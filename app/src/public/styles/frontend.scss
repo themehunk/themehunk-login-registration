@@ -1,0 +1,338 @@
+// Base styles for the TH Login frontend modal and forms.
+
+// General body styling to prevent scroll when modal is open
+body.th-login-modal-open {
+    overflow: hidden;
+    padding-right: 15px; // Compensate for scrollbar to prevent layout shift
+}
+
+// Main modal container
+.th-login-popup-modal {
+    display: none; // Hidden by default, shown by JS
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999; // High z-index to be on top
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto; // Allow scrolling if content is too tall
+    -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+
+    // Initial state for animations
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+    &.th-login-popup-modal--active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    // Animation for opening
+    &.th-login-popup-modal--opening {
+        animation: th-login-fade-in 0.3s forwards;
+    }
+
+    // Animation for closing
+    &.th-login-popup-modal--closing {
+        animation: th-login-fade-out 0.3s forwards;
+    }
+}
+
+// Modal overlay
+.th-login-popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); // Default overlay color
+    cursor: pointer;
+}
+
+// Form container within the modal
+.th-login-popup-form-container {
+    position: relative;
+    background-color: #fff; // Default form background
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 100000; // Above overlay
+    max-width: 500px;
+    width: 400px; // Default width
+    margin: 20px; // Margin for smaller screens
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Center content horizontally
+    justify-content: center; // Center content vertically
+    min-height: 300px; // Minimum height for forms
+
+    // Responsive adjustments
+    @media (max-width: 768px) {
+        width: 90%;
+        padding: 25px;
+    }
+
+    @media (max-width: 480px) {
+        width: 95%;
+        padding: 20px;
+    }
+}
+
+// Close button
+.th-login-popup-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 24px;
+    line-height: 1;
+    color: #333; // Default icon color
+    transition: color 0.2s ease-in-out;
+    z-index: 100001; // Above form container
+
+    &:hover {
+        color: #000; // Default hover color
+    }
+
+    .dashicons {
+        width: 24px;
+        height: 24px;
+        font-size: 24px;
+    }
+}
+
+// Individual form styling (hidden/shown by JS)
+.th-login-form {
+    display: none; // Hidden by default, shown by setActiveForm
+    width: 100%; // Take full width of container
+    box-sizing: border-box;
+
+    &.th-login-form--active {
+        display: block; // Or flex, depending on internal layout
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #222;
+        font-size: 1.8em;
+    }
+}
+
+// Form fields
+.th-login-form-field {
+    margin-bottom: 15px;
+    width: 100%;
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #555;
+        font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        line-height: 1.5;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+        color: #333;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+        &:focus {
+            border-color: #007cba;
+            box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.25);
+            outline: none;
+        }
+
+        &::placeholder {
+            color: #999;
+        }
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    // Checkbox styling
+    &.th-login-form-field--checkbox {
+        display: flex;
+        align-items: center;
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        label {
+            margin-bottom: 0;
+            display: inline-block;
+            cursor: pointer;
+            a {
+                color: #007cba;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+// Form submission button
+.th-login-form-submit {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+
+    .th-login-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 25px;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+        text-decoration: none; // For shortcode links that use button styling
+
+        &--primary {
+            background-color: #007cba;
+            color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+            &:hover {
+                background-color: #005ba0;
+                transform: translateY(-1px);
+            }
+
+            &:disabled {
+                background-color: #a0a0a0;
+                cursor: not-allowed;
+                box-shadow: none;
+            }
+        }
+
+        &--secondary {
+            background-color: transparent;
+            color: #007cba;
+            border: 1px solid #007cba;
+
+            &:hover {
+                background-color: rgba(0, 124, 186, 0.05);
+                color: #005ba0;
+            }
+        }
+
+        .th-login-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    }
+}
+
+// Form links (e.g., "Forgot Password?", "Back to Login")
+.th-login-form-links {
+    margin-top: 15px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+
+    a {
+        color: #007cba;
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+            color: #005ba0;
+            text-decoration: underline;
+        }
+    }
+}
+
+// Messages (success/error)
+.th-login-messages {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center;
+
+    p.th-login-message {
+        padding: 10px 15px;
+        border-radius: 4px;
+        border: 1px solid;
+        margin: 0;
+
+        &--success {
+            background-color: #e6ffe6;
+            border-color: #4CAF50;
+            color: #333;
+        }
+
+        &--error {
+            background-color: #ffe6e6;
+            border-color: #F44336;
+            color: #333;
+        }
+    }
+}
+
+// Shortcode form wrapper styles (for inline forms)
+.th-login-shortcode-form-wrapper {
+    max-width: 500px; // Match modal form max-width for consistency
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+
+    .th-login-form {
+        display: block; // Always visible when embedded via shortcode
+    }
+}
+
+// Animations
+@keyframes th-login-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes th-login-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

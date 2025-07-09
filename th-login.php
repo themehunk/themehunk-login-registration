@@ -238,7 +238,9 @@ final class TH_Login {
 					'placeholder' => esc_html__( 'Create a strong password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'lock',
-					
+					'check'		  => array( 'text'=> true, 'number'=> false, 'special_charcter'=> false ),
+					'maxInput'    => 20,
+					'minInput'    => 5,
 				),
 				array(
 					'id'          => 'confirm_password',
@@ -556,7 +558,9 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Create a strong password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'lock',
-					
+					'check'=> array( 'text'=> true, 'number'=> false, 'special_charcter'=> false ),
+					'maxInput'=> 20,
+					'minInput'=> 5,
 				),
 				array(
 					'id'          => 'confirm_password',

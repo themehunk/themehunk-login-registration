@@ -450,8 +450,6 @@ class TH_Login_REST_API {
 			}
 		}
 
-		 error_log("Field data: " . print_r($register_fields, true));
-
 		// Basic validation
 		if ( empty( $username ) || empty( $email ) || empty( $password ) || empty( $confirm_password ) ) {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'All fields are required.', 'th-login' ) ] ], 400 );
@@ -467,6 +465,38 @@ class TH_Login_REST_API {
 		}
 		if ( $password !== $confirm_password ) {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Passwords do not match.', 'th-login' ) ] ], 400 );
+		}
+
+		// Extract password field settings from register_fields
+		$password_settings = null;
+
+		foreach ( $register_fields as $field ) {
+			if ( $field['id'] === 'password' ) {
+				$password_settings = $field;
+				break;
+			}
+		}
+
+		if ( ! empty( $password_settings ) ) {
+			$min   = intval( $password_settings['minInput'] ?? 6 );
+			$max   = intval( $password_settings['maxInput'] ?? 0 );
+			$check = $password_settings['check'] ?? [];
+
+			if ( $min && strlen( $password ) < $min ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => sprintf( __( 'Password must be at least %d characters.', 'th-login' ), $min ) ] ], 400 );
+			}
+			if ( $max && strlen( $password ) > $max ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => sprintf( __( 'Password must not exceed %d characters.', 'th-login' ), $max ) ] ], 400 );
+			}
+			if ( ! empty( $check['text'] ) && ! preg_match( '/[A-Za-z]/', $password ) ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Password must contain at least one letter.', 'th-login' ) ] ], 400 );
+			}
+			if ( ! empty( $check['number'] ) && ! preg_match( '/\d/', $password ) ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Password must contain at least one number.', 'th-login' ) ] ], 400 );
+			}
+			if ( ! empty( $check['special_charcter'] ) && ! preg_match( '/[\W_]/', $password ) ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Password must contain at least one special character.', 'th-login' ) ] ], 400 );
+			}
 		}
 
 		// Terms check
@@ -684,7 +714,6 @@ class TH_Login_REST_API {
 		), 200 );
 	}
 
-
 	/**
 	 * Export all TH Login plugin settings.
 	 *
@@ -845,9 +874,8 @@ class TH_Login_REST_API {
 	}
 
 	public function sanitize_form_fields_settings( $settings ) {
-		$sanitized = [];
-
-		$form_keys = [ 'login', 'register', 'forgot_password' ];
+		$sanitized  = [];
+		$form_keys  = [ 'login', 'register', 'forgot_password' ];
 
 		foreach ( $form_keys as $form_key ) {
 			if ( ! isset( $settings[ $form_key ] ) || ! is_array( $settings[ $form_key ] ) ) {
@@ -874,14 +902,31 @@ class TH_Login_REST_API {
 				$sanitized_field['show']        = rest_sanitize_boolean( $field['show'] ?? true );
 				$sanitized_field['hidden']      = rest_sanitize_boolean( $field['hidden'] ?? false );
 
-				// Optional: for custom fields mapped to user_meta
+				// Optional: map to user meta
 				if ( isset( $field['map_to_user_meta'] ) ) {
 					$sanitized_field['map_to_user_meta'] = rest_sanitize_boolean( $field['map_to_user_meta'] );
 				}
 
-				// Optional: sanitize select/radio options
+				// Optional: select/radio options
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 					$sanitized_field['options'] = array_map( 'sanitize_text_field', $field['options'] );
+				}
+
+				// Advanced: min/max input for fields like password
+				if ( isset( $field['minInput'] ) ) {
+					$sanitized_field['minInput'] = intval( $field['minInput'] );
+				}
+				if ( isset( $field['maxInput'] ) ) {
+					$sanitized_field['maxInput'] = intval( $field['maxInput'] );
+				}
+
+				// Advanced: check (text, number, special_charcter)
+				if ( isset( $field['check'] ) && is_array( $field['check'] ) ) {
+					$sanitized_field['check'] = [
+						'text'             => ! empty( $field['check']['text'] ),
+						'number'           => ! empty( $field['check']['number'] ),
+						'special_charcter' => ! empty( $field['check']['special_charcter'] ),
+					];
 				}
 
 				$sanitized[ $form_key ][] = $sanitized_field;
@@ -892,9 +937,8 @@ class TH_Login_REST_API {
 	}
 
 	public function validate_form_fields_settings( $settings ) {
-		$errors = new WP_Error();
-
-		$form_keys = [ 'login', 'register', 'forgot_password' ];
+		$errors     = new WP_Error();
+		$form_keys  = [ 'login', 'register', 'forgot_password' ];
 
 		foreach ( $form_keys as $form_key ) {
 			if ( ! isset( $settings[ $form_key ] ) || ! is_array( $settings[ $form_key ] ) ) {
@@ -918,12 +962,29 @@ class TH_Login_REST_API {
 
 				$seen_ids[] = $field_id;
 
-				// Validate required field has label.
+				// Validate: required fields must have label
 				if ( ! empty( $field['required'] ) && empty( $label ) ) {
 					$errors->add(
 						'missing_required_label',
 						sprintf( esc_html__( 'Field "%s" in %s is required but missing a label.', 'th-login' ), esc_html( $field_id ), $form_key )
 					);
+				}
+
+				// Advanced: Validate password rule fields
+				if ( $field['id'] === 'password' ) {
+					if ( isset( $field['minInput'] ) && intval( $field['minInput'] ) < 4 ) {
+						$errors->add( 'invalid_min_input', esc_html__( 'Password minimum length must be at least 4 characters.', 'th-login' ) );
+					}
+
+					if ( isset( $field['check'] ) && is_array( $field['check'] ) ) {
+						if (
+							empty( $field['check']['text'] ) &&
+							empty( $field['check']['number'] ) &&
+							empty( $field['check']['special_charcter'] )
+						) {
+							$errors->add( 'invalid_password_check', esc_html__( 'At least one password check must be enabled (letter, number, or special character).', 'th-login' ) );
+						}
+					}
 				}
 			}
 		}

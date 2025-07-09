@@ -78,8 +78,6 @@ final class TH_Login {
 	private function includes() {
 		require_once TH_LOGIN_PATH . 'includes/class-th-login-admin.php';
 		require_once TH_LOGIN_PATH . 'includes/class-th-login-frontend.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-ajax.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-customizer.php';
 		require_once TH_LOGIN_PATH . 'includes/class-th-login-shortcodes.php';
 		require_once TH_LOGIN_PATH . 'includes/class-th-login-security.php';
 		require_once TH_LOGIN_PATH . 'includes/class-th-login-rest-api.php';
@@ -96,8 +94,6 @@ final class TH_Login {
 
 		new TH_Login_Admin();
 		new TH_Login_Frontend();
-		new TH_Login_Ajax();
-		new TH_Login_Customizer();
 		new TH_Login_Shortcodes();
 		new TH_Login_Security();
 		new TH_Login_REST_API();
@@ -115,22 +111,17 @@ final class TH_Login {
 		// Ensure all nested arrays are explicitly defined as empty arrays.
 		$default_general_settings = array(
 			'plugin_status' => 'enabled',
-			'disable_wp_login_page' => false,
-			'auto_redirect_wp_login_admin' => true,
 			'auto_login_after_registration' => false,
+			'form_type'=> 'double',
+      		'display_mode'=> 'popup',
+			'default_register_role'=>  'subscriber', 
 			'redirects' => array(
 				'after_login' => array( 'type' => 'current_page', 'url' => '' ),
 				'after_logout' => array( 'type' => 'home_page', 'url' => '' ),
 				'after_register' => array( 'type' => 'login_form', 'url' => '' ),
-				'role_based_redirects' => array(), // Ensure this is an array.
 			),
-			'email_verification' => array(
-                'enabled' => false,
-                'email_subject' => esc_html__( 'Verify your email for TH Login', 'th-login' ),
-                'email_content' => esc_html__( 'Please click this link to verify: {verification_link}', 'th-login' ),
-                'redirect_after_verification' => 'login_form'
-            ),
-            'manual_user_approval' => array( 'enabled' => false )
+            'manual_user_approval' => array( 'enabled' => false ),
+			'close_button' => true
 		);
 
 		add_option( 'th_login_general_settings', json_encode( $default_general_settings ) );
@@ -186,30 +177,136 @@ final class TH_Login {
 		add_option( 'th_login_design_settings', json_encode( $default_design_settings ) );
 
 		$default_form_fields_settings = array(
-			'login' => array( // Ensure array.
-				'username_label' => esc_html__( 'Username or Email', 'th-login' ), 'username_placeholder' => esc_html__( 'Enter your username or email', 'th-login' ),
-				'password_label' => esc_html__( 'Password', 'th-login' ), 'password_placeholder' => esc_html__( 'Enter your password', 'th-login' ),
-				'remember_me_label' => esc_html__( 'Remember Me', 'th-login' ), 'show_remember_me' => true
-			),
-			'register' => array( // Ensure array.
-				'username_label' => esc_html__( 'Choose a Username', 'th-login' ), 'username_placeholder' => esc_html__( 'Enter your desired username', 'th-login' ),
-				'email_label' => esc_html__( 'Email Address', 'th-login' ), 'email_placeholder' => esc_html__( 'Enter your email', 'th-login' ),
-				'password_label' => esc_html__( 'Create Password', 'th-login' ), 'password_placeholder' => esc_html__( 'Create a strong password', 'th-login' ),
-				'confirm_password_label' => esc_html__( 'Confirm Password', 'th-login' ), 'confirm_password_placeholder' => esc_html__( 'Confirm your password', 'th-login' ),
-				'show_first_name' => false, 'first_name_label' => esc_html__( 'First Name', 'th-login' ), 'first_name_placeholder' => esc_html__( 'Your first name', 'th-login' ),
-				'show_last_name' => false, 'last_name_label' => esc_html__( 'Last Name', 'th-login' ), 'last_name_placeholder' => esc_html__( 'Your last name', 'th-login' ),
-				'terms_and_conditions' => array( // Ensure array.
-					'enabled' => true,
-					'label' => esc_html__( 'I agree to the <a href=\'#\'>Terms & Conditions</a>', 'th-login' ),
-					'required' => true
+			'login' => array(
+				array(
+					'id'          => 'username',
+					'label'       => esc_html__( 'Username or Email', 'th-login' ),
+					'name'        => 'username',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Enter your username or email', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'user',
+					'logic_key' => 'user',
 				),
-				'honeypot_enabled' => true,
-				'custom_fields' => array() // Ensure this is an array.
+				array(
+					'id'          => 'password',
+					'label'       => esc_html__( 'Password', 'th-login' ),
+					'name'        => 'password',
+					'type'        => 'password',
+					'placeholder' => esc_html__( 'Enter your password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'lock',
+					'logic_key' => 'password',
+				),
+				array(
+					'id'       => 'remember_me',
+					'label'    => esc_html__( 'Remember Me', 'th-login' ),
+					'name'     => 'remember_me',
+					'type'     => 'checkbox',
+					'required' => false,
+					'icon'     => '',
+					'show'     => true,
+					'logic_key' => 'remember',
+				),
 			),
-			'forgot_password' => array( // Ensure array.
-				'email_label' => esc_html__( 'Email Address', 'th-login' ), 'email_placeholder' => esc_html__( 'Enter your email to reset password', 'th-login' )
-			)
+			'register' => array(
+				array(
+					'id'          => 'username',
+					'label'       => esc_html__( 'Choose a Username', 'th-login' ),
+					'name'        => 'username',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Enter your desired username', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'user',
+					'logic_key' => 'user',
+				),
+				array(
+					'id'          => 'email',
+					'label'       => esc_html__( 'Email Address', 'th-login' ),
+					'name'        => 'email',
+					'type'        => 'email',
+					'placeholder' => esc_html__( 'Enter your email', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'email',
+					'logic_key' => 'email',
+				),
+				array(
+					'id'          => 'password',
+					'label'       => esc_html__( 'Create Password', 'th-login' ),
+					'name'        => 'password',
+					'type'        => 'password',
+					'placeholder' => esc_html__( 'Create a strong password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'lock',
+					'logic_key' => 'password',
+				),
+				array(
+					'id'          => 'confirm_password',
+					'label'       => esc_html__( 'Confirm Password', 'th-login' ),
+					'name'        => 'confirm_password',
+					'type'        => 'password',
+					'placeholder' => esc_html__( 'Confirm your password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'lock',
+					'logic_key' => 'confirm_password',
+				),
+				array(
+					'id'          => 'first_name',
+					'label'       => esc_html__( 'First Name', 'th-login' ),
+					'name'        => 'first_name',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Your first name', 'th-login' ),
+					'required'    => false,
+					'icon'        => 'user',
+					'show'        => false,
+					'logic_key' => 'first_name',
+				),
+				array(
+					'id'          => 'last_name',
+					'label'       => esc_html__( 'Last Name', 'th-login' ),
+					'name'        => 'last_name',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Your last name', 'th-login' ),
+					'required'    => false,
+					'icon'        => 'user',
+					'show'        => false,
+					'logic_key' => 'last_name',
+				),
+				array(
+					'id'       => 'terms_and_conditions',
+					'label'    => esc_html__( "I agree to the Terms & Conditions", 'th-login' ),
+					'name'     => 'terms_and_conditions',
+					'type'     => 'checkbox',
+					'required' => true,
+					'icon'     => '',
+					'show'     => true,
+					'logic_key' => 'terms',
+				),
+				array(
+					'id'      => 'honeypot',
+					'name'    => 'honeypot',
+					'type'    => 'text',
+					'label'   => '',
+					'icon'    => '',
+					'show'    => false,
+					'hidden'  => true,
+				),
+			),
+			'forgot_password' => array(
+				array(
+					'id'          => 'user_login',
+					'label'       => esc_html__( 'Email Address', 'th-login' ),
+					'name'        => 'user_login',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Enter your email to reset password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'email',
+					'logic_key' => 'email',
+				),
+			),
 		);
+
+
 		add_option( 'th_login_form_fields_settings', json_encode( $default_form_fields_settings ) );
 
 		$default_display_triggers_settings = array(
@@ -297,23 +394,18 @@ function th_login_set_default_options() {
     // General Settings
     $general_defaults = array(
         'plugin_status'             => 'enabled',
-        'disable_wp_login_page'     => false,
-        'auto_redirect_wp_login_admin' => true,
+		'form_type' => 'double',
+      	'display_mode'=> 'popup',
+		'default_register_role'=> 'subscriber', 
         'auto_login_after_registration' => false,
         'redirects'                 => array(
             'after_login'    => array( 'type' => 'current_page', 'url' => '' ),
             'after_logout'   => array( 'type' => 'home_page', 'url' => '' ),
-            'after_register' => array( 'type' => 'login_form', 'url' => '' ),
+            'after_register' => array( 'type' => 'current_page', 'url' => '' ),
             'role_based_redirects' => array(),
         ),
-        'email_verification'        => array(
-            'enabled'                   => false,
-            'email_subject'             => __( 'Verify your email for TH Login', 'th-login' ),
-            'email_content'             => __( 'Please click this link to verify: {verification_link}', 'th-login' ),
-            'redirect_after_verification' => 'login_form',
-            'custom_redirect_url'       => '',
-        ),
         'manual_user_approval'      => array( 'enabled' => false ),
+		'close_button' => true,
     );
     update_option( 'th_login_general_settings', json_encode( $general_defaults ) );
 
@@ -353,7 +445,7 @@ function th_login_set_default_options() {
             'form_box_shadow'       => '0 8px 25px rgba(0,0,0,0.15)',
             'modal_animation_in'    => 'fade-in',
             'modal_animation_out'   => 'fade-out',
-            'close_button'          => array( 'enabled' => true, 'position' => 'top-right', 'icon_color' => '#333', 'bg_color' => 'transparent', 'size' => '24px', 'hover_color' => '#000' ),
+            'close_button'          => array( 'position' => 'top-right', 'icon_color' => '#333', 'bg_color' => 'transparent', 'size' => '24px', 'hover_color' => '#000' ),
             'scrollbar_style'       => 'default',
         ),
         'typography'      => array(
@@ -403,42 +495,135 @@ function th_login_set_default_options() {
 
     // Form Fields Settings
     $form_fields_defaults = array(
-        'login'           => array(
-            'username_label'       => __( 'Username or Email Address', 'th-login' ),
-            'username_placeholder' => __( 'Enter your username or email', 'th-login' ),
-            'password_label'       => __( 'Password', 'th-login' ),
-            'password_placeholder' => __( 'Enter your password', 'th-login' ),
-            'remember_me_label'    => __( 'Remember Me', 'th-login' ),
-            'show_remember_me'     => true,
-        ),
-        'register'        => array(
-            'username_label'          => __( 'Choose a Username', 'th-login' ),
-            'username_placeholder'    => __( 'Enter your desired username', 'th-login' ),
-            'email_label'             => __( 'Email Address', 'th-login' ),
-            'email_placeholder'       => __( 'Enter your email', 'th-login' ),
-            'password_label'          => __( 'Create Password', 'th-login' ),
-            'password_placeholder'    => __( 'Create a strong password', 'th-login' ),
-            'confirm_password_label'  => __( 'Confirm Password', 'th-login' ),
-            'confirm_password_placeholder' => __( 'Confirm your password', 'th-login' ),
-            'show_first_name'         => false,
-            'first_name_label'        => __( 'First Name', 'th-login' ),
-            'first_name_placeholder'  => __( 'Your first name', 'th-login' ),
-            'show_last_name'          => false,
-            'last_name_label'         => __( 'Last Name', 'th-login' ),
-            'last_name_placeholder'   => __( 'Your last name', 'th-login' ),
-            'terms_and_conditions'    => array(
-                'enabled'  => false,
-                'label'    => __( 'I agree to the <a href="#">Terms & Conditions</a>', 'th-login' ),
-                'required' => false,
-            ),
-            'honeypot_enabled'        => true,
-            'custom_fields'           => array(), // Empty array for custom fields.
-        ),
-        'forgot_password' => array(
-            'email_label'       => __( 'Username or Email Address', 'th-login' ),
-            'email_placeholder' => __( 'Enter your username or email', 'th-login' ),
-        ),
+		'login' => array(
+				array(
+					'id'          => 'username',
+					'label'       => esc_html__( 'Username or Email', 'th-login' ),
+					'name'        => 'username',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Enter your username or email', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'user',
+					'logic_key' => 'user',
+				),
+				array(
+					'id'          => 'password',
+					'label'       => esc_html__( 'Password', 'th-login' ),
+					'name'        => 'password',
+					'type'        => 'password',
+					'placeholder' => esc_html__( 'Enter your password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'lock',
+					'logic_key' => 'password',
+				),
+				array(
+					'id'       => 'remember_me',
+					'label'    => esc_html__( 'Remember Me', 'th-login' ),
+					'name'     => 'remember_me',
+					'type'     => 'checkbox',
+					'required' => false,
+					'icon'     => '',
+					'show'     => true,
+					'logic_key' => 'remember',
+				),
+			),
+			'register' => array(
+				array(
+					'id'          => 'username',
+					'label'       => esc_html__( 'Choose a Username', 'th-login' ),
+					'name'        => 'username',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Enter your desired username', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'user',
+					'logic_key' => 'user',
+				),
+				array(
+					'id'          => 'email',
+					'label'       => esc_html__( 'Email Address', 'th-login' ),
+					'name'        => 'email',
+					'type'        => 'email',
+					'placeholder' => esc_html__( 'Enter your email', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'email',
+					'logic_key' => 'email',
+				),
+				array(
+					'id'          => 'password',
+					'label'       => esc_html__( 'Create Password', 'th-login' ),
+					'name'        => 'password',
+					'type'        => 'password',
+					'placeholder' => esc_html__( 'Create a strong password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'lock',
+					'logic_key' => 'password',
+				),
+				array(
+					'id'          => 'confirm_password',
+					'label'       => esc_html__( 'Confirm Password', 'th-login' ),
+					'name'        => 'confirm_password',
+					'type'        => 'password',
+					'placeholder' => esc_html__( 'Confirm your password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'lock',
+					'logic_key' => 'confirm_password',
+				),
+				array(
+					'id'          => 'first_name',
+					'label'       => esc_html__( 'First Name', 'th-login' ),
+					'name'        => 'first_name',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Your first name', 'th-login' ),
+					'required'    => false,
+					'icon'        => 'user',
+					'show'        => false,
+					'logic_key' => 'first_name',
+				),
+				array(
+					'id'          => 'last_name',
+					'label'       => esc_html__( 'Last Name', 'th-login' ),
+					'name'        => 'last_name',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Your last name', 'th-login' ),
+					'required'    => false,
+					'icon'        => 'user',
+					'show'        => false,
+					'logic_key' => 'last_name',
+				),
+				array(
+					'id'       => 'terms_and_conditions',
+					'label'    => esc_html__( "I agree to the Terms & Conditions", 'th-login' ),
+					'name'     => 'terms_and_conditions',
+					'type'     => 'checkbox',
+					'required' => true,
+					'icon'     => '',
+					'show'     => true,
+					'logic_key' => 'terms',
+				),
+				array(
+					'id'      => 'honeypot',
+					'name'    => 'honeypot',
+					'type'    => 'text',
+					'label'   => '',
+					'icon'    => '',
+					'show'    => false,
+					'hidden'  => true,
+				),
+			),
+			'forgot_password' => array(
+				array(
+					'id'          => 'user_login',
+					'label'       => esc_html__( 'Email Address', 'th-login' ),
+					'name'        => 'user_login',
+					'type'        => 'text',
+					'placeholder' => esc_html__( 'Enter your email to reset password', 'th-login' ),
+					'required'    => true,
+					'icon'        => 'email',
+					'logic_key' => 'email',
+				),
+			),
     );
+	
     update_option( 'th_login_form_fields_settings', json_encode( $form_fields_defaults ) );
 
     // Display Triggers Settings

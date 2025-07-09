@@ -336,3 +336,136 @@ body.th-login-modal-open {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.th-login-popup-modal.th-login-slide-in-left,
+.th-login-popup-modal.th-login-slide-in-right {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  background-color: transparent;
+}
+
+.th-login-popup-modal.th-login-slide-in-right{
+  justify-content: flex-end;
+}
+
+.th-login-popup-modal.th-login-slide-in-left{
+ justify-content: flex-start;
+}
+
+.th-login-popup-modal.slide-in-left .th-login-popup-form-container,
+.th-login-popup-modal.slide-in-right .th-login-popup-form-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 320px; // narrower width for slide-in
+  max-width: 80vw;
+  height: 100vh;
+  border-radius: 0;
+  margin: 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+// Slide in from left (initial state offscreen left)
+.th-login-popup-modal.slide-in-left.th-login-popup-modal--opening {
+  animation: slideInFromLeft 0.3s forwards;
+}
+.th-login-popup-modal.slide-in-left.th-login-popup-modal--closing {
+  animation: slideOutToLeft 0.3s forwards;
+}
+
+// Slide in from right (initial state offscreen right)
+.th-login-popup-modal.slide-in-right.th-login-popup-modal--opening {
+  animation: slideInFromRight 0.3s forwards;
+}
+.th-login-popup-modal.slide-in-right.th-login-popup-modal--closing {
+  animation: slideOutToRight 0.3s forwards;
+}
+
+// Overlay hidden for slide modes or optionally semi-transparent behind panel
+.th-login-popup-modal.slide-in-left .th-login-popup-overlay,
+.th-login-popup-modal.slide-in-right .th-login-popup-overlay {
+  display: none; // or reduce opacity if you want some dimming effect
+}
+
+// Keyframe animations
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+
+.th-login-form-toggle {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 20px;
+
+	.th-login-toggle-button {
+		padding: 8px 16px;
+		border: 1px solid #007cba;
+		background-color: #f9f9f9;
+		color: #007cba;
+		border-radius: 4px;
+		cursor: pointer;
+		font-weight: 600;
+		transition: all 0.2s ease-in-out;
+
+		&:hover {
+			background-color: #007cba;
+			color: #fff;
+		}
+
+		&--active {
+			background-color: #007cba;
+			color: #fff;
+		}
+	}
+}

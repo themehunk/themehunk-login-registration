@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 if ( ! get_option( 'users_can_register' ) ) {
 	echo '<p class="th-login-error-message">' . esc_html__( 'User registration is currently disabled on this site.', 'th-login' ) . '</p>';
 	return;
@@ -12,81 +11,83 @@ if ( ! get_option( 'users_can_register' ) ) {
 
 $form_fields_settings = json_decode( get_option( 'th_login_form_fields_settings', '{}' ), true );
 $register_fields = $form_fields_settings['register'] ?? array();
-
-// Instantiate the forms class to access the rendering method.
-$th_login_forms = new TH_Login_Forms();
 ?>
+
 <div class="th-login-form th-login-form--register" data-form-type="register" style="display: none;">
-    <?php
-    // Include form header (logo, custom HTML).
-    require TH_LOGIN_PATH . 'templates/parts/form-header.php';
-    ?>
+	<?php require TH_LOGIN_PATH . 'templates/parts/form-header.php'; ?>
 
-    <form class="th-login-ajax-form" data-form-type="register">
-        <div class="th-login-messages" aria-live="polite"></div>
+	<form class="th-login-ajax-form" data-form-type="register">
+		<div class="th-login-messages" aria-live="polite"></div>
 
-        <p class="th-login-form-field">
-            <label for="th-register-username"><?php echo esc_html( $register_fields['username_label'] ?? __( 'Choose a Username', 'th-login' ) ); ?></label>
-            <input type="text" name="username" id="th-register-username" placeholder="<?php echo esc_attr( $register_fields['username_placeholder'] ?? __( 'Enter your desired username', 'th-login' ) ); ?>" required>
-        </p>
+		<?php foreach ( $register_fields as $field ) :
+			if ( ! ( $field['show'] ?? true ) || ( $field['hidden'] ?? false ) ) {
+				continue;
+			}
 
-        <p class="th-login-form-field">
-            <label for="th-register-email"><?php echo esc_html( $register_fields['email_label'] ?? __( 'Email Address', 'th-login' ) ); ?></label>
-            <input type="email" name="email" id="th-register-email" placeholder="<?php echo esc_attr( $register_fields['email_placeholder'] ?? __( 'Enter your email', 'th-login' ) ); ?>" required>
-        </p>
+			$logic_key   = $field['logic_key'] ?? '';
+			$field_id    = esc_attr( $field['id'] ?? '' );
+			$field_label = $field['label'] ?? '';
+			$field_name  = esc_attr( $field['name'] ?? $logic_key ?: $field_id );
+			$field_type  = esc_attr( $field['type'] ?? 'text' );
+			$placeholder = esc_attr( $field['placeholder'] ?? '' );
+			$required    = ! empty( $field['required'] ) ? 'required' : '';
 
-        <p class="th-login-form-field">
-            <label for="th-register-password"><?php echo esc_html( $register_fields['password_label'] ?? __( 'Create Password', 'th-login' ) ); ?></label>
-            <input type="password" name="password" id="th-register-password" placeholder="<?php echo esc_attr( $register_fields['password_placeholder'] ?? __( 'Create a strong password', 'th-login' ) ); ?>" required>
-            <!-- Password strength meter will be handled by JS -->
-        </p>
+			// Honeypot: skip (handled below)
+			if ( $logic_key === 'honeypot' ) {
+				continue;
+			}
 
-        <p class="th-login-form-field">
-            <label for="th-register-confirm-password"><?php echo esc_html( $register_fields['confirm_password_label'] ?? __( 'Confirm Password', 'th-login' ) ); ?></label>
-            <input type="password" name="confirm_password" id="th-register-confirm-password" placeholder="<?php echo esc_attr( $register_fields['confirm_password_placeholder'] ?? __( 'Confirm your password', 'th-login' ) ); ?>" required>
-        </p>
+			// Terms & Conditions
+			if ( $logic_key === 'terms_and_conditions' ) : ?>
+				<p class="th-login-form-field th-login-form-field--terms">
+					<input type="checkbox" name="terms" id="th-register-terms" value="1" <?php echo $required; ?>>
+					<label for="th-register-terms">
+						<?php echo wp_kses_post( $field_label ?: __( 'I agree to the Terms & Conditions', 'th-login' ) ); ?>
+					</label>
+				</p>
+				<?php continue;
+			endif;
+		?>
+			<p class="th-login-form-field">
+				<label for="th-register-<?php echo $field_id; ?>"><?php echo esc_html( $field_label ); ?></label>
+				<input
+					type="<?php echo $field_type; ?>"
+					name="<?php echo $field_name; ?>"
+					id="th-register-<?php echo $field_id; ?>"
+					placeholder="<?php echo $placeholder; ?>"
+					<?php echo $required; ?>
+				>
+			</p>
+		<?php endforeach; ?>
 
-        <?php
-        // Render custom registration fields here.
-        $th_login_forms->render_custom_registration_fields();
-        ?>
+		<?php
+		// Honeypot field (anti-spam).
+		$honeypot_enabled = false;
+		foreach ( $register_fields as $f ) {
+			if ( ( $f['logic_key'] ?? '' ) === 'honeypot' && ! empty( $f['hidden'] ) ) {
+				$honeypot_enabled = true;
+				break;
+			}
+		}
+		if ( $honeypot_enabled ) :
+			$honeypot_field_name = 'th_login_hp_' . wp_rand( 1000, 9999 );
+		?>
+			<p class="th-login-form-field th-login-form-field--honeypot" style="display: none;">
+				<label for="<?php echo esc_attr( $honeypot_field_name ); ?>"><?php esc_html_e( 'Please leave this field empty', 'th-login' ); ?></label>
+				<input type="text" name="<?php echo esc_attr( $honeypot_field_name ); ?>" id="<?php echo esc_attr( $honeypot_field_name ); ?>" tabindex="-1" autocomplete="off">
+			</p>
+		<?php endif; ?>
 
-        <?php if ( ( $register_fields['terms_and_conditions']['enabled'] ?? false ) ) : ?>
-        <p class="th-login-form-field th-login-form-field--terms">
-            <input type="checkbox" name="terms" id="th-register-terms" value="1" <?php echo ( $register_fields['terms_and_conditions']['required'] ?? false ) ? 'required' : ''; ?>>
-            <label for="th-register-terms">
-                <?php
-                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is expected here for links.
-                echo $register_fields['terms_and_conditions']['label'] ?? __( 'I agree to the Terms & Conditions', 'th-login' );
-                ?>
-            </label>
-        </p>
-        <?php endif; ?>
+		<p class="th-login-form-submit">
+			<button type="submit" class="th-login-button th-login-button--primary">
+				<?php esc_html_e( 'Register', 'th-login' ); ?>
+			</button>
+		</p>
 
-        <?php
-        // Honeypot field (hidden) for basic anti-spam.
-        if ( ( $register_fields['honeypot_enabled'] ?? true ) ) :
-            $honeypot_field_name = 'th_login_hp_' . wp_rand( 1000, 9999 );
-        ?>
-        <p class="th-login-form-field th-login-form-field--honeypot" style="display: none;">
-            <label for="<?php echo esc_attr( $honeypot_field_name ); ?>"><?php esc_html_e( 'Please leave this field empty', 'th-login' ); ?></label>
-            <input type="text" name="<?php echo esc_attr( $honeypot_field_name ); ?>" id="<?php echo esc_attr( $honeypot_field_name ); ?>" tabindex="-1" autocomplete="off">
-        </p>
-        <?php endif; ?>
+		<p class="th-login-form-links">
+			<a href="#" class="th-login-link" data-th-popup-action="login"><?php esc_html_e( 'Already have an account? Log In', 'th-login' ); ?></a>
+		</p>
+	</form>
 
-        <p class="th-login-form-submit">
-            <button type="submit" class="th-login-button th-login-button--primary">
-                <?php esc_html_e( 'Register', 'th-login' ); ?>
-            </button>
-        </p>
-
-        <p class="th-login-form-links">
-            <a href="#" class="th-login-link" data-th-popup-action="login"><?php esc_html_e( 'Already have an account? Log In', 'th-login' ); ?></a>
-        </p>
-    </form>
-
-    <?php
-    // Include form footer (custom HTML).
-    require TH_LOGIN_PATH . 'templates/parts/form-footer.php';
-    ?>
+	<?php require TH_LOGIN_PATH . 'templates/parts/form-footer.php'; ?>
 </div>

@@ -20,15 +20,15 @@ const TABS = [
     label: __("General", "th-login"),
     icon: "admin-settings"
   },
+   {
+    id: "form-fields",
+    label: __("Form Fields", "th-login"),
+    icon: "feedback"
+  },
   {
     id: "design",
     label: __("Design", "th-login"),
     icon: "art"
-  },
-  {
-    id: "form-fields",
-    label: __("Form Fields", "th-login"),
-    icon: "feedback"
   },
   {
     id: "display-triggers",
@@ -57,24 +57,16 @@ const App = () => {
   const [settings, setSettings] = useState({
     general: {
       plugin_status: "enabled",
-      disable_wp_login_page: false,
-      auto_redirect_wp_login_admin: true,
+      form_type: 'double',
+      display_mode:'popup',
+      default_register_role: 'subscriber', 
       auto_login_after_registration: false,
+      close_button:true,
       redirects: {
         after_login: { type: "current_page", url: "" },
         after_logout: { type: "home_page", url: "" },
-        after_register: { type: "login_form", url: "" },
+        after_register: { type: "current_page", url: "" },
         role_based_redirects: [], // Ensure this is an array
-      },
-      email_verification: {
-        enabled: false,
-        email_subject: __("Verify your email for TH Login", "th-login"),
-        email_content: __(
-          "Please click this link to verify: {verification_link}",
-          "th-login"
-        ),
-        redirect_after_verification: "login_form",
-        custom_redirect_url: "",
       },
       manual_user_approval: { enabled: false },
     },
@@ -124,9 +116,138 @@ const App = () => {
         },  
     },
     form_fields: {
-      login: {},
-      register: { custom_fields: [] },
-      forgot_password: {},
+  login: [
+    {
+      id: 'username',
+      label: 'Username or Email',
+      name: 'username',
+      type: 'text',
+      placeholder: 'Enter your username or email',
+      required: true,
+      icon: 'user',
+      logic_key: 'user',
+    },
+    {
+      id: 'password',
+      label: 'Password',
+      name: 'password',
+      type: 'password',
+      placeholder: 'Enter your password',
+      required: true,
+      icon: 'lock',
+      logic_key: 'password',
+    },
+    {
+      id: 'remember_me',
+      label: 'Remember Me',
+      name: 'remember_me',
+      type: 'checkbox',
+      required: false,
+      icon: '',
+      show: true,
+      logic_key: 'remember',
+    },
+  ],
+
+  register: [
+    {
+      id: 'username',
+      label: 'Choose a Username',
+      name: 'username',
+      type: 'text',
+      placeholder: 'Enter your desired username',
+      required: true,
+      icon: 'user',
+      logic_key: 'user',
+    },
+    {
+      id: 'email',
+      label: 'Email Address',
+      name: 'email',
+      type: 'email',
+      placeholder: 'Enter your email',
+      required: true,
+      icon: 'email',
+      logic_key: 'email',
+    },
+    {
+      id: 'password',
+      label: 'Create Password',
+      name: 'password',
+      type: 'password',
+      placeholder: 'Create a strong password',
+      required: true,
+      icon: 'lock',
+      check: { text: true, number: false, special_charcter: false },
+      maxInput: 20,
+      minInput: 5,
+      logic_key: 'password',
+    },
+    {
+      id: 'confirm_password',
+      label: 'Confirm Password',
+      name: 'confirm_password',
+      type: 'password',
+      placeholder: 'Confirm your password',
+      required: true,
+      icon: 'lock',
+      logic_key: 'confirm_password',
+    },
+    {
+      id: 'first_name',
+      label: 'First Name',
+      name: 'first_name',
+      type: 'text',
+      placeholder: 'Your first name',
+      required: false,
+      icon: 'user',
+      show: false,
+      logic_key: 'first_name',
+    },
+    {
+      id: 'last_name',
+      label: 'Last Name',
+      name: 'last_name',
+      type: 'text',
+      placeholder: 'Your last name',
+      required: false,
+      icon: 'user',
+      show: false,
+      logic_key: 'last_name',
+    },
+    {
+      id: 'terms_and_conditions',
+      label: 'I agree to the Terms & Conditions',
+      name: 'terms_and_conditions',
+      type: 'checkbox',
+      required: true,
+      icon: '',
+      show: true,
+      logic_key: 'terms',
+    },
+    {
+      id: 'honeypot',
+      label: '',
+      name: 'honeypot',
+      type: 'text',
+      icon: '',
+      show: false,
+      hidden: true,
+    },
+  ],
+
+  forgot_password: [
+    {
+      id: 'user_login',
+      label: 'Email Address',
+      name: 'user_login',
+      type: 'text',
+      placeholder: 'Enter your email to reset password',
+      required: true,
+      icon: 'email',
+      logic_key: 'email',
+    },
+  ],
     },
     display_triggers: {
       trigger_css_class: "th-login-trigger",
@@ -192,6 +313,8 @@ const App = () => {
 
   const importTextareaRef = useRef(null); // Ref for import textarea
 
+  console.log(settings);
+
   // Fetch settings on component mount.
   useEffect(() => {
     const fetchSettings = async () => {
@@ -205,12 +328,7 @@ const App = () => {
         if (response.success) {
           // Deep merge fetched settings with default structure to ensure all keys exist.
           const mergedSettings = deepMerge(settings, response.settings);
-          // Ensure specific arrays are initialized if missing or not array.
-          if (
-            !Array.isArray(mergedSettings.form_fields?.register?.custom_fields)
-          ) {
-            mergedSettings.form_fields.register.custom_fields = [];
-          }
+        
           if (
             !Array.isArray(
               mergedSettings.general?.redirects?.role_based_redirects
@@ -218,6 +336,7 @@ const App = () => {
           ) {
             mergedSettings.general.redirects.role_based_redirects = [];
           }
+
           setSettings(mergedSettings);
         } else {
           setMessage({
@@ -240,10 +359,6 @@ const App = () => {
     fetchSettings();
   }, []); // Empty dependency array means this runs once on mount.
 
-  /**
-   * Helper function for deep merging objects.
-   * Used to merge fetched settings with default state, ensuring all keys are present.
-   */
   const deepMerge = (target, source) => {
     const output = { ...target };
     if (
@@ -272,13 +387,6 @@ const App = () => {
     return output;
   };
 
-  /**
-   * Generic handler for updating a specific setting within a category.
-   * Handles nested properties by reconstructing the object path.
-   * @param {string} category The top-level settings category (e.g., 'general', 'design').
-   * @param {string[]} path An array of keys representing the path to the setting (e.g., ['modal', 'overlay_color']).
-   * @param {*} value The new value for the setting.
-   */
   const handleSettingChange = (category, path, value) => {
     setSettings((prevSettings) => {
       const newCategorySettings = { ...prevSettings[category] };
@@ -351,133 +459,6 @@ const App = () => {
       setTimeout(() => setMessage(null), 5000);
     }
   };
-
-  // --- Custom Fields Management Functions ---
-
-  const addCustomField = () => {
-    setSettings((prevSettings) => ({
-      ...prevSettings,
-      form_fields: {
-        ...prevSettings.form_fields,
-        register: {
-          ...prevSettings.form_fields.register,
-          custom_fields: [
-            ...prevSettings.form_fields.register.custom_fields,
-            {
-              id: `custom_field_${Date.now()}`, // Unique ID
-              type: "text",
-              label: __("New Field", "th-login"),
-              placeholder: "",
-              required: false,
-              map_to_user_meta: false,
-              options: [], // For select/radio types
-            },
-          ],
-        },
-      },
-    }));
-  };
-
-  const updateCustomField = (index, key, value) => {
-    setSettings((prevSettings) => {
-      const newCustomFields = [
-        ...prevSettings.form_fields.register.custom_fields,
-      ];
-      newCustomFields[index] = {
-        ...newCustomFields[index],
-        [key]: value,
-      };
-      return {
-        ...prevSettings,
-        form_fields: {
-          ...prevSettings.form_fields,
-          register: {
-            ...prevSettings.form_fields.register,
-            custom_fields: newCustomFields,
-          },
-        },
-      };
-    });
-  };
-
-  const removeCustomField = (index) => {
-    setSettings((prevSettings) => {
-      const newCustomFields =
-        prevSettings.form_fields.register.custom_fields.filter(
-          (_, i) => i !== index
-        );
-      return {
-        ...prevSettings,
-        form_fields: {
-          ...prevSettings.form_fields,
-          register: {
-            ...prevSettings.form_fields.register,
-            custom_fields: newCustomFields,
-          },
-        },
-      };
-    });
-  };
-
-  // --- Role-Based Redirects Functions ---
-  const addRoleBasedRedirect = () => {
-    setSettings((prevSettings) => ({
-      ...prevSettings,
-      general: {
-        ...prevSettings.general,
-        redirects: {
-          ...prevSettings.general.redirects,
-          role_based_redirects: [
-            ...prevSettings.general.redirects.role_based_redirects,
-            { role: "", url: "" },
-          ],
-        },
-      },
-    }));
-  };
-
-  const updateRoleBasedRedirect = (index, key, value) => {
-    setSettings((prevSettings) => {
-      const newRoleBasedRedirects = [
-        ...prevSettings.general.redirects.role_based_redirects,
-      ];
-      newRoleBasedRedirects[index] = {
-        ...newRoleBasedRedirects[index],
-        [key]: value,
-      };
-      return {
-        ...prevSettings,
-        general: {
-          ...prevSettings.general,
-          redirects: {
-            ...prevSettings.general.redirects,
-            role_based_redirects: newRoleBasedRedirects,
-          },
-        },
-      };
-    });
-  };
-
-  const removeRoleBasedRedirect = (index) => {
-    setSettings((prevSettings) => {
-      const newRoleBasedRedirects =
-        prevSettings.general.redirects.role_based_redirects.filter(
-          (_, i) => i !== index
-        );
-      return {
-        ...prevSettings,
-        general: {
-          ...prevSettings.general,
-          redirects: {
-            ...prevSettings.general.redirects,
-            role_based_redirects: newRoleBasedRedirects,
-          },
-        },
-      };
-    });
-  };
-
-  // --- Tools Functions ---
 
   const handleExportSettings = () => {
     // Create a copy of settings, remove sensitive info if any (e.g., reCAPTCHA secret key).
@@ -659,6 +640,8 @@ const App = () => {
             <span className="th-logo">TH</span>
             {__("Login Settings", "th-login")}
           </h2>
+
+          
           {message && (
             <div className={`notice-banner ${message.type}`}>
               <p>{message.text}</p>
@@ -691,9 +674,6 @@ const App = () => {
             <GeneralSettings 
               settings={settings} 
               handleSettingChange={handleSettingChange}
-              addRoleBasedRedirect={addRoleBasedRedirect}
-              updateRoleBasedRedirect={updateRoleBasedRedirect}
-              removeRoleBasedRedirect={removeRoleBasedRedirect}
             />
           )}
 
@@ -708,9 +688,9 @@ const App = () => {
             <FormFieldsSettings
               settings={settings}
               handleSettingChange={handleSettingChange}
-              addCustomField={addCustomField}
-              updateCustomField={updateCustomField}
-              removeCustomField={removeCustomField}
+              // addCustomField={addCustomField}
+              // updateCustomField={updateCustomField}
+              // removeCustomField={removeCustomField}
             />
           )}
 
@@ -748,25 +728,22 @@ const App = () => {
                 setIsResetConfirmOpen={setIsResetConfirmOpen}
             />
           )}
-
-          {/* Save Button */}
-          <div className="save-settings">
-            <Button
-              isPrimary
-              onClick={handleSaveSettings}
-              disabled={isSaving}
-              className="save-button"
-            >
-              {isSaving ? (
-                <Spinner />
-              ) : (
-                <i className="dashicons dashicons-yes"></i>
-              )}
-              {__("Save Changes", "th-login")}
-            </Button>
-          </div>
         </div>
       </div>
+
+        <div className="save-settings">
+              <Button
+                isPrimary
+                onClick={handleSaveSettings}
+                disabled={isSaving}
+                className="save-button"
+              >
+                {isSaving && (
+                  <Spinner />
+                )}
+                {__("Save Changes", "th-login")}
+              </Button>
+          </div>
 
       {/* Reset Confirmation Modal */}
       {isResetConfirmOpen && (

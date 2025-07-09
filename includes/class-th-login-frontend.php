@@ -50,6 +50,8 @@ class TH_Login_Frontend {
 			$asset_config['version']
 		);
 
+		wp_enqueue_style( 'dashicons' );
+
 		$general_settings          = json_decode( get_option( 'th_login_general_settings', '{}' ), true );
 		$design_settings           = json_decode( get_option( 'th_login_design_settings', '{}' ), true );
 		$form_fields_settings      = json_decode( get_option( 'th_login_form_fields_settings', '{}' ), true );

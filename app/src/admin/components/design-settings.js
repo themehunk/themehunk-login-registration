@@ -10,6 +10,8 @@ import {
   __experimentalToggleGroupControl as ToggleGroupControl,
   __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
+import { BorderBoxControl } from './border-box-control';
+import { __experimentalBorderRadiusControl as BorderRadiusControl } from '@wordpress/components';
 
 
 const DesignEditor = ({ settings, handleSettingChange }) => {
@@ -522,31 +524,12 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									<AccordionSection title={__("Border", "th-login")} defaultOpen={false}>
 										{/* Border Widths */}
 										<div className="th-login-border-controls">
-											<RangeControl
-												label={__("Top", "th-login")}
-												value={settings.design.modal.form_border?.width?.top ?? 0}
-												onChange={(val) => handleSettingChange("design", ["modal", "form_border", "width", "top"], val)}
-												min={0}
-												max={20}
-											/>
-											<RangeControl
-												label={__("Right", "th-login")}
-												value={settings.design.modal.form_border?.width?.right ?? 0}
-												onChange={(val) => handleSettingChange("design", ["modal", "form_border", "width", "right"], val)}
-												min={0}
-												max={20}
-											/>
-											<RangeControl
-												label={__("Bottom", "th-login")}
-												value={settings.design.modal.form_border?.width?.bottom ?? 0}
-												onChange={(val) => handleSettingChange("design", ["modal", "form_border", "width", "bottom"], val)}
-												min={0}
-												max={20}
-											/>
-											<RangeControl
-												label={__("Left", "th-login")}
-												value={settings.design.modal.form_border?.width?.left ?? 0}
-												onChange={(val) => handleSettingChange("design", ["modal", "form_border", "width", "left"], val)}
+											<BorderBoxControl
+												label={__("Border Width", "th-login")}
+												values={settings.design.modal.form_border?.width || {}}
+												onChange={(newVal) =>
+													handleSettingChange("design", ["modal", "form_border", "width"], newVal)
+												}
 												min={0}
 												max={20}
 											/>
@@ -563,6 +546,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												{ label: __("Double", "th-login"), value: "double" },
 												{ label: __("None", "th-login"), value: "none" },
 											]}
+											className="modern-border-select-control"
 											onChange={(val) => handleSettingChange("design", ["modal", "form_border", "style"], val)}
 										/>
 
@@ -575,35 +559,12 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 										<hr style={{ margin: "16px 0" }} />
 
-										{/* Border Radius */}
-										<h4 style={{ marginBottom: "8px" }}>{__("Border Radius", "th-login")}</h4>
-										<RangeControl
-											label={__("Top Left", "th-login")}
-											value={settings.design.modal.form_border?.radius?.topLeft ?? 0}
-											onChange={(val) => handleSettingChange("design", ["modal", "form_border", "radius", "topLeft"], val)}
-											min={0}
-											max={50}
-										/>
-										<RangeControl
-											label={__("Top Right", "th-login")}
-											value={settings.design.modal.form_border?.radius?.topRight ?? 0}
-											onChange={(val) => handleSettingChange("design", ["modal", "form_border", "radius", "topRight"], val)}
-											min={0}
-											max={50}
-										/>
-										<RangeControl
-											label={__("Bottom Right", "th-login")}
-											value={settings.design.modal.form_border?.radius?.bottomRight ?? 0}
-											onChange={(val) => handleSettingChange("design", ["modal", "form_border", "radius", "bottomRight"], val)}
-											min={0}
-											max={50}
-										/>
-										<RangeControl
-											label={__("Bottom Left", "th-login")}
-											value={settings.design.modal.form_border?.radius?.bottomLeft ?? 0}
-											onChange={(val) => handleSettingChange("design", ["modal", "form_border", "radius", "bottomLeft"], val)}
-											min={0}
-											max={50}
+										<BorderRadiusControl
+											label={__("Border Radius", "th-login")}
+											values={settings.design.modal.form_border?.radius || {}}
+											onChange={(newRadius) =>
+												handleSettingChange("design", ["modal", "form_border", "radius"], newRadius)
+											}
 										/>
 									</AccordionSection>
 

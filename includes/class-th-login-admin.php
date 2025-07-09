@@ -1,59 +1,41 @@
-	<?php
-	// Exit if accessed directly.
-	if ( ! defined( 'ABSPATH' ) ) {
-		exit;
+<?php
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class TH_Login_Admin {
+
+	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'register_admin_menu_page' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 	}
 
-	/**
-	 * Handles all admin-related functionalities for TH Login.
-	 */
-	class TH_Login_Admin {
+	public function register_admin_menu_page() {
+		add_menu_page(
+			esc_html__( 'TH Login', 'th-login' ), // Page title
+			esc_html__( 'TH Login', 'th-login' ), // Menu title
+			'manage_options',                    // Capability required to access
+			'th-login-settings',                 // Menu slug
+			array( $this, 'render_admin_page' ), // Callback function to render page content
+			'dashicons-admin-users',             // Icon for the menu item
+			59                                   // Position in the menu
+		);
+	}
 
-		/**
-		 * Constructor.
-		 */
-		public function __construct() {
-			add_action( 'admin_menu', array( $this, 'register_admin_menu_page' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+	public function render_admin_page() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return; // Security check.
 		}
+		?>
+		<div id="th-login-admin-root" class="wrap">
+			<h1><?php echo esc_html__( 'TH Login Settings', 'th-login' ); ?></h1>
+			<p><?php echo esc_html__( 'Loading settings...', 'th-login' ); ?></p>
+		</div>
+		<?php
+	}
 
-		/**
-		 * Register the admin menu page.
-		 */
-		public function register_admin_menu_page() {
-			add_menu_page(
-				esc_html__( 'TH Login', 'th-login' ), // Page title
-				esc_html__( 'TH Login', 'th-login' ), // Menu title
-				'manage_options',                    // Capability required to access
-				'th-login-settings',                 // Menu slug
-				array( $this, 'render_admin_page' ), // Callback function to render page content
-				'dashicons-admin-users',             // Icon for the menu item
-				59                                   // Position in the menu
-			);
-		}
-
-		/**
-		 * Render the admin settings page.
-		 * This will be the root element for our React app.
-		 */
-		public function render_admin_page() {
-			if ( ! current_user_can( 'manage_options' ) ) {
-				return; // Security check.
-			}
-			?>
-			<div id="th-login-admin-root" class="wrap">
-				<h1><?php echo esc_html__( 'TH Login Settings', 'th-login' ); ?></h1>
-				<p><?php echo esc_html__( 'Loading settings...', 'th-login' ); ?></p>
-			</div>
-			<?php
-		}
-
-		/**
-		 * Enqueue admin scripts and styles for the settings page.
-		 *
-		 * @param string $hook The current admin page hook.
-		 */
-		public function enqueue_admin_scripts( $hook ) {
+	public function enqueue_admin_scripts( $hook ) {
 		if ( 'toplevel_page_th-login-settings' !== $hook ) {
 			return;
 		}
@@ -111,4 +93,4 @@
 		);
 	}
 
-	}
+}

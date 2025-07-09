@@ -6,51 +6,96 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Get form fields settings.
 $form_fields_settings = json_decode( get_option( 'th_login_form_fields_settings', '{}' ), true );
-$login_fields = $form_fields_settings['login'] ?? array();
+$general_settings     = json_decode( get_option( 'th_login_general_settings', '{}' ), true );
+$login_fields         = $form_fields_settings['login'] ?? array();
 ?>
+
 <div class="th-login-form th-login-form--login" data-form-type="login">
-    <?php
-    // Include form header (logo, custom HTML).
-    require TH_LOGIN_PATH . 'templates/parts/form-header.php';
-    ?>
+	<?php require TH_LOGIN_PATH . 'templates/parts/form-header.php'; ?>
 
-    <form class="th-login-ajax-form" data-form-type="login">
-        <div class="th-login-messages" aria-live="polite"></div>
+	<form class="th-login-ajax-form" data-form-type="login">
+		<div class="th-login-messages" aria-live="polite"></div>
 
-        <p class="th-login-form-field">
-            <label for="th-login-username"><?php echo esc_html( $login_fields['username_label'] ?? __( 'Username or Email Address', 'th-login' ) ); ?></label>
-            <input type="text" name="username" id="th-login-username" placeholder="<?php echo esc_attr( $login_fields['username_placeholder'] ?? __( 'Enter your username or email', 'th-login' ) ); ?>" required>
-        </p>
+		<?php foreach ( $login_fields as $field ) :
+			if ( ! empty( $field['hidden'] ) ) {
+				continue;
+			}
 
-        <p class="th-login-form-field">
-            <label for="th-login-password"><?php echo esc_html( $login_fields['password_label'] ?? __( 'Password', 'th-login' ) ); ?></label>
-            <input type="password" name="password" id="th-login-password" placeholder="<?php echo esc_attr( $login_fields['password_placeholder'] ?? __( 'Enter your password', 'th-login' ) ); ?>" required>
-        </p>
+			$type        = $field['type'] ?? 'text';
+			$name        = esc_attr( $field['name'] ?? '' );
+			$id          = esc_attr( $field['id'] ?? 'field_' . uniqid() );
+			$label       = $field['label'] ?? '';
+			$placeholder = $field['placeholder'] ?? '';
+			$required    = ! empty( $field['required'] );
+			$logic_key   = $field['logic_key'] ?? '';
+			$icon_class  = ! empty( $field['icon'] ) ? 'dashicons-' . esc_attr( $field['icon'] ) : '';
 
-        <?php if ( ( $login_fields['show_remember_me'] ?? true ) ) : ?>
-        <p class="th-login-form-field th-login-form-field--remember">
-            <input type="checkbox" name="rememberme" id="th-login-rememberme" value="forever">
-            <label for="th-login-rememberme"><?php echo esc_html( $login_fields['remember_me_label'] ?? __( 'Remember Me', 'th-login' ) ); ?></label>
-        </p>
-        <?php endif; ?>
+			$field_class = 'th-login-form-field';
+			if ( $type === 'checkbox' ) {
+				$field_class .= ' th-login-form-field--checkbox';
+			}
 
-        <p class="th-login-form-submit">
-            <button type="submit" class="th-login-button th-login-button--primary">
-                <?php esc_html_e( 'Log In', 'th-login' ); ?>
-            </button>
-        </p>
+			// Set autocomplete attribute based on logic_key
+			$autocomplete = '';
+			switch ( $logic_key ) {
+				case 'user':
+					$autocomplete = 'username';
+					break;
+				case 'email':
+					$autocomplete = 'email';
+					break;
+				case 'password':
+					$autocomplete = 'current-password';
+					break;
+			}
+		?>
+			<p class="<?php echo esc_attr( $field_class ); ?>">
+				<?php if ( $type === 'checkbox' ) : ?>
+					<input
+						type="checkbox"
+						name="<?php echo $name; ?>"
+						id="<?php echo $id; ?>"
+						value="1"
+					/>
+					<label for="<?php echo $id; ?>">
+						<?php echo esc_html( $label ); ?>
+						<?php if ( $required ) : ?>
+							<span class="th-required">*</span>
+						<?php endif; ?>
+					</label>
+				<?php else : ?>
+					<label for="<?php echo $id; ?>">
+						<?php echo esc_html( $label ); ?>
+						<?php if ( $required ) : ?>
+							<span class="th-required">*</span>
+						<?php endif; ?>
+					</label>
+					<input
+						type="<?php echo esc_attr( $type ); ?>"
+						name="<?php echo $name; ?>"
+						id="<?php echo $id; ?>"
+						placeholder="<?php echo esc_attr( $placeholder ); ?>"
+						<?php echo $required ? 'required' : ''; ?>
+						<?php echo $autocomplete ? 'autocomplete="' . esc_attr( $autocomplete ) . '"' : ''; ?>
+					/>
+				<?php endif; ?>
+			</p>
+		<?php endforeach; ?>
 
-        <p class="th-login-form-links">
-            <a href="#" class="th-login-link" data-th-popup-action="forgot-password"><?php esc_html_e( 'Forgot Password?', 'th-login' ); ?></a>
-            <?php if ( get_option( 'users_can_register' ) ) : ?>
-                <span class="th-login-link-separator">|</span>
-                <a href="#" class="th-login-link" data-th-popup-action="register"><?php esc_html_e( 'Register', 'th-login' ); ?></a>
-            <?php endif; ?>
-        </p>
-    </form>
+		<p class="th-login-form-submit">
+			<button type="submit" class="th-login-button th-login-button--primary">
+				<?php esc_html_e( 'Log In', 'th-login' ); ?>
+			</button>
+		</p>
 
-    <?php
-    // Include form footer (custom HTML).
-    require TH_LOGIN_PATH . 'templates/parts/form-footer.php';
-    ?>
+		<p class="th-login-form-links">
+			<a href="#" class="th-login-link" data-th-popup-action="forgot-password"><?php esc_html_e( 'Forgot Password?', 'th-login' ); ?></a>
+			<?php if ( $general_settings['form_type'] === 'double' ) : ?>
+				<span class="th-login-link-separator">|</span>
+				<a href="#" class="th-login-link" data-th-popup-action="register"><?php esc_html_e( 'Register', 'th-login' ); ?></a>
+			<?php endif; ?>
+		</p>
+	</form>
+
+	<?php require TH_LOGIN_PATH . 'templates/parts/form-footer.php'; ?>
 </div>

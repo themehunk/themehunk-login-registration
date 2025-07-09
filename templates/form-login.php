@@ -17,9 +17,7 @@ $login_fields         = $form_fields_settings['login'] ?? array();
 		<div class="th-login-messages" aria-live="polite"></div>
 
 		<?php foreach ( $login_fields as $field ) :
-			if ( ! empty( $field['hidden'] ) ) {
-				continue;
-			}
+			if ( ! empty( $field['hidden'] ) ) continue;
 
 			$type        = $field['type'] ?? 'text';
 			$name        = esc_attr( $field['name'] ?? '' );
@@ -27,7 +25,6 @@ $login_fields         = $form_fields_settings['login'] ?? array();
 			$label       = $field['label'] ?? '';
 			$placeholder = $field['placeholder'] ?? '';
 			$required    = ! empty( $field['required'] );
-			$logic_key   = $field['logic_key'] ?? '';
 			$icon_class  = ! empty( $field['icon'] ) ? 'dashicons-' . esc_attr( $field['icon'] ) : '';
 
 			$field_class = 'th-login-form-field';
@@ -35,18 +32,14 @@ $login_fields         = $form_fields_settings['login'] ?? array();
 				$field_class .= ' th-login-form-field--checkbox';
 			}
 
-			// Set autocomplete attribute based on logic_key
+			// Basic autocomplete guessing (optional fallback)
 			$autocomplete = '';
-			switch ( $logic_key ) {
-				case 'user':
-					$autocomplete = 'username';
-					break;
-				case 'email':
-					$autocomplete = 'email';
-					break;
-				case 'password':
-					$autocomplete = 'current-password';
-					break;
+			if ( stripos( $name, 'user' ) !== false ) {
+				$autocomplete = 'username';
+			} elseif ( stripos( $name, 'email' ) !== false ) {
+				$autocomplete = 'email';
+			} elseif ( stripos( $name, 'pass' ) !== false ) {
+				$autocomplete = 'current-password';
 			}
 		?>
 			<p class="<?php echo esc_attr( $field_class ); ?>">

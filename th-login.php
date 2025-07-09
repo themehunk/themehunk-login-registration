@@ -186,7 +186,7 @@ final class TH_Login {
 					'placeholder' => esc_html__( 'Enter your username or email', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'user',
-					'logic_key' => 'user',
+					
 				),
 				array(
 					'id'          => 'password',
@@ -196,7 +196,7 @@ final class TH_Login {
 					'placeholder' => esc_html__( 'Enter your password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'lock',
-					'logic_key' => 'password',
+					
 				),
 				array(
 					'id'       => 'remember_me',
@@ -206,7 +206,7 @@ final class TH_Login {
 					'required' => false,
 					'icon'     => '',
 					'show'     => true,
-					'logic_key' => 'remember',
+					
 				),
 			),
 			'register' => array(
@@ -218,7 +218,7 @@ final class TH_Login {
 					'placeholder' => esc_html__( 'Enter your desired username', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'user',
-					'logic_key' => 'user',
+					
 				),
 				array(
 					'id'          => 'email',
@@ -228,7 +228,7 @@ final class TH_Login {
 					'placeholder' => esc_html__( 'Enter your email', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'email',
-					'logic_key' => 'email',
+					
 				),
 				array(
 					'id'          => 'password',
@@ -238,7 +238,7 @@ final class TH_Login {
 					'placeholder' => esc_html__( 'Create a strong password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'lock',
-					'logic_key' => 'password',
+					
 				),
 				array(
 					'id'          => 'confirm_password',
@@ -259,7 +259,7 @@ final class TH_Login {
 					'required'    => false,
 					'icon'        => 'user',
 					'show'        => false,
-					'logic_key' => 'first_name',
+					
 				),
 				array(
 					'id'          => 'last_name',
@@ -270,7 +270,7 @@ final class TH_Login {
 					'required'    => false,
 					'icon'        => 'user',
 					'show'        => false,
-					'logic_key' => 'last_name',
+					
 				),
 				array(
 					'id'       => 'terms_and_conditions',
@@ -280,7 +280,7 @@ final class TH_Login {
 					'required' => true,
 					'icon'     => '',
 					'show'     => true,
-					'logic_key' => 'terms',
+					
 				),
 				array(
 					'id'      => 'honeypot',
@@ -301,7 +301,7 @@ final class TH_Login {
 					'placeholder' => esc_html__( 'Enter your email to reset password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'email',
-					'logic_key' => 'email',
+					
 				),
 			),
 		);
@@ -504,7 +504,7 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Enter your username or email', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'user',
-					'logic_key' => 'user',
+					
 				),
 				array(
 					'id'          => 'password',
@@ -514,7 +514,7 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Enter your password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'lock',
-					'logic_key' => 'password',
+					
 				),
 				array(
 					'id'       => 'remember_me',
@@ -524,7 +524,7 @@ function th_login_set_default_options() {
 					'required' => false,
 					'icon'     => '',
 					'show'     => true,
-					'logic_key' => 'remember',
+	
 				),
 			),
 			'register' => array(
@@ -536,7 +536,7 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Enter your desired username', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'user',
-					'logic_key' => 'user',
+					
 				),
 				array(
 					'id'          => 'email',
@@ -546,7 +546,7 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Enter your email', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'email',
-					'logic_key' => 'email',
+					
 				),
 				array(
 					'id'          => 'password',
@@ -556,7 +556,7 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Create a strong password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'lock',
-					'logic_key' => 'password',
+					
 				),
 				array(
 					'id'          => 'confirm_password',
@@ -566,7 +566,7 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Confirm your password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'lock',
-					'logic_key' => 'confirm_password',
+					
 				),
 				array(
 					'id'          => 'first_name',
@@ -577,7 +577,7 @@ function th_login_set_default_options() {
 					'required'    => false,
 					'icon'        => 'user',
 					'show'        => false,
-					'logic_key' => 'first_name',
+					
 				),
 				array(
 					'id'          => 'last_name',
@@ -588,7 +588,7 @@ function th_login_set_default_options() {
 					'required'    => false,
 					'icon'        => 'user',
 					'show'        => false,
-					'logic_key' => 'last_name',
+					
 				),
 				array(
 					'id'       => 'terms_and_conditions',
@@ -598,7 +598,7 @@ function th_login_set_default_options() {
 					'required' => true,
 					'icon'     => '',
 					'show'     => true,
-					'logic_key' => 'terms',
+					
 				),
 				array(
 					'id'      => 'honeypot',
@@ -619,7 +619,7 @@ function th_login_set_default_options() {
 					'placeholder' => esc_html__( 'Enter your email to reset password', 'th-login' ),
 					'required'    => true,
 					'icon'        => 'email',
-					'logic_key' => 'email',
+					
 				),
 			),
     );

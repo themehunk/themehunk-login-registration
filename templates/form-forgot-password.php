@@ -25,15 +25,16 @@ $forgot_password_fields   = $form_fields_settings['forgot_password'] ?? array();
 			$label       = $field['label'] ?? '';
 			$placeholder = $field['placeholder'] ?? '';
 			$required    = ! empty( $field['required'] );
-			$logic_key   = $field['logic_key'] ?? '';
 
-			// Only allow email/user fields
-			if ( ! in_array( $logic_key, [ 'user', 'email' ], true ) ) {
+			// Only include fields with name hinting email or username
+			if (
+				stripos( $name, 'email' ) === false &&
+				stripos( $name, 'user' ) === false
+			) {
 				continue;
 			}
 
-			// Set autocomplete
-			$autocomplete = $logic_key === 'email' ? 'email' : 'username';
+			$autocomplete = ( stripos( $name, 'email' ) !== false ) ? 'email' : 'username';
 		?>
 			<p class="th-login-form-field">
 				<label for="<?php echo $id; ?>">

@@ -246,24 +246,6 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
             />
 
             <CustomSelectControl
-              label={__("Logic Key (Avoid Changing This)", "th-login")}
-              value={selectedField.logic_key || ""}
-              options={[
-                { label: __("None", "th-login"), value: "" },
-                { label: __("Username", "th-login"), value: "user" },
-                { label: __("Email", "th-login"), value: "email" },
-                { label: __("Password", "th-login"), value: "password" },
-                { label: __("Confirm Password", "th-login"), value: "confirm_password" },
-                { label: __("Terms & Conditions", "th-login"), value: "terms_and_conditions" },
-                { label: __("Number", "th-login"), value: "number" },
-                { label: __("Address", "th-login"), value: "address" },
-                { label: __("First Name", "th-login"), value: "first_name" },
-                { label: __("Last Name", "th-login"), value: "last_name" },
-              ]}
-              onChange={(val) => handleFieldChange("logic_key", val)}
-            />
-
-            <CustomSelectControl
               label={__("Field Type", "th-login")}
               value={selectedField.type || "text"}
               options={[
@@ -322,7 +304,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               onChange={(val) => handleFieldChange("show", val)}
             />
         
-            {(selectedField.type === "password" && selectedField.logic_key !== 'confirm_password' ) && (
+            {(selectedField.type === "password" && selectedField.id !== 'confirm_password' ) && (
               <>
   
                 <TextControl

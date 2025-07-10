@@ -10,7 +10,7 @@ class TH_Login_Shortcodes {
 		add_shortcode( 'th_register_form', array( $this, 'render_register_form_shortcode' ) );
 		add_shortcode( 'th_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
 		add_shortcode( 'th_login_popup_link', array( $this, 'render_popup_link_shortcode' ) );
-		add_shortcode( 'th_combined_form', array( $this, 'render_combined_form_shortcode' ) );
+		add_shortcode( 'th_login__combined_form', array( $this, 'render_combined_form_shortcode' ) );
 	}
 
 	private function safe_json_option( $option_key, $default = array() ) {
@@ -23,15 +23,16 @@ class TH_Login_Shortcodes {
 	}
 
 	public function render_combined_form_shortcode( $atts ) {
-		$this->enqueue_shortcode_assets(); // Enqueue scripts/styles.
+		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require TH_LOGIN_PATH . 'templates/modal-wrapper.php'; // This is the same file used for popup modal.
-		return '<div class="th-login-combined-form-wrapper">' . ob_get_clean() . '</div>';
+		require TH_LOGIN_PATH . 'templates/modal-wrapper.php';
+		$output = ob_get_clean();
+		$output .= '<script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){if(window.thLoginFrontendData && typeof window.thLoginFrontendData==="object" && document.getElementById("th-login-popup-modal")){document.getElementById("th-login-popup-modal").style.display="flex";}},100);});</script>';
+		return '<div class="th-login-combined-form-wrapper">' . $output . '</div>';
 	}
 
 	public function enqueue_shortcode_assets() {
-		// Only enqueue if not already enqueued by the main frontend class.
 		if ( ! wp_style_is( 'th-login-frontend-style', 'enqueued' ) ) {
 			$general_settings = $this->safe_json_option( 'th_login_general_settings' );
 			$plugin_status = $general_settings['plugin_status'] ?? 'enabled';
@@ -86,10 +87,7 @@ class TH_Login_Shortcodes {
 				)
 			);
 
-			$typography_settings = array();
-			if ( isset( $design_settings['typography'] ) && is_array( $design_settings['typography'] ) ) {
-				$typography_settings = $design_settings['typography'];
-			}
+			$typography_settings = $design_settings['typography'] ?? array();
 			$google_font_url = $typography_settings['google_font_url'] ?? '';
 
 			if ( ! empty( $google_font_url ) ) {
@@ -99,7 +97,7 @@ class TH_Login_Shortcodes {
 	}
 
 	public function render_login_form_shortcode( $atts ) {
-		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
+		$this->enqueue_shortcode_assets();
 
 		ob_start();
 		require TH_LOGIN_PATH . 'templates/form-login.php';
@@ -107,7 +105,7 @@ class TH_Login_Shortcodes {
 	}
 
 	public function render_register_form_shortcode( $atts ) {
-		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
+		$this->enqueue_shortcode_assets();
 
 		ob_start();
 		require TH_LOGIN_PATH . 'templates/form-register.php';
@@ -115,7 +113,7 @@ class TH_Login_Shortcodes {
 	}
 
 	public function render_forgot_password_form_shortcode( $atts ) {
-		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
+		$this->enqueue_shortcode_assets();
 
 		ob_start();
 		require TH_LOGIN_PATH . 'templates/form-forgot-password.php';
@@ -123,13 +121,13 @@ class TH_Login_Shortcodes {
 	}
 
 	public function render_popup_link_shortcode( $atts, $content = null ) {
-		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
+		$this->enqueue_shortcode_assets();
 
 		$atts = shortcode_atts(
 			array(
-				'type' => 'login', // 'login', 'register', 'forgot-password'
-				'text' => '',      // Link text
-				'class' => '',     // Additional CSS class for the link
+				'type' => 'login',
+				'text' => '',
+				'class' => '',
 			),
 			$atts,
 			'th_login_popup_link'
@@ -140,15 +138,12 @@ class TH_Login_Shortcodes {
 		$extra_class = sanitize_html_class( $atts['class'] );
 
 		if ( empty( $text ) ) {
-			if ( 'login' === $type ) {
-				$text = esc_html__( 'Login', 'th-login' );
-			} elseif ( 'register' === $type ) {
-				$text = esc_html__( 'Register', 'th-login' );
-			} elseif ( 'forgot-password' === $type ) {
-				$text = esc_html__( 'Forgot Password', 'th-login' );
-			} else {
-				$text = esc_html__( 'Open Login Popup', 'th-login' );
-			}
+			$text = match ( $type ) {
+				'login' => esc_html__( 'Login', 'th-login' ),
+				'register' => esc_html__( 'Register', 'th-login' ),
+				'forgot-password' => esc_html__( 'Forgot Password', 'th-login' ),
+				default => esc_html__( 'Open Login Popup', 'th-login' ),
+			};
 		}
 
 		$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );

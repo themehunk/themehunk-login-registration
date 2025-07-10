@@ -168,27 +168,39 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
     setSelectedField(firstVisible);
   }, []);
 
+  
+    const tabs = [
+        { key: "general", label: __("Login", "th-login") },
+        { key: "redirect", label: __("Register", "th-login") },
+        { key: "shortcodes", label: __("Forgot Password", "th-login") },
+    ];
+    
+    const renderTabs = () => (
+      <div className="custom-tabs">
+      {Object.keys(TAB_KEYS).map((key) => (
+          <button
+            key={key}
+            className={classnames("custom-tab-button", {
+                active: key === activeTab,
+            })}
+          onClick={() => {
+            setActiveTab(key);
+            setSelectedField(
+              (settings.form_fields?.[key] || []).find((f) => !f.hidden) || null
+            );
+          }}
+          >
+          {TAB_KEYS[key]}
+          </button>
+      ))}
+      </div>
+  );
+
   return (
     <div className="thl-form-fields-settings">
       <div className="thl-left-panel">
-        <div className="tabs">
-          {Object.keys(TAB_KEYS).map((key) => (
-            <button
-              key={key}
-              className={classnames("tab-button", {
-                active: key === activeTab,
-              })}
-              onClick={() => {
-                setActiveTab(key);
-                setSelectedField(
-                  (settings.form_fields?.[key] || []).find((f) => !f.hidden) || null
-                );
-              }}
-            >
-              {TAB_KEYS[key]}
-            </button>
-          ))}
-        </div>
+
+        {renderTabs()}
 
         <div className="fields-list scrollable">
           <DndContext

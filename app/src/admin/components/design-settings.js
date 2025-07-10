@@ -167,6 +167,28 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		);
 	};
 
+    const tabs = [
+        { key: "login", label: __("Login", "th-login") },
+        { key: "register", label: __("Register", "th-login") },
+        { key: "forgot", label: __("Forgot", "th-login") },
+    ];
+    
+    const renderTabs = () => (
+        <div className="custom-tabs">
+        {tabs.map((tab) => (
+            <button
+            key={tab.key}
+            className={`custom-tab-button ${
+                activeForm === tab.key ? "active" : ""
+            }`}
+            onClick={() => setActiveForm(tab.key)}
+            >
+            {tab.label}
+            </button>
+        ))}
+        </div>
+    );
+
 	return (
 		<div className="design-editor-layout">
 			{/* Left Preview Panel */}
@@ -179,15 +201,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				</div>
 
 				<div className="preview-switcher">
-					<button onClick={() => setActiveForm("login")} className={activeForm === "login" ? "active" : ""}>
-						{__("Login", "th-login")}
-					</button>
-					<button onClick={() => setActiveForm("register")} className={activeForm === "register" ? "active" : ""}>
-						{__("Register", "th-login")}
-					</button>
-					<button onClick={() => setActiveForm("forgot")} className={activeForm === "forgot" ? "active" : ""}>
-						{__("Forgot", "th-login")}
-					</button>
+					{renderTabs()}
 				</div>
 			</div>
 

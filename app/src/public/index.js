@@ -312,4 +312,11 @@ document.addEventListener('DOMContentLoaded', () => {
         f.style.display = 'block';
         f.classList.add('th-login-form--active');
     });
+
+        // Force auto-open if shortcode was used on this page
+    const isShortcodeBasedModal = document.querySelector('.th-login-shortcode-form-wrapper');
+    if (isShortcodeBasedModal && canShowModal()) {
+        openModal('login'); // You can dynamically read form type if needed
+    }
+
 });

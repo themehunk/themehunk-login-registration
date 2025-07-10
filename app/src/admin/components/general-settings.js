@@ -3,6 +3,8 @@ import { ToggleControl, TextControl } from "@wordpress/components";
 import { CustomSelectControl } from './custom-select-control';
 import { useEffect, useState } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
+import {  FaCheck } from "react-icons/fa"; 
+import { FaCopy } from "react-icons/fa6";
 
 const GeneralSettings = ({ settings, handleSettingChange}) => {
 
@@ -18,6 +20,67 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
         });
     }, []);
 
+	const [copiedIndex, setCopiedIndex] = useState(null);
+
+	const shortcodes = [
+		{
+			label: __("Login Form", "th-login"),
+			shortcode: "[th_login_form]",
+			description: __("Displays only the login form", "th-login"),
+		},
+		{
+			label: __("Register Form", "th-login"),
+			shortcode: "[th_register_form]",
+			description: __("Displays only the register form", "th-login"),
+		},
+		{
+			label: __("Forgot Password Form", "th-login"),
+			shortcode: "[th_forgot_password_form]",
+			description: __("Displays only the forgot password form", "th-login"),
+		},
+		{
+			label: __("Combined Modal", "th-login"),
+			shortcode: "[th_login__combined_form]",
+			description: __("Shows the full login/register/forgot modal and auto-triggers it", "th-login"),
+		},
+        {
+            label: __("Popup Link", "th-login"),
+            shortcode : "[th_login_popup_link]",
+            description:__("Use this link to generate popup link.")
+        }
+	];
+
+	const handleCopy = (text, index) => {
+		navigator.clipboard.writeText(text).then(() => {
+			setCopiedIndex(index);
+			setTimeout(() => setCopiedIndex(null), 3000);
+		});
+	};
+
+    const [activeTab, setActiveTab] = useState("general");
+
+    const tabs = [
+        { key: "general", label: __("General", "th-login") },
+        { key: "redirect", label: __("Redirect", "th-login") },
+        { key: "shortcodes", label: __("Short Codes", "th-login") },
+    ];
+    
+    const renderTabs = () => (
+        <div className="custom-tabs">
+        {tabs.map((tab) => (
+            <button
+            key={tab.key}
+            className={`custom-tab-button ${
+                activeTab === tab.key ? "active" : ""
+            }`}
+            onClick={() => setActiveTab(tab.key)}
+            >
+            {tab.label}
+            </button>
+        ))}
+        </div>
+    );
+
     return (
         <section className="settings-section">
             <div className="settings-card">
@@ -26,7 +89,11 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                     {__("General Settings", "th-login")}
                 </h2>
 
-                {/* General Info */}
+                {renderTabs()}
+                
+                {activeTab === "general" && (
+                    <>
+                    {/* General Info */}
                 <div className="settings-group">
                     <h3 className="group-title">{__("General", "th-login")}</h3>
                 </div>
@@ -159,9 +226,12 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                     }/>
                     </div>
                 </div>
+                    
+                    </>
+                )}
 
-                {/* Redirection Rules */}
-                <div className="settings-group">
+                {activeTab === "redirect" && (
+                    <div className="settings-group">
                     <h3 className="group-title">{__("Redirect", "th-login")}</h3>
                     <div className="redirection-grid">
                         <div className="redirection-card">
@@ -257,7 +327,45 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                                 )}
                         </div>
                     </div>
-                </div>
+                    </div>
+                )}
+
+                {activeTab === "shortcodes" && (
+                    <div className="settings-group th-login-shortcodes-list">
+                    <h3 className="group-title">{__("Shortcodes", "th-login")}</h3>
+                    <div className="shortcode-grid">
+                        {shortcodes.map(({ label, shortcode, description }, i) => (
+                            <div className="shortcode-card" key={i}>
+                                <h4>{label}</h4>
+                                <p className="description">{description}</p>
+                                <div className="shortcode-copy-wrap">
+                                    <textarea
+                                        className="shortcode-text"
+                                        readOnly
+                                        value={shortcode}
+                                        onClick={(e) => e.target.select()}
+                                    />
+                                  <button
+                                        className="components-button is-secondary copy-button"
+                                        onClick={() => handleCopy(shortcode, i)}
+                                        title={copiedIndex === i ? __("Copied!", "th-login") : __("Copy", "th-login")}
+                                    >
+                                        {copiedIndex === i ? <FaCheck /> : <FaCopy />}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    </div>
+                )}
+
+                
+
+                {/* Redirection Rules */}
+              
+
+                {/* Shortcode Quick Access */}
+              
 
             </div>
         </section>

@@ -23,14 +23,14 @@ const TABS = [
     icon: "feedback"
   },
   {
-    id: "design",
-    label: __("Design", "th-login"),
-    icon: "art"
-  },
-  {
     id: "display-triggers",
     label: __("Display Triggers", "th-login"),
     icon: "visibility"
+  },
+  {
+    id: "design",
+    label: __("Design", "th-login"),
+    icon: "art"
   },
   {
     id: "integration",

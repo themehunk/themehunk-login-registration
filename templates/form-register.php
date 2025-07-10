@@ -1,8 +1,5 @@
 <?php
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! get_option( 'users_can_register' ) ) {
 	echo '<p class="th-login-error-message">' . esc_html__( 'User registration is currently disabled on this site.', 'th-login' ) . '</p>';
@@ -20,34 +17,23 @@ $register_fields = $form_fields_settings['register'] ?? array();
 		<div class="th-login-messages" aria-live="polite"></div>
 
 		<?php foreach ( $register_fields as $field ) :
-			if ( ! ( $field['show'] ?? true ) || ( $field['hidden'] ?? false ) ) {
-				continue;
-			}
+			if ( ! ( $field['show'] ?? true ) || ( $field['hidden'] ?? false ) ) continue;
 
-			$logic_key   = $field['logic_key'] ?? '';
 			$field_id    = esc_attr( $field['id'] ?? '' );
 			$field_label = $field['label'] ?? '';
-			$field_name  = esc_attr( $field['name'] ?? $logic_key ?: $field_id );
+			$field_name  = esc_attr( $field['name'] ?? $field_id );
 			$field_type  = esc_attr( $field['type'] ?? 'text' );
 			$placeholder = esc_attr( $field['placeholder'] ?? '' );
 			$required    = ! empty( $field['required'] ) ? 'required' : '';
 
-			// Honeypot: skip (handled below)
-			if ( $logic_key === 'honeypot' ) {
-				continue;
-			}
-
-			// Terms & Conditions
-			if ( $logic_key === 'terms_and_conditions' ) : ?>
+			if ( $field_type === 'checkbox' && strpos( strtolower( $field_name ), 'terms' ) !== false ) : ?>
 				<p class="th-login-form-field th-login-form-field--terms">
-					<input type="checkbox" name="terms" id="th-register-terms" value="1" <?php echo $required; ?>>
-					<label for="th-register-terms">
-						<?php echo wp_kses_post( $field_label ?: __( 'I agree to the Terms & Conditions', 'th-login' ) ); ?>
-					</label>
+					<input type="checkbox" name="<?php echo esc_attr( $field_name ); ?>" id="th-register-<?php echo $field_id; ?>" value="1" <?php echo $required; ?>>
+					<label for="th-register-<?php echo $field_id; ?>"><?php echo wp_kses_post( $field_label ?: __( 'I agree to the Terms & Conditions', 'th-login' ) ); ?></label>
 				</p>
 				<?php continue;
-			endif;
-		?>
+			endif; ?>
+
 			<p class="th-login-form-field">
 				<label for="th-register-<?php echo $field_id; ?>"><?php echo esc_html( $field_label ); ?></label>
 				<input
@@ -61,10 +47,10 @@ $register_fields = $form_fields_settings['register'] ?? array();
 		<?php endforeach; ?>
 
 		<?php
-		// Honeypot field (anti-spam).
+		// Honeypot field
 		$honeypot_enabled = false;
 		foreach ( $register_fields as $f ) {
-			if ( ( $f['logic_key'] ?? '' ) === 'honeypot' && ! empty( $f['hidden'] ) ) {
+			if ( ( $f['id'] ?? '' ) === 'honeypot' && ! empty( $f['hidden'] ) ) {
 				$honeypot_enabled = true;
 				break;
 			}

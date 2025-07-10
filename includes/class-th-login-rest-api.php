@@ -302,19 +302,26 @@ class TH_Login_REST_API {
 		$form_fields_settings = get_option( 'th_login_form_fields_settings', '{}' );
 		$form_fields = json_decode( $form_fields_settings, true )['login'] ?? [];
 
-		// Map logic_keys to actual field data
-		$logic_map = [];
+		// Initialize variables
+		$user_login = '';
+		$user_password = '';
+		$remember = ! empty( $params['rememberme'] );
+
+		// Extract user login and password by field name (no logic_key usage)
 		foreach ( $form_fields as $field ) {
-			$logic_key = $field['logic_key'] ?? '';
-			if ( $logic_key !== '' ) {
-				$logic_map[ $logic_key ] = $field;
+			if ( ! empty( $field['hidden'] ) ) {
+				continue;
+			}
+
+			$name = $field['name'] ?? '';
+			$type = $field['type'] ?? '';
+
+			if ( stripos( $name, 'user' ) !== false || stripos( $name, 'email' ) !== false ) {
+				$user_login = sanitize_text_field( $params[ $name ] ?? '' );
+			} elseif ( stripos( $name, 'pass' ) !== false ) {
+				$user_password = $params[ $name ] ?? '';
 			}
 		}
-
-		// Get values using logic keys
-		$user_login    = sanitize_text_field( $params[ $logic_map['user']['name'] ?? '' ] ?? '' );
-		$user_password = $params[ $logic_map['password']['name'] ?? '' ] ?? '';
-		$remember      = ! empty( $params['rememberme'] );
 
 		if ( empty( $user_login ) || empty( $user_password ) ) {
 			return new WP_REST_Response( [
@@ -340,40 +347,33 @@ class TH_Login_REST_API {
 
 		$user_id = $user->ID;
 
-		// Validate additional custom fields using logic_key
+		// Custom field validation
 		foreach ( $form_fields as $field ) {
-			$logic_key = $field['logic_key'] ?? '';
-			if ( in_array( $logic_key, [ 'user', 'password' ], true ) ) {
-				continue;
-			}
-
 			if ( ! empty( $field['hidden'] ) || empty( $field['show'] ) ) {
 				continue;
 			}
 
-			$field_name = $field['name'] ?? '';
-			$submitted_value = sanitize_text_field( $params[ $field_name ] ?? '' );
-			$existing_value  = get_user_meta( $user_id, $field_name, true );
+			$name     = $field['name'] ?? '';
+			$label    = $field['label'] ?? ucfirst( $name );
+			$value    = sanitize_text_field( $params[ $name ] ?? '' );
+			$existing = get_user_meta( $user_id, $name, true );
 
-			// Required check
-			if ( ! empty( $field['required'] ) && $submitted_value === '' ) {
+			if ( ! empty( $field['required'] ) && $value === '' ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => sprintf( __( '%s is required.', 'th-login' ), $field['label'] ?? ucfirst( $field_name ) ) ],
+					'data'    => [ 'message' => sprintf( __( '%s is required.', 'th-login' ), $label ) ],
 				], 400 );
 			}
 
-			// If meta exists but doesn't match submitted value — deny
-			if ( $existing_value && $submitted_value && $existing_value !== $submitted_value ) {
+			if ( $existing && $value && $existing !== $value ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => sprintf( __( 'Invalid value for %s.', 'th-login' ), $field['label'] ?? ucfirst( $field_name ) ) ],
+					'data'    => [ 'message' => sprintf( __( 'Invalid value for %s.', 'th-login' ), $label ) ],
 				], 403 );
 			}
 
-			// If meta doesn't exist yet — save it
-			if ( empty( $existing_value ) && ! empty( $submitted_value ) ) {
-				update_user_meta( $user_id, $field_name, $submitted_value );
+			if ( empty( $existing ) && ! empty( $value ) ) {
+				update_user_meta( $user_id, $name, $value );
 			}
 		}
 
@@ -392,7 +392,7 @@ class TH_Login_REST_API {
 			$redirect_url = $request->get_header( 'referer' ) ? esc_url_raw( $request->get_header( 'referer' ) ) : home_url();
 		}
 
-		// Role-based override
+		// Role-based redirect override
 		$role_redirects = $general_settings['redirects']['role_based_redirects'] ?? [];
 		if ( ! empty( $role_redirects ) && is_array( $user->roles ) ) {
 			foreach ( $role_redirects as $rule ) {
@@ -419,38 +419,38 @@ class TH_Login_REST_API {
 	 * @return WP_REST_Response Response object.
 	 */
 	public function handle_frontend_register( WP_REST_Request $request ) {
-		$form_fields        = $this->safe_json_option( 'th_login_form_fields_settings' );
-		$register_fields    = $form_fields['register'] ?? [];
-		$general_settings   = $this->safe_json_option( 'th_login_general_settings' );
-		$security_settings  = $this->safe_json_option( 'th_login_security_settings' );
+		$form_fields       = $this->safe_json_option( 'th_login_form_fields_settings' );
+		$register_fields   = $form_fields['register'] ?? [];
+		$general_settings  = $this->safe_json_option( 'th_login_general_settings' );
+		$security_settings = $this->safe_json_option( 'th_login_security_settings' );
 
 		$username = '';
 		$email    = '';
 		$password = '';
 		$confirm_password = '';
 
-		// First pass: extract logic_key values from submitted fields
 		foreach ( $register_fields as $field ) {
-			$logic_key = $field['logic_key'] ?? '';
-			$submitted_value = sanitize_text_field( $request->get_param( $field['name'] ?? $field['id'] ?? '' ) );
+			$field_id  = $field['id'] ?? '';
+			$field_name = $field['name'] ?? $field_id;
+			$value = sanitize_text_field( $request->get_param( $field_name ) );
 
-			switch ( $logic_key ) {
-				case 'user':
-					$username = sanitize_user( $submitted_value );
+			switch ( $field_id ) {
+				case 'username':
+					$username = sanitize_user( $value );
 					break;
 				case 'email':
-					$email = sanitize_email( $submitted_value );
+					$email = sanitize_email( $value );
 					break;
 				case 'password':
-					$password = $submitted_value;
+					$password = $value;
 					break;
 				case 'confirm_password':
-					$confirm_password = $submitted_value;
+					$confirm_password = $value;
 					break;
 			}
 		}
 
-		// Required checks for core fields
+		// Basic validation
 		if ( empty( $username ) || empty( $email ) || empty( $password ) || empty( $confirm_password ) ) {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'All fields are required.', 'th-login' ) ] ], 400 );
 		}
@@ -467,62 +467,93 @@ class TH_Login_REST_API {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Passwords do not match.', 'th-login' ) ] ], 400 );
 		}
 
-		// Terms & Conditions check (logic_key only)
+		// Extract password field settings from register_fields
+		$password_settings = null;
+
 		foreach ( $register_fields as $field ) {
-			if ( ( $field['logic_key'] ?? '' ) === 'terms_and_conditions' && ( $field['required'] ?? false ) ) {
-				$terms_checked = $request->get_param( $field['name'] ?? $field['id'] ?? '' );
-				if ( ! $terms_checked ) {
+			if ( $field['id'] === 'password' ) {
+				$password_settings = $field;
+				break;
+			}
+		}
+
+		if ( ! empty( $password_settings ) ) {
+			$min   = intval( $password_settings['minInput'] ?? 6 );
+			$max   = intval( $password_settings['maxInput'] ?? 0 );
+			$check = $password_settings['check'] ?? [];
+
+			if ( $min && strlen( $password ) < $min ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => sprintf( __( 'Password must be at least %d characters.', 'th-login' ), $min ) ] ], 400 );
+			}
+			if ( $max && strlen( $password ) > $max ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => sprintf( __( 'Password must not exceed %d characters.', 'th-login' ), $max ) ] ], 400 );
+			}
+			if ( ! empty( $check['text'] ) && ! preg_match( '/[A-Za-z]/', $password ) ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Password must contain at least one letter.', 'th-login' ) ] ], 400 );
+			}
+			if ( ! empty( $check['number'] ) && ! preg_match( '/\d/', $password ) ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Password must contain at least one number.', 'th-login' ) ] ], 400 );
+			}
+			if ( ! empty( $check['special_charcter'] ) && ! preg_match( '/[\W_]/', $password ) ) {
+				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Password must contain at least one special character.', 'th-login' ) ] ], 400 );
+			}
+		}
+
+		// Terms check
+		foreach ( $register_fields as $field ) {
+			$field_id = $field['id'] ?? '';
+			$field_name = $field['name'] ?? $field_id;
+			if ( $field_id === 'terms_and_conditions' && ( $field['required'] ?? false ) ) {
+				$checked = $request->get_param( $field_name );
+				if ( ! $checked ) {
 					return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'You must accept the Terms & Conditions.', 'th-login' ) ] ], 400 );
 				}
 				break;
 			}
 		}
 
-		// Honeypot check
+		// Honeypot detection
 		if ( $security_settings['honeypot_enabled'] ?? true ) {
-			foreach ( $request->get_params() as $key => $value ) {
-				if ( strpos( $key, 'th_login_hp_' ) === 0 && ! empty( $value ) ) {
+			foreach ( $request->get_params() as $key => $val ) {
+				if ( strpos( $key, 'th_login_hp_' ) === 0 && ! empty( $val ) ) {
 					return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Spam detected.', 'th-login' ) ] ], 403 );
 				}
 			}
 		}
 
-		// Prepare user data
+		// Create user
 		$user_data = [
 			'user_login' => $username,
 			'user_pass'  => $password,
 			'user_email' => $email,
 		];
 
-		// Role
-		$requested_role = sanitize_text_field( $request->get_param( 'role' ) );
+		$role = sanitize_text_field( $request->get_param( 'role' ) );
 		if ( ! function_exists( 'get_editable_roles' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/user.php';
 		}
+		$default_role = $general_settings['default_register_role'] ?? 'subscriber';
 		$editable_roles = array_keys( get_editable_roles() );
-		$default_role   = $general_settings['default_register_role'] ?? 'subscriber';
-		$user_data['role'] = ( $requested_role && in_array( $requested_role, $editable_roles, true ) ) ? $requested_role : $default_role;
+		$user_data['role'] = ( $role && in_array( $role, $editable_roles, true ) ) ? $role : $default_role;
 
-		// Meta input
+		// Custom meta fields
 		foreach ( $register_fields as $field ) {
-			$logic_key = $field['logic_key'] ?? '';
-			$name      = $field['name'] ?? $field['id'] ?? '';
-			$value     = sanitize_text_field( $request->get_param( $name ) );
+			$field_id = $field['id'] ?? '';
+			$field_name = $field['name'] ?? $field_id;
+			$value = sanitize_text_field( $request->get_param( $field_name ) );
 
-			// Skip core fields and honeypot/terms
-			if ( in_array( $logic_key, [ 'user', 'email', 'password', 'confirm_password', 'terms_and_conditions' ], true ) ) {
-				continue;
-			}
+			// Skip core fields
+			if ( in_array( $field_id, [ 'username', 'email', 'password', 'confirm_password', 'terms_and_conditions', 'honeypot' ], true ) ) continue;
 
 			if ( ( $field['required'] ?? false ) && empty( $value ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => sprintf( __( '%s is required.', 'th-login' ), $field['label'] ?? $name ) ]
+					'data' => [ 'message' => sprintf( __( '%s is required.', 'th-login' ), $field['label'] ?? $field_name ) ]
 				], 400 );
 			}
 
-			if ( $logic_key && ! empty( $value ) ) {
-				$user_data['meta_input'][ $logic_key ] = $value;
+			if ( ! empty( $value ) ) {
+				$user_data['meta_input'][ $field_id ] = $value;
 			}
 		}
 
@@ -531,7 +562,7 @@ class TH_Login_REST_API {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $user_id->get_error_message() ] ], 400 );
 		}
 
-		// Email Verification
+		// Email verification
 		if ( $general_settings['email_verification']['enabled'] ?? false ) {
 			$key = md5( microtime() . $user_id );
 			update_user_meta( $user_id, 'th_login_email_verification_key', $key );
@@ -546,13 +577,13 @@ class TH_Login_REST_API {
 			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please verify your email.', 'th-login' ) ] ], 200 );
 		}
 
-		// Manual Approval
+		// Manual approval
 		if ( $general_settings['manual_user_approval']['enabled'] ?? false ) {
 			update_user_meta( $user_id, 'th_login_pending_approval', true );
 			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Awaiting admin approval.', 'th-login' ) ] ], 200 );
 		}
 
-		// Auto Login
+		// Auto-login
 		if ( $general_settings['auto_login_after_registration'] ?? false ) {
 			wp_set_current_user( $user_id );
 			wp_set_auth_cookie( $user_id, true );
@@ -577,10 +608,10 @@ class TH_Login_REST_API {
 			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! You are now logged in.', 'th-login' ), 'redirect_url' => $url ] ], 200 );
 		}
 
-		// Fallback
+		// Default success
 		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'th-login' ), 'redirect_url' => home_url( '/?th_login_action=login' ) ] ], 200 );
 	}
-
+	
 	/**
 	 * Handle frontend forgot password requests.
 	 *
@@ -595,19 +626,19 @@ class TH_Login_REST_API {
 		$forgot_fields        = $form_fields_settings['forgot_password'] ?? [];
 
 		$user_login = '';
+
 		foreach ( $forgot_fields as $field ) {
-			if ( ! empty( $field['hidden'] ) || empty( $field['logic_key'] ) ) {
+			if ( ! empty( $field['hidden'] ) ) {
 				continue;
 			}
 
-			$logic_key = $field['logic_key'];
 			$field_name = $field['name'] ?? '';
-
-			$value = sanitize_text_field( $params[ $field_name ] ?? '' );
-
-			if ( $logic_key === 'user' || $logic_key === 'email' ) {
-				$user_login = $value;
-				break; // only need one
+			if (
+				stripos( $field_name, 'email' ) !== false ||
+				stripos( $field_name, 'user' ) !== false
+			) {
+				$user_login = sanitize_text_field( $params[ $field_name ] ?? '' );
+				break;
 			}
 		}
 
@@ -658,6 +689,7 @@ class TH_Login_REST_API {
 			$user->user_login,
 			$reset_link
 		);
+
 		$title = sprintf(
 			esc_html__( '[%s] Password Reset', 'th-login' ),
 			wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES )
@@ -842,9 +874,8 @@ class TH_Login_REST_API {
 	}
 
 	public function sanitize_form_fields_settings( $settings ) {
-		$sanitized = [];
-
-		$form_keys = [ 'login', 'register', 'forgot_password' ];
+		$sanitized  = [];
+		$form_keys  = [ 'login', 'register', 'forgot_password' ];
 
 		foreach ( $form_keys as $form_key ) {
 			if ( ! isset( $settings[ $form_key ] ) || ! is_array( $settings[ $form_key ] ) ) {
@@ -871,14 +902,31 @@ class TH_Login_REST_API {
 				$sanitized_field['show']        = rest_sanitize_boolean( $field['show'] ?? true );
 				$sanitized_field['hidden']      = rest_sanitize_boolean( $field['hidden'] ?? false );
 
-				// Optional: for custom fields mapped to user_meta
+				// Optional: map to user meta
 				if ( isset( $field['map_to_user_meta'] ) ) {
 					$sanitized_field['map_to_user_meta'] = rest_sanitize_boolean( $field['map_to_user_meta'] );
 				}
 
-				// Optional: sanitize select/radio options
+				// Optional: select/radio options
 				if ( isset( $field['options'] ) && is_array( $field['options'] ) ) {
 					$sanitized_field['options'] = array_map( 'sanitize_text_field', $field['options'] );
+				}
+
+				// Advanced: min/max input for fields like password
+				if ( isset( $field['minInput'] ) ) {
+					$sanitized_field['minInput'] = intval( $field['minInput'] );
+				}
+				if ( isset( $field['maxInput'] ) ) {
+					$sanitized_field['maxInput'] = intval( $field['maxInput'] );
+				}
+
+				// Advanced: check (text, number, special_charcter)
+				if ( isset( $field['check'] ) && is_array( $field['check'] ) ) {
+					$sanitized_field['check'] = [
+						'text'             => ! empty( $field['check']['text'] ),
+						'number'           => ! empty( $field['check']['number'] ),
+						'special_charcter' => ! empty( $field['check']['special_charcter'] ),
+					];
 				}
 
 				$sanitized[ $form_key ][] = $sanitized_field;
@@ -889,9 +937,8 @@ class TH_Login_REST_API {
 	}
 
 	public function validate_form_fields_settings( $settings ) {
-		$errors = new WP_Error();
-
-		$form_keys = [ 'login', 'register', 'forgot_password' ];
+		$errors     = new WP_Error();
+		$form_keys  = [ 'login', 'register', 'forgot_password' ];
 
 		foreach ( $form_keys as $form_key ) {
 			if ( ! isset( $settings[ $form_key ] ) || ! is_array( $settings[ $form_key ] ) ) {
@@ -915,12 +962,29 @@ class TH_Login_REST_API {
 
 				$seen_ids[] = $field_id;
 
-				// Validate required field has label.
+				// Validate: required fields must have label
 				if ( ! empty( $field['required'] ) && empty( $label ) ) {
 					$errors->add(
 						'missing_required_label',
 						sprintf( esc_html__( 'Field "%s" in %s is required but missing a label.', 'th-login' ), esc_html( $field_id ), $form_key )
 					);
+				}
+
+				// Advanced: Validate password rule fields
+				if ( $field['id'] === 'password' ) {
+					if ( isset( $field['minInput'] ) && intval( $field['minInput'] ) < 4 ) {
+						$errors->add( 'invalid_min_input', esc_html__( 'Password minimum length must be at least 4 characters.', 'th-login' ) );
+					}
+
+					if ( isset( $field['check'] ) && is_array( $field['check'] ) ) {
+						if (
+							empty( $field['check']['text'] ) &&
+							empty( $field['check']['number'] ) &&
+							empty( $field['check']['special_charcter'] )
+						) {
+							$errors->add( 'invalid_password_check', esc_html__( 'At least one password check must be enabled (letter, number, or special character).', 'th-login' ) );
+						}
+					}
 				}
 			}
 		}

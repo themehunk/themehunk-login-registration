@@ -4101,6 +4101,149 @@ const DragOverlay = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().me
 
 /***/ }),
 
+/***/ "./node_modules/@dnd-kit/modifiers/dist/modifiers.esm.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@dnd-kit/modifiers/dist/modifiers.esm.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createSnapModifier: () => (/* binding */ createSnapModifier),
+/* harmony export */   restrictToFirstScrollableAncestor: () => (/* binding */ restrictToFirstScrollableAncestor),
+/* harmony export */   restrictToHorizontalAxis: () => (/* binding */ restrictToHorizontalAxis),
+/* harmony export */   restrictToParentElement: () => (/* binding */ restrictToParentElement),
+/* harmony export */   restrictToVerticalAxis: () => (/* binding */ restrictToVerticalAxis),
+/* harmony export */   restrictToWindowEdges: () => (/* binding */ restrictToWindowEdges),
+/* harmony export */   snapCenterToCursor: () => (/* binding */ snapCenterToCursor)
+/* harmony export */ });
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+
+
+function createSnapModifier(gridSize) {
+  return _ref => {
+    let {
+      transform
+    } = _ref;
+    return { ...transform,
+      x: Math.ceil(transform.x / gridSize) * gridSize,
+      y: Math.ceil(transform.y / gridSize) * gridSize
+    };
+  };
+}
+
+const restrictToHorizontalAxis = _ref => {
+  let {
+    transform
+  } = _ref;
+  return { ...transform,
+    y: 0
+  };
+};
+
+function restrictToBoundingRect(transform, rect, boundingRect) {
+  const value = { ...transform
+  };
+
+  if (rect.top + transform.y <= boundingRect.top) {
+    value.y = boundingRect.top - rect.top;
+  } else if (rect.bottom + transform.y >= boundingRect.top + boundingRect.height) {
+    value.y = boundingRect.top + boundingRect.height - rect.bottom;
+  }
+
+  if (rect.left + transform.x <= boundingRect.left) {
+    value.x = boundingRect.left - rect.left;
+  } else if (rect.right + transform.x >= boundingRect.left + boundingRect.width) {
+    value.x = boundingRect.left + boundingRect.width - rect.right;
+  }
+
+  return value;
+}
+
+const restrictToParentElement = _ref => {
+  let {
+    containerNodeRect,
+    draggingNodeRect,
+    transform
+  } = _ref;
+
+  if (!draggingNodeRect || !containerNodeRect) {
+    return transform;
+  }
+
+  return restrictToBoundingRect(transform, draggingNodeRect, containerNodeRect);
+};
+
+const restrictToFirstScrollableAncestor = _ref => {
+  let {
+    draggingNodeRect,
+    transform,
+    scrollableAncestorRects
+  } = _ref;
+  const firstScrollableAncestorRect = scrollableAncestorRects[0];
+
+  if (!draggingNodeRect || !firstScrollableAncestorRect) {
+    return transform;
+  }
+
+  return restrictToBoundingRect(transform, draggingNodeRect, firstScrollableAncestorRect);
+};
+
+const restrictToVerticalAxis = _ref => {
+  let {
+    transform
+  } = _ref;
+  return { ...transform,
+    x: 0
+  };
+};
+
+const restrictToWindowEdges = _ref => {
+  let {
+    transform,
+    draggingNodeRect,
+    windowRect
+  } = _ref;
+
+  if (!draggingNodeRect || !windowRect) {
+    return transform;
+  }
+
+  return restrictToBoundingRect(transform, draggingNodeRect, windowRect);
+};
+
+const snapCenterToCursor = _ref => {
+  let {
+    activatorEvent,
+    draggingNodeRect,
+    transform
+  } = _ref;
+
+  if (draggingNodeRect && activatorEvent) {
+    const activatorCoordinates = (0,_dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_0__.getEventCoordinates)(activatorEvent);
+
+    if (!activatorCoordinates) {
+      return transform;
+    }
+
+    const offsetX = activatorCoordinates.x - draggingNodeRect.left;
+    const offsetY = activatorCoordinates.y - draggingNodeRect.top;
+    return { ...transform,
+      x: transform.x + offsetX - draggingNodeRect.width / 2,
+      y: transform.y + offsetY - draggingNodeRect.height / 2
+    };
+  }
+
+  return transform;
+};
+
+
+//# sourceMappingURL=modifiers.esm.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@dnd-kit/sortable/dist/sortable.esm.js ***!
@@ -6996,7 +7139,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
- // Added useRef
+
 
 
 
@@ -7037,282 +7180,311 @@ var TABS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Tools", "th-login"),
   icon: "admin-tools"
 }];
+var general = {
+  plugin_status: "enabled",
+  form_type: 'double',
+  display_mode: 'popup',
+  default_register_role: 'subscriber',
+  auto_login_after_registration: false,
+  close_button: true,
+  redirects: {
+    after_login: {
+      type: "current_page",
+      url: ""
+    },
+    after_logout: {
+      type: "home_page",
+      url: ""
+    },
+    after_register: {
+      type: "current_page",
+      url: ""
+    },
+    role_based_redirects: [] // Ensure this is an array
+  },
+  manual_user_approval: {
+    enabled: false
+  }
+};
+var form_fields = {
+  login: [{
+    id: 'username',
+    label: 'Username or Email',
+    name: 'username',
+    type: 'text',
+    placeholder: 'Enter your username or email',
+    required: true,
+    icon: 'user',
+    error_message: 'Username or email is required.',
+    predefined: true
+  }, {
+    id: 'password',
+    label: 'Password',
+    name: 'password',
+    type: 'password',
+    placeholder: 'Enter your password',
+    required: true,
+    icon: 'lock',
+    error_message: 'Password is required.',
+    predefined: true
+  }, {
+    id: 'remember_me',
+    label: 'Remember Me',
+    name: 'remember_me',
+    type: 'checkbox',
+    required: false,
+    icon: '',
+    show: true,
+    error_message: '',
+    predefined: true
+  }],
+  register: [{
+    id: 'username',
+    label: 'Choose a Username',
+    name: 'username',
+    type: 'text',
+    placeholder: 'Enter your desired username',
+    required: true,
+    icon: 'user',
+    error_message: 'Username is required.',
+    predefined: true
+  }, {
+    id: 'email',
+    label: 'Email Address',
+    name: 'email',
+    type: 'email',
+    placeholder: 'Enter your email',
+    required: true,
+    icon: 'email',
+    error_message: 'Email address is required.',
+    predefined: false
+  }, {
+    id: 'password',
+    label: 'Create Password',
+    name: 'password',
+    type: 'password',
+    placeholder: 'Create a strong password',
+    required: true,
+    icon: 'lock',
+    check: {
+      text: true,
+      number: false,
+      special_charcter: false
+    },
+    maxInput: 20,
+    minInput: 5,
+    error_message: 'Password is required.',
+    predefined: true
+  }, {
+    id: 'confirm_password',
+    label: 'Confirm Password',
+    name: 'confirm_password',
+    type: 'password',
+    placeholder: 'Confirm your password',
+    required: true,
+    icon: 'lock',
+    error_message: 'Please confirm your password.',
+    predefined: true
+  }, {
+    id: 'first_name',
+    label: 'First Name',
+    name: 'first_name',
+    type: 'text',
+    placeholder: 'Your first name',
+    required: false,
+    icon: 'user',
+    show: false,
+    error_message: 'First name is required.',
+    predefined: false
+  }, {
+    id: 'last_name',
+    label: 'Last Name',
+    name: 'last_name',
+    type: 'text',
+    placeholder: 'Your last name',
+    required: false,
+    icon: 'user',
+    show: false,
+    error_message: 'Last name is required.',
+    predefined: false
+  }, {
+    id: 'terms_and_conditions',
+    label: 'I agree to the Terms & Conditions',
+    name: 'terms_and_conditions',
+    type: 'checkbox',
+    required: true,
+    icon: '',
+    show: true,
+    error_message: 'You must agree to the Terms & Conditions.',
+    predefined: false,
+    link: ""
+  }, {
+    id: 'honeypot',
+    label: '',
+    name: 'honeypot',
+    type: 'text',
+    icon: '',
+    show: false,
+    hidden: true,
+    error_message: ''
+  }],
+  forgot_password: [{
+    id: 'user_login',
+    label: 'Email Address',
+    name: 'user_login',
+    type: 'text',
+    placeholder: 'Enter your email to reset password',
+    required: true,
+    icon: 'email',
+    error_message: 'Email address is required to reset password.',
+    predefined: true
+  }]
+};
+var design = {
+  modal: {
+    layout_type: 'popup',
+    modal_background: {
+      type: "image",
+      // 'color' | 'gradient' | 'image'
+      color: "#ffffff",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      opacity: 1,
+      image: {
+        url: "",
+        // Image URL
+        position: "center center",
+        // e.g. 'top left', 'center center'
+        size: "cover",
+        // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
+    form_background: {
+      type: "image",
+      // 'color' | 'gradient' | 'image'
+      color: "#ffffff",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      opacity: 1,
+      image: {
+        url: "",
+        // Image URL
+        position: "center center",
+        // e.g. 'top left', 'center center'
+        size: "cover",
+        // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
+    form_border: {
+      width: {
+        top: 1,
+        right: 1,
+        bottom: 1,
+        left: 1
+      },
+      style: "solid",
+      color: "#000000",
+      radius: {
+        topLeft: 6,
+        topRight: 6,
+        bottomRight: 6,
+        bottomLeft: 6
+      }
+    }
+  }
+};
+var display_triggers = {
+  trigger_css_class: "th-login-trigger",
+  auto_open_on_load: {
+    enabled: true,
+    delay_seconds: 2
+  },
+  auto_open_on_scroll: {
+    enabled: false,
+    scroll_percentage: 50
+  },
+  auto_open_on_exit_intent: {
+    enabled: false
+  },
+  auto_open_on_time_on_page: {
+    enabled: false,
+    time_seconds: 10
+  },
+  auto_open_conditions: {
+    for_logged_out_only: true,
+    for_specific_roles: [],
+    on_specific_pages: {
+      enabled: false,
+      page_ids: [],
+      page_slugs: []
+    },
+    on_specific_categories: {
+      enabled: false,
+      category_ids: [],
+      category_slugs: []
+    },
+    on_specific_tags: {
+      enabled: false,
+      tag_ids: [],
+      tag_slugs: []
+    },
+    on_woocommerce_myaccount: false,
+    on_woocommerce_checkout: false,
+    device_visibility: {
+      desktop: true,
+      tablet: true,
+      mobile: true
+    },
+    url_parameter_trigger: {
+      enabled: false,
+      param_name: "th_login",
+      param_value: "open"
+    },
+    referrer_detection: {
+      enabled: false,
+      referrer_urls: []
+    }
+  },
+  pop_up_frequency: {
+    enabled: false,
+    type: "session",
+    days: 7
+  },
+  menu_integration: {
+    enabled: false,
+    menu_slug: "primary",
+    item_text_login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login"),
+    item_text_register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login"),
+    item_icon_login: "dashicons-admin-users",
+    item_icon_register: "dashicons-plus-alt",
+    visibility_login_logged_in: false,
+    visibility_register_logged_in: false
+  }
+};
+var security = {
+  brute_force_protection: {
+    enabled: true,
+    max_attempts: 5,
+    lockout_duration_minutes: 30,
+    auto_ip_blacklist_enabled: true
+  },
+  recaptcha: {
+    enabled: false,
+    type: "v2_checkbox",
+    site_key: "",
+    secret_key: ""
+  },
+  honeypot_enabled: true
+};
 
 // Main React App Component
 var App = function App() {
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      general: {
-        plugin_status: "enabled",
-        form_type: 'double',
-        display_mode: 'popup',
-        default_register_role: 'subscriber',
-        auto_login_after_registration: false,
-        close_button: true,
-        redirects: {
-          after_login: {
-            type: "current_page",
-            url: ""
-          },
-          after_logout: {
-            type: "home_page",
-            url: ""
-          },
-          after_register: {
-            type: "current_page",
-            url: ""
-          },
-          role_based_redirects: [] // Ensure this is an array
-        },
-        manual_user_approval: {
-          enabled: false
-        }
-      },
-      design: {
-        modal: {
-          layout_type: 'popup',
-          modal_background: {
-            type: "image",
-            // 'color' | 'gradient' | 'image'
-            color: "#ffffff",
-            gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-            opacity: 1,
-            image: {
-              url: "",
-              // Image URL
-              position: "center center",
-              // e.g. 'top left', 'center center'
-              size: "cover",
-              // 'cover' | 'contain' | 'auto'
-              repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
-            }
-          },
-          form_background: {
-            type: "image",
-            // 'color' | 'gradient' | 'image'
-            color: "#ffffff",
-            gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-            opacity: 1,
-            image: {
-              url: "",
-              // Image URL
-              position: "center center",
-              // e.g. 'top left', 'center center'
-              size: "cover",
-              // 'cover' | 'contain' | 'auto'
-              repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
-            }
-          },
-          form_border: {
-            width: {
-              top: 1,
-              right: 1,
-              bottom: 1,
-              left: 1
-            },
-            style: "solid",
-            color: "#000000",
-            radius: {
-              topLeft: 6,
-              topRight: 6,
-              bottomRight: 6,
-              bottomLeft: 6
-            }
-          }
-        }
-      },
-      form_fields: {
-        login: [{
-          id: 'username',
-          label: 'Username or Email',
-          name: 'username',
-          type: 'text',
-          placeholder: 'Enter your username or email',
-          required: true,
-          icon: 'user'
-        }, {
-          id: 'password',
-          label: 'Password',
-          name: 'password',
-          type: 'password',
-          placeholder: 'Enter your password',
-          required: true,
-          icon: 'lock'
-        }, {
-          id: 'remember_me',
-          label: 'Remember Me',
-          name: 'remember_me',
-          type: 'checkbox',
-          required: false,
-          icon: '',
-          show: true
-        }],
-        register: [{
-          id: 'username',
-          label: 'Choose a Username',
-          name: 'username',
-          type: 'text',
-          placeholder: 'Enter your desired username',
-          required: true,
-          icon: 'user'
-        }, {
-          id: 'email',
-          label: 'Email Address',
-          name: 'email',
-          type: 'email',
-          placeholder: 'Enter your email',
-          required: true,
-          icon: 'email'
-        }, {
-          id: 'password',
-          label: 'Create Password',
-          name: 'password',
-          type: 'password',
-          placeholder: 'Create a strong password',
-          required: true,
-          icon: 'lock',
-          check: {
-            text: true,
-            number: false,
-            special_charcter: false
-          },
-          maxInput: 20,
-          minInput: 5
-        }, {
-          id: 'confirm_password',
-          label: 'Confirm Password',
-          name: 'confirm_password',
-          type: 'password',
-          placeholder: 'Confirm your password',
-          required: true,
-          icon: 'lock'
-        }, {
-          id: 'first_name',
-          label: 'First Name',
-          name: 'first_name',
-          type: 'text',
-          placeholder: 'Your first name',
-          required: false,
-          icon: 'user',
-          show: false
-        }, {
-          id: 'last_name',
-          label: 'Last Name',
-          name: 'last_name',
-          type: 'text',
-          placeholder: 'Your last name',
-          required: false,
-          icon: 'user',
-          show: false
-        }, {
-          id: 'terms_and_conditions',
-          label: 'I agree to the Terms & Conditions',
-          name: 'terms_and_conditions',
-          type: 'checkbox',
-          required: true,
-          icon: '',
-          show: true
-        }, {
-          id: 'honeypot',
-          label: '',
-          name: 'honeypot',
-          type: 'text',
-          icon: '',
-          show: false,
-          hidden: true
-        }],
-        forgot_password: [{
-          id: 'user_login',
-          label: 'Email Address',
-          name: 'user_login',
-          type: 'text',
-          placeholder: 'Enter your email to reset password',
-          required: true,
-          icon: 'email'
-        }]
-      },
-      display_triggers: {
-        trigger_css_class: "th-login-trigger",
-        auto_open_on_load: {
-          enabled: true,
-          delay_seconds: 2
-        },
-        auto_open_on_scroll: {
-          enabled: false,
-          scroll_percentage: 50
-        },
-        auto_open_on_exit_intent: {
-          enabled: false
-        },
-        auto_open_on_time_on_page: {
-          enabled: false,
-          time_seconds: 10
-        },
-        auto_open_conditions: {
-          for_logged_out_only: true,
-          for_specific_roles: [],
-          on_specific_pages: {
-            enabled: false,
-            page_ids: [],
-            page_slugs: []
-          },
-          on_specific_categories: {
-            enabled: false,
-            category_ids: [],
-            category_slugs: []
-          },
-          on_specific_tags: {
-            enabled: false,
-            tag_ids: [],
-            tag_slugs: []
-          },
-          on_woocommerce_myaccount: false,
-          on_woocommerce_checkout: false,
-          device_visibility: {
-            desktop: true,
-            tablet: true,
-            mobile: true
-          },
-          url_parameter_trigger: {
-            enabled: false,
-            param_name: "th_login",
-            param_value: "open"
-          },
-          referrer_detection: {
-            enabled: false,
-            referrer_urls: []
-          }
-        },
-        pop_up_frequency: {
-          enabled: false,
-          type: "session",
-          days: 7
-        },
-        menu_integration: {
-          enabled: false,
-          menu_slug: "primary",
-          item_text_login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login"),
-          item_text_register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login"),
-          item_icon_login: "dashicons-admin-users",
-          item_icon_register: "dashicons-plus-alt",
-          visibility_login_logged_in: false,
-          visibility_register_logged_in: false
-        }
-      },
-      security: {
-        brute_force_protection: {
-          enabled: true,
-          max_attempts: 5,
-          lockout_duration_minutes: 30,
-          auto_ip_blacklist_enabled: true
-        },
-        recaptcha: {
-          enabled: false,
-          type: "v2_checkbox",
-          site_key: "",
-          secret_key: ""
-        },
-        honeypot_enabled: true
-      }
+      general: general,
+      design: design,
+      form_fields: form_fields,
+      display_triggers: display_triggers,
+      security: security
     }),
     _useState2 = _slicedToArray(_useState, 2),
     settings = _useState2[0],
@@ -7346,8 +7518,6 @@ var App = function App() {
     activeTab = _useState14[0],
     setActiveTab = _useState14[1];
   var importTextareaRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null); // Ref for import textarea
-
-  console.log(settings);
 
   // Fetch settings on component mount.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -9377,13 +9547,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
 /* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
-/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icons */ "./src/admin/components/icons.js");
-/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./custom-select-control */ "./src/admin/components/custom-select-control.js");
+/* harmony import */ var _dnd_kit_modifiers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @dnd-kit/modifiers */ "./node_modules/@dnd-kit/modifiers/dist/modifiers.esm.js");
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icons */ "./src/admin/components/icons.js");
+/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./custom-select-control */ "./src/admin/components/custom-select-control.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -9410,6 +9581,7 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 
 
+
 var TAB_KEYS = {
   login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
   register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
@@ -9424,13 +9596,29 @@ var DEFAULT_FIELD = function DEFAULT_FIELD() {
     required: false,
     name: "",
     type: "text",
-    show: true
+    show: true,
+    predefined: false
   };
 };
-var SortableFieldItem = function SortableFieldItem(_ref) {
-  var field = _ref.field,
-    _onClick = _ref.onClick,
-    onDelete = _ref.onDelete;
+var ToastNotice = function ToastNotice(_ref) {
+  var message = _ref.message,
+    onClose = _ref.onClose;
+  (0,react__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+    var timer = setTimeout(function () {
+      onClose();
+    }, 2000);
+    return function () {
+      return clearTimeout(timer);
+    };
+  }, [onClose]);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "thl-toast-notice"
+  }, message);
+};
+var SortableFieldItem = function SortableFieldItem(_ref2) {
+  var field = _ref2.field,
+    _onClick = _ref2.onClick,
+    onDelete = _ref2.onDelete;
   var _useSortable = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.useSortable)({
       id: field.id
     }),
@@ -9440,7 +9628,7 @@ var SortableFieldItem = function SortableFieldItem(_ref) {
     transform = _useSortable.transform,
     transition = _useSortable.transition;
   var style = {
-    transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_4__.CSS.Transform.toString(transform),
+    transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_5__.CSS.Transform.toString(transform),
     transition: transition
   };
   return /*#__PURE__*/React.createElement("div", {
@@ -9457,16 +9645,16 @@ var SortableFieldItem = function SortableFieldItem(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "selected-icon",
     dangerouslySetInnerHTML: {
-      __html: _icons__WEBPACK_IMPORTED_MODULE_7__.THL_ICONS[field.icon] || ""
+      __html: _icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS[field.icon] || ""
     }
   }), /*#__PURE__*/React.createElement("span", {
     className: "field-label",
     dangerouslySetInnerHTML: {
       __html: field.label || field.placeholder
     }
-  }), field.required ? /*#__PURE__*/React.createElement("span", {
+  }), field.predefined ? /*#__PURE__*/React.createElement("span", {
     className: "field-action-icon lock",
-    title: "Required field"
+    title: "Predefined field (locked)"
   }, /*#__PURE__*/React.createElement("span", {
     className: "dashicons dashicons-lock"
   })) : /*#__PURE__*/React.createElement("span", {
@@ -9480,22 +9668,26 @@ var SortableFieldItem = function SortableFieldItem(_ref) {
     className: "dashicons dashicons-trash"
   })));
 };
-var FormFieldsSettings = function FormFieldsSettings(_ref2) {
+var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   var _settings$form_fields, _selectedField$check, _selectedField$check2, _selectedField$check3;
-  var settings = _ref2.settings,
-    handleSettingChange = _ref2.handleSettingChange;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)("login"),
+  var settings = _ref3.settings,
+    handleSettingChange = _ref3.handleSettingChange;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)("login"),
     _useState2 = _slicedToArray(_useState, 2),
     activeTab = _useState2[0],
     setActiveTab = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
     selectedField = _useState4[0],
     setSelectedField = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
     iconPickerOpen = _useState6[0],
     setIconPickerOpen = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(""),
+    _useState8 = _slicedToArray(_useState7, 2),
+    toastMessage = _useState8[0],
+    setToastMessage = _useState8[1];
   var sensors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.useSensors)((0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.PointerSensor), (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.KeyboardSensor, {
     coordinateGetter: _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.sortableKeyboardCoordinates
   }));
@@ -9522,6 +9714,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
   var handleAddField = function handleAddField() {
     var newField = DEFAULT_FIELD();
     updateFields([].concat(_toConsumableArray(fields), [newField]));
+    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field added successfully!", "th-login"));
   };
   var handleDeleteField = function handleDeleteField(fieldId) {
     var filtered = fields.filter(function (f) {
@@ -9529,6 +9722,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
     });
     updateFields(filtered);
     if ((selectedField === null || selectedField === void 0 ? void 0 : selectedField.id) === fieldId) setSelectedField(null);
+    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field deleted", "th-login"));
   };
   var handleFieldChange = function handleFieldChange(key, value) {
     if (!selectedField) return;
@@ -9549,6 +9743,10 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
     var updated = _objectSpread(_objectSpread({}, current), {}, _defineProperty({}, key, !current[key]));
     handleFieldChange("check", updated);
   };
+  (0,react__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+    var firstVisible = fields[0] || null;
+    setSelectedField(firstVisible);
+  }, []);
   return /*#__PURE__*/React.createElement("div", {
     className: "thl-form-fields-settings"
   }, /*#__PURE__*/React.createElement("div", {
@@ -9558,7 +9756,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
   }, Object.keys(TAB_KEYS).map(function (key) {
     return /*#__PURE__*/React.createElement("button", {
       key: key,
-      className: classnames__WEBPACK_IMPORTED_MODULE_6___default()("tab-button", {
+      className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("tab-button", {
         active: key === activeTab
       }),
       onClick: function onClick() {
@@ -9574,6 +9772,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
   }, /*#__PURE__*/React.createElement(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.DndContext, {
     sensors: sensors,
     collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_2__.closestCenter,
+    modifiers: [_dnd_kit_modifiers__WEBPACK_IMPORTED_MODULE_4__.restrictToVerticalAxis],
     onDragEnd: handleDragEnd
   }, /*#__PURE__*/React.createElement(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_3__.SortableContext, {
     items: fields.map(function (f) {
@@ -9587,12 +9786,17 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
   }, TAB_KEYS[activeTab], " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fields", "th-login")), fields.length === 0 ? /*#__PURE__*/React.createElement("p", {
     className: "no-fields"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No fields yet.", "th-login")) : fields.map(function (field) {
-    return /*#__PURE__*/React.createElement(SortableFieldItem, {
+    return /*#__PURE__*/React.createElement("div", {
+      key: field.id,
+      className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("sortable-field-wrapper", {
+        selected: (selectedField === null || selectedField === void 0 ? void 0 : selectedField.id) === field.id // ✅ Highlight selected field
+      })
+    }, /*#__PURE__*/React.createElement(SortableFieldItem, {
       key: field.id,
       field: field,
       onClick: setSelectedField,
       onDelete: handleDeleteField
-    });
+    }));
   }))))), /*#__PURE__*/React.createElement("div", {
     className: "add-field-button-wrapper"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
@@ -9616,36 +9820,18 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
     onChange: function onChange(val) {
       return handleFieldChange("placeholder", val);
     }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "th-login"),
-    value: selectedField.name || "",
+  }), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "th-login"),
+    placeholder: "https://example.com/terms",
+    value: selectedField.link || "",
     onChange: function onChange(val) {
-      return handleFieldChange("name", val);
+      return handleFieldChange("link", val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ID", "th-login"),
-    value: selectedField.id || "",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "th-login"),
+    value: selectedField.error_message || "",
     onChange: function onChange(val) {
-      return handleFieldChange("id", val);
-    }
-  }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_8__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field Type", "th-login"),
-    value: selectedField.type || "text",
-    options: [{
-      label: "Text",
-      value: "text"
-    }, {
-      label: "Email",
-      value: "email"
-    }, {
-      label: "Password",
-      value: "password"
-    }, {
-      label: "Checkbox",
-      value: "checkbox"
-    }],
-    onChange: function onChange(val) {
-      return handleFieldChange("type", val);
+      return handleFieldChange("error_message", val);
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: "thl-icon-picker"
@@ -9661,7 +9847,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "selected-icon",
     dangerouslySetInnerHTML: {
-      __html: _icons__WEBPACK_IMPORTED_MODULE_7__.THL_ICONS[selectedField.icon] || ""
+      __html: _icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS[selectedField.icon] || ""
     }
   }), /*#__PURE__*/React.createElement("span", {
     className: "icon-name"
@@ -9669,7 +9855,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
     className: "icon-caret"
   }, "\u25BE")), iconPickerOpen && /*#__PURE__*/React.createElement("div", {
     className: "icon-picker-dropdown"
-  }, Object.keys(_icons__WEBPACK_IMPORTED_MODULE_7__.THL_ICONS).map(function (key) {
+  }, Object.keys(_icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS).map(function (key) {
     return /*#__PURE__*/React.createElement("div", {
       key: key,
       className: "icon-option ".concat(selectedField.icon === key ? "active" : ""),
@@ -9679,10 +9865,40 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
       },
       title: key,
       dangerouslySetInnerHTML: {
-        __html: _icons__WEBPACK_IMPORTED_MODULE_7__.THL_ICONS[key]
+        __html: _icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS[key]
       }
     });
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+  }))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "th-login"),
+    value: selectedField.name || "",
+    onChange: function onChange(val) {
+      return handleFieldChange("name", val);
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ID", "th-login"),
+    value: selectedField.id || "",
+    onChange: function onChange(val) {
+      return handleFieldChange("id", val);
+    }
+  }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_9__.CustomSelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field Type", "th-login"),
+    value: selectedField.type || "text",
+    options: [{
+      label: "Text",
+      value: "text"
+    }, {
+      label: "Email",
+      value: "email"
+    }, {
+      label: "Checkbox",
+      value: "checkbox"
+    }],
+    onChange: function onChange(val) {
+      return handleFieldChange("type", val);
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "th-login-toggle-one-line"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Required", "th-login"),
     checked: selectedField.required,
     onChange: function onChange(val) {
@@ -9694,7 +9910,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
     onChange: function onChange(val) {
       return handleFieldChange("show", val);
     }
-  }), selectedField.type === "password" && selectedField.id !== 'confirm_password' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  }))), activeTab === "register" && selectedField.type === "password" && selectedField.predefined && selectedField.id !== "confirm_password" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Minimum Length", "th-login"),
     type: "number",
     value: selectedField.minInput || "",
@@ -9730,7 +9946,12 @@ var FormFieldsSettings = function FormFieldsSettings(_ref2) {
     }
   })))) : /*#__PURE__*/React.createElement("div", {
     className: "placeholder"
-  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Click a field to edit its settings", "th-login")))));
+  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Click a field to edit its settings", "th-login")))), toastMessage && /*#__PURE__*/React.createElement(ToastNotice, {
+    message: toastMessage,
+    onClose: function onClose() {
+      return setToastMessage("");
+    }
+  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormFieldsSettings);
 
@@ -9756,10 +9977,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -9978,37 +10195,8 @@ var GeneralSettings = function GeneralSettings(_ref) {
       return handleSettingChange("general", ["redirects", "after_logout", "url"], newValue);
     },
     placeholder: "https://example.com/goodbye"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "redirection-card"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Registration", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
-    value: ((_settings$general$red5 = settings.general.redirects) === null || _settings$general$red5 === void 0 || (_settings$general$red5 = _settings$general$red5.after_register) === null || _settings$general$red5 === void 0 ? void 0 : _settings$general$red5.type) || "login_form",
-    options: [].concat(_toConsumableArray(!settings.general.auto_login_after_registration ? [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Login Form", "th-login"),
-      value: "login_form"
-    }] : []), [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "th-login"),
-      value: "dashboard"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "th-login"),
-      value: "current_page"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
-      value: "home_page"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
-      value: "custom_url"
-    }]),
-    onChange: function onChange(newValue) {
-      return handleSettingChange("general", ["redirects", "after_register", "type"], newValue);
-    }
-  }), ((_settings$general$red6 = settings.general.redirects) === null || _settings$general$red6 === void 0 || (_settings$general$red6 = _settings$general$red6.after_register) === null || _settings$general$red6 === void 0 ? void 0 : _settings$general$red6.type) === "custom_url" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    value: settings.general.redirects.after_register.url || "",
-    onChange: function onChange(newValue) {
-      return handleSettingChange("general", ["redirects", "after_register", "url"], newValue);
-    },
-    placeholder: "https://example.com/registration-success"
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
+    className: "setting-row settings-manage-toggle-resitartion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
   }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Login After Registration", "th-login")), /*#__PURE__*/React.createElement("p", {
@@ -10020,7 +10208,36 @@ var GeneralSettings = function GeneralSettings(_ref) {
     onChange: function onChange(isChecked) {
       return handleSettingChange("general", ["auto_login_after_registration"], isChecked);
     }
-  }))))));
+  }), settings.general.auto_login_after_registration && /*#__PURE__*/React.createElement("div", {
+    className: "redirection-card th-inline-registration-redirect",
+    style: {
+      marginTop: "12px"
+    }
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Registration", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+    value: ((_settings$general$red5 = settings.general.redirects) === null || _settings$general$red5 === void 0 || (_settings$general$red5 = _settings$general$red5.after_register) === null || _settings$general$red5 === void 0 ? void 0 : _settings$general$red5.type) || "dashboard",
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "th-login"),
+      value: "dashboard"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "th-login"),
+      value: "current_page"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
+      value: "home_page"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
+      value: "custom_url"
+    }],
+    onChange: function onChange(newValue) {
+      return handleSettingChange("general", ["redirects", "after_register", "type"], newValue);
+    }
+  }), ((_settings$general$red6 = settings.general.redirects) === null || _settings$general$red6 === void 0 || (_settings$general$red6 = _settings$general$red6.after_register) === null || _settings$general$red6 === void 0 ? void 0 : _settings$general$red6.type) === "custom_url" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: settings.general.redirects.after_register.url || "",
+    onChange: function onChange(newValue) {
+      return handleSettingChange("general", ["redirects", "after_register", "url"], newValue);
+    },
+    placeholder: "https://example.com/registration-success"
+  })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GeneralSettings);
 

@@ -1,31 +1,18 @@
 <?php
-// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Handles all shortcode-related functionalities for TH Login.
- */
 class TH_Login_Shortcodes {
 
-	/**
-	 * Constructor.
-	 */
 	public function __construct() {
 		add_shortcode( 'th_login_form', array( $this, 'render_login_form_shortcode' ) );
 		add_shortcode( 'th_register_form', array( $this, 'render_register_form_shortcode' ) );
 		add_shortcode( 'th_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
 		add_shortcode( 'th_login_popup_link', array( $this, 'render_popup_link_shortcode' ) );
+		add_shortcode( 'th_combined_form', array( $this, 'render_combined_form_shortcode' ) );
 	}
 
-	/**
-	 * Safely decode JSON option.
-	 *
-	 * @param string $option_key The option key to retrieve.
-	 * @param array  $default    The default value if the option is not found or invalid.
-	 * @return array Decoded JSON as an associative array, or default.
-	 */
 	private function safe_json_option( $option_key, $default = array() ) {
 		$value = get_option( $option_key );
 		if ( ! is_string( $value ) || empty( $value ) ) {
@@ -35,10 +22,14 @@ class TH_Login_Shortcodes {
 		return is_array( $decoded ) ? $decoded : $default;
 	}
 
-	/**
-	 * Enqueues frontend assets specifically for shortcodes.
-	 * This ensures scripts/styles are loaded only when a shortcode is present.
-	 */
+	public function render_combined_form_shortcode( $atts ) {
+		$this->enqueue_shortcode_assets(); // Enqueue scripts/styles.
+
+		ob_start();
+		require TH_LOGIN_PATH . 'templates/modal-wrapper.php'; // This is the same file used for popup modal.
+		return '<div class="th-login-combined-form-wrapper">' . ob_get_clean() . '</div>';
+	}
+
 	public function enqueue_shortcode_assets() {
 		// Only enqueue if not already enqueued by the main frontend class.
 		if ( ! wp_style_is( 'th-login-frontend-style', 'enqueued' ) ) {
@@ -107,13 +98,6 @@ class TH_Login_Shortcodes {
 		}
 	}
 
-
-	/**
-	 * Renders the login form via shortcode.
-	 *
-	 * @param array $atts Shortcode attributes.
-	 * @return string HTML content of the login form.
-	 */
 	public function render_login_form_shortcode( $atts ) {
 		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
 
@@ -122,12 +106,6 @@ class TH_Login_Shortcodes {
 		return '<div class="th-login-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
-	/**
-	 * Renders the registration form via shortcode.
-	 *
-	 * @param array $atts Shortcode attributes.
-	 * @return string HTML content of the registration form.
-	 */
 	public function render_register_form_shortcode( $atts ) {
 		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
 
@@ -136,12 +114,6 @@ class TH_Login_Shortcodes {
 		return '<div class="th-login-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
-	/**
-	 * Renders the forgot password form via shortcode.
-	 *
-	 * @param array $atts Shortcode attributes.
-	 * @return string HTML content of the forgot password form.
-	 */
 	public function render_forgot_password_form_shortcode( $atts ) {
 		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
 
@@ -150,13 +122,6 @@ class TH_Login_Shortcodes {
 		return '<div class="th-login-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
-	/**
-	 * Renders a link that triggers the popup modal via shortcode.
-	 *
-	 * @param array  $atts    Shortcode attributes.
-	 * @param string $content The content between the shortcode tags.
-	 * @return string HTML content of the link.
-	 */
 	public function render_popup_link_shortcode( $atts, $content = null ) {
 		$this->enqueue_shortcode_assets(); // Ensure assets are loaded.
 

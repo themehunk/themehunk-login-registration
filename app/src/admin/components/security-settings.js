@@ -24,6 +24,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                     </div>
                     <div className="setting-control">
                       <ToggleControl
+                      __nextHasNoMarginBottom={true}
                         checked={
                           settings.security.brute_force_protection?.enabled ||
                           false
@@ -53,6 +54,8 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                           <TextControl
+                                                          __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                             type="number"
                             min="1"
                             value={
@@ -84,6 +87,8 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                           <TextControl
+                                                          __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                             type="number"
                             min="1"
                             value={
@@ -116,6 +121,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                           <ToggleControl
+                          __nextHasNoMarginBottom={true}
                             checked={
                               settings.security.brute_force_protection
                                 ?.auto_ip_blacklist_enabled || false
@@ -151,6 +157,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                     </div>
                     <div className="setting-control">
                       <ToggleControl
+                      __nextHasNoMarginBottom={true}
                         checked={settings.security.recaptcha?.enabled || false}
                         onChange={(isChecked) =>
                           handleSettingChange(
@@ -207,6 +214,8 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                           </div>
                           <div className="setting-control">
                             <TextControl
+                                                            __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                               value={settings.security.recaptcha?.site_key || ""}
                               onChange={(newValue) =>
                                 handleSettingChange(
@@ -228,6 +237,8 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                           </div>
                           <div className="setting-control">
                             <TextControl
+                                                            __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                               value={
                                 settings.security.recaptcha?.secret_key || ""
                               }
@@ -259,6 +270,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                     </div>
                     <div className="setting-control">
                       <ToggleControl
+                      __nextHasNoMarginBottom={true}
                         checked={settings.security.honeypot_enabled || false}
                         onChange={(isChecked) =>
                           handleSettingChange(

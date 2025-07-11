@@ -53,16 +53,19 @@ class TH_Login_Admin {
 		wp_enqueue_script( 'wp-edit-post' );
 		wp_enqueue_style( 'wp-edit-blocks' );
 
-		// ✅ Enqueue the correct admin.js file
+		// Enqueue the admin.js file with defer
 		wp_enqueue_script(
 			'th-login-admin-script',
 			TH_LOGIN_URL . 'app/build/admin.js',
 			$asset_config['dependencies'],
 			$asset_config['version'],
-			true
+			array(
+				'in_footer' => true,
+				'strategy' => 'defer' // Using defer for better control
+			)
 		);
 
-		// ✅ Enqueue the correct admin.css file
+		// Enqueue the admin.css file
 		wp_enqueue_style(
 			'th-login-admin-style',
 			TH_LOGIN_URL . 'app/build/admin.css',
@@ -70,7 +73,7 @@ class TH_Login_Admin {
 			$asset_config['version']
 		);
 
-		// ✅ Localize
+		// Localize script with settings data
 		$settings_data = array(
 			'general'          => json_decode( get_option( 'th_login_general_settings', '{}' ), true ),
 			'design'           => json_decode( get_option( 'th_login_design_settings', '{}' ), true ),
@@ -92,5 +95,4 @@ class TH_Login_Admin {
 			)
 		);
 	}
-
 }

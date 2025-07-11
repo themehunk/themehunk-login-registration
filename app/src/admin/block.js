@@ -85,6 +85,8 @@ registerBlockType('th-login/form-block', {
                         />
                         {displayAs === 'popup' && (
                             <TextControl
+                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                 label={__('Link Text', 'th-login')}
                                 value={linkText}
                                 onChange={(newText) => setAttributes({ linkText: newText })}

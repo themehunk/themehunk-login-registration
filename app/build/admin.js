@@ -23103,24 +23103,32 @@ var BorderBoxControl = function BorderBoxControl(_ref) {
   }, label), /*#__PURE__*/React.createElement("div", {
     className: "th-border-row"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: (_values$top = values.top) !== null && _values$top !== void 0 ? _values$top : 0,
     type: "number",
     onChange: function onChange(val) {
       return handleChange('top', val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: (_values$right = values.right) !== null && _values$right !== void 0 ? _values$right : 0,
     type: "number",
     onChange: function onChange(val) {
       return handleChange('right', val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: (_values$bottom = values.bottom) !== null && _values$bottom !== void 0 ? _values$bottom : 0,
     type: "number",
     onChange: function onChange(val) {
       return handleChange('bottom', val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: (_values$left = values.left) !== null && _values$left !== void 0 ? _values$left : 0,
     type: "number",
     onChange: function onChange(val) {
@@ -23512,6 +23520,12 @@ var DesignEditor = function DesignEditor(_ref) {
     }));
   };
   return /*#__PURE__*/React.createElement("div", {
+    className: "settings-card"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "dashicons dashicons-art"
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Design Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "design-editor-layout"
   }, /*#__PURE__*/React.createElement("div", {
     className: "preview-panel"
@@ -23570,6 +23584,7 @@ var DesignEditor = function DesignEditor(_ref) {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
       defaultOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControl, {
+      __nextHasNoMarginBottom: true,
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "th-login"),
       value: bgType,
       isBlock: true,
@@ -23612,6 +23627,8 @@ var DesignEditor = function DesignEditor(_ref) {
     })), bgType === "image" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: "image-url-input"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      __next40pxDefaultSize: true,
+      __nextHasNoMarginBottom: true,
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image URL", "th-login"),
       value: imageURL,
       onChange: function onChange(val) {
@@ -23722,6 +23739,7 @@ var DesignEditor = function DesignEditor(_ref) {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
       defaultOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControl, {
+      __nextHasNoMarginBottom: true,
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "th-login"),
       value: formBgType,
       isBlock: true,
@@ -23758,6 +23776,8 @@ var DesignEditor = function DesignEditor(_ref) {
         slug: "ocean-blue"
       }]
     }), formBgType === "image" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      __next40pxDefaultSize: true,
+      __nextHasNoMarginBottom: true,
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image URL", "th-login"),
       value: formImageURL,
       onChange: function onChange(val) {
@@ -23917,7 +23937,7 @@ var DesignEditor = function DesignEditor(_ref) {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "th-login"),
       defaultOpen: false
     })));
-  })));
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DesignEditor);
 
@@ -24010,6 +24030,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open when page loads", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri = settings.display_triggers.auto_open_on_load) === null || _settings$display_tri === void 0 ? void 0 : _settings$display_tri.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_on_load", "enabled"], isChecked);
@@ -24023,6 +24044,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delay before showing the modal", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     type: "number",
     min: "0",
     value: ((_settings$display_tri3 = settings.display_triggers.auto_open_on_load) === null || _settings$display_tri3 === void 0 ? void 0 : _settings$display_tri3.delay_seconds) || 0,
@@ -24038,6 +24061,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal when the user scrolls down a certain percentage of the page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control  "
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri4 = settings.display_triggers.auto_open_on_scroll) === null || _settings$display_tri4 === void 0 ? void 0 : _settings$display_tri4.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_on_scroll', 'enabled'], isChecked);
@@ -24051,6 +24075,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Percentage of the page scrolled before the modal opens.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     type: "number",
     min: "1",
     max: "100",
@@ -24067,6 +24093,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri7 = settings.display_triggers.auto_open_on_exit_intent) === null || _settings$display_tri7 === void 0 ? void 0 : _settings$display_tri7.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_on_exit_intent', 'enabled'], isChecked);
@@ -24080,6 +24107,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal after the user spends a specified amount of time on the page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri8 = settings.display_triggers.auto_open_on_time_on_page) === null || _settings$display_tri8 === void 0 ? void 0 : _settings$display_tri8.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'enabled'], isChecked);
@@ -24093,6 +24121,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time in seconds before the modal opens.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     type: "number",
     min: "1",
     value: ((_settings$display_tri0 = settings.display_triggers.auto_open_on_time_on_page) === null || _settings$display_tri0 === void 0 ? void 0 : _settings$display_tri0.time_seconds) || 10,
@@ -24112,6 +24142,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only show to logged out users", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri1 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri1 === void 0 ? void 0 : _settings$display_tri1.for_logged_out_only) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "for_logged_out_only"], isChecked);
@@ -24129,6 +24160,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on specific pages or posts", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri10 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri10 === void 0 || (_settings$display_tri10 = _settings$display_tri10.on_specific_pages) === null || _settings$display_tri10 === void 0 ? void 0 : _settings$display_tri10.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "on_specific_pages", "enabled"], isChecked);
@@ -24142,6 +24174,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comma-separated list of IDs", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri12 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri12 === void 0 || (_settings$display_tri12 = _settings$display_tri12.on_specific_pages) === null || _settings$display_tri12 === void 0 || (_settings$display_tri12 = _settings$display_tri12.page_ids) === null || _settings$display_tri12 === void 0 ? void 0 : _settings$display_tri12.join(", ")) || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "on_specific_pages", "page_ids"], newValue.split(",").map(function (s) {
@@ -24160,6 +24194,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comma-separated list of slugs", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri13 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri13 === void 0 || (_settings$display_tri13 = _settings$display_tri13.on_specific_pages) === null || _settings$display_tri13 === void 0 || (_settings$display_tri13 = _settings$display_tri13.page_slugs) === null || _settings$display_tri13 === void 0 ? void 0 : _settings$display_tri13.join(", ")) || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "on_specific_pages", "page_slugs"], newValue.split(",").map(function (s) {
@@ -24176,6 +24212,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control modal display on posts within specific categories.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri14 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri14 === void 0 || (_settings$display_tri14 = _settings$display_tri14.on_specific_categories) === null || _settings$display_tri14 === void 0 ? void 0 : _settings$display_tri14.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'enabled'], isChecked);
@@ -24189,6 +24226,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter category IDs (e.g., 5, 12).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri16 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.on_specific_categories) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.category_ids) === null || _settings$display_tri16 === void 0 ? void 0 : _settings$display_tri16.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_ids'], newValue.split(',').map(function (s) {
@@ -24206,6 +24245,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter category slugs (e.g., news, blog).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri17 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri17 === void 0 || (_settings$display_tri17 = _settings$display_tri17.on_specific_categories) === null || _settings$display_tri17 === void 0 || (_settings$display_tri17 = _settings$display_tri17.category_slugs) === null || _settings$display_tri17 === void 0 ? void 0 : _settings$display_tri17.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_slugs'], newValue.split(',').map(function (s) {
@@ -24221,6 +24262,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control modal display on posts with specific tags.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri18 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri18 === void 0 || (_settings$display_tri18 = _settings$display_tri18.on_specific_tags) === null || _settings$display_tri18 === void 0 ? void 0 : _settings$display_tri18.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'enabled'], isChecked);
@@ -24234,6 +24276,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter tag IDs (e.g., 7, 15).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri20 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri20 === void 0 || (_settings$display_tri20 = _settings$display_tri20.on_specific_tags) === null || _settings$display_tri20 === void 0 || (_settings$display_tri20 = _settings$display_tri20.tag_ids) === null || _settings$display_tri20 === void 0 ? void 0 : _settings$display_tri20.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_ids'], newValue.split(',').map(function (s) {
@@ -24251,6 +24295,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter tag slugs (e.g., featured, popular).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri21 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.on_specific_tags) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.tag_slugs) === null || _settings$display_tri21 === void 0 ? void 0 : _settings$display_tri21.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_slugs'], newValue.split(',').map(function (s) {
@@ -24266,6 +24312,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal on the WooCommerce My Account page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri22 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri22 === void 0 ? void 0 : _settings$display_tri22.on_woocommerce_myaccount) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_myaccount'], isChecked);
@@ -24279,6 +24326,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal on the WooCommerce Checkout page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri23 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri23 === void 0 ? void 0 : _settings$display_tri23.on_woocommerce_checkout) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_checkout'], isChecked);
@@ -24296,6 +24344,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on desktop devices", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri24 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri24 === void 0 || (_settings$display_tri24 = _settings$display_tri24.device_visibility) === null || _settings$display_tri24 === void 0 ? void 0 : _settings$display_tri24.desktop) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "desktop"], isChecked);
@@ -24309,6 +24358,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on tablet devices", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri25 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri25 === void 0 || (_settings$display_tri25 = _settings$display_tri25.device_visibility) === null || _settings$display_tri25 === void 0 ? void 0 : _settings$display_tri25.tablet) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "tablet"], isChecked);
@@ -24322,6 +24372,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on mobile devices", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri26 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri26 === void 0 || (_settings$display_tri26 = _settings$display_tri26.device_visibility) === null || _settings$display_tri26 === void 0 ? void 0 : _settings$display_tri26.mobile) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "mobile"], isChecked);
@@ -24339,6 +24390,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control how often pop-up appears", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri27 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri27 === void 0 ? void 0 : _settings$display_tri27.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "enabled"], isChecked);
@@ -24369,6 +24421,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Days before showing again", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     type: "number",
     min: "1",
     value: ((_settings$display_tri31 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri31 === void 0 ? void 0 : _settings$display_tri31.days) || 7,
@@ -24388,6 +24442,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add login/register links to menus", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri32 = settings.display_triggers.menu_integration) === null || _settings$display_tri32 === void 0 ? void 0 : _settings$display_tri32.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "enabled"], isChecked);
@@ -24401,6 +24456,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Menu to add items to (or "all")', "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri34 = settings.display_triggers.menu_integration) === null || _settings$display_tri34 === void 0 ? void 0 : _settings$display_tri34.menu_slug) || "primary",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "menu_slug"], newValue);
@@ -24416,6 +24473,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text for login menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri35 = settings.display_triggers.menu_integration) === null || _settings$display_tri35 === void 0 ? void 0 : _settings$display_tri35.item_text_login) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_login"], newValue);
@@ -24429,6 +24488,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashicon for login menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri36 = settings.display_triggers.menu_integration) === null || _settings$display_tri36 === void 0 ? void 0 : _settings$display_tri36.item_icon_login) || "dashicons-admin-users",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_icon_login"], newValue);
@@ -24442,6 +24503,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide login item for logged in users", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri37 = settings.display_triggers.menu_integration) === null || _settings$display_tri37 === void 0 ? void 0 : _settings$display_tri37.visibility_login_logged_in) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "visibility_login_logged_in"], isChecked);
@@ -24457,6 +24519,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text for register menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri38 = settings.display_triggers.menu_integration) === null || _settings$display_tri38 === void 0 ? void 0 : _settings$display_tri38.item_text_register) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_register"], newValue);
@@ -24470,6 +24534,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashicon for register menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$display_tri39 = settings.display_triggers.menu_integration) === null || _settings$display_tri39 === void 0 ? void 0 : _settings$display_tri39.item_icon_register) || "dashicons-plus-alt",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_icon_register"], newValue);
@@ -24483,6 +24549,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide register item for logged in users", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$display_tri40 = settings.display_triggers.menu_integration) === null || _settings$display_tri40 === void 0 ? void 0 : _settings$display_tri40.visibility_register_logged_in) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "visibility_register_logged_in"], isChecked);
@@ -24740,6 +24807,12 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     }));
   };
   return /*#__PURE__*/React.createElement("div", {
+    className: "settings-card"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "dashicons dashicons-feedback"
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form feild Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "thl-form-fields-settings"
   }, /*#__PURE__*/React.createElement("div", {
     className: "thl-left-panel"
@@ -24785,18 +24858,24 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }, /*#__PURE__*/React.createElement("h3", {
     className: "field-editor-title"
   }, selectedField.label || selectedField.id), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label", "th-login"),
     value: selectedField.label,
     onChange: function onChange(val) {
       return handleFieldChange("label", val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Placeholder", "th-login"),
     value: selectedField.placeholder || "",
     onChange: function onChange(val) {
       return handleFieldChange("placeholder", val);
     }
   }), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "th-login"),
     placeholder: "https://example.com/terms",
     value: selectedField.link || "",
@@ -24804,6 +24883,8 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       return handleFieldChange("link", val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "th-login"),
     value: selectedField.error_message || "",
     onChange: function onChange(val) {
@@ -24845,12 +24926,16 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       }
     });
   }))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "th-login"),
     value: selectedField.name || "",
     onChange: function onChange(val) {
       return handleFieldChange("name", val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ID", "th-login"),
     value: selectedField.id || "",
     onChange: function onChange(val) {
@@ -24875,18 +24960,22 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "th-login-toggle-one-line"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Required", "th-login"),
     checked: selectedField.required,
     onChange: function onChange(val) {
       return handleFieldChange("required", val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Field", "th-login"),
     checked: selectedField.show !== false,
     onChange: function onChange(val) {
       return handleFieldChange("show", val);
     }
   }))), activeTab === "register" && selectedField.type === "password" && selectedField.predefined && selectedField.id !== "confirm_password" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Minimum Length", "th-login"),
     type: "number",
     value: selectedField.minInput || "",
@@ -24894,6 +24983,8 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       return handleFieldChange("minInput", parseInt(val));
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maximum Length", "th-login"),
     type: "number",
     value: selectedField.maxInput || "",
@@ -24903,18 +24994,21 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "check-group"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Letters (A-Z)", "th-login"),
     checked: ((_selectedField$check = selectedField.check) === null || _selectedField$check === void 0 ? void 0 : _selectedField$check.text) || false,
     onChange: function onChange() {
       return handleCheckToggle("text");
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Numbers (0-9)", "th-login"),
     checked: ((_selectedField$check2 = selectedField.check) === null || _selectedField$check2 === void 0 ? void 0 : _selectedField$check2.number) || false,
     onChange: function onChange() {
       return handleCheckToggle("number");
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Special Characters", "th-login"),
     checked: ((_selectedField$check3 = selectedField.check) === null || _selectedField$check3 === void 0 ? void 0 : _selectedField$check3.special_character) || false,
     onChange: function onChange() {
@@ -24927,7 +25021,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     onClose: function onClose() {
       return setToastMessage("");
     }
-  }));
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormFieldsSettings);
 
@@ -25069,6 +25163,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
   }, settings.general.plugin_status === "enabled" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is active", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is inactive", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: settings.general.plugin_status === "enabled",
     onChange: function onChange(isChecked) {
       return handleSettingChange("general", ["plugin_status"], isChecked ? "enabled" : "disabled");
@@ -25166,6 +25261,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$general$man = settings.general.manual_user_approval) === null || _settings$general$man === void 0 ? void 0 : _settings$general$man.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("general", ["manual_user_approval", "enabled"], isChecked);
@@ -25179,6 +25275,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If true without user login the panel can close.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: settings.general.close_button || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("general", ["close_button"], isChecked);
@@ -25210,6 +25307,8 @@ var GeneralSettings = function GeneralSettings(_ref) {
       return handleSettingChange("general", ["redirects", "after_login", "type"], newValue);
     }
   }), ((_settings$general$red2 = settings.general.redirects) === null || _settings$general$red2 === void 0 || (_settings$general$red2 = _settings$general$red2.after_login) === null || _settings$general$red2 === void 0 ? void 0 : _settings$general$red2.type) === "custom_url" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: settings.general.redirects.after_login.url || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("general", ["redirects", "after_login", "url"], newValue);
@@ -25230,6 +25329,8 @@ var GeneralSettings = function GeneralSettings(_ref) {
       return handleSettingChange("general", ["redirects", "after_logout", "type"], newValue);
     }
   }), ((_settings$general$red4 = settings.general.redirects) === null || _settings$general$red4 === void 0 || (_settings$general$red4 = _settings$general$red4.after_logout) === null || _settings$general$red4 === void 0 ? void 0 : _settings$general$red4.type) === "custom_url" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: settings.general.redirects.after_logout.url || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("general", ["redirects", "after_logout", "url"], newValue);
@@ -25244,6 +25345,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log users in after registration", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: settings.general.auto_login_after_registration || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("general", ["auto_login_after_registration"], isChecked);
@@ -25272,6 +25374,8 @@ var GeneralSettings = function GeneralSettings(_ref) {
       return handleSettingChange("general", ["redirects", "after_register", "type"], newValue);
     }
   }), ((_settings$general$red6 = settings.general.redirects) === null || _settings$general$red6 === void 0 || (_settings$general$red6 = _settings$general$red6.after_register) === null || _settings$general$red6 === void 0 ? void 0 : _settings$general$red6.type) === "custom_url" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: settings.general.redirects.after_register.url || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("general", ["redirects", "after_register", "url"], newValue);
@@ -25431,6 +25535,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integrate with WooCommerce features", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$integration = settings.integration) === null || _settings$integration === void 0 || (_settings$integration = _settings$integration.woocommerce) === null || _settings$integration === void 0 ? void 0 : _settings$integration.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "enabled"], isChecked);
@@ -25444,6 +25549,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Use this login form for WooCommerce", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: settings.integration.woocommerce.replace_login || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "replace_login"], isChecked);
@@ -25457,6 +25563,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Use this registration form for WooCommerce", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: settings.integration.woocommerce.replace_registration || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "replace_registration"], isChecked);
@@ -25509,6 +25616,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prevent brute force login attacks", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$security$br = settings.security.brute_force_protection) === null || _settings$security$br === void 0 ? void 0 : _settings$security$br.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("security", ["brute_force_protection", "enabled"], isChecked);
@@ -25524,6 +25632,8 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allowed failed attempts before lockout", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     type: "number",
     min: "1",
     value: ((_settings$security$br3 = settings.security.brute_force_protection) === null || _settings$security$br3 === void 0 ? void 0 : _settings$security$br3.max_attempts) || 5,
@@ -25539,6 +25649,8 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time before another attempt is allowed", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     type: "number",
     min: "1",
     value: ((_settings$security$br4 = settings.security.brute_force_protection) === null || _settings$security$br4 === void 0 ? void 0 : _settings$security$br4.lockout_duration_minutes) || 30,
@@ -25554,6 +25666,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically blacklist repeat offenders", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$security$br5 = settings.security.brute_force_protection) === null || _settings$security$br5 === void 0 ? void 0 : _settings$security$br5.auto_ip_blacklist_enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("security", ["brute_force_protection", "auto_ip_blacklist_enabled"], isChecked);
@@ -25571,6 +25684,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Google reCAPTCHA to forms", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: ((_settings$security$re = settings.security.recaptcha) === null || _settings$security$re === void 0 ? void 0 : _settings$security$re.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("security", ["recaptcha", "enabled"], isChecked);
@@ -25605,6 +25719,8 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Google reCAPTCHA Admin", "th-login")))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$security$re4 = settings.security.recaptcha) === null || _settings$security$re4 === void 0 ? void 0 : _settings$security$re4.site_key) || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("security", ["recaptcha", "site_key"], newValue);
@@ -25618,6 +25734,8 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA secret key", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
     value: ((_settings$security$re5 = settings.security.recaptcha) === null || _settings$security$re5 === void 0 ? void 0 : _settings$security$re5.secret_key) || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("security", ["recaptcha", "secret_key"], newValue);
@@ -25635,6 +25753,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add hidden field to catch bots", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
     checked: settings.security.honeypot_enabled || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("security", ["honeypot_enabled"], isChecked);
@@ -25820,6 +25939,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy this JSON to save your settings", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+    __nextHasNoMarginBottom: true,
     value: exportedSettings,
     readOnly: true,
     rows: 10,
@@ -25841,6 +25961,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste previously exported settings JSON", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+    __nextHasNoMarginBottom: true,
     value: importSettingsText,
     onChange: function onChange(newValue) {
       return setImportSettingsText(newValue);

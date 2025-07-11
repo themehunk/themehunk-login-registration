@@ -30,23 +30,31 @@ export const BorderBoxControl = ({ label, values = {}, onChange }) => {
 
 			<div className="th-border-row">
 				<TextControl
+				                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
 					value={values.top ?? 0}
 					type="number"
 					onChange={(val) => handleChange('top', val)}
 				/>
 				<TextControl
+				                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
 					
 					value={values.right ?? 0}
 					type="number"
 					onChange={(val) => handleChange('right', val)}
 				/>
 				<TextControl
+				                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
 					
 					value={values.bottom ?? 0}
 					type="number"
 					onChange={(val) => handleChange('bottom', val)}
 				/>
 				<TextControl
+				                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
 					
 					value={values.left ?? 0}
 					type="number"

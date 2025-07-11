@@ -1,10 +1,7 @@
-import { useState, useEffect, useRef } from "@wordpress/element"; // Added useRef
+import { useState, useEffect, useRef } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import apiFetch from "@wordpress/api-fetch";
-import {
-  Spinner,
-  Button,
-} from "@wordpress/components";
+import {Spinner, Button} from "@wordpress/components";
 import "./index.scss";
 import GeneralSettings from './components/general-settings';
 import DesignSettings from './components/design-settings';
@@ -26,14 +23,14 @@ const TABS = [
     icon: "feedback"
   },
   {
-    id: "design",
-    label: __("Design", "th-login"),
-    icon: "art"
-  },
-  {
     id: "display-triggers",
     label: __("Display Triggers", "th-login"),
     icon: "visibility"
+  },
+  {
+    id: "design",
+    label: __("Design", "th-login"),
+    icon: "art"
   },
   {
     id: "integration",
@@ -52,10 +49,7 @@ const TABS = [
   }
 ];
 
-// Main React App Component
-const App = () => {
-  const [settings, setSettings] = useState({
-    general: {
+const general = {
       plugin_status: "enabled",
       form_type: 'double',
       display_mode:'popup',
@@ -69,8 +63,157 @@ const App = () => {
         role_based_redirects: [], // Ensure this is an array
       },
       manual_user_approval: { enabled: false },
+};
+
+const form_fields = {
+  login: [
+    {
+      id: 'username',
+      label: 'Username or Email',
+      name: 'username',
+      type: 'text',
+      placeholder: 'Enter your username or email',
+      required: true,
+      icon: 'user',
+      error_message: 'Username or email is required.',
+      predefined:true,
     },
-    design: {
+    {
+      id: 'password',
+      label: 'Password',
+      name: 'password',
+      type: 'password',
+      placeholder: 'Enter your password',
+      required: true,
+      icon: 'lock',
+      error_message: 'Password is required.',
+      predefined:true,
+    },
+    {
+      id: 'remember_me',
+      label: 'Remember Me',
+      name: 'remember_me',
+      type: 'checkbox',
+      required: false,
+      icon: '',
+      show: true,
+      error_message: '',
+      predefined:true,
+    },
+  ],
+
+  register: [
+    {
+      id: 'username',
+      label: 'Choose a Username',
+      name: 'username',
+      type: 'text',
+      placeholder: 'Enter your desired username',
+      required: true,
+      icon: 'user',
+      error_message: 'Username is required.',
+      predefined:true,
+    },
+    {
+      id: 'email',
+      label: 'Email Address',
+      name: 'email',
+      type: 'email',
+      placeholder: 'Enter your email',
+      required: true,
+      icon: 'email',
+      error_message: 'Email address is required.',
+      predefined:false,
+    },
+    {
+      id: 'password',
+      label: 'Create Password',
+      name: 'password',
+      type: 'password',
+      placeholder: 'Create a strong password',
+      required: true,
+      icon: 'lock',
+      check: { text: true, number: false, special_charcter: false },
+      maxInput: 20,
+      minInput: 5,
+      error_message: 'Password is required.',
+      predefined:true,
+    },
+    {
+      id: 'confirm_password',
+      label: 'Confirm Password',
+      name: 'confirm_password',
+      type: 'password',
+      placeholder: 'Confirm your password',
+      required: true,
+      icon: 'lock',
+      error_message: 'Please confirm your password.',
+      predefined:true,
+    },
+    {
+      id: 'first_name',
+      label: 'First Name',
+      name: 'first_name',
+      type: 'text',
+      placeholder: 'Your first name',
+      required: false,
+      icon: 'user',
+      show: false,
+      error_message: 'First name is required.',
+      predefined:false,
+    },
+    {
+      id: 'last_name',
+      label: 'Last Name',
+      name: 'last_name',
+      type: 'text',
+      placeholder: 'Your last name',
+      required: false,
+      icon: 'user',
+      show: false,
+      error_message: 'Last name is required.',
+      predefined:false,
+    },
+    {
+      id: 'terms_and_conditions',
+      label: 'I agree to the Terms & Conditions',
+      name: 'terms_and_conditions',
+      type: 'checkbox',
+      required: true,
+      icon: '',
+      show: true,
+      error_message: 'You must agree to the Terms & Conditions.',
+      predefined:false,
+      link:""
+    },
+    {
+      id: 'honeypot',
+      label: '',
+      name: 'honeypot',
+      type: 'text',
+      icon: '',
+      show: false,
+      hidden: true,
+      error_message: '',
+    },
+  ],
+
+  forgot_password: [
+    {
+      id: 'user_login',
+      label: 'Email Address',
+      name: 'user_login',
+      type: 'text',
+      placeholder: 'Enter your email to reset password',
+      required: true,
+      icon: 'email',
+      error_message: 'Email address is required to reset password.',
+      predefined:true,
+    },
+  ],
+};
+
+const design = {
         modal: {
           layout_type: 'popup',  
           modal_background: {
@@ -114,139 +257,9 @@ const App = () => {
             }
           }
         },  
-    },
-    form_fields: {
-      login: [
-        {
-          id: 'username',
-          label: 'Username or Email',
-          name: 'username',
-          type: 'text',
-          placeholder: 'Enter your username or email',
-          required: true,
-          icon: 'user',
-        },
-        {
-          id: 'password',
-          label: 'Password',
-          name: 'password',
-          type: 'password',
-          placeholder: 'Enter your password',
-          required: true,
-          icon: 'lock',
-        },
-        {
-          id: 'remember_me',
-          label: 'Remember Me',
-          name: 'remember_me',
-          type: 'checkbox',
-          required: false,
-          icon: '',
-          show: true,
-        },
-      ],
+};
 
-      register: [
-        {
-          id: 'username',
-          label: 'Choose a Username',
-          name: 'username',
-          type: 'text',
-          placeholder: 'Enter your desired username',
-          required: true,
-          icon: 'user',
-         
-        },
-        {
-          id: 'email',
-          label: 'Email Address',
-          name: 'email',
-          type: 'email',
-          placeholder: 'Enter your email',
-          required: true,
-          icon: 'email',
-          
-        },
-        {
-          id: 'password',
-          label: 'Create Password',
-          name: 'password',
-          type: 'password',
-          placeholder: 'Create a strong password',
-          required: true,
-          icon: 'lock',
-          check: { text: true, number: false, special_charcter: false },
-          maxInput: 20,
-          minInput: 5,
-          
-        },
-        {
-          id: 'confirm_password',
-          label: 'Confirm Password',
-          name: 'confirm_password',
-          type: 'password',
-          placeholder: 'Confirm your password',
-          required: true,
-          icon: 'lock',
-          
-        },
-        {
-          id: 'first_name',
-          label: 'First Name',
-          name: 'first_name',
-          type: 'text',
-          placeholder: 'Your first name',
-          required: false,
-          icon: 'user',
-          show: false,
-         
-        },
-        {
-          id: 'last_name',
-          label: 'Last Name',
-          name: 'last_name',
-          type: 'text',
-          placeholder: 'Your last name',
-          required: false,
-          icon: 'user',
-          show: false,
-          
-        },
-        {
-          id: 'terms_and_conditions',
-          label: 'I agree to the Terms & Conditions',
-          name: 'terms_and_conditions',
-          type: 'checkbox',
-          required: true,
-          icon: '',
-          show: true,
-          
-        },
-        {
-          id: 'honeypot',
-          label: '',
-          name: 'honeypot',
-          type: 'text',
-          icon: '',
-          show: false,
-          hidden: true,
-        },
-      ],
-
-      forgot_password: [
-        {
-          id: 'user_login',
-          label: 'Email Address',
-          name: 'user_login',
-          type: 'text',
-          placeholder: 'Enter your email to reset password',
-          required: true,
-          icon: 'email',
-          
-        },
-      ],
-    },
-    display_triggers: {
+const display_triggers = {
       trigger_css_class: "th-login-trigger",
       auto_open_on_load: { enabled: true, delay_seconds: 2 },
       auto_open_on_scroll: { enabled: false, scroll_percentage: 50 },
@@ -283,23 +296,34 @@ const App = () => {
         visibility_login_logged_in: false,
         visibility_register_logged_in: false,
       },
-    },
-    security: {
-      brute_force_protection: {
-        enabled: true,
-        max_attempts: 5,
-        lockout_duration_minutes: 30,
-        auto_ip_blacklist_enabled: true,
-      },
-      recaptcha: {
-        enabled: false,
-        type: "v2_checkbox",
-        site_key: "",
-        secret_key: "",
-      },
-      honeypot_enabled: true,
-    },
+};
+
+const security = {
+  brute_force_protection: {
+    enabled: true,
+    max_attempts: 5,
+    lockout_duration_minutes: 30,
+    auto_ip_blacklist_enabled: true,
+  },
+  recaptcha: {
+    enabled: false,
+    type: "v2_checkbox",
+    site_key: "",
+    secret_key: "",
+  },
+  honeypot_enabled: true,
+};
+
+// Main React App Component
+const App = () => {
+  const [settings, setSettings] = useState({
+    general: general,
+    design: design,
+    form_fields: form_fields,
+    display_triggers: display_triggers,
+    security: security,
   });
+
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState(null); // { type: 'success' | 'error', text: '...' }
@@ -309,8 +333,6 @@ const App = () => {
   const [activeTab, setActiveTab] = useState("general");
 
   const importTextareaRef = useRef(null); // Ref for import textarea
-
-  console.log(settings);
 
   // Fetch settings on component mount.
   useEffect(() => {

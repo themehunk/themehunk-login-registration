@@ -40,8 +40,8 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                   </div>
 
                   {settings.security.brute_force_protection?.enabled && (
-                    <>
-                      <div className="setting-row">
+                    <div className="menu-item-group ">
+                      <div className="setting-row text-small-box ">
                         <div className="setting-label">
                           <h4>{__("Max Login Attempts", "th-login")}</h4>
                           <p className="description">
@@ -70,7 +70,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                         </div>
                       </div>
 
-                      <div className="setting-row">
+                      <div className="setting-row text-small-box ">
                         <div className="setting-label">
                           <h4>
                             {__("Lockout Duration (minutes)", "th-login")}
@@ -133,7 +133,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                           />
                         </div>
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
 
@@ -164,84 +164,84 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                   </div>
 
                   {settings.security.recaptcha?.enabled && (
-                    <>
-                      <div className="setting-row">
-                        <div className="setting-label">
-                          <h4>{__("reCAPTCHA Type", "th-login")}</h4>
-                          <p className="description">
-                            {__("Version of reCAPTCHA to use", "th-login")}
-                          </p>
+                    <div className="menu-item-group ">
+                        <div className="setting-row">
+                          <div className="setting-label">
+                            <h4>{__("reCAPTCHA Type", "th-login")}</h4>
+                            <p className="description">
+                              {__("Version of reCAPTCHA to use", "th-login")}
+                            </p>
+                          </div>
+                          <div className="setting-control">
+                            <select
+                              value={
+                                settings.security.recaptcha?.type || "v2_checkbox"
+                              }
+                              onChange={(e) =>
+                                handleSettingChange(
+                                  "security",
+                                  ["recaptcha", "type"],
+                                  e.target.value
+                                )
+                              }
+                            >
+                              <option value="v2_checkbox">
+                                {__("reCAPTCHA v2 Checkbox", "th-login")}
+                              </option>
+                              <option value="v3_invisible">
+                                {__("reCAPTCHA v3 Invisible", "th-login")}
+                              </option>
+                            </select>
+                          </div>
                         </div>
-                        <div className="setting-control">
-                          <select
-                            value={
-                              settings.security.recaptcha?.type || "v2_checkbox"
-                            }
-                            onChange={(e) =>
-                              handleSettingChange(
-                                "security",
-                                ["recaptcha", "type"],
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="v2_checkbox">
-                              {__("reCAPTCHA v2 Checkbox", "th-login")}
-                            </option>
-                            <option value="v3_invisible">
-                              {__("reCAPTCHA v3 Invisible", "th-login")}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
 
-                      <div className="setting-row">
-                        <div className="setting-label">
-                          <h4>{__("Site Key", "th-login")}</h4>
-                          <p className="description">
-                            {__("Your reCAPTCHA site key", "th-login")}{' '}
-                            <ExternalLink href="https://www.google.com/recaptcha/admin">
-                              {__("Google reCAPTCHA Admin", "th-login")}
-                            </ExternalLink>
-                          </p>
+                        <div className="setting-row">
+                          <div className="setting-label">
+                            <h4>{__("Site Key", "th-login")}</h4>
+                            <p className="description">
+                              {__("Your reCAPTCHA site key", "th-login")}{' '}
+                              <ExternalLink href="https://www.google.com/recaptcha/admin">
+                                {__("Google reCAPTCHA Admin", "th-login")}
+                              </ExternalLink>
+                            </p>
+                          </div>
+                          <div className="setting-control">
+                            <TextControl
+                              value={settings.security.recaptcha?.site_key || ""}
+                              onChange={(newValue) =>
+                                handleSettingChange(
+                                  "security",
+                                  ["recaptcha", "site_key"],
+                                  newValue
+                                )
+                              }
+                            />
+                          </div>
                         </div>
-                        <div className="setting-control">
-                          <TextControl
-                            value={settings.security.recaptcha?.site_key || ""}
-                            onChange={(newValue) =>
-                              handleSettingChange(
-                                "security",
-                                ["recaptcha", "site_key"],
-                                newValue
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
 
-                      <div className="setting-row">
-                        <div className="setting-label">
-                          <h4>{__("Secret Key", "th-login")}</h4>
-                          <p className="description">
-                            {__("Your reCAPTCHA secret key", "th-login")}
-                          </p>
+                        <div className="setting-row">
+                          <div className="setting-label">
+                            <h4>{__("Secret Key", "th-login")}</h4>
+                            <p className="description">
+                              {__("Your reCAPTCHA secret key", "th-login")}
+                            </p>
+                          </div>
+                          <div className="setting-control">
+                            <TextControl
+                              value={
+                                settings.security.recaptcha?.secret_key || ""
+                              }
+                              onChange={(newValue) =>
+                                handleSettingChange(
+                                  "security",
+                                  ["recaptcha", "secret_key"],
+                                  newValue
+                                )
+                              }
+                            />
+                          </div>
                         </div>
-                        <div className="setting-control">
-                          <TextControl
-                            value={
-                              settings.security.recaptcha?.secret_key || ""
-                            }
-                            onChange={(newValue) =>
-                              handleSettingChange(
-                                "security",
-                                ["recaptcha", "secret_key"],
-                                newValue
-                              )
-                            }
-                          />
-                        </div>
-                      </div>
-                    </>
+                    </div>
                   )}
                 </div>
 

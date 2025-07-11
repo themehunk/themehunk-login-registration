@@ -1,9 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import {
-  Button,
-  TextControl,
-  ToggleControl,
-} from "@wordpress/components";
+import { Button, TextControl, ToggleControl } from "@wordpress/components";
 import {
   DndContext,
   closestCenter,
@@ -19,11 +15,12 @@ import {
   useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classnames from "classnames";
-import { THL_ICONS } from './icons';
-import { CustomSelectControl } from './custom-select-control';
+import { THL_ICONS } from "./icons";
+import { CustomSelectControl } from "./custom-select-control";
 
 const TAB_KEYS = {
   login: __("Login", "th-login"),
@@ -40,7 +37,19 @@ const DEFAULT_FIELD = () => ({
   name: "",
   type: "text",
   show: true,
+  predefined: false,
 });
+
+const ToastNotice = ({ message, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return <div className="thl-toast-notice">{message}</div>;
+};
 
 const SortableFieldItem = ({ field, onClick, onDelete }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -70,8 +79,8 @@ const SortableFieldItem = ({ field, onClick, onDelete }) => {
         className="field-label"
         dangerouslySetInnerHTML={{ __html: field.label || field.placeholder }}
       ></span>
-      {field.required ? (
-        <span className="field-action-icon lock" title="Required field">
+      {field.predefined ? (
+        <span className="field-action-icon lock" title="Predefined field (locked)">
           <span className="dashicons dashicons-lock"></span>
         </span>
       ) : (
@@ -94,6 +103,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
   const [activeTab, setActiveTab] = useState("login");
   const [selectedField, setSelectedField] = useState(null);
   const [iconPickerOpen, setIconPickerOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -102,9 +112,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
     })
   );
 
-  const fields = (settings.form_fields?.[activeTab] || []).filter(
-    (f) => !f.hidden
-  );
+  const fields = (settings.form_fields?.[activeTab] || []).filter((f) => !f.hidden);
 
   const updateFields = (newFields) => {
     handleSettingChange("form_fields", [activeTab], newFields);
@@ -123,12 +131,14 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
   const handleAddField = () => {
     const newField = DEFAULT_FIELD();
     updateFields([...fields, newField]);
+    setToastMessage(__("Field added successfully!", "th-login"));
   };
 
   const handleDeleteField = (fieldId) => {
     const filtered = fields.filter((f) => f.id !== fieldId);
     updateFields(filtered);
     if (selectedField?.id === fieldId) setSelectedField(null);
+    setToastMessage(__("Field deleted", "th-login"));
   };
 
   const handleFieldChange = (key, value) => {
@@ -153,33 +163,50 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
     handleFieldChange("check", updated);
   };
 
+  useEffect(() => {
+    const firstVisible = fields[0] || null;
+    setSelectedField(firstVisible);
+  }, []);
+
+  
+    const tabs = [
+        { key: "general", label: __("Login", "th-login") },
+        { key: "redirect", label: __("Register", "th-login") },
+        { key: "shortcodes", label: __("Forgot Password", "th-login") },
+    ];
+    
+    const renderTabs = () => (
+      <div className="custom-tabs">
+      {Object.keys(TAB_KEYS).map((key) => (
+          <button
+            key={key}
+            className={classnames("custom-tab-button", {
+                active: key === activeTab,
+            })}
+          onClick={() => {
+            setActiveTab(key);
+            setSelectedField(
+              (settings.form_fields?.[key] || []).find((f) => !f.hidden) || null
+            );
+          }}
+          >
+          {TAB_KEYS[key]}
+          </button>
+      ))}
+      </div>
+  );
+
   return (
     <div className="thl-form-fields-settings">
       <div className="thl-left-panel">
-        <div className="tabs">
-          {Object.keys(TAB_KEYS).map((key) => (
-            <button
-              key={key}
-              className={classnames("tab-button", {
-                active: key === activeTab,
-              })}
-              onClick={() => {
-                setActiveTab(key);
-                setSelectedField(
-                  (settings.form_fields?.[key] || []).find((f) => !f.hidden) ||
-                    null
-                );
-              }}
-            >
-              {TAB_KEYS[key]}
-            </button>
-          ))}
-        </div>
+
+        {renderTabs()}
 
         <div className="fields-list scrollable">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
+            modifiers={[restrictToVerticalAxis]}
             onDragEnd={handleDragEnd}
           >
             <SortableContext
@@ -194,12 +221,19 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                   <p className="no-fields">{__("No fields yet.", "th-login")}</p>
                 ) : (
                   fields.map((field) => (
-                    <SortableFieldItem
+                     <div
                       key={field.id}
-                      field={field}
-                      onClick={setSelectedField}
-                      onDelete={handleDeleteField}
-                    />
+                      className={classnames("sortable-field-wrapper", {
+                        selected: selectedField?.id === field.id, // ✅ Highlight selected field
+                      })}
+                    >
+                      <SortableFieldItem
+                        key={field.id}
+                        field={field}
+                        onClick={setSelectedField}
+                        onDelete={handleDeleteField}
+                      />
+                    </div>
                   ))
                 )}
               </div>
@@ -233,28 +267,19 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               onChange={(val) => handleFieldChange("placeholder", val)}
             />
 
-            <TextControl
-              label={__("Name", "th-login")}
-              value={selectedField.name || ""}
-              onChange={(val) => handleFieldChange("name", val)}
-            />
+            {selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && (
+              <TextControl
+                label={__("Terms & Conditions Link", "th-login")}
+                placeholder="https://example.com/terms"
+                value={selectedField.link || ""}
+                onChange={(val) => handleFieldChange("link", val)}
+              />
+            )}
 
             <TextControl
-              label={__("ID", "th-login")}
-              value={selectedField.id || ""}
-              onChange={(val) => handleFieldChange("id", val)}
-            />
-
-            <CustomSelectControl
-              label={__("Field Type", "th-login")}
-              value={selectedField.type || "text"}
-              options={[
-                { label: "Text", value: "text" },
-                { label: "Email", value: "email" },
-                { label: "Password", value: "password" },
-                { label: "Checkbox", value: "checkbox" },
-              ]}
-              onChange={(val) => handleFieldChange("type", val)}
+              label={__("Error Message", "th-login")}
+              value={selectedField.error_message || ""}
+              onChange={(val) => handleFieldChange("error_message", val)}
             />
 
             <div className="thl-icon-picker">
@@ -268,7 +293,9 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               >
                 <div
                   className="selected-icon"
-                  dangerouslySetInnerHTML={{ __html: THL_ICONS[selectedField.icon] || "" }}
+                  dangerouslySetInnerHTML={{
+                    __html: THL_ICONS[selectedField.icon] || "",
+                  }}
                 />
                 <span className="icon-name">{selectedField.icon}</span>
                 <span className="icon-caret">▾</span>
@@ -279,7 +306,9 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                   {Object.keys(THL_ICONS).map((key) => (
                     <div
                       key={key}
-                      className={`icon-option ${selectedField.icon === key ? "active" : ""}`}
+                      className={`icon-option ${
+                        selectedField.icon === key ? "active" : ""
+                      }`}
                       onClick={() => {
                         handleFieldChange("icon", key);
                         setIconPickerOpen(false);
@@ -292,60 +321,91 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               )}
             </div>
 
-            <ToggleControl
-              label={__("Required", "th-login")}
-              checked={selectedField.required}
-              onChange={(val) => handleFieldChange("required", val)}
-            />
-
-            <ToggleControl
-              label={__("Show Field", "th-login")}
-              checked={selectedField.show !== false}
-              onChange={(val) => handleFieldChange("show", val)}
-            />
-        
-            {(selectedField.type === "password" && selectedField.id !== 'confirm_password' ) && (
+            {!selectedField.predefined && (
               <>
-  
                 <TextControl
-                  label={__("Minimum Length", "th-login")}
-                  type="number"
-                  value={selectedField.minInput || ""}
-                  onChange={(val) => handleFieldChange("minInput", parseInt(val))}
+                  label={__("Name", "th-login")}
+                  value={selectedField.name || ""}
+                  onChange={(val) => handleFieldChange("name", val)}
                 />
                 <TextControl
-                  label={__("Maximum Length", "th-login")}
-                  type="number"
-                  value={selectedField.maxInput || ""}
-                  onChange={(val) => handleFieldChange("maxInput", parseInt(val))}
+                  label={__("ID", "th-login")}
+                  value={selectedField.id || ""}
+                  onChange={(val) => handleFieldChange("id", val)}
                 />
-                <div className="check-group">
+                <CustomSelectControl
+                  label={__("Field Type", "th-login")}
+                  value={selectedField.type || "text"}
+                  options={[
+                    { label: "Text", value: "text" },
+                    { label: "Email", value: "email" },
+                    { label: "Checkbox", value: "checkbox" },
+                  ]}
+                  onChange={(val) => handleFieldChange("type", val)}
+                />
+                <div className="th-login-toggle-one-line">
                   <ToggleControl
-                    label={__("Require Letters (A-Z)", "th-login")}
-                    checked={selectedField.check?.text || false}
-                    onChange={() => handleCheckToggle("text")}
+                    label={__("Required", "th-login")}
+                    checked={selectedField.required}
+                    onChange={(val) => handleFieldChange("required", val)}
                   />
                   <ToggleControl
-                    label={__("Require Numbers (0-9)", "th-login")}
-                    checked={selectedField.check?.number || false}
-                    onChange={() => handleCheckToggle("number")}
-                  />
-                  <ToggleControl
-                    label={__("Require Special Characters", "th-login")}
-                    checked={selectedField.check?.special_character || false}
-                    onChange={() => handleCheckToggle("special_character")}
+                    label={__("Show Field", "th-login")}
+                    checked={selectedField.show !== false}
+                    onChange={(val) => handleFieldChange("show", val)}
                   />
                 </div>
               </>
             )}
 
-          </div>  
+            {activeTab === "register" &&
+              selectedField.type === "password" &&
+              selectedField.predefined &&
+              selectedField.id !== "confirm_password" && (
+                <>
+                  <TextControl
+                    label={__("Minimum Length", "th-login")}
+                    type="number"
+                    value={selectedField.minInput || ""}
+                    onChange={(val) => handleFieldChange("minInput", parseInt(val))}
+                  />
+                  <TextControl
+                    label={__("Maximum Length", "th-login")}
+                    type="number"
+                    value={selectedField.maxInput || ""}
+                    onChange={(val) => handleFieldChange("maxInput", parseInt(val))}
+                  />
+                  <div className="check-group">
+                    <ToggleControl
+                      label={__("Require Letters (A-Z)", "th-login")}
+                      checked={selectedField.check?.text || false}
+                      onChange={() => handleCheckToggle("text")}
+                    />
+                    <ToggleControl
+                      label={__("Require Numbers (0-9)", "th-login")}
+                      checked={selectedField.check?.number || false}
+                      onChange={() => handleCheckToggle("number")}
+                    />
+                    <ToggleControl
+                      label={__("Require Special Characters", "th-login")}
+                      checked={selectedField.check?.special_character || false}
+                      onChange={() => handleCheckToggle("special_character")}
+                    />
+                  </div>
+                </>
+              )}
+          </div>
         ) : (
           <div className="placeholder">
             <p>{__("Click a field to edit its settings", "th-login")}</p>
           </div>
         )}
       </div>
+
+      {toastMessage && (
+        <ToastNotice message={toastMessage} onClose={() => setToastMessage("")} />
+      )}
+
     </div>
   );
 };

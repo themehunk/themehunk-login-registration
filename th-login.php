@@ -108,90 +108,80 @@ function th_login_set_default_options() {
 		'close_button' => true,
 	);
 
-	update_option( 'th_login_general_settings', json_encode( $general_defaults ) );
-
 	$design_defaults = array(
-		'design_template' => 'default',
-		'logo'            => array(
-			'url'           => '',
-			'width'         => array( 'desktop' => '150px' ),
-			'margin_bottom' => '20px',
-			'svg_enabled'   => true,
-			'link_url'      => '',
-		),
-
-		'modal'           => array(
-
-			'overlay_background_type' => 'color',
-			'overlay_background_color'    => 'rgba(0, 0, 0, 0.5)',
-			'overlay_background_gradient' => 'linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4))',
-			'overlay_background_image_url'    => '',
-			'overlay_background_image_size'     => 'cover',
-			'overlay_background_image_position' => 'center center',
-			'overlay_background_image_repeat'   => 'no-repeat',
-
-			'form_bg_type'          => 'color',
-			'form_bg_color'         => '#ffffff',
-			'form_bg_image'         => array( 'url' => '', 'position' => 'center center', 'size' => 'cover', 'repeat' => 'no-repeat' ),
-			'form_bg_gradient'      => array( 'colors' => array(), 'direction' => 'to bottom' ),
-			'form_width'            => array( 'desktop' => '400px', 'tablet' => '90%', 'mobile' => '95%' ),
-			'form_max_width'        => '500px',
-			'form_height'           => 'auto',
-			'form_min_height'       => '300px',
-			'form_padding'          => array( 'desktop' => '30px', 'tablet' => '25px', 'mobile' => '20px' ),
-			'form_margin'           => '20px auto',
-			'form_border'           => array( 'style' => 'solid', 'width' => '1px', 'color' => '#dddddd', 'top_width' => '1px', 'right_width' => '1px', 'bottom_width' => '1px', 'left_width' => '1px', 'top_color' => '#dddddd', 'right_color' => '#dddddd', 'bottom_color' => '#dddddd', 'left_color' => '#dddddd' ),
-			'form_border_radius'    => array( 'top_left' => '12px', 'top_right' => '12px', 'bottom_left' => '12px', 'bottom_right' => '12px' ),
-			'form_box_shadow'       => '0 8px 25px rgba(0,0,0,0.15)',
-			'modal_animation_in'    => 'fade-in',
-			'modal_animation_out'   => 'fade-out',
-			'close_button'          => array( 'position' => 'top-right', 'icon_color' => '#333', 'bg_color' => 'transparent', 'size' => '24px', 'hover_color' => '#000' ),
-			'scrollbar_style'       => 'default',
-		),
-		'typography'      => array(
-			'font_family'      => 'Inter, sans-serif',
-			'google_font_url'  => '',
-			'general_text'     => array(
-				'color' => '#333333',
-				'font_size' => array( 'desktop' => '16px' ),
-				'line_height' => '1.6',
-				'font_weight' => '400',
-				'text_shadow' => '',
-				'border_style' => 'none', // NEW DEFAULT
-				'border_width' => '0px',   // NEW DEFAULT
-				'border_color' => '#000000', // NEW DEFAULT
+		'modal' => array(
+			'modal_background' => array(
+				'type'     => 'image', // 'color' | 'gradient' | 'image'
+				'color'    => '#ffffff',
+				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+				'opacity'  => 1,
+				'image'    => array(
+					'url'      => '',
+					'position' => 'center center',
+					'size'     => 'cover',
+					'repeat'   => 'no-repeat',
+				),
 			),
-			'labels'           => array( 'color' => '#555555', 'font_size' => array( 'desktop' => '14px' ), 'font_weight' => '500' ),
-			'links'            => array( 'color' => '#007cba', 'hover_color' => '#005ba0', 'font_size' => array( 'desktop' => '14px' ) ),
-			'messages'         => array( 'success_color' => '#4CAF50', 'error_color' => '#F44336', 'font_size' => array( 'desktop' => '14px' ) ),
-			'headings'         => array( 'color' => '#222222', 'font_size' => array( 'desktop' => '24px' ), 'font_weight' => '600' ),
-			'form_header_html' => array( 'content' => '', 'enabled' => true ),
-			'form_footer_html' => array( 'content' => '', 'enabled' => true ),
+			'modal_border' => array(
+				'width' => array(
+					'top'    => 1,
+					'right'  => 1,
+					'bottom' => 1,
+					'left'   => 1,
+				),
+				'style'  => 'solid',
+				'color'  => '#000000',
+				'radius' => array(
+					'topLeft'     => 6,
+					'topRight'    => 6,
+					'bottomRight' => 6,
+					'bottomLeft'  => 6,
+				),
+			),
+			'modal_padding' => array(
+				'top'    => 10,
+				'right'  => 10,
+				'bottom' => 10,
+				'left'   => 10,
+			),
 		),
-		'input_fields'    => array(
-			'bg_color'          => '#f9f9f9',
-			'text_color'        => '#333333',
-			'border'            => array( 'style' => 'solid', 'width' => '1px', 'color' => '#cccccc', 'focus_color' => '#007cba' ),
-			'border_radius'     => '6px',
-			'padding'           => '12px',
-			'placeholder_color' => '#999999',
-			'focus_box_shadow'  => '0 0 0 2px rgba(0,124,186,0.25)',
-			'focus_outline'     => '2px solid rgba(0,124,186,0.25)',
-		),
-		'buttons'         => array(
-			'primary'   => array( 'bg_color' => '#007cba', 'bg_hover_color' => '#005ba0', 'text_color' => '#ffffff', 'text_hover_color' => '#ffffff', 'border_radius' => '6px', 'padding' => '12px 25px', 'box_shadow' => '0 2px 5px rgba(0,0,0,0.1)', 'icon' => '', 'hover_animation' => 'scale', 'text_saving' => __( 'Processing...', 'th-login' ) ),
-			'secondary' => array( 'bg_color' => 'transparent', 'bg_hover_color' => 'rgba(0,0,0,0.05)', 'text_color' => '#007cba', 'text_hover_color' => '#005ba0', 'border_radius' => '4px', 'padding' => '8px 15px' ),
-		),
-		'custom_css'      => '',
-		'custom_js'       => '',
-		// NEW: Login Form specific styles
-		'login_form'      => array(
-			'bg_color'   => '#ffffff', // Default to white
-			'text_color' => '#333333', // Default to dark grey
+		'form' => array(
+			'form_background' => array(
+				'type'     => 'image',
+				'color'    => '#ffffff',
+				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+				'opacity'  => 1,
+				'image'    => array(
+					'url'      => '',
+					'position' => 'center center',
+					'size'     => 'cover',
+					'repeat'   => 'no-repeat',
+				),
+			),
+			'form_border' => array(
+				'width' => array(
+					'top'    => 1,
+					'right'  => 1,
+					'bottom' => 1,
+					'left'   => 1,
+				),
+				'style'  => 'solid',
+				'color'  => '#000000',
+				'radius' => array(
+					'topLeft'     => 6,
+					'topRight'    => 6,
+					'bottomRight' => 6,
+					'bottomLeft'  => 6,
+				),
+			),
+			'form_padding' => array(
+				'top'    => 10,
+				'right'  => 10,
+				'bottom' => 10,
+				'left'   => 10,
+			),
 		),
 	);
-
-	update_option( 'th_login_design_settings', json_encode( $design_defaults ) );
 
 	$form_fields_defaults = array(
 		'login' => array(
@@ -343,8 +333,6 @@ function th_login_set_default_options() {
 		),
 	);
 	
-	update_option( 'th_login_form_fields_settings', json_encode( $form_fields_defaults ) );
-
 	$display_triggers_defaults = array(
 		'trigger_css_class'          => 'th-login-trigger',
 		'auto_open_on_load'          => array( 'enabled' => true, 'delay_seconds' => 2 ),
@@ -376,8 +364,6 @@ function th_login_set_default_options() {
 		),
 	);
 
-	update_option( 'th_login_display_triggers_settings', json_encode( $display_triggers_defaults ) );
-
 	$security_defaults = array(
 		'brute_force_protection' => array(
 			'enabled'                   => true,
@@ -394,7 +380,18 @@ function th_login_set_default_options() {
 		'honeypot_enabled'       => true,
 	);
 
-	update_option( 'th_login_security_settings', json_encode( $security_defaults ) );
+	$defaults = array(
+		'general'           => $general_defaults,
+		'design'            => $design_defaults,
+		'form_fields'       => $form_fields_defaults,
+		'display_triggers'  => $display_triggers_defaults,
+		'security'          => $security_defaults,
+	);
+
+	foreach ( $defaults as $key => $value ) {
+		update_option( "th_login_{$key}_settings", json_encode( $value ) );
+	}
+
 }
 
 register_activation_hook( __FILE__, 'th_login_set_default_options' );
@@ -408,4 +405,5 @@ new TH_Login_Gutenberg_Block();
 function th_login_init() {
 	return TH_Login::instance();
 }
+
 th_login_init();

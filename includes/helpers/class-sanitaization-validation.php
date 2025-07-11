@@ -55,41 +55,54 @@ class TH_Sanitization_validation {
 	public function sanitize_design_settings( $settings ) {
 		$sanitized = array();
 
-		//$sanitized['design_template'] = sanitize_text_field( $settings['design_template'] ?? 'default' );
-
 		$sanitized['modal']['layout_type'] = sanitize_text_field( $settings['modal']['layout_type'] ?? 'popup' );
 
-		// Sanitize modal background
-		$modal_bg = $settings['modal']['modal_background'] ?? array();
+		// Sections to loop through
+		foreach ( ['modal', 'form'] as $section ) {
 
-		$sanitized['modal']['modal_background'] = array(
-			'type'    => sanitize_text_field( $modal_bg['type'] ?? 'color' ),
-			'color'   => sanitize_hex_color( $modal_bg['color'] ?? '#ffffff' ),
-			'gradient'=> sanitize_text_field( $modal_bg['gradient'] ?? '' ),
-			'opacity'  => floatval( $modal_bg['opacity'] ?? 1 ),
-			'image'   => array(
-				'url'      => esc_url_raw( $modal_bg['image']['url'] ?? '' ),
-				'position' => sanitize_text_field( $modal_bg['image']['position'] ?? 'center center' ),
-				'size'     => sanitize_text_field( $modal_bg['image']['size'] ?? 'cover' ),
-				'repeat'   => sanitize_text_field( $modal_bg['image']['repeat'] ?? 'no-repeat' ),
-			),
-		);
+			// Sanitize background
+			$bg = $settings[$section]["{$section}_background"] ?? array();
+			$sanitized[$section]["{$section}_background"] = array(
+				'type'     => sanitize_text_field( $bg['type'] ?? 'color' ),
+				'color'    => sanitize_hex_color( $bg['color'] ?? '#ffffff' ),
+				'gradient' => sanitize_text_field( $bg['gradient'] ?? '' ),
+				'opacity'  => floatval( $bg['opacity'] ?? 1 ),
+				'image'    => array(
+					'url'      => esc_url_raw( $bg['image']['url'] ?? '' ),
+					'position' => sanitize_text_field( $bg['image']['position'] ?? 'center center' ),
+					'size'     => sanitize_text_field( $bg['image']['size'] ?? 'cover' ),
+					'repeat'   => sanitize_text_field( $bg['image']['repeat'] ?? 'no-repeat' ),
+				),
+			);
 
-		// Sanitize form background
-		$form_bg = $settings['modal']['form_background'] ?? array();
+			// Sanitize border
+			$border = $settings[$section]["{$section}_border"] ?? array();
+			$sanitized[$section]["{$section}_border"] = array(
+				'width' => array(
+					'top'    => intval( $border['width']['top'] ?? 0 ),
+					'right'  => intval( $border['width']['right'] ?? 0 ),
+					'bottom' => intval( $border['width']['bottom'] ?? 0 ),
+					'left'   => intval( $border['width']['left'] ?? 0 ),
+				),
+				'style'  => sanitize_text_field( $border['style'] ?? 'solid' ),
+				'color'  => sanitize_hex_color( $border['color'] ?? '#000000' ),
+				'radius' => array(
+					'topLeft'     => intval( $border['radius']['topLeft'] ?? 0 ),
+					'topRight'    => intval( $border['radius']['topRight'] ?? 0 ),
+					'bottomRight' => intval( $border['radius']['bottomRight'] ?? 0 ),
+					'bottomLeft'  => intval( $border['radius']['bottomLeft'] ?? 0 ),
+				),
+			);
 
-		$sanitized['modal']['form_background'] = array(
-			'type'    => sanitize_text_field( $form_bg['type'] ?? 'color' ),
-			'color'   => sanitize_hex_color( $form_bg['color'] ?? '#ffffff' ),
-			'gradient'=> sanitize_text_field( $form_bg['gradient'] ?? '' ),
-			'opacity'  => floatval( $form_bg['opacity'] ?? 1 ),
-			'image'   => array(
-				'url'      => esc_url_raw( $form_bg['image']['url'] ?? '' ),
-				'position' => sanitize_text_field( $form_bg['image']['position'] ?? 'center center' ),
-				'size'     => sanitize_text_field( $form_bg['image']['size'] ?? 'cover' ),
-				'repeat'   => sanitize_text_field( $form_bg['image']['repeat'] ?? 'no-repeat' ),
-			),
-		);
+			// Sanitize padding
+			$padding = $settings[$section]["{$section}_padding"] ?? array();
+			$sanitized[$section]["{$section}_padding"] = array(
+				'top'    => intval( $padding['top'] ?? 0 ),
+				'right'  => intval( $padding['right'] ?? 0 ),
+				'bottom' => intval( $padding['bottom'] ?? 0 ),
+				'left'   => intval( $padding['left'] ?? 0 ),
+			);
+		}
 
 		return $sanitized;
 	}
@@ -97,14 +110,53 @@ class TH_Sanitization_validation {
 	public function validate_design_settings( $settings ) {
 		$errors = new WP_Error();
 
-		// Example validation: Check if overlay_type is valid.
-		$valid_overlay_types = array( 'color', 'gradient', 'image' );
-		if ( ! in_array( $settings['modal']['overlay_type'] ?? 'color', $valid_overlay_types, true ) ) {
-			$errors->add( 'invalid_overlay_type', esc_html__( 'Invalid modal overlay type.', 'th-login' ) );
+		$valid_types = array( 'color', 'gradient', 'image' );
+
+		// Validate modal_background type
+		$modal_type = $settings['modal']['modal_background']['type'] ?? 'color';
+		if ( ! in_array( $modal_type, $valid_types, true ) ) {
+			$errors->add( 'invalid_modal_background_type', esc_html__( 'Invalid modal background type.', 'th-login' ) );
 		}
 
-		// Add more specific validations for colors, dimensions, etc.
-		// E.g., check if '12px' or '50%' format is valid for dimensions.
+		// Validate form_background type
+		$form_type = $settings['form']['form_background']['type'] ?? 'color';
+		if ( ! in_array( $form_type, $valid_types, true ) ) {
+			$errors->add( 'invalid_form_background_type', esc_html__( 'Invalid form background type.', 'th-login' ) );
+		}
+
+		// Validate border radius values (non-negative ints)
+		$radius_fields = array(
+			'modal_border' => $settings['modal']['modal_border']['radius'] ?? array(),
+			'form_border'  => $settings['form']['form_border']['radius'] ?? array(),
+		);
+
+		foreach ( $radius_fields as $key => $radius ) {
+			foreach ( array( 'topLeft', 'topRight', 'bottomRight', 'bottomLeft' ) as $corner ) {
+				if ( isset( $radius[ $corner ] ) && intval( $radius[ $corner ] ) < 0 ) {
+					$errors->add(
+						'invalid_' . $key . '_' . $corner,
+						sprintf( esc_html__( '%s radius value must be a positive number.', 'th-login' ), ucfirst( $key ) )
+					);
+				}
+			}
+		}
+
+		// Validate padding values (non-negative ints)
+		$padding_fields = array(
+			'modal_padding' => $settings['modal']['modal_padding'] ?? array(),
+			'form_padding'  => $settings['form']['form_padding'] ?? array(),
+		);
+
+		foreach ( $padding_fields as $key => $padding ) {
+			foreach ( array( 'top', 'right', 'bottom', 'left' ) as $side ) {
+				if ( isset( $padding[ $side ] ) && intval( $padding[ $side ] ) < 0 ) {
+					$errors->add(
+						'invalid_' . $key . '_' . $side,
+						sprintf( esc_html__( '%s padding must be a positive number.', 'th-login' ), ucfirst( $key ) )
+					);
+				}
+			}
+		}
 
 		return $errors->has_errors() ? $errors : true;
 	}

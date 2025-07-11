@@ -5431,226 +5431,6 @@ function findFirstFocusableNode(element) {
 
 /***/ }),
 
-/***/ "./node_modules/@wordpress/icons/build-module/icon/index.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@wordpress/icons/build-module/icon/index.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/**
- * WordPress dependencies
- */
-
-
-/** @typedef {{icon: JSX.Element, size?: number} & import('@wordpress/primitives').SVGProps} IconProps */
-
-/**
- * Return an SVG icon.
- *
- * @param {IconProps}                                 props icon is the SVG component to render
- *                                                          size is a number specifying the icon size in pixels
- *                                                          Other props will be passed to wrapped SVG component
- * @param {import('react').ForwardedRef<HTMLElement>} ref   The forwarded ref to the SVG element.
- *
- * @return {JSX.Element}  Icon component
- */
-function Icon({
-  icon,
-  size = 24,
-  ...props
-}, ref) {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(icon, {
-    width: size,
-    height: size,
-    ...props,
-    ref
-  });
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(Icon));
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@wordpress/icons/build-module/library/grid.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@wordpress/icons/build-module/library/grid.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "./node_modules/@wordpress/icons/node_modules/@wordpress/primitives/build-module/svg/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/**
- * WordPress dependencies
- */
-
-
-const grid = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 24 24",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
-    d: "m3 5c0-1.10457.89543-2 2-2h13.5c1.1046 0 2 .89543 2 2v13.5c0 1.1046-.8954 2-2 2h-13.5c-1.10457 0-2-.8954-2-2zm2-.5h6v6.5h-6.5v-6c0-.27614.22386-.5.5-.5zm-.5 8v6c0 .2761.22386.5.5.5h6v-6.5zm8 0v6.5h6c.2761 0 .5-.2239.5-.5v-6zm0-8v6.5h6.5v-6c0-.27614-.2239-.5-.5-.5z",
-    fillRule: "evenodd",
-    clipRule: "evenodd"
-  })
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (grid);
-//# sourceMappingURL=grid.js.map
-
-/***/ }),
-
-/***/ "./node_modules/@wordpress/icons/node_modules/@wordpress/primitives/build-module/svg/index.js":
-/*!****************************************************************************************************!*\
-  !*** ./node_modules/@wordpress/icons/node_modules/@wordpress/primitives/build-module/svg/index.js ***!
-  \****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Circle: () => (/* binding */ Circle),
-/* harmony export */   Defs: () => (/* binding */ Defs),
-/* harmony export */   G: () => (/* binding */ G),
-/* harmony export */   Line: () => (/* binding */ Line),
-/* harmony export */   LinearGradient: () => (/* binding */ LinearGradient),
-/* harmony export */   Path: () => (/* binding */ Path),
-/* harmony export */   Polygon: () => (/* binding */ Polygon),
-/* harmony export */   RadialGradient: () => (/* binding */ RadialGradient),
-/* harmony export */   Rect: () => (/* binding */ Rect),
-/* harmony export */   SVG: () => (/* binding */ SVG),
-/* harmony export */   Stop: () => (/* binding */ Stop)
-/* harmony export */ });
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.mjs");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/**
- * External dependencies
- */
-
-
-/**
- * WordPress dependencies
- */
-
-
-/** @typedef {{isPressed?: boolean} & import('react').ComponentPropsWithoutRef<'svg'>} SVGProps */
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'circle'>} props
- *
- * @return {JSX.Element} Circle component
- */
-
-const Circle = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('circle', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'g'>} props
- *
- * @return {JSX.Element} G component
- */
-const G = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('g', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'line'>} props
- *
- * @return {JSX.Element} Path component
- */
-const Line = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('line', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'path'>} props
- *
- * @return {JSX.Element} Path component
- */
-const Path = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('path', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'polygon'>} props
- *
- * @return {JSX.Element} Polygon component
- */
-const Polygon = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('polygon', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'rect'>} props
- *
- * @return {JSX.Element} Rect component
- */
-const Rect = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('rect', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'defs'>} props
- *
- * @return {JSX.Element} Defs component
- */
-const Defs = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('defs', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'radialGradient'>} props
- *
- * @return {JSX.Element} RadialGradient component
- */
-const RadialGradient = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('radialGradient', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'linearGradient'>} props
- *
- * @return {JSX.Element} LinearGradient component
- */
-const LinearGradient = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('linearGradient', props);
-
-/**
- * @param {import('react').ComponentPropsWithoutRef<'stop'>} props
- *
- * @return {JSX.Element} Stop component
- */
-const Stop = props => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)('stop', props);
-const SVG = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.forwardRef)(
-/**
- * @param {SVGProps}                                    props isPressed indicates whether the SVG should appear as pressed.
- *                                                            Other props will be passed through to svg component.
- * @param {import('react').ForwardedRef<SVGSVGElement>} ref   The forwarded ref to the SVG element.
- *
- * @return {JSX.Element} Stop component
- */
-({
-  className,
-  isPressed,
-  ...props
-}, ref) => {
-  const appliedProps = {
-    ...props,
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_0__["default"])(className, {
-      'is-pressed': isPressed
-    }) || undefined,
-    'aria-hidden': true,
-    focusable: false
-  };
-
-  // Disable reason: We need to have a way to render HTML tag for web.
-  // eslint-disable-next-line react/forbid-elements
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
-    ...appliedProps,
-    ref: ref
-  });
-});
-SVG.displayName = 'SVG';
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
 /***/ "./node_modules/classnames/index.js":
 /*!******************************************!*\
   !*** ./node_modules/classnames/index.js ***!
@@ -5735,22 +5515,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 {}
 }());
 
-
-/***/ }),
-
-/***/ "./node_modules/clsx/dist/clsx.mjs":
-/*!*****************************************!*\
-  !*** ./node_modules/clsx/dist/clsx.mjs ***!
-  \*****************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   clsx: () => (/* binding */ clsx),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e)){var o=e.length;for(t=0;t<o;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f)}else for(f in e)e[f]&&(n&&(n+=" "),n+=f);return n}function clsx(){for(var e,t,f=0,n="",o=arguments.length;f<o;f++)(e=arguments[f])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (clsx);
 
 /***/ }),
 
@@ -20772,1348 +20536,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/react/cjs/react-jsx-runtime.development.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/react/cjs/react-jsx-runtime.development.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/**
- * @license React
- * react-jsx-runtime.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-if (true) {
-  (function() {
-'use strict';
-
-var React = __webpack_require__(/*! react */ "react");
-
-// ATTENTION
-// When adding new symbols to this file,
-// Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
-// The Symbol used to tag the ReactElement-like types.
-var REACT_ELEMENT_TYPE = Symbol.for('react.element');
-var REACT_PORTAL_TYPE = Symbol.for('react.portal');
-var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
-var REACT_STRICT_MODE_TYPE = Symbol.for('react.strict_mode');
-var REACT_PROFILER_TYPE = Symbol.for('react.profiler');
-var REACT_PROVIDER_TYPE = Symbol.for('react.provider');
-var REACT_CONTEXT_TYPE = Symbol.for('react.context');
-var REACT_FORWARD_REF_TYPE = Symbol.for('react.forward_ref');
-var REACT_SUSPENSE_TYPE = Symbol.for('react.suspense');
-var REACT_SUSPENSE_LIST_TYPE = Symbol.for('react.suspense_list');
-var REACT_MEMO_TYPE = Symbol.for('react.memo');
-var REACT_LAZY_TYPE = Symbol.for('react.lazy');
-var REACT_OFFSCREEN_TYPE = Symbol.for('react.offscreen');
-var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
-var FAUX_ITERATOR_SYMBOL = '@@iterator';
-function getIteratorFn(maybeIterable) {
-  if (maybeIterable === null || typeof maybeIterable !== 'object') {
-    return null;
-  }
-
-  var maybeIterator = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL];
-
-  if (typeof maybeIterator === 'function') {
-    return maybeIterator;
-  }
-
-  return null;
-}
-
-var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-
-function error(format) {
-  {
-    {
-      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-        args[_key2 - 1] = arguments[_key2];
-      }
-
-      printWarning('error', format, args);
-    }
-  }
-}
-
-function printWarning(level, format, args) {
-  // When changing this logic, you might want to also
-  // update consoleWithStackDev.www.js as well.
-  {
-    var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-    var stack = ReactDebugCurrentFrame.getStackAddendum();
-
-    if (stack !== '') {
-      format += '%s';
-      args = args.concat([stack]);
-    } // eslint-disable-next-line react-internal/safe-string-coercion
-
-
-    var argsWithFormat = args.map(function (item) {
-      return String(item);
-    }); // Careful: RN currently depends on this prefix
-
-    argsWithFormat.unshift('Warning: ' + format); // We intentionally don't use spread (or .apply) directly because it
-    // breaks IE9: https://github.com/facebook/react/issues/13610
-    // eslint-disable-next-line react-internal/no-production-logging
-
-    Function.prototype.apply.call(console[level], console, argsWithFormat);
-  }
-}
-
-// -----------------------------------------------------------------------------
-
-var enableScopeAPI = false; // Experimental Create Event Handle API.
-var enableCacheElement = false;
-var enableTransitionTracing = false; // No known bugs, but needs performance testing
-
-var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
-// stuff. Intended to enable React core members to more easily debug scheduling
-// issues in DEV builds.
-
-var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
-
-var REACT_MODULE_REFERENCE;
-
-{
-  REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
-}
-
-function isValidElementType(type) {
-  if (typeof type === 'string' || typeof type === 'function') {
-    return true;
-  } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
-
-
-  if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing  || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden  || type === REACT_OFFSCREEN_TYPE || enableScopeAPI  || enableCacheElement  || enableTransitionTracing ) {
-    return true;
-  }
-
-  if (typeof type === 'object' && type !== null) {
-    if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || // This needs to include all possible module reference object
-    // types supported by any Flight configuration anywhere since
-    // we don't know which Flight build this will end up being used
-    // with.
-    type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== undefined) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-function getWrappedName(outerType, innerType, wrapperName) {
-  var displayName = outerType.displayName;
-
-  if (displayName) {
-    return displayName;
-  }
-
-  var functionName = innerType.displayName || innerType.name || '';
-  return functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName;
-} // Keep in sync with react-reconciler/getComponentNameFromFiber
-
-
-function getContextName(type) {
-  return type.displayName || 'Context';
-} // Note that the reconciler package should generally prefer to use getComponentNameFromFiber() instead.
-
-
-function getComponentNameFromType(type) {
-  if (type == null) {
-    // Host root, text node or just invalid type.
-    return null;
-  }
-
-  {
-    if (typeof type.tag === 'number') {
-      error('Received an unexpected object in getComponentNameFromType(). ' + 'This is likely a bug in React. Please file an issue.');
-    }
-  }
-
-  if (typeof type === 'function') {
-    return type.displayName || type.name || null;
-  }
-
-  if (typeof type === 'string') {
-    return type;
-  }
-
-  switch (type) {
-    case REACT_FRAGMENT_TYPE:
-      return 'Fragment';
-
-    case REACT_PORTAL_TYPE:
-      return 'Portal';
-
-    case REACT_PROFILER_TYPE:
-      return 'Profiler';
-
-    case REACT_STRICT_MODE_TYPE:
-      return 'StrictMode';
-
-    case REACT_SUSPENSE_TYPE:
-      return 'Suspense';
-
-    case REACT_SUSPENSE_LIST_TYPE:
-      return 'SuspenseList';
-
-  }
-
-  if (typeof type === 'object') {
-    switch (type.$$typeof) {
-      case REACT_CONTEXT_TYPE:
-        var context = type;
-        return getContextName(context) + '.Consumer';
-
-      case REACT_PROVIDER_TYPE:
-        var provider = type;
-        return getContextName(provider._context) + '.Provider';
-
-      case REACT_FORWARD_REF_TYPE:
-        return getWrappedName(type, type.render, 'ForwardRef');
-
-      case REACT_MEMO_TYPE:
-        var outerName = type.displayName || null;
-
-        if (outerName !== null) {
-          return outerName;
-        }
-
-        return getComponentNameFromType(type.type) || 'Memo';
-
-      case REACT_LAZY_TYPE:
-        {
-          var lazyComponent = type;
-          var payload = lazyComponent._payload;
-          var init = lazyComponent._init;
-
-          try {
-            return getComponentNameFromType(init(payload));
-          } catch (x) {
-            return null;
-          }
-        }
-
-      // eslint-disable-next-line no-fallthrough
-    }
-  }
-
-  return null;
-}
-
-var assign = Object.assign;
-
-// Helpers to patch console.logs to avoid logging during side-effect free
-// replaying on render function. This currently only patches the object
-// lazily which won't cover if the log function was extracted eagerly.
-// We could also eagerly patch the method.
-var disabledDepth = 0;
-var prevLog;
-var prevInfo;
-var prevWarn;
-var prevError;
-var prevGroup;
-var prevGroupCollapsed;
-var prevGroupEnd;
-
-function disabledLog() {}
-
-disabledLog.__reactDisabledLog = true;
-function disableLogs() {
-  {
-    if (disabledDepth === 0) {
-      /* eslint-disable react-internal/no-production-logging */
-      prevLog = console.log;
-      prevInfo = console.info;
-      prevWarn = console.warn;
-      prevError = console.error;
-      prevGroup = console.group;
-      prevGroupCollapsed = console.groupCollapsed;
-      prevGroupEnd = console.groupEnd; // https://github.com/facebook/react/issues/19099
-
-      var props = {
-        configurable: true,
-        enumerable: true,
-        value: disabledLog,
-        writable: true
-      }; // $FlowFixMe Flow thinks console is immutable.
-
-      Object.defineProperties(console, {
-        info: props,
-        log: props,
-        warn: props,
-        error: props,
-        group: props,
-        groupCollapsed: props,
-        groupEnd: props
-      });
-      /* eslint-enable react-internal/no-production-logging */
-    }
-
-    disabledDepth++;
-  }
-}
-function reenableLogs() {
-  {
-    disabledDepth--;
-
-    if (disabledDepth === 0) {
-      /* eslint-disable react-internal/no-production-logging */
-      var props = {
-        configurable: true,
-        enumerable: true,
-        writable: true
-      }; // $FlowFixMe Flow thinks console is immutable.
-
-      Object.defineProperties(console, {
-        log: assign({}, props, {
-          value: prevLog
-        }),
-        info: assign({}, props, {
-          value: prevInfo
-        }),
-        warn: assign({}, props, {
-          value: prevWarn
-        }),
-        error: assign({}, props, {
-          value: prevError
-        }),
-        group: assign({}, props, {
-          value: prevGroup
-        }),
-        groupCollapsed: assign({}, props, {
-          value: prevGroupCollapsed
-        }),
-        groupEnd: assign({}, props, {
-          value: prevGroupEnd
-        })
-      });
-      /* eslint-enable react-internal/no-production-logging */
-    }
-
-    if (disabledDepth < 0) {
-      error('disabledDepth fell below zero. ' + 'This is a bug in React. Please file an issue.');
-    }
-  }
-}
-
-var ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher;
-var prefix;
-function describeBuiltInComponentFrame(name, source, ownerFn) {
-  {
-    if (prefix === undefined) {
-      // Extract the VM specific prefix used by each line.
-      try {
-        throw Error();
-      } catch (x) {
-        var match = x.stack.trim().match(/\n( *(at )?)/);
-        prefix = match && match[1] || '';
-      }
-    } // We use the prefix to ensure our stacks line up with native stack frames.
-
-
-    return '\n' + prefix + name;
-  }
-}
-var reentry = false;
-var componentFrameCache;
-
-{
-  var PossiblyWeakMap = typeof WeakMap === 'function' ? WeakMap : Map;
-  componentFrameCache = new PossiblyWeakMap();
-}
-
-function describeNativeComponentFrame(fn, construct) {
-  // If something asked for a stack inside a fake render, it should get ignored.
-  if ( !fn || reentry) {
-    return '';
-  }
-
-  {
-    var frame = componentFrameCache.get(fn);
-
-    if (frame !== undefined) {
-      return frame;
-    }
-  }
-
-  var control;
-  reentry = true;
-  var previousPrepareStackTrace = Error.prepareStackTrace; // $FlowFixMe It does accept undefined.
-
-  Error.prepareStackTrace = undefined;
-  var previousDispatcher;
-
-  {
-    previousDispatcher = ReactCurrentDispatcher.current; // Set the dispatcher in DEV because this might be call in the render function
-    // for warnings.
-
-    ReactCurrentDispatcher.current = null;
-    disableLogs();
-  }
-
-  try {
-    // This should throw.
-    if (construct) {
-      // Something should be setting the props in the constructor.
-      var Fake = function () {
-        throw Error();
-      }; // $FlowFixMe
-
-
-      Object.defineProperty(Fake.prototype, 'props', {
-        set: function () {
-          // We use a throwing setter instead of frozen or non-writable props
-          // because that won't throw in a non-strict mode function.
-          throw Error();
-        }
-      });
-
-      if (typeof Reflect === 'object' && Reflect.construct) {
-        // We construct a different control for this case to include any extra
-        // frames added by the construct call.
-        try {
-          Reflect.construct(Fake, []);
-        } catch (x) {
-          control = x;
-        }
-
-        Reflect.construct(fn, [], Fake);
-      } else {
-        try {
-          Fake.call();
-        } catch (x) {
-          control = x;
-        }
-
-        fn.call(Fake.prototype);
-      }
-    } else {
-      try {
-        throw Error();
-      } catch (x) {
-        control = x;
-      }
-
-      fn();
-    }
-  } catch (sample) {
-    // This is inlined manually because closure doesn't do it for us.
-    if (sample && control && typeof sample.stack === 'string') {
-      // This extracts the first frame from the sample that isn't also in the control.
-      // Skipping one frame that we assume is the frame that calls the two.
-      var sampleLines = sample.stack.split('\n');
-      var controlLines = control.stack.split('\n');
-      var s = sampleLines.length - 1;
-      var c = controlLines.length - 1;
-
-      while (s >= 1 && c >= 0 && sampleLines[s] !== controlLines[c]) {
-        // We expect at least one stack frame to be shared.
-        // Typically this will be the root most one. However, stack frames may be
-        // cut off due to maximum stack limits. In this case, one maybe cut off
-        // earlier than the other. We assume that the sample is longer or the same
-        // and there for cut off earlier. So we should find the root most frame in
-        // the sample somewhere in the control.
-        c--;
-      }
-
-      for (; s >= 1 && c >= 0; s--, c--) {
-        // Next we find the first one that isn't the same which should be the
-        // frame that called our sample function and the control.
-        if (sampleLines[s] !== controlLines[c]) {
-          // In V8, the first line is describing the message but other VMs don't.
-          // If we're about to return the first line, and the control is also on the same
-          // line, that's a pretty good indicator that our sample threw at same line as
-          // the control. I.e. before we entered the sample frame. So we ignore this result.
-          // This can happen if you passed a class to function component, or non-function.
-          if (s !== 1 || c !== 1) {
-            do {
-              s--;
-              c--; // We may still have similar intermediate frames from the construct call.
-              // The next one that isn't the same should be our match though.
-
-              if (c < 0 || sampleLines[s] !== controlLines[c]) {
-                // V8 adds a "new" prefix for native classes. Let's remove it to make it prettier.
-                var _frame = '\n' + sampleLines[s].replace(' at new ', ' at '); // If our component frame is labeled "<anonymous>"
-                // but we have a user-provided "displayName"
-                // splice it in to make the stack more readable.
-
-
-                if (fn.displayName && _frame.includes('<anonymous>')) {
-                  _frame = _frame.replace('<anonymous>', fn.displayName);
-                }
-
-                {
-                  if (typeof fn === 'function') {
-                    componentFrameCache.set(fn, _frame);
-                  }
-                } // Return the line we found.
-
-
-                return _frame;
-              }
-            } while (s >= 1 && c >= 0);
-          }
-
-          break;
-        }
-      }
-    }
-  } finally {
-    reentry = false;
-
-    {
-      ReactCurrentDispatcher.current = previousDispatcher;
-      reenableLogs();
-    }
-
-    Error.prepareStackTrace = previousPrepareStackTrace;
-  } // Fallback to just using the name if we couldn't make it throw.
-
-
-  var name = fn ? fn.displayName || fn.name : '';
-  var syntheticFrame = name ? describeBuiltInComponentFrame(name) : '';
-
-  {
-    if (typeof fn === 'function') {
-      componentFrameCache.set(fn, syntheticFrame);
-    }
-  }
-
-  return syntheticFrame;
-}
-function describeFunctionComponentFrame(fn, source, ownerFn) {
-  {
-    return describeNativeComponentFrame(fn, false);
-  }
-}
-
-function shouldConstruct(Component) {
-  var prototype = Component.prototype;
-  return !!(prototype && prototype.isReactComponent);
-}
-
-function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-
-  if (type == null) {
-    return '';
-  }
-
-  if (typeof type === 'function') {
-    {
-      return describeNativeComponentFrame(type, shouldConstruct(type));
-    }
-  }
-
-  if (typeof type === 'string') {
-    return describeBuiltInComponentFrame(type);
-  }
-
-  switch (type) {
-    case REACT_SUSPENSE_TYPE:
-      return describeBuiltInComponentFrame('Suspense');
-
-    case REACT_SUSPENSE_LIST_TYPE:
-      return describeBuiltInComponentFrame('SuspenseList');
-  }
-
-  if (typeof type === 'object') {
-    switch (type.$$typeof) {
-      case REACT_FORWARD_REF_TYPE:
-        return describeFunctionComponentFrame(type.render);
-
-      case REACT_MEMO_TYPE:
-        // Memo may contain any component type so we recursively resolve it.
-        return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
-
-      case REACT_LAZY_TYPE:
-        {
-          var lazyComponent = type;
-          var payload = lazyComponent._payload;
-          var init = lazyComponent._init;
-
-          try {
-            // Lazy may contain any component type so we recursively resolve it.
-            return describeUnknownElementTypeFrameInDEV(init(payload), source, ownerFn);
-          } catch (x) {}
-        }
-    }
-  }
-
-  return '';
-}
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-var loggedTypeFailures = {};
-var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-
-function setCurrentlyValidatingElement(element) {
-  {
-    if (element) {
-      var owner = element._owner;
-      var stack = describeUnknownElementTypeFrameInDEV(element.type, element._source, owner ? owner.type : null);
-      ReactDebugCurrentFrame.setExtraStackFrame(stack);
-    } else {
-      ReactDebugCurrentFrame.setExtraStackFrame(null);
-    }
-  }
-}
-
-function checkPropTypes(typeSpecs, values, location, componentName, element) {
-  {
-    // $FlowFixMe This is okay but Flow doesn't know it.
-    var has = Function.call.bind(hasOwnProperty);
-
-    for (var typeSpecName in typeSpecs) {
-      if (has(typeSpecs, typeSpecName)) {
-        var error$1 = void 0; // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          if (typeof typeSpecs[typeSpecName] !== 'function') {
-            // eslint-disable-next-line react-internal/prod-error-codes
-            var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
-            err.name = 'Invariant Violation';
-            throw err;
-          }
-
-          error$1 = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED');
-        } catch (ex) {
-          error$1 = ex;
-        }
-
-        if (error$1 && !(error$1 instanceof Error)) {
-          setCurrentlyValidatingElement(element);
-
-          error('%s: type specification of %s' + ' `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error$1);
-
-          setCurrentlyValidatingElement(null);
-        }
-
-        if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error$1.message] = true;
-          setCurrentlyValidatingElement(element);
-
-          error('Failed %s type: %s', location, error$1.message);
-
-          setCurrentlyValidatingElement(null);
-        }
-      }
-    }
-  }
-}
-
-var isArrayImpl = Array.isArray; // eslint-disable-next-line no-redeclare
-
-function isArray(a) {
-  return isArrayImpl(a);
-}
-
-/*
- * The `'' + value` pattern (used in in perf-sensitive code) throws for Symbol
- * and Temporal.* types. See https://github.com/facebook/react/pull/22064.
- *
- * The functions in this module will throw an easier-to-understand,
- * easier-to-debug exception with a clear errors message message explaining the
- * problem. (Instead of a confusing exception thrown inside the implementation
- * of the `value` object).
- */
-// $FlowFixMe only called in DEV, so void return is not possible.
-function typeName(value) {
-  {
-    // toStringTag is needed for namespaced types like Temporal.Instant
-    var hasToStringTag = typeof Symbol === 'function' && Symbol.toStringTag;
-    var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || 'Object';
-    return type;
-  }
-} // $FlowFixMe only called in DEV, so void return is not possible.
-
-
-function willCoercionThrow(value) {
-  {
-    try {
-      testStringCoercion(value);
-      return false;
-    } catch (e) {
-      return true;
-    }
-  }
-}
-
-function testStringCoercion(value) {
-  // If you ended up here by following an exception call stack, here's what's
-  // happened: you supplied an object or symbol value to React (as a prop, key,
-  // DOM attribute, CSS property, string ref, etc.) and when React tried to
-  // coerce it to a string using `'' + value`, an exception was thrown.
-  //
-  // The most common types that will cause this exception are `Symbol` instances
-  // and Temporal objects like `Temporal.Instant`. But any object that has a
-  // `valueOf` or `[Symbol.toPrimitive]` method that throws will also cause this
-  // exception. (Library authors do this to prevent users from using built-in
-  // numeric operators like `+` or comparison operators like `>=` because custom
-  // methods are needed to perform accurate arithmetic or comparison.)
-  //
-  // To fix the problem, coerce this object or symbol value to a string before
-  // passing it to React. The most reliable way is usually `String(value)`.
-  //
-  // To find which value is throwing, check the browser or debugger console.
-  // Before this exception was thrown, there should be `console.error` output
-  // that shows the type (Symbol, Temporal.PlainDate, etc.) that caused the
-  // problem and how that type was used: key, atrribute, input value prop, etc.
-  // In most cases, this console output also shows the component and its
-  // ancestor components where the exception happened.
-  //
-  // eslint-disable-next-line react-internal/safe-string-coercion
-  return '' + value;
-}
-function checkKeyStringCoercion(value) {
-  {
-    if (willCoercionThrow(value)) {
-      error('The provided key is an unsupported type %s.' + ' This value must be coerced to a string before before using it here.', typeName(value));
-
-      return testStringCoercion(value); // throw (to help callers find troubleshooting comments)
-    }
-  }
-}
-
-var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
-var RESERVED_PROPS = {
-  key: true,
-  ref: true,
-  __self: true,
-  __source: true
-};
-var specialPropKeyWarningShown;
-var specialPropRefWarningShown;
-var didWarnAboutStringRefs;
-
-{
-  didWarnAboutStringRefs = {};
-}
-
-function hasValidRef(config) {
-  {
-    if (hasOwnProperty.call(config, 'ref')) {
-      var getter = Object.getOwnPropertyDescriptor(config, 'ref').get;
-
-      if (getter && getter.isReactWarning) {
-        return false;
-      }
-    }
-  }
-
-  return config.ref !== undefined;
-}
-
-function hasValidKey(config) {
-  {
-    if (hasOwnProperty.call(config, 'key')) {
-      var getter = Object.getOwnPropertyDescriptor(config, 'key').get;
-
-      if (getter && getter.isReactWarning) {
-        return false;
-      }
-    }
-  }
-
-  return config.key !== undefined;
-}
-
-function warnIfStringRefCannotBeAutoConverted(config, self) {
-  {
-    if (typeof config.ref === 'string' && ReactCurrentOwner.current && self && ReactCurrentOwner.current.stateNode !== self) {
-      var componentName = getComponentNameFromType(ReactCurrentOwner.current.type);
-
-      if (!didWarnAboutStringRefs[componentName]) {
-        error('Component "%s" contains the string ref "%s". ' + 'Support for string refs will be removed in a future major release. ' + 'This case cannot be automatically converted to an arrow function. ' + 'We ask you to manually fix this case by using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://reactjs.org/link/strict-mode-string-ref', getComponentNameFromType(ReactCurrentOwner.current.type), config.ref);
-
-        didWarnAboutStringRefs[componentName] = true;
-      }
-    }
-  }
-}
-
-function defineKeyPropWarningGetter(props, displayName) {
-  {
-    var warnAboutAccessingKey = function () {
-      if (!specialPropKeyWarningShown) {
-        specialPropKeyWarningShown = true;
-
-        error('%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://reactjs.org/link/special-props)', displayName);
-      }
-    };
-
-    warnAboutAccessingKey.isReactWarning = true;
-    Object.defineProperty(props, 'key', {
-      get: warnAboutAccessingKey,
-      configurable: true
-    });
-  }
-}
-
-function defineRefPropWarningGetter(props, displayName) {
-  {
-    var warnAboutAccessingRef = function () {
-      if (!specialPropRefWarningShown) {
-        specialPropRefWarningShown = true;
-
-        error('%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://reactjs.org/link/special-props)', displayName);
-      }
-    };
-
-    warnAboutAccessingRef.isReactWarning = true;
-    Object.defineProperty(props, 'ref', {
-      get: warnAboutAccessingRef,
-      configurable: true
-    });
-  }
-}
-/**
- * Factory method to create a new React element. This no longer adheres to
- * the class pattern, so do not use new to call it. Also, instanceof check
- * will not work. Instead test $$typeof field against Symbol.for('react.element') to check
- * if something is a React Element.
- *
- * @param {*} type
- * @param {*} props
- * @param {*} key
- * @param {string|object} ref
- * @param {*} owner
- * @param {*} self A *temporary* helper to detect places where `this` is
- * different from the `owner` when React.createElement is called, so that we
- * can warn. We want to get rid of owner and replace string `ref`s with arrow
- * functions, and as long as `this` and owner are the same, there will be no
- * change in behavior.
- * @param {*} source An annotation object (added by a transpiler or otherwise)
- * indicating filename, line number, and/or other information.
- * @internal
- */
-
-
-var ReactElement = function (type, key, ref, self, source, owner, props) {
-  var element = {
-    // This tag allows us to uniquely identify this as a React Element
-    $$typeof: REACT_ELEMENT_TYPE,
-    // Built-in properties that belong on the element
-    type: type,
-    key: key,
-    ref: ref,
-    props: props,
-    // Record the component responsible for creating this element.
-    _owner: owner
-  };
-
-  {
-    // The validation flag is currently mutative. We put it on
-    // an external backing store so that we can freeze the whole object.
-    // This can be replaced with a WeakMap once they are implemented in
-    // commonly used development environments.
-    element._store = {}; // To make comparing ReactElements easier for testing purposes, we make
-    // the validation flag non-enumerable (where possible, which should
-    // include every environment we run tests in), so the test framework
-    // ignores it.
-
-    Object.defineProperty(element._store, 'validated', {
-      configurable: false,
-      enumerable: false,
-      writable: true,
-      value: false
-    }); // self and source are DEV only properties.
-
-    Object.defineProperty(element, '_self', {
-      configurable: false,
-      enumerable: false,
-      writable: false,
-      value: self
-    }); // Two elements created in two different places should be considered
-    // equal for testing purposes and therefore we hide it from enumeration.
-
-    Object.defineProperty(element, '_source', {
-      configurable: false,
-      enumerable: false,
-      writable: false,
-      value: source
-    });
-
-    if (Object.freeze) {
-      Object.freeze(element.props);
-      Object.freeze(element);
-    }
-  }
-
-  return element;
-};
-/**
- * https://github.com/reactjs/rfcs/pull/107
- * @param {*} type
- * @param {object} props
- * @param {string} key
- */
-
-function jsxDEV(type, config, maybeKey, source, self) {
-  {
-    var propName; // Reserved names are extracted
-
-    var props = {};
-    var key = null;
-    var ref = null; // Currently, key can be spread in as a prop. This causes a potential
-    // issue if key is also explicitly declared (ie. <div {...props} key="Hi" />
-    // or <div key="Hi" {...props} /> ). We want to deprecate key spread,
-    // but as an intermediary step, we will use jsxDEV for everything except
-    // <div {...props} key="Hi" />, because we aren't currently able to tell if
-    // key is explicitly declared to be undefined or not.
-
-    if (maybeKey !== undefined) {
-      {
-        checkKeyStringCoercion(maybeKey);
-      }
-
-      key = '' + maybeKey;
-    }
-
-    if (hasValidKey(config)) {
-      {
-        checkKeyStringCoercion(config.key);
-      }
-
-      key = '' + config.key;
-    }
-
-    if (hasValidRef(config)) {
-      ref = config.ref;
-      warnIfStringRefCannotBeAutoConverted(config, self);
-    } // Remaining properties are added to a new props object
-
-
-    for (propName in config) {
-      if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-        props[propName] = config[propName];
-      }
-    } // Resolve default props
-
-
-    if (type && type.defaultProps) {
-      var defaultProps = type.defaultProps;
-
-      for (propName in defaultProps) {
-        if (props[propName] === undefined) {
-          props[propName] = defaultProps[propName];
-        }
-      }
-    }
-
-    if (key || ref) {
-      var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
-
-      if (key) {
-        defineKeyPropWarningGetter(props, displayName);
-      }
-
-      if (ref) {
-        defineRefPropWarningGetter(props, displayName);
-      }
-    }
-
-    return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
-  }
-}
-
-var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
-var ReactDebugCurrentFrame$1 = ReactSharedInternals.ReactDebugCurrentFrame;
-
-function setCurrentlyValidatingElement$1(element) {
-  {
-    if (element) {
-      var owner = element._owner;
-      var stack = describeUnknownElementTypeFrameInDEV(element.type, element._source, owner ? owner.type : null);
-      ReactDebugCurrentFrame$1.setExtraStackFrame(stack);
-    } else {
-      ReactDebugCurrentFrame$1.setExtraStackFrame(null);
-    }
-  }
-}
-
-var propTypesMisspellWarningShown;
-
-{
-  propTypesMisspellWarningShown = false;
-}
-/**
- * Verifies the object is a ReactElement.
- * See https://reactjs.org/docs/react-api.html#isvalidelement
- * @param {?object} object
- * @return {boolean} True if `object` is a ReactElement.
- * @final
- */
-
-
-function isValidElement(object) {
-  {
-    return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-  }
-}
-
-function getDeclarationErrorAddendum() {
-  {
-    if (ReactCurrentOwner$1.current) {
-      var name = getComponentNameFromType(ReactCurrentOwner$1.current.type);
-
-      if (name) {
-        return '\n\nCheck the render method of `' + name + '`.';
-      }
-    }
-
-    return '';
-  }
-}
-
-function getSourceInfoErrorAddendum(source) {
-  {
-    if (source !== undefined) {
-      var fileName = source.fileName.replace(/^.*[\\\/]/, '');
-      var lineNumber = source.lineNumber;
-      return '\n\nCheck your code at ' + fileName + ':' + lineNumber + '.';
-    }
-
-    return '';
-  }
-}
-/**
- * Warn if there's no key explicitly set on dynamic arrays of children or
- * object keys are not valid. This allows us to keep track of children between
- * updates.
- */
-
-
-var ownerHasKeyUseWarning = {};
-
-function getCurrentComponentErrorInfo(parentType) {
-  {
-    var info = getDeclarationErrorAddendum();
-
-    if (!info) {
-      var parentName = typeof parentType === 'string' ? parentType : parentType.displayName || parentType.name;
-
-      if (parentName) {
-        info = "\n\nCheck the top-level render call using <" + parentName + ">.";
-      }
-    }
-
-    return info;
-  }
-}
-/**
- * Warn if the element doesn't have an explicit key assigned to it.
- * This element is in an array. The array could grow and shrink or be
- * reordered. All children that haven't already been validated are required to
- * have a "key" property assigned to it. Error statuses are cached so a warning
- * will only be shown once.
- *
- * @internal
- * @param {ReactElement} element Element that requires a key.
- * @param {*} parentType element's parent's type.
- */
-
-
-function validateExplicitKey(element, parentType) {
-  {
-    if (!element._store || element._store.validated || element.key != null) {
-      return;
-    }
-
-    element._store.validated = true;
-    var currentComponentErrorInfo = getCurrentComponentErrorInfo(parentType);
-
-    if (ownerHasKeyUseWarning[currentComponentErrorInfo]) {
-      return;
-    }
-
-    ownerHasKeyUseWarning[currentComponentErrorInfo] = true; // Usually the current owner is the offender, but if it accepts children as a
-    // property, it may be the creator of the child that's responsible for
-    // assigning it a key.
-
-    var childOwner = '';
-
-    if (element && element._owner && element._owner !== ReactCurrentOwner$1.current) {
-      // Give the component that originally created this child.
-      childOwner = " It was passed a child from " + getComponentNameFromType(element._owner.type) + ".";
-    }
-
-    setCurrentlyValidatingElement$1(element);
-
-    error('Each child in a list should have a unique "key" prop.' + '%s%s See https://reactjs.org/link/warning-keys for more information.', currentComponentErrorInfo, childOwner);
-
-    setCurrentlyValidatingElement$1(null);
-  }
-}
-/**
- * Ensure that every element either is passed in a static location, in an
- * array with an explicit keys property defined, or in an object literal
- * with valid key property.
- *
- * @internal
- * @param {ReactNode} node Statically passed child of any type.
- * @param {*} parentType node's parent's type.
- */
-
-
-function validateChildKeys(node, parentType) {
-  {
-    if (typeof node !== 'object') {
-      return;
-    }
-
-    if (isArray(node)) {
-      for (var i = 0; i < node.length; i++) {
-        var child = node[i];
-
-        if (isValidElement(child)) {
-          validateExplicitKey(child, parentType);
-        }
-      }
-    } else if (isValidElement(node)) {
-      // This element was passed in a valid location.
-      if (node._store) {
-        node._store.validated = true;
-      }
-    } else if (node) {
-      var iteratorFn = getIteratorFn(node);
-
-      if (typeof iteratorFn === 'function') {
-        // Entry iterators used to provide implicit keys,
-        // but now we print a separate warning for them later.
-        if (iteratorFn !== node.entries) {
-          var iterator = iteratorFn.call(node);
-          var step;
-
-          while (!(step = iterator.next()).done) {
-            if (isValidElement(step.value)) {
-              validateExplicitKey(step.value, parentType);
-            }
-          }
-        }
-      }
-    }
-  }
-}
-/**
- * Given an element, validate that its props follow the propTypes definition,
- * provided by the type.
- *
- * @param {ReactElement} element
- */
-
-
-function validatePropTypes(element) {
-  {
-    var type = element.type;
-
-    if (type === null || type === undefined || typeof type === 'string') {
-      return;
-    }
-
-    var propTypes;
-
-    if (typeof type === 'function') {
-      propTypes = type.propTypes;
-    } else if (typeof type === 'object' && (type.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
-    // Inner props are checked in the reconciler.
-    type.$$typeof === REACT_MEMO_TYPE)) {
-      propTypes = type.propTypes;
-    } else {
-      return;
-    }
-
-    if (propTypes) {
-      // Intentionally inside to avoid triggering lazy initializers:
-      var name = getComponentNameFromType(type);
-      checkPropTypes(propTypes, element.props, 'prop', name, element);
-    } else if (type.PropTypes !== undefined && !propTypesMisspellWarningShown) {
-      propTypesMisspellWarningShown = true; // Intentionally inside to avoid triggering lazy initializers:
-
-      var _name = getComponentNameFromType(type);
-
-      error('Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', _name || 'Unknown');
-    }
-
-    if (typeof type.getDefaultProps === 'function' && !type.getDefaultProps.isReactClassApproved) {
-      error('getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
-    }
-  }
-}
-/**
- * Given a fragment, validate that it can only be provided with fragment props
- * @param {ReactElement} fragment
- */
-
-
-function validateFragmentProps(fragment) {
-  {
-    var keys = Object.keys(fragment.props);
-
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-
-      if (key !== 'children' && key !== 'key') {
-        setCurrentlyValidatingElement$1(fragment);
-
-        error('Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.', key);
-
-        setCurrentlyValidatingElement$1(null);
-        break;
-      }
-    }
-
-    if (fragment.ref !== null) {
-      setCurrentlyValidatingElement$1(fragment);
-
-      error('Invalid attribute `ref` supplied to `React.Fragment`.');
-
-      setCurrentlyValidatingElement$1(null);
-    }
-  }
-}
-
-function jsxWithValidation(type, props, key, isStaticChildren, source, self) {
-  {
-    var validType = isValidElementType(type); // We warn in this case but don't throw. We expect the element creation to
-    // succeed and there will likely be errors in render.
-
-    if (!validType) {
-      var info = '';
-
-      if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
-        info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and named imports.";
-      }
-
-      var sourceInfo = getSourceInfoErrorAddendum(source);
-
-      if (sourceInfo) {
-        info += sourceInfo;
-      } else {
-        info += getDeclarationErrorAddendum();
-      }
-
-      var typeString;
-
-      if (type === null) {
-        typeString = 'null';
-      } else if (isArray(type)) {
-        typeString = 'array';
-      } else if (type !== undefined && type.$$typeof === REACT_ELEMENT_TYPE) {
-        typeString = "<" + (getComponentNameFromType(type.type) || 'Unknown') + " />";
-        info = ' Did you accidentally export a JSX literal instead of a component?';
-      } else {
-        typeString = typeof type;
-      }
-
-      error('React.jsx: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', typeString, info);
-    }
-
-    var element = jsxDEV(type, props, key, source, self); // The result can be nullish if a mock or a custom function is used.
-    // TODO: Drop this when these are no longer allowed as the type argument.
-
-    if (element == null) {
-      return element;
-    } // Skip key warning if the type isn't valid since our key validation logic
-    // doesn't expect a non-string/function type and can throw confusing errors.
-    // We don't want exception behavior to differ between dev and prod.
-    // (Rendering will throw with a helpful message and as soon as the type is
-    // fixed, the key warnings will appear.)
-
-
-    if (validType) {
-      var children = props.children;
-
-      if (children !== undefined) {
-        if (isStaticChildren) {
-          if (isArray(children)) {
-            for (var i = 0; i < children.length; i++) {
-              validateChildKeys(children[i], type);
-            }
-
-            if (Object.freeze) {
-              Object.freeze(children);
-            }
-          } else {
-            error('React.jsx: Static children should always be an array. ' + 'You are likely explicitly calling React.jsxs or React.jsxDEV. ' + 'Use the Babel transform instead.');
-          }
-        } else {
-          validateChildKeys(children, type);
-        }
-      }
-    }
-
-    if (type === REACT_FRAGMENT_TYPE) {
-      validateFragmentProps(element);
-    } else {
-      validatePropTypes(element);
-    }
-
-    return element;
-  }
-} // These two functions exist to still get child warnings in dev
-// even with the prod transform. This means that jsxDEV is purely
-// opt-in behavior for better messages but that we won't stop
-// giving you warnings if you use production apis.
-
-function jsxWithValidationStatic(type, props, key) {
-  {
-    return jsxWithValidation(type, props, key, true);
-  }
-}
-function jsxWithValidationDynamic(type, props, key) {
-  {
-    return jsxWithValidation(type, props, key, false);
-  }
-}
-
-var jsx =  jsxWithValidationDynamic ; // we may want to special case jsxs internally to take advantage of static children.
-// for now we can ship identical prod functions
-
-var jsxs =  jsxWithValidationStatic ;
-
-exports.Fragment = REACT_FRAGMENT_TYPE;
-exports.jsx = jsx;
-exports.jsxs = jsxs;
-  })();
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/react/jsx-runtime.js":
-/*!*******************************************!*\
-  !*** ./node_modules/react/jsx-runtime.js ***!
-  \*******************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-if (false) // removed by dead control flow
-{} else {
-  module.exports = __webpack_require__(/*! ./cjs/react-jsx-runtime.development.js */ "./node_modules/react/cjs/react-jsx-runtime.development.js");
-}
-
-
-/***/ }),
-
 /***/ "./src/admin/App.js":
 /*!**************************!*\
   !*** ./src/admin/App.js ***!
@@ -22360,7 +20782,6 @@ var form_fields = {
 };
 var design = {
   modal: {
-    layout_type: 'popup',
     modal_background: {
       type: "image",
       // 'color' | 'gradient' | 'image'
@@ -22377,6 +20798,30 @@ var design = {
         repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
       }
     },
+    modal_border: {
+      width: {
+        top: 1,
+        right: 1,
+        bottom: 1,
+        left: 1
+      },
+      style: "solid",
+      color: "#000000",
+      radius: {
+        topLeft: 6,
+        topRight: 6,
+        bottomRight: 6,
+        bottomLeft: 6
+      }
+    },
+    modal_padding: {
+      top: 10,
+      left: 10,
+      right: 10,
+      bottom: 10
+    }
+  },
+  form: {
     form_background: {
       type: "image",
       // 'color' | 'gradient' | 'image'
@@ -22408,6 +20853,12 @@ var design = {
         bottomRight: 6,
         bottomLeft: 6
       }
+    },
+    form_padding: {
+      top: 10,
+      left: 10,
+      right: 10,
+      bottom: 10
     }
   }
 };
@@ -22981,175 +21432,6 @@ var App = function App() {
 
 /***/ }),
 
-/***/ "./src/admin/components/accordion-section.js":
-/*!***************************************************!*\
-  !*** ./src/admin/components/accordion-section.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-// File: AccordionSection.js
-
-
-
-var AccordionSection = function AccordionSection(_ref) {
-  var title = _ref.title,
-    children = _ref.children,
-    _ref$defaultOpen = _ref.defaultOpen,
-    defaultOpen = _ref$defaultOpen === void 0 ? false : _ref$defaultOpen;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultOpen),
-    _useState2 = _slicedToArray(_useState, 2),
-    open = _useState2[0],
-    setOpen = _useState2[1];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "th-accordion-section ".concat(open ? "open" : "")
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "accordion-header",
-    onClick: function onClick() {
-      return setOpen(!open);
-    }
-  }, /*#__PURE__*/React.createElement("span", null, title), /*#__PURE__*/React.createElement("span", {
-    className: "accordion-icon rotated"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
-    icon: "chevron-down"
-  }))), open && /*#__PURE__*/React.createElement("div", {
-    className: "accordion-body"
-  }, children));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccordionSection);
-
-/***/ }),
-
-/***/ "./src/admin/components/border-box-control.js":
-/*!****************************************************!*\
-  !*** ./src/admin/components/border-box-control.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   BorderBoxControl: () => (/* binding */ BorderBoxControl)
-/* harmony export */ });
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/grid.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-
- // Any icon, can change to 'fullscreen', 'block-table', etc.
-
-var BorderBoxControl = function BorderBoxControl(_ref) {
-  var _values$top, _values$right, _values$bottom, _values$left;
-  var label = _ref.label,
-    _ref$values = _ref.values,
-    values = _ref$values === void 0 ? {} : _ref$values,
-    onChange = _ref.onChange;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    syncAll = _useState2[0],
-    setSyncAll = _useState2[1];
-  var handleChange = function handleChange(side, value) {
-    var cleanValue = parseInt(value) || 0;
-    if (syncAll) {
-      onChange({
-        top: cleanValue,
-        right: cleanValue,
-        bottom: cleanValue,
-        left: cleanValue
-      });
-    } else {
-      onChange(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, side, cleanValue)));
-    }
-  };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "th-border-inline-box"
-  }, label && /*#__PURE__*/React.createElement("label", {
-    className: "th-label"
-  }, label), /*#__PURE__*/React.createElement("div", {
-    className: "th-border-row"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    value: (_values$top = values.top) !== null && _values$top !== void 0 ? _values$top : 0,
-    type: "number",
-    onChange: function onChange(val) {
-      return handleChange('top', val);
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    value: (_values$right = values.right) !== null && _values$right !== void 0 ? _values$right : 0,
-    type: "number",
-    onChange: function onChange(val) {
-      return handleChange('right', val);
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    value: (_values$bottom = values.bottom) !== null && _values$bottom !== void 0 ? _values$bottom : 0,
-    type: "number",
-    onChange: function onChange(val) {
-      return handleChange('bottom', val);
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    value: (_values$left = values.left) !== null && _values$left !== void 0 ? _values$left : 0,
-    type: "number",
-    onChange: function onChange(val) {
-      return handleChange('left', val);
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.Tooltip, {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Apply same to all sides', 'th-login')
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.IconButton, {
-    icon: /*#__PURE__*/React.createElement(_wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"]
-    }),
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Apply to all sides', 'th-login'),
-    isPressed: syncAll,
-    onClick: function onClick() {
-      return setSyncAll(!syncAll);
-    }
-  }))));
-};
-
-/***/ }),
-
 /***/ "./src/admin/components/custom-select-control.js":
 /*!*******************************************************!*\
   !*** ./src/admin/components/custom-select-control.js ***!
@@ -23302,6 +21584,798 @@ var CustomSelectControl = function CustomSelectControl(_ref) {
 
 /***/ }),
 
+/***/ "./src/admin/components/design-editor/accordion-section.js":
+/*!*****************************************************************!*\
+  !*** ./src/admin/components/design-editor/accordion-section.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+// File: AccordionSection.js
+
+
+
+var AccordionSection = function AccordionSection(_ref) {
+  var title = _ref.title,
+    children = _ref.children,
+    _ref$defaultOpen = _ref.defaultOpen,
+    defaultOpen = _ref$defaultOpen === void 0 ? false : _ref$defaultOpen;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultOpen),
+    _useState2 = _slicedToArray(_useState, 2),
+    open = _useState2[0],
+    setOpen = _useState2[1];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "th-accordion-section ".concat(open ? "open" : "")
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "accordion-header",
+    onClick: function onClick() {
+      return setOpen(!open);
+    }
+  }, /*#__PURE__*/React.createElement("span", null, title), /*#__PURE__*/React.createElement("span", {
+    className: "accordion-icon rotated"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
+    icon: "chevron-down"
+  }))), open && /*#__PURE__*/React.createElement("div", {
+    className: "accordion-body"
+  }, children));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AccordionSection);
+
+/***/ }),
+
+/***/ "./src/admin/components/design-editor/background-panel.js":
+/*!****************************************************************!*\
+  !*** ./src/admin/components/design-editor/background-panel.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../custom-select-control */ "./src/admin/components/custom-select-control.js");
+/* harmony import */ var _accordion_section__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./accordion-section */ "./src/admin/components/design-editor/accordion-section.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+
+
+
+
+
+var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
+  var _background$opacity;
+  var title = _ref.title,
+    _ref$background = _ref.background,
+    background = _ref$background === void 0 ? {} : _ref$background,
+    _ref$path = _ref.path,
+    path = _ref$path === void 0 ? [] : _ref$path,
+    handleSettingChange = _ref.handleSettingChange;
+  var type = background.type || "color";
+  var color = background.color || "#ffffff";
+  var gradient = background.gradient || "";
+  var image = background.image || {};
+  var imageURL = image.url || "";
+  var position = image.position || "center center";
+  var size = image.size || "cover";
+  var repeat = image.repeat || "no-repeat";
+  var opacity = (_background$opacity = background.opacity) !== null && _background$opacity !== void 0 ? _background$opacity : 1;
+  return /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: title,
+    defaultOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
+    __nextHasNoMarginBottom: true,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Type", "th-login"),
+    value: type,
+    isBlock: true,
+    onChange: function onChange(newType) {
+      handleSettingChange("design", [].concat(_toConsumableArray(path), ["type"]), newType);
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+    value: "color",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "th-login")
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+    value: "gradient",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "th-login")
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+    value: "image",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image", "th-login")
+  })), type === "color" && /*#__PURE__*/React.createElement("div", {
+    className: "background-color-picker"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: color,
+    onChangeComplete: function onChangeComplete(value) {
+      handleSettingChange("design", [].concat(_toConsumableArray(path), ["color"]), value.hex);
+    },
+    disableAlpha: false
+  })), type === "gradient" && /*#__PURE__*/React.createElement("div", {
+    className: "background-gradient-picker"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.GradientPicker, {
+    value: gradient,
+    onChange: function onChange(value) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["gradient"]), value);
+    },
+    gradients: [{
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "th-login"),
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      slug: "default"
+    }, {
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ocean Blue", "th-login"),
+      gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
+      slug: "ocean-blue"
+    }]
+  })), type === "image" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "image-url-input"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image URL", "th-login"),
+    value: imageURL,
+    onChange: function onChange(val) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "url"]), val);
+    },
+    placeholder: "https://example.com/image.jpg"
+  })), imageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: "10px"
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: imageURL,
+    alt: "Preview",
+    style: {
+      width: "100%",
+      height: "auto",
+      borderRadius: "6px",
+      border: "1px solid #ccc",
+      objectFit: "cover"
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-login-media-image"
+  }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Position", "th-login"),
+    value: position,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Left", "th-login"),
+      value: "top left"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Center", "th-login"),
+      value: "top center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Right", "th-login"),
+      value: "top right"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Left", "th-login"),
+      value: "center left"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Center", "th-login"),
+      value: "center center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Right", "th-login"),
+      value: "center right"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Left", "th-login"),
+      value: "bottom left"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Center", "th-login"),
+      value: "bottom center"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Right", "th-login"),
+      value: "bottom right"
+    }],
+    onChange: function onChange(val) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "position"]), val);
+    }
+  }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Size", "th-login"),
+    value: size,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cover", "th-login"),
+      value: "cover"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contain", "th-login"),
+      value: "contain"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto", "th-login"),
+      value: "auto"
+    }],
+    onChange: function onChange(val) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "size"]), val);
+    }
+  }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "th-login"),
+    value: repeat,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No Repeat", "th-login"),
+      value: "no-repeat"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "th-login"),
+      value: "repeat"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat X", "th-login"),
+      value: "repeat-x"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat Y", "th-login"),
+      value: "repeat-y"
+    }],
+    onChange: function onChange(val) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "repeat"]), val);
+    }
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "background-opacity-slider",
+    style: {
+      marginTop: "16px"
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Opacity", "th-login"),
+    value: opacity,
+    onChange: function onChange(val) {
+      handleSettingChange("design", [].concat(_toConsumableArray(path), ["opacity"]), val);
+    },
+    min: 0,
+    max: 1,
+    step: 0.1,
+    withInputField: true
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BackgroundSettingsPanel);
+
+/***/ }),
+
+/***/ "./src/admin/components/design-editor/border-box-control.js":
+/*!******************************************************************!*\
+  !*** ./src/admin/components/design-editor/border-box-control.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   BorderBoxControl: () => (/* binding */ BorderBoxControl)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+var BorderBoxControl = function BorderBoxControl(_ref) {
+  var label = _ref.label,
+    _ref$values = _ref.values,
+    values = _ref$values === void 0 ? {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
+    } : _ref$values,
+    onChange = _ref.onChange,
+    _ref$min = _ref.min,
+    min = _ref$min === void 0 ? 0 : _ref$min,
+    _ref$max = _ref.max,
+    max = _ref$max === void 0 ? 100 : _ref$max;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    syncAll = _useState2[0],
+    setSyncAll = _useState2[1];
+  var handleChange = function handleChange(side, value) {
+    var cleanValue = parseInt(value, 10) || 0;
+    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    if (syncAll) {
+      onChange({
+        top: cleanValue,
+        right: cleanValue,
+        bottom: cleanValue,
+        left: cleanValue
+      });
+    } else {
+      onChange(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, side, cleanValue)));
+    }
+  };
+  var toggleSync = function toggleSync() {
+    var newSyncState = !syncAll;
+    setSyncAll(newSyncState);
+    if (newSyncState) {
+      onChange({
+        top: values.top || 0,
+        right: values.top || 0,
+        bottom: values.top || 0,
+        left: values.top || 0
+      });
+    }
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control"
+  }, label && /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__header"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-border-box-control__label"
+  }, label), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.Button, {
+    className: "components-border-box-control__sync-button",
+    isSmall: true,
+    icon: syncAll ? 'admin-links' : 'editor-unlink',
+    onClick: toggleSync,
+    "aria-pressed": syncAll,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'th-login'),
+    showTooltip: true
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.top,
+    onChange: function onChange(val) {
+      return handleChange('top', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.right,
+    onChange: function onChange(val) {
+      return handleChange('right', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.bottom,
+    onChange: function onChange(val) {
+      return handleChange('bottom', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.left,
+    onChange: function onChange(val) {
+      return handleChange('left', val);
+    }
+  }))));
+};
+
+/***/ }),
+
+/***/ "./src/admin/components/design-editor/border-radius-control.js":
+/*!*********************************************************************!*\
+  !*** ./src/admin/components/design-editor/border-radius-control.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   BorderRadiusControl: () => (/* binding */ BorderRadiusControl)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+var BorderRadiusControl = function BorderRadiusControl(_ref) {
+  var label = _ref.label,
+    _ref$values = _ref.values,
+    values = _ref$values === void 0 ? {
+      topLeft: 0,
+      topRight: 0,
+      bottomRight: 0,
+      bottomLeft: 0
+    } : _ref$values,
+    onChange = _ref.onChange,
+    _ref$min = _ref.min,
+    min = _ref$min === void 0 ? 0 : _ref$min,
+    _ref$max = _ref.max,
+    max = _ref$max === void 0 ? 100 : _ref$max;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    syncAll = _useState2[0],
+    setSyncAll = _useState2[1];
+  var handleChange = function handleChange(corner, value) {
+    var cleanValue = parseInt(value, 10) || 0;
+    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    if (syncAll) {
+      onChange({
+        topLeft: cleanValue,
+        topRight: cleanValue,
+        bottomRight: cleanValue,
+        bottomLeft: cleanValue
+      });
+    } else {
+      onChange(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, corner, cleanValue)));
+    }
+  };
+  var toggleSync = function toggleSync() {
+    var newSyncState = !syncAll;
+    setSyncAll(newSyncState);
+    if (newSyncState) {
+      onChange({
+        topLeft: values.topLeft || 0,
+        topRight: values.topLeft || 0,
+        bottomRight: values.topLeft || 0,
+        bottomLeft: values.topLeft || 0
+      });
+    }
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control"
+  }, label && /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__header"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-border-box-control__label"
+  }, label), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.Button, {
+    className: "components-border-box-control__sync-button",
+    isSmall: true,
+    icon: syncAll ? 'admin-links' : 'editor-unlink',
+    onClick: toggleSync,
+    "aria-pressed": syncAll,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'th-login'),
+    showTooltip: true
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top Left', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.topLeft,
+    onChange: function onChange(val) {
+      return handleChange('topLeft', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top Right', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.topRight,
+    onChange: function onChange(val) {
+      return handleChange('topRight', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom Right', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.bottomRight,
+    onChange: function onChange(val) {
+      return handleChange('bottomRight', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom Left', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: values.bottomLeft,
+    onChange: function onChange(val) {
+      return handleChange('bottomLeft', val);
+    }
+  }))));
+};
+
+/***/ }),
+
+/***/ "./src/admin/components/design-editor/border-settings-panel.js":
+/*!*********************************************************************!*\
+  !*** ./src/admin/components/design-editor/border-settings-panel.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _accordion_section__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./accordion-section */ "./src/admin/components/design-editor/accordion-section.js");
+/* harmony import */ var _border_box_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./border-box-control */ "./src/admin/components/design-editor/border-box-control.js");
+/* harmony import */ var _border_radius_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./border-radius-control */ "./src/admin/components/design-editor/border-radius-control.js");
+/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../custom-select-control */ "./src/admin/components/custom-select-control.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+
+
+
+
+
+
+var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
+  var title = _ref.title,
+    _ref$border = _ref.border,
+    border = _ref$border === void 0 ? {} : _ref$border,
+    _ref$path = _ref.path,
+    path = _ref$path === void 0 ? [] : _ref$path,
+    handleSettingChange = _ref.handleSettingChange;
+  var width = border.width || {};
+  var style = border.style || "solid";
+  var color = border.color || "#000000";
+  var radius = border.radius || {};
+  return /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    title: title,
+    defaultOpen: false
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-login-border-controls"
+  }, /*#__PURE__*/React.createElement(_border_box_control__WEBPACK_IMPORTED_MODULE_3__.BorderBoxControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "th-login"),
+    values: width,
+    onChange: function onChange(newVal) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["width"]), newVal);
+    },
+    min: 0,
+    max: 20
+  })), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_5__.CustomSelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Style", "th-login"),
+    value: style,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "th-login"),
+      value: "solid"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "th-login"),
+      value: "dashed"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "th-login"),
+      value: "dotted"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "th-login"),
+      value: "double"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "th-login"),
+      value: "none"
+    }],
+    className: "modern-border-select-control",
+    onChange: function onChange(val) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["style"]), val);
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "background-color-picker"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: color,
+    onChangeComplete: function onChangeComplete(value) {
+      handleSettingChange("design", [].concat(_toConsumableArray(path), ["color"]), value.hex);
+    },
+    disableAlpha: false
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-login-border-controls"
+  }, /*#__PURE__*/React.createElement(_border_radius_control__WEBPACK_IMPORTED_MODULE_4__.BorderRadiusControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius", "th-login"),
+    values: radius,
+    onChange: function onChange(newVal) {
+      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["radius"]), newVal);
+    },
+    min: 0,
+    max: 20
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BorderSettingsPanel);
+
+/***/ }),
+
+/***/ "./src/admin/components/design-editor/padding-settings-panel.js":
+/*!**********************************************************************!*\
+  !*** ./src/admin/components/design-editor/padding-settings-panel.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PaddingSettingsPanel: () => (/* binding */ PaddingSettingsPanel)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _accordion_section__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./accordion-section */ "./src/admin/components/design-editor/accordion-section.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+var PaddingSettingsPanel = function PaddingSettingsPanel(_ref) {
+  var title = _ref.title,
+    _ref$padding = _ref.padding,
+    padding = _ref$padding === void 0 ? {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
+    } : _ref$padding,
+    path = _ref.path,
+    handleSettingChange = _ref.handleSettingChange,
+    _ref$min = _ref.min,
+    min = _ref$min === void 0 ? 0 : _ref$min,
+    _ref$max = _ref.max,
+    max = _ref$max === void 0 ? 100 : _ref$max;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    syncAll = _useState2[0],
+    setSyncAll = _useState2[1];
+  var handlePaddingChange = function handlePaddingChange(side, value) {
+    var cleanValue = parseInt(value, 10) || 0;
+    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    if (syncAll) {
+      var newPadding = {
+        top: cleanValue,
+        right: cleanValue,
+        bottom: cleanValue,
+        left: cleanValue
+      };
+      handleSettingChange('design', _toConsumableArray(path), newPadding);
+    } else {
+      handleSettingChange('design', [].concat(_toConsumableArray(path), [side]), cleanValue);
+    }
+  };
+  var toggleSync = function toggleSync() {
+    var newSyncState = !syncAll;
+    setSyncAll(newSyncState);
+    if (newSyncState) {
+      // When enabling sync, set all sides to top value
+      handleSettingChange('design', _toConsumableArray(path), {
+        top: padding.top || 0,
+        right: padding.top || 0,
+        bottom: padding.top || 0,
+        left: padding.top || 0
+      });
+    }
+  };
+  return /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: title,
+    defaultOpen: false
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__header"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-border-box-control__label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Padding Settings', 'th-login')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.Button, {
+    className: "components-border-box-control__sync-button",
+    isSmall: true,
+    icon: syncAll ? 'admin-links' : 'editor-unlink',
+    onClick: toggleSync,
+    "aria-pressed": syncAll,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'th-login'),
+    showTooltip: true
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: padding.top || 0,
+    onChange: function onChange(val) {
+      return handlePaddingChange('top', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: padding.right || 0,
+    onChange: function onChange(val) {
+      return handlePaddingChange('right', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: padding.bottom || 0,
+    onChange: function onChange(val) {
+      return handlePaddingChange('bottom', val);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "components-border-box-control__input-container"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'th-login'),
+    type: "number",
+    min: min,
+    max: max,
+    value: padding.left || 0,
+    onChange: function onChange(val) {
+      return handlePaddingChange('left', val);
+    }
+  })))));
+};
+
+/***/ }),
+
 /***/ "./src/admin/components/design-settings.js":
 /*!*************************************************!*\
   !*** ./src/admin/components/design-settings.js ***!
@@ -23319,9 +22393,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _accordion_section__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./accordion-section */ "./src/admin/components/accordion-section.js");
-/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./custom-select-control */ "./src/admin/components/custom-select-control.js");
-/* harmony import */ var _border_box_control__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./border-box-control */ "./src/admin/components/border-box-control.js");
+/* harmony import */ var _design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./design-editor/accordion-section */ "./src/admin/components/design-editor/accordion-section.js");
+/* harmony import */ var _design_editor_background_panel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./design-editor/background-panel */ "./src/admin/components/design-editor/background-panel.js");
+/* harmony import */ var _design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./design-editor/border-settings-panel */ "./src/admin/components/design-editor/border-settings-panel.js");
+/* harmony import */ var _design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./design-editor/padding-settings-panel */ "./src/admin/components/design-editor/padding-settings-panel.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -23335,9 +22416,16 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-
-
-
+var tabs = [{
+  key: "login",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login")
+}, {
+  key: "register",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login")
+}, {
+  key: "forgot",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot", "th-login")
+}];
 var DesignEditor = function DesignEditor(_ref) {
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
@@ -23345,83 +22433,36 @@ var DesignEditor = function DesignEditor(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     activeForm = _useState2[0],
     setActiveForm = _useState2[1];
-  var background = settings.design.modal.modal_background || {};
-  var bgType = background.type || "color";
-  var bgColor = background.color || "#ffffff";
-  var bgGradient = background.gradient || "";
-  var bgImage = background.image || {};
-  var imageURL = bgImage.url || "";
-  var position = bgImage.position || "center center";
-  var size = bgImage.size || "cover";
-  var repeat = bgImage.repeat || "no-repeat";
-  var formBackground = settings.design.modal.form_background || {};
-  var formBgType = formBackground.type || "color";
-  var formBgColor = formBackground.color || "#ffffff";
-  var formBgGradient = formBackground.gradient || "";
-  var formBgImage = formBackground.image || {};
-  var formImageURL = formBgImage.url || "";
-  var formPosition = formBgImage.position || "center center";
-  var formSize = formBgImage.size || "cover";
-  var formRepeat = formBgImage.repeat || "no-repeat";
-  var getFormBackgroundStyle = function getFormBackgroundStyle() {
-    var _base$image;
-    var base = settings.design.modal.form_background || {};
-    var type = base.type || "color";
+  var getBackgroundStyle = function getBackgroundStyle(background) {
+    var _background$image;
+    var type = (background === null || background === void 0 ? void 0 : background.type) || "color";
     if (type === "gradient") {
       return {
-        backgroundImage: base.gradient,
+        backgroundImage: background.gradient,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        opacity: base.opacity
+        opacity: background.opacity
       };
-    } else if (type === "image" && (_base$image = base.image) !== null && _base$image !== void 0 && _base$image.url) {
+    } else if (type === "image" && (_background$image = background.image) !== null && _background$image !== void 0 && _background$image.url) {
       return {
-        backgroundImage: "url(".concat(base.image.url, ")"),
-        backgroundSize: base.image.size || "cover",
-        backgroundRepeat: base.image.repeat || "no-repeat",
-        backgroundPosition: base.image.position || "center center",
-        opacity: base.opacity
+        backgroundImage: "url(".concat(background.image.url, ")"),
+        backgroundSize: background.image.size || "cover",
+        backgroundRepeat: background.image.repeat || "no-repeat",
+        backgroundPosition: background.image.position || "center center",
+        opacity: background.opacity
       };
     } else {
       return {
-        backgroundColor: base.color || "#ffffff",
-        opacity: base.opacity
+        backgroundColor: background.color || "#ffffff",
+        opacity: background.opacity
       };
     }
   };
-  var getModalBackgroundStyle = function getModalBackgroundStyle() {
-    var _base$image2;
-    var base = settings.design.modal.modal_background || {};
-    var type = base.type || "color";
-    if (type === "gradient") {
-      return {
-        backgroundImage: base.gradient,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        opacity: base.opacity
-      };
-    } else if (type === "image" && (_base$image2 = base.image) !== null && _base$image2 !== void 0 && _base$image2.url) {
-      return {
-        backgroundImage: "url(".concat(base.image.url, ")"),
-        backgroundSize: base.image.size || "cover",
-        backgroundRepeat: base.image.repeat || "no-repeat",
-        backgroundPosition: base.image.position || "center center",
-        opacity: base.opacity
-      };
-    } else {
-      return {
-        backgroundColor: base.color || "#ffffff",
-        opacity: base.opacity
-      };
-    }
-  };
-  var getFormBorderStyle = function getFormBorderStyle() {
+  var getBorderStyle = function getBorderStyle(border) {
     var _width$top, _width$right, _width$bottom, _width$left, _radius$topLeft, _radius$topRight, _radius$bottomRight, _radius$bottomLeft;
-    var border = settings.design.modal.form_border || {};
-    var width = border.width || {};
-    var radius = border.radius || {};
+    var width = (border === null || border === void 0 ? void 0 : border.width) || {};
+    var radius = (border === null || border === void 0 ? void 0 : border.radius) || {};
     return {
       borderTopWidth: "".concat((_width$top = width.top) !== null && _width$top !== void 0 ? _width$top : 0, "px"),
       borderRightWidth: "".concat((_width$right = width.right) !== null && _width$right !== void 0 ? _width$right : 0, "px"),
@@ -23436,13 +22477,35 @@ var DesignEditor = function DesignEditor(_ref) {
       borderWidth: "1px"
     };
   };
+  var getPaddingStyle = function getPaddingStyle(padding) {
+    var _pad$top, _pad$right, _pad$bottom, _pad$left;
+    var pad = padding || {};
+    return {
+      paddingTop: "".concat((_pad$top = pad.top) !== null && _pad$top !== void 0 ? _pad$top : 0, "px"),
+      paddingRight: "".concat((_pad$right = pad.right) !== null && _pad$right !== void 0 ? _pad$right : 0, "px"),
+      paddingBottom: "".concat((_pad$bottom = pad.bottom) !== null && _pad$bottom !== void 0 ? _pad$bottom : 0, "px"),
+      paddingLeft: "".concat((_pad$left = pad.left) !== null && _pad$left !== void 0 ? _pad$left : 0, "px")
+    };
+  };
+  var modalStyle = _objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle(settings.design.modal.modal_background)), getBorderStyle(settings.design.modal.modal_border)), {}, {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  });
+  var formStyle = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle(settings.design.form.form_background)), getBorderStyle(settings.design.form.form_border)), getPaddingStyle(settings.design.form.form_padding)), {}, {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    gap: '30px'
+  });
   var renderFormPreview = function renderFormPreview() {
     var formContent = function () {
       switch (activeForm) {
         case "register":
           return /*#__PURE__*/React.createElement("form", {
             className: "preview-form",
-            style: getFormBackgroundStyle()
+            style: formStyle
           }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login")), /*#__PURE__*/React.createElement("input", {
             type: "text",
             placeholder: "Username"
@@ -23459,7 +22522,7 @@ var DesignEditor = function DesignEditor(_ref) {
         case "forgot":
           return /*#__PURE__*/React.createElement("form", {
             className: "preview-form",
-            style: getFormBackgroundStyle()
+            style: formStyle
           }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot Password", "th-login")), /*#__PURE__*/React.createElement("input", {
             type: "text",
             placeholder: "Username or Email"
@@ -23467,7 +22530,7 @@ var DesignEditor = function DesignEditor(_ref) {
         default:
           return /*#__PURE__*/React.createElement("form", {
             className: "preview-form",
-            style: getFormBackgroundStyle()
+            style: formStyle
           }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login")), /*#__PURE__*/React.createElement("input", {
             type: "text",
             placeholder: "Username or Email"
@@ -23484,28 +22547,12 @@ var DesignEditor = function DesignEditor(_ref) {
           }), " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remember Me", "th-login"))), /*#__PURE__*/React.createElement("button", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login")));
       }
     }();
-    var layoutType = settings.design.modal.layout_type || "popup";
-    var wrappedContent = /*#__PURE__*/React.createElement("div", {
-      className: "form-background-preview"
-    }, formContent);
-    return layoutType === "sliding" ? /*#__PURE__*/React.createElement("div", {
-      className: "preview-sliding-wrapper"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "side-panel-preview"
-    }, wrappedContent)) : /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: "modal-box-preview"
-    }, wrappedContent);
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-background-preview"
+    }, formContent));
   };
-  var tabs = [{
-    key: "login",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login")
-  }, {
-    key: "register",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login")
-  }, {
-    key: "forgot",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot", "th-login")
-  }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
       className: "custom-tabs"
@@ -23528,17 +22575,8 @@ var DesignEditor = function DesignEditor(_ref) {
   }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Design Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "design-editor-layout"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "preview-panel"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "preview-overlay layout-".concat(settings.design.modal.layout_type),
-    style: getModalBackgroundStyle()
-  }, renderFormPreview()), /*#__PURE__*/React.createElement("div", {
-    className: "preview-switcher"
-  }, renderTabs())), /*#__PURE__*/React.createElement("div", {
     className: "settings-panel"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "settings-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Design Settings", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
     className: "th-login-tabs",
     activeClass: "active-tab",
     tabs: [{
@@ -23552,392 +22590,92 @@ var DesignEditor = function DesignEditor(_ref) {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Components", "th-login")
     }]
   }, function (tab) {
-    var _background$opacity, _formBackground$opaci, _settings$design$moda, _settings$design$moda2, _settings$design$moda3, _settings$design$moda4;
-    return /*#__PURE__*/React.createElement(React.Fragment, null, tab.name === "layout" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, tab.name === "layout" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Layout", "th-login"),
       defaultOpen: false
     }, /*#__PURE__*/React.createElement("div", {
-      className: "layout-style-grid"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "layout-style-card ".concat(settings.design.modal.layout_type === "popup" ? "selected" : ""),
-      onClick: function onClick() {
-        return handleSettingChange("design", ["modal", "layout_type"], "popup");
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "layout-visual layout-popup"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "modal-box"
-    })), /*#__PURE__*/React.createElement("p", {
-      className: "layout-name"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Popup Modal", "th-login"))), /*#__PURE__*/React.createElement("div", {
-      className: "layout-style-card ".concat(settings.design.modal.layout_type === "sliding" ? "selected" : ""),
-      onClick: function onClick() {
-        return handleSettingChange("design", ["modal", "layout_type"], "sliding");
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "layout-visual layout-sliding"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "side-panel"
-    })), /*#__PURE__*/React.createElement("p", {
-      className: "layout-name"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sliding Panel", "th-login"))))), /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      className: "th-layout-picker"
+    }, [{
+      key: "popup",
+      icon: "align-center",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Popup", "th-login"),
+      demoClass: "popup"
+    }, {
+      key: "slide_in_left",
+      icon: "align-pull-left",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slide-in-left", "th-login"),
+      demoClass: "slide-left"
+    }, {
+      key: "slide_in_right",
+      icon: "align-pull-right",
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Slide-in-right", "th-login"),
+      demoClass: "slide-right"
+    }].map(function (option) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: option.key,
+        className: "th-layout-card ".concat(settings.general.display_mode === option.key ? "active" : ""),
+        onClick: function onClick() {
+          return handleSettingChange("general", ["display_mode"], option.key);
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "layout-preview ".concat(option.demoClass)
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "form-box"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "form-line"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "form-line short"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "form-button"
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "layout-label"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
+        icon: option.icon,
+        size: 16
+      }), /*#__PURE__*/React.createElement("span", null, option.label)));
+    }))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
-      defaultOpen: false
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControl, {
-      __nextHasNoMarginBottom: true,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "th-login"),
-      value: bgType,
-      isBlock: true,
-      onChange: function onChange(newType) {
-        handleSettingChange("design", ["modal", "modal_background", "type"], newType);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-      value: "color",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "th-login")
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-      value: "gradient",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gradient", "th-login")
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-      value: "image",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image", "th-login")
-    })), bgType === "color" && /*#__PURE__*/React.createElement("div", {
-      className: "background-color-picker"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-      color: bgColor,
-      onChangeComplete: function onChangeComplete(value) {
-        handleSettingChange("design", ["modal", "modal_background", "color"], value.hex);
-      },
-      disableAlpha: false
-    })), bgType === "gradient" && /*#__PURE__*/React.createElement("div", {
-      className: "background-gradient-picker"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
-      value: bgGradient,
-      onChange: function onChange(value) {
-        return handleSettingChange("design", ["modal", "modal_background", "gradient"], value);
-      },
-      gradients: [{
-        name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "th-login"),
-        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-        slug: "default"
-      }, {
-        name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ocean Blue", "th-login"),
-        gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
-        slug: "ocean-blue"
-      }]
-    })), bgType === "image" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: "image-url-input"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      __next40pxDefaultSize: true,
-      __nextHasNoMarginBottom: true,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image URL", "th-login"),
-      value: imageURL,
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "modal_background", "image", "url"], val);
-      },
-      placeholder: "https://example.com/image.jpg"
-    })), imageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: "10px"
-      }
-    }, /*#__PURE__*/React.createElement("img", {
-      src: imageURL,
-      alt: "Preview",
-      style: {
-        width: "100%",
-        height: "auto",
-        borderRadius: "6px",
-        border: "1px solid #ccc",
-        objectFit: "cover"
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "th-login-media-image"
-    }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_4__.CustomSelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Position", "th-login"),
-      value: position,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Left", "th-login"),
-        value: "top left"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Center", "th-login"),
-        value: "top center"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Right", "th-login"),
-        value: "top right"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Left", "th-login"),
-        value: "center left"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Center", "th-login"),
-        value: "center center"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Right", "th-login"),
-        value: "center right"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Left", "th-login"),
-        value: "bottom left"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Center", "th-login"),
-        value: "bottom center"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Right", "th-login"),
-        value: "bottom right"
-      }],
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "modal_background", "image", "position"], val);
-      }
-    }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_4__.CustomSelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "th-login"),
-      value: size,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cover", "th-login"),
-        value: "cover"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contain", "th-login"),
-        value: "contain"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto", "th-login"),
-        value: "auto"
-      }],
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "modal_background", "image", "size"], val);
-      }
-    }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_4__.CustomSelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "th-login"),
-      value: repeat,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("No Repeat", "th-login"),
-        value: "no-repeat"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "th-login"),
-        value: "repeat"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat X", "th-login"),
-        value: "repeat-x"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat Y", "th-login"),
-        value: "repeat-y"
-      }],
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "modal_background", "image", "repeat"], val);
-      }
-    })))), /*#__PURE__*/React.createElement("div", {
-      className: "background-opacity-slider",
-      style: {
-        marginTop: "16px"
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Opacity", "th-login"),
-      value: (_background$opacity = background.opacity) !== null && _background$opacity !== void 0 ? _background$opacity : 1,
-      onChange: function onChange(val) {
-        handleSettingChange("design", ["modal", "modal_background", "opacity"], val);
-      },
-      min: 0,
-      max: 1,
-      step: 0.1,
-      withInputField: true
-    })))), tab.name === "container" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
-      defaultOpen: false
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControl, {
-      __nextHasNoMarginBottom: true,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Type", "th-login"),
-      value: formBgType,
-      isBlock: true,
-      onChange: function onChange(newType) {
-        handleSettingChange("design", ["modal", "form_background", "type"], newType);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-      value: "color",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "th-login")
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-      value: "gradient",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Gradient", "th-login")
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-      value: "image",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image", "th-login")
-    })), formBgType === "color" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-      color: formBgColor,
-      onChangeComplete: function onChangeComplete(val) {
-        return handleSettingChange("design", ["modal", "form_background", "color"], val.hex);
-      },
-      disableAlpha: false
-    }), formBgType === "gradient" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
-      value: formBgGradient,
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "form_background", "gradient"], val);
-      },
-      gradients: [{
-        name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Default", "th-login"),
-        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-        slug: "default"
-      }, {
-        name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Ocean Blue", "th-login"),
-        gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
-        slug: "ocean-blue"
-      }]
-    }), formBgType === "image" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      __next40pxDefaultSize: true,
-      __nextHasNoMarginBottom: true,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image URL", "th-login"),
-      value: formImageURL,
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "form_background", "image", "url"], val);
-      }
-    }), formImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("img", {
-      src: formImageURL,
-      alt: "Form Background Preview",
-      style: {
-        width: "100%",
-        height: "auto",
-        borderRadius: "6px",
-        border: "1px solid #ccc",
-        objectFit: "cover",
-        marginTop: "10px"
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "th-login-media-image"
-    }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_4__.CustomSelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Position", "th-login"),
-      value: formPosition,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Left", "th-login"),
-        value: "top left"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Center", "th-login"),
-        value: "top center"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Top Right", "th-login"),
-        value: "top right"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Left", "th-login"),
-        value: "center left"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Center", "th-login"),
-        value: "center center"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Center Right", "th-login"),
-        value: "center right"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Left", "th-login"),
-        value: "bottom left"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Center", "th-login"),
-        value: "bottom center"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Bottom Right", "th-login"),
-        value: "bottom right"
-      }],
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "form_background", "image", "position"], val);
-      }
-    }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_4__.CustomSelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "th-login"),
-      value: formSize,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cover", "th-login"),
-        value: "cover"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Contain", "th-login"),
-        value: "contain"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Auto", "th-login"),
-        value: "auto"
-      }],
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "form_background", "image", "size"], val);
-      }
-    }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_4__.CustomSelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "th-login"),
-      value: formRepeat,
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("No Repeat", "th-login"),
-        value: "no-repeat"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat", "th-login"),
-        value: "repeat"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat X", "th-login"),
-        value: "repeat-x"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Repeat Y", "th-login"),
-        value: "repeat-y"
-      }],
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "form_background", "image", "repeat"], val);
-      }
-    })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Opacity", "th-login"),
-      value: (_formBackground$opaci = formBackground.opacity) !== null && _formBackground$opaci !== void 0 ? _formBackground$opaci : 1,
-      onChange: function onChange(val) {
-        handleSettingChange("design", ["modal", "form_background", "opacity"], val);
-      },
-      min: 0,
-      max: 1,
-      step: 0.1,
-      withInputField: true
-    })), /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      background: settings.design.modal.modal_background,
+      path: ["modal", "modal_background"],
+      handleSettingChange: handleSettingChange
+    }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_5__["default"], {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
-      defaultOpen: false
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "th-login-border-controls"
-    }, /*#__PURE__*/React.createElement(_border_box_control__WEBPACK_IMPORTED_MODULE_5__.BorderBoxControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Width", "th-login"),
-      values: ((_settings$design$moda = settings.design.modal.form_border) === null || _settings$design$moda === void 0 ? void 0 : _settings$design$moda.width) || {},
-      onChange: function onChange(newVal) {
-        return handleSettingChange("design", ["modal", "form_border", "width"], newVal);
-      },
-      min: 0,
-      max: 20
-    })), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_4__.CustomSelectControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Style", "th-login"),
-      value: ((_settings$design$moda2 = settings.design.modal.form_border) === null || _settings$design$moda2 === void 0 ? void 0 : _settings$design$moda2.style) || "solid",
-      options: [{
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Solid", "th-login"),
-        value: "solid"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashed", "th-login"),
-        value: "dashed"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dotted", "th-login"),
-        value: "dotted"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Double", "th-login"),
-        value: "double"
-      }, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("None", "th-login"),
-        value: "none"
-      }],
-      className: "modern-border-select-control",
-      onChange: function onChange(val) {
-        return handleSettingChange("design", ["modal", "form_border", "style"], val);
-      }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-      color: ((_settings$design$moda3 = settings.design.modal.form_border) === null || _settings$design$moda3 === void 0 ? void 0 : _settings$design$moda3.color) || "#000000",
-      onChangeComplete: function onChangeComplete(val) {
-        return handleSettingChange("design", ["modal", "form_border", "color"], val.hex);
-      },
-      disableAlpha: false
-    }), /*#__PURE__*/React.createElement("hr", {
-      style: {
-        margin: "16px 0"
-      }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBorderRadiusControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border Radius", "th-login"),
-      values: ((_settings$design$moda4 = settings.design.modal.form_border) === null || _settings$design$moda4 === void 0 ? void 0 : _settings$design$moda4.radius) || {},
-      onChange: function onChange(newRadius) {
-        return handleSettingChange("design", ["modal", "form_border", "radius"], newRadius);
-      }
-    }))), tab.name === "more" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      border: settings.design.modal.modal_border,
+      path: ["modal", "modal_border"],
+      handleSettingChange: handleSettingChange
+    })), tab.name === "container" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
+      background: settings.design.form.form_background,
+      path: ["form", "form_background"],
+      handleSettingChange: handleSettingChange
+    }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
+      border: settings.design.form.form_border,
+      path: ["form", "form_border"],
+      handleSettingChange: handleSettingChange
+    }), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_6__.PaddingSettingsPanel, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
+      padding: settings.design.form.form_padding,
+      path: ["form", "form_padding"],
+      handleSettingChange: handleSettingChange
+    })), tab.name === "more" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heading", "th-login"),
       defaultOpen: false
-    }), /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input", "th-login"),
       defaultOpen: false
-    }), /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "th-login"),
       defaultOpen: false
     })));
-  }))));
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "preview-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "preview-overlay layout-".concat(settings.general.display_mode),
+    style: modalStyle
+  }, renderFormPreview()), /*#__PURE__*/React.createElement("div", {
+    className: "preview-switcher"
+  }, renderTabs()))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DesignEditor);
 

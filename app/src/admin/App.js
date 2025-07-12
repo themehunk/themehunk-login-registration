@@ -4,7 +4,7 @@ import apiFetch from "@wordpress/api-fetch";
 import {Spinner, Button} from "@wordpress/components";
 import "./index.scss";
 import GeneralSettings from './components/general-settings';
-import DesignSettings from './components/design-settings';
+import DesignSettings from './components/design-setings';
 import FormFieldsSettings from './components/form-feild-setiings';
 import DisplayTriggersSettings from './components/display-trigger-settings';
 import SecuritySettings from './components/security-settings';

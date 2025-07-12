@@ -42,12 +42,7 @@ registerBlockType('th-login/form-block', {
         },
     },
 
-    /**
-     * Edit function: Renders the block in the editor.
-     * @param {Object} props - Block properties.
-     * @param {Object} props.attributes - The block's attributes.
-     * @param {Function} props.setAttributes - Function to update attributes.
-     */
+
     edit: ({ attributes, setAttributes }) => {
         const blockProps = useBlockProps();
         const { formType, linkText, displayAs } = attributes;
@@ -124,11 +119,6 @@ registerBlockType('th-login/form-block', {
         );
     },
 
-    /**
-     * Save function: Defines the block's content for the frontend.
-     * Since we are using PHP's render_callback, this function can return null or an empty div.
-     * The actual HTML is generated server-side.
-     */
     save: () => {
         return null; // Content is rendered server-side by PHP.
     },

@@ -20557,7 +20557,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index.scss */ "./src/admin/index.scss");
 /* harmony import */ var _components_general_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/general-settings */ "./src/admin/components/general-settings.js");
-/* harmony import */ var _components_design_settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/design-settings */ "./src/admin/components/design-settings.js");
+/* harmony import */ var _components_design_setings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/design-setings */ "./src/admin/components/design-setings.js");
 /* harmony import */ var _components_form_feild_setiings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/form-feild-setiings */ "./src/admin/components/form-feild-setiings.js");
 /* harmony import */ var _components_display_trigger_settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/display-trigger-settings */ "./src/admin/components/display-trigger-settings.js");
 /* harmony import */ var _components_security_settings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/security-settings */ "./src/admin/components/security-settings.js");
@@ -21375,7 +21375,7 @@ var App = function App() {
   }, activeTab === "general" && /*#__PURE__*/React.createElement(_components_general_settings__WEBPACK_IMPORTED_MODULE_5__["default"], {
     settings: settings,
     handleSettingChange: handleSettingChange
-  }), activeTab === "design" && /*#__PURE__*/React.createElement(_components_design_settings__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), activeTab === "design" && /*#__PURE__*/React.createElement(_components_design_setings__WEBPACK_IMPORTED_MODULE_6__["default"], {
     settings: settings,
     handleSettingChange: handleSettingChange
   }), activeTab === "form-fields" && /*#__PURE__*/React.createElement(_components_form_feild_setiings__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -22376,10 +22376,10 @@ var PaddingSettingsPanel = function PaddingSettingsPanel(_ref) {
 
 /***/ }),
 
-/***/ "./src/admin/components/design-settings.js":
-/*!*************************************************!*\
-  !*** ./src/admin/components/design-settings.js ***!
-  \*************************************************/
+/***/ "./src/admin/components/design-setings.js":
+/*!************************************************!*\
+  !*** ./src/admin/components/design-setings.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

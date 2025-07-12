@@ -10,7 +10,7 @@ class TH_Login_Shortcodes {
 		add_shortcode( 'th_register_form', array( $this, 'render_register_form_shortcode' ) );
 		add_shortcode( 'th_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
 		add_shortcode( 'th_login_popup_link', array( $this, 'render_popup_link_shortcode' ) );
-		add_shortcode( 'th_login__combined_form', array( $this, 'render_combined_form_shortcode' ) );
+		add_shortcode( 'th_login_combined_form', array( $this, 'render_combined_form_shortcode' ) );
 	}
 
 	private function safe_json_option( $option_key, $default = array() ) {
@@ -49,12 +49,16 @@ class TH_Login_Shortcodes {
 				'version'      => TH_LOGIN_VERSION,
 			);
 
+			// Using defer for the main frontend script as it needs DOM and other dependencies
 			wp_enqueue_script(
 				'th-login-frontend-script',
 				TH_LOGIN_URL . 'app/build/frontend.js',
 				$asset_config['dependencies'],
 				$asset_config['version'],
-				true
+				array(
+					'in_footer' => true,
+					'strategy' => 'defer',
+				)
 			);
 
 			wp_enqueue_style(
@@ -91,7 +95,14 @@ class TH_Login_Shortcodes {
 			$google_font_url = $typography_settings['google_font_url'] ?? '';
 
 			if ( ! empty( $google_font_url ) ) {
-				wp_enqueue_style( 'th-login-google-fonts', esc_url( $google_font_url ), array(), null );
+				// Using async for Google Fonts as they're render-blocking
+				wp_enqueue_style( 
+					'th-login-google-fonts', 
+					esc_url( $google_font_url ), 
+					array(), 
+					null,
+					'async' 
+				);
 			}
 		}
 	}

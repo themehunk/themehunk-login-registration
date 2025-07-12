@@ -26,6 +26,13 @@ $register_fields = $form_fields_settings['register'] ?? array();
 			$placeholder = esc_attr( $field['placeholder'] ?? '' );
 			$required    = ! empty( $field['required'] ) ? 'required' : '';
 
+			$autocomplete = '';
+			if ( $field_type === 'password' ) {
+				$autocomplete = 'autocomplete="new-password"';
+			} elseif ( $field_type === 'email' ) {
+				$autocomplete = 'autocomplete="email"';
+			}
+
 			if ( $field_type === 'checkbox' && strpos( strtolower( $field_name ), 'terms' ) !== false ) : ?>
 				<p class="th-login-form-field th-login-form-field--terms">
 					<input type="checkbox" name="<?php echo esc_attr( $field_name ); ?>" id="th-register-<?php echo $field_id; ?>" value="1" <?php echo $required; ?>>
@@ -42,6 +49,7 @@ $register_fields = $form_fields_settings['register'] ?? array();
 					id="th-register-<?php echo $field_id; ?>"
 					placeholder="<?php echo $placeholder; ?>"
 					<?php echo $required; ?>
+					<?php echo $autocomplete; ?>
 				>
 			</p>
 		<?php endforeach; ?>

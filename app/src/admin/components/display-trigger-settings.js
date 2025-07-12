@@ -59,6 +59,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={
                                 settings.display_triggers.auto_open_on_load
                                 ?.enabled || false
@@ -84,6 +85,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             </div>
                             <div className="setting-control text-small-box">
                             <TextControl
+                                                            __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                 type="number"
                                 min="0"
                                 value={
@@ -111,6 +114,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control  ">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={settings.display_triggers.auto_open_on_scroll?.enabled || false}
                             onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_scroll', 'enabled'], isChecked)}
                             />
@@ -127,6 +131,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control text-small-box">
                                 <TextControl
+                                                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     type="number"
                                     min="1"
                                     max="100"
@@ -146,6 +152,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={settings.display_triggers.auto_open_on_exit_intent?.enabled || false}
                             onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_exit_intent', 'enabled'], isChecked)}
                             />
@@ -161,6 +168,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={settings.display_triggers.auto_open_on_time_on_page?.enabled || false}
                             onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'enabled'], isChecked)}
                             />
@@ -177,6 +185,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             </div>
                             <div className="setting-control text-small-box">
                             <TextControl
+                                                            __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                 type="number"
                                 min="1"
                                 value={settings.display_triggers.auto_open_on_time_on_page?.time_seconds || 10}
@@ -204,6 +214,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             </div>
                             <div className="setting-control">
                                 <ToggleControl
+                                __nextHasNoMarginBottom={true}
                                 checked={
                                     settings.display_triggers.auto_open_conditions
                                     ?.for_logged_out_only || false
@@ -236,6 +247,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={
                                 settings.display_triggers.auto_open_conditions
                                 ?.on_specific_pages?.enabled || false
@@ -266,6 +278,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                     </div>
                                     <div className="setting-control">
                                         <TextControl
+                                                                        __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                         value={
                                             settings.display_triggers.auto_open_conditions?.on_specific_pages?.page_ids?.join(
                                             ", "
@@ -298,6 +312,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                     </div>
                                     <div className="setting-control">
                                         <TextControl
+                                                                        __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                         value={
                                             settings.display_triggers.auto_open_conditions?.on_specific_pages?.page_slugs?.join(
                                             ", "
@@ -330,6 +346,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={settings.display_triggers.auto_open_conditions?.on_specific_categories?.enabled || false}
                             onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'enabled'], isChecked)}
                             />
@@ -347,6 +364,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_ids?.join(', ') || ''}
                                     onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_ids'], newValue.split(',').map(s => parseInt(s.trim(), 10)).filter(id => !isNaN(id)))}
                                     />
@@ -362,6 +381,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_slugs?.join(', ') || ''}
                                     onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_slugs'], newValue.split(',').map(s => s.trim()))}
                                     />
@@ -379,6 +400,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             </div>
                             <div className="setting-control">
                                 <ToggleControl
+                                __nextHasNoMarginBottom={true}
                                 checked={settings.display_triggers.auto_open_conditions?.on_specific_tags?.enabled || false}
                                 onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'enabled'], isChecked)}
                                 />
@@ -396,6 +418,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_ids?.join(', ') || ''}
                                     onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_ids'], newValue.split(',').map(s => parseInt(s.trim(), 10)).filter(id => !isNaN(id)))}
                                     />
@@ -411,6 +435,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_slugs?.join(', ') || ''}
                                     onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_slugs'], newValue.split(',').map(s => s.trim()))}
                                     />
@@ -428,6 +454,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             </div>
                             <div className="setting-control">
                                 <ToggleControl
+                                __nextHasNoMarginBottom={true}
                                 checked={settings.display_triggers.auto_open_conditions?.on_woocommerce_myaccount || false}
                                 onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_myaccount'], isChecked)}
                                 />
@@ -443,6 +470,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={settings.display_triggers.auto_open_conditions?.on_woocommerce_checkout || false}
                             onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_checkout'], isChecked)}
                             />
@@ -467,6 +495,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={
                                 settings.display_triggers.auto_open_conditions
                                 ?.device_visibility?.desktop || false
@@ -495,6 +524,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={
                                 settings.display_triggers.auto_open_conditions
                                 ?.device_visibility?.tablet || false
@@ -523,6 +553,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={
                                 settings.display_triggers.auto_open_conditions
                                 ?.device_visibility?.mobile || false
@@ -559,6 +590,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={
                                 settings.display_triggers.pop_up_frequency?.enabled ||
                                 false
@@ -617,6 +649,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control text-small-box">
                                 <TextControl
+                                                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     type="number"
                                     min="1"
                                     value={
@@ -654,6 +688,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                             <ToggleControl
+                            __nextHasNoMarginBottom={true}
                             checked={
                                 settings.display_triggers.menu_integration?.enabled ||
                                 false
@@ -680,6 +715,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             </div>
                             <div className="setting-control">
                                 <TextControl
+                                                                __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                 value={
                                     settings.display_triggers.menu_integration
                                     ?.menu_slug || "primary"
@@ -705,6 +742,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={
                                         settings.display_triggers.menu_integration
                                         ?.item_text_login || __("Login", "th-login")
@@ -729,6 +768,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={
                                         settings.display_triggers.menu_integration
                                         ?.item_icon_login || "dashicons-admin-users"
@@ -756,6 +797,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <ToggleControl
+                                    __nextHasNoMarginBottom={true}
                                     checked={
                                         settings.display_triggers.menu_integration
                                         ?.visibility_login_logged_in || false
@@ -785,6 +827,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={
                                         settings.display_triggers.menu_integration
                                         ?.item_text_register ||
@@ -810,6 +854,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                     value={
                                         settings.display_triggers.menu_integration
                                         ?.item_icon_register || "dashicons-plus-alt"
@@ -839,6 +885,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <ToggleControl
+                                    __nextHasNoMarginBottom={true}
                                     checked={
                                         settings.display_triggers.menu_integration
                                         ?.visibility_register_logged_in || false

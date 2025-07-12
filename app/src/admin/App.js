@@ -4,7 +4,7 @@ import apiFetch from "@wordpress/api-fetch";
 import {Spinner, Button} from "@wordpress/components";
 import "./index.scss";
 import GeneralSettings from './components/general-settings';
-import DesignSettings from './components/design-settings';
+import DesignSettings from './components/design-setings';
 import FormFieldsSettings from './components/form-feild-setiings';
 import DisplayTriggersSettings from './components/display-trigger-settings';
 import SecuritySettings from './components/security-settings';
@@ -215,7 +215,6 @@ const form_fields = {
 
 const design = {
         modal: {
-          layout_type: 'popup',  
           modal_background: {
             type: "image",     // 'color' | 'gradient' | 'image'
             color: "#ffffff",
@@ -228,6 +227,30 @@ const design = {
               repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
             }
           },
+          modal_border: {
+            width: {
+              top: 1,
+              right: 1,
+              bottom: 1,
+              left: 1
+            },
+            style: "solid",
+            color: "#000000",
+            radius: {
+              topLeft: 6,
+              topRight: 6,
+              bottomRight: 6,
+              bottomLeft: 6
+            }
+          },
+          modal_padding :{
+            top:10,
+            left:10,
+            right:10,
+            bottom:10,
+          }
+        }, 
+        form : {
           form_background: {
             type: "image",     // 'color' | 'gradient' | 'image'
             color: "#ffffff",
@@ -255,8 +278,14 @@ const design = {
               bottomRight: 6,
               bottomLeft: 6
             }
+          },
+          form_padding :{
+            top:10,
+            left:10,
+            right:10,
+            bottom:10,
           }
-        },  
+        }, 
 };
 
 const display_triggers = {
@@ -652,6 +681,7 @@ const App = () => {
 
   return (
     <div className="th-login-admin-modern">
+      
       {/* Header Section */}
       <div className="admin-header">
         <div className="header-content">
@@ -750,19 +780,19 @@ const App = () => {
         </div>
       </div>
 
-        <div className="save-settings">
-              <Button
-                isPrimary
-                onClick={handleSaveSettings}
-                disabled={isSaving}
-                className="save-button"
-              >
-                {isSaving && (
-                  <Spinner />
-                )}
-                {__("Save Changes", "th-login")}
-              </Button>
-          </div>
+      <div className="save-settings">
+            <Button
+              isPrimary
+              onClick={handleSaveSettings}
+              disabled={isSaving}
+              className="save-button"
+            >
+              {isSaving && (
+                <Spinner />
+              )}
+              {__("Save Changes", "th-login")}
+            </Button>
+      </div>
 
       {/* Reset Confirmation Modal */}
       {isResetConfirmOpen && (

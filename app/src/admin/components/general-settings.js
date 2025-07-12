@@ -110,6 +110,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                     </div>
                     <div className="setting-control">
                     <ToggleControl
+                    __nextHasNoMarginBottom={true}
                         checked={settings.general.plugin_status === "enabled"}
                         onChange={(isChecked) =>
                         handleSettingChange("general", ["plugin_status"], isChecked ? "enabled" : "disabled")
@@ -204,6 +205,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                     </div>
                     <div className="setting-control">
                     <ToggleControl
+                    __nextHasNoMarginBottom={true}
                         checked={settings.general.manual_user_approval?.enabled || false}
                         onChange={(isChecked) =>
                         handleSettingChange("general", ["manual_user_approval", "enabled"], isChecked)
@@ -220,6 +222,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                     </div>
                     <div className="setting-control">
                     <ToggleControl
+                    __nextHasNoMarginBottom={true}
                         checked={settings.general.close_button || false}
                         onChange={(isChecked) =>
                         handleSettingChange("general", ["close_button"], isChecked)
@@ -250,6 +253,8 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                         />
                         {settings.general.redirects?.after_login?.type === "custom_url" && (
                             <TextControl
+                                                            __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                             value={settings.general.redirects.after_login.url || ""}
                             onChange={(newValue) =>
                                 handleSettingChange("general", ["redirects", "after_login", "url"], newValue)
@@ -273,6 +278,8 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                         />
                         {settings.general.redirects?.after_logout?.type === "custom_url" && (
                             <TextControl
+                                                            __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                             value={settings.general.redirects.after_logout.url || ""}
                             onChange={(newValue) =>
                                 handleSettingChange("general", ["redirects", "after_logout", "url"], newValue)
@@ -293,6 +300,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                             </div>
                             <div className="setting-control">
                                 <ToggleControl
+                                __nextHasNoMarginBottom={true}
                                     checked={settings.general.auto_login_after_registration || false}
                                     onChange={(isChecked) =>
                                     handleSettingChange("general", ["auto_login_after_registration"], isChecked)
@@ -316,6 +324,8 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                                     />
                                     {settings.general.redirects?.after_register?.type === "custom_url" && (
                                         <TextControl
+                                                                        __next40pxDefaultSize = {true}
+                                __nextHasNoMarginBottom={true}
                                         value={settings.general.redirects.after_register.url || ""}
                                         onChange={(newValue) =>
                                             handleSettingChange("general", ["redirects", "after_register", "url"], newValue)

@@ -31,7 +31,10 @@ class TH_Login_Gutenberg_Block {
 			TH_LOGIN_URL . 'app/build/block.js', // This will be our block's JS.
 			array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ),
 			TH_LOGIN_VERSION,
-			true
+			array(
+				'in_footer' => true,
+				'strategy' => 'defer', // Using defer for editor script as it needs the DOM but can wait
+			)
 		);
 
 		// Register the block editor styles.

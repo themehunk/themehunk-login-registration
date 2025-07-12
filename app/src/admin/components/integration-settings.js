@@ -26,6 +26,7 @@ const IntegrationSettings = ({ settings, handleSettingChange }) => {
                     </div>
                     <div className="setting-control">
                       <ToggleControl
+                      __nextHasNoMarginBottom={true}
                         checked={
                           settings.integration?.woocommerce?.enabled || false
                         }
@@ -54,6 +55,7 @@ const IntegrationSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                           <ToggleControl
+                          __nextHasNoMarginBottom={true}
                             checked={
                               settings.integration.woocommerce.replace_login ||
                               false
@@ -83,6 +85,7 @@ const IntegrationSettings = ({ settings, handleSettingChange }) => {
                         </div>
                         <div className="setting-control">
                           <ToggleControl
+                          __nextHasNoMarginBottom={true}
                             checked={
                               settings.integration.woocommerce
                                 .replace_registration || false

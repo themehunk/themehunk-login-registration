@@ -98,6 +98,7 @@ const ToolsSettings = ({
                 </div>
                 <div className="setting-control">
                   <TextareaControl
+                  __nextHasNoMarginBottom={true}
                     value={exportedSettings}
                     readOnly
                     rows={10}
@@ -129,6 +130,7 @@ const ToolsSettings = ({
             </div>
             <div className="setting-control">
               <TextareaControl
+              __nextHasNoMarginBottom={true}
                 value={importSettingsText}
                 onChange={(newValue) => setImportSettingsText(newValue)}
                 rows={10}

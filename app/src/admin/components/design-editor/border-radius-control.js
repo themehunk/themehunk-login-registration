@@ -64,6 +64,8 @@ export const BorderRadiusControl = ({
       <div className="components-border-box-control__input-wrapper">
         <div className="components-border-box-control__input-container">
           <TextControl
+          __next40pxDefaultSize={true}
+          __nextHasNoMarginBottom={true}
             label={__('Top Left', 'th-login')}
             type="number"
             min={min}
@@ -75,6 +77,8 @@ export const BorderRadiusControl = ({
 
         <div className="components-border-box-control__input-container">
           <TextControl
+          __next40pxDefaultSize={true}
+          __nextHasNoMarginBottom={true}
             label={__('Top Right', 'th-login')}
             type="number"
             min={min}
@@ -86,6 +90,8 @@ export const BorderRadiusControl = ({
 
         <div className="components-border-box-control__input-container">
           <TextControl
+          __next40pxDefaultSize={true}
+          __nextHasNoMarginBottom={true}
             label={__('Bottom Right', 'th-login')}
             type="number"
             min={min}
@@ -97,6 +103,8 @@ export const BorderRadiusControl = ({
 
         <div className="components-border-box-control__input-container">
           <TextControl
+          __next40pxDefaultSize={true}
+          __nextHasNoMarginBottom={true}
             label={__('Bottom Left', 'th-login')}
             type="number"
             min={min}

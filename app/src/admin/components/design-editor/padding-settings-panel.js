@@ -66,6 +66,8 @@ export const PaddingSettingsPanel = ({
         <div className="components-border-box-control__input-wrapper">
           <div className="components-border-box-control__input-container">
             <TextControl
+            __next40pxDefaultSize={true}
+            __nextHasNoMarginBottom={true}
               label={__('Top', 'th-login')}
               type="number"
               min={min}
@@ -77,6 +79,8 @@ export const PaddingSettingsPanel = ({
 
           <div className="components-border-box-control__input-container">
             <TextControl
+            __next40pxDefaultSize={true}
+            __nextHasNoMarginBottom={true}
               label={__('Right', 'th-login')}
               type="number"
               min={min}
@@ -88,6 +92,8 @@ export const PaddingSettingsPanel = ({
 
           <div className="components-border-box-control__input-container">
             <TextControl
+            __next40pxDefaultSize={true}
+            __nextHasNoMarginBottom={true}
               label={__('Bottom', 'th-login')}
               type="number"
               min={min}
@@ -99,6 +105,8 @@ export const PaddingSettingsPanel = ({
 
           <div className="components-border-box-control__input-container">
             <TextControl
+            __next40pxDefaultSize={true}
+            __nextHasNoMarginBottom={true}
               label={__('Left', 'th-login')}
               type="number"
               min={min}

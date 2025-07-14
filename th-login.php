@@ -89,7 +89,6 @@ final class TH_Login {
 	}
 }
 
-
 function th_login_set_default_options() {
 
 	$general_defaults = array(
@@ -111,7 +110,7 @@ function th_login_set_default_options() {
 	$design_defaults = array(
 		'modal' => array(
 			'modal_background' => array(
-				'type'     => 'image', // 'color' | 'gradient' | 'image'
+				'type'     => 'color', // 'color' | 'gradient' | 'image'
 				'color'    => '#ffffff',
 				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
 				'opacity'  => 1,
@@ -145,9 +144,10 @@ function th_login_set_default_options() {
 				'left'   => 10,
 			),
 		),
+
 		'form' => array(
 			'form_background' => array(
-				'type'     => 'image',
+				'type'     => 'color',
 				'color'    => '#ffffff',
 				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
 				'opacity'  => 1,
@@ -179,6 +179,56 @@ function th_login_set_default_options() {
 				'right'  => 10,
 				'bottom' => 10,
 				'left'   => 10,
+			),
+		),
+
+		'heading' => array(
+			'color'     => '#000000',
+			'typography' => array(
+				'size'       => '10px',
+				'fontWeight' => 500,
+			),
+		),
+
+		'Input' => array(
+			'color'           => '#000000',
+			'background'      => '#111',
+			'activeBackground'=> '',
+			'typography'      => array(
+				'size'       => '10px',
+				'fontWeight' => 500,
+			),
+		),
+
+		'button' => array(
+			'color'           => '#111',
+			'background'      => '#000000',
+			'hoverBackground' => '',
+			'padding'         => array(
+				'top'    => 10,
+				'right'  => 10,
+				'bottom' => 10,
+				'left'   => 10,
+			),
+			'typography'      => array(
+				'size'       => '10px',
+				'fontWeight' => 500,
+			),
+			'border' => array(
+				'width' => array(
+					'top'    => 1,
+					'right'  => 1,
+					'bottom' => 1,
+					'left'   => 1,
+				),
+				'style'  => 'solid',
+				'color'  => '#000000',
+				'radius' => array(
+					'topLeft'     => 6,
+					'topRight'    => 6,
+					'bottomRight' => 6,
+					'bottomLeft'  => 6,
+				),
 			),
 		),
 	);

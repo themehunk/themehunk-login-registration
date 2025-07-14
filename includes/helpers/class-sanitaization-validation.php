@@ -57,10 +57,8 @@ class TH_Sanitization_validation {
 
 		$sanitized['modal']['layout_type'] = sanitize_text_field( $settings['modal']['layout_type'] ?? 'popup' );
 
-		// Sections to loop through
 		foreach ( ['modal', 'form'] as $section ) {
-
-			// Sanitize background
+			// Background
 			$bg = $settings[$section]["{$section}_background"] ?? array();
 			$sanitized[$section]["{$section}_background"] = array(
 				'type'     => sanitize_text_field( $bg['type'] ?? 'color' ),
@@ -75,7 +73,7 @@ class TH_Sanitization_validation {
 				),
 			);
 
-			// Sanitize border
+			// Border
 			$border = $settings[$section]["{$section}_border"] ?? array();
 			$sanitized[$section]["{$section}_border"] = array(
 				'width' => array(
@@ -94,7 +92,7 @@ class TH_Sanitization_validation {
 				),
 			);
 
-			// Sanitize padding
+			// Padding
 			$padding = $settings[$section]["{$section}_padding"] ?? array();
 			$sanitized[$section]["{$section}_padding"] = array(
 				'top'    => intval( $padding['top'] ?? 0 ),
@@ -103,6 +101,62 @@ class TH_Sanitization_validation {
 				'left'   => intval( $padding['left'] ?? 0 ),
 			);
 		}
+
+		// Heading
+		$heading = $settings['heading'] ?? array();
+		$sanitized['heading'] = array(
+			'color'      => sanitize_text_field( $heading['color'] ?? '#000000' ),
+			'typography' => array(
+				'size'       => sanitize_text_field( $heading['typography']['size'] ?? '14px' ),
+				'fontWeight' => intval( $heading['typography']['fontWeight'] ?? 400 ),
+			),
+		);
+
+		// Input
+		$input = $settings['Input'] ?? array();
+		$sanitized['Input'] = array(
+			'color'            => sanitize_text_field( $input['color'] ?? '#000000' ),
+			'background'       => sanitize_text_field( $input['background'] ?? '#111' ),
+			'activeBackground' => sanitize_text_field( $input['activeBackground'] ?? '' ),
+			'typography'       => array(
+				'size'       => sanitize_text_field( $input['typography']['size'] ?? '14px' ),
+				'fontWeight' => intval( $input['typography']['fontWeight'] ?? 400 ),
+			),
+		);
+
+		// Button
+		$button = $settings['button'] ?? array();
+		$sanitized['button'] = array(
+			'color'           => sanitize_text_field( $button['color'] ?? '#111' ),
+			'background'      => sanitize_text_field( $button['background'] ?? '#000000' ),
+			'hoverBackground' => sanitize_text_field( $button['hoverBackground'] ?? '' ),
+			'padding'         => array(
+				'top'    => intval( $button['padding']['top'] ?? 0 ),
+				'right'  => intval( $button['padding']['right'] ?? 0 ),
+				'bottom' => intval( $button['padding']['bottom'] ?? 0 ),
+				'left'   => intval( $button['padding']['left'] ?? 0 ),
+			),
+			'typography' => array(
+				'size'       => sanitize_text_field( $button['typography']['size'] ?? '14px' ),
+				'fontWeight' => intval( $button['typography']['fontWeight'] ?? 400 ),
+			),
+			'border' => array(
+				'width' => array(
+					'top'    => intval( $button['border']['width']['top'] ?? 0 ),
+					'right'  => intval( $button['border']['width']['right'] ?? 0 ),
+					'bottom' => intval( $button['border']['width']['bottom'] ?? 0 ),
+					'left'   => intval( $button['border']['width']['left'] ?? 0 ),
+				),
+				'style'  => sanitize_text_field( $button['border']['style'] ?? 'solid' ),
+				'color'  => sanitize_hex_color( $button['border']['color'] ?? '#000000' ),
+				'radius' => array(
+					'topLeft'     => intval( $button['border']['radius']['topLeft'] ?? 0 ),
+					'topRight'    => intval( $button['border']['radius']['topRight'] ?? 0 ),
+					'bottomRight' => intval( $button['border']['radius']['bottomRight'] ?? 0 ),
+					'bottomLeft'  => intval( $button['border']['radius']['bottomLeft'] ?? 0 ),
+				),
+			),
+		);
 
 		return $sanitized;
 	}
@@ -128,6 +182,7 @@ class TH_Sanitization_validation {
 		$radius_fields = array(
 			'modal_border' => $settings['modal']['modal_border']['radius'] ?? array(),
 			'form_border'  => $settings['form']['form_border']['radius'] ?? array(),
+			'button_border' => $settings['button']['border']['radius'] ?? array(),
 		);
 
 		foreach ( $radius_fields as $key => $radius ) {
@@ -135,7 +190,7 @@ class TH_Sanitization_validation {
 				if ( isset( $radius[ $corner ] ) && intval( $radius[ $corner ] ) < 0 ) {
 					$errors->add(
 						'invalid_' . $key . '_' . $corner,
-						sprintf( esc_html__( '%s radius value must be a positive number.', 'th-login' ), ucfirst( $key ) )
+						sprintf( esc_html__( '%s radius value must be a positive number.', 'th-login' ), ucfirst( str_replace('_', ' ', $key) ) )
 					);
 				}
 			}
@@ -143,8 +198,9 @@ class TH_Sanitization_validation {
 
 		// Validate padding values (non-negative ints)
 		$padding_fields = array(
-			'modal_padding' => $settings['modal']['modal_padding'] ?? array(),
-			'form_padding'  => $settings['form']['form_padding'] ?? array(),
+			'modal_padding'  => $settings['modal']['modal_padding'] ?? array(),
+			'form_padding'   => $settings['form']['form_padding'] ?? array(),
+			'button_padding' => $settings['button']['padding'] ?? array(),
 		);
 
 		foreach ( $padding_fields as $key => $padding ) {
@@ -152,9 +208,24 @@ class TH_Sanitization_validation {
 				if ( isset( $padding[ $side ] ) && intval( $padding[ $side ] ) < 0 ) {
 					$errors->add(
 						'invalid_' . $key . '_' . $side,
-						sprintf( esc_html__( '%s padding must be a positive number.', 'th-login' ), ucfirst( $key ) )
+						sprintf( esc_html__( '%s padding must be a positive number.', 'th-login' ), ucfirst( str_replace('_', ' ', $key) ) )
 					);
 				}
+			}
+		}
+
+		// Validate font sizes (must be like "14px", "1.2em", etc.)
+		$typography_fields = array(
+			'heading' => $settings['heading']['typography']['size'] ?? '',
+			'Input'   => $settings['Input']['typography']['size'] ?? '',
+			'button'  => $settings['button']['typography']['size'] ?? '',
+		);
+		foreach ( $typography_fields as $key => $font_size ) {
+			if ( $font_size && ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%)$/', $font_size ) ) {
+				$errors->add(
+					'invalid_' . $key . '_font_size',
+					sprintf( esc_html__( '%s font size must be a valid CSS size (e.g., 14px, 1.2em).', 'th-login' ), ucfirst( $key ) )
+				);
 			}
 		}
 

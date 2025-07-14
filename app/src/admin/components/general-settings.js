@@ -172,13 +172,13 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                 <div className="settings-group th-login-modalchoose-form">
                     <h4 className="group-title">{__("Login Display Mode", "th-login")}</h4>
                     <CustomSelectControl
-                    value={displayMode}
-                    options={[
-                        { label: __("Popup", "th-login"), value: "popup" },
-                        { label: __("Slide-in-left", "th-login"), value: "slide_in_left" },
-                        { label: __("Slide-in-right", "th-login"), value: "slide_in_right" },
-                    ]}
-                    onChange={(value) => handleSettingChange("general", ["display_mode"], value)}
+                        value={displayMode}
+                        options={[
+                            { label: __("Popup", "th-login"), value: "popup" },
+                            { label: __("Slide-in-left", "th-login"), value: "slide_in_left" },
+                            { label: __("Slide-in-right", "th-login"), value: "slide_in_right" },
+                        ]}
+                        onChange={(value) => handleSettingChange("general", ["display_mode"], value)}
                     />
                     
                 </div>

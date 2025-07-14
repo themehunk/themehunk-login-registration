@@ -37,14 +37,6 @@ class TH_Login_Gutenberg_Block {
 			)
 		);
 
-		// Register the block editor styles.
-		wp_register_style(
-			'th-login-block-editor-style',
-			TH_LOGIN_URL . 'app/build/block-editor.css', // Editor-specific styles.
-			array( 'wp-edit-blocks' ),
-			TH_LOGIN_VERSION
-		);
-
 		// Register the block frontend styles (if different from main frontend.css, otherwise use frontend.css).
 		wp_register_style(
 			'th-login-block-style',

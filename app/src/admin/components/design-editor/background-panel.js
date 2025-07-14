@@ -22,6 +22,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 		<AccordionSection title={title} defaultOpen={false}>
 			<ToggleGroupControl
 				__nextHasNoMarginBottom={true}
+				__next40pxDefaultSize = {true}
 				label={__("Background Type", "th-login")}
 				value={type}
 				isBlock
@@ -150,7 +151,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 				</>
 			)}
 
-			<div className="background-opacity-slider" style={{ marginTop: "16px" }}>
+			{/* <div className="background-opacity-slider" style={{ marginTop: "16px" }}>
 				<RangeControl
 					label={__("Opacity", "th-login")}
 					value={opacity}
@@ -161,8 +162,10 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 					max={1}
 					step={0.1}
 					withInputField
+					__next40pxDefaultSize={true}
+					__nextHasNoMarginBottom={true}
 				/>
-			</div>
+			</div> */}
 		</AccordionSection>
 	);
 };

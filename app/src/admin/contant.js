@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
+//app
 export const TABS = [
   {
     id: "general",
@@ -216,28 +217,6 @@ export  const design = {
         repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
       }
     },
-    modal_border: {
-      width: {
-        top: 1,
-        right: 1,
-        bottom: 1,
-        left: 1
-      },
-      style: "solid",
-      color: "#000000",
-      radius: {
-        topLeft: 6,
-        topRight: 6,
-        bottomRight: 6,
-        bottomLeft: 6
-      }
-    },
-    modal_padding :{
-      top:10,
-      left:10,
-      right:10,
-      bottom:10,
-    }
   }, 
   form : {
     form_background: {
@@ -273,7 +252,8 @@ export  const design = {
       left:10,
       right:10,
       bottom:10,
-    }
+    },
+    form_gap:5,
   }, 
   heading:{
     color:"#000000",
@@ -281,14 +261,15 @@ export  const design = {
   },
   Input:{
     color:"#000000",
-    background:"#111",
-    activeBackground:"",
+    labelcolor:"#000000",
+    labeltypography:{size: "10px", fontWeight: 500},
+    background:"#11111",
     typography:{size: "10px", fontWeight: 500}
   },
   button:{
-    color:"#111",
-    background:"#000000",
-    hoverBackground:"",
+    color:"#000000",
+    background:"#ffffff",
+    hoverBackground:"#C7C2C2",
     padding:{ top:10, left:10, right:10, bottom:10},
     typography:{size: "10px",fontWeight: 500},
     border: {
@@ -297,6 +278,11 @@ export  const design = {
       color: "#000000",
       radius: { topLeft: 6, topRight: 6, bottomRight: 6, bottomLeft: 6}
     },
+  },
+  rememberme:{
+    color:"#000000",
+    checkboxbackground:"#000000",
+    typography:{size: "10px",fontWeight: 500},
   }
 };
 
@@ -354,3 +340,44 @@ export  const security = {
   },
   honeypot_enabled: true,
 };
+
+//deisgn-settings
+export const tabs = [
+  { key: "login", label: __("Login", "th-login") },
+  { key: "register", label: __("Register", "th-login") },
+  { key: "forgot_password", label: __("Forgot", "th-login") },
+];
+
+export const layoutOptions = [
+  {
+    key: "page",
+    icon: "admin-page", // more appropriate than "align-center"
+    label: __("Page", "th-login"),
+    demoClass: "page",
+  },
+  {	
+    key: "popup",
+    icon: "align-center",
+    label: __("Popup", "th-login"),
+    demoClass: "popup",
+  },
+  {
+    key: "slide_in_left",
+    icon: "align-pull-left",
+    label: __("Slide-in-left", "th-login"),
+    demoClass: "slide-left",
+  },
+  {
+    key: "slide_in_right",
+    icon: "align-pull-right",
+    label: __("Slide-in-right", "th-login"),
+    demoClass: "slide-right",
+  },
+];
+
+export const fontWeightOptions = [
+  { label: __("Normal", "th-login"), value: 400 },
+  { label: __("Medium", "th-login"), value: 500 },
+  { label: __("Semi-Bold", "th-login"), value: 600 },
+  { label: __("Bold", "th-login"), value: 700 },
+];

@@ -348,10 +348,12 @@ body.th-login-modal-open {
 
 .th-login-popup-modal.th-login-slide-in-right{
   justify-content: flex-end;
+      width: 500px;
 }
 
 .th-login-popup-modal.th-login-slide-in-left{
  justify-content: flex-start;
+     width: 500px;
 }
 
 .th-login-popup-modal.slide-in-left .th-login-popup-form-container,

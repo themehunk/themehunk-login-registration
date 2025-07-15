@@ -47,7 +47,7 @@ export const PaddingSettingsPanel = ({
 
   return (
     <AccordionSection title={title} defaultOpen={false}>
-      <div className="components-border-box-control">
+
         <div className="components-border-box-control__header">
           <span className="components-border-box-control__label">
             {__('Padding Settings', 'th-login')}
@@ -116,7 +116,7 @@ export const PaddingSettingsPanel = ({
             />
           </div>
         </div>
-      </div>
+
     </AccordionSection>
   );
 };

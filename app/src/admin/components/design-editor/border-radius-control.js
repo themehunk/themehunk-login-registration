@@ -45,7 +45,7 @@ export const BorderRadiusControl = ({
   };
 
   return (
-    <div className="components-border-box-control">
+    <>
       {label && (
         <div className="components-border-box-control__header">
           <span className="components-border-box-control__label">{label}</span>
@@ -114,7 +114,7 @@ export const BorderRadiusControl = ({
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

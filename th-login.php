@@ -121,28 +121,6 @@ function th_login_set_default_options() {
 					'repeat'   => 'no-repeat',
 				),
 			),
-			'modal_border' => array(
-				'width' => array(
-					'top'    => 1,
-					'right'  => 1,
-					'bottom' => 1,
-					'left'   => 1,
-				),
-				'style'  => 'solid',
-				'color'  => '#000000',
-				'radius' => array(
-					'topLeft'     => 6,
-					'topRight'    => 6,
-					'bottomRight' => 6,
-					'bottomLeft'  => 6,
-				),
-			),
-			'modal_padding' => array(
-				'top'    => 10,
-				'right'  => 10,
-				'bottom' => 10,
-				'left'   => 10,
-			),
 		),
 
 		'form' => array(
@@ -180,6 +158,7 @@ function th_login_set_default_options() {
 				'bottom' => 10,
 				'left'   => 10,
 			),
+			'form_gap' => 5,
 		),
 
 		'heading' => array(
@@ -192,8 +171,12 @@ function th_login_set_default_options() {
 
 		'Input' => array(
 			'color'           => '#000000',
-			'background'      => '#111',
-			'activeBackground'=> '',
+			'labelcolor'           => '#000000',
+			'background'      => '#11111',
+			'labeltypography'      => array(
+				'size'       => '10px',
+				'fontWeight' => 500,
+			),
 			'typography'      => array(
 				'size'       => '10px',
 				'fontWeight' => 500,
@@ -201,9 +184,9 @@ function th_login_set_default_options() {
 		),
 
 		'button' => array(
-			'color'           => '#111',
-			'background'      => '#000000',
-			'hoverBackground' => '',
+			'color'           => '#000000',
+			'background'      => '#ffffff',
+			'hoverBackground' => '#C7C2C2',
 			'padding'         => array(
 				'top'    => 10,
 				'right'  => 10,
@@ -229,6 +212,15 @@ function th_login_set_default_options() {
 					'bottomRight' => 6,
 					'bottomLeft'  => 6,
 				),
+			),
+		),
+
+		'rememberme' => array(
+			'color'            => '#000000',
+			'checkboxbackground' => '#000000',
+			'typography'       => array(
+				'size'       => '10px',
+				'fontWeight' => 500,
 			),
 		),
 	);

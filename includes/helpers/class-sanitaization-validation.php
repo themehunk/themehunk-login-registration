@@ -13,6 +13,7 @@ class TH_Sanitization_validation {
 		$sanitized['default_register_role']             = sanitize_text_field( $settings['default_register_role'] ?? 'subscriber' );
 
 		$sanitized['auto_login_after_registration'] = rest_sanitize_boolean( $settings['auto_login_after_registration'] ?? false );
+		$sanitized['allow_user_registration'] = rest_sanitize_boolean( $settings['allow_user_registration'] ?? get_option( 'users_can_register' ) );
 		$sanitized['close_button'] = rest_sanitize_boolean( $settings['close_button'] ?? true );
 
 		// Sanitize redirects.

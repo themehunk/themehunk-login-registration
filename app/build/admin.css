@@ -3631,7 +3631,10 @@ input[type=range]::-webkit-slider-thumb {
   width: 100%;
   height: 100%;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  overflow-y: auto;
 }
 
 /* Form Preview Styles (background) */
@@ -3693,6 +3696,10 @@ input[type=range]::-webkit-slider-thumb {
   to {
     transform: translateX(0);
   }
+}
+.th-modal-preview input:-webkit-autofill {
+  box-shadow: var(--th-backgroundColor) !important;
+  -webkit-text-fill-color: var(--th-input-color) !important;
 }
 
 /*# sourceMappingURL=admin.css.map*/

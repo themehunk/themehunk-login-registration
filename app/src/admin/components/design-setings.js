@@ -107,10 +107,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		}
 	};
 
-	const getBorderStyle = (border) => {
-		const width = border?.width || {};
-		const radius = border?.radius || {};
-		return {
+	const getBorderStyle = (border = {}) => {
+	const width = border.width || {};
+	const radius = border.radius || {};
+	return {
 		borderTopWidth: `${width.top ?? 0}px`,
 		borderRightWidth: `${width.right ?? 0}px`,
 		borderBottomWidth: `${width.bottom ?? 0}px`,
@@ -121,7 +121,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		borderTopRightRadius: `${radius.topRight ?? 0}px`,
 		borderBottomRightRadius: `${radius.bottomRight ?? 0}px`,
 		borderBottomLeftRadius: `${radius.bottomLeft ?? 0}px`,
-		};
+	};
 	};
 
 	const getPaddingStyle = (padding) => {
@@ -135,19 +135,20 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 	};
 
 	const modalStyle = {
-		...getBackgroundStyle(settings.design.modal.modal_background),
-		...getBorderStyle(settings.design.modal.modal_border),
+		...getBackgroundStyle(settings.design.modal?.modal_background),
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
 		height: '100%',
+		'--th-input-color': inputBase.color,
+		'--th-backgroundColor': `0 0 0 1000px ${inputBase.background} inset`,
 	};
 
 	const formStyle = {
-		...getBackgroundStyle(settings.design.form.form_background),
-		...getBorderStyle(settings.design.form.form_border),
-		...getPaddingStyle(settings.design.form.form_padding),
+		...getBackgroundStyle(settings.design.form?.form_background),
+		...getBorderStyle(settings.design.form?.form_border),
+		...getPaddingStyle(settings.design.form?.form_padding),
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -160,24 +161,24 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 	const renderFormPreview = () => {
 		const commonHeadingStyle = {
-		color: settings.design.heading.color,
-		fontSize: settings.design.heading.typography.size,
-		fontWeight: settings.design.heading.typography.fontWeight,
-		margin: 0,
+			color: settings.design.heading.color,
+			fontSize: settings.design.heading.typography.size,
+			fontWeight: settings.design.heading.typography.fontWeight,
+			margin: 0,
 		};
 
 		const inputProps = {
-		base: {
-			color: inputBase.color,
-			backgroundColor: inputBase.background,
-			fontSize: inputBase.typography.size,
-			fontWeight: inputBase.typography.fontWeight,
-			padding: '10px',
-			border: '1px solid #ccc',
-			width: '100%',
-			borderRadius: '4px',
-		},
-		active: { backgroundColor: inputBase.activeBackground },
+			base: {
+				color: inputBase.color,
+				backgroundColor: inputBase.background,
+				fontSize: inputBase.typography.size,
+				fontWeight: inputBase.typography.fontWeight,
+				padding: '10px',
+				border: '1px solid #ccc',
+				width: '100%',
+				borderRadius: '4px',
+			},
+			active: { backgroundColor: inputBase.activeBackground },
 		};
 
 		const buttonProps = {

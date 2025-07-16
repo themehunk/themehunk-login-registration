@@ -46,6 +46,7 @@ export const general = {
       default_register_role: 'subscriber', 
       auto_login_after_registration: false,
       close_button:true,
+      allow_user_registration: false,
       redirects: {
         after_login: { type: "current_page", url: "" },
         after_logout: { type: "home_page", url: "" },
@@ -233,10 +234,10 @@ export  const design = {
     },
     form_border: {
       width: {
-        top: 1,
-        right: 1,
-        bottom: 1,
-        left: 1
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
       },
       style: "solid",
       color: "#000000",
@@ -248,41 +249,41 @@ export  const design = {
       }
     },
     form_padding :{
-      top:10,
-      left:10,
-      right:10,
-      bottom:10,
+      top:15,
+      left:50,
+      right:50,
+      bottom:15,
     },
-    form_gap:5,
+    form_gap:12,
   }, 
   heading:{
     color:"#000000",
-    typography:{size: "10px", fontWeight: 500}
+    typography:{size: "25px", fontWeight: 700}
   },
   Input:{
     color:"#000000",
     labelcolor:"#000000",
-    labeltypography:{size: "10px", fontWeight: 500},
-    background:"#11111",
-    typography:{size: "10px", fontWeight: 500}
+    labeltypography:{size: "20px", fontWeight: 300},
+    background:"#EEEcec",
+    typography:{size: "15px", fontWeight: 300}
   },
   button:{
-    color:"#000000",
-    background:"#ffffff",
-    hoverBackground:"#C7C2C2",
-    padding:{ top:10, left:10, right:10, bottom:10},
-    typography:{size: "10px",fontWeight: 500},
+    color:"#ffffff",
+    background:"#0B59f4",
+    hoverBackground:"#1c21ba",
+    padding:{ top:6, left:15, right:10, bottom:15},
+    typography:{size: "14px",fontWeight: 500},
     border: {
-      width: { top: 1, right: 1, bottom: 1, left: 1 },
+      width: { top: 0, right: 0, bottom: 0, left: 0 },
       style: "solid",
       color: "#000000",
-      radius: { topLeft: 6, topRight: 6, bottomRight: 6, bottomLeft: 6}
+      radius: { topLeft: 5, topRight: 5, bottomRight: 5, bottomLeft: 5}
     },
   },
   rememberme:{
     color:"#000000",
-    checkboxbackground:"#000000",
-    typography:{size: "10px",fontWeight: 500},
+    checkboxbackground:"#ffffff",
+    typography:{size: "12px",fontWeight: 300},
   }
 };
 
@@ -376,8 +377,8 @@ export const layoutOptions = [
 ];
 
 export const fontWeightOptions = [
-  { label: __("Normal", "th-login"), value: 400 },
+  { label: __("Normal", "th-login"), value: 300 },
   { label: __("Medium", "th-login"), value: 500 },
-  { label: __("Semi-Bold", "th-login"), value: 600 },
-  { label: __("Bold", "th-login"), value: 700 },
+  { label: __("Semi-Bold", "th-login"), value: 700 },
+  { label: __("Bold", "th-login"), value: 900 },
 ];

@@ -119,6 +119,25 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                             </div>
                         </div>
 
+                        {/* Allow User Registration Toggle */}
+                        <div className="setting-row">
+                            <div className="setting-label">
+                                <h3>{__("Allow User Registration", "th-login")}</h3>
+                                <p className="description">
+                                    {__("If enabled, users can register an account using the register form.", "th-login")}
+                                </p>
+                            </div>
+                            <div className="setting-control">
+                                <ToggleControl
+                                    __nextHasNoMarginBottom={true}
+                                    checked={settings.general.allow_user_registration || false}
+                                    onChange={(isChecked) =>
+                                        handleSettingChange("general", ["allow_user_registration"], isChecked)
+                                    }
+                                />
+                            </div>
+                        </div>
+
                         {/* Login Form Type */}
                         <div className="settings-group th-login-modalchoose-form">
                             <h4 className="group-title">{__("Login Form Type", "th-login")}</h4>

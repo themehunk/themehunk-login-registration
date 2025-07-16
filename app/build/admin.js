@@ -22160,6 +22160,7 @@ var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
   }, children));
 };
 var DesignEditor = function DesignEditor(_ref4) {
+  var _settings$design$moda, _settings$design$form, _settings$design$form2, _settings$design$form3;
   var settings = _ref4.settings,
     handleSettingChange = _ref4.handleSettingChange;
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("login"),
@@ -22194,10 +22195,11 @@ var DesignEditor = function DesignEditor(_ref4) {
       };
     }
   };
-  var getBorderStyle = function getBorderStyle(border) {
+  var getBorderStyle = function getBorderStyle() {
     var _width$top, _width$right, _width$bottom, _width$left, _radius$topLeft, _radius$topRight, _radius$bottomRight, _radius$bottomLeft;
-    var width = (border === null || border === void 0 ? void 0 : border.width) || {};
-    var radius = (border === null || border === void 0 ? void 0 : border.radius) || {};
+    var border = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var width = border.width || {};
+    var radius = border.radius || {};
     return {
       borderTopWidth: "".concat((_width$top = width.top) !== null && _width$top !== void 0 ? _width$top : 0, "px"),
       borderRightWidth: "".concat((_width$right = width.right) !== null && _width$right !== void 0 ? _width$right : 0, "px"),
@@ -22221,14 +22223,16 @@ var DesignEditor = function DesignEditor(_ref4) {
       paddingLeft: "".concat((_pad$left = pad.left) !== null && _pad$left !== void 0 ? _pad$left : 0, "px")
     };
   };
-  var modalStyle = _objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle(settings.design.modal.modal_background)), getBorderStyle(settings.design.modal.modal_border)), {}, {
+  var modalStyle = _objectSpread(_objectSpread({}, getBackgroundStyle((_settings$design$moda = settings.design.modal) === null || _settings$design$moda === void 0 ? void 0 : _settings$design$moda.modal_background)), {}, {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    '--th-input-color': inputBase.color,
+    '--th-backgroundColor': "0 0 0 1000px ".concat(inputBase.background, " inset")
   });
-  var formStyle = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle(settings.design.form.form_background)), getBorderStyle(settings.design.form.form_border)), getPaddingStyle(settings.design.form.form_padding)), {}, {
+  var formStyle = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle((_settings$design$form = settings.design.form) === null || _settings$design$form === void 0 ? void 0 : _settings$design$form.form_background)), getBorderStyle((_settings$design$form2 = settings.design.form) === null || _settings$design$form2 === void 0 ? void 0 : _settings$design$form2.form_border)), getPaddingStyle((_settings$design$form3 = settings.design.form) === null || _settings$design$form3 === void 0 ? void 0 : _settings$design$form3.form_padding)), {}, {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -23909,6 +23913,20 @@ var GeneralSettings = function GeneralSettings(_ref) {
       return handleSettingChange("general", ["plugin_status"], isChecked ? "enabled" : "disabled");
     }
   }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allow User Registration", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If enabled, users can register an account using the register form.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: settings.general.allow_user_registration || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("general", ["allow_user_registration"], isChecked);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group th-login-modalchoose-form"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
@@ -24813,6 +24831,7 @@ var general = {
   default_register_role: 'subscriber',
   auto_login_after_registration: false,
   close_button: true,
+  allow_user_registration: false,
   redirects: {
     after_login: {
       type: "current_page",
@@ -25004,10 +25023,10 @@ var design = {
     },
     form_border: {
       width: {
-        top: 1,
-        right: 1,
-        bottom: 1,
-        left: 1
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
       },
       style: "solid",
       color: "#000000",
@@ -25019,70 +25038,70 @@ var design = {
       }
     },
     form_padding: {
-      top: 10,
-      left: 10,
-      right: 10,
-      bottom: 10
+      top: 15,
+      left: 50,
+      right: 50,
+      bottom: 15
     },
-    form_gap: 5
+    form_gap: 12
   },
   heading: {
     color: "#000000",
     typography: {
-      size: "10px",
-      fontWeight: 500
+      size: "25px",
+      fontWeight: 700
     }
   },
   Input: {
     color: "#000000",
     labelcolor: "#000000",
     labeltypography: {
-      size: "10px",
-      fontWeight: 500
+      size: "20px",
+      fontWeight: 300
     },
-    background: "#11111",
+    background: "#EEEcec",
     typography: {
-      size: "10px",
-      fontWeight: 500
+      size: "15px",
+      fontWeight: 300
     }
   },
   button: {
-    color: "#000000",
-    background: "#ffffff",
-    hoverBackground: "#C7C2C2",
+    color: "#ffffff",
+    background: "#0B59f4",
+    hoverBackground: "#1c21ba",
     padding: {
-      top: 10,
-      left: 10,
+      top: 6,
+      left: 15,
       right: 10,
-      bottom: 10
+      bottom: 15
     },
     typography: {
-      size: "10px",
+      size: "14px",
       fontWeight: 500
     },
     border: {
       width: {
-        top: 1,
-        right: 1,
-        bottom: 1,
-        left: 1
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
       },
       style: "solid",
       color: "#000000",
       radius: {
-        topLeft: 6,
-        topRight: 6,
-        bottomRight: 6,
-        bottomLeft: 6
+        topLeft: 5,
+        topRight: 5,
+        bottomRight: 5,
+        bottomLeft: 5
       }
     }
   },
   rememberme: {
     color: "#000000",
-    checkboxbackground: "#000000",
+    checkboxbackground: "#ffffff",
     typography: {
-      size: "10px",
-      fontWeight: 500
+      size: "12px",
+      fontWeight: 300
     }
   }
 };
@@ -25205,16 +25224,16 @@ var layoutOptions = [{
 }];
 var fontWeightOptions = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "th-login"),
-  value: 400
+  value: 300
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Medium", "th-login"),
   value: 500
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Semi-Bold", "th-login"),
-  value: 600
+  value: 700
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bold", "th-login"),
-  value: 700
+  value: 900
 }];
 
 /***/ }),

@@ -827,8 +827,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control">
                                     <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
+                                        __next40pxDefaultSize = {true}
+                                        __nextHasNoMarginBottom={true}
                                     value={
                                         settings.display_triggers.menu_integration
                                         ?.item_text_register ||

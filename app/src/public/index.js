@@ -94,8 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal) return;
 
         modal.classList.remove(
+            'th-login-popup-modal-effect',
             'th-login-slide-in-left',
             'th-login-slide-in-right',
+            'th-login-page',
             'th-login-popup-modal--closing',
             'th-login-popup-modal--active'
         );
@@ -107,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.add('th-login-slide-in-left');
         } else if (display_type === 'slide_in_right') {
             modal.classList.add('th-login-slide-in-right');
+        } else if(display_type === 'page'){
+            modal.classList.add('th-login-page');
+        }else{
+            modal.classList.add('th-login-popup-modal-effect');
         }
 
         setActiveForm(formType);
@@ -128,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modal.classList.remove('th-login-popup-modal--opening');
         modal.classList.add('th-login-popup-modal--closing');
-        modal.classList.remove('th-login-slide-in-left', 'th-login-slide-in-right');
+        modal.classList.remove('th-login-slide-in-left', 'th-login-slide-in-right', 'th-login-page', 'th-login-popup-modal-effect');
         modal.setAttribute('aria-hidden', 'true');
 
         animationEndHandler = function handler() {

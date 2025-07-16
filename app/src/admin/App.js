@@ -365,6 +365,7 @@ const App = () => {
               <p>{message.text}</p>
             </div>
           )}
+
         </div>
       </div>
 

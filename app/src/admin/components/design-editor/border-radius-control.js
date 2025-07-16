@@ -1,5 +1,5 @@
 import { TextControl, Button } from '@wordpress/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 
 export const BorderRadiusControl = ({
@@ -10,6 +10,17 @@ export const BorderRadiusControl = ({
   max = 100,
 }) => {
   const [syncAll, setSyncAll] = useState(false);
+
+  // Auto-enable sync if all values match on mount
+  useEffect(() => {
+    const allSame =
+      values.topLeft === values.topRight &&
+      values.topRight === values.bottomRight &&
+      values.bottomRight === values.bottomLeft;
+    if (allSame) {
+      setSyncAll(true);
+    }
+  }, []);
 
   const handleChange = (corner, value) => {
     let cleanValue = parseInt(value, 10) || 0;
@@ -33,7 +44,7 @@ export const BorderRadiusControl = ({
   const toggleSync = () => {
     const newSyncState = !syncAll;
     setSyncAll(newSyncState);
-    
+
     if (newSyncState) {
       onChange({
         topLeft: values.topLeft || 0,
@@ -43,6 +54,13 @@ export const BorderRadiusControl = ({
       });
     }
   };
+
+  const corners = [
+    { key: 'topLeft', label: __('Top Left', 'th-login') },
+    { key: 'topRight', label: __('Top Right', 'th-login') },
+    { key: 'bottomRight', label: __('Bottom Right', 'th-login') },
+    { key: 'bottomLeft', label: __('Bottom Left', 'th-login') },
+  ];
 
   return (
     <>
@@ -62,60 +80,21 @@ export const BorderRadiusControl = ({
       )}
 
       <div className="components-border-box-control__input-wrapper">
-        <div className="components-border-box-control__input-container">
-          <TextControl
-          __next40pxDefaultSize={true}
-          __nextHasNoMarginBottom={true}
-            label={__('Top Left', 'th-login')}
-            type="number"
-            min={min}
-            max={max}
-            value={values.topLeft}
-            onChange={(val) => handleChange('topLeft', val)}
-          />
-        </div>
-
-        <div className="components-border-box-control__input-container">
-          <TextControl
-          __next40pxDefaultSize={true}
-          __nextHasNoMarginBottom={true}
-            label={__('Top Right', 'th-login')}
-            type="number"
-            min={min}
-            max={max}
-            value={values.topRight}
-            onChange={(val) => handleChange('topRight', val)}
-          />
-        </div>
-
-        <div className="components-border-box-control__input-container">
-          <TextControl
-          __next40pxDefaultSize={true}
-          __nextHasNoMarginBottom={true}
-            label={__('Bottom Right', 'th-login')}
-            type="number"
-            min={min}
-            max={max}
-            value={values.bottomRight}
-            onChange={(val) => handleChange('bottomRight', val)}
-          />
-        </div>
-
-        <div className="components-border-box-control__input-container">
-          <TextControl
-          __next40pxDefaultSize={true}
-          __nextHasNoMarginBottom={true}
-            label={__('Bottom Left', 'th-login')}
-            type="number"
-            min={min}
-            max={max}
-            value={values.bottomLeft}
-            onChange={(val) => handleChange('bottomLeft', val)}
-          />
-        </div>
+        {corners.map(({ key, label }) => (
+          <div key={key} className="components-border-box-control__input-container">
+            <TextControl
+              __next40pxDefaultSize={true}
+              __nextHasNoMarginBottom={true}
+              label={label}
+              type="number"
+              min={min}
+              max={max}
+              value={values[key]}
+              onChange={(val) => handleChange(key, val)}
+            />
+          </div>
+        ))}
       </div>
     </>
   );
 };
-
-

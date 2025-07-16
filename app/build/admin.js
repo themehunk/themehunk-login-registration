@@ -22052,6 +22052,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _contant__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../contant */ "./src/admin/contant.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icons */ "./src/admin/components/icons.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var _excluded = ["base", "hover", "active"];
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -22068,6 +22069,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
 function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
+
 
 
 
@@ -22292,13 +22294,25 @@ var DesignEditor = function DesignEditor(_ref4) {
       return fields.filter(function (field) {
         return field.show !== false;
       }).map(function (field, i) {
+        var Icon = field.icon && _icons__WEBPACK_IMPORTED_MODULE_9__.THL_ICONS[field.icon] ? _icons__WEBPACK_IMPORTED_MODULE_9__.THL_ICONS[field.icon] : null;
         return /*#__PURE__*/React.createElement("div", {
           key: i,
           className: "th-preview-field-group",
           style: {
             width: '100%'
           }
-        }, field.type !== 'checkbox' && field.label && /*#__PURE__*/React.createElement("label", {
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "design-label-wrapper"
+        }, Icon && /*#__PURE__*/React.createElement("div", {
+          dangerouslySetInnerHTML: {
+            __html: _icons__WEBPACK_IMPORTED_MODULE_9__.THL_ICONS[field.icon]
+          },
+          style: {
+            color: settings.design.icon.color,
+            width: settings.design.icon.size,
+            flexShrink: 0
+          }
+        }), field.type !== 'checkbox' && field.label && /*#__PURE__*/React.createElement("label", {
           style: {
             display: "block",
             marginBottom: "5px",
@@ -22306,7 +22320,7 @@ var DesignEditor = function DesignEditor(_ref4) {
             fontWeight: inputBase.labeltypography.fontWeight,
             color: inputBase.labelcolor || '#333'
           }
-        }, field.label), field.type === 'checkbox' ? /*#__PURE__*/React.createElement(InteractiveCheckbox, checkboxProps, field.label) : /*#__PURE__*/React.createElement(InteractiveInput, {
+        }, field.label)), field.type === 'checkbox' ? /*#__PURE__*/React.createElement(InteractiveCheckbox, checkboxProps, field.label) : /*#__PURE__*/React.createElement(InteractiveInput, {
           type: field.type || "text",
           placeholder: field.placeholder || "",
           base: inputProps.base,
@@ -22445,7 +22459,7 @@ var DesignEditor = function DesignEditor(_ref4) {
       },
       options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
     }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input", "th-login"),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Label", "th-login"),
       defaultOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       className: "th-heading-settings"
@@ -22483,7 +22497,12 @@ var DesignEditor = function DesignEditor(_ref4) {
         return handleSettingChange("design", ["Input", "labeltypography", "fontWeight"], value);
       },
       options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
-    }))), /*#__PURE__*/React.createElement("div", {
+    }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Box", "th-login"),
+      defaultOpen: false
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "th-heading-settings"
+    }, /*#__PURE__*/React.createElement("div", {
       className: "th-setting-row"
     }, /*#__PURE__*/React.createElement("label", {
       className: "th-setting-label"
@@ -22651,7 +22670,35 @@ var DesignEditor = function DesignEditor(_ref4) {
         return handleSettingChange("design", ["rememberme", "typography", "fontWeight"], value);
       },
       options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
-    })))))));
+    }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Icon", "th-login"),
+      defaultOpen: false
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "th-heading-settings"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "th-setting-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "th-setting-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+      type: "color",
+      className: "th-color-input",
+      value: settings.design.icon.color,
+      onChange: function onChange(e) {
+        return handleSettingChange("design", ["icon", "color"], e.target.value);
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "th-setting-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "th-setting-label"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      className: "th-number-input",
+      value: parseInt(settings.design.icon.size),
+      onChange: function onChange(e) {
+        return handleSettingChange("design", ["icon", "size"], "".concat(e.target.value, "px"));
+      },
+      min: 1
+    }))))));
   })), /*#__PURE__*/React.createElement("div", {
     className: "preview-panel"
   }, /*#__PURE__*/React.createElement("div", {
@@ -22704,6 +22751,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { if (r) i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n;else { var o = function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); }; o("next", 0), o("throw", 1), o("return", 2); } }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -22713,20 +22772,62 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+
 var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
-  var _settings$display_tri, _settings$display_tri2, _settings$display_tri3, _settings$display_tri4, _settings$display_tri5, _settings$display_tri6, _settings$display_tri7, _settings$display_tri8, _settings$display_tri9, _settings$display_tri0, _settings$display_tri1, _settings$display_tri10, _settings$display_tri11, _settings$display_tri12, _settings$display_tri13, _settings$display_tri14, _settings$display_tri15, _settings$display_tri16, _settings$display_tri17, _settings$display_tri18, _settings$display_tri19, _settings$display_tri20, _settings$display_tri21, _settings$display_tri22, _settings$display_tri23, _settings$display_tri24, _settings$display_tri25, _settings$display_tri26, _settings$display_tri27, _settings$display_tri28, _settings$display_tri29, _settings$display_tri30, _settings$display_tri31, _settings$display_tri32, _settings$display_tri33, _settings$display_tri34, _settings$display_tri35, _settings$display_tri36, _settings$display_tri37, _settings$display_tri38, _settings$display_tri39, _settings$display_tri40;
+  var _settings$display_tri, _settings$display_tri2, _settings$display_tri3, _settings$display_tri4, _settings$display_tri5, _settings$display_tri6, _settings$display_tri7, _settings$display_tri8, _settings$display_tri9, _settings$display_tri0, _settings$display_tri1, _settings$display_tri10, _settings$display_tri11, _settings$display_tri12, _settings$display_tri13, _settings$display_tri14, _settings$display_tri15, _settings$display_tri16, _suggestions$categori2, _settings$display_tri17, _settings$display_tri18, _settings$display_tri19, _settings$display_tri20, _settings$display_tri21, _suggestions$tags2, _settings$display_tri22, _settings$display_tri23, _settings$display_tri24, _settings$display_tri25, _settings$display_tri26, _settings$display_tri27, _settings$display_tri28, _settings$display_tri29, _settings$display_tri30, _settings$display_tri31, _settings$display_tri32, _settings$display_tri33, _settings$display_tri34, _settings$display_tri35, _settings$display_tri36, _settings$display_tri37, _settings$display_tri38, _settings$display_tri39, _settings$display_tri40, _settings$display_tri41, _settings$display_tri42;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)("auto_open"),
     _useState2 = _slicedToArray(_useState, 2),
     activeTab = _useState2[0],
     setActiveTab = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)({
+      pages: [],
+      posts: [],
+      categories: [],
+      tags: []
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    suggestions = _useState4[0],
+    setSuggestions = _useState4[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    var fetchSuggestions = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var response, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.n) {
+            case 0:
+              _context.p = 0;
+              _context.n = 1;
+              return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+                path: "th-login/v1/content-suggestions"
+              });
+            case 1:
+              response = _context.v;
+              if (response) {
+                setSuggestions(response);
+              }
+              _context.n = 3;
+              break;
+            case 2:
+              _context.p = 2;
+              _t = _context.v;
+              console.error("Error fetching content suggestions:", _t);
+            case 3:
+              return _context.a(2);
+          }
+        }, _callee, null, [[0, 2]]);
+      }));
+      return function fetchSuggestions() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
+    fetchSuggestions();
+  }, []);
   var tabs = [{
     key: "auto_open",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open", "th-login")
-  }, {
-    key: "audience",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Audience", "th-login")
   }, {
     key: "page_conditions",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page Conditions", "th-login")
@@ -22873,24 +22974,6 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'time_seconds'], parseInt(newValue, 10));
     }
-  })))), activeTab === "audience" && /*#__PURE__*/React.createElement("div", {
-    className: "settings-group"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Audience Conditions", "th-login")), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logged Out Users Only", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only show to logged out users", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri1 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri1 === void 0 ? void 0 : _settings$display_tri1.for_logged_out_only) || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("display_triggers", ["auto_open_conditions", "for_logged_out_only"], isChecked);
-    }
   })))), activeTab === "page_conditions" && /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
@@ -22905,11 +22988,41 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri10 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri10 === void 0 || (_settings$display_tri10 = _settings$display_tri10.on_specific_pages) === null || _settings$display_tri10 === void 0 ? void 0 : _settings$display_tri10.enabled) || false,
+    checked: ((_settings$display_tri1 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri1 === void 0 || (_settings$display_tri1 = _settings$display_tri1.on_specific_pages) === null || _settings$display_tri1 === void 0 ? void 0 : _settings$display_tri1.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "on_specific_pages", "enabled"], isChecked);
     }
-  }))), ((_settings$display_tri11 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri11 === void 0 || (_settings$display_tri11 = _settings$display_tri11.on_specific_pages) === null || _settings$display_tri11 === void 0 ? void 0 : _settings$display_tri11.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$display_tri10 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri10 === void 0 || (_settings$display_tri10 = _settings$display_tri10.on_specific_pages) === null || _settings$display_tri10 === void 0 ? void 0 : _settings$display_tri10.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FormTokenField, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Pages/Posts', 'th-login'),
+    value: ((_settings$display_tri11 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri11 === void 0 || (_settings$display_tri11 = _settings$display_tri11.on_specific_pages) === null || _settings$display_tri11 === void 0 || (_settings$display_tri11 = _settings$display_tri11.page_ids) === null || _settings$display_tri11 === void 0 ? void 0 : _settings$display_tri11.map(function (id) {
+      var matched = [].concat(_toConsumableArray(suggestions.pages), _toConsumableArray(suggestions.posts)).find(function (p) {
+        return p.id === id;
+      });
+      return (matched === null || matched === void 0 ? void 0 : matched.title) || "Untitled (ID: ".concat(id, ")");
+    })) || [],
+    suggestions: [].concat(_toConsumableArray(suggestions.pages), _toConsumableArray(suggestions.posts)).map(function (p) {
+      return p.title || "Untitled (ID: ".concat(p.id, ")");
+    }),
+    onChange: function onChange(tokens) {
+      var selectedIds = tokens.map(function (token) {
+        var match = [].concat(_toConsumableArray(suggestions.pages), _toConsumableArray(suggestions.posts)).find(function (p) {
+          return (p.title || "Untitled (ID: ".concat(p.id, ")")) === token;
+        });
+        return match === null || match === void 0 ? void 0 : match.id;
+      }).filter(Boolean);
+      handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_pages', 'page_ids'], selectedIds);
+    },
+    __experimentalExpandOnFocus: true,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    __experimentalValidateInput: function __experimentalValidateInput(input) {
+      return [].concat(_toConsumableArray(suggestions.pages), _toConsumableArray(suggestions.posts)).some(function (opt) {
+        return (opt.title || "Untitled (ID: ".concat(opt.id, ")")) === input;
+      });
+    }
+  }), /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -22961,7 +23074,40 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'enabled'], isChecked);
     }
-  }))), ((_settings$display_tri15 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri15 === void 0 || (_settings$display_tri15 = _settings$display_tri15.on_specific_categories) === null || _settings$display_tri15 === void 0 ? void 0 : _settings$display_tri15.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$display_tri15 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri15 === void 0 || (_settings$display_tri15 = _settings$display_tri15.on_specific_categories) === null || _settings$display_tri15 === void 0 ? void 0 : _settings$display_tri15.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FormTokenField, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Categories', 'th-login'),
+    value: ((_settings$display_tri16 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.on_specific_categories) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.category_ids) === null || _settings$display_tri16 === void 0 ? void 0 : _settings$display_tri16.map(function (id) {
+      var _suggestions$categori;
+      var matched = (_suggestions$categori = suggestions.categories) === null || _suggestions$categori === void 0 ? void 0 : _suggestions$categori.find(function (cat) {
+        return cat.id === id;
+      });
+      return (matched === null || matched === void 0 ? void 0 : matched.name) || "Unnamed (ID: ".concat(id, ")");
+    })) || [],
+    suggestions: ((_suggestions$categori2 = suggestions.categories) === null || _suggestions$categori2 === void 0 ? void 0 : _suggestions$categori2.map(function (cat) {
+      return cat.name || "Unnamed (ID: ".concat(cat.id, ")");
+    })) || [],
+    onChange: function onChange(tokens) {
+      var selectedIds = tokens.map(function (token) {
+        var _suggestions$categori3;
+        var match = (_suggestions$categori3 = suggestions.categories) === null || _suggestions$categori3 === void 0 ? void 0 : _suggestions$categori3.find(function (cat) {
+          return (cat.name || "Unnamed (ID: ".concat(cat.id, ")")) === token;
+        });
+        return match === null || match === void 0 ? void 0 : match.id;
+      }).filter(Boolean);
+      handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_ids'], selectedIds);
+    },
+    __experimentalExpandOnFocus: true,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    __experimentalValidateInput: function __experimentalValidateInput(input) {
+      var _suggestions$categori4;
+      return (_suggestions$categori4 = suggestions.categories) === null || _suggestions$categori4 === void 0 ? void 0 : _suggestions$categori4.some(function (cat) {
+        return (cat.name || "Unnamed (ID: ".concat(cat.id, ")")) === input;
+      });
+    }
+  }), /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -22972,7 +23118,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri16 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.on_specific_categories) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.category_ids) === null || _settings$display_tri16 === void 0 ? void 0 : _settings$display_tri16.join(', ')) || '',
+    value: ((_settings$display_tri17 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri17 === void 0 || (_settings$display_tri17 = _settings$display_tri17.on_specific_categories) === null || _settings$display_tri17 === void 0 || (_settings$display_tri17 = _settings$display_tri17.category_ids) === null || _settings$display_tri17 === void 0 ? void 0 : _settings$display_tri17.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_ids'], newValue.split(',').map(function (s) {
         return parseInt(s.trim(), 10);
@@ -22991,7 +23137,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri17 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri17 === void 0 || (_settings$display_tri17 = _settings$display_tri17.on_specific_categories) === null || _settings$display_tri17 === void 0 || (_settings$display_tri17 = _settings$display_tri17.category_slugs) === null || _settings$display_tri17 === void 0 ? void 0 : _settings$display_tri17.join(', ')) || '',
+    value: ((_settings$display_tri18 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri18 === void 0 || (_settings$display_tri18 = _settings$display_tri18.on_specific_categories) === null || _settings$display_tri18 === void 0 || (_settings$display_tri18 = _settings$display_tri18.category_slugs) === null || _settings$display_tri18 === void 0 ? void 0 : _settings$display_tri18.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_slugs'], newValue.split(',').map(function (s) {
         return s.trim();
@@ -23007,11 +23153,44 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri18 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri18 === void 0 || (_settings$display_tri18 = _settings$display_tri18.on_specific_tags) === null || _settings$display_tri18 === void 0 ? void 0 : _settings$display_tri18.enabled) || false,
+    checked: ((_settings$display_tri19 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri19 === void 0 || (_settings$display_tri19 = _settings$display_tri19.on_specific_tags) === null || _settings$display_tri19 === void 0 ? void 0 : _settings$display_tri19.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'enabled'], isChecked);
     }
-  }))), ((_settings$display_tri19 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri19 === void 0 || (_settings$display_tri19 = _settings$display_tri19.on_specific_tags) === null || _settings$display_tri19 === void 0 ? void 0 : _settings$display_tri19.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$display_tri20 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri20 === void 0 || (_settings$display_tri20 = _settings$display_tri20.on_specific_tags) === null || _settings$display_tri20 === void 0 ? void 0 : _settings$display_tri20.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FormTokenField, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Tags', 'th-login'),
+    value: ((_settings$display_tri21 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.on_specific_tags) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.tag_ids) === null || _settings$display_tri21 === void 0 ? void 0 : _settings$display_tri21.map(function (id) {
+      var _suggestions$tags;
+      var matched = (_suggestions$tags = suggestions.tags) === null || _suggestions$tags === void 0 ? void 0 : _suggestions$tags.find(function (tag) {
+        return tag.id === id;
+      });
+      return (matched === null || matched === void 0 ? void 0 : matched.name) || "Unnamed (ID: ".concat(id, ")");
+    })) || [],
+    suggestions: ((_suggestions$tags2 = suggestions.tags) === null || _suggestions$tags2 === void 0 ? void 0 : _suggestions$tags2.map(function (tag) {
+      return tag.name || "Unnamed (ID: ".concat(tag.id, ")");
+    })) || [],
+    onChange: function onChange(tokens) {
+      var selectedIds = tokens.map(function (token) {
+        var _suggestions$tags3;
+        var match = (_suggestions$tags3 = suggestions.tags) === null || _suggestions$tags3 === void 0 ? void 0 : _suggestions$tags3.find(function (tag) {
+          return (tag.name || "Unnamed (ID: ".concat(tag.id, ")")) === token;
+        });
+        return match === null || match === void 0 ? void 0 : match.id;
+      }).filter(Boolean);
+      handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_ids'], selectedIds);
+    },
+    __experimentalExpandOnFocus: true,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    __experimentalValidateInput: function __experimentalValidateInput(input) {
+      var _suggestions$tags4;
+      return (_suggestions$tags4 = suggestions.tags) === null || _suggestions$tags4 === void 0 ? void 0 : _suggestions$tags4.some(function (tag) {
+        return (tag.name || "Unnamed (ID: ".concat(tag.id, ")")) === input;
+      });
+    }
+  }), /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -23022,7 +23201,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri20 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri20 === void 0 || (_settings$display_tri20 = _settings$display_tri20.on_specific_tags) === null || _settings$display_tri20 === void 0 || (_settings$display_tri20 = _settings$display_tri20.tag_ids) === null || _settings$display_tri20 === void 0 ? void 0 : _settings$display_tri20.join(', ')) || '',
+    value: ((_settings$display_tri22 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri22 === void 0 || (_settings$display_tri22 = _settings$display_tri22.on_specific_tags) === null || _settings$display_tri22 === void 0 || (_settings$display_tri22 = _settings$display_tri22.tag_ids) === null || _settings$display_tri22 === void 0 ? void 0 : _settings$display_tri22.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_ids'], newValue.split(',').map(function (s) {
         return parseInt(s.trim(), 10);
@@ -23041,7 +23220,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri21 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.on_specific_tags) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.tag_slugs) === null || _settings$display_tri21 === void 0 ? void 0 : _settings$display_tri21.join(', ')) || '',
+    value: ((_settings$display_tri23 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri23 === void 0 || (_settings$display_tri23 = _settings$display_tri23.on_specific_tags) === null || _settings$display_tri23 === void 0 || (_settings$display_tri23 = _settings$display_tri23.tag_slugs) === null || _settings$display_tri23 === void 0 ? void 0 : _settings$display_tri23.join(', ')) || '',
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_slugs'], newValue.split(',').map(function (s) {
         return s.trim();
@@ -23057,7 +23236,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri22 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri22 === void 0 ? void 0 : _settings$display_tri22.on_woocommerce_myaccount) || false,
+    checked: ((_settings$display_tri24 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri24 === void 0 ? void 0 : _settings$display_tri24.on_woocommerce_myaccount) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_myaccount'], isChecked);
     }
@@ -23071,7 +23250,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri23 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri23 === void 0 ? void 0 : _settings$display_tri23.on_woocommerce_checkout) || false,
+    checked: ((_settings$display_tri25 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri25 === void 0 ? void 0 : _settings$display_tri25.on_woocommerce_checkout) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_checkout'], isChecked);
     }
@@ -23089,7 +23268,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri24 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri24 === void 0 || (_settings$display_tri24 = _settings$display_tri24.device_visibility) === null || _settings$display_tri24 === void 0 ? void 0 : _settings$display_tri24.desktop) || false,
+    checked: ((_settings$display_tri26 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri26 === void 0 || (_settings$display_tri26 = _settings$display_tri26.device_visibility) === null || _settings$display_tri26 === void 0 ? void 0 : _settings$display_tri26.desktop) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "desktop"], isChecked);
     }
@@ -23103,7 +23282,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri25 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri25 === void 0 || (_settings$display_tri25 = _settings$display_tri25.device_visibility) === null || _settings$display_tri25 === void 0 ? void 0 : _settings$display_tri25.tablet) || false,
+    checked: ((_settings$display_tri27 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri27 === void 0 || (_settings$display_tri27 = _settings$display_tri27.device_visibility) === null || _settings$display_tri27 === void 0 ? void 0 : _settings$display_tri27.tablet) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "tablet"], isChecked);
     }
@@ -23117,7 +23296,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri26 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri26 === void 0 || (_settings$display_tri26 = _settings$display_tri26.device_visibility) === null || _settings$display_tri26 === void 0 ? void 0 : _settings$display_tri26.mobile) || false,
+    checked: ((_settings$display_tri28 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri28 === void 0 || (_settings$display_tri28 = _settings$display_tri28.device_visibility) === null || _settings$display_tri28 === void 0 ? void 0 : _settings$display_tri28.mobile) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "mobile"], isChecked);
     }
@@ -23135,11 +23314,11 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri27 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri27 === void 0 ? void 0 : _settings$display_tri27.enabled) || false,
+    checked: ((_settings$display_tri29 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri29 === void 0 ? void 0 : _settings$display_tri29.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "enabled"], isChecked);
     }
-  }))), ((_settings$display_tri28 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri28 === void 0 ? void 0 : _settings$display_tri28.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$display_tri30 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri30 === void 0 ? void 0 : _settings$display_tri30.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -23148,7 +23327,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How to limit pop-up frequency", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control select-control-settings-popup"
   }, /*#__PURE__*/React.createElement("select", {
-    value: ((_settings$display_tri29 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri29 === void 0 ? void 0 : _settings$display_tri29.type) || "session",
+    value: ((_settings$display_tri31 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri31 === void 0 ? void 0 : _settings$display_tri31.type) || "session",
     onChange: function onChange(e) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "type"], e.target.value);
     }
@@ -23156,7 +23335,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     value: "session"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once per session", "th-login")), /*#__PURE__*/React.createElement("option", {
     value: "days"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "th-login"))))), ((_settings$display_tri30 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri30 === void 0 ? void 0 : _settings$display_tri30.type) === "days" && /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "th-login"))))), ((_settings$display_tri32 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri32 === void 0 ? void 0 : _settings$display_tri32.type) === "days" && /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -23169,7 +23348,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     __nextHasNoMarginBottom: true,
     type: "number",
     min: "1",
-    value: ((_settings$display_tri31 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri31 === void 0 ? void 0 : _settings$display_tri31.days) || 7,
+    value: ((_settings$display_tri33 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri33 === void 0 ? void 0 : _settings$display_tri33.days) || 7,
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "days"], parseInt(newValue, 10));
     }
@@ -23187,11 +23366,11 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri32 = settings.display_triggers.menu_integration) === null || _settings$display_tri32 === void 0 ? void 0 : _settings$display_tri32.enabled) || false,
+    checked: ((_settings$display_tri34 = settings.display_triggers.menu_integration) === null || _settings$display_tri34 === void 0 ? void 0 : _settings$display_tri34.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "enabled"], isChecked);
     }
-  }))), ((_settings$display_tri33 = settings.display_triggers.menu_integration) === null || _settings$display_tri33 === void 0 ? void 0 : _settings$display_tri33.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$display_tri35 = settings.display_triggers.menu_integration) === null || _settings$display_tri35 === void 0 ? void 0 : _settings$display_tri35.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -23202,7 +23381,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri34 = settings.display_triggers.menu_integration) === null || _settings$display_tri34 === void 0 ? void 0 : _settings$display_tri34.menu_slug) || "primary",
+    value: ((_settings$display_tri36 = settings.display_triggers.menu_integration) === null || _settings$display_tri36 === void 0 ? void 0 : _settings$display_tri36.menu_slug) || "primary",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "menu_slug"], newValue);
     }
@@ -23219,7 +23398,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri35 = settings.display_triggers.menu_integration) === null || _settings$display_tri35 === void 0 ? void 0 : _settings$display_tri35.item_text_login) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
+    value: ((_settings$display_tri37 = settings.display_triggers.menu_integration) === null || _settings$display_tri37 === void 0 ? void 0 : _settings$display_tri37.item_text_login) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_login"], newValue);
     }
@@ -23234,7 +23413,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri36 = settings.display_triggers.menu_integration) === null || _settings$display_tri36 === void 0 ? void 0 : _settings$display_tri36.item_icon_login) || "dashicons-admin-users",
+    value: ((_settings$display_tri38 = settings.display_triggers.menu_integration) === null || _settings$display_tri38 === void 0 ? void 0 : _settings$display_tri38.item_icon_login) || "dashicons-admin-users",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_icon_login"], newValue);
     }
@@ -23248,7 +23427,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri37 = settings.display_triggers.menu_integration) === null || _settings$display_tri37 === void 0 ? void 0 : _settings$display_tri37.visibility_login_logged_in) || false,
+    checked: ((_settings$display_tri39 = settings.display_triggers.menu_integration) === null || _settings$display_tri39 === void 0 ? void 0 : _settings$display_tri39.visibility_login_logged_in) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "visibility_login_logged_in"], isChecked);
     }
@@ -23265,7 +23444,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri38 = settings.display_triggers.menu_integration) === null || _settings$display_tri38 === void 0 ? void 0 : _settings$display_tri38.item_text_register) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
+    value: ((_settings$display_tri40 = settings.display_triggers.menu_integration) === null || _settings$display_tri40 === void 0 ? void 0 : _settings$display_tri40.item_text_register) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_register"], newValue);
     }
@@ -23280,7 +23459,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri39 = settings.display_triggers.menu_integration) === null || _settings$display_tri39 === void 0 ? void 0 : _settings$display_tri39.item_icon_register) || "dashicons-plus-alt",
+    value: ((_settings$display_tri41 = settings.display_triggers.menu_integration) === null || _settings$display_tri41 === void 0 ? void 0 : _settings$display_tri41.item_icon_register) || "dashicons-plus-alt",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_icon_register"], newValue);
     }
@@ -23294,7 +23473,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri40 = settings.display_triggers.menu_integration) === null || _settings$display_tri40 === void 0 ? void 0 : _settings$display_tri40.visibility_register_logged_in) || false,
+    checked: ((_settings$display_tri42 = settings.display_triggers.menu_integration) === null || _settings$display_tri42 === void 0 ? void 0 : _settings$display_tri42.visibility_register_logged_in) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "visibility_register_logged_in"], isChecked);
     }
@@ -25103,6 +25282,10 @@ var design = {
       size: "12px",
       fontWeight: 300
     }
+  },
+  icon: {
+    color: "#111111",
+    size: "20px"
   }
 };
 var display_triggers = {

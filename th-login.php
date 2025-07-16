@@ -183,6 +183,7 @@ function th_login_set_default_options() {
 				'fontWeight' => 300,
 			),
 		),
+
 		'button' => array(
 			'color'           => '#ffffff',
 			'background'      => '#0B59f4',
@@ -223,6 +224,12 @@ function th_login_set_default_options() {
 				'fontWeight' => 300,
 			),
 		),
+
+		'icon'=> array(
+			'color' => '#111111',
+			'size' =>  '20px'
+		),
+			
 	);
 
 	$form_fields_defaults = array(

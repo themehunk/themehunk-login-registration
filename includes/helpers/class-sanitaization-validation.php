@@ -177,6 +177,13 @@ class TH_Sanitization_validation {
 			),
 		);
 
+		// Icon
+		$icon = $settings['icon'] ?? array();
+		$sanitized['icon'] = array(
+			'color' => sanitize_text_field( $icon['color'] ?? '#111111' ),
+			'size'  => sanitize_text_field( $icon['size'] ?? '20px' ),
+		);
+
 		return $sanitized;
 	}
 
@@ -247,6 +254,7 @@ class TH_Sanitization_validation {
 			'Input_label'         => $settings['Input']['labeltypography']['size'] ?? '',
 			'button'              => $settings['button']['typography']['size'] ?? '',
 			'rememberme'          => $settings['rememberme']['typography']['size'] ?? '',
+			'icon'                => $settings['icon']['size'] ?? '',
 		);
 
 		foreach ( $typography_fields as $key => $font_size ) {
@@ -271,6 +279,7 @@ class TH_Sanitization_validation {
 			'form_border_color'       => $settings['form']['form_border']['color'] ?? '',
 			'rememberme_color'        => $settings['rememberme']['color'] ?? '',
 			'rememberme_checkbox_bg'  => $settings['rememberme']['checkboxbackground'] ?? '',
+			'icon_color'              => $settings['icon']['color'] ?? '',
 		);
 
 		foreach ( $color_fields as $key => $color ) {

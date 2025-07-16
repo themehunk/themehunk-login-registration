@@ -284,6 +284,10 @@ export  const design = {
     color:"#000000",
     checkboxbackground:"#ffffff",
     typography:{size: "12px",fontWeight: 300},
+  },
+  icon:{
+    color:"#111111",
+    size:"20px"
   }
 };
 

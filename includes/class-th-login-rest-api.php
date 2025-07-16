@@ -105,7 +105,6 @@ class TH_Login_REST_API {
 			)
 		);
 
-
 		// Route for exporting all plugin settings.
 		register_rest_route(
 			$namespace,
@@ -127,6 +126,15 @@ class TH_Login_REST_API {
 				'permission_callback' => array( $this, 'check_admin_permissions' ),
 			)
 		);
+
+		//Route for gettings categoy id tags slugs of wordpress defgaults
+		register_rest_route( 'th-login/v1', '/content-suggestions', array(
+			'methods'  => 'GET',
+			'callback' => array( $this, 'get_content_suggestions' ),
+			'permission_callback' => function () {
+				return current_user_can( 'manage_options' );
+			},
+		) );
 
 		//Route for gettings roles 
 		register_rest_route('th-login/v1', '/roles', [
@@ -152,6 +160,45 @@ class TH_Login_REST_API {
 			'permission_callback' => '__return_true',
 		]);
 
+	}
+
+	public function get_content_suggestions( $request ) {
+		$pages = get_pages( array( 'post_status' => 'publish' ) );
+		$posts = get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'numberposts' => -1 ) );
+
+		$categories = get_categories( array( 'hide_empty' => false ) );
+		$tags = get_tags( array( 'hide_empty' => false ) );
+
+		return rest_ensure_response( array(
+			'pages' => array_map( function( $p ) {
+				return array(
+					'id'   => $p->ID,
+					'slug' => $p->post_name,
+					'title' => $p->post_title,
+				);
+			}, $pages ),
+			'posts' => array_map( function( $p ) {
+				return array(
+					'id'   => $p->ID,
+					'slug' => $p->post_name,
+					'title' => $p->post_title,
+				);
+			}, $posts ),
+			'categories' => array_map( function( $c ) {
+				return array(
+					'id'   => $c->term_id,
+					'slug' => $c->slug,
+					'name' => $c->name,
+				);
+			}, $categories ),
+			'tags' => array_map( function( $t ) {
+				return array(
+					'id'   => $t->term_id,
+					'slug' => $t->slug,
+					'name' => $t->name,
+				);
+			}, $tags ),
+		) );
 	}
 
 	public function check_admin_permissions( WP_REST_Request $request ) {

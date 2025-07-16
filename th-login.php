@@ -92,11 +92,12 @@ final class TH_Login {
 function th_login_set_default_options() {
 
 	$general_defaults = array(
-		'plugin_status'             => 'enabled',
+		'plugin_status' => 'enabled',
 		'form_type' => 'double',
 		'display_mode'=> 'popup',
 		'default_register_role'=> 'subscriber', 
 		'auto_login_after_registration' => false,
+		'allow_user_registration' => get_option( 'users_can_register' ),
 		'redirects'                 => array(
 			'after_login'    => array( 'type' => 'current_page', 'url' => '' ),
 			'after_logout'   => array( 'type' => 'home_page', 'url' => '' ),
@@ -110,7 +111,7 @@ function th_login_set_default_options() {
 	$design_defaults = array(
 		'modal' => array(
 			'modal_background' => array(
-				'type'     => 'color', // 'color' | 'gradient' | 'image'
+				'type'     => 'color',
 				'color'    => '#ffffff',
 				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
 				'opacity'  => 1,
@@ -138,10 +139,10 @@ function th_login_set_default_options() {
 			),
 			'form_border' => array(
 				'width' => array(
-					'top'    => 1,
-					'right'  => 1,
-					'bottom' => 1,
-					'left'   => 1,
+					'top'    => 0,
+					'right'  => 0,
+					'bottom' => 0,
+					'left'   => 0,
 				),
 				'style'  => 'solid',
 				'color'  => '#000000',
@@ -153,76 +154,82 @@ function th_login_set_default_options() {
 				),
 			),
 			'form_padding' => array(
-				'top'    => 10,
-				'right'  => 10,
-				'bottom' => 10,
-				'left'   => 10,
+				'top'    => 15,
+				'right'  => 50,
+				'bottom' => 15,
+				'left'   => 50,
 			),
-			'form_gap' => 5,
+			'form_gap' => 12,
 		),
 
 		'heading' => array(
 			'color'     => '#000000',
 			'typography' => array(
-				'size'       => '10px',
-				'fontWeight' => 500,
+				'size'       => '25px',
+				'fontWeight' => 700,
 			),
 		),
 
 		'Input' => array(
-			'color'           => '#000000',
-			'labelcolor'           => '#000000',
-			'background'      => '#11111',
-			'labeltypography'      => array(
-				'size'       => '10px',
-				'fontWeight' => 500,
+			'color'      => '#000000',
+			'labelcolor' => '#000000',
+			'labeltypography' => array(
+				'size'       => '20px',
+				'fontWeight' => 300,
 			),
-			'typography'      => array(
-				'size'       => '10px',
-				'fontWeight' => 500,
+			'background' => '#EEEcec',
+			'typography' => array(
+				'size'       => '15px',
+				'fontWeight' => 300,
 			),
 		),
 
 		'button' => array(
-			'color'           => '#000000',
-			'background'      => '#ffffff',
-			'hoverBackground' => '#C7C2C2',
+			'color'           => '#ffffff',
+			'background'      => '#0B59f4',
+			'hoverBackground' => '#1c21ba',
 			'padding'         => array(
-				'top'    => 10,
+				'top'    => 6,
 				'right'  => 10,
-				'bottom' => 10,
-				'left'   => 10,
+				'bottom' => 15,
+				'left'   => 15,
 			),
-			'typography'      => array(
-				'size'       => '10px',
+			'typography' => array(
+				'size'       => '14px',
 				'fontWeight' => 500,
 			),
 			'border' => array(
 				'width' => array(
-					'top'    => 1,
-					'right'  => 1,
-					'bottom' => 1,
-					'left'   => 1,
+					'top'    => 0,
+					'right'  => 0,
+					'bottom' => 0,
+					'left'   => 0,
 				),
 				'style'  => 'solid',
 				'color'  => '#000000',
 				'radius' => array(
-					'topLeft'     => 6,
-					'topRight'    => 6,
-					'bottomRight' => 6,
-					'bottomLeft'  => 6,
+					'topLeft'     => 5,
+					'topRight'    => 5,
+					'bottomRight' => 5,
+					'bottomLeft'  => 5,
 				),
 			),
 		),
 
 		'rememberme' => array(
-			'color'            => '#000000',
-			'checkboxbackground' => '#000000',
-			'typography'       => array(
-				'size'       => '10px',
-				'fontWeight' => 500,
+			'color'              => '#000000',
+			'checkboxbackground' => '#ffffff',
+			'typography'         => array(
+				'size'       => '12px',
+				'fontWeight' => 300,
 			),
 		),
+
+		'icon'=> array(
+			'color' => '#111111',
+			'size' =>  '20px'
+		),
+			
 	);
 
 	$form_fields_defaults = array(

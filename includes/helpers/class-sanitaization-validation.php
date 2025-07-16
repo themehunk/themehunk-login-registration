@@ -13,6 +13,7 @@ class TH_Sanitization_validation {
 		$sanitized['default_register_role']             = sanitize_text_field( $settings['default_register_role'] ?? 'subscriber' );
 
 		$sanitized['auto_login_after_registration'] = rest_sanitize_boolean( $settings['auto_login_after_registration'] ?? false );
+		$sanitized['allow_user_registration'] = rest_sanitize_boolean( $settings['allow_user_registration'] ?? get_option( 'users_can_register' ) );
 		$sanitized['close_button'] = rest_sanitize_boolean( $settings['close_button'] ?? true );
 
 		// Sanitize redirects.
@@ -176,6 +177,13 @@ class TH_Sanitization_validation {
 			),
 		);
 
+		// Icon
+		$icon = $settings['icon'] ?? array();
+		$sanitized['icon'] = array(
+			'color' => sanitize_text_field( $icon['color'] ?? '#111111' ),
+			'size'  => sanitize_text_field( $icon['size'] ?? '20px' ),
+		);
+
 		return $sanitized;
 	}
 
@@ -246,6 +254,7 @@ class TH_Sanitization_validation {
 			'Input_label'         => $settings['Input']['labeltypography']['size'] ?? '',
 			'button'              => $settings['button']['typography']['size'] ?? '',
 			'rememberme'          => $settings['rememberme']['typography']['size'] ?? '',
+			'icon'                => $settings['icon']['size'] ?? '',
 		);
 
 		foreach ( $typography_fields as $key => $font_size ) {
@@ -270,6 +279,7 @@ class TH_Sanitization_validation {
 			'form_border_color'       => $settings['form']['form_border']['color'] ?? '',
 			'rememberme_color'        => $settings['rememberme']['color'] ?? '',
 			'rememberme_checkbox_bg'  => $settings['rememberme']['checkboxbackground'] ?? '',
+			'icon_color'              => $settings['icon']['color'] ?? '',
 		);
 
 		foreach ( $color_fields as $key => $color ) {

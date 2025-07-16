@@ -105,7 +105,6 @@ class TH_Login_REST_API {
 			)
 		);
 
-
 		// Route for exporting all plugin settings.
 		register_rest_route(
 			$namespace,
@@ -127,6 +126,15 @@ class TH_Login_REST_API {
 				'permission_callback' => array( $this, 'check_admin_permissions' ),
 			)
 		);
+
+		//Route for gettings categoy id tags slugs of wordpress defgaults
+		register_rest_route( 'th-login/v1', '/content-suggestions', array(
+			'methods'  => 'GET',
+			'callback' => array( $this, 'get_content_suggestions' ),
+			'permission_callback' => function () {
+				return current_user_can( 'manage_options' );
+			},
+		) );
 
 		//Route for gettings roles 
 		register_rest_route('th-login/v1', '/roles', [
@@ -154,6 +162,45 @@ class TH_Login_REST_API {
 
 	}
 
+	public function get_content_suggestions( $request ) {
+		$pages = get_pages( array( 'post_status' => 'publish' ) );
+		$posts = get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'numberposts' => -1 ) );
+
+		$categories = get_categories( array( 'hide_empty' => false ) );
+		$tags = get_tags( array( 'hide_empty' => false ) );
+
+		return rest_ensure_response( array(
+			'pages' => array_map( function( $p ) {
+				return array(
+					'id'   => $p->ID,
+					'slug' => $p->post_name,
+					'title' => $p->post_title,
+				);
+			}, $pages ),
+			'posts' => array_map( function( $p ) {
+				return array(
+					'id'   => $p->ID,
+					'slug' => $p->post_name,
+					'title' => $p->post_title,
+				);
+			}, $posts ),
+			'categories' => array_map( function( $c ) {
+				return array(
+					'id'   => $c->term_id,
+					'slug' => $c->slug,
+					'name' => $c->name,
+				);
+			}, $categories ),
+			'tags' => array_map( function( $t ) {
+				return array(
+					'id'   => $t->term_id,
+					'slug' => $t->slug,
+					'name' => $t->name,
+				);
+			}, $tags ),
+		) );
+	}
+
 	public function check_admin_permissions( WP_REST_Request $request ) {
 		return current_user_can( 'manage_options' );
 	}
@@ -163,84 +210,106 @@ class TH_Login_REST_API {
 	}
 
 	public function save_settings( WP_REST_Request $request ) {
-		$general_settings_data = $request->get_param( 'general' );
-		$design_settings_data = $request->get_param( 'design' );
-		$form_fields_settings_data = $request->get_param( 'form_fields' );
+		$general_settings_data          = $request->get_param( 'general' );
+		$design_settings_data           = $request->get_param( 'design' );
+		$form_fields_settings_data      = $request->get_param( 'form_fields' );
 		$display_triggers_settings_data = $request->get_param( 'display_triggers' );
-		$security_settings_data = $request->get_param( 'security' );
+		$security_settings_data         = $request->get_param( 'security' );
 
-		// Update options.
-		// Use sanitize/validate callbacks for each category.
+		// 1. Save General Settings
 		if ( null !== $general_settings_data ) {
-			$sanitized_general = $this->sanitize_general_settings( $general_settings_data );
-			$validation_general = $this->validate_general_settings( $sanitized_general );
+			$sanitized_general   = $this->sanitize_general_settings( $general_settings_data );
+			$validation_general  = $this->validate_general_settings( $sanitized_general );
+
 			if ( is_wp_error( $validation_general ) ) {
-				return new WP_REST_Response( array( 'success' => false, 'message' => $validation_general->get_error_message() ), 400 );
+				return new WP_REST_Response(
+					array( 'success' => false, 'message' => $validation_general->get_error_message() ),
+					400
+				);
 			}
+
 			update_option( 'th_login_general_settings', json_encode( $sanitized_general ) );
+
+			// 🔁 Sync with WordPress default registration setting
+			update_option( 'users_can_register', $sanitized_general['allow_user_registration'] ? 1 : 0 );
 		}
 
+		// 2. Save Design Settings
 		if ( null !== $design_settings_data ) {
-			$sanitized_design = $this->sanitize_design_settings( $design_settings_data );
+			$sanitized_design  = $this->sanitize_design_settings( $design_settings_data );
 			$validation_design = $this->validate_design_settings( $sanitized_design );
+
 			if ( is_wp_error( $validation_design ) ) {
-				return new WP_REST_Response( array( 'success' => false, 'message' => $validation_design->get_error_message() ), 400 );
+				return new WP_REST_Response(
+					array( 'success' => false, 'message' => $validation_design->get_error_message() ),
+					400
+				);
 			}
+
 			update_option( 'th_login_design_settings', json_encode( $sanitized_design ) );
 		}
 
-			if ( null !== $form_fields_settings_data ) {
-				// Clean structure: keep only numeric keys (actual field definitions)
-				$cleaned = [];
+		// 3. Save Form Fields
+		if ( null !== $form_fields_settings_data ) {
+			$cleaned = [];
 
-				foreach ( $form_fields_settings_data as $form_type => $fields_or_meta ) {
-					$cleaned[$form_type] = [];
+			foreach ( $form_fields_settings_data as $form_type => $fields_or_meta ) {
+				$cleaned[ $form_type ] = [];
 
-					// Go through each item
-					foreach ( $fields_or_meta as $key => $value ) {
-						// Only keep numeric keys — these are the real form fields
-						if ( is_numeric( $key ) && is_array( $value ) && isset( $value['id'] ) ) {
-							$cleaned[$form_type][] = $value;
-						}
+				foreach ( $fields_or_meta as $key => $value ) {
+					if ( is_numeric( $key ) && is_array( $value ) && isset( $value['id'] ) ) {
+						$cleaned[ $form_type ][] = $value;
 					}
 				}
-
-				// Now sanitize + validate
-				$sanitized_form_fields   = $this->sanitize_form_fields_settings( $cleaned );
-				$validation_form_fields  = $this->validate_form_fields_settings( $sanitized_form_fields );
-
-				if ( is_wp_error( $validation_form_fields ) ) {
-					return new WP_REST_Response(
-						array(
-							'success' => false,
-							'message' => $validation_form_fields->get_error_message(),
-						),
-						400
-					);
-				}
-
-				update_option( 'th_login_form_fields_settings', json_encode( $sanitized_form_fields ) );
 			}
 
+			$sanitized_form_fields  = $this->sanitize_form_fields_settings( $cleaned );
+			$validation_form_fields = $this->validate_form_fields_settings( $sanitized_form_fields );
+
+			if ( is_wp_error( $validation_form_fields ) ) {
+				return new WP_REST_Response(
+					array(
+						'success' => false,
+						'message' => $validation_form_fields->get_error_message(),
+					),
+					400
+				);
+			}
+
+			update_option( 'th_login_form_fields_settings', json_encode( $sanitized_form_fields ) );
+		}
+
+		// 4. Save Display Triggers
 		if ( null !== $display_triggers_settings_data ) {
-			$sanitized_display_triggers = $this->sanitize_display_triggers_settings( $display_triggers_settings_data );
+			$sanitized_display_triggers  = $this->sanitize_display_triggers_settings( $display_triggers_settings_data );
 			$validation_display_triggers = $this->validate_display_triggers_settings( $sanitized_display_triggers );
+
 			if ( is_wp_error( $validation_display_triggers ) ) {
-				return new WP_REST_Response( array( 'success' => false, 'message' => $validation_display_triggers->get_error_message() ), 400 );
+				return new WP_REST_Response(
+					array( 'success' => false, 'message' => $validation_display_triggers->get_error_message() ),
+					400
+				);
 			}
+
 			update_option( 'th_login_display_triggers_settings', json_encode( $sanitized_display_triggers ) );
 		}
 
+		// 5. Save Security Settings
 		if ( null !== $security_settings_data ) {
-			$sanitized_security = $this->sanitize_security_settings( $security_settings_data );
+			$sanitized_security  = $this->sanitize_security_settings( $security_settings_data );
 			$validation_security = $this->validate_security_settings( $sanitized_security );
+
 			if ( is_wp_error( $validation_security ) ) {
-				return new WP_REST_Response( array( 'success' => false, 'message' => $validation_security->get_error_message() ), 400 );
+				return new WP_REST_Response(
+					array( 'success' => false, 'message' => $validation_security->get_error_message() ),
+					400
+				);
 			}
+
 			update_option( 'th_login_security_settings', json_encode( $sanitized_security ) );
 		}
 
-		// Return updated settings to React app.
+		// ✅ Final updated settings response
 		$updated_settings = array(
 			'general'          => $this->safe_json_option( 'th_login_general_settings' ),
 			'design'           => $this->safe_json_option( 'th_login_design_settings' ),

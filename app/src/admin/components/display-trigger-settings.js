@@ -2,16 +2,41 @@ import { __ } from "@wordpress/i18n";
 import {
   ToggleControl,
   TextControl,
+  FormTokenField,
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
+import { useEffect } from "react";
+import apiFetch from "@wordpress/api-fetch";
 
 const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
     const [activeTab, setActiveTab] = useState("auto_open");
 
+    const [suggestions, setSuggestions] = useState({
+        pages: [],
+        posts: [],
+        categories: [],
+        tags: [],
+    });
+
+    useEffect(() => {
+        const fetchSuggestions = async () => {
+            try {
+            const response = await apiFetch({ path: "th-login/v1/content-suggestions" });
+
+            if (response) {
+                setSuggestions(response);
+            }
+            } catch (error) {
+                console.error("Error fetching content suggestions:", error);
+            }
+        };
+
+        fetchSuggestions();
+    }, []);
+
     const tabs = [
         { key: "auto_open", label: __("Auto-Open", "th-login") },
-        { key: "audience", label: __("Audience", "th-login") },
         { key: "page_conditions", label: __("Page Conditions", "th-login") },
         { key: "device", label: __("Device Visibility", "th-login") },
         { key: "frequency", label: __("Frequency", "th-login") },
@@ -51,74 +76,76 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </h3>
 
                         <div className="setting-row">
-                        <div className="setting-label">
-                            <h4>{__("On Page Load", "th-login")}</h4>
-                            <p className="description">
-                            {__("Automatically open when page loads", "th-login")}
-                            </p>
-                        </div>
-                        <div className="setting-control">
-                            <ToggleControl
-                            __nextHasNoMarginBottom={true}
-                            checked={
-                                settings.display_triggers.auto_open_on_load
-                                ?.enabled || false
-                            }
-                            onChange={(isChecked) =>
-                                handleSettingChange(
-                                "display_triggers",
-                                ["auto_open_on_load", "enabled"],
-                                isChecked
-                                )
-                            }
-                            />
-                        </div>
+                            <div className="setting-label">
+                                <h4>{__("On Page Load", "th-login")}</h4>
+                                <p className="description">
+                                {__("Automatically open when page loads", "th-login")}
+                                </p>
+                            </div>
+
+                            <div className="setting-control">
+                                <ToggleControl
+                                __nextHasNoMarginBottom={true}
+                                checked={
+                                    settings.display_triggers.auto_open_on_load
+                                    ?.enabled || false
+                                }
+                                onChange={(isChecked) =>
+                                    handleSettingChange(
+                                    "display_triggers",
+                                    ["auto_open_on_load", "enabled"],
+                                    isChecked
+                                    )
+                                }
+                                />
+                            </div>
                         </div>
 
                         {settings.display_triggers.auto_open_on_load?.enabled && (
-                        <div className="setting-row under-small-portion">
-                            <div className="setting-label">
-                            <h4>{__("Delay (seconds)", "th-login")}</h4>
-                            <p className="description">
-                                {__("Delay before showing the modal", "th-login")}
-                            </p>
+                            <div className="setting-row under-small-portion">
+                                <div className="setting-label">
+                                <h4>{__("Delay (seconds)", "th-login")}</h4>
+                                <p className="description">
+                                    {__("Delay before showing the modal", "th-login")}
+                                </p>
+                                </div>
+                                <div className="setting-control text-small-box">
+                                <TextControl
+                                                                __next40pxDefaultSize = {true}
+                                    __nextHasNoMarginBottom={true}
+                                    type="number"
+                                    min="0"
+                                    value={
+                                    settings.display_triggers.auto_open_on_load
+                                        ?.delay_seconds || 0
+                                    }
+                                    onChange={(newValue) =>
+                                    handleSettingChange(
+                                        "display_triggers",
+                                        ["auto_open_on_load", "delay_seconds"],
+                                        parseInt(newValue, 10)
+                                    )
+                                    }
+                                />
+                                </div>
                             </div>
-                            <div className="setting-control text-small-box">
-                            <TextControl
-                                                            __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                type="number"
-                                min="0"
-                                value={
-                                settings.display_triggers.auto_open_on_load
-                                    ?.delay_seconds || 0
-                                }
-                                onChange={(newValue) =>
-                                handleSettingChange(
-                                    "display_triggers",
-                                    ["auto_open_on_load", "delay_seconds"],
-                                    parseInt(newValue, 10)
-                                )
-                                }
-                            />
-                            </div>
-                        </div>
                         )}
 
                         <div className="setting-row">
-                        <div className="setting-label">
-                            <h4>{__("Auto-Open on Scroll", "th-login")}</h4>
-                            <p className="description">
-                            {__("Automatically open the modal when the user scrolls down a certain percentage of the page.", "th-login")}
-                            </p>
-                        </div>
-                        <div className="setting-control  ">
-                            <ToggleControl
-                            __nextHasNoMarginBottom={true}
-                            checked={settings.display_triggers.auto_open_on_scroll?.enabled || false}
-                            onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_scroll', 'enabled'], isChecked)}
-                            />
-                        </div>
+                            <div className="setting-label">
+                                <h4>{__("Auto-Open on Scroll", "th-login")}</h4>
+                                <p className="description">
+                                {__("Automatically open the modal when the user scrolls down a certain percentage of the page.", "th-login")}
+                                </p>
+                            </div>
+
+                            <div className="setting-control  ">
+                                <ToggleControl
+                                __nextHasNoMarginBottom={true}
+                                checked={settings.display_triggers.auto_open_on_scroll?.enabled || false}
+                                onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_scroll', 'enabled'], isChecked)}
+                                />
+                            </div>
                         </div>
 
                         {settings.display_triggers.auto_open_on_scroll?.enabled && (
@@ -144,91 +171,60 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         )}
 
                         <div className="setting-row">
-                        <div className="setting-label">
-                            <h4>{__("Auto-Open on Exit Intent", "th-login")}</h4>
-                            <p className="description">
-                            {__("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "th-login")}
-                            </p>
-                        </div>
-                        <div className="setting-control">
-                            <ToggleControl
-                            __nextHasNoMarginBottom={true}
-                            checked={settings.display_triggers.auto_open_on_exit_intent?.enabled || false}
-                            onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_exit_intent', 'enabled'], isChecked)}
-                            />
-                        </div>
-                        </div>
-
-                        <div className="setting-row">
-                        <div className="setting-label">
-                            <h4>{__("Auto-Open on Time on Page", "th-login")}</h4>
-                            <p className="description">
-                            {__("Automatically open the modal after the user spends a specified amount of time on the page.", "th-login")}
-                            </p>
-                        </div>
-                        <div className="setting-control">
-                            <ToggleControl
-                            __nextHasNoMarginBottom={true}
-                            checked={settings.display_triggers.auto_open_on_time_on_page?.enabled || false}
-                            onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'enabled'], isChecked)}
-                            />
-                        </div>
-                        </div>
-
-                        {settings.display_triggers.auto_open_on_time_on_page?.enabled && (
-                        <div className="setting-row under-small-portion">
                             <div className="setting-label">
-                            <h4>{__("Time on Page (seconds)", "th-login")}</h4>
-                            <p className="description">
-                                {__("Time in seconds before the modal opens.", "th-login")}
-                            </p>
-                            </div>
-                            <div className="setting-control text-small-box">
-                            <TextControl
-                                                            __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                type="number"
-                                min="1"
-                                value={settings.display_triggers.auto_open_on_time_on_page?.time_seconds || 10}
-                                onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'time_seconds'], parseInt(newValue, 10))}
-                            />
-                            </div>
-                        </div>
-                        )}
-
-                    </div>
-                )}
-
-                {activeTab === "audience" && (
-                    <div className="settings-group">
-                        <h3 className="group-title">
-                        {__("Audience Conditions", "th-login")}
-                        </h3>
-
-                        <div className="setting-row">
-                            <div className="setting-label">
-                                <h4>{__("Logged Out Users Only", "th-login")}</h4>
+                                <h4>{__("Auto-Open on Exit Intent", "th-login")}</h4>
                                 <p className="description">
-                                {__("Only show to logged out users", "th-login")}
+                                {__("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "th-login")}
                                 </p>
                             </div>
+
                             <div className="setting-control">
                                 <ToggleControl
                                 __nextHasNoMarginBottom={true}
-                                checked={
-                                    settings.display_triggers.auto_open_conditions
-                                    ?.for_logged_out_only || false
-                                }
-                                onChange={(isChecked) =>
-                                    handleSettingChange(
-                                    "display_triggers",
-                                    ["auto_open_conditions", "for_logged_out_only"],
-                                    isChecked
-                                    )
-                                }
+                                checked={settings.display_triggers.auto_open_on_exit_intent?.enabled || false}
+                                onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_exit_intent', 'enabled'], isChecked)}
                                 />
                             </div>
                         </div>
+
+                        <div className="setting-row">
+                            <div className="setting-label">
+                                <h4>{__("Auto-Open on Time on Page", "th-login")}</h4>
+                                <p className="description">
+                                {__("Automatically open the modal after the user spends a specified amount of time on the page.", "th-login")}
+                                </p>
+                            </div>
+
+                            <div className="setting-control">
+                                <ToggleControl
+                                __nextHasNoMarginBottom={true}
+                                checked={settings.display_triggers.auto_open_on_time_on_page?.enabled || false}
+                                onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'enabled'], isChecked)}
+                                />
+                            </div>
+                        </div>
+
+                        {settings.display_triggers.auto_open_on_time_on_page?.enabled && (
+                            <div className="setting-row under-small-portion">
+                                <div className="setting-label">
+                                <h4>{__("Time on Page (seconds)", "th-login")}</h4>
+                                <p className="description">
+                                    {__("Time in seconds before the modal opens.", "th-login")}
+                                </p>
+                                </div>
+                                <div className="setting-control text-small-box">
+                                <TextControl
+                                                                __next40pxDefaultSize = {true}
+                                    __nextHasNoMarginBottom={true}
+                                    type="number"
+                                    min="1"
+                                    value={settings.display_triggers.auto_open_on_time_on_page?.time_seconds || 10}
+                                    onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'time_seconds'], parseInt(newValue, 10))}
+                                />
+                                </div>
+                            </div>
+                        )}
+
                     </div>
                 )}
 
@@ -268,7 +264,44 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
 
                         {settings.display_triggers.auto_open_conditions ?.on_specific_pages?.enabled && (
-                            <>
+                            <div className="menu-item-group">
+                               
+                                <FormTokenField
+                                    label={__('Select Pages/Posts', 'th-login')}
+                                    value={
+                                        settings.display_triggers.auto_open_conditions?.on_specific_pages?.page_ids?.map(id => {
+                                            const matched = [...suggestions.pages, ...suggestions.posts].find(p => p.id === id);
+                                            return matched?.title || `Untitled (ID: ${id})`;
+                                        }) || []
+                                    }
+                                    suggestions={
+                                        [...suggestions.pages, ...suggestions.posts].map(p =>
+                                            p.title || `Untitled (ID: ${p.id})`
+                                        )
+                                    }
+                                    onChange={(tokens) => {
+                                        const selectedIds = tokens.map(token => {
+                                            const match = [...suggestions.pages, ...suggestions.posts].find(p =>
+                                                (p.title || `Untitled (ID: ${p.id})`) === token
+                                            );
+                                            return match?.id;
+                                        }).filter(Boolean);
+                                        handleSettingChange(
+                                            'display_triggers',
+                                            ['auto_open_conditions', 'on_specific_pages', 'page_ids'],
+                                            selectedIds
+                                        );
+                                    }}
+                                    __experimentalExpandOnFocus={true}
+                                    __next40pxDefaultSize={true}
+                                    __nextHasNoMarginBottom={true}
+                                    __experimentalValidateInput={(input) =>
+                                        [...suggestions.pages, ...suggestions.posts].some(opt =>
+                                            (opt.title || `Untitled (ID: ${opt.id})`) === input
+                                        )
+                                    }
+                                />
+                   
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
                                         <h4>{__("Page/Post IDs", "th-login")}</h4>
@@ -278,8 +311,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                     </div>
                                     <div className="setting-control">
                                         <TextControl
-                                                                        __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
+                                            __next40pxDefaultSize = {true}
+                                            __nextHasNoMarginBottom={true}
                                         value={
                                             settings.display_triggers.auto_open_conditions?.on_specific_pages?.page_ids?.join(
                                             ", "
@@ -303,6 +336,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                         />
                                     </div>
                                 </div>
+
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
                                         <h4>{__("Page/Post Slugs", "th-login")}</h4>
@@ -334,42 +368,82 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                         />
                                     </div>
                                 </div>
-                            </>
+                            </div>
                         )}
 
                         <div className="setting-row">
-                        <div className="setting-label">
-                            <h4>{__("Show on Specific Categories", "th-login")}</h4>
-                            <p className="description">
-                            {__("Control modal display on posts within specific categories.", "th-login")}
-                            </p>
-                        </div>
-                        <div className="setting-control">
-                            <ToggleControl
-                            __nextHasNoMarginBottom={true}
-                            checked={settings.display_triggers.auto_open_conditions?.on_specific_categories?.enabled || false}
-                            onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'enabled'], isChecked)}
-                            />
-                        </div>
+                            <div className="setting-label">
+                                <h4>{__("Show on Specific Categories", "th-login")}</h4>
+                                <p className="description">
+                                {__("Control modal display on posts within specific categories.", "th-login")}
+                                </p>
+                            </div>
+
+                            <div className="setting-control">
+                                <ToggleControl
+                                __nextHasNoMarginBottom={true}
+                                checked={settings.display_triggers.auto_open_conditions?.on_specific_categories?.enabled || false}
+                                onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'enabled'], isChecked)}
+                                />
+                            </div>
                         </div>
 
                         {settings.display_triggers.auto_open_conditions?.on_specific_categories?.enabled && (
-                            <>
+                            <div className="menu-item-group">
+
+                                <FormTokenField
+                                    label={__('Select Categories', 'th-login')}
+                                    value={
+                                        settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_ids?.map(id => {
+                                            const matched = suggestions.categories?.find(cat => cat.id === id);
+                                            return matched?.name || `Unnamed (ID: ${id})`;
+                                        }) || []
+                                    }
+                                    suggestions={
+                                        suggestions.categories?.map(cat => cat.name || `Unnamed (ID: ${cat.id})`) || []
+                                    }
+                                    onChange={(tokens) => {
+                                        const selectedIds = tokens
+                                            .map(token => {
+                                                const match = suggestions.categories?.find(cat =>
+                                                    (cat.name || `Unnamed (ID: ${cat.id})`) === token
+                                                );
+                                                return match?.id;
+                                            })
+                                            .filter(Boolean);
+                                        handleSettingChange(
+                                            'display_triggers',
+                                            ['auto_open_conditions', 'on_specific_categories', 'category_ids'],
+                                            selectedIds
+                                        );
+                                    }}
+                                    __experimentalExpandOnFocus={true}
+                                    __next40pxDefaultSize={true}
+                                    __nextHasNoMarginBottom={true}
+                                    __experimentalValidateInput={(input) =>
+                                        suggestions.categories?.some(cat =>
+                                            (cat.name || `Unnamed (ID: ${cat.id})`) === input
+                                        )
+                                    }
+                                />
+
+
                                 <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Category IDs (comma-separated)", "th-login")}</h4>
-                                    <p className="description">
-                                    {__("Enter category IDs (e.g., 5, 12).", "th-login")}
-                                    </p>
-                                </div>
-                                <div className="setting-control">
-                                    <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    value={settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_ids?.join(', ') || ''}
-                                    onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_ids'], newValue.split(',').map(s => parseInt(s.trim(), 10)).filter(id => !isNaN(id)))}
-                                    />
-                                </div>
+                                    <div className="setting-label">
+                                        <h4>{__("Category IDs (comma-separated)", "th-login")}</h4>
+                                        <p className="description">
+                                        {__("Enter category IDs (e.g., 5, 12).", "th-login")}
+                                        </p>
+                                    </div>
+
+                                    <div className="setting-control">
+                                        <TextControl
+                                                                        __next40pxDefaultSize = {true}
+                                    __nextHasNoMarginBottom={true}
+                                        value={settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_ids?.join(', ') || ''}
+                                        onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_categories', 'category_ids'], newValue.split(',').map(s => parseInt(s.trim(), 10)).filter(id => !isNaN(id)))}
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="setting-row under-small-portion">
@@ -388,7 +462,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                     />
                                 </div>
                                 </div>
-                            </>
+                            </div>
                         )}
 
                         <div className="setting-row">
@@ -398,6 +472,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 {__("Control modal display on posts with specific tags.", "th-login")}
                                 </p>
                             </div>
+
                             <div className="setting-control">
                                 <ToggleControl
                                 __nextHasNoMarginBottom={true}
@@ -408,41 +483,81 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
 
                         {settings.display_triggers.auto_open_conditions?.on_specific_tags?.enabled && (
-                            <>
+                            <div className="menu-item-group">
+
+                                <FormTokenField
+                                    label={__('Select Tags', 'th-login')}
+                                    value={
+                                        settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_ids?.map(id => {
+                                            const matched = suggestions.tags?.find(tag => tag.id === id);
+                                            return matched?.name || `Unnamed (ID: ${id})`;
+                                        }) || []
+                                    }
+                                    suggestions={
+                                        suggestions.tags?.map(tag => tag.name || `Unnamed (ID: ${tag.id})`) || []
+                                    }
+                                    onChange={(tokens) => {
+                                        const selectedIds = tokens
+                                            .map(token => {
+                                                const match = suggestions.tags?.find(tag =>
+                                                    (tag.name || `Unnamed (ID: ${tag.id})`) === token
+                                                );
+                                                return match?.id;
+                                            })
+                                            .filter(Boolean);
+                                        handleSettingChange(
+                                            'display_triggers',
+                                            ['auto_open_conditions', 'on_specific_tags', 'tag_ids'],
+                                            selectedIds
+                                        );
+                                    }}
+                                    __experimentalExpandOnFocus={true}
+                                    __next40pxDefaultSize={true}
+                                    __nextHasNoMarginBottom={true}
+                                    __experimentalValidateInput={(input) =>
+                                        suggestions.tags?.some(tag =>
+                                            (tag.name || `Unnamed (ID: ${tag.id})`) === input
+                                        )
+                                    }
+                                />
+
                                 <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Tag IDs (comma-separated)", "th-login")}</h4>
-                                    <p className="description">
-                                    {__("Enter tag IDs (e.g., 7, 15).", "th-login")}
-                                    </p>
-                                </div>
-                                <div className="setting-control">
-                                    <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    value={settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_ids?.join(', ') || ''}
-                                    onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_ids'], newValue.split(',').map(s => parseInt(s.trim(), 10)).filter(id => !isNaN(id)))}
-                                    />
-                                </div>
+                                    <div className="setting-label">
+                                        <h4>{__("Tag IDs (comma-separated)", "th-login")}</h4>
+                                        <p className="description">
+                                        {__("Enter tag IDs (e.g., 7, 15).", "th-login")}
+                                        </p>
+                                    </div>
+
+                                    <div className="setting-control">
+                                        <TextControl
+                                                                        __next40pxDefaultSize = {true}
+                                    __nextHasNoMarginBottom={true}
+                                        value={settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_ids?.join(', ') || ''}
+                                        onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_ids'], newValue.split(',').map(s => parseInt(s.trim(), 10)).filter(id => !isNaN(id)))}
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Tag Slugs (comma-separated)", "th-login")}</h4>
-                                    <p className="description">
-                                    {__("Enter tag slugs (e.g., featured, popular).", "th-login")}
-                                    </p>
+                                    <div className="setting-label">
+                                        <h4>{__("Tag Slugs (comma-separated)", "th-login")}</h4>
+                                        <p className="description">
+                                        {__("Enter tag slugs (e.g., featured, popular).", "th-login")}
+                                        </p>
+                                    </div>
+
+                                    <div className="setting-control">
+                                        <TextControl
+                                                                        __next40pxDefaultSize = {true}
+                                    __nextHasNoMarginBottom={true}
+                                        value={settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_slugs?.join(', ') || ''}
+                                        onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_slugs'], newValue.split(',').map(s => s.trim()))}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="setting-control">
-                                    <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    value={settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_slugs?.join(', ') || ''}
-                                    onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_specific_tags', 'tag_slugs'], newValue.split(',').map(s => s.trim()))}
-                                    />
-                                </div>
-                                </div>
-                            </>
+
+                            </div>
                         )}
 
                         <div className="setting-row">
@@ -452,6 +567,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 {__("Automatically open the modal on the WooCommerce My Account page.", "th-login")}
                                 </p>
                             </div>
+
                             <div className="setting-control">
                                 <ToggleControl
                                 __nextHasNoMarginBottom={true}
@@ -462,19 +578,20 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
 
                         <div className="setting-row">
-                        <div className="setting-label">
-                            <h4>{__("Show on WooCommerce Checkout Page", "th-login")}</h4>
-                            <p className="description">
-                            {__("Automatically open the modal on the WooCommerce Checkout page.", "th-login")}
-                            </p>
-                        </div>
-                        <div className="setting-control">
-                            <ToggleControl
-                            __nextHasNoMarginBottom={true}
-                            checked={settings.display_triggers.auto_open_conditions?.on_woocommerce_checkout || false}
-                            onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_checkout'], isChecked)}
-                            />
-                        </div>
+                            <div className="setting-label">
+                                <h4>{__("Show on WooCommerce Checkout Page", "th-login")}</h4>
+                                <p className="description">
+                                {__("Automatically open the modal on the WooCommerce Checkout page.", "th-login")}
+                                </p>
+                            </div>
+
+                            <div className="setting-control">
+                                <ToggleControl
+                                __nextHasNoMarginBottom={true}
+                                checked={settings.display_triggers.auto_open_conditions?.on_woocommerce_checkout || false}
+                                onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_checkout'], isChecked)}
+                                />
+                            </div>
                         </div>
 
                     </div>
@@ -819,30 +936,30 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                             <div className="menu-item-group login-group">
                                 <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Register Item Text", "th-login")}</h4>
-                                    <p className="description">
-                                    {__("Text for register menu item", "th-login")}
-                                    </p>
-                                </div>
-                                <div className="setting-control">
-                                    <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    value={
-                                        settings.display_triggers.menu_integration
-                                        ?.item_text_register ||
-                                        __("Register", "th-login")
-                                    }
-                                    onChange={(newValue) =>
-                                        handleSettingChange(
-                                        "display_triggers",
-                                        ["menu_integration", "item_text_register"],
-                                        newValue
-                                        )
-                                    }
-                                    />
-                                </div>
+                                    <div className="setting-label">
+                                        <h4>{__("Register Item Text", "th-login")}</h4>
+                                        <p className="description">
+                                        {__("Text for register menu item", "th-login")}
+                                        </p>
+                                    </div>
+                                    <div className="setting-control">
+                                        <TextControl
+                                            __next40pxDefaultSize = {true}
+                                            __nextHasNoMarginBottom={true}
+                                        value={
+                                            settings.display_triggers.menu_integration
+                                            ?.item_text_register ||
+                                            __("Register", "th-login")
+                                        }
+                                        onChange={(newValue) =>
+                                            handleSettingChange(
+                                            "display_triggers",
+                                            ["menu_integration", "item_text_register"],
+                                            newValue
+                                            )
+                                        }
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="setting-row under-small-portion">

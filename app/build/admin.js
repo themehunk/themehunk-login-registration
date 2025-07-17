@@ -20696,9 +20696,6 @@ var App = function App() {
     var output = _objectSpread({}, target);
     if (target && _typeof(target) === "object" && source && _typeof(source) === "object") {
       Object.keys(source).forEach(function (key) {
-        // Handle arrays: if source[key] is an array, replace directly.
-        // Otherwise, if it's an object, deep merge.
-        // Otherwise, assign directly.
         if (Array.isArray(source[key])) {
           output[key] = source[key];
         } else if (source[key] && _typeof(source[key]) === "object") {
@@ -20906,7 +20903,6 @@ var App = function App() {
             _context4.n = 2;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
               path: "th-login/v1/reset-settings",
-              // New endpoint for reset
               method: "POST"
             });
           case 2:
@@ -22029,6 +22025,8 @@ function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t =
 
 
 
+
+//intertivity
 var InteractiveInput = function InteractiveInput(_ref) {
   var base = _ref.base,
     hover = _ref.hover,
@@ -22110,6 +22108,8 @@ var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
     style: labelStyle
   }, children));
 };
+
+//login-loader
 var LoginFormHeader = function LoginFormHeader(_ref4) {
   var settings = _ref4.settings;
   var _settings$design = settings.design,
@@ -22241,14 +22241,13 @@ var DesignEditor = function DesignEditor(_ref5) {
     '--th-backgroundColor': "0 0 0 1000px ".concat(inputBase.background, " inset")
   });
   var formStyle = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle((_settings$design$form = settings.design.form) === null || _settings$design$form === void 0 ? void 0 : _settings$design$form.form_background)), getBorderStyle((_settings$design$form2 = settings.design.form) === null || _settings$design$form2 === void 0 ? void 0 : _settings$design$form2.form_border)), getPaddingStyle((_settings$design$form3 = settings.design.form) === null || _settings$design$form3 === void 0 ? void 0 : _settings$design$form3.form_padding)), {}, {
+    gap: "".concat(settings.design.form.form_gap || 0, "px"),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    gap: "".concat(settings.design.form.form_gap || 0, "px"),
     width: '100%',
     maxWidth: '400px',
-    // Default form width
     margin: '0 auto'
   });
   var renderFormPreview = function renderFormPreview() {
@@ -22261,14 +22260,14 @@ var DesignEditor = function DesignEditor(_ref5) {
     };
     var inputProps = {
       base: {
-        color: inputBase.color,
-        backgroundColor: inputBase.background,
-        fontSize: inputBase.typography.size,
-        fontWeight: inputBase.typography.fontWeight,
         padding: '10px',
         border: '1px solid #ccc',
         width: '100%',
-        borderRadius: '4px'
+        borderRadius: '4px',
+        color: inputBase.color,
+        backgroundColor: inputBase.background,
+        fontSize: inputBase.typography.size,
+        fontWeight: inputBase.typography.fontWeight
       },
       active: {
         backgroundColor: inputBase.activeBackground
@@ -24686,7 +24685,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SecuritySettings = function SecuritySettings(_ref) {
-  var _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
   return /*#__PURE__*/React.createElement("section", {
@@ -24697,162 +24695,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-shield"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
-    className: "settings-group"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force Protection", "th-login")), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Protection", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prevent brute force login attacks", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: ((_settings$security$br = settings.security.brute_force_protection) === null || _settings$security$br === void 0 ? void 0 : _settings$security$br.enabled) || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("security", ["brute_force_protection", "enabled"], isChecked);
-    }
-  }))), ((_settings$security$br2 = settings.security.brute_force_protection) === null || _settings$security$br2 === void 0 ? void 0 : _settings$security$br2.enabled) && /*#__PURE__*/React.createElement("div", {
-    className: "menu-item-group "
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-row text-small-box "
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Max Login Attempts", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allowed failed attempts before lockout", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    type: "number",
-    min: "1",
-    value: ((_settings$security$br3 = settings.security.brute_force_protection) === null || _settings$security$br3 === void 0 ? void 0 : _settings$security$br3.max_attempts) || 5,
-    onChange: function onChange(newValue) {
-      return handleSettingChange("security", ["brute_force_protection", "max_attempts"], parseInt(newValue, 10));
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row text-small-box "
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lockout Duration (minutes)", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time before another attempt is allowed", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    type: "number",
-    min: "1",
-    value: ((_settings$security$br4 = settings.security.brute_force_protection) === null || _settings$security$br4 === void 0 ? void 0 : _settings$security$br4.lockout_duration_minutes) || 30,
-    onChange: function onChange(newValue) {
-      return handleSettingChange("security", ["brute_force_protection", "lockout_duration_minutes"], parseInt(newValue, 10));
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto IP Blacklisting", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically blacklist repeat offenders", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: ((_settings$security$br5 = settings.security.brute_force_protection) === null || _settings$security$br5 === void 0 ? void 0 : _settings$security$br5.auto_ip_blacklist_enabled) || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("security", ["brute_force_protection", "auto_ip_blacklist_enabled"], isChecked);
-    }
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "settings-group"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable reCAPTCHA", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Google reCAPTCHA to forms", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: ((_settings$security$re = settings.security.recaptcha) === null || _settings$security$re === void 0 ? void 0 : _settings$security$re.enabled) || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("security", ["recaptcha", "enabled"], isChecked);
-    }
-  }))), ((_settings$security$re2 = settings.security.recaptcha) === null || _settings$security$re2 === void 0 ? void 0 : _settings$security$re2.enabled) && /*#__PURE__*/React.createElement("div", {
-    className: "menu-item-group "
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Type", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Version of reCAPTCHA to use", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement("select", {
-    value: ((_settings$security$re3 = settings.security.recaptcha) === null || _settings$security$re3 === void 0 ? void 0 : _settings$security$re3.type) || "v2_checkbox",
-    onChange: function onChange(e) {
-      return handleSettingChange("security", ["recaptcha", "type"], e.target.value);
-    }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "v2_checkbox"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA v2 Checkbox", "th-login")), /*#__PURE__*/React.createElement("option", {
-    value: "v3_invisible"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA v3 Invisible", "th-login"))))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Site Key", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA site key", "th-login"), ' ', /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ExternalLink, {
-    href: "https://www.google.com/recaptcha/admin"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Google reCAPTCHA Admin", "th-login")))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    value: ((_settings$security$re4 = settings.security.recaptcha) === null || _settings$security$re4 === void 0 ? void 0 : _settings$security$re4.site_key) || "",
-    onChange: function onChange(newValue) {
-      return handleSettingChange("security", ["recaptcha", "site_key"], newValue);
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secret Key", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA secret key", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    value: ((_settings$security$re5 = settings.security.recaptcha) === null || _settings$security$re5 === void 0 ? void 0 : _settings$security$re5.secret_key) || "",
-    onChange: function onChange(newValue) {
-      return handleSettingChange("security", ["recaptcha", "secret_key"], newValue);
-    }
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "settings-group"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Honeypot Protection", "th-login")), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Honeypot", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add hidden field to catch bots", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: settings.security.honeypot_enabled || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("security", ["honeypot_enabled"], isChecked);
-    }
-  }))))));
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "th-login"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SecuritySettings);
 

@@ -5,56 +5,62 @@ $design_settings = json_decode(get_option('th_login_design_settings', '{}'), tru
 $design = wp_parse_args($design_settings);
 
 // Helper function to get background style
-function th_login_get_background_style($background) {
-    $type = $background['type'] ?? 'color';
-    $style = '';
-    
-    if ($type === 'gradient') {
-        $style = "background-image: {$background['gradient']}; background-size: cover; background-repeat: no-repeat; background-position: center center; opacity: {$background['opacity']};";
-    } elseif ($type === 'image' && !empty($background['image']['url'])) {
-        $image = $background['image'];
-        $style = "background-image: url({$image['url']}); background-size: {$image['size']}; background-repeat: {$image['repeat']}; background-position: {$image['position']}; opacity: {$background['opacity']};";
-    } else {
-        $style = "background-color: {$background['color']}; opacity: {$background['opacity']};";
+if (!function_exists('th_login_get_background_style')) {
+    function th_login_get_background_style($background) {
+        $type = $background['type'] ?? 'color';
+        $style = '';
+
+        if ($type === 'gradient') {
+            $style = "background-image: {$background['gradient']}; background-size: cover; background-repeat: no-repeat; background-position: center center; opacity: {$background['opacity']};";
+        } elseif ($type === 'image' && !empty($background['image']['url'])) {
+            $image = $background['image'];
+            $style = "background-image: url({$image['url']}); background-size: {$image['size']}; background-repeat: {$image['repeat']}; background-position: {$image['position']}; opacity: {$background['opacity']};";
+        } else {
+            $style = "background-color: {$background['color']}; opacity: {$background['opacity']};";
+        }
+
+        return $style;
     }
-    
-    return $style;
 }
 
 // Helper function to get border style
-function th_login_get_border_style($border) {
-    $width = $border['width'] ?? [];
-    $radius = $border['radius'] ?? [];
-    
-    return sprintf(
-        "border-top-width: %dpx; border-right-width: %dpx; border-bottom-width: %dpx; border-left-width: %dpx; border-style: %s; border-color: %s; border-top-left-radius: %dpx; border-top-right-radius: %dpx; border-bottom-right-radius: %dpx; border-bottom-left-radius: %dpx;",
-        $width['top'] ?? 0,
-        $width['right'] ?? 0,
-        $width['bottom'] ?? 0,
-        $width['left'] ?? 0,
-        $border['style'] ?? 'solid',
-        $border['color'] ?? '#000000',
-        $radius['topLeft'] ?? 0,
-        $radius['topRight'] ?? 0,
-        $radius['bottomRight'] ?? 0,
-        $radius['bottomLeft'] ?? 0
-    );
+if (!function_exists('th_login_get_border_style')) {
+    function th_login_get_border_style($border) {
+        $width = $border['width'] ?? [];
+        $radius = $border['radius'] ?? [];
+
+        return sprintf(
+            "border-top-width: %dpx; border-right-width: %dpx; border-bottom-width: %dpx; border-left-width: %dpx; border-style: %s; border-color: %s; border-top-left-radius: %dpx; border-top-right-radius: %dpx; border-bottom-right-radius: %dpx; border-bottom-left-radius: %dpx;",
+            $width['top'] ?? 0,
+            $width['right'] ?? 0,
+            $width['bottom'] ?? 0,
+            $width['left'] ?? 0,
+            $border['style'] ?? 'solid',
+            $border['color'] ?? '#000000',
+            $radius['topLeft'] ?? 0,
+            $radius['topRight'] ?? 0,
+            $radius['bottomRight'] ?? 0,
+            $radius['bottomLeft'] ?? 0
+        );
+    }
 }
 
 // Helper function to get padding style
-function th_login_get_padding_style($padding) {
-    return sprintf(
-        "padding-top: %dpx; padding-right: %dpx; padding-bottom: %dpx; padding-left: %dpx;",
-        $padding['top'] ?? 0,
-        $padding['right'] ?? 0,
-        $padding['bottom'] ?? 0,
-        $padding['left'] ?? 0
-    );
+if (!function_exists('th_login_get_padding_style')) {
+    function th_login_get_padding_style($padding) {
+        return sprintf(
+            "padding-top: %dpx; padding-right: %dpx; padding-bottom: %dpx; padding-left: %dpx;",
+            $padding['top'] ?? 0,
+            $padding['right'] ?? 0,
+            $padding['bottom'] ?? 0,
+            $padding['left'] ?? 0
+        );
+    }
 }
 ?>
 
+
 <style>
-/* Common Form Styles */
 .th-login-popup-form-container {
     <?php echo th_login_get_background_style($design['form']['form_background']); ?>
     <?php echo th_login_get_border_style($design['form']['form_border']); ?>
@@ -72,30 +78,6 @@ function th_login_get_padding_style($padding) {
     font-weight: <?php echo $design['heading']['typography']['fontWeight']; ?>;
     margin: 0 0 15px 0;
     text-align: center;
-}
-
-.th-login-form-field {
-    width: 100%;
-    margin: 0 0 15px 0;
-}
-
-.th-login-label-with-icon {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 5px;
-}
-
-.th-login-label-text {
-    color: <?php echo $design['Input']['labelcolor']; ?>;
-    font-size: <?php echo $design['Input']['labeltypography']['size']; ?>;
-    font-weight: <?php echo $design['Input']['labeltypography']['fontWeight']; ?>;
-}
-
-.th-login-label-icon svg {
-    width: <?php echo $design['icon']['size']; ?>;
-    height: <?php echo $design['icon']['size']; ?>;
-    color: <?php echo $design['icon']['color']; ?>;
 }
 
 .th-login-form-field input[type="text"],
@@ -165,6 +147,31 @@ function th_login_get_padding_style($padding) {
 .th-login-link:hover {
     text-decoration: underline;
 }
+
+.th-login-form-field {
+    width: 100%;
+    margin: 0 0 15px 0;
+}
+
+.th-login-label-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.th-login-label-text {
+    color: <?php echo $design['Input']['labelcolor']; ?>;
+    font-size: <?php echo $design['Input']['labeltypography']['size']; ?>;
+    font-weight: <?php echo $design['Input']['labeltypography']['fontWeight']; ?>;
+}
+
+.th-login-label-icon svg {
+    width: <?php echo $design['icon']['size']; ?>;
+    height: <?php echo $design['icon']['size']; ?>;
+    color: <?php echo $design['icon']['color']; ?>;
+}
+
 
 .th-login-link-separator {
     margin: 0 8px;

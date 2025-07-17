@@ -85,9 +85,6 @@ const App = () => {
       typeof source === "object"
     ) {
       Object.keys(source).forEach((key) => {
-        // Handle arrays: if source[key] is an array, replace directly.
-        // Otherwise, if it's an object, deep merge.
-        // Otherwise, assign directly.
         if (Array.isArray(source[key])) {
           output[key] = source[key];
         } else if (source[key] && typeof source[key] === "object") {
@@ -288,7 +285,7 @@ const App = () => {
     setMessage(null);
     try {
       const response = await apiFetch({
-        path: "th-login/v1/reset-settings", // New endpoint for reset
+        path: "th-login/v1/reset-settings", 
         method: "POST",
       });
 
@@ -351,15 +348,13 @@ const App = () => {
   return (
     <div className="th-login-admin-modern">
       
-      {/* Header Section */}
       <div className="admin-header">
         <div className="header-content">
           <h2>
             <span className="th-logo">TH</span>
             {__("Login Settings", "th-login")}
           </h2>
-
-          
+    
           {message && (
             <div className={`notice-banner ${message.type}`}>
               <p>{message.text}</p>
@@ -369,7 +364,6 @@ const App = () => {
         </div>
       </div>
 
-      {/* Main Container */}
       <div className="admin-container">
         {/* Side Navigation */}
         <nav className="admin-sidebar">
@@ -387,7 +381,6 @@ const App = () => {
 
         {/* Content Area */}
         <div className="admin-content">
-          {/* General Settings Section */}
 
           {activeTab === "general" && (
             <GeneralSettings 
@@ -429,22 +422,22 @@ const App = () => {
 
           {activeTab === "integration" && (
             <IntegrationSettings 
-                settings={settings}
-                handleSettingChange={handleSettingChange}
+              settings={settings}
+              handleSettingChange={handleSettingChange}
             />
           )}
 
           {activeTab === "tools" && (
             <ToolsSettings
-                settings={settings}
-                exportedSettings={exportedSettings}
-                setExportedSettings={setExportedSettings}
-                importSettingsText={ importSettingsText}
-                setImportSettingsText={setImportSettingsText}
-                handleExportSettings={handleExportSettings}
-                handleImportSettings={handleImportSettings}
-                isSaving={isSaving}
-                setIsResetConfirmOpen={setIsResetConfirmOpen}
+              settings={settings}
+              exportedSettings={exportedSettings}
+              setExportedSettings={setExportedSettings}
+              importSettingsText={ importSettingsText}
+              setImportSettingsText={setImportSettingsText}
+              handleExportSettings={handleExportSettings}
+              handleImportSettings={handleImportSettings}
+              isSaving={isSaving}
+              setIsResetConfirmOpen={setIsResetConfirmOpen}
             />
           )}
         </div>
@@ -494,7 +487,6 @@ const App = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

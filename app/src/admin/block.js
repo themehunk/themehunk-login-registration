@@ -15,7 +15,7 @@ registerBlockType('th-login/form-block', {
     category: 'widgets', // Common category for utility blocks
 
     // Block icon (Dashicon or custom SVG)
-    icon: 'admin-users', // Example: Dashicon for users
+    icon: 'admin-users',
 
     // Keywords to help users find the block
     keywords: [
@@ -38,7 +38,7 @@ registerBlockType('th-login/form-block', {
         },
         displayAs: {
             type: 'string',
-            default: 'popup', // 'popup' or 'inline'
+            default: 'popup', 
         },
     },
 

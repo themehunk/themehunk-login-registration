@@ -9,6 +9,7 @@ import { Dashicon, RangeControl } from "@wordpress/components";
 import {tabs, layoutOptions, fontWeightOptions} from '../contant';
 import { THL_ICONS } from "./icons";
 
+//intertivity
 const InteractiveInput = ({ base, hover, active, ...props }) => {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -76,6 +77,7 @@ const InteractiveCheckbox = ({ base, children }) => {
   );
 };
 
+//login-loader
 const LoginFormHeader = ({ settings }) => {
   const { design = {}, general = {} } = settings;
   const { header = {} } = design;
@@ -170,29 +172,29 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 	};
 
 	const getBorderStyle = (border = {}) => {
-	const width = border.width || {};
-	const radius = border.radius || {};
-	return {
-		borderTopWidth: `${width.top ?? 0}px`,
-		borderRightWidth: `${width.right ?? 0}px`,
-		borderBottomWidth: `${width.bottom ?? 0}px`,
-		borderLeftWidth: `${width.left ?? 0}px`,
-		borderStyle: border.style || "solid",
-		borderColor: border.color || "#000000",
-		borderTopLeftRadius: `${radius.topLeft ?? 0}px`,
-		borderTopRightRadius: `${radius.topRight ?? 0}px`,
-		borderBottomRightRadius: `${radius.bottomRight ?? 0}px`,
-		borderBottomLeftRadius: `${radius.bottomLeft ?? 0}px`,
-	};
+		const width = border.width || {};
+		const radius = border.radius || {};
+		return {
+			borderTopWidth: `${width.top ?? 0}px`,
+			borderRightWidth: `${width.right ?? 0}px`,
+			borderBottomWidth: `${width.bottom ?? 0}px`,
+			borderLeftWidth: `${width.left ?? 0}px`,
+			borderStyle: border.style || "solid",
+			borderColor: border.color || "#000000",
+			borderTopLeftRadius: `${radius.topLeft ?? 0}px`,
+			borderTopRightRadius: `${radius.topRight ?? 0}px`,
+			borderBottomRightRadius: `${radius.bottomRight ?? 0}px`,
+			borderBottomLeftRadius: `${radius.bottomLeft ?? 0}px`,
+		};
 	};
 
 	const getPaddingStyle = (padding) => {
 		const pad = padding || {};
 		return {
-		paddingTop: `${pad.top ?? 0}px`,
-		paddingRight: `${pad.right ?? 0}px`,
-		paddingBottom: `${pad.bottom ?? 0}px`,
-		paddingLeft: `${pad.left ?? 0}px`,
+			paddingTop: `${pad.top ?? 0}px`,
+			paddingRight: `${pad.right ?? 0}px`,
+			paddingBottom: `${pad.bottom ?? 0}px`,
+			paddingLeft: `${pad.left ?? 0}px`,
 		};
 	};
 
@@ -211,13 +213,13 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		...getBackgroundStyle(settings.design.form?.form_background),
 		...getBorderStyle(settings.design.form?.form_border),
 		...getPaddingStyle(settings.design.form?.form_padding),
+		gap: `${settings.design.form.form_gap || 0}px`,
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
 		flexDirection: 'column',
-		gap: `${settings.design.form.form_gap || 0}px`,
 		width: '100%',
-		maxWidth: '400px', // Default form width
+		maxWidth: '400px',
 		margin: '0 auto',
 	};
 
@@ -231,14 +233,14 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 		const inputProps = {
 			base: {
-				color: inputBase.color,
-				backgroundColor: inputBase.background,
-				fontSize: inputBase.typography.size,
-				fontWeight: inputBase.typography.fontWeight,
 				padding: '10px',
 				border: '1px solid #ccc',
 				width: '100%',
 				borderRadius: '4px',
+				color: inputBase.color,
+				backgroundColor: inputBase.background,
+				fontSize: inputBase.typography.size,
+				fontWeight: inputBase.typography.fontWeight,
 			},
 			active: { backgroundColor: inputBase.activeBackground },
 		};
@@ -254,7 +256,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				borderRadius: `${buttonBase.border.radius?.topLeft ?? 4}px`,
 				cursor: 'pointer',
 			},
-				hover: { backgroundColor: buttonBase.hoverBackground },
+			hover: { backgroundColor: buttonBase.hoverBackground },
 		};
 
 		const checkboxProps = {
@@ -431,15 +433,15 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 							/>
 
 							<AccordionSection title={__("Field Gap", "th-login")} defaultOpen={false}>
-							<RangeControl
-								label={__('Gap', 'th-login')}
-								value={parseInt(settings.design.form.form_gap || 0)}
-								onChange={(value) => handleSettingChange("design", ["form", "form_gap"], parseInt(value))}
-								min={0}
-								max={50}
-								step={1}
-								withInputField
-							/>
+								<RangeControl
+									label={__('Gap', 'th-login')}
+									value={parseInt(settings.design.form.form_gap || 0)}
+									onChange={(value) => handleSettingChange("design", ["form", "form_gap"], parseInt(value))}
+									min={0}
+									max={50}
+									step={1}
+									withInputField
+								/>
 							</AccordionSection>
 						</>
 						)}

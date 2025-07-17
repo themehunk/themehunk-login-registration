@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Include shared styles
-require TH_LOGIN_PATH . 'templates/th-login-styles.php';
+require TH_LOGIN_PATH . 'templates/styles/th-front-styles.php';
 
 $design_settings = json_decode(get_option('th_login_design_settings', '{}'), true);
 $modal_design = $design_settings['modal']['modal_background'] ?? [];

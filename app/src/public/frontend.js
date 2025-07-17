@@ -1,7 +1,3 @@
-// Import necessary utilities if needed.
-// For now, we'll use vanilla JS for core modal logic.
-import './styles/frontend.scss';
-// Ensure the DOM is fully loaded before attempting to interact with elements.
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get references to the main modal elements.

@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var openModal = function openModal() {
     var formType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'login';
     if (!modal) return;
-    modal.classList.remove('th-login-slide-in-left', 'th-login-slide-in-right', 'th-login-popup-modal--closing', 'th-login-popup-modal--active');
+    modal.classList.remove('th-login-popup-modal-effect', 'th-login-slide-in-left', 'th-login-slide-in-right', 'th-login-page', 'th-login-popup-modal--closing', 'th-login-popup-modal--active');
     modal.classList.add('th-login-popup-modal--opening');
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
@@ -162,6 +162,10 @@ document.addEventListener('DOMContentLoaded', function () {
       modal.classList.add('th-login-slide-in-left');
     } else if (display_type === 'slide_in_right') {
       modal.classList.add('th-login-slide-in-right');
+    } else if (display_type === 'page') {
+      modal.classList.add('th-login-page');
+    } else {
+      modal.classList.add('th-login-popup-modal-effect');
     }
     setActiveForm(formType);
     setTimeout(function () {
@@ -177,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!modal) return;
     modal.classList.remove('th-login-popup-modal--opening');
     modal.classList.add('th-login-popup-modal--closing');
-    modal.classList.remove('th-login-slide-in-left', 'th-login-slide-in-right');
+    modal.classList.remove('th-login-slide-in-left', 'th-login-slide-in-right', 'th-login-page', 'th-login-popup-modal-effect');
     modal.setAttribute('aria-hidden', 'true');
     animationEndHandler = function handler() {
       if (modal.classList.contains('th-login-popup-modal--closing')) {

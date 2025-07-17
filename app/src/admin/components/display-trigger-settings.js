@@ -1,9 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import {
-  ToggleControl,
-  TextControl,
-  FormTokenField,
-} from "@wordpress/components";
+import { ToggleControl, TextControl, FormTokenField} from "@wordpress/components";
 import { useState } from "@wordpress/element";
 import { useEffect } from "react";
 import apiFetch from "@wordpress/api-fetch";
@@ -62,6 +58,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
   return (
         <section className="settings-section">
             <div className="settings-card">
+
                 <h2 className="section-title">
                     <i className="dashicons dashicons-visibility"></i>
                     {__("Display Triggers", "th-login")}
@@ -1026,6 +1023,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                     </div>
                 )}
+
             </div>
         </section>
   );

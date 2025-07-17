@@ -1,7 +1,7 @@
 import { TextControl, Button } from '@wordpress/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import AccordionSection  from './accordion-section';
+import AccordionSection from './accordion-section';
 
 export const PaddingSettingsPanel = ({
   title,
@@ -12,6 +12,18 @@ export const PaddingSettingsPanel = ({
   max = 100,
 }) => {
   const [syncAll, setSyncAll] = useState(false);
+
+  // ✅ Auto-enable sync if all values are the same
+  useEffect(() => {
+    const allSame =
+      padding.top === padding.right &&
+      padding.right === padding.bottom &&
+      padding.bottom === padding.left;
+
+    if (allSame) {
+      setSyncAll(true);
+    }
+  }, []); // run only on mount
 
   const handlePaddingChange = (side, value) => {
     let cleanValue = parseInt(value, 10) || 0;
@@ -33,90 +45,59 @@ export const PaddingSettingsPanel = ({
   const toggleSync = () => {
     const newSyncState = !syncAll;
     setSyncAll(newSyncState);
-    
+
     if (newSyncState) {
-      // When enabling sync, set all sides to top value
-      handleSettingChange('design', [...path], {
+      // When enabling sync, set all to top value
+      const synced = {
         top: padding.top || 0,
         right: padding.top || 0,
         bottom: padding.top || 0,
         left: padding.top || 0
-      });
+      };
+      handleSettingChange('design', [...path], synced);
     }
   };
 
+  const sides = [
+    { key: 'top', label: __('Top', 'th-login') },
+    { key: 'right', label: __('Right', 'th-login') },
+    { key: 'bottom', label: __('Bottom', 'th-login') },
+    { key: 'left', label: __('Left', 'th-login') },
+  ];
+
   return (
     <AccordionSection title={title} defaultOpen={false}>
+      <div className="components-border-box-control__header">
+        <span className="components-border-box-control__label">
+          {__('Padding Settings', 'th-login')}
+        </span>
+        <Button
+          className="components-border-box-control__sync-button"
+          isSmall
+          icon={syncAll ? 'admin-links' : 'editor-unlink'}
+          onClick={toggleSync}
+          aria-pressed={syncAll}
+          label={__('Toggle sync', 'th-login')}
+          showTooltip
+        />
+      </div>
 
-        <div className="components-border-box-control__header">
-          <span className="components-border-box-control__label">
-            {__('Padding Settings', 'th-login')}
-          </span>
-          <Button
-            className="components-border-box-control__sync-button"
-            isSmall
-            icon={syncAll ? 'admin-links' : 'editor-unlink'}
-            onClick={toggleSync}
-            aria-pressed={syncAll}
-            label={__('Toggle sync', 'th-login')}
-            showTooltip
-          />
-        </div>
-
-        <div className="components-border-box-control__input-wrapper">
-          <div className="components-border-box-control__input-container">
+      <div className="components-border-box-control__input-wrapper">
+        {sides.map(({ key, label }) => (
+          <div key={key} className="components-border-box-control__input-container">
             <TextControl
-            __next40pxDefaultSize={true}
-            __nextHasNoMarginBottom={true}
-              label={__('Top', 'th-login')}
+              __next40pxDefaultSize={true}
+              __nextHasNoMarginBottom={true}
+              label={label}
               type="number"
               min={min}
               max={max}
-              value={padding.top || 0}
-              onChange={(val) => handlePaddingChange('top', val)}
+              value={padding[key] || 0}
+              onChange={(val) => handlePaddingChange(key, val)}
             />
           </div>
-
-          <div className="components-border-box-control__input-container">
-            <TextControl
-            __next40pxDefaultSize={true}
-            __nextHasNoMarginBottom={true}
-              label={__('Right', 'th-login')}
-              type="number"
-              min={min}
-              max={max}
-              value={padding.right || 0}
-              onChange={(val) => handlePaddingChange('right', val)}
-            />
-          </div>
-
-          <div className="components-border-box-control__input-container">
-            <TextControl
-            __next40pxDefaultSize={true}
-            __nextHasNoMarginBottom={true}
-              label={__('Bottom', 'th-login')}
-              type="number"
-              min={min}
-              max={max}
-              value={padding.bottom || 0}
-              onChange={(val) => handlePaddingChange('bottom', val)}
-            />
-          </div>
-
-          <div className="components-border-box-control__input-container">
-            <TextControl
-            __next40pxDefaultSize={true}
-            __nextHasNoMarginBottom={true}
-              label={__('Left', 'th-login')}
-              type="number"
-              min={min}
-              max={max}
-              value={padding.left || 0}
-              onChange={(val) => handlePaddingChange('left', val)}
-            />
-          </div>
-        </div>
-
+        ))}
+      </div>
     </AccordionSection>
   );
 };

@@ -263,9 +263,9 @@ export  const design = {
   Input:{
     color:"#000000",
     labelcolor:"#000000",
-    labeltypography:{size: "20px", fontWeight: 300},
+    labeltypography:{size: "15px", fontWeight: 300},
     background:"#EEEcec",
-    typography:{size: "15px", fontWeight: 300}
+    typography:{size: "12px", fontWeight: 300}
   },
   button:{
     color:"#ffffff",
@@ -288,6 +288,34 @@ export  const design = {
   icon:{
     color:"#111111",
     size:"20px"
+  },
+  header:{
+    button:{
+      color:"#ffffff",
+      background:"#0B59f4",
+      hoverBackground:"#1c21ba",
+      padding:{ top:8, left:12, right:12, bottom:8},
+      typography:{size: "14px",fontWeight: 500},
+      border: {
+        width: { top: 0, right: 0, bottom: 0, left: 0 },
+        style: "solid",
+        color: "#000000",
+        radius: { topLeft: 5, topRight: 5, bottomRight: 5, bottomLeft: 5}
+      },
+    },
+    cancel_button:{
+      color:"#f31212",
+      background:"#E6e6e6",
+      hoverBackground:"#9a9a9e",
+      padding:{ top:3, left:3, right:3, bottom:3},
+      typography:{size: "14px",fontWeight: 500},
+      border: {
+        width: { top: 0, right: 0, bottom: 0, left: 0 },
+        style: "solid",
+        color: "#000000",
+        radius: { topLeft: 20, topRight: 20, bottomRight: 20, bottomLeft: 20}
+      },
+    }
   }
 };
 

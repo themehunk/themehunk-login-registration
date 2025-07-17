@@ -174,12 +174,12 @@ function th_login_set_default_options() {
 			'color'      => '#000000',
 			'labelcolor' => '#000000',
 			'labeltypography' => array(
-				'size'       => '20px',
+				'size'       => '15px',
 				'fontWeight' => 300,
 			),
 			'background' => '#EEEcec',
 			'typography' => array(
-				'size'       => '15px',
+				'size'       => '12px',
 				'fontWeight' => 300,
 			),
 		),
@@ -225,11 +225,75 @@ function th_login_set_default_options() {
 			),
 		),
 
-		'icon'=> array(
+		'icon' => array(
 			'color' => '#111111',
-			'size' =>  '20px'
+			'size'  => '20px',
 		),
-			
+
+		'header' => array(
+			'button' => array(
+				'color'           => '#ffffff',
+				'background'      => '#0B59f4',
+				'hoverBackground' => '#1c21ba',
+				'padding'         => array(
+					'top'    => 8,
+					'right'  => 12,
+					'bottom' => 8,
+					'left'   => 12,
+				),
+				'typography' => array(
+					'size'       => '14px',
+					'fontWeight' => 500,
+				),
+				'border' => array(
+					'width' => array(
+						'top'    => 0,
+						'right'  => 0,
+						'bottom' => 0,
+						'left'   => 0,
+					),
+					'style'  => 'solid',
+					'color'  => '#000000',
+					'radius' => array(
+						'topLeft'     => 5,
+						'topRight'    => 5,
+						'bottomRight' => 5,
+						'bottomLeft'  => 5,
+					),
+				),
+			),
+			'cancel_button' => array(
+				'color'           => '#f31212',
+				'background'      => '#E6e6e6',
+				'hoverBackground' => '#9a9a9e',
+				'padding'         => array(
+					'top'    => 3,
+					'right'  => 3,
+					'bottom' => 3,
+					'left'   => 3,
+				),
+				'typography' => array(
+					'size'       => '14px',
+					'fontWeight' => 500,
+				),
+				'border' => array(
+					'width' => array(
+						'top'    => 0,
+						'right'  => 0,
+						'bottom' => 0,
+						'left'   => 0,
+					),
+					'style'  => 'solid',
+					'color'  => '#000000',
+					'radius' => array(
+						'topLeft'     => 20,
+						'topRight'    => 20,
+						'bottomRight' => 20,
+						'bottomLeft'  => 20,
+					),
+				),
+			),
+		),
 	);
 
 	$form_fields_defaults = array(

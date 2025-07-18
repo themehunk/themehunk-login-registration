@@ -18,7 +18,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
     useEffect(() => {
         const fetchSuggestions = async () => {
             try {
-            const response = await apiFetch({ path: "th-login/v1/content-suggestions" });
+            const response = await apiFetch({ path: "thlogin/v1/content-suggestions" });
 
             if (response) {
                 setSuggestions(response);
@@ -32,11 +32,11 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
     }, []);
 
     const tabs = [
-        { key: "auto_open", label: __("Auto-Open", "th-login") },
-        { key: "page_conditions", label: __("Page Conditions", "th-login") },
-        { key: "device", label: __("Device Visibility", "th-login") },
-        { key: "frequency", label: __("Frequency", "th-login") },
-        { key: "menu", label: __("Menu Integration", "th-login") },
+        { key: "auto_open", label: __("Auto-Open", "thlogin") },
+        { key: "page_conditions", label: __("Page Conditions", "thlogin") },
+        { key: "device", label: __("Device Visibility", "thlogin") },
+        { key: "frequency", label: __("Frequency", "thlogin") },
+        { key: "menu", label: __("Menu Integration", "thlogin") },
     ];
 
     const renderTabs = () => (
@@ -61,7 +61,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                 <h2 className="section-title">
                     <i className="dashicons dashicons-visibility"></i>
-                    {__("Display Triggers", "th-login")}
+                    {__("Display Triggers", "thlogin")}
                 </h2>
 
                 {renderTabs()}
@@ -69,14 +69,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "auto_open" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Auto-Open Conditions", "th-login")}
+                        {__("Auto-Open Conditions", "thlogin")}
                         </h3>
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("On Page Load", "th-login")}</h4>
+                                <h4>{__("On Page Load", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Automatically open when page loads", "th-login")}
+                                {__("Automatically open when page loads", "thlogin")}
                                 </p>
                             </div>
 
@@ -101,9 +101,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         {settings.display_triggers.auto_open_on_load?.enabled && (
                             <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                <h4>{__("Delay (seconds)", "th-login")}</h4>
+                                <h4>{__("Delay (seconds)", "thlogin")}</h4>
                                 <p className="description">
-                                    {__("Delay before showing the modal", "th-login")}
+                                    {__("Delay before showing the modal", "thlogin")}
                                 </p>
                                 </div>
                                 <div className="setting-control text-small-box">
@@ -130,9 +130,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Auto-Open on Scroll", "th-login")}</h4>
+                                <h4>{__("Auto-Open on Scroll", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal when the user scrolls down a certain percentage of the page.", "th-login")}
+                                {__("Automatically open the modal when the user scrolls down a certain percentage of the page.", "thlogin")}
                                 </p>
                             </div>
 
@@ -148,9 +148,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         {settings.display_triggers.auto_open_on_scroll?.enabled && (
                             <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                <h4>{__("Scroll Percentage (%)", "th-login")}</h4>
+                                <h4>{__("Scroll Percentage (%)", "thlogin")}</h4>
                                 <p className="description">
-                                    {__("Percentage of the page scrolled before the modal opens.", "th-login")}
+                                    {__("Percentage of the page scrolled before the modal opens.", "thlogin")}
                                 </p>
                                 </div>
                                 <div className="setting-control text-small-box">
@@ -169,9 +169,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Auto-Open on Exit Intent", "th-login")}</h4>
+                                <h4>{__("Auto-Open on Exit Intent", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "th-login")}
+                                {__("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "thlogin")}
                                 </p>
                             </div>
 
@@ -186,9 +186,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Auto-Open on Time on Page", "th-login")}</h4>
+                                <h4>{__("Auto-Open on Time on Page", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal after the user spends a specified amount of time on the page.", "th-login")}
+                                {__("Automatically open the modal after the user spends a specified amount of time on the page.", "thlogin")}
                                 </p>
                             </div>
 
@@ -204,9 +204,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         {settings.display_triggers.auto_open_on_time_on_page?.enabled && (
                             <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                <h4>{__("Time on Page (seconds)", "th-login")}</h4>
+                                <h4>{__("Time on Page (seconds)", "thlogin")}</h4>
                                 <p className="description">
-                                    {__("Time in seconds before the modal opens.", "th-login")}
+                                    {__("Time in seconds before the modal opens.", "thlogin")}
                                 </p>
                                 </div>
                                 <div className="setting-control text-small-box">
@@ -228,14 +228,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "page_conditions" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Page & Content Conditions", "th-login")}
+                        {__("Page & Content Conditions", "thlogin")}
                         </h3>
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Specific Pages/Posts", "th-login")}</h4>
+                            <h4>{__("Specific Pages/Posts", "thlogin")}</h4>
                             <p className="description">
-                            {__("Show on specific pages or posts", "th-login")}
+                            {__("Show on specific pages or posts", "thlogin")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -264,7 +264,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
                                
                                 <FormTokenField
-                                    label={__('Select Pages/Posts', 'th-login')}
+                                    label={__('Select Pages/Posts', 'thlogin')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_pages?.page_ids?.map(id => {
                                             const matched = [...suggestions.pages, ...suggestions.posts].find(p => p.id === id);
@@ -301,9 +301,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                    
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Page/Post IDs", "th-login")}</h4>
+                                        <h4>{__("Page/Post IDs", "thlogin")}</h4>
                                         <p className="description">
-                                        {__("Comma-separated list of IDs", "th-login")}
+                                        {__("Comma-separated list of IDs", "thlogin")}
                                         </p>
                                     </div>
                                     <div className="setting-control">
@@ -336,9 +336,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Page/Post Slugs", "th-login")}</h4>
+                                        <h4>{__("Page/Post Slugs", "thlogin")}</h4>
                                         <p className="description">
-                                        {__("Comma-separated list of slugs", "th-login")}
+                                        {__("Comma-separated list of slugs", "thlogin")}
                                         </p>
                                     </div>
                                     <div className="setting-control">
@@ -370,9 +370,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Show on Specific Categories", "th-login")}</h4>
+                                <h4>{__("Show on Specific Categories", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Control modal display on posts within specific categories.", "th-login")}
+                                {__("Control modal display on posts within specific categories.", "thlogin")}
                                 </p>
                             </div>
 
@@ -389,7 +389,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
 
                                 <FormTokenField
-                                    label={__('Select Categories', 'th-login')}
+                                    label={__('Select Categories', 'thlogin')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_ids?.map(id => {
                                             const matched = suggestions.categories?.find(cat => cat.id === id);
@@ -427,9 +427,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Category IDs (comma-separated)", "th-login")}</h4>
+                                        <h4>{__("Category IDs (comma-separated)", "thlogin")}</h4>
                                         <p className="description">
-                                        {__("Enter category IDs (e.g., 5, 12).", "th-login")}
+                                        {__("Enter category IDs (e.g., 5, 12).", "thlogin")}
                                         </p>
                                     </div>
 
@@ -445,9 +445,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                    <h4>{__("Category Slugs (comma-separated)", "th-login")}</h4>
+                                    <h4>{__("Category Slugs (comma-separated)", "thlogin")}</h4>
                                     <p className="description">
-                                    {__("Enter category slugs (e.g., news, blog).", "th-login")}
+                                    {__("Enter category slugs (e.g., news, blog).", "thlogin")}
                                     </p>
                                 </div>
                                 <div className="setting-control">
@@ -464,9 +464,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Show on Specific Tags", "th-login")}</h4>
+                                <h4>{__("Show on Specific Tags", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Control modal display on posts with specific tags.", "th-login")}
+                                {__("Control modal display on posts with specific tags.", "thlogin")}
                                 </p>
                             </div>
 
@@ -483,7 +483,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
 
                                 <FormTokenField
-                                    label={__('Select Tags', 'th-login')}
+                                    label={__('Select Tags', 'thlogin')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_ids?.map(id => {
                                             const matched = suggestions.tags?.find(tag => tag.id === id);
@@ -520,9 +520,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Tag IDs (comma-separated)", "th-login")}</h4>
+                                        <h4>{__("Tag IDs (comma-separated)", "thlogin")}</h4>
                                         <p className="description">
-                                        {__("Enter tag IDs (e.g., 7, 15).", "th-login")}
+                                        {__("Enter tag IDs (e.g., 7, 15).", "thlogin")}
                                         </p>
                                     </div>
 
@@ -538,9 +538,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Tag Slugs (comma-separated)", "th-login")}</h4>
+                                        <h4>{__("Tag Slugs (comma-separated)", "thlogin")}</h4>
                                         <p className="description">
-                                        {__("Enter tag slugs (e.g., featured, popular).", "th-login")}
+                                        {__("Enter tag slugs (e.g., featured, popular).", "thlogin")}
                                         </p>
                                     </div>
 
@@ -559,9 +559,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Show on WooCommerce My Account Page", "th-login")}</h4>
+                                <h4>{__("Show on WooCommerce My Account Page", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal on the WooCommerce My Account page.", "th-login")}
+                                {__("Automatically open the modal on the WooCommerce My Account page.", "thlogin")}
                                 </p>
                             </div>
 
@@ -576,9 +576,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Show on WooCommerce Checkout Page", "th-login")}</h4>
+                                <h4>{__("Show on WooCommerce Checkout Page", "thlogin")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal on the WooCommerce Checkout page.", "th-login")}
+                                {__("Automatically open the modal on the WooCommerce Checkout page.", "thlogin")}
                                 </p>
                             </div>
 
@@ -597,14 +597,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "device" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Device Visibility", "th-login")}
+                        {__("Device Visibility", "thlogin")}
                         </h3>
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Desktop", "th-login")}</h4>
+                            <h4>{__("Desktop", "thlogin")}</h4>
                             <p className="description">
-                            {__("Show on desktop devices", "th-login")}
+                            {__("Show on desktop devices", "thlogin")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -631,9 +631,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Tablet", "th-login")}</h4>
+                            <h4>{__("Tablet", "thlogin")}</h4>
                             <p className="description">
-                            {__("Show on tablet devices", "th-login")}
+                            {__("Show on tablet devices", "thlogin")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -660,9 +660,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Mobile", "th-login")}</h4>
+                            <h4>{__("Mobile", "thlogin")}</h4>
                             <p className="description">
-                            {__("Show on mobile devices", "th-login")}
+                            {__("Show on mobile devices", "thlogin")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -692,14 +692,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "frequency" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Pop-up Frequency", "th-login")}
+                        {__("Pop-up Frequency", "thlogin")}
                         </h3>
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Enable Frequency Control", "th-login")}</h4>
+                            <h4>{__("Enable Frequency Control", "thlogin")}</h4>
                             <p className="description">
-                            {__("Control how often pop-up appears", "th-login")}
+                            {__("Control how often pop-up appears", "thlogin")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -724,9 +724,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         <>
                             <div className="setting-row under-small-portion">
                             <div className="setting-label">
-                                <h4>{__("Frequency Type", "th-login")}</h4>
+                                <h4>{__("Frequency Type", "thlogin")}</h4>
                                 <p className="description">
-                                {__("How to limit pop-up frequency", "th-login")}
+                                {__("How to limit pop-up frequency", "thlogin")}
                                 </p>
                             </div>
                                 <div className="setting-control select-control-settings-popup">
@@ -744,10 +744,10 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                         }
                                         >
                                         <option value="session">
-                                            {__("Once per session", "th-login")}
+                                            {__("Once per session", "thlogin")}
                                         </option>
                                         <option value="days">
-                                            {__("Once every X days", "th-login")}
+                                            {__("Once every X days", "thlogin")}
                                         </option>
                                     </select>
                                 </div>
@@ -756,9 +756,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             "days" && (
                             <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                <h4>{__("Days to Hide", "th-login")}</h4>
+                                <h4>{__("Days to Hide", "thlogin")}</h4>
                                 <p className="description">
-                                    {__("Days before showing again", "th-login")}
+                                    {__("Days before showing again", "thlogin")}
                                 </p>
                                 </div>
                                 <div className="setting-control text-small-box">
@@ -790,14 +790,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "menu" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Menu Integration", "th-login")}
+                        {__("Menu Integration", "thlogin")}
                         </h3>
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Enable Menu Items", "th-login")}</h4>
+                            <h4>{__("Enable Menu Items", "thlogin")}</h4>
                             <p className="description">
-                            {__("Add login/register links to menus", "th-login")}
+                            {__("Add login/register links to menus", "thlogin")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -822,9 +822,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         <>
                             <div className="setting-row under-small-portion">
                             <div className="setting-label">
-                                <h4>{__("Menu Slug", "th-login")}</h4>
+                                <h4>{__("Menu Slug", "thlogin")}</h4>
                                 <p className="description">
-                                {__('Menu to add items to (or "all")', "th-login")}
+                                {__('Menu to add items to (or "all")', "thlogin")}
                                 </p>
                             </div>
                             <div className="setting-control">
@@ -849,9 +849,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group login-group">
                                 <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                    <h4>{__("Login Item Text", "th-login")}</h4>
+                                    <h4>{__("Login Item Text", "thlogin")}</h4>
                                     <p className="description">
-                                    {__("Text for login menu item", "th-login")}
+                                    {__("Text for login menu item", "thlogin")}
                                     </p>
                                 </div>
                                 <div className="setting-control">
@@ -860,7 +860,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 __nextHasNoMarginBottom={true}
                                     value={
                                         settings.display_triggers.menu_integration
-                                        ?.item_text_login || __("Login", "th-login")
+                                        ?.item_text_login || __("Login", "thlogin")
                                     }
                                     onChange={(newValue) =>
                                         handleSettingChange(
@@ -875,9 +875,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                    <h4>{__("Login Item Icon", "th-login")}</h4>
+                                    <h4>{__("Login Item Icon", "thlogin")}</h4>
                                     <p className="description">
-                                    {__("Dashicon for login menu item", "th-login")}
+                                    {__("Dashicon for login menu item", "thlogin")}
                                     </p>
                                 </div>
                                 <div className="setting-control">
@@ -901,11 +901,11 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                    <h4>{__("Hide Login When Logged In", "th-login")}</h4>
+                                    <h4>{__("Hide Login When Logged In", "thlogin")}</h4>
                                     <p className="description">
                                     {__(
                                         "Hide login item for logged in users",
-                                        "th-login"
+                                        "thlogin"
                                     )}
                                     </p>
                                 </div>
@@ -934,9 +934,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group login-group">
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Register Item Text", "th-login")}</h4>
+                                        <h4>{__("Register Item Text", "thlogin")}</h4>
                                         <p className="description">
-                                        {__("Text for register menu item", "th-login")}
+                                        {__("Text for register menu item", "thlogin")}
                                         </p>
                                     </div>
                                     <div className="setting-control">
@@ -946,7 +946,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                         value={
                                             settings.display_triggers.menu_integration
                                             ?.item_text_register ||
-                                            __("Register", "th-login")
+                                            __("Register", "thlogin")
                                         }
                                         onChange={(newValue) =>
                                             handleSettingChange(
@@ -961,9 +961,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                    <h4>{__("Register Item Icon", "th-login")}</h4>
+                                    <h4>{__("Register Item Icon", "thlogin")}</h4>
                                     <p className="description">
-                                    {__("Dashicon for register menu item", "th-login")}
+                                    {__("Dashicon for register menu item", "thlogin")}
                                     </p>
                                 </div>
                                 <div className="setting-control">
@@ -988,12 +988,12 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 <div className="setting-row under-small-portion">
                                 <div className="setting-label">
                                     <h4>
-                                    {__("Hide Register When Logged In", "th-login")}
+                                    {__("Hide Register When Logged In", "thlogin")}
                                     </h4>
                                     <p className="description">
                                     {__(
                                         "Hide register item for logged in users",
-                                        "th-login"
+                                        "thlogin"
                                     )}
                                     </p>
                                 </div>

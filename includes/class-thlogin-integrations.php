@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handles all third-party integrations for TH Login, e.g., WooCommerce.
  */
-class TH_Login_Integrations {
+class THLogin_Integrations {
 
 	/**
 	 * Constructor.
@@ -45,8 +45,8 @@ class TH_Login_Integrations {
 	 * Handles redirects for WooCommerce My Account, Login, and Register pages.
 	 */
 	public function handle_woocommerce_redirects() {
-		$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 
 		// Only apply redirects if the plugin is enabled.
 		if ( ( $general_settings['plugin_status'] ?? 'enabled' ) !== 'enabled' ) {
@@ -98,18 +98,18 @@ class TH_Login_Integrations {
 	 * @return string Modified form HTML.
 	 */
 	public function filter_woocommerce_login_form( $form ) {
-		$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
+		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
 		$on_my_account_page_trigger = $display_triggers_settings['auto_open_conditions']['on_woocommerce_myaccount'] ?? false;
 
 		if ( $on_my_account_page_trigger ) {
 			// If we are redirecting to a popup, we can hide the default form.
 			// Or, replace it with a button that triggers our popup.
-			$login_text = $display_triggers_settings['menu_integration']['item_text_login'] ?? esc_html__( 'Login', 'th-login' );
-			$trigger_class = $display_triggers_settings['trigger_css_class'] ?? 'th-login-trigger';
+			$login_text = $display_triggers_settings['menu_integration']['item_text_login'] ?? esc_html__( 'Login', 'thlogin' );
+			$trigger_class = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
 
 			return sprintf(
-				'<p class="th-login-wc-form-replacement">%s</p><p><a href="#" class="%s" data-th-popup-action="login">%s</a></p>',
-				esc_html__( 'Please use our custom login form.', 'th-login' ),
+				'<p class="thlogin-wc-form-replacement">%s</p><p><a href="#" class="%s" data-th-popup-action="login">%s</a></p>',
+				esc_html__( 'Please use our custom login form.', 'thlogin' ),
 				esc_attr( $trigger_class ),
 				esc_html( $login_text )
 			);
@@ -124,16 +124,16 @@ class TH_Login_Integrations {
 	 * @return string Modified form HTML.
 	 */
 	public function filter_woocommerce_register_form( $form ) {
-		$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
+		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
 		$on_my_account_page_trigger = $display_triggers_settings['auto_open_conditions']['on_woocommerce_myaccount'] ?? false;
 
 		if ( $on_my_account_page_trigger ) {
-			$register_text = $display_triggers_settings['menu_integration']['item_text_register'] ?? esc_html__( 'Register', 'th-login' );
-			$trigger_class = $display_triggers_settings['trigger_css_class'] ?? 'th-login-trigger';
+			$register_text = $display_triggers_settings['menu_integration']['item_text_register'] ?? esc_html__( 'Register', 'thlogin' );
+			$trigger_class = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
 
 			return sprintf(
-				'<p class="th-login-wc-form-replacement">%s</p><p><a href="#" class="%s" data-th-popup-action="register">%s</a></p>',
-				esc_html__( 'Please use our custom registration form.', 'th-login' ),
+				'<p class="thlogin-wc-form-replacement">%s</p><p><a href="#" class="%s" data-th-popup-action="register">%s</a></p>',
+				esc_html__( 'Please use our custom registration form.', 'thlogin' ),
 				esc_attr( $trigger_class ),
 				esc_html( $register_text )
 			);
@@ -148,16 +148,16 @@ class TH_Login_Integrations {
 	 * @return string Modified form HTML.
 	 */
 	public function filter_woocommerce_lost_password_form( $form ) {
-		$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
+		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
 		$on_my_account_page_trigger = $display_triggers_settings['auto_open_conditions']['on_woocommerce_myaccount'] ?? false;
 
 		if ( $on_my_account_page_trigger ) {
-			$forgot_password_text = esc_html__( 'Forgot Password', 'th-login' ); // No specific setting for this text, use default.
-			$trigger_class = $display_triggers_settings['trigger_css_class'] ?? 'th-login-trigger';
+			$forgot_password_text = esc_html__( 'Forgot Password', 'thlogin' ); // No specific setting for this text, use default.
+			$trigger_class = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
 
 			return sprintf(
-				'<p class="th-login-wc-form-replacement">%s</p><p><a href="#" class="%s" data-th-popup-action="forgot-password">%s</a></p>',
-				esc_html__( 'Please use our custom password reset form.', 'th-login' ),
+				'<p class="thlogin-wc-form-replacement">%s</p><p><a href="#" class="%s" data-th-popup-action="forgot-password">%s</a></p>',
+				esc_html__( 'Please use our custom password reset form.', 'thlogin' ),
 				esc_attr( $trigger_class ),
 				esc_html( $forgot_password_text )
 			);

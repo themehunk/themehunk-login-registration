@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class TH_Login_Shortcodes {
+class THLogin_Shortcodes {
 
 	public function __construct() {
 		add_shortcode( 'th_login_form', array( $this, 'render_login_form_shortcode' ) );
@@ -26,15 +26,15 @@ class TH_Login_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require TH_LOGIN_PATH . 'templates/modal-wrapper.php';
+		require THLOGIN_PATH . 'templates/modal-wrapper.php';
 		$output = ob_get_clean();
-		$output .= '<script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){if(window.thLoginFrontendData && typeof window.thLoginFrontendData==="object" && document.getElementById("th-login-popup-modal")){document.getElementById("th-login-popup-modal").style.display="flex";}},100);});</script>';
-		return '<div class="th-login-combined-form-wrapper">' . $output . '</div>';
+		$output .= '<script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){if(window.thLoginFrontendData && typeof window.thLoginFrontendData==="object" && document.getElementById("thlogin-popup-modal")){document.getElementById("thlogin-popup-modal").style.display="flex";}},100);});</script>';
+		return '<div class="thlogin-combined-form-wrapper">' . $output . '</div>';
 	}
 
 	public function enqueue_shortcode_assets() {
-		if ( ! wp_style_is( 'th-login-frontend-style', 'enqueued' ) ) {
-			$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		if ( ! wp_style_is( 'thlogin-frontend-style', 'enqueued' ) ) {
+			$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 			$plugin_status = $general_settings['plugin_status'] ?? 'enabled';
 
 			if ( 'enabled' !== $plugin_status ) {
@@ -43,16 +43,16 @@ class TH_Login_Shortcodes {
 
 			wp_enqueue_style( 'dashicons' );
 
-			$asset_file = TH_LOGIN_PATH . 'app/build/frontend.asset.php';
+			$asset_file = THLOGIN_PATH . 'app/build/frontend.asset.php';
 			$asset_config = file_exists( $asset_file ) ? require $asset_file : array(
 				'dependencies' => array(),
-				'version'      => TH_LOGIN_VERSION,
+				'version'      => THLOGIN_VERSION,
 			);
 
 			// Using defer for the main frontend script as it needs DOM and other dependencies
 			wp_enqueue_script(
-				'th-login-frontend-script',
-				TH_LOGIN_URL . 'app/build/frontend.js',
+				'thlogin-frontend-script',
+				THLOGIN_URL . 'app/build/frontend.js',
 				$asset_config['dependencies'],
 				$asset_config['version'],
 				array(
@@ -62,17 +62,17 @@ class TH_Login_Shortcodes {
 			);
 
 			wp_enqueue_style(
-				'th-login-frontend-style',
-				TH_LOGIN_URL . 'app/build/public.css',
+				'thlogin-frontend-style',
+				THLOGIN_URL . 'app/build/public.css',
 				array(),
 				$asset_config['version']
 			);
 
-			$design_settings = $this->safe_json_option( 'th_login_design_settings' );
-			$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
+			$design_settings = $this->safe_json_option( 'thlogin_design_settings' );
+			$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
 
 			wp_localize_script(
-				'th-login-frontend-script',
+				'thlogin-frontend-script',
 				'thLoginFrontendData',
 				array(
 					'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
@@ -97,7 +97,7 @@ class TH_Login_Shortcodes {
 			if ( ! empty( $google_font_url ) ) {
 				// Using async for Google Fonts as they're render-blocking
 				wp_enqueue_style( 
-					'th-login-google-fonts', 
+					'thlogin-google-fonts', 
 					esc_url( $google_font_url ), 
 					array(), 
 					null,
@@ -111,24 +111,24 @@ class TH_Login_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require TH_LOGIN_PATH . 'templates/form-login.php';
-		return '<div class="th-login-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
+		require THLOGIN_PATH . 'templates/form-login.php';
+		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
 	public function render_register_form_shortcode( $atts ) {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require TH_LOGIN_PATH . 'templates/form-register.php';
-		return '<div class="th-login-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
+		require THLOGIN_PATH . 'templates/form-register.php';
+		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
 	public function render_forgot_password_form_shortcode( $atts ) {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require TH_LOGIN_PATH . 'templates/form-forgot-password.php';
-		return '<div class="th-login-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
+		require THLOGIN_PATH . 'templates/form-forgot-password.php';
+		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
 	public function render_popup_link_shortcode( $atts, $content = null ) {
@@ -150,17 +150,17 @@ class TH_Login_Shortcodes {
 
 		if ( empty( $text ) ) {
 			$text = match ( $type ) {
-				'login' => esc_html__( 'Login', 'th-login' ),
-				'register' => esc_html__( 'Register', 'th-login' ),
-				'forgot-password' => esc_html__( 'Forgot Password', 'th-login' ),
-				default => esc_html__( 'Open Login Popup', 'th-login' ),
+				'login' => esc_html__( 'Login', 'thlogin' ),
+				'register' => esc_html__( 'Register', 'thlogin' ),
+				'forgot-password' => esc_html__( 'Forgot Password', 'thlogin' ),
+				default => esc_html__( 'Open Login Popup', 'thlogin' ),
 			};
 		}
 
-		$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
-		$trigger_css_class = $display_triggers_settings['trigger_css_class'] ?? 'th-login-trigger';
+		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
+		$trigger_css_class = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
 
-		$classes = array( $trigger_css_class, 'th-login-shortcode-link' );
+		$classes = array( $trigger_css_class, 'thlogin-shortcode-link' );
 		if ( ! empty( $extra_class ) ) {
 			$classes[] = $extra_class;
 		}

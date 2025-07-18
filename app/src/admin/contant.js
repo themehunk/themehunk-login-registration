@@ -4,37 +4,37 @@ import { __ } from "@wordpress/i18n";
 export const TABS = [
   {
     id: "general",
-    label: __("General", "th-login"),
+    label: __("General", "thlogin"),
     icon: "admin-settings"
   },
    {
     id: "form-fields",
-    label: __("Form Fields", "th-login"),
+    label: __("Form Fields", "thlogin"),
     icon: "feedback"
   },
   {
     id: "display-triggers",
-    label: __("Display Triggers", "th-login"),
+    label: __("Display Triggers", "thlogin"),
     icon: "visibility"
   },
   {
     id: "design",
-    label: __("Design", "th-login"),
+    label: __("Design", "thlogin"),
     icon: "art"
   },
   {
     id: "integration",
-    label: __("Integration", "th-login"),
+    label: __("Integration", "thlogin"),
     icon: "admin-plugins"
   },
   {
     id: "security",
-    label: __("Security", "th-login"),
+    label: __("Security", "thlogin"),
     icon: "shield"
   },
   {
     id: "tools",
-    label: __("Tools", "th-login"),
+    label: __("Tools", "thlogin"),
     icon: "admin-tools"
   }
 ];
@@ -320,7 +320,7 @@ export  const design = {
 };
 
 export  const display_triggers = {
-      trigger_css_class: "th-login-trigger",
+      trigger_css_class: "thlogin-trigger",
       auto_open_on_load: { enabled: true, delay_seconds: 2 },
       auto_open_on_scroll: { enabled: false, scroll_percentage: 50 },
       auto_open_on_exit_intent: { enabled: false },
@@ -349,8 +349,8 @@ export  const display_triggers = {
       menu_integration: {
         enabled: false,
         menu_slug: "primary",
-        item_text_login: __("Login", "th-login"),
-        item_text_register: __("Register", "th-login"),
+        item_text_login: __("Login", "thlogin"),
+        item_text_register: __("Register", "thlogin"),
         item_icon_login: "dashicons-admin-users",
         item_icon_register: "dashicons-plus-alt",
         visibility_login_logged_in: false,
@@ -376,41 +376,41 @@ export  const security = {
 
 //deisgn-settings
 export const tabs = [
-  { key: "login", label: __("Login", "th-login") },
-  { key: "register", label: __("Register", "th-login") },
-  { key: "forgot_password", label: __("Forgot", "th-login") },
+  { key: "login", label: __("Login", "thlogin") },
+  { key: "register", label: __("Register", "thlogin") },
+  { key: "forgot_password", label: __("Forgot", "thlogin") },
 ];
 
 export const layoutOptions = [
   {
     key: "page",
     icon: "admin-page", // more appropriate than "align-center"
-    label: __("Page", "th-login"),
+    label: __("Page", "thlogin"),
     demoClass: "page",
   },
   {	
     key: "popup",
     icon: "align-center",
-    label: __("Popup", "th-login"),
+    label: __("Popup", "thlogin"),
     demoClass: "popup",
   },
   {
     key: "slide_in_left",
     icon: "align-pull-left",
-    label: __("Slide-in-left", "th-login"),
+    label: __("Slide-in-left", "thlogin"),
     demoClass: "slide-left",
   },
   {
     key: "slide_in_right",
     icon: "align-pull-right",
-    label: __("Slide-in-right", "th-login"),
+    label: __("Slide-in-right", "thlogin"),
     demoClass: "slide-right",
   },
 ];
 
 export const fontWeightOptions = [
-  { label: __("Normal", "th-login"), value: 300 },
-  { label: __("Medium", "th-login"), value: 500 },
-  { label: __("Semi-Bold", "th-login"), value: 700 },
-  { label: __("Bold", "th-login"), value: 900 },
+  { label: __("Normal", "thlogin"), value: 300 },
+  { label: __("Medium", "thlogin"), value: 500 },
+  { label: __("Semi-Bold", "thlogin"), value: 700 },
+  { label: __("Bold", "thlogin"), value: 900 },
 ];

@@ -65,24 +65,24 @@ const ToolsSettings = ({
       <div className="settings-card">
         <h2 className="section-title">
           <i className="dashicons dashicons-admin-tools"></i>
-          {__("Tools", "th-login")}
+          {__("Tools", "thlogin")}
         </h2>
 
         {/* Export Section */}
         <div className="settings-group">
-          <h3 className="group-title">{__("Export Settings", "th-login")}</h3>
+          <h3 className="group-title">{__("Export Settings", "thlogin")}</h3>
 
           <div className="setting-row">
             <div className="setting-label">
-              <h4>{__("Export Current Settings", "th-login")}</h4>
+              <h4>{__("Export Current Settings", "thlogin")}</h4>
               <p className="description">
-                {__("Backup your current configuration", "th-login")}
+                {__("Backup your current configuration", "thlogin")}
               </p>
             </div>
             <div className="setting-control">
               <Button isSecondary onClick={handleExportSettings}>
                 <Dashicon icon="download" />
-                {__("Export Settings", "th-login")}
+                {__("Export Settings", "thlogin")}
               </Button>
             </div>
           </div>
@@ -91,9 +91,9 @@ const ToolsSettings = ({
             <>
               <div className="setting-row">
                 <div className="setting-label">
-                  <h4>{__("Exported Settings", "th-login")}</h4>
+                  <h4>{__("Exported Settings", "thlogin")}</h4>
                   <p className="description">
-                    {__("Copy this JSON to save your settings", "th-login")}
+                    {__("Copy this JSON to save your settings", "thlogin")}
                   </p>
                 </div>
                 <div className="setting-control">
@@ -109,7 +109,7 @@ const ToolsSettings = ({
                     onClick={handleCopyToClipboard}
                     isSmall
                   >
-                    {copied ? __("Copied!", "th-login") : __("Copy", "th-login")}
+                    {copied ? __("Copied!", "thlogin") : __("Copy", "thlogin")}
                   </Button>
                 </div>
               </div>
@@ -119,13 +119,13 @@ const ToolsSettings = ({
 
         {/* Import Section */}
         <div className="settings-group">
-          <h3 className="group-title">{__("Import Settings", "th-login")}</h3>
+          <h3 className="group-title">{__("Import Settings", "thlogin")}</h3>
 
           <div className="setting-row">
             <div className="setting-label">
-              <h4>{__("Import Settings", "th-login")}</h4>
+              <h4>{__("Import Settings", "thlogin")}</h4>
               <p className="description">
-                {__("Paste previously exported settings JSON", "th-login")}
+                {__("Paste previously exported settings JSON", "thlogin")}
               </p>
             </div>
             <div className="setting-control">
@@ -143,7 +143,7 @@ const ToolsSettings = ({
                 disabled={!clipboardContent.trim()}
               >
                 <Dashicon icon="clipboard" />
-                {__("Paste from Clipboard", "th-login")}
+                {__("Paste from Clipboard", "thlogin")}
               </Button>
             </div>
           </div>
@@ -160,7 +160,7 @@ const ToolsSettings = ({
                 ) : (
                   <>
                     <Dashicon icon="upload" />
-                    {__("Import Settings", "th-login")}
+                    {__("Import Settings", "thlogin")}
                   </>
                 )}
               </Button>
@@ -170,13 +170,13 @@ const ToolsSettings = ({
 
         {/* Reset Section */}
         <div className="settings-group">
-          <h3 className="group-title">{__("Reset Settings", "th-login")}</h3>
+          <h3 className="group-title">{__("Reset Settings", "thlogin")}</h3>
 
           <div className="setting-row">
             <div className="setting-label">
-              <h4>{__("Reset All Settings", "th-login")}</h4>
+              <h4>{__("Reset All Settings", "thlogin")}</h4>
               <p className="description">
-                {__("Restore all settings to default values", "th-login")}
+                {__("Restore all settings to default values", "thlogin")}
               </p>
             </div>
             <div className="setting-control">
@@ -185,7 +185,7 @@ const ToolsSettings = ({
                 onClick={() => setIsResetConfirmOpen(true)}
               >
                 <Dashicon icon="undo" />
-                {__("Reset Settings", "th-login")}
+                {__("Reset Settings", "thlogin")}
               </Button>
             </div>
           </div>

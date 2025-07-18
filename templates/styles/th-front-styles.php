@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-$design_settings = json_decode(get_option('th_login_design_settings', '{}'), true);
+$design_settings = json_decode(get_option('thlogin_design_settings', '{}'), true);
 $design = wp_parse_args($design_settings);
 
 // Helper function to get background style
@@ -61,7 +61,7 @@ if (!function_exists('th_login_get_padding_style')) {
 
 
 <style>
-.th-login-popup-form-container {
+.thlogin-popup-form-container {
     <?php echo th_login_get_background_style($design['form']['form_background']); ?>
     <?php echo th_login_get_border_style($design['form']['form_border']); ?>
     <?php echo th_login_get_padding_style($design['form']['form_padding']); ?>
@@ -72,7 +72,7 @@ if (!function_exists('th_login_get_padding_style')) {
     margin: 0 auto;
 }
 
-.th-login-form h3 {
+.thlogin-form h3 {
     color: <?php echo $design['heading']['color']; ?>;
     font-size: <?php echo $design['heading']['typography']['size']; ?>;
     font-weight: <?php echo $design['heading']['typography']['fontWeight']; ?>;
@@ -80,12 +80,12 @@ if (!function_exists('th_login_get_padding_style')) {
     text-align: center;
 }
 
-.th-login-form-field input[type="text"],
-.th-login-form-field input[type="email"],
-.th-login-form-field input[type="password"],
-.th-login-form-field input[type="tel"],
-.th-login-form-field input[type="url"],
-.th-login-form-field input[type="number"] {
+.thlogin-form-field input[type="text"],
+.thlogin-form-field input[type="email"],
+.thlogin-form-field input[type="password"],
+.thlogin-form-field input[type="tel"],
+.thlogin-form-field input[type="url"],
+.thlogin-form-field input[type="number"] {
     width: 100%;
     padding: 10px;
     color: <?php echo $design['Input']['color']; ?>;
@@ -96,30 +96,30 @@ if (!function_exists('th_login_get_padding_style')) {
     border-radius: 4px;
 }
 
-.th-login-form-field--checkbox,
-.th-login-form-field--terms {
+.thlogin-form-field--checkbox,
+.thlogin-form-field--terms {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.th-login-form-field--checkbox input[type="checkbox"],
-.th-login-form-field--terms input[type="checkbox"] {
+.thlogin-form-field--checkbox input[type="checkbox"],
+.thlogin-form-field--terms input[type="checkbox"] {
     accent-color: <?php echo $design['rememberme']['checkboxbackground']; ?>;
     width: 16px;
     height: 16px;
     cursor: pointer;
 }
 
-.th-login-form-field--checkbox label,
-.th-login-form-field--terms label {
+.thlogin-form-field--checkbox label,
+.thlogin-form-field--terms label {
     color: <?php echo $design['rememberme']['color']; ?>;
     font-size: <?php echo $design['rememberme']['typography']['size']; ?>;
     font-weight: <?php echo $design['rememberme']['typography']['fontWeight']; ?>;
     cursor: pointer;
 }
 
-.th-login-button {
+.thlogin-button {
     color: <?php echo $design['button']['color']; ?>;
     background-color: <?php echo $design['button']['background']; ?>;
     font-size: <?php echo $design['button']['typography']['size']; ?>;
@@ -130,50 +130,50 @@ if (!function_exists('th_login_get_padding_style')) {
     transition: background-color 0.3s ease;
 }
 
-.th-login-button:hover {
+.thlogin-button:hover {
     background-color: <?php echo $design['button']['hoverBackground']; ?>;
 }
 
-.th-login-form-links {
+.thlogin-form-links {
     text-align: center;
     margin-top: 15px;
 }
 
-.th-login-link {
+.thlogin-link {
     color: <?php echo $design['Input']['color']; ?>;
     text-decoration: none;
 }
 
-.th-login-link:hover {
+.thlogin-link:hover {
     text-decoration: underline;
 }
 
-.th-login-form-field {
+.thlogin-form-field {
     width: 100%;
     margin: 0 0 15px 0;
 }
 
-.th-login-label-with-icon {
+.thlogin-label-with-icon {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 5px;
 }
 
-.th-login-label-text {
+.thlogin-label-text {
     color: <?php echo $design['Input']['labelcolor']; ?>;
     font-size: <?php echo $design['Input']['labeltypography']['size']; ?>;
     font-weight: <?php echo $design['Input']['labeltypography']['fontWeight']; ?>;
 }
 
-.th-login-label-icon svg {
+.thlogin-label-icon svg {
     width: <?php echo $design['icon']['size']; ?>;
     height: <?php echo $design['icon']['size']; ?>;
     color: <?php echo $design['icon']['color']; ?>;
 }
 
 
-.th-login-link-separator {
+.thlogin-link-separator {
     margin: 0 8px;
     color: <?php echo $design['Input']['color']; ?>;
 }
@@ -183,11 +183,11 @@ if (!function_exists('th_login_get_padding_style')) {
     margin-left: 3px;
 }
 
-.th-login-form-field--honeypot {
+.thlogin-form-field--honeypot {
     display: none !important;
 }
 
-.th-login-error-message {
+.thlogin-error-message {
     color: #ff0000;
     text-align: center;
     margin: 10px 0;
@@ -195,7 +195,7 @@ if (!function_exists('th_login_get_padding_style')) {
 }
 
 /* Header Button Styles */
-.th-login-header-button {
+.thlogin-header-button {
     color: <?php echo $design['header']['button']['color']; ?>;
     background-color: <?php echo $design['header']['button']['background']; ?>;
     font-size: <?php echo $design['header']['button']['typography']['size']; ?>;
@@ -206,11 +206,11 @@ if (!function_exists('th_login_get_padding_style')) {
     transition: background-color 0.3s ease;
 }
 
-.th-login-header-button:hover {
+.thlogin-header-button:hover {
     background-color: <?php echo $design['header']['button']['hoverBackground']; ?>;
 }
 
-.th-login-header-cancel-button {
+.thlogin-header-cancel-button {
     color: <?php echo $design['header']['cancel_button']['color']; ?>;
     background-color: <?php echo $design['header']['cancel_button']['background']; ?>;
     font-size: <?php echo $design['header']['cancel_button']['typography']['size']; ?>;
@@ -225,23 +225,23 @@ if (!function_exists('th_login_get_padding_style')) {
     border: none;
 }
 
-.th-login-header-cancel-button:hover {
+.thlogin-header-cancel-button:hover {
     background-color: <?php echo $design['header']['cancel_button']['hoverBackground']; ?>;
 }
 
-.th-login-header-cancel-button .dashicons {
+.thlogin-header-cancel-button .dashicons {
     width: <?php echo $design['header']['cancel_button']['typography']['size']; ?>;
     height: <?php echo $design['header']['cancel_button']['typography']['size']; ?>;
     font-size: <?php echo $design['header']['cancel_button']['typography']['size']; ?>;
 }
 
-.th-login-form-toggle {
+.thlogin-form-toggle {
     display: flex;
     gap: 10px;
     margin-top: 15px;
 }
 
-.th-login-toggle-button {
+.thlogin-toggle-button {
     flex: 1;
 }
 </style>

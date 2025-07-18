@@ -4,9 +4,9 @@ if (!defined('ABSPATH')) {
 }
 
 // Include shared styles
-require TH_LOGIN_PATH . 'templates/styles/th-front-styles.php';
+require THLOGIN_PATH . 'templates/styles/th-front-styles.php';
 
-$design_settings = json_decode(get_option('th_login_design_settings', '{}'), true);
+$design_settings = json_decode(get_option('thlogin_design_settings', '{}'), true);
 $modal_design = $design_settings['modal']['modal_background'] ?? [];
 $opacity = isset($modal_design['opacity']) ? floatval($modal_design['opacity']) : 1;
 $modal_bg_style = '';
@@ -23,13 +23,13 @@ if ($modal_design['type'] === 'color') {
 $modal_bg_style .= " opacity: {$opacity};";
 ?>
 
-<div id="th-login-popup-modal" class="th-login-popup-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none; <?= esc_attr($modal_bg_style); ?>">
-    <div class="th-login-popup-form-container">
+<div id="thlogin-popup-modal" class="thlogin-popup-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none; <?= esc_attr($modal_bg_style); ?>">
+    <div class="thlogin-popup-form-container">
         <?php
         // Load forms
-        require TH_LOGIN_PATH . 'templates/form-login.php';
-        require TH_LOGIN_PATH . 'templates/form-register.php';
-        require TH_LOGIN_PATH . 'templates/form-forgot-password.php';
+        require THLOGIN_PATH . 'templates/form-login.php';
+        require THLOGIN_PATH . 'templates/form-register.php';
+        require THLOGIN_PATH . 'templates/form-forgot-password.php';
         ?>
     </div>
 </div>

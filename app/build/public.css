@@ -1,12 +1,12 @@
 /*!**************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/public/styles/frontend.scss ***!
   \**************************************************************************************************************************/
-body.th-login-modal-open {
+body.thlogin-modal-open {
   overflow: hidden;
   padding-right: 15px;
 }
 
-.th-login-popup-modal {
+.thlogin-popup-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -22,30 +22,30 @@ body.th-login-modal-open {
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
-.th-login-popup-modal.th-login-popup-modal--active {
+.thlogin-popup-modal.thlogin-popup-modal--active {
   opacity: 1;
   visibility: visible;
 }
-.th-login-popup-modal.th-login-popup-modal--opening {
-  animation: th-login-fade-in 0.3s forwards;
+.thlogin-popup-modal.thlogin-popup-modal--opening {
+  animation: thlogin-fade-in 0.3s forwards;
 }
-.th-login-popup-modal.th-login-popup-modal--closing {
-  animation: th-login-fade-out 0.3s forwards;
+.thlogin-popup-modal.thlogin-popup-modal--closing {
+  animation: thlogin-fade-out 0.3s forwards;
 }
-.th-login-popup-modal.th-login-slide-in-right.th-login-popup-modal--opening .th-login-popup-form-container {
+.thlogin-popup-modal.thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container {
   animation: slideInFromRight 0.5s forwards !important;
 }
-.th-login-popup-modal.th-login-slide-in-right.th-login-popup-modal--closing .th-login-popup-form-container {
+.thlogin-popup-modal.thlogin-slide-in-right.thlogin-popup-modal--closing .thlogin-popup-form-container {
   animation: slideOutToRight 0.5s forwards !important;
 }
-.th-login-popup-modal.th-login-slide-in-left.th-login-popup-modal--opening .th-login-popup-form-container {
+.thlogin-popup-modal.thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container {
   animation: slideInFromLeft 0.5s forwards !important;
 }
-.th-login-popup-modal.th-login-slide-in-left.th-login-popup-modal--closing .th-login-popup-form-container {
+.thlogin-popup-modal.thlogin-slide-in-left.thlogin-popup-modal--closing .thlogin-popup-form-container {
   animation: slideOutToLeft 0.5s forwards !important;
 }
 
-.th-login-popup-overlay {
+.thlogin-popup-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -55,7 +55,7 @@ body.th-login-modal-open {
   cursor: pointer;
 }
 
-.th-login-popup-form-container {
+.thlogin-popup-form-container {
   position: relative;
   z-index: 100000;
   max-width: 500px;
@@ -69,17 +69,17 @@ body.th-login-modal-open {
   min-height: 300px;
 }
 @media (max-width: 768px) {
-  .th-login-popup-form-container {
+  .thlogin-popup-form-container {
     width: 90%;
   }
 }
 @media (max-width: 480px) {
-  .th-login-popup-form-container {
+  .thlogin-popup-form-container {
     width: 95%;
   }
 }
 
-.th-login-popup-close-button {
+.thlogin-popup-close-button {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -93,36 +93,36 @@ body.th-login-modal-open {
   transition: color 0.2s ease-in-out;
   z-index: 100001;
 }
-.th-login-popup-close-button:hover {
+.thlogin-popup-close-button:hover {
   color: #000;
 }
-.th-login-popup-close-button .dashicons {
+.thlogin-popup-close-button .dashicons {
   width: 24px;
   height: 24px;
   font-size: 24px;
 }
 
-.th-login-form {
+.thlogin-form {
   display: none;
   width: 100%;
   box-sizing: border-box;
 }
-.th-login-form.th-login-form--active {
+.thlogin-form.thlogin-form--active {
   display: block;
 }
-.th-login-form h2 {
+.thlogin-form h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #222;
   font-size: 1.8em;
 }
 
-.th-login-form-submit {
+.thlogin-form-submit {
   margin-top: 20px;
   text-align: center;
   width: 100%;
 }
-.th-login-form-submit .th-login-button .th-login-spinner {
+.thlogin-form-submit .thlogin-button .thlogin-spinner {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -134,45 +134,45 @@ body.th-login-modal-open {
   vertical-align: middle;
 }
 
-.th-login-form-links {
+.thlogin-form-links {
   margin-top: 15px;
   text-align: center;
   width: 100%;
   font-size: 14px;
 }
-.th-login-form-links a {
+.thlogin-form-links a {
   color: #007cba;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
-.th-login-form-links a:hover {
+.thlogin-form-links a:hover {
   color: #005ba0;
   text-decoration: underline;
 }
 
-.th-login-messages {
+.thlogin-messages {
   width: 100%;
   margin-bottom: 15px;
   text-align: center;
 }
-.th-login-messages p.th-login-message {
+.thlogin-messages p.thlogin-message {
   padding: 10px 15px;
   border-radius: 4px;
   border: 1px solid;
   margin: 0;
 }
-.th-login-messages p.th-login-message--success {
+.thlogin-messages p.thlogin-message--success {
   background-color: #e6ffe6;
   border-color: #4CAF50;
   color: #333;
 }
-.th-login-messages p.th-login-message--error {
+.thlogin-messages p.thlogin-message--error {
   background-color: #ffe6e6;
   border-color: #F44336;
   color: #333;
 }
 
-.th-login-shortcode-form-wrapper {
+.thlogin-shortcode-form-wrapper {
   max-width: 500px;
   margin: 30px auto;
   padding: 30px;
@@ -182,11 +182,11 @@ body.th-login-modal-open {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
-.th-login-shortcode-form-wrapper .th-login-form {
+.thlogin-shortcode-form-wrapper .thlogin-form {
   display: block;
 }
 
-@keyframes th-login-fade-in {
+@keyframes thlogin-fade-in {
   from {
     opacity: 0;
   }
@@ -194,7 +194,7 @@ body.th-login-modal-open {
     opacity: 1;
   }
 }
-@keyframes th-login-fade-out {
+@keyframes thlogin-fade-out {
   from {
     opacity: 1;
   }
@@ -210,16 +210,16 @@ body.th-login-modal-open {
     transform: rotate(360deg);
   }
 }
-.th-login-popup-modal.th-login-slide-in-right {
+.thlogin-popup-modal.thlogin-slide-in-right {
   justify-content: flex-end;
 }
 
-.th-login-popup-modal.th-login-slide-in-left {
+.thlogin-popup-modal.thlogin-slide-in-left {
   justify-content: flex-start;
 }
 
-.th-login-popup-modal.slide-in-left .th-login-popup-form-container,
-.th-login-popup-modal.slide-in-right .th-login-popup-form-container {
+.thlogin-popup-modal.slide-in-left .thlogin-popup-form-container,
+.thlogin-popup-modal.slide-in-right .thlogin-popup-form-container {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -238,8 +238,8 @@ body.th-login-modal-open {
   justify-content: flex-start;
 }
 
-.th-login-popup-modal.slide-in-left .th-login-popup-overlay,
-.th-login-popup-modal.slide-in-right .th-login-popup-overlay {
+.thlogin-popup-modal.slide-in-left .thlogin-popup-overlay,
+.thlogin-popup-modal.slide-in-right .thlogin-popup-overlay {
   display: none;
 }
 
@@ -283,7 +283,7 @@ body.th-login-modal-open {
     opacity: 0;
   }
 }
-.th-login-form-toggle {
+.thlogin-form-toggle {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -291,7 +291,7 @@ body.th-login-modal-open {
 }
 
 /* Main page mode layout */
-#th-login-popup-modal.th-login-page {
+#thlogin-popup-modal.thlogin-page {
   position: fixed;
   top: 0;
   left: 0;
@@ -305,38 +305,38 @@ body.th-login-modal-open {
   padding: 20px;
 }
 
-.th-login-label-with-icon {
+.thlogin-label-with-icon {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.th-login-label-with-icon .th-login-label-icon {
+.thlogin-label-with-icon .thlogin-label-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--th-icon-color, #111);
 }
-.th-login-label-with-icon .th-login-label-icon svg {
+.thlogin-label-with-icon .thlogin-label-icon svg {
   width: var(--th-icon-size, 20px);
   height: var(--th-icon-size, 20px);
 }
-.th-login-label-with-icon .th-login-label-text {
+.thlogin-label-with-icon .thlogin-label-text {
   display: inline-block;
 }
 
-.th-login-popup-close-button {
+.thlogin-popup-close-button {
   position: absolute;
   top: 3%;
   right: 3%;
 }
 
-.th-login-form-toggle {
+.thlogin-form-toggle {
   display: flex;
   gap: 10px;
   margin: 15px 0;
 }
 
-.th-login-toggle-button {
+.thlogin-toggle-button {
   padding: 8px 20px;
   border: none;
   border-radius: 4px;
@@ -344,25 +344,25 @@ body.th-login-modal-open {
   transition: all 0.3s ease;
 }
 
-.th-login-slide-in-left .th-login-popup-form-container {
+.thlogin-slide-in-left .thlogin-popup-form-container {
   height: 100%;
   margin: 0;
 }
 
-.th-login-slide-in-right .th-login-popup-form-container {
+.thlogin-slide-in-right .thlogin-popup-form-container {
   height: 100%;
   margin: 0;
 }
 
-.th-login-page .th-login-popup-form-container {
+.thlogin-page .thlogin-popup-form-container {
   height: 100%;
 }
 
-.th-login-popup-modal .th-login-popup-form-container {
+.thlogin-popup-modal .thlogin-popup-form-container {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.th-login-popup-modal-effect .th-login-popup-form-container {
+.thlogin-popup-modal-effect .thlogin-popup-form-container {
   animation: thModalPopupOpen 0.3s ease-out forwards;
   opacity: 0;
   transform: scale(0.9);

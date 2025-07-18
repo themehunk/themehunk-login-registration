@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * - Email verification for new registrations
  * - Manual user approval for new registrations
  */
-class TH_Login_Security {
+class THLogin_Security {
 
 	/**
 	 * Option key for storing failed login attempts.
@@ -65,7 +65,7 @@ class TH_Login_Security {
 	 * @param string $username The username that failed to log in.
 	 */
 	public function log_failed_login_attempt( $username ) {
-		$security_settings = $this->safe_json_option( 'th_login_security_settings' );
+		$security_settings = $this->safe_json_option( 'thlogin_security_settings' );
 		$brute_force_enabled = $security_settings['brute_force_protection']['enabled'] ?? true;
 
 		if ( ! $brute_force_enabled ) {
@@ -110,7 +110,7 @@ class TH_Login_Security {
 			return $user;
 		}
 
-		$security_settings = $this->safe_json_option( 'th_login_security_settings' );
+		$security_settings = $this->safe_json_option( 'thlogin_security_settings' );
 		$brute_force_enabled = $security_settings['brute_force_protection']['enabled'] ?? true;
 
 		if ( ! $brute_force_enabled ) {
@@ -145,7 +145,7 @@ class TH_Login_Security {
 				'th_login_locked_out',
 				sprintf(
 					/* translators: %s: duration in minutes */
-					esc_html__( 'Too many failed login attempts. Please try again in %s minutes.', 'th-login' ),
+					esc_html__( 'Too many failed login attempts. Please try again in %s minutes.', 'thlogin' ),
 					( $security_settings['brute_force_protection']['lockout_duration_minutes'] ?? 30 )
 				)
 			);
@@ -188,13 +188,13 @@ class TH_Login_Security {
 		$user = get_user_by( 'id', $user_id );
 
 		if ( ! $user ) {
-			wp_die( esc_html__( 'Invalid user ID.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
+			wp_die( esc_html__( 'Invalid user ID.', 'thlogin' ), esc_html__( 'Verification Error', 'thlogin' ) );
 		}
 
 		$stored_key = get_user_meta( $user_id, 'th_login_email_verification_key', true );
 
 		if ( empty( $stored_key ) || $stored_key !== $verification_key ) {
-			wp_die( esc_html__( 'Invalid or expired verification link.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
+			wp_die( esc_html__( 'Invalid or expired verification link.', 'thlogin' ), esc_html__( 'Verification Error', 'thlogin' ) );
 		}
 
 		// Mark email as verified.
@@ -202,7 +202,7 @@ class TH_Login_Security {
 		delete_user_meta( $user_id, 'th_login_email_verification_key' ); // Remove key after use.
 
 		// Handle redirection after verification.
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$redirect_type = $general_settings['email_verification']['redirect_after_verification'] ?? 'login_form';
 		$redirect_url = home_url(); // Default fallback.
 
@@ -241,7 +241,7 @@ class TH_Login_Security {
 			return $user;
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$email_verification_enabled = $general_settings['email_verification']['enabled'] ?? false;
 
 		if ( ! $email_verification_enabled ) {
@@ -253,7 +253,7 @@ class TH_Login_Security {
 		if ( ! $is_verified ) {
 			return new WP_Error(
 				'th_login_email_not_verified',
-				esc_html__( 'Your email address has not been verified. Please check your inbox for a verification link.', 'th-login' )
+				esc_html__( 'Your email address has not been verified. Please check your inbox for a verification link.', 'thlogin' )
 			);
 		}
 
@@ -270,7 +270,7 @@ class TH_Login_Security {
 	 * @param int $user_id The ID of the newly registered user.
 	 */
 	public function set_user_pending_approval_status( $user_id ) {
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( $manual_user_approval_enabled ) {
@@ -291,7 +291,7 @@ class TH_Login_Security {
 			return $user;
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( ! $manual_user_approval_enabled ) {
@@ -303,7 +303,7 @@ class TH_Login_Security {
 		if ( $is_pending_approval ) {
 			return new WP_Error(
 				'th_login_account_pending_approval',
-				esc_html__( 'Your account is pending administrator approval. Please wait for your account to be activated.', 'th-login' )
+				esc_html__( 'Your account is pending administrator approval. Please wait for your account to be activated.', 'thlogin' )
 			);
 		}
 
@@ -320,7 +320,7 @@ class TH_Login_Security {
 			return; // Only show for users who can edit other users.
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( ! $manual_user_approval_enabled ) {
@@ -329,16 +329,16 @@ class TH_Login_Security {
 
 		$is_pending_approval = get_user_meta( $user->ID, 'th_login_pending_approval', true );
 		?>
-		<h3><?php esc_html_e( 'TH Login Account Status', 'th-login' ); ?></h3>
+		<h3><?php esc_html_e( 'TH Login Account Status', 'thlogin' ); ?></h3>
 		<table class="form-table">
 			<tr>
-				<th><label for="th_login_pending_approval"><?php esc_html_e( 'Account Approval', 'th-login' ); ?></label></th>
+				<th><label for="th_login_pending_approval"><?php esc_html_e( 'Account Approval', 'thlogin' ); ?></label></th>
 				<td>
 					<select name="th_login_pending_approval" id="th_login_pending_approval">
-						<option value="1" <?php selected( $is_pending_approval, true ); ?>><?php esc_html_e( 'Pending Approval', 'th-login' ); ?></option>
-						<option value="0" <?php selected( $is_pending_approval, false ); ?>><?php esc_html_e( 'Approved', 'th-login' ); ?></option>
+						<option value="1" <?php selected( $is_pending_approval, true ); ?>><?php esc_html_e( 'Pending Approval', 'thlogin' ); ?></option>
+						<option value="0" <?php selected( $is_pending_approval, false ); ?>><?php esc_html_e( 'Approved', 'thlogin' ); ?></option>
 					</select>
-					<p class="description"><?php esc_html_e( 'Set the approval status for this user account.', 'th-login' ); ?></p>
+					<p class="description"><?php esc_html_e( 'Set the approval status for this user account.', 'thlogin' ); ?></p>
 				</td>
 			</tr>
 		</table>
@@ -356,7 +356,7 @@ class TH_Login_Security {
 			return;
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( ! $manual_user_approval_enabled ) {
@@ -376,8 +376,8 @@ class TH_Login_Security {
 				// For now, just a basic notification.
 				$user = get_user_by( 'id', $user_id );
 				if ( $user ) {
-					$subject = esc_html__( 'Your account has been approved!', 'th-login' );
-					$message = sprintf( esc_html__( 'Hello %s, your account on %s has been approved. You can now log in.', 'th-login' ), $user->user_login, get_bloginfo( 'name' ) );
+					$subject = esc_html__( 'Your account has been approved!', 'thlogin' );
+					$message = sprintf( esc_html__( 'Hello %s, your account on %s has been approved. You can now log in.', 'thlogin' ), $user->user_login, get_bloginfo( 'name' ) );
 					wp_mail( $user->user_email, $subject, $message );
 				}
 			}

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       TH Login
- * Plugin URI:        https://themehunk.com/th-login
+ * Plugin URI:        https://themehunk.com/thlogin
  * Description:       A powerful and highly customizable frontend login, registration, and password reset pop-up plugin for WordPress.
  * Version:           1.0.0
  * Requires at least: 5.8
@@ -10,7 +10,7 @@
  * Author URI:        https://themehunk.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       th-login
+ * Text Domain:       thlogin
  * Domain Path:       /languages
  *
  * @package TH_Login
@@ -21,13 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TH_LOGIN_VERSION', '1.0.0' );
-define( 'TH_LOGIN_FILE', __FILE__ );
-define( 'TH_LOGIN_PATH', plugin_dir_path( TH_LOGIN_FILE ) );
-define( 'TH_LOGIN_URL', plugin_dir_url( TH_LOGIN_FILE ) );
-define( 'TH_LOGIN_BASENAME', plugin_basename( TH_LOGIN_FILE ) );
+define( 'THLOGIN_VERSION', '1.0.0' );
+define( 'THLOGIN_FILE', __FILE__ );
+define( 'THLOGIN_PATH', plugin_dir_path( THLOGIN_FILE ) );
+define( 'THLOGIN_URL', plugin_dir_url( THLOGIN_FILE ) );
+define( 'THLOGIN_BASENAME', plugin_basename( THLOGIN_FILE ) );
 
-final class TH_Login {
+final class THLogin {
 
 	protected static $instance = null;
 
@@ -44,38 +44,38 @@ final class TH_Login {
 	}
 
 	private function define_hooks() {
-		register_activation_hook( TH_LOGIN_FILE, array( $this, 'activate' ) );
-		register_deactivation_hook( TH_LOGIN_FILE, array( $this, 'deactivate' ) );
+		register_activation_hook( THLOGIN_FILE, array( $this, 'activate' ) );
+		register_deactivation_hook( THLOGIN_FILE, array( $this, 'deactivate' ) );
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 	}
 
 	private function includes() {
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-admin.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-frontend.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-shortcodes.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-security.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-rest-api.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-forms.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-integrations.php';
-		require_once TH_LOGIN_PATH . 'includes/helpers.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-admin.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-frontend.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-shortcodes.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-security.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-rest-api.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-forms.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-integrations.php';
+		require_once THLOGIN_PATH . 'includes/helpers.php';
 	}
 
 	public function init_plugin() {
-		load_plugin_textdomain( 'th-login', false, dirname( TH_LOGIN_BASENAME ) . '/languages' );
+		load_plugin_textdomain( 'thlogin', false, dirname( THLOGIN_BASENAME ) . '/languages' );
 
-		new TH_Login_Admin();
-		new TH_Login_Frontend();
-		new TH_Login_Shortcodes();
-		new TH_Login_Security();
-		new TH_Login_REST_API();
-		new TH_Login_Forms();
-		new TH_Login_Integrations();
+		new THLogin_Admin();
+		new THLogin_Frontend();
+		new THLogin_Shortcodes();
+		new THLogin_Security();
+		new THLogin_REST_API();
+		new THLogin_Forms();
+		new THLogin_Integrations();
 
-		add_filter( 'plugin_action_links_' . TH_LOGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
+		add_filter( 'plugin_action_links_' . THLOGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
 	}
 
 	public function activate() {
-		th_login_set_default_options();
+		thlogin_set_default_options();
 	}
 
 	public function deactivate() {
@@ -83,13 +83,13 @@ final class TH_Login {
 	}
 
 	public function add_plugin_action_links( $links ) {
-		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=th-login-settings' ) ) . '">' . esc_html__( 'Settings', 'th-login' ) . '</a>';
+		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'thlogin' ) . '</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}
 }
 
-function th_login_set_default_options() {
+function thlogin_set_default_options() {
 
 	$general_defaults = array(
 		'plugin_status' => 'enabled',
@@ -300,29 +300,29 @@ function th_login_set_default_options() {
 		'login' => array(
 			array(
 				'id'            => 'username',
-				'label'         => esc_html__( 'Username or Email', 'th-login' ),
+				'label'         => esc_html__( 'Username or Email', 'thlogin' ),
 				'name'          => 'username',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Enter your username or email', 'th-login' ),
+				'placeholder'   => esc_html__( 'Enter your username or email', 'thlogin' ),
 				'required'      => true,
 				'icon'          => 'user',
-				'error_message' => esc_html__( 'Username or email is required.', 'th-login' ),
+				'error_message' => esc_html__( 'Username or email is required.', 'thlogin' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'password',
-				'label'         => esc_html__( 'Password', 'th-login' ),
+				'label'         => esc_html__( 'Password', 'thlogin' ),
 				'name'          => 'password',
 				'type'          => 'password',
-				'placeholder'   => esc_html__( 'Enter your password', 'th-login' ),
+				'placeholder'   => esc_html__( 'Enter your password', 'thlogin' ),
 				'required'      => true,
 				'icon'          => 'lock',
-				'error_message' => esc_html__( 'Password is required.', 'th-login' ),
+				'error_message' => esc_html__( 'Password is required.', 'thlogin' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'remember_me',
-				'label'         => esc_html__( 'Remember Me', 'th-login' ),
+				'label'         => esc_html__( 'Remember Me', 'thlogin' ),
 				'name'          => 'remember_me',
 				'type'          => 'checkbox',
 				'required'      => false,
@@ -336,85 +336,85 @@ function th_login_set_default_options() {
 		'register' => array(
 			array(
 				'id'            => 'username',
-				'label'         => esc_html__( 'Choose a Username', 'th-login' ),
+				'label'         => esc_html__( 'Choose a Username', 'thlogin' ),
 				'name'          => 'username',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Enter your desired username', 'th-login' ),
+				'placeholder'   => esc_html__( 'Enter your desired username', 'thlogin' ),
 				'required'      => true,
 				'icon'          => 'user',
-				'error_message' => esc_html__( 'Username is required.', 'th-login' ),
+				'error_message' => esc_html__( 'Username is required.', 'thlogin' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'email',
-				'label'         => esc_html__( 'Email Address', 'th-login' ),
+				'label'         => esc_html__( 'Email Address', 'thlogin' ),
 				'name'          => 'email',
 				'type'          => 'email',
-				'placeholder'   => esc_html__( 'Enter your email', 'th-login' ),
+				'placeholder'   => esc_html__( 'Enter your email', 'thlogin' ),
 				'required'      => true,
 				'icon'          => 'email',
-				'error_message' => esc_html__( 'Email address is required.', 'th-login' ),
+				'error_message' => esc_html__( 'Email address is required.', 'thlogin' ),
 				'predefined'    => false,
 			),
 			array(
 				'id'            => 'password',
-				'label'         => esc_html__( 'Create Password', 'th-login' ),
+				'label'         => esc_html__( 'Create Password', 'thlogin' ),
 				'name'          => 'password',
 				'type'          => 'password',
-				'placeholder'   => esc_html__( 'Create a strong password', 'th-login' ),
+				'placeholder'   => esc_html__( 'Create a strong password', 'thlogin' ),
 				'required'      => true,
 				'icon'          => 'lock',
 				'check'         => array( 'text' => true, 'number' => false, 'special_charcter' => false ),
 				'maxInput'      => 20,
 				'minInput'      => 5,
-				'error_message' => esc_html__( 'Password is required.', 'th-login' ),
+				'error_message' => esc_html__( 'Password is required.', 'thlogin' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'confirm_password',
-				'label'         => esc_html__( 'Confirm Password', 'th-login' ),
+				'label'         => esc_html__( 'Confirm Password', 'thlogin' ),
 				'name'          => 'confirm_password',
 				'type'          => 'password',
-				'placeholder'   => esc_html__( 'Confirm your password', 'th-login' ),
+				'placeholder'   => esc_html__( 'Confirm your password', 'thlogin' ),
 				'required'      => true,
 				'icon'          => 'lock',
 				'logic_key'     => 'confirm_password',
-				'error_message' => esc_html__( 'Please confirm your password.', 'th-login' ),
+				'error_message' => esc_html__( 'Please confirm your password.', 'thlogin' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'first_name',
-				'label'         => esc_html__( 'First Name', 'th-login' ),
+				'label'         => esc_html__( 'First Name', 'thlogin' ),
 				'name'          => 'first_name',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Your first name', 'th-login' ),
+				'placeholder'   => esc_html__( 'Your first name', 'thlogin' ),
 				'required'      => false,
 				'icon'          => 'user',
 				'show'          => false,
-				'error_message' => esc_html__( 'First name is required.', 'th-login' ),
+				'error_message' => esc_html__( 'First name is required.', 'thlogin' ),
 				'predefined'    => false,
 			),
 			array(
 				'id'            => 'last_name',
-				'label'         => esc_html__( 'Last Name', 'th-login' ),
+				'label'         => esc_html__( 'Last Name', 'thlogin' ),
 				'name'          => 'last_name',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Your last name', 'th-login' ),
+				'placeholder'   => esc_html__( 'Your last name', 'thlogin' ),
 				'required'      => false,
 				'icon'          => 'user',
 				'show'          => false,
-				'error_message' => esc_html__( 'Last name is required.', 'th-login' ),
+				'error_message' => esc_html__( 'Last name is required.', 'thlogin' ),
 				'predefined'    => false,
 			),
 			array(
 				'id'            => 'terms_and_conditions',
-				'label'         => esc_html__( 'I agree to the Terms & Conditions', 'th-login' ),
+				'label'         => esc_html__( 'I agree to the Terms & Conditions', 'thlogin' ),
 				'name'          => 'terms_and_conditions',
 				'type'          => 'checkbox',
 				'required'      => true,
 				'icon'          => '',
 				'show'          => true,
-				'error_message' => esc_html__( 'You must agree to the Terms & Conditions.', 'th-login' ),
+				'error_message' => esc_html__( 'You must agree to the Terms & Conditions.', 'thlogin' ),
 				'predefined'    => false,
 				'link'          => "",
 			),
@@ -434,20 +434,20 @@ function th_login_set_default_options() {
 		'forgot_password' => array(
 			array(
 				'id'            => 'user_login',
-				'label'         => esc_html__( 'Email Address', 'th-login' ),
+				'label'         => esc_html__( 'Email Address', 'thlogin' ),
 				'name'          => 'user_login',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Enter your email to reset password', 'th-login' ),
+				'placeholder'   => esc_html__( 'Enter your email to reset password', 'thlogin' ),
 				'required'      => true,
 				'icon'          => 'email',
-				'error_message' => esc_html__( 'Email address is required to reset password.', 'th-login' ),
+				'error_message' => esc_html__( 'Email address is required to reset password.', 'thlogin' ),
 				'predefined'    => true,
 			),
 		),
 	);
 	
 	$display_triggers_defaults = array(
-		'trigger_css_class'          => 'th-login-trigger',
+		'trigger_css_class'          => 'thlogin-trigger',
 		'auto_open_on_load'          => array( 'enabled' => true, 'delay_seconds' => 2 ),
 		'auto_open_on_scroll'        => array( 'enabled' => false, 'scroll_percentage' => 50 ),
 		'auto_open_on_exit_intent'   => array( 'enabled' => false ),
@@ -468,8 +468,8 @@ function th_login_set_default_options() {
 		'menu_integration'           => array(
 			'enabled'                    => false,
 			'menu_slug'                  => 'primary',
-			'item_text_login'            => __( 'Login', 'th-login' ),
-			'item_text_register'         => __( 'Register', 'th-login' ),
+			'item_text_login'            => __( 'Login', 'thlogin' ),
+			'item_text_register'         => __( 'Register', 'thlogin' ),
 			'item_icon_login'            => 'dashicons-admin-users',
 			'item_icon_register'         => 'dashicons-plus-alt',
 			'visibility_login_logged_in' => false,
@@ -507,16 +507,16 @@ function th_login_set_default_options() {
 
 }
 
-register_activation_hook( __FILE__, 'th_login_set_default_options' );
+register_activation_hook( __FILE__, 'thlogin_set_default_options' );
 
-require_once TH_LOGIN_PATH . 'includes/class-th-login-menu-integration.php';
-new TH_Login_Menu_Integration();
+require_once THLOGIN_PATH . 'includes/class-thlogin-menu-integration.php';
+new THLogin_Menu_Integration();
 
-require_once TH_LOGIN_PATH . 'includes/class-th-login-gutenberg-block.php';
-new TH_Login_Gutenberg_Block();
+require_once THLOGIN_PATH . 'includes/class-thlogin-gutenberg-block.php';
+new THLogin_Gutenberg_Block();
 
-function th_login_init() {
-	return TH_Login::instance();
+function thlogin_init() {
+	return THLogin::instance();
 }
 
-th_login_init();
+thlogin_init();

@@ -75,9 +75,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 document.addEventListener('DOMContentLoaded', function () {
   // --- Elements ---
-  var modal = document.getElementById('th-login-popup-modal');
+  var modal = document.getElementById('thlogin-popup-modal');
   if (!modal) return;
-  var formContainer = modal.querySelector('.th-login-popup-form-container');
+  var formContainer = modal.querySelector('.thlogin-popup-form-container');
   var loginForm = modal.querySelector('[data-form-type="login"]');
   var registerForm = modal.querySelector('[data-form-type="register"]');
   var forgotPasswordForm = modal.querySelector('[data-form-type="forgot-password"]');
@@ -96,22 +96,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var setActiveForm = function setActiveForm(type) {
     [loginForm, registerForm, forgotPasswordForm].forEach(function (form) {
       if (!form) return;
-      if (form.closest('#th-login-popup-modal')) {
+      if (form.closest('#thlogin-popup-modal')) {
         if (form.dataset.formType === type) {
           form.style.display = 'block';
-          form.classList.add('th-login-form--active');
+          form.classList.add('thlogin-form--active');
         } else {
           form.style.display = 'none';
-          form.classList.remove('th-login-form--active');
+          form.classList.remove('thlogin-form--active');
         }
       }
     });
     if (formContainer) formContainer.dataset.activeForm = type;
   };
   var showMessage = function showMessage(formElement, message, type) {
-    var container = formElement.querySelector('.th-login-messages');
+    var container = formElement.querySelector('.thlogin-messages');
     if (!container) return;
-    container.innerHTML = "<p class=\"th-login-message th-login-message--".concat(type, "\">").concat(message, "</p>");
+    container.innerHTML = "<p class=\"thlogin-message thlogin-message--".concat(type, "\">").concat(message, "</p>");
     container.style.display = 'block';
     setTimeout(function () {
       container.innerHTML = '';
@@ -154,22 +154,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var openModal = function openModal() {
     var formType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'login';
     if (!modal) return;
-    modal.classList.remove('th-login-popup-modal-effect', 'th-login-slide-in-left', 'th-login-slide-in-right', 'th-login-page', 'th-login-popup-modal--closing', 'th-login-popup-modal--active');
-    modal.classList.add('th-login-popup-modal--opening');
+    modal.classList.remove('thlogin-popup-modal-effect', 'thlogin-slide-in-left', 'thlogin-slide-in-right', 'thlogin-page', 'thlogin-popup-modal--closing', 'thlogin-popup-modal--active');
+    modal.classList.add('thlogin-popup-modal--opening');
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
     if (display_type === 'slide_in_left') {
-      modal.classList.add('th-login-slide-in-left');
+      modal.classList.add('thlogin-slide-in-left');
     } else if (display_type === 'slide_in_right') {
-      modal.classList.add('th-login-slide-in-right');
+      modal.classList.add('thlogin-slide-in-right');
     } else if (display_type === 'page') {
-      modal.classList.add('th-login-page');
+      modal.classList.add('thlogin-page');
     } else {
-      modal.classList.add('th-login-popup-modal-effect');
+      modal.classList.add('thlogin-popup-modal-effect');
     }
     setActiveForm(formType);
     setTimeout(function () {
-      modal.classList.add('th-login-popup-modal--active');
+      modal.classList.add('thlogin-popup-modal--active');
     }, 50);
     recordPopupShown();
     if (animationEndHandler) {
@@ -179,14 +179,14 @@ document.addEventListener('DOMContentLoaded', function () {
   };
   var closeModal = function closeModal() {
     if (!modal) return;
-    modal.classList.remove('th-login-popup-modal--opening');
-    modal.classList.add('th-login-popup-modal--closing');
-    modal.classList.remove('th-login-slide-in-left', 'th-login-slide-in-right', 'th-login-page', 'th-login-popup-modal-effect');
+    modal.classList.remove('thlogin-popup-modal--opening');
+    modal.classList.add('thlogin-popup-modal--closing');
+    modal.classList.remove('thlogin-slide-in-left', 'thlogin-slide-in-right', 'thlogin-page', 'thlogin-popup-modal-effect');
     modal.setAttribute('aria-hidden', 'true');
     animationEndHandler = function handler() {
-      if (modal.classList.contains('th-login-popup-modal--closing')) {
+      if (modal.classList.contains('thlogin-popup-modal--closing')) {
         modal.style.display = 'none';
-        modal.classList.remove('th-login-popup-modal--active', 'th-login-popup-modal--closing');
+        modal.classList.remove('thlogin-popup-modal--active', 'thlogin-popup-modal--closing');
       }
       modal.removeEventListener('animationend', animationEndHandler);
       animationEndHandler = null;
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.body.addEventListener('click', function (e) {
     // Close modal: overlay or close button
-    if (e.target.closest('.th-login-popup-close-button') || e.target.closest('.th-login-popup-overlay')) {
+    if (e.target.closest('.thlogin-popup-close-button') || e.target.closest('.thlogin-popup-overlay')) {
       closeModal();
     }
     // Open modal via trigger elements
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // --- Form Submission Handling ---
-  document.querySelectorAll('.th-login-ajax-form').forEach(function (form) {
+  document.querySelectorAll('.thlogin-ajax-form').forEach(function (form) {
     form.addEventListener('submit', /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
         var formType, formData, messagesContainer, requestData, _iterator, _step, _step$value, key, value, endpoint, submitButton, _thLoginFrontendData$, response, data, _submitButton, _t;
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
               e.preventDefault();
               formType = form.dataset.formType;
               formData = new FormData(form);
-              messagesContainer = form.querySelector('.th-login-messages');
+              messagesContainer = form.querySelector('.thlogin-messages');
               if (messagesContainer) {
                 messagesContainer.innerHTML = '';
                 messagesContainer.style.display = 'none';
@@ -253,13 +253,13 @@ document.addEventListener('DOMContentLoaded', function () {
               } finally {
                 _iterator.f();
               }
-              endpoint = "".concat(thLoginFrontendData.siteUrl, "/wp-json/th-login/v1/").concat(formType);
+              endpoint = "".concat(thLoginFrontendData.siteUrl, "/wp-json/thlogin/v1/").concat(formType);
               _context.p = 1;
               submitButton = form.querySelector('button[type="submit"]');
               if (submitButton) {
                 submitButton.disabled = true;
                 submitButton.dataset.originalText = submitButton.innerHTML;
-                submitButton.innerHTML = "<span class=\"th-login-spinner\"></span> ".concat(((_thLoginFrontendData$ = thLoginFrontendData.settings.design) === null || _thLoginFrontendData$ === void 0 || (_thLoginFrontendData$ = _thLoginFrontendData$.buttons) === null || _thLoginFrontendData$ === void 0 || (_thLoginFrontendData$ = _thLoginFrontendData$.primary) === null || _thLoginFrontendData$ === void 0 ? void 0 : _thLoginFrontendData$.text_saving) || 'Processing...');
+                submitButton.innerHTML = "<span class=\"thlogin-spinner\"></span> ".concat(((_thLoginFrontendData$ = thLoginFrontendData.settings.design) === null || _thLoginFrontendData$ === void 0 || (_thLoginFrontendData$ = _thLoginFrontendData$.buttons) === null || _thLoginFrontendData$ === void 0 || (_thLoginFrontendData$ = _thLoginFrontendData$.primary) === null || _thLoginFrontendData$ === void 0 ? void 0 : _thLoginFrontendData$.text_saving) || 'Processing...');
               }
               _context.n = 2;
               return fetch(endpoint, {
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (formType === 'forgot-password') {
                   // Keep modal open so user can see success
                 } else {
-                  if (form.closest('#th-login-popup-modal')) {
+                  if (form.closest('#thlogin-popup-modal')) {
                     setTimeout(closeModal, 1000);
                   }
                 }
@@ -384,13 +384,13 @@ document.addEventListener('DOMContentLoaded', function () {
   checkAndAutoOpenModal();
 
   // Show shortcode embedded forms by default (visible)
-  document.querySelectorAll('.th-login-shortcode-form-wrapper .th-login-form').forEach(function (f) {
+  document.querySelectorAll('.thlogin-shortcode-form-wrapper .thlogin-form').forEach(function (f) {
     f.style.display = 'block';
-    f.classList.add('th-login-form--active');
+    f.classList.add('thlogin-form--active');
   });
 
   // Force auto-open if shortcode was used on this page
-  var isShortcodeBasedModal = document.querySelector('.th-login-shortcode-form-wrapper');
+  var isShortcodeBasedModal = document.querySelector('.thlogin-shortcode-form-wrapper');
   if (isShortcodeBasedModal && canShowModal()) {
     openModal('login'); // You can dynamically read form type if needed
   }

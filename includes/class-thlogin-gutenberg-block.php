@@ -7,11 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handles Gutenberg block registration for TH Login forms and triggers.
  */
-class TH_Login_Gutenberg_Block {
+class THLogin_Gutenberg_Block {
 
-	/**
-	 * Constructor.
-	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_th_login_block' ) );
 	}
@@ -27,10 +24,10 @@ class TH_Login_Gutenberg_Block {
 
 		// Register the block script.
 		wp_register_script(
-			'th-login-block-editor-script',
-			TH_LOGIN_URL . 'app/build/block.js', // This will be our block's JS.
+			'thlogin-block-editor-script',
+			THLOGIN_URL . 'app/build/block.js', // This will be our block's JS.
 			array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ),
-			TH_LOGIN_VERSION,
+			THLOGIN_VERSION,
 			array(
 				'in_footer' => true,
 				'strategy' => 'defer', // Using defer for editor script as it needs the DOM but can wait
@@ -39,18 +36,18 @@ class TH_Login_Gutenberg_Block {
 
 		// Register the block frontend styles (if different from main frontend.css, otherwise use frontend.css).
 		wp_register_style(
-			'th-login-block-style',
-			TH_LOGIN_URL . 'app/build/public.css', // Re-using frontend styles for block output.
+			'thlogin-block-style',
+			THLOGIN_URL . 'app/build/public.css', // Re-using frontend styles for block output.
 			array(),
-			TH_LOGIN_VERSION
+			THLOGIN_VERSION
 		);
 
 		register_block_type(
-			'th-login/form-block',
+			'thlogin/form-block',
 			array(
-				'editor_script'   => 'th-login-block-editor-script',
-				'editor_style'    => 'th-login-block-editor-style',
-				'style'           => 'th-login-block-style',
+				'editor_script'   => 'thlogin-block-editor-script',
+				'editor_style'    => 'thlogin-block-editor-style',
+				'style'           => 'thlogin-block-style',
 				'render_callback' => array( $this, 'render_th_login_block' ),
 				'attributes'      => array(
 					'formType' => array(
@@ -85,21 +82,21 @@ class TH_Login_Gutenberg_Block {
 		// Ensure frontend assets are loaded for the block.
 		// This is important if the block is the only thing on the page that needs the assets.
 		// The main frontend class already enqueues them, but this is a fallback/guarantee.
-		if ( ! wp_script_is( 'th-login-frontend-script', 'enqueued' ) ) {
-			wp_enqueue_script( 'th-login-frontend-script' );
-			wp_enqueue_style( 'th-login-frontend-style' );
+		if ( ! wp_script_is( 'thlogin-frontend-script', 'enqueued' ) ) {
+			wp_enqueue_script( 'thlogin-frontend-script' );
+			wp_enqueue_style( 'thlogin-frontend-style' );
 			wp_enqueue_style( 'dashicons' ); // Ensure dashicons are loaded for icons.
 
 			// Re-localize script if not already localized by frontend class.
-			// This is a bit redundant if TH_Login_Frontend is always active, but safer.
+			// This is a bit redundant if THLogin_Frontend is always active, but safer.
 			global $thLoginFrontendData; // Access the global variable if set.
 			if ( ! isset( $thLoginFrontendData ) ) {
-				$general_settings = $this->safe_json_option( 'th_login_general_settings' );
-				$design_settings = $this->safe_json_option( 'th_login_design_settings' );
-				$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
+				$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
+				$design_settings = $this->safe_json_option( 'thlogin_design_settings' );
+				$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
 
 				wp_localize_script(
-					'th-login-frontend-script',
+					'thlogin-frontend-script',
 					'thLoginFrontendData',
 					array(
 						'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
@@ -126,27 +123,27 @@ class TH_Login_Gutenberg_Block {
 			ob_start();
 			switch ( $form_type ) {
 				case 'login':
-					require TH_LOGIN_PATH . 'templates/form-login.php';
+					require THLOGIN_PATH . 'templates/form-login.php';
 					break;
 				case 'register':
-					require TH_LOGIN_PATH . 'templates/form-register.php';
+					require THLOGIN_PATH . 'templates/form-register.php';
 					break;
 				case 'forgot-password':
-					require TH_LOGIN_PATH . 'templates/form-forgot-password.php';
+					require THLOGIN_PATH . 'templates/form-forgot-password.php';
 					break;
 				default:
 					// Fallback to login form.
-					require TH_LOGIN_PATH . 'templates/form-login.php';
+					require THLOGIN_PATH . 'templates/form-login.php';
 					break;
 			}
-			$output = '<div class="th-login-gutenberg-inline-form">' . ob_get_clean() . '</div>';
+			$output = '<div class="thlogin-gutenberg-inline-form">' . ob_get_clean() . '</div>';
 		} else {
 			// Render a link that triggers the popup.
-			$trigger_css_class = $this->safe_json_option( 'th_login_display_triggers_settings' )['trigger_css_class'] ?? 'th-login-trigger';
-			$final_link_text = ! empty( $link_text ) ? $link_text : sprintf( esc_html__( 'Open %s Form', 'th-login' ), ucfirst( $form_type ) );
+			$trigger_css_class = $this->safe_json_option( 'thlogin_display_triggers_settings' )['trigger_css_class'] ?? 'thlogin-trigger';
+			$final_link_text = ! empty( $link_text ) ? $link_text : sprintf( esc_html__( 'Open %s Form', 'thlogin' ), ucfirst( $form_type ) );
 
 			$output = sprintf(
-				'<p><a href="#" class="%s th-login-gutenberg-popup-link" data-th-popup-action="%s">%s</a></p>',
+				'<p><a href="#" class="%s thlogin-gutenberg-popup-link" data-th-popup-action="%s">%s</a></p>',
 				esc_attr( $trigger_css_class ),
 				esc_attr( $form_type ),
 				esc_html( $final_link_text )

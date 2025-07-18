@@ -5,20 +5,20 @@ if (!defined('ABSPATH')) {
 }
 
 // Get settings
-$form_fields_settings = json_decode(get_option('th_login_form_fields_settings', '{}'), true);
-$general_settings = json_decode(get_option('th_login_general_settings', '{}'), true);
+$form_fields_settings = json_decode(get_option('thlogin_form_fields_settings', '{}'), true);
+$general_settings = json_decode(get_option('thlogin_general_settings', '{}'), true);
 $login_fields = $form_fields_settings['login'] ?? array();
 
 
 ?>
 
-<div class="th-login-form th-login-form--login" data-form-type="login">
-    <?php require TH_LOGIN_PATH . 'templates/parts/form-header.php'; ?>
+<div class="thlogin-form thlogin-form--login" data-form-type="login">
+    <?php require THLOGIN_PATH . 'templates/parts/form-header.php'; ?>
 
-    <form class="th-login-ajax-form" data-form-type="login">
-        <div class="th-login-messages" aria-live="polite"></div>
+    <form class="thlogin-ajax-form" data-form-type="login">
+        <div class="thlogin-messages" aria-live="polite"></div>
 
-        <h3><?php esc_html_e('Login', 'th-login'); ?></h3>
+        <h3><?php esc_html_e('Login', 'thlogin'); ?></h3>
 
         <?php foreach ($login_fields as $field) :
             if (!empty($field['hidden'])) continue;
@@ -31,9 +31,9 @@ $login_fields = $form_fields_settings['login'] ?? array();
             $required = !empty($field['required']);
             $icon = $field['icon'] ?? '';
 
-            $field_class = 'th-login-form-field';
+            $field_class = 'thlogin-form-field';
             if ($type === 'checkbox') {
-                $field_class .= ' th-login-form-field--checkbox';
+                $field_class .= ' thlogin-form-field--checkbox';
             }
 
             $autocomplete = '';
@@ -59,11 +59,11 @@ $login_fields = $form_fields_settings['login'] ?? array();
                         <?php if ($required) : ?><span class="th-required">*</span><?php endif; ?>
                     </label>
                 <?php else : ?>
-                    <label for="<?php echo $id; ?>" class="th-login-label-with-icon">
+                    <label for="<?php echo $id; ?>" class="thlogin-label-with-icon">
                         <?php if ($icon) : ?>
-                            <span class="th-login-label-icon"><?php echo th_login_get_icon_svg($icon); ?></span>
+                            <span class="thlogin-label-icon"><?php echo th_login_get_icon_svg($icon); ?></span>
                         <?php endif; ?>
-                        <span class="th-login-label-text">
+                        <span class="thlogin-label-text">
                             <?php echo esc_html($label); ?>
                             <?php if ($required) : ?><span class="th-required">*</span><?php endif; ?>
                         </span>
@@ -81,20 +81,20 @@ $login_fields = $form_fields_settings['login'] ?? array();
             </div>
         <?php endforeach; ?>
 
-        <div class="th-login-form-submit">
-            <button type="submit" class="th-login-button th-login-button--primary">
-                <?php esc_html_e('Log In', 'th-login'); ?>
+        <div class="thlogin-form-submit">
+            <button type="submit" class="thlogin-button thlogin-button--primary">
+                <?php esc_html_e('Log In', 'thlogin'); ?>
             </button>
         </div>
 
-        <div class="th-login-form-links">
-            <a href="#" class="th-login-link" data-th-popup-action="forgot-password"><?php esc_html_e('Forgot Password?', 'th-login'); ?></a>
+        <div class="thlogin-form-links">
+            <a href="#" class="thlogin-link" data-th-popup-action="forgot-password"><?php esc_html_e('Forgot Password?', 'thlogin'); ?></a>
             <?php if ($general_settings['form_type'] === 'double') : ?>
-                <span class="th-login-link-separator">|</span>
-                <a href="#" class="th-login-link" data-th-popup-action="register"><?php esc_html_e('Register', 'th-login'); ?></a>
+                <span class="thlogin-link-separator">|</span>
+                <a href="#" class="thlogin-link" data-th-popup-action="register"><?php esc_html_e('Register', 'thlogin'); ?></a>
             <?php endif; ?>
         </div>
     </form>
 
-    <?php require TH_LOGIN_PATH . 'templates/parts/form-footer.php'; ?>
+    <?php require THLOGIN_PATH . 'templates/parts/form-footer.php'; ?>
 </div>

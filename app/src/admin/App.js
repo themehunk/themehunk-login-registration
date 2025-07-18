@@ -37,10 +37,12 @@ const App = () => {
     const fetchSettings = async () => {
       try {
         const response = await apiFetch({
-          path: "th-login/v1/settings",
+          path: "thlogin/v1/settings",
           method: "POST",
           data: { action: "fetch_settings" },
         });
+
+         console.log("API response:", response);
 
         if (response.success) {
           // Deep merge fetched settings with default structure to ensure all keys exist.
@@ -59,14 +61,14 @@ const App = () => {
           setMessage({
             type: "error",
             text:
-              response.message || __("Failed to load settings.", "th-login"),
+              response.message || __("Failed to load settings.", "thlogin"),
           });
         }
       } catch (error) {
         console.error("Error fetching settings:", error);
         setMessage({
           type: "error",
-          text: __("Error loading settings. Please check console.", "th-login"),
+          text: __("Error loading settings. Please check console.", "thlogin"),
         });
       } finally {
         setIsLoading(false);
@@ -132,7 +134,7 @@ const App = () => {
     setMessage(null);
     try {
       const response = await apiFetch({
-        path: "th-login/v1/settings",
+        path: "thlogin/v1/settings",
         method: "POST",
         data: settings,
       });
@@ -159,13 +161,13 @@ const App = () => {
       } else {
         setMessage({
           type: "error",
-          text: response.message || __("Failed to save settings.", "th-login"),
+          text: response.message || __("Failed to save settings.", "thlogin"),
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: __("Error saving settings. Please check console.", "th-login"),
+        text: __("Error saving settings. Please check console.", "thlogin"),
       });
       console.error("Error saving settings:", error);
     } finally {
@@ -186,7 +188,7 @@ const App = () => {
         .then(() =>
           setMessage({
             type: "success",
-            text: __("Settings copied to clipboard!", "th-login"),
+            text: __("Settings copied to clipboard!", "thlogin"),
           })
         )
         .catch(() =>
@@ -194,7 +196,7 @@ const App = () => {
             type: "error",
             text: __(
               "Failed to copy settings to clipboard. Please copy manually.",
-              "th-login"
+              "thlogin"
             ),
           })
         );
@@ -203,7 +205,7 @@ const App = () => {
         type: "info",
         text: __(
           "Please manually copy the settings from the text area below.",
-          "th-login"
+          "thlogin"
         ),
       });
       if (importTextareaRef.current) {
@@ -226,13 +228,13 @@ const App = () => {
         throw new Error(
           __(
             "Invalid settings format. Please provide a valid JSON object.",
-            "th-login"
+            "thlogin"
           )
         );
       }
 
       const response = await apiFetch({
-        path: "th-login/v1/settings",
+        path: "thlogin/v1/settings",
         method: "POST",
         data: importedData, // Send the imported data directly
       });
@@ -259,7 +261,7 @@ const App = () => {
         setMessage({
           type: "error",
           text:
-            response.message || __("Failed to import settings.", "th-login"),
+            response.message || __("Failed to import settings.", "thlogin"),
         });
       }
     } catch (error) {
@@ -269,7 +271,7 @@ const App = () => {
           error.message ||
           __(
             "Error parsing or importing settings. Please ensure valid JSON.",
-            "th-login"
+            "thlogin"
           ),
       });
       console.error("Error importing settings:", error);
@@ -285,7 +287,7 @@ const App = () => {
     setMessage(null);
     try {
       const response = await apiFetch({
-        path: "th-login/v1/reset-settings", 
+        path: "thlogin/v1/reset-settings", 
         method: "POST",
       });
 
@@ -293,7 +295,7 @@ const App = () => {
         setMessage({ type: "success", text: response.message });
         // Re-fetch settings to load the newly reset defaults
         const fetchResponse = await apiFetch({
-          path: "th-login/v1/settings",
+          path: "thlogin/v1/settings",
           method: "POST",
           data: { action: "fetch_settings" },
         });
@@ -316,13 +318,13 @@ const App = () => {
       } else {
         setMessage({
           type: "error",
-          text: response.message || __("Failed to reset settings.", "th-login"),
+          text: response.message || __("Failed to reset settings.", "thlogin"),
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: __("Error resetting settings. Please check console.", "th-login"),
+        text: __("Error resetting settings. Please check console.", "thlogin"),
       });
       console.error("Error resetting settings:", error);
     } finally {
@@ -333,26 +335,28 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <div className="th-login-admin-wrap">
-        <div className="th-login-loader">
-          <div className="th-login-loader-circle"></div>
-          <div className="th-login-loader-circle"></div>
-          <div className="th-login-loader-circle"></div>
-          <div className="th-login-loader-circle"></div>
+      <div className="thlogin-admin-wrap">
+        <div className="thlogin-loader">
+          <div className="thlogin-loader-circle"></div>
+          <div className="thlogin-loader-circle"></div>
+          <div className="thlogin-loader-circle"></div>
+          <div className="thlogin-loader-circle"></div>
         </div>
-        <p className="th-login-loading-text">{__("Loading settings...", "th-login")}</p>
+        <p className="thlogin-loading-text">{__("Loading settings...", "thlogin")}</p>
       </div>
     );
   }
 
+  console.log(settings);
+
   return (
-    <div className="th-login-admin-modern">
+    <div className="thlogin-admin-modern">
       
       <div className="admin-header">
         <div className="header-content">
           <h2>
             <span className="th-logo">TH</span>
-            {__("Login Settings", "th-login")}
+            {__("Login Settings", "thlogin")}
           </h2>
     
           {message && (
@@ -453,7 +457,7 @@ const App = () => {
               {isSaving && (
                 <Spinner />
               )}
-              {__("Save Changes", "th-login")}
+              {__("Save Changes", "thlogin")}
             </Button>
       </div>
 
@@ -461,11 +465,11 @@ const App = () => {
       {isResetConfirmOpen && (
         <div className="confirmation-modal">
           <div className="modal-content">
-            <h3>{__("Reset All Settings?", "th-login")}</h3>
+            <h3>{__("Reset All Settings?", "thlogin")}</h3>
             <p>
               {__(
                 "This will restore all settings to default values. This cannot be undone.",
-                "th-login"
+                "thlogin"
               )}
             </p>
             <div className="modal-actions">
@@ -474,14 +478,14 @@ const App = () => {
                 onClick={() => setIsResetConfirmOpen(false)}
                 className="cancel-button"
               >
-                {__("Cancel", "th-login")}
+                {__("Cancel", "thlogin")}
               </Button>
               <Button
                 isDestructive
                 onClick={handleResetSettings}
                 className="confirm-button"
               >
-                {__("Reset Settings", "th-login")}
+                {__("Reset Settings", "thlogin")}
               </Button>
             </div>
           </div>

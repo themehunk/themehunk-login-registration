@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 /**
  * Handles all frontend-related functionalities for TH Login.
  */
-class TH_Login_Frontend {
+class THLogin_Frontend {
 
     public function __construct() {
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
@@ -18,27 +18,27 @@ class TH_Login_Frontend {
     }
 
     public function enqueue_scripts() {
-        $asset_file = TH_LOGIN_PATH . 'app/build/public.asset.php';
+        $asset_file = THLOGIN_PATH . 'app/build/public.asset.php';
 
         if (file_exists($asset_file)) {
             $asset_config = require_once $asset_file;
             if (!is_array($asset_config)) {
                 $asset_config = array(
                     'dependencies' => array(),
-                    'version' => TH_LOGIN_VERSION,
+                    'version' => THLOGIN_VERSION,
                 );
             }
         } else {
             $asset_config = array(
                 'dependencies' => array(),
-                'version' => TH_LOGIN_VERSION,
+                'version' => THLOGIN_VERSION,
             );
         }
 
         // Enqueue script with defer attribute
         wp_enqueue_script(
-            'th-login-frontend-script',
-            TH_LOGIN_URL . 'app/build/public.js',
+            'thlogin-frontend-script',
+            THLOGIN_URL . 'app/build/public.js',
             $asset_config['dependencies'],
             $asset_config['version'],
             array(
@@ -48,22 +48,22 @@ class TH_Login_Frontend {
         );
 
         wp_enqueue_style(
-            'th-login-frontend-style',
-            TH_LOGIN_URL . 'app/build/public.css',
+            'thlogin-frontend-style',
+            THLOGIN_URL . 'app/build/public.css',
             array(),
             $asset_config['version']
         );
 
         wp_enqueue_style('dashicons');
 
-        $general_settings = json_decode(get_option('th_login_general_settings', '{}'), true);
-        $design_settings = json_decode(get_option('th_login_design_settings', '{}'), true);
-        $form_fields_settings = json_decode(get_option('th_login_form_fields_settings', '{}'), true);
-        $display_triggers_settings = json_decode(get_option('th_login_display_triggers_settings', '{}'), true);
-        $security_settings = json_decode(get_option('th_login_security_settings', '{}'), true);
+        $general_settings = json_decode(get_option('thlogin_general_settings', '{}'), true);
+        $design_settings = json_decode(get_option('thlogin_design_settings', '{}'), true);
+        $form_fields_settings = json_decode(get_option('thlogin_form_fields_settings', '{}'), true);
+        $display_triggers_settings = json_decode(get_option('thlogin_display_triggers_settings', '{}'), true);
+        $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), true);
 
         wp_localize_script(
-            'th-login-frontend-script',
+            'thlogin-frontend-script',
             'thLoginFrontendData',
             array(
                 'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -84,15 +84,15 @@ class TH_Login_Frontend {
     }
 
     public function render_modal_wrapper() {
-        $general_settings = json_decode(get_option('th_login_general_settings', '{}'), true);
+        $general_settings = json_decode(get_option('thlogin_general_settings', '{}'), true);
         if (($general_settings['plugin_status'] ?? 'enabled') === 'disabled') {
             return;
         }
-        require_once TH_LOGIN_PATH . 'templates/modal-wrapper.php';
+        require_once THLOGIN_PATH . 'templates/modal-wrapper.php';
     }
 
     public function handle_wp_login_redirect() {
-        $general_settings = json_decode(get_option('th_login_general_settings', '{}'), true);
+        $general_settings = json_decode(get_option('thlogin_general_settings', '{}'), true);
         $disable_wp_login = $general_settings['disable_wp_login_page'] ?? false;
 
         if ($disable_wp_login && (strpos($_SERVER['REQUEST_URI'], 'wp-login.php') !== false || strpos($_SERVER['REQUEST_URI'], 'wp-admin') !== false)) {
@@ -110,7 +110,7 @@ class TH_Login_Frontend {
     }
 
     public function handle_logout_redirect() {
-        $general_settings = json_decode(get_option('th_login_general_settings', '{}'), true);
+        $general_settings = json_decode(get_option('thlogin_general_settings', '{}'), true);
         $redirect_settings = $general_settings['redirects']['after_logout'] ?? array('type' => 'home_page');
         $redirect_url = home_url();
 
@@ -133,7 +133,7 @@ class TH_Login_Frontend {
                 update_user_meta($user_id, 'th_login_email_verified', true);
                 delete_user_meta($user_id, 'th_login_email_verification_key');
 
-                $general_settings = json_decode(get_option('th_login_general_settings', '{}'), true);
+                $general_settings = json_decode(get_option('thlogin_general_settings', '{}'), true);
                 $redirect_after_verification = $general_settings['email_verification']['redirect_after_verification'] ?? 'login_form';
                 $custom_redirect_url = $general_settings['email_verification']['custom_redirect_url'] ?? '';
 
@@ -152,7 +152,7 @@ class TH_Login_Frontend {
                 wp_safe_redirect($redirect_url);
                 exit;
             } else {
-                wp_die(esc_html__('Invalid verification link.', 'th-login'));
+                wp_die(esc_html__('Invalid verification link.', 'thlogin'));
             }
         }
     }

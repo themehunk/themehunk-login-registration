@@ -4,17 +4,17 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$form_fields_settings = json_decode(get_option('th_login_form_fields_settings', '{}'), true);
+$form_fields_settings = json_decode(get_option('thlogin_form_fields_settings', '{}'), true);
 $forgot_password_fields = $form_fields_settings['forgot_password'] ?? array();
 ?>
 
-<div class="th-login-form th-login-form--forgot-password" data-form-type="forgot-password" style="display: none;">
-    <?php require TH_LOGIN_PATH . 'templates/parts/form-header.php'; ?>
+<div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">
+    <?php require THLOGIN_PATH . 'templates/parts/form-header.php'; ?>
 
-    <form class="th-login-ajax-form" data-form-type="forgot-password">
-        <div class="th-login-messages" aria-live="polite"></div>
+    <form class="thlogin-ajax-form" data-form-type="forgot-password">
+        <div class="thlogin-messages" aria-live="polite"></div>
 
-        <h3><?php esc_html_e('Reset Password', 'th-login'); ?></h3>
+        <h3><?php esc_html_e('Reset Password', 'thlogin'); ?></h3>
 
         <?php foreach ($forgot_password_fields as $field) :
             if (!empty($field['hidden'])) {
@@ -36,12 +36,12 @@ $forgot_password_fields = $form_fields_settings['forgot_password'] ?? array();
 
             $autocomplete = (stripos($name, 'email') !== false) ? 'email' : 'username';
         ?>
-            <p class="th-login-form-field">
-                <label for="<?php echo $id; ?>" class="th-login-label-with-icon">
+            <p class="thlogin-form-field">
+                <label for="<?php echo $id; ?>" class="thlogin-label-with-icon">
                     <?php if ($icon) : ?>
-                        <span class="th-login-label-icon"><?php echo th_login_get_icon_svg($icon); ?></span>
+                        <span class="thlogin-label-icon"><?php echo th_login_get_icon_svg($icon); ?></span>
                     <?php endif; ?>
-                    <span class="th-login-label-text">
+                    <span class="thlogin-label-text">
                         <?php echo esc_html($label); ?>
                         <?php if ($required) : ?><span class="th-required">*</span><?php endif; ?>
                     </span>
@@ -57,16 +57,16 @@ $forgot_password_fields = $form_fields_settings['forgot_password'] ?? array();
             </p>
         <?php endforeach; ?>
 
-        <p class="th-login-form-submit">
-            <button type="submit" class="th-login-button th-login-button--primary">
-                <?php esc_html_e('Reset Password', 'th-login'); ?>
+        <p class="thlogin-form-submit">
+            <button type="submit" class="thlogin-button thlogin-button--primary">
+                <?php esc_html_e('Reset Password', 'thlogin'); ?>
             </button>
         </p>
 
-        <p class="th-login-form-links">
-            <a href="#" class="th-login-link" data-th-popup-action="login"><?php esc_html_e('Back to Login', 'th-login'); ?></a>
+        <p class="thlogin-form-links">
+            <a href="#" class="thlogin-link" data-th-popup-action="login"><?php esc_html_e('Back to Login', 'thlogin'); ?></a>
         </p>
     </form>
 
-    <?php require TH_LOGIN_PATH . 'templates/parts/form-footer.php'; ?>
+    <?php require THLOGIN_PATH . 'templates/parts/form-footer.php'; ?>
 </div>

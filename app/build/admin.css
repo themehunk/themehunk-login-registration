@@ -1,6 +1,7 @@
 /*!***************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/admin/index.scss ***!
   \***************************************************************************************************************/
+@charset "UTF-8";
 /* ========== Ultra Modern Base Styles ========== */
 /* ========== Ultra Modern Base Styles ========== */
 .thlogin-admin-modern {
@@ -3707,6 +3708,86 @@ input[type=range]::-webkit-slider-thumb {
 
 .cutsom-tabs-inside-panel {
   margin-top: 25px;
+}
+
+.woocommerce-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-left: 4px solid #96588a;
+  border-radius: 16px;
+  padding: 15px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ Smooth subtle animated shine */
+.woocommerce-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  animation: cardShine 2.5s infinite linear;
+}
+
+@keyframes cardShine {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+/* Header */
+.woocommerce-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* Icon */
+.woocommerce-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  width: 48px;
+  height: 48px;
+}
+
+.woocommerce-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Title */
+.woocommerce-info h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #1e1e1e;
+  letter-spacing: -0.2px;
+}
+
+/* Description */
+.woocommerce-info p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+/* Toggle Control */
+.woocommerce-toggle {
+  margin-left: auto;
 }
 
 /*# sourceMappingURL=admin.css.map*/

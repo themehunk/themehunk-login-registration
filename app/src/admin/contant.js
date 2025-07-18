@@ -41,8 +41,9 @@ export const TABS = [
 
 export const general = {
       plugin_status: "enabled",
+      replace_wordpress: true,
       form_type: 'double',
-      display_mode:'popup',
+      display_mode:'page',
       default_register_role: 'subscriber', 
       auto_login_after_registration: false,
       close_button:true,
@@ -358,6 +359,12 @@ export  const display_triggers = {
       },
 };
 
+export const integration = {
+  woocommerce: {
+    enabled: true,
+  },
+};
+
 export  const security = {
   brute_force_protection: {
     enabled: true,
@@ -385,7 +392,7 @@ export const layoutOptions = [
   {
     key: "page",
     icon: "admin-page", // more appropriate than "align-center"
-    label: __("Page", "thlogin"),
+    label: __("Page/ShortCode", "thlogin"),
     demoClass: "page",
   },
   {	
@@ -413,4 +420,33 @@ export const fontWeightOptions = [
   { label: __("Medium", "thlogin"), value: 500 },
   { label: __("Semi-Bold", "thlogin"), value: 700 },
   { label: __("Bold", "thlogin"), value: 900 },
+];
+
+//general-settings
+export const shortcodes = [
+    {
+      label: __("Login Form", "thlogin"),
+      shortcode: "[th_login_form]",
+      description: __("Displays only the login form", "thlogin"),
+    },
+    {
+      label: __("Register Form", "thlogin"),
+      shortcode: "[th_register_form]",
+      description: __("Displays only the register form", "thlogin"),
+    },
+    {
+      label: __("Forgot Password Form", "thlogin"),
+      shortcode: "[th_forgot_password_form]",
+      description: __("Displays only the forgot password form", "thlogin"),
+    },
+    {
+      label: __("Combined Modal", "thlogin"),
+      shortcode: "[th_login__combined_form]",
+      description: __("Shows the full login/register/forgot modal and auto-triggers it", "thlogin"),
+    },
+        {
+            label: __("Popup Link", "thlogin"),
+            shortcode : "[th_login_popup_auto]",
+            description:__("Use this link to generate popup link.")
+        }
 ];

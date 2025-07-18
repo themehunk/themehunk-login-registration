@@ -57,7 +57,7 @@ body.thlogin-modal-open {
 
 .thlogin-popup-form-container {
   position: relative;
-  z-index: 100000;
+  z-index: 100;
   max-width: 500px;
   width: 400px;
   margin: 20px;
@@ -293,6 +293,7 @@ body.thlogin-modal-open {
 /* Main page mode layout */
 #thlogin-popup-modal.thlogin-page {
   position: fixed;
+  display: none !important;
   top: 0;
   left: 0;
   width: 100vw;

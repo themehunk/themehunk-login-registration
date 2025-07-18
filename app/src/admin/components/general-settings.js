@@ -5,6 +5,7 @@ import { useEffect, useState } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
 import {  FaCheck } from "react-icons/fa"; 
 import { FaCopy } from "react-icons/fa6";
+import { shortcodes } from '../contant';
 
 const GeneralSettings = ({ settings, handleSettingChange}) => {
 
@@ -21,34 +22,6 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
     }, []);
 
 	const [copiedIndex, setCopiedIndex] = useState(null);
-
-	const shortcodes = [
-		{
-			label: __("Login Form", "thlogin"),
-			shortcode: "[th_login_form]",
-			description: __("Displays only the login form", "thlogin"),
-		},
-		{
-			label: __("Register Form", "thlogin"),
-			shortcode: "[th_register_form]",
-			description: __("Displays only the register form", "thlogin"),
-		},
-		{
-			label: __("Forgot Password Form", "thlogin"),
-			shortcode: "[th_forgot_password_form]",
-			description: __("Displays only the forgot password form", "thlogin"),
-		},
-		{
-			label: __("Combined Modal", "thlogin"),
-			shortcode: "[th_login__combined_form]",
-			description: __("Shows the full login/register/forgot modal and auto-triggers it", "thlogin"),
-		},
-        {
-            label: __("Popup Link", "thlogin"),
-            shortcode : "[th_login_popup_link]",
-            description:__("Use this link to generate popup link.")
-        }
-	];
 
 	const handleCopy = (text, index) => {
 		navigator.clipboard.writeText(text).then(() => {
@@ -118,6 +91,29 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                             />
                             </div>
                         </div>
+
+                       {/* Replace Default WordPress Forms Toggle
+                        <div className="setting-row">
+                            <div className="setting-label">
+                                <h3>{__("Replace WordPress Login/Registration", "thlogin")}</h3>
+                                <p className="description">
+                                    {__(
+                                        "Enable this to override default WordPress login, register, and lost password pages with TH Login popup/modal.",
+                                        "thlogin"
+                                    )}
+                                </p>
+                            </div>
+                            <div className="setting-control">
+                                <ToggleControl
+                                    __nextHasNoMarginBottom={true}
+                                    checked={settings.general.replace_wordpress || false}
+                                    onChange={(isChecked) =>
+                                        handleSettingChange("general", ["replace_wordpress"], isChecked)
+                                    }
+                                />
+                            </div>
+                        </div> */}
+
 
                         {/* Allow User Registration Toggle */}
                         <div className="setting-row">
@@ -193,7 +189,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                             <CustomSelectControl
                                 value={displayMode}
                                 options={[
-                                    { label: __("Page", "thlogin"), value: "page" },
+                                    { label: __("Page/ShortCode", "thlogin"), value: "page" },
                                     { label: __("Popup", "thlogin"), value: "popup" },
                                     { label: __("Slide-in-left", "thlogin"), value: "slide_in_left" },
                                     { label: __("Slide-in-right", "thlogin"), value: "slide_in_right" },

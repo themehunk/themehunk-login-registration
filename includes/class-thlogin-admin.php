@@ -13,8 +13,8 @@ class THLogin_Admin {
 
 	public function register_admin_menu_page() {
 		add_menu_page(
-			esc_html__( 'TH Login', 'thlogin' ), // Page title
-			esc_html__( 'TH Login', 'thlogin' ), // Menu title
+			esc_html__( 'TH Login', 'th-login' ), // Page title
+			esc_html__( 'TH Login', 'th-login' ), // Menu title
 			'manage_options',                    // Capability required to access
 			'thlogin-settings',                 // Menu slug
 			array( $this, 'render_admin_page' ), // Callback function to render page content
@@ -29,8 +29,8 @@ class THLogin_Admin {
 		}
 		?>
 		<div id="thlogin-admin-root" class="wrap">
-			<h1><?php echo esc_html__( 'TH Login Settings', 'thlogin' ); ?></h1>
-			<p><?php echo esc_html__( 'Loading settings...', 'thlogin' ); ?></p>
+			<h1><?php echo esc_html__( 'TH Login Settings', 'th-login' ); ?></h1>
+			<p><?php echo esc_html__( 'Loading settings...', 'th-login' ); ?></p>
 		</div>
 		<?php
 	}
@@ -94,5 +94,16 @@ class THLogin_Admin {
 				'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
 			)
 		);
+
+		$woo_active  = class_exists('WooCommerce');
+		$thlogin_page = get_page_by_path('th-login');
+		$thlogin_url  = $thlogin_page ? get_permalink($thlogin_page) : '';
+
+		wp_localize_script('thlogin-admin-script', 'thlogin_admin_data', array(
+			'woo_enabled'   => $woo_active,
+			'myaccount_url' => $woo_active ? wc_get_page_permalink('myaccount') : '',
+			'thlogin_url'   => $thlogin_page ? $thlogin_url : '',
+		));
+
 	}
 }

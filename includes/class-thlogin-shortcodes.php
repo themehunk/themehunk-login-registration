@@ -9,8 +9,9 @@ class THLogin_Shortcodes {
 		add_shortcode( 'th_login_form', array( $this, 'render_login_form_shortcode' ) );
 		add_shortcode( 'th_register_form', array( $this, 'render_register_form_shortcode' ) );
 		add_shortcode( 'th_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
-		add_shortcode( 'th_login_popup_link', array( $this, 'render_popup_link_shortcode' ) );
 		add_shortcode( 'th_login_combined_form', array( $this, 'render_combined_form_shortcode' ) );
+		add_shortcode( 'th_login_popup_auto', array( $this, 'render_auto_popup_shortcode' ) );
+
 	}
 
 	private function safe_json_option( $option_key, $default = array() ) {
@@ -20,16 +21,6 @@ class THLogin_Shortcodes {
 		}
 		$decoded = json_decode( $value, true );
 		return is_array( $decoded ) ? $decoded : $default;
-	}
-
-	public function render_combined_form_shortcode( $atts ) {
-		$this->enqueue_shortcode_assets();
-
-		ob_start();
-		require THLOGIN_PATH . 'templates/modal-wrapper.php';
-		$output = ob_get_clean();
-		$output .= '<script>document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){if(window.thLoginFrontendData && typeof window.thLoginFrontendData==="object" && document.getElementById("thlogin-popup-modal")){document.getElementById("thlogin-popup-modal").style.display="flex";}},100);});</script>';
-		return '<div class="thlogin-combined-form-wrapper">' . $output . '</div>';
 	}
 
 	public function enqueue_shortcode_assets() {
@@ -120,7 +111,15 @@ class THLogin_Shortcodes {
 
 		ob_start();
 		require THLOGIN_PATH . 'templates/form-register.php';
-		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
+		$form_html = ob_get_clean();
+
+		// 1. Remove inline style="display: none;" from register form wrapper
+		$form_html = preg_replace( '/(<div[^>]+class="[^"]*thlogin-form--register[^"]*"[^>]*)style="[^"]*"([^>]*>)/', '$1$2', $form_html );
+
+		// 2. Remove the element with class thlogin-form-links (can be <p>, <div>, etc.)
+		$form_html = preg_replace( '/<[^>]+class="[^"]*thlogin-form-links[^"]*"[^>]*>.*?<\/[^>]+>/is', '', $form_html );
+
+		return '<div class="thlogin-shortcode-form-wrapper">' . $form_html . '</div>';
 	}
 
 	public function render_forgot_password_form_shortcode( $atts ) {
@@ -128,7 +127,15 @@ class THLogin_Shortcodes {
 
 		ob_start();
 		require THLOGIN_PATH . 'templates/form-forgot-password.php';
-		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
+		$form_html = ob_get_clean();
+
+		// 1. Remove inline "display: none;" from forgot password form
+		$form_html = preg_replace( '/(<div[^>]+class="[^"]*thlogin-form--forgot-password[^"]*"[^>]*)style="[^"]*"([^>]*>)/', '$1$2', $form_html );
+
+		// 2. Remove "Back to Login" link section
+		$form_html = preg_replace( '/<[^>]+class="[^"]*thlogin-form-links[^"]*"[^>]*>.*?<\/[^>]+>/is', '', $form_html );
+
+		return '<div class="thlogin-shortcode-form-wrapper">' . $form_html . '</div>';
 	}
 
 	public function render_popup_link_shortcode( $atts, $content = null ) {
@@ -136,42 +143,212 @@ class THLogin_Shortcodes {
 
 		$atts = shortcode_atts(
 			array(
-				'type' => 'login',
-				'text' => '',
-				'class' => '',
+				'type'      => 'login',
+				'text'      => '',
+				'class'     => '',
+				'auto_open' => 'false',
 			),
 			$atts,
 			'th_login_popup_link'
 		);
 
-		$type = sanitize_text_field( $atts['type'] );
-		$text = ! empty( $content ) ? $content : sanitize_text_field( $atts['text'] );
+		$type        = sanitize_text_field( $atts['type'] );
+		$text        = ! empty( $content ) ? $content : sanitize_text_field( $atts['text'] );
 		$extra_class = sanitize_html_class( $atts['class'] );
-
-		if ( empty( $text ) ) {
-			$text = match ( $type ) {
-				'login' => esc_html__( 'Login', 'thlogin' ),
-				'register' => esc_html__( 'Register', 'thlogin' ),
-				'forgot-password' => esc_html__( 'Forgot Password', 'thlogin' ),
-				default => esc_html__( 'Open Login Popup', 'thlogin' ),
-			};
-		}
+		$auto_open   = filter_var( $atts['auto_open'], FILTER_VALIDATE_BOOLEAN );
 
 		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
-		$trigger_css_class = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
+		$trigger_css_class         = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
 
 		$classes = array( $trigger_css_class, 'thlogin-shortcode-link' );
 		if ( ! empty( $extra_class ) ) {
 			$classes[] = $extra_class;
 		}
 
-		$link_html = sprintf(
-			'<a href="#" class="%s" data-th-popup-action="%s">%s</a>',
-			esc_attr( implode( ' ', $classes ) ),
-			esc_attr( $type ),
-			esc_html( $text )
-		);
+		$html = '';
 
-		return $link_html;
+		if ( ! $auto_open ) {
+			// Normal trigger link
+			$html .= sprintf(
+				'<a href="#" class="%s" data-th-popup-action="%s">%s</a>',
+				esc_attr( implode( ' ', $classes ) ),
+				esc_attr( $type ),
+				esc_html( $text )
+			);
+		} else {
+			// Auto open: show modal + form instantly
+			ob_start();
+			?>
+			<style>
+			#thlogin-popup-modal {
+				display: flex !important;
+				opacity: 1 !important;
+				visibility: visible !important;
+			}
+			#thlogin-popup-modal .thlogin-form {
+				display: none;
+			}
+			#thlogin-popup-modal .thlogin-form[data-form-type="<?php echo esc_attr( $type ); ?>"] {
+				display: block;
+			}
+			</style>
+			<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				setTimeout(function () {
+					document.dispatchEvent(new CustomEvent("thlogin:open", {
+						detail: { type: "<?php echo esc_js( $type ); ?>" }
+					}));
+				}, 100);
+			});
+			</script>
+			<?php
+			$html .= ob_get_clean();
+		}
+
+		return $html;
 	}
+
+	public function render_auto_popup_shortcode( $atts ) {
+		$this->enqueue_shortcode_assets();
+
+		ob_start();
+		require THLOGIN_PATH . 'templates/modal-wrapper.php';
+		$output = ob_get_clean();
+
+		// Styles to force popup visible and highlight active toggle
+		$output .= '<style>
+			#thlogin-popup-modal.thlogin-popup-modal--active {
+				display: flex !important;
+				opacity: 1 !important;
+				visibility: visible !important;
+			}
+			.thlogin-toggle-button.is-active {
+				background: #0b59f4;
+				color: #fff;
+				font-weight: 600;
+			}
+		</style>';
+
+		// JS: handle toggle + close functionality
+		$output .= '<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var modal = document.getElementById("thlogin-popup-modal");
+			if (modal) {
+				modal.style.display = "flex";
+				modal.classList.add("thlogin-popup-modal--active");
+				modal.setAttribute("aria-hidden", "false");
+			}
+
+			function switchForm(target) {
+				document.querySelectorAll(".thlogin-form").forEach(function (f) {
+					f.style.display = "none";
+				});
+				var form = document.querySelector(".thlogin-form--" + target);
+				if (form) {
+					form.style.display = "block";
+				}
+				document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
+					btn.classList.remove("is-active");
+				});
+				var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
+				if (activeBtn) {
+					activeBtn.classList.add("is-active");
+				}
+			}
+
+			// Initial form = login
+			switchForm("login");
+
+			// Form toggle buttons (login/register/forgot)
+			document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
+				btn.addEventListener("click", function (e) {
+					e.preventDefault();
+					var target = this.getAttribute("data-th-popup-action");
+					switchForm(target);
+				});
+			});
+
+			// Close button functionality
+			document.querySelectorAll(".thlogin-popup-close-button").forEach(function (btn) {
+				btn.addEventListener("click", function () {
+					modal.classList.remove("thlogin-popup-modal--active");
+					modal.style.display = "none";
+					modal.setAttribute("aria-hidden", "true");
+				});
+			});
+		});
+		</script>';
+
+		return '<div class="thlogin-auto-popup-shortcode-wrapper">' . $output . '</div>';
+	}
+
+	public function render_combined_form_shortcode( $atts ) {
+		$this->enqueue_shortcode_assets();
+
+		ob_start();
+		require THLOGIN_PATH . 'templates/modal-wrapper.php'; // Reuse the popup template
+		$output = ob_get_clean();
+
+		// 1. Remove popup-specific classes/IDs/styles
+		$output = str_replace('id="thlogin-popup-modal"', 'id="thlogin-inline-wrapper"', $output);
+		$output = str_replace('thlogin-popup-modal', 'thlogin-inline-wrapper', $output);
+		$output = preg_replace('/style="[^"]*"/', '', $output); // Strip inline styles
+
+		// 2. Remove close (X) buttons
+		$output = preg_replace('/<button class="thlogin-popup-close-button[^>]*>.*?<\/button>/', '', $output);
+
+		// 3. Add custom styles and JS logic
+		$output .= '<style>
+			#thlogin-inline-wrapper {
+				display: block !important;
+				position: static !important;
+				background: none !important;
+				box-shadow: none !important;
+				opacity: 1 !important;
+				visibility: visible !important;
+				z-index: auto !important;
+			}
+			.thlogin-toggle-button.is-active {
+				background: #0b59f4;
+				color: #fff;
+				font-weight: 600;
+			}
+
+			.thlogin-header-cancel-button{
+				display:none;
+			}
+		</style>';
+
+		$output .= '<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			function switchForm(target) {
+				document.querySelectorAll(".thlogin-form").forEach(function (f) {
+					f.style.display = "none";
+				});
+				var form = document.querySelector(".thlogin-form--" + target);
+				if (form) {
+					form.style.display = "block";
+				}
+				document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
+					btn.classList.remove("is-active");
+				});
+				var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
+				if (activeBtn) {
+					activeBtn.classList.add("is-active");
+				}
+			}
+
+			switchForm("login"); // Default form
+
+			document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
+				btn.addEventListener("click", function (e) {
+					e.preventDefault();
+					switchForm(this.getAttribute("data-th-popup-action"));
+				});
+			});
+		});
+		</script>';
+
+		return '<div class="thlogin-inline-combined-form-wrapper">' . $output . '</div>';
+	}	
 }

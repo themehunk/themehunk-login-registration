@@ -140,7 +140,8 @@ class THLogin_Gutenberg_Block {
 		} else {
 			// Render a link that triggers the popup.
 			$trigger_css_class = $this->safe_json_option( 'thlogin_display_triggers_settings' )['trigger_css_class'] ?? 'thlogin-trigger';
-			$final_link_text = ! empty( $link_text ) ? $link_text : sprintf( esc_html__( 'Open %s Form', 'thlogin' ), ucfirst( $form_type ) );
+			/* translators: %s: The form type (login/register) to be displayed in the link text */
+			$final_link_text = ! empty( $link_text ) ? $link_text : sprintf( esc_html__( 'Open %s Form', 'th-login' ), ucfirst( $form_type ) );
 
 			$output = sprintf(
 				'<p><a href="#" class="%s thlogin-gutenberg-popup-link" data-th-popup-action="%s">%s</a></p>',

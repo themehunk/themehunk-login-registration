@@ -8,8 +8,10 @@ class TH_Sanitization_validation {
     public function sanitize_general_settings( $settings ) {
 		$sanitized = array();
 		$sanitized['plugin_status']             = sanitize_text_field( $settings['plugin_status'] ?? 'enabled' );
+		$sanitized['replace_wordpress'] = rest_sanitize_boolean( $settings['replace_wordpress'] ?? true );
+		
 		$sanitized['form_type']             = sanitize_text_field( $settings['form_type'] ?? 'double' );
-		$sanitized['display_mode']             = sanitize_text_field( $settings['display_mode'] ?? 'popup' );
+		$sanitized['display_mode']             = sanitize_text_field( $settings['display_mode'] ?? 'page' );
 		$sanitized['default_register_role']             = sanitize_text_field( $settings['default_register_role'] ?? 'subscriber' );
 
 		$sanitized['auto_login_after_registration'] = rest_sanitize_boolean( $settings['auto_login_after_registration'] ?? false );
@@ -45,10 +47,8 @@ class TH_Sanitization_validation {
 		$errors = new WP_Error();
 
 		if ( ! in_array( $settings['plugin_status'], array( 'enabled', 'disabled' ), true ) ) {
-			$errors->add( 'invalid_plugin_status', esc_html__( 'Invalid plugin status.', 'thlogin' ) );
+			$errors->add( 'invalid_plugin_status', esc_html__( 'Invalid plugin status.', 'th-login' ) );
 		}
-
-		// Add more specific validations as needed.
 
 		return $errors->has_errors() ? $errors : true;
 	}
@@ -196,7 +196,8 @@ class TH_Sanitization_validation {
 		foreach ( [ 'modal', 'form' ] as $section ) {
 			$type = $settings[ $section ][ "{$section}_background" ]['type'] ?? 'color';
 			if ( ! in_array( $type, $valid_types, true ) ) {
-				$errors->add( "invalid_{$section}_background_type", sprintf( esc_html__( 'Invalid %s background type.', 'thlogin' ), $section ) );
+				/* translators: %s: The form type (login/register) to be displayed in the link text */
+				$errors->add( "invalid_{$section}_background_type", sprintf( esc_html__( 'Invalid %s background type.', 'th-login' ), $section ) );
 			}
 		}
 
@@ -213,7 +214,8 @@ class TH_Sanitization_validation {
 				if ( isset( $radius[ $corner ] ) && intval( $radius[ $corner ] ) < 0 ) {
 					$errors->add(
 						"inappropriate_{$key}_{$corner}",
-						sprintf( esc_html__( '%s radius value must be a positive number.', 'thlogin' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
+						sprintf( esc_html__( '%s radius value must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
 			}
@@ -232,7 +234,8 @@ class TH_Sanitization_validation {
 				if ( isset( $padding[ $side ] ) && intval( $padding[ $side ] ) < 0 ) {
 					$errors->add(
 						"invalid_{$key}_{$side}",
-						sprintf( esc_html__( '%s padding must be a positive number.', 'thlogin' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
+						sprintf( esc_html__( '%s padding must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
 			}
@@ -242,7 +245,7 @@ class TH_Sanitization_validation {
 		if ( isset( $settings['form']['form_gap'] ) && intval( $settings['form']['form_gap'] ) < 0 ) {
 			$errors->add(
 				'invalid_form_gap',
-				esc_html__( 'Form gap must be a positive number.', 'thlogin' )
+				esc_html__( 'Form gap must be a positive number.', 'th-login' )
 			);
 		}
 
@@ -262,7 +265,8 @@ class TH_Sanitization_validation {
 			if ( $font_size && ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%)$/', $font_size ) ) {
 				$errors->add(
 					'invalid_' . strtolower( $key ) . '_font_size',
-					sprintf( esc_html__( '%s font size must be a valid CSS size (e.g., 14px, 1.2em).', 'thlogin' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+					/* translators: %s: The form type (login/register) to be displayed in the link text */
+					sprintf( esc_html__( '%s font size must be a valid CSS size (e.g., 14px, 1.2em).', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
 		}
@@ -298,7 +302,8 @@ class TH_Sanitization_validation {
 			if ( $color && ! preg_match( $valid_color_regex, $color ) ) {
 				$errors->add(
 					'invalid_' . $key,
-					sprintf( esc_html__( '%s must be a valid hex color.', 'thlogin' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+					/* translators: %s: The form type (login/register) to be displayed in the link text */
+					sprintf( esc_html__( '%s must be a valid hex color.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
 		}
@@ -398,34 +403,49 @@ class TH_Sanitization_validation {
 				if ( empty( $field_id ) ) {
 					$errors->add(
 						'missing_field_id',
-						sprintf( esc_html__( 'A field in "%s" is missing an ID.', 'thlogin' ), $form_key )
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
+						sprintf( esc_html__( 'A field in "%s" is missing an ID.', 'th-login' ), $form_key )
 					);
 					continue;
 				}
 
 				if ( in_array( $field_id, $seen_ids, true ) ) {
+					// translators: 1: Field ID, 2: Form name/identifier
+					$error_message = sprintf(
+						esc_html__( 'Duplicate field ID "%1$s" found in %2$s.', 'th-login' ),
+						esc_html( $field_id ),
+						esc_html( $form_key )
+					);
+					
 					$errors->add(
 						'duplicate_field_id',
-						sprintf( esc_html__( 'Duplicate field ID "%s" found in %s.', 'thlogin' ), esc_html( $field_id ), $form_key )
+						$error_message
 					);
 				}
+
 
 				$seen_ids[] = $field_id;
 
 				// Required fields must have label
 				if ( ! empty( $field['required'] ) && empty( $label ) ) {
+					/* translators: 1: Field ID, 2: Form name/identifier */
 					$errors->add(
 						'missing_required_label',
-						sprintf( esc_html__( 'Field "%s" in %s is required but missing a label.', 'thlogin' ), esc_html( $field_id ), $form_key )
+						sprintf( 
+							esc_html__( 'Field "%1$s" in %2$s is required but missing a label.', 'th-login' ),
+							esc_html( $field_id ),
+							esc_html( $form_key )
+						)
 					);
 				}
+
 
 				// Validate password field rules
 				if ( $field_id === 'password' ) {
 					if ( isset( $field['minInput'] ) && intval( $field['minInput'] ) < 4 ) {
 						$errors->add(
 							'invalid_min_input',
-							esc_html__( 'Password minimum length must be at least 4 characters.', 'thlogin' )
+							esc_html__( 'Password minimum length must be at least 4 characters.', 'th-login' )
 						);
 					}
 
@@ -439,7 +459,7 @@ class TH_Sanitization_validation {
 						) {
 							$errors->add(
 								'invalid_password_check',
-								esc_html__( 'At least one password check must be enabled (letter, number, or special character).', 'thlogin' )
+								esc_html__( 'At least one password check must be enabled (letter, number, or special character).', 'th-login' )
 							);
 						}
 					}
@@ -450,7 +470,7 @@ class TH_Sanitization_validation {
 					if ( isset( $field['link'] ) && ! empty( $field['link'] ) && ! filter_var( $field['link'], FILTER_VALIDATE_URL ) ) {
 						$errors->add(
 							'invalid_terms_link',
-							esc_html__( 'The link for Terms & Conditions must be a valid URL.', 'thlogin' )
+							esc_html__( 'The link for Terms & Conditions must be a valid URL.', 'th-login' )
 						);
 					}
 				}
@@ -533,10 +553,44 @@ class TH_Sanitization_validation {
 
 		// Example validation: delay_seconds must be positive.
 		if ( ( $settings['auto_open_on_load']['enabled'] ?? false ) && ( $settings['auto_open_on_load']['delay_seconds'] ?? 0 ) < 0 ) {
-			$errors->add( 'invalid_delay_seconds', esc_html__( 'Delay seconds must be a non-negative number.', 'thlogin' ) );
+			$errors->add( 'invalid_delay_seconds', esc_html__( 'Delay seconds must be a non-negative number.', 'th-login' ) );
 		}
 
 		return $errors->has_errors() ? $errors : true;
+	}
+
+	public function sanitize_integration_settings( $settings ) {
+		$woocommerce = $settings['woocommerce'] ?? [];
+
+		return array(
+			'woocommerce' => array(
+				'enabled' => ! empty( $woocommerce['enabled'] ),
+			),
+		);
+	}
+
+	public function validate_integration_settings( $settings ) {
+		if ( ! is_array( $settings ) ) {
+			return new WP_Error( 'invalid_data', __( 'Integration settings must be an array.', 'th-login' ) );
+		}
+
+		if ( isset( $settings['woocommerce'] ) && is_array( $settings['woocommerce'] ) ) {
+			$allowed_woo_keys = [ 'enabled' ]; // Only allow the keys you're using
+
+			foreach ( $settings['woocommerce'] as $key => $val ) {
+				if ( ! in_array( $key, $allowed_woo_keys, true ) ) {
+					return new WP_Error(
+						'invalid_key',
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
+						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'th-login' ), $key )
+					);
+				}
+			}
+		} else {
+			return new WP_Error( 'missing_woocommerce', __( 'WooCommerce integration settings missing or invalid.', 'th-login' ) );
+		}
+
+		return true;
 	}
 
 	public function sanitize_security_settings( $settings ) {
@@ -565,10 +619,10 @@ class TH_Sanitization_validation {
 		// Example validation: reCAPTCHA keys are required if enabled.
 		if ( ( $settings['recaptcha']['enabled'] ?? false ) ) {
 			if ( empty( $settings['recaptcha']['site_key'] ?? '' ) ) {
-				$errors->add( 'missing_recaptcha_site_key', esc_html__( 'reCAPTCHA Site Key is required when reCAPTCHA is enabled.', 'thlogin' ) );
+				$errors->add( 'missing_recaptcha_site_key', esc_html__( 'reCAPTCHA Site Key is required when reCAPTCHA is enabled.', 'th-login' ) );
 			}
 			if ( empty( $settings['recaptcha']['secret_key'] ?? '' ) ) {
-				$errors->add( 'missing_recaptcha_secret_key', esc_html__( 'reCAPTCHA Secret Key is required when reCAPTCHA is enabled.', 'thlogin' ) );
+				$errors->add( 'missing_recaptcha_secret_key', esc_html__( 'reCAPTCHA Secret Key is required when reCAPTCHA is enabled.', 'th-login' ) );
 			}
 		}
 

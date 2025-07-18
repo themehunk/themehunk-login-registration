@@ -10,7 +10,7 @@
  * Author URI:        https://themehunk.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       thlogin
+ * Text Domain:       th-login
  * Domain Path:       /languages
  *
  * @package TH_Login
@@ -35,6 +35,7 @@ final class THLogin {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
+
 		return self::$instance;
 	}
 
@@ -61,7 +62,7 @@ final class THLogin {
 	}
 
 	public function init_plugin() {
-		load_plugin_textdomain( 'thlogin', false, dirname( THLOGIN_BASENAME ) . '/languages' );
+		load_plugin_textdomain( 'th-login', false, dirname( THLOGIN_BASENAME ) . '/languages' );
 
 		new THLogin_Admin();
 		new THLogin_Frontend();
@@ -83,7 +84,7 @@ final class THLogin {
 	}
 
 	public function add_plugin_action_links( $links ) {
-		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'thlogin' ) . '</a>';
+		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'th-login' ) . '</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}
@@ -93,8 +94,9 @@ function thlogin_set_default_options() {
 
 	$general_defaults = array(
 		'plugin_status' => 'enabled',
+		'repalce_wordpress' => true,
 		'form_type' => 'double',
-		'display_mode'=> 'popup',
+		'display_mode'=> 'page',
 		'default_register_role'=> 'subscriber', 
 		'auto_login_after_registration' => false,
 		'allow_user_registration' => get_option( 'users_can_register' ),
@@ -300,29 +302,29 @@ function thlogin_set_default_options() {
 		'login' => array(
 			array(
 				'id'            => 'username',
-				'label'         => esc_html__( 'Username or Email', 'thlogin' ),
+				'label'         => esc_html__( 'Username or Email', 'th-login' ),
 				'name'          => 'username',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Enter your username or email', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Enter your username or email', 'th-login' ),
 				'required'      => true,
 				'icon'          => 'user',
-				'error_message' => esc_html__( 'Username or email is required.', 'thlogin' ),
+				'error_message' => esc_html__( 'Username or email is required.', 'th-login' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'password',
-				'label'         => esc_html__( 'Password', 'thlogin' ),
+				'label'         => esc_html__( 'Password', 'th-login' ),
 				'name'          => 'password',
 				'type'          => 'password',
-				'placeholder'   => esc_html__( 'Enter your password', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Enter your password', 'th-login' ),
 				'required'      => true,
 				'icon'          => 'lock',
-				'error_message' => esc_html__( 'Password is required.', 'thlogin' ),
+				'error_message' => esc_html__( 'Password is required.', 'th-login' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'remember_me',
-				'label'         => esc_html__( 'Remember Me', 'thlogin' ),
+				'label'         => esc_html__( 'Remember Me', 'th-login' ),
 				'name'          => 'remember_me',
 				'type'          => 'checkbox',
 				'required'      => false,
@@ -336,85 +338,85 @@ function thlogin_set_default_options() {
 		'register' => array(
 			array(
 				'id'            => 'username',
-				'label'         => esc_html__( 'Choose a Username', 'thlogin' ),
+				'label'         => esc_html__( 'Choose a Username', 'th-login' ),
 				'name'          => 'username',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Enter your desired username', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Enter your desired username', 'th-login' ),
 				'required'      => true,
 				'icon'          => 'user',
-				'error_message' => esc_html__( 'Username is required.', 'thlogin' ),
+				'error_message' => esc_html__( 'Username is required.', 'th-login' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'email',
-				'label'         => esc_html__( 'Email Address', 'thlogin' ),
+				'label'         => esc_html__( 'Email Address', 'th-login' ),
 				'name'          => 'email',
 				'type'          => 'email',
-				'placeholder'   => esc_html__( 'Enter your email', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Enter your email', 'th-login' ),
 				'required'      => true,
 				'icon'          => 'email',
-				'error_message' => esc_html__( 'Email address is required.', 'thlogin' ),
+				'error_message' => esc_html__( 'Email address is required.', 'th-login' ),
 				'predefined'    => false,
 			),
 			array(
 				'id'            => 'password',
-				'label'         => esc_html__( 'Create Password', 'thlogin' ),
+				'label'         => esc_html__( 'Create Password', 'th-login' ),
 				'name'          => 'password',
 				'type'          => 'password',
-				'placeholder'   => esc_html__( 'Create a strong password', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Create a strong password', 'th-login' ),
 				'required'      => true,
 				'icon'          => 'lock',
 				'check'         => array( 'text' => true, 'number' => false, 'special_charcter' => false ),
 				'maxInput'      => 20,
 				'minInput'      => 5,
-				'error_message' => esc_html__( 'Password is required.', 'thlogin' ),
+				'error_message' => esc_html__( 'Password is required.', 'th-login' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'confirm_password',
-				'label'         => esc_html__( 'Confirm Password', 'thlogin' ),
+				'label'         => esc_html__( 'Confirm Password', 'th-login' ),
 				'name'          => 'confirm_password',
 				'type'          => 'password',
-				'placeholder'   => esc_html__( 'Confirm your password', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Confirm your password', 'th-login' ),
 				'required'      => true,
 				'icon'          => 'lock',
 				'logic_key'     => 'confirm_password',
-				'error_message' => esc_html__( 'Please confirm your password.', 'thlogin' ),
+				'error_message' => esc_html__( 'Please confirm your password.', 'th-login' ),
 				'predefined'    => true,
 			),
 			array(
 				'id'            => 'first_name',
-				'label'         => esc_html__( 'First Name', 'thlogin' ),
+				'label'         => esc_html__( 'First Name', 'th-login' ),
 				'name'          => 'first_name',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Your first name', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Your first name', 'th-login' ),
 				'required'      => false,
 				'icon'          => 'user',
 				'show'          => false,
-				'error_message' => esc_html__( 'First name is required.', 'thlogin' ),
+				'error_message' => esc_html__( 'First name is required.', 'th-login' ),
 				'predefined'    => false,
 			),
 			array(
 				'id'            => 'last_name',
-				'label'         => esc_html__( 'Last Name', 'thlogin' ),
+				'label'         => esc_html__( 'Last Name', 'th-login' ),
 				'name'          => 'last_name',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Your last name', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Your last name', 'th-login' ),
 				'required'      => false,
 				'icon'          => 'user',
 				'show'          => false,
-				'error_message' => esc_html__( 'Last name is required.', 'thlogin' ),
+				'error_message' => esc_html__( 'Last name is required.', 'th-login' ),
 				'predefined'    => false,
 			),
 			array(
 				'id'            => 'terms_and_conditions',
-				'label'         => esc_html__( 'I agree to the Terms & Conditions', 'thlogin' ),
+				'label'         => esc_html__( 'I agree to the Terms & Conditions', 'th-login' ),
 				'name'          => 'terms_and_conditions',
 				'type'          => 'checkbox',
 				'required'      => true,
 				'icon'          => '',
 				'show'          => true,
-				'error_message' => esc_html__( 'You must agree to the Terms & Conditions.', 'thlogin' ),
+				'error_message' => esc_html__( 'You must agree to the Terms & Conditions.', 'th-login' ),
 				'predefined'    => false,
 				'link'          => "",
 			),
@@ -434,13 +436,13 @@ function thlogin_set_default_options() {
 		'forgot_password' => array(
 			array(
 				'id'            => 'user_login',
-				'label'         => esc_html__( 'Email Address', 'thlogin' ),
+				'label'         => esc_html__( 'Email Address', 'th-login' ),
 				'name'          => 'user_login',
 				'type'          => 'text',
-				'placeholder'   => esc_html__( 'Enter your email to reset password', 'thlogin' ),
+				'placeholder'   => esc_html__( 'Enter your email to reset password', 'th-login' ),
 				'required'      => true,
 				'icon'          => 'email',
-				'error_message' => esc_html__( 'Email address is required to reset password.', 'thlogin' ),
+				'error_message' => esc_html__( 'Email address is required to reset password.', 'th-login' ),
 				'predefined'    => true,
 			),
 		),
@@ -468,8 +470,8 @@ function thlogin_set_default_options() {
 		'menu_integration'           => array(
 			'enabled'                    => false,
 			'menu_slug'                  => 'primary',
-			'item_text_login'            => __( 'Login', 'thlogin' ),
-			'item_text_register'         => __( 'Register', 'thlogin' ),
+			'item_text_login'            => __( 'Login', 'th-login' ),
+			'item_text_register'         => __( 'Register', 'th-login' ),
 			'item_icon_login'            => 'dashicons-admin-users',
 			'item_icon_register'         => 'dashicons-plus-alt',
 			'visibility_login_logged_in' => false,
@@ -493,12 +495,19 @@ function thlogin_set_default_options() {
 		'honeypot_enabled'       => true,
 	);
 
+	$integration_defaults = array(
+		'woocommerce' => array(
+			'enabled' => true,
+		),
+	);
+
 	$defaults = array(
 		'general'           => $general_defaults,
 		'design'            => $design_defaults,
 		'form_fields'       => $form_fields_defaults,
 		'display_triggers'  => $display_triggers_defaults,
 		'security'          => $security_defaults,
+		'integration'       => $integration_defaults,
 	);
 
 	foreach ( $defaults as $key => $value ) {

@@ -23,7 +23,7 @@ if ($modal_design['type'] === 'color') {
 $modal_bg_style .= " opacity: {$opacity};";
 ?>
 
-<div id="thlogin-popup-modal" class="thlogin-popup-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none; <?= esc_attr($modal_bg_style); ?>">
+<div id="thlogin-popup-modal" class="thlogin-popup-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none; <?php echo esc_attr($modal_bg_style); ?>">
     <div class="thlogin-popup-form-container">
         <?php
         // Load forms

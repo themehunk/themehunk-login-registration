@@ -10,7 +10,7 @@ import DisplayTriggersSettings from './components/display-trigger-settings';
 import SecuritySettings from './components/security-settings';
 import IntegrationSettings from './components/integration-settings';
 import ToolsSettings from './components/tools-settings';
-import { TABS, general, form_fields, design, display_triggers, security } from "./contant";
+import { TABS, general, form_fields, design, display_triggers, security, integration } from "./contant";
 
 const App = () => {
   
@@ -19,6 +19,7 @@ const App = () => {
     design: design,
     form_fields: form_fields,
     display_triggers: display_triggers,
+    integration: integration,
     security: security,
   });
 
@@ -41,8 +42,6 @@ const App = () => {
           method: "POST",
           data: { action: "fetch_settings" },
         });
-
-         console.log("API response:", response);
 
         if (response.success) {
           // Deep merge fetched settings with default structure to ensure all keys exist.
@@ -299,6 +298,7 @@ const App = () => {
           method: "POST",
           data: { action: "fetch_settings" },
         });
+        
         if (fetchResponse.success) {
           const mergedSettings = deepMerge(settings, fetchResponse.settings);
           if (
@@ -404,9 +404,6 @@ const App = () => {
             <FormFieldsSettings
               settings={settings}
               handleSettingChange={handleSettingChange}
-              // addCustomField={addCustomField}
-              // updateCustomField={updateCustomField}
-              // removeCustomField={removeCustomField}
             />
           )}
 

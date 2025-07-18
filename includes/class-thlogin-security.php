@@ -145,7 +145,7 @@ class THLogin_Security {
 				'th_login_locked_out',
 				sprintf(
 					/* translators: %s: duration in minutes */
-					esc_html__( 'Too many failed login attempts. Please try again in %s minutes.', 'thlogin' ),
+					esc_html__( 'Too many failed login attempts. Please try again in %s minutes.', 'th-login' ),
 					( $security_settings['brute_force_protection']['lockout_duration_minutes'] ?? 30 )
 				)
 			);
@@ -160,15 +160,19 @@ class THLogin_Security {
 	 * @return string
 	 */
 	private function get_user_ip_address() {
-		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-			$ip = $_SERVER['HTTP_CLIENT_IP'];
-		} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		} else {
-			$ip = $_SERVER['REMOTE_ADDR'];
+		$ip = '';
+
+		if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
+		} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+		} elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 		}
-		return sanitize_text_field( $ip );
+
+		return $ip;
 	}
+
 
 	/**
 	 * --- Email Verification ---
@@ -188,13 +192,13 @@ class THLogin_Security {
 		$user = get_user_by( 'id', $user_id );
 
 		if ( ! $user ) {
-			wp_die( esc_html__( 'Invalid user ID.', 'thlogin' ), esc_html__( 'Verification Error', 'thlogin' ) );
+			wp_die( esc_html__( 'Invalid user ID.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
 		}
 
 		$stored_key = get_user_meta( $user_id, 'th_login_email_verification_key', true );
 
 		if ( empty( $stored_key ) || $stored_key !== $verification_key ) {
-			wp_die( esc_html__( 'Invalid or expired verification link.', 'thlogin' ), esc_html__( 'Verification Error', 'thlogin' ) );
+			wp_die( esc_html__( 'Invalid or expired verification link.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
 		}
 
 		// Mark email as verified.
@@ -253,7 +257,7 @@ class THLogin_Security {
 		if ( ! $is_verified ) {
 			return new WP_Error(
 				'th_login_email_not_verified',
-				esc_html__( 'Your email address has not been verified. Please check your inbox for a verification link.', 'thlogin' )
+				esc_html__( 'Your email address has not been verified. Please check your inbox for a verification link.', 'th-login' )
 			);
 		}
 
@@ -303,7 +307,7 @@ class THLogin_Security {
 		if ( $is_pending_approval ) {
 			return new WP_Error(
 				'th_login_account_pending_approval',
-				esc_html__( 'Your account is pending administrator approval. Please wait for your account to be activated.', 'thlogin' )
+				esc_html__( 'Your account is pending administrator approval. Please wait for your account to be activated.', 'th-login' )
 			);
 		}
 
@@ -329,16 +333,16 @@ class THLogin_Security {
 
 		$is_pending_approval = get_user_meta( $user->ID, 'th_login_pending_approval', true );
 		?>
-		<h3><?php esc_html_e( 'TH Login Account Status', 'thlogin' ); ?></h3>
+		<h3><?php esc_html_e( 'TH Login Account Status', 'th-login' ); ?></h3>
 		<table class="form-table">
 			<tr>
-				<th><label for="th_login_pending_approval"><?php esc_html_e( 'Account Approval', 'thlogin' ); ?></label></th>
+				<th><label for="th_login_pending_approval"><?php esc_html_e( 'Account Approval', 'th-login' ); ?></label></th>
 				<td>
 					<select name="th_login_pending_approval" id="th_login_pending_approval">
-						<option value="1" <?php selected( $is_pending_approval, true ); ?>><?php esc_html_e( 'Pending Approval', 'thlogin' ); ?></option>
-						<option value="0" <?php selected( $is_pending_approval, false ); ?>><?php esc_html_e( 'Approved', 'thlogin' ); ?></option>
+						<option value="1" <?php selected( $is_pending_approval, true ); ?>><?php esc_html_e( 'Pending Approval', 'th-login' ); ?></option>
+						<option value="0" <?php selected( $is_pending_approval, false ); ?>><?php esc_html_e( 'Approved', 'th-login' ); ?></option>
 					</select>
-					<p class="description"><?php esc_html_e( 'Set the approval status for this user account.', 'thlogin' ); ?></p>
+					<p class="description"><?php esc_html_e( 'Set the approval status for this user account.', 'th-login' ); ?></p>
 				</td>
 			</tr>
 		</table>
@@ -363,24 +367,29 @@ class THLogin_Security {
 			return;
 		}
 
-		if ( isset( $_POST['th_login_pending_approval'] ) ) {
-			$new_status = ( '1' === $_POST['th_login_pending_approval'] );
+		if (
+			isset( $_POST['th_login_pending_approval'] ) &&
+			isset( $_POST['_wpnonce'] ) &&
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'update-user_' . $user_id )
+		) {
+			$new_status = ( '1' === sanitize_text_field( wp_unslash( $_POST['th_login_pending_approval'] ) ) );
+			$was_pending = get_user_meta( $user_id, 'th_login_pending_approval', true );
+
 			update_user_meta( $user_id, 'th_login_pending_approval', $new_status );
 
-			// If changed from pending to approved, and email verification is not enabled,
-			// or if email is already verified, then auto-login (if setting allows)
-			// or send a notification.
-			if ( ! $new_status && get_user_meta( $user_id, 'th_login_pending_approval', true ) ) { // Was pending, now approved.
-				// Optionally, send an email to the user notifying them of approval.
-				// This would involve getting email content from settings.
-				// For now, just a basic notification.
+			if ( ! $new_status && $was_pending ) {
 				$user = get_user_by( 'id', $user_id );
 				if ( $user ) {
-					$subject = esc_html__( 'Your account has been approved!', 'thlogin' );
-					$message = sprintf( esc_html__( 'Hello %s, your account on %s has been approved. You can now log in.', 'thlogin' ), $user->user_login, get_bloginfo( 'name' ) );
+					$subject = esc_html__( 'Your account has been approved!', 'th-login' );
+					$message = sprintf(
+						esc_html__( 'Hello %1$s, your account on %2$s has been approved. You can now log in.', 'th-login' ),
+						$user->user_login,
+						get_bloginfo( 'name' )
+					);
 					wp_mail( $user->user_email, $subject, $message );
 				}
 			}
 		}
 	}
+
 }

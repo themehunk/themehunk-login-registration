@@ -59,17 +59,17 @@ export const PaddingSettingsPanel = ({
   };
 
   const sides = [
-    { key: 'top', label: __('Top', 'thlogin') },
-    { key: 'right', label: __('Right', 'thlogin') },
-    { key: 'bottom', label: __('Bottom', 'thlogin') },
-    { key: 'left', label: __('Left', 'thlogin') },
+    { key: 'top', label: __('Top', 'th-login') },
+    { key: 'right', label: __('Right', 'th-login') },
+    { key: 'bottom', label: __('Bottom', 'th-login') },
+    { key: 'left', label: __('Left', 'th-login') },
   ];
 
   return (
     <AccordionSection title={title} defaultOpen={false}>
       <div className="components-border-box-control__header">
         <span className="components-border-box-control__label">
-          {__('Padding Settings', 'thlogin')}
+          {__('Padding Settings', 'th-login')}
         </span>
         <Button
           className="components-border-box-control__sync-button"
@@ -77,7 +77,7 @@ export const PaddingSettingsPanel = ({
           icon={syncAll ? 'admin-links' : 'editor-unlink'}
           onClick={toggleSync}
           aria-pressed={syncAll}
-          label={__('Toggle sync', 'thlogin')}
+          label={__('Toggle sync', 'th-login')}
           showTooltip
         />
       </div>

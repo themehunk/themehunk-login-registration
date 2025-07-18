@@ -54,8 +54,8 @@ class THLogin_Menu_Integration {
 			return $items;
 		}
 
-		$login_text    = $menu_integration_settings['item_text_login'] ?? esc_html__( 'Login', 'thlogin' );
-		$register_text = $menu_integration_settings['item_text_register'] ?? esc_html__( 'Register', 'thlogin' );
+		$login_text    = $menu_integration_settings['item_text_login'] ?? esc_html__( 'Login', 'th-login' );
+		$register_text = $menu_integration_settings['item_text_register'] ?? esc_html__( 'Register', 'th-login' );
 		$login_icon    = $menu_integration_settings['item_icon_login'] ?? 'dashicons-admin-users';
 		$register_icon = $menu_integration_settings['item_icon_register'] ?? 'dashicons-plus-alt';
 		$hide_login_if_logged_in = $menu_integration_settings['visibility_login_logged_in'] ?? false;
@@ -68,7 +68,7 @@ class THLogin_Menu_Integration {
 		if ( is_user_logged_in() ) {
 			// Add Logout link.
 			$logout_url = wp_logout_url( home_url() ); // Redirect to home after logout.
-			$logout_text = esc_html__( 'Logout', 'thlogin' );
+			$logout_text = esc_html__( 'Logout', 'th-login' );
 			$logout_icon = 'dashicons-admin-users'; // Default icon for logout.
 
 			$logout_link_html = '<li class="menu-item thlogin-menu-item thlogin-menu-item--logout">';

@@ -59,6 +59,12 @@ class THLogin_REST_API {
 						'validate_callback' => array( $this, 'validate_display_triggers_settings' ),
 						'required'          => false,
 					),
+					'integration' => array(
+						'type'              => 'object',
+						'sanitize_callback' => array( $this, 'sanitize_integration_settings' ),
+						'validate_callback' => array( $this, 'validate_integration_settings' ),
+						'required'          => false,
+					),
 					'security' => array(
 						'type'              => 'object',
 						'sanitize_callback' => array( $this, 'sanitize_security_settings' ),
@@ -215,6 +221,7 @@ class THLogin_REST_API {
 		$form_fields_settings_data      = $request->get_param( 'form_fields' );
 		$display_triggers_settings_data = $request->get_param( 'display_triggers' );
 		$security_settings_data         = $request->get_param( 'security' );
+		$integration_settings_data      = $request->get_param( 'integration' );
 
 		// 1. Save General Settings
 		if ( null !== $general_settings_data ) {
@@ -309,6 +316,22 @@ class THLogin_REST_API {
 			update_option( 'thlogin_security_settings', json_encode( $sanitized_security ) );
 		}
 
+		// 6. Save Integration Settings
+		if ( null !== $integration_settings_data ) {
+	
+			$sanitized_integration  = $this->sanitize_integration_settings( $integration_settings_data );
+			$validation_integration = $this->validate_integration_settings( $sanitized_integration );
+
+			if ( is_wp_error( $validation_integration ) ) {
+				return new WP_REST_Response(
+					array( 'success' => false, 'message' => $validation_integration->get_error_message() ),
+					400
+				);
+			}
+
+			update_option( 'thlogin_integration_settings', json_encode( $sanitized_integration ) );
+		}
+
 		// ✅ Final updated settings response
 		$updated_settings = array(
 			'general'          => $this->safe_json_option( 'thlogin_general_settings' ),
@@ -316,12 +339,13 @@ class THLogin_REST_API {
 			'form_fields'      => $this->safe_json_option( 'thlogin_form_fields_settings' ),
 			'display_triggers' => $this->safe_json_option( 'thlogin_display_triggers_settings' ),
 			'security'         => $this->safe_json_option( 'thlogin_security_settings' ),
+			'integration'      => $this->safe_json_option( 'thlogin_integration_settings' ),
 		);
 
 		return new WP_REST_Response(
 			array(
 				'success'  => true,
-				'message'  => esc_html__( 'Settings saved successfully!', 'thlogin' ),
+				'message'  => esc_html__( 'Settings saved successfully!', 'th-login' ),
 				'settings' => $updated_settings,
 			),
 			200
@@ -373,7 +397,7 @@ class THLogin_REST_API {
 			}
 
 			if ( empty( trim( $error_message ) ) ) {
-				$error_message = __( 'Username and password are required.', 'thlogin' );
+				$error_message = __( 'Username and password are required.', 'th-login' );
 			}
 
 			return new WP_REST_Response( [
@@ -409,7 +433,8 @@ class THLogin_REST_API {
 			$label    = $field['label'] ?? ucfirst( $name );
 			$value    = sanitize_text_field( $params[ $name ] ?? '' );
 			$existing = get_user_meta( $user_id, $name, true );
-			$error    = $field['error_message'] ?? sprintf( __( '%s is required.', 'thlogin' ), $label );
+			/* translators: %s: The form type (login/register) to be displayed in the link text */
+			$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'th-login' ), $label );
 
 			if ( ! empty( $field['required'] ) && $value === '' ) {
 				return new WP_REST_Response( [
@@ -421,7 +446,8 @@ class THLogin_REST_API {
 			if ( $existing && $value && $existing !== $value ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => sprintf( __( 'Invalid value for %s.', 'thlogin' ), $label ) ],
+					/* translators: %s: The form type (login/register) to be displayed in the link text */
+					'data' => [ 'message' => sprintf( __( 'Invalid value for %s.', 'th-login' ), $label ) ],
 				], 403 );
 			}
 
@@ -459,7 +485,7 @@ class THLogin_REST_API {
 		return new WP_REST_Response( [
 			'success' => true,
 			'data'    => [
-				'message'      => __( 'Login successful!', 'thlogin' ),
+				'message'      => __( 'Login successful!', 'th-login' ),
 				'redirect_url' => $redirect_url,
 			],
 		], 200 );
@@ -470,6 +496,7 @@ class THLogin_REST_API {
 		$register_fields   = $form_fields['register'] ?? [];
 		$general_settings  = $this->safe_json_option( 'thlogin_general_settings' );
 		$security_settings = $this->safe_json_option( 'thlogin_security_settings' );
+		$integration_settings = $this->safe_json_option( 'thlogin_integration_settings' );
 
 		$username         = '';
 		$email            = '';
@@ -505,24 +532,25 @@ class THLogin_REST_API {
 			$value = sanitize_text_field( $request->get_param( $name ) );
 
 			if ( empty( $value ) ) {
-				$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'thlogin' ), ucfirst( str_replace('_', ' ', $field_id) ) );
+				/* translators: %s: The form type (login/register) to be displayed in the link text */
+				$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'th-login' ), ucfirst( str_replace('_', ' ', $field_id) ) );
 				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $error ] ], 400 );
 			}
 		}
 
 		if ( ! is_email( $email ) ) {
-			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Invalid email address.', 'thlogin' ) ] ], 400 );
+			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Invalid email address.', 'th-login' ) ] ], 400 );
 		}
 		if ( username_exists( $username ) ) {
-			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This username is already taken.', 'thlogin' ) ] ], 409 );
+			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This username is already taken.', 'th-login' ) ] ], 409 );
 		}
 		if ( email_exists( $email ) ) {
-			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This email is already registered.', 'thlogin' ) ] ], 409 );
+			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This email is already registered.', 'th-login' ) ] ], 409 );
 		}
 		if ( $password !== $confirm_password ) {
 			$field = array_filter( $register_fields, fn( $f ) => $f['id'] === 'confirm_password' );
 			$field = reset( $field );
-			$msg   = $field['error_message'] ?? __( 'Passwords do not match.', 'thlogin' );
+			$msg   = $field['error_message'] ?? __( 'Passwords do not match.', 'th-login' );
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $msg ] ], 400 );
 		}
 
@@ -543,31 +571,33 @@ class THLogin_REST_API {
 			if ( $min && strlen( $password ) < $min ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => sprintf( __( 'Password must be at least %d characters.', 'thlogin' ), $min ) ]
+					/* translators: %d: The form type (login/register) to be displayed in the link text */
+					'data'    => [ 'message' => sprintf( __( 'Password must be at least %d characters.', 'th-login' ), $min ) ]
 				], 400 );
 			}
 			if ( $max && strlen( $password ) > $max ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => sprintf( __( 'Password must not exceed %d characters.', 'thlogin' ), $max ) ]
+					/* translators: %d: The form type (login/register) to be displayed in the link text */
+					'data'    => [ 'message' => sprintf( __( 'Password must not exceed %d characters.', 'th-login' ), $max ) ]
 				], 400 );
 			}
 			if ( ! empty( $check['text'] ) && ! preg_match( '/[A-Za-z]/', $password ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => __( 'Password must contain at least one letter.', 'thlogin' ) ]
+					'data'    => [ 'message' => __( 'Password must contain at least one letter.', 'th-login' ) ]
 				], 400 );
 			}
 			if ( ! empty( $check['number'] ) && ! preg_match( '/\d/', $password ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => __( 'Password must contain at least one number.', 'thlogin' ) ]
+					'data'    => [ 'message' => __( 'Password must contain at least one number.', 'th-login' ) ]
 				], 400 );
 			}
 			if ( ! empty( $check['special_charcter'] ) && ! preg_match( '/[\W_]/', $password ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => __( 'Password must contain at least one special character.', 'thlogin' ) ]
+					'data'    => [ 'message' => __( 'Password must contain at least one special character.', 'th-login' ) ]
 				], 400 );
 			}
 		}
@@ -579,7 +609,7 @@ class THLogin_REST_API {
 				if ( ! $checked ) {
 					return new WP_REST_Response( [
 						'success' => false,
-						'data'    => [ 'message' => $field['error_message'] ?? __( 'You must agree to the Terms & Conditions.', 'thlogin' ) ]
+						'data'    => [ 'message' => $field['error_message'] ?? __( 'You must agree to the Terms & Conditions.', 'th-login' ) ]
 					], 400 );
 				}
 				break;
@@ -590,7 +620,7 @@ class THLogin_REST_API {
 		if ( $security_settings['honeypot_enabled'] ?? true ) {
 			foreach ( $request->get_params() as $key => $val ) {
 				if ( strpos( $key, 'th_login_hp_' ) === 0 && ! empty( $val ) ) {
-					return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Spam detected.', 'thlogin' ) ] ], 403 );
+					return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Spam detected.', 'th-login' ) ] ], 403 );
 				}
 			}
 		}
@@ -621,7 +651,8 @@ class THLogin_REST_API {
 			}
 
 			if ( ( $field['required'] ?? false ) && empty( $value ) ) {
-				$msg = $field['error_message'] ?? sprintf( __( '%s is required.', 'thlogin' ), $field['label'] ?? ucfirst( $field_name ) );
+				/* translators: %s: The form type (login/register) to be displayed in the link text */
+				$msg = $field['error_message'] ?? sprintf( __( '%s is required.', 'th-login' ), $field['label'] ?? ucfirst( $field_name ) );
 				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $msg ] ], 400 );
 			}
 
@@ -642,18 +673,18 @@ class THLogin_REST_API {
 			update_user_meta( $user_id, 'th_login_email_verified', false );
 
 			$link    = add_query_arg( [ 'th_login_verify_email' => $key, 'user_id' => $user_id ], home_url() );
-			$subject = $general_settings['email_verification']['email_subject'] ?? __( 'Verify your email', 'thlogin' );
+			$subject = $general_settings['email_verification']['email_subject'] ?? __( 'Verify your email', 'th-login' );
 			$content = str_replace( '{verification_link}', esc_url( $link ), $general_settings['email_verification']['email_content'] ?? 'Click to verify: {verification_link}' );
 
 			wp_mail( $email, $subject, $content );
 
-			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please verify your email.', 'thlogin' ) ] ], 200 );
+			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please verify your email.', 'th-login' ) ] ], 200 );
 		}
 
 		// Manual approval
 		if ( $general_settings['manual_user_approval']['enabled'] ?? false ) {
 			update_user_meta( $user_id, 'th_login_pending_approval', true );
-			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Awaiting admin approval.', 'thlogin' ) ] ], 200 );
+			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Awaiting admin approval.', 'th-login' ) ] ], 200 );
 		}
 
 		// Auto-login
@@ -678,11 +709,11 @@ class THLogin_REST_API {
 				}
 			}
 
-			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! You are now logged in.', 'thlogin' ), 'redirect_url' => $url ] ], 200 );
+			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! You are now logged in.', 'th-login' ), 'redirect_url' => $url ] ], 200 );
 		}
 
 		// Default
-		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'thlogin' ), 'redirect_url' => home_url( '/?th_login_action=login' ) ] ], 200 );
+		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'th-login' ), 'redirect_url' => home_url( '/?th_login_action=login' ) ] ], 200 );
 	}
 
 	public function handle_frontend_forgot_password( WP_REST_Request $request ) {
@@ -716,7 +747,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [
 				'success' => false,
 				'data'    => [
-					'message' => $field_error_message ?: __( 'Please enter your username or email address.', 'thlogin' ),
+					'message' => $field_error_message ?: __( 'Please enter your username or email address.', 'th-login' ),
 				],
 			], 400 );
 		}
@@ -732,7 +763,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [
 				'success' => false,
 				'data'    => [
-					'message' => __( 'Invalid username or email address.', 'thlogin' ),
+					'message' => __( 'Invalid username or email address.', 'th-login' ),
 				],
 			], 404 );
 		}
@@ -755,17 +786,20 @@ class THLogin_REST_API {
 		);
 
 		// Email content
+		/* translators: 1: User's login name, 2: Password reset link */
 		$message = sprintf(
 			esc_html__(
+					/* translators: 1: User's login name, 2: Password reset link */
 				'Someone has requested a password reset for the following account: %1$s. If this was a mistake, just ignore this email. To reset your password, visit the following address: %2$s',
-				'thlogin'
+				'th-login'
 			),
 			$user->user_login,
 			$reset_link
 		);
 
 		$title = sprintf(
-			esc_html__( '[%s] Password Reset', 'thlogin' ),
+			/* translators: %s: The form type (login/register) to be displayed in the link text */
+			esc_html__( '[%s] Password Reset', 'th-login' ),
 			wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES )
 		);
 
@@ -776,7 +810,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [
 				'success' => false,
 				'data'    => [
-					'message' => __( 'The email could not be sent. Possible reason: your host may have disabled the mail function.', 'thlogin' ),
+					'message' => __( 'The email could not be sent. Possible reason: your host may have disabled the mail function.', 'th-login' ),
 				],
 			], 500 );
 		}
@@ -784,7 +818,7 @@ class THLogin_REST_API {
 		return new WP_REST_Response( [
 			'success' => true,
 			'data'    => [
-				'message' => __( 'A password reset link has been sent to your email address.', 'thlogin' ),
+				'message' => __( 'A password reset link has been sent to your email address.', 'th-login' ),
 			],
 		], 200 );
 	}
@@ -795,6 +829,7 @@ class THLogin_REST_API {
 			'design'           => $this->safe_json_option( 'thlogin_design_settings' ),
 			'form_fields'      => $this->safe_json_option( 'thlogin_form_fields_settings' ),
 			'display_triggers' => $this->safe_json_option( 'thlogin_display_triggers_settings' ),
+			'integration'      => $this->safe_json_option( 'thlogin_integration_settings' ),
 			'security'         => $this->safe_json_option( 'thlogin_security_settings' ),
 		);
 
@@ -802,22 +837,16 @@ class THLogin_REST_API {
 	}
 
 	public function reset_settings( WP_REST_Request $request ) {
-		// Get default settings from the main plugin file's activation hook.
-		// We need to call the activation logic without actually deactivating/reactivating.
-		// This requires accessing the default settings directly or re-running the setup.
-		// For simplicity, we'll re-run the default option setup.
-		require_once THLOGIN_PATH . 'thlogin.php'; // Ensure the file with th_login_activate is loaded.
 
-		// Call the function that sets default options.
-		// Assuming th_login_activate contains the logic to add/update default options.
-		// If it's not a standalone function, you might need to refactor it.
-		// Let's assume a helper function `thlogin_set_default_options()` exists or create one.
+		require_once THLOGIN_PATH . 'thlogin.php';
+
 		if ( function_exists( 'thlogin_set_default_options' ) ) {
 			thlogin_set_default_options();
+
 			return new WP_REST_Response(
 				array(
 					'success' => true,
-					'message' => esc_html__( 'All settings have been reset to default.', 'thlogin' ),
+					'message' => esc_html__( 'All settings have been reset to default.', 'th-login' ),
 				),
 				200
 			);
@@ -825,7 +854,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response(
 				array(
 					'success' => false,
-					'message' => esc_html__( 'Reset function not found. Please deactivate and reactivate the plugin to reset.', 'thlogin' ),
+					'message' => esc_html__( 'Reset function not found. Please deactivate and reactivate the plugin to reset.', 'th-login' ),
 				),
 				500
 			);
@@ -871,5 +900,13 @@ class THLogin_REST_API {
 
 	public function validate_security_settings( $settings ) {
 		return $this->sanitizer->validate_security_settings( $settings );
+	}
+
+	public function sanitize_integration_settings( $settings ) {
+		return $this->sanitizer->sanitize_integration_settings( $settings );
+	}
+
+	public function validate_integration_settings( $settings ) {
+		return $this->sanitizer->validate_integration_settings( $settings );
 	}
 }

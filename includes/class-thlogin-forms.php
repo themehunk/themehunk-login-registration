@@ -71,18 +71,18 @@ class THLogin_Forms {
 				case 'email':
 				case 'url':
 				case 'number':
-					echo '<input type="' . esc_attr( $field_type ) . '" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . $required_attr . '>';
+					echo '<input type="' . esc_attr( $field_type ) . '" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . esc_attr( $required_attr ) . '>';
 					break;
 				case 'textarea':
-					echo '<textarea name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . $required_attr . '></textarea>';
+					echo '<textarea name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . esc_attr( $required_attr ) . '></textarea>';
 					break;
 				case 'checkbox':
-					echo '<input type="checkbox" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" value="1" ' . $required_attr . '>';
+					echo '<input type="checkbox" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" value="1" ' . esc_attr( $required_attr ) . '>';
 					break;
 				case 'select':
 					$options = $field['options'] ?? array();
-					echo '<select name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" ' . $required_attr . '>';
-					echo '<option value="">' . esc_html__( 'Select an option', 'thlogin' ) . '</option>';
+					echo '<select name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" ' . esc_attr( $required_attr ) . '>';
+					echo '<option value="">' . esc_html__( 'Select an option', 'th-login' ) . '</option>';
 					foreach ( $options as $option_value ) {
 						echo '<option value="' . esc_attr( $option_value ) . '">' . esc_html( $option_value ) . '</option>';
 					}
@@ -91,7 +91,7 @@ class THLogin_Forms {
 				// Add more field types (e.g., radio, date) as needed.
 				default:
 					// Fallback for unknown types.
-					echo '<input type="text" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . $required_attr . '>';
+					echo '<input type="text" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . esc_attr( $required_attr ) . '>';
 					break;
 			}
 			
@@ -116,6 +116,6 @@ class THLogin_Forms {
 		//     return $this->handle_login_logic( $data );
 		// }
 		// ...
-		return array( 'success' => false, 'message' => esc_html__( 'Form processing not fully implemented here.', 'thlogin' ) );
+		return array( 'success' => false, 'message' => esc_html__( 'Form processing not fully implemented here.', 'th-login' ) );
 	}
 }

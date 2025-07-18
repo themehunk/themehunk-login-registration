@@ -6,10 +6,10 @@ import { __ } from '@wordpress/i18n';
 // Register the block
 registerBlockType('thlogin/form-block', {
     // Block title (visible in editor)
-    title: __('TH Login Form/Trigger', 'thlogin'),
+    title: __('TH Login Form/Trigger', 'th-login'),
 
     // Block description (visible in editor)
-    description: __('Embed a login, registration, or forgot password form, or a link to trigger the popup.', 'thlogin'),
+    description: __('Embed a login, registration, or forgot password form, or a link to trigger the popup.', 'th-login'),
 
     // Block category (where it appears in the block inserter)
     category: 'widgets', // Common category for utility blocks
@@ -19,11 +19,11 @@ registerBlockType('thlogin/form-block', {
 
     // Keywords to help users find the block
     keywords: [
-        __('login', 'thlogin'),
-        __('register', 'thlogin'),
-        __('form', 'thlogin'),
-        __('popup', 'thlogin'),
-        __('th login', 'thlogin'),
+        __('login', 'th-login'),
+        __('register', 'th-login'),
+        __('form', 'th-login'),
+        __('popup', 'th-login'),
+        __('th login', 'th-login'),
     ],
 
     // Block attributes (defined in PHP as well for server-side rendering)
@@ -49,15 +49,15 @@ registerBlockType('thlogin/form-block', {
 
         // Options for the form type select control
         const formTypeOptions = [
-            { label: __('Login Form', 'thlogin'), value: 'login' },
-            { label: __('Registration Form', 'thlogin'), value: 'register' },
-            { label: __('Forgot Password Form', 'thlogin'), value: 'forgot-password' },
+            { label: __('Login Form', 'th-login'), value: 'login' },
+            { label: __('Registration Form', 'th-login'), value: 'register' },
+            { label: __('Forgot Password Form', 'th-login'), value: 'forgot-password' },
         ];
 
         // Options for display as select control
         const displayAsOptions = [
-            { label: __('Popup Trigger Link', 'thlogin'), value: 'popup' },
-            { label: __('Inline Form', 'thlogin'), value: 'inline' },
+            { label: __('Popup Trigger Link', 'th-login'), value: 'popup' },
+            { label: __('Inline Form', 'th-login'), value: 'inline' },
         ];
 
         // Render the block in the editor
@@ -65,15 +65,15 @@ registerBlockType('thlogin/form-block', {
             <>
                 {/* InspectorControls for block settings in the sidebar */}
                 <InspectorControls>
-                    <PanelBody title={__('Form Settings', 'thlogin')} initialOpen={true}>
+                    <PanelBody title={__('Form Settings', 'th-login')} initialOpen={true}>
                         <SelectControl
-                            label={__('Select Form Type', 'thlogin')}
+                            label={__('Select Form Type', 'th-login')}
                             value={formType}
                             options={formTypeOptions}
                             onChange={(newType) => setAttributes({ formType: newType })}
                         />
                         <SelectControl
-                            label={__('Display As', 'thlogin')}
+                            label={__('Display As', 'th-login')}
                             value={displayAs}
                             options={displayAsOptions}
                             onChange={(newDisplayAs) => setAttributes({ displayAs: newDisplayAs })}
@@ -82,11 +82,11 @@ registerBlockType('thlogin/form-block', {
                             <TextControl
                                 __next40pxDefaultSize = {true}
                                 __nextHasNoMarginBottom={true}
-                                label={__('Link Text', 'thlogin')}
+                                label={__('Link Text', 'th-login')}
                                 value={linkText}
                                 onChange={(newText) => setAttributes({ linkText: newText })}
-                                placeholder={__('e.g., Open Login', 'thlogin')}
-                                help={__('Text for the link that triggers the popup. Leave empty for default.', 'thlogin')}
+                                placeholder={__('e.g., Open Login', 'th-login')}
+                                help={__('Text for the link that triggers the popup. Leave empty for default.', 'th-login')}
                             />
                         )}
                     </PanelBody>
@@ -98,20 +98,20 @@ registerBlockType('thlogin/form-block', {
                         <div className="thlogin-block-preview thlogin-block-preview--popup">
                             <Dashicon icon="external" />
                             <p>
-                                {__('TH Login Popup Trigger:', 'thlogin')}
+                                {__('TH Login Popup Trigger:', 'th-login')}
                                 <strong> {formTypeOptions.find(opt => opt.value === formType)?.label || formType}</strong>
                             </p>
                             {linkText && <p>Link Text: "{linkText}"</p>}
-                            <p className="thlogin-block-note">{__('This will render a link that opens the popup on the frontend.', 'thlogin')}</p>
+                            <p className="thlogin-block-note">{__('This will render a link that opens the popup on the frontend.', 'th-login')}</p>
                         </div>
                     ) : (
                         <div className="thlogin-block-preview thlogin-block-preview--inline">
                             <Dashicon icon="forms" />
                             <p>
-                                {__('TH Login Inline Form:', 'thlogin')}
+                                {__('TH Login Inline Form:', 'th-login')}
                                 <strong> {formTypeOptions.find(opt => opt.value === formType)?.label || formType}</strong>
                             </p>
-                            <p className="thlogin-block-note">{__('This will render the form directly on the page.', 'thlogin')}</p>
+                            <p className="thlogin-block-note">{__('This will render the form directly on the page.', 'th-login')}</p>
                         </div>
                     )}
                 </div>

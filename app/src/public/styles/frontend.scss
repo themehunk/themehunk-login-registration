@@ -72,7 +72,7 @@ body.thlogin-modal-open {
 // Form container within the modal
 .thlogin-popup-form-container {
     position: relative;
-    z-index: 100000; // Above overlay
+    z-index: 100; // Above overlay
     max-width: 500px;
     width: 400px; // Default width
     margin: 20px; // Margin for smaller screens
@@ -321,10 +321,10 @@ body.thlogin-modal-open {
 	margin-bottom: 20px;
 }
 
-
 /* Main page mode layout */
 #thlogin-popup-modal.thlogin-page {
     position: fixed;
+    display:none !important;
     top: 0;
     left: 0;
     width: 100vw;

@@ -105,7 +105,7 @@ const LoginFormHeader = ({ settings }) => {
         {close_button && (
           <button 
             className="thloginpreview-popup-close-button" 
-            aria-label={__('Close', 'thlogin')}
+            aria-label={__('Close', 'th-login')}
             style={applyButtonStyle(cancelStyle)}
           >
             <Dashicon icon="no-alt" />
@@ -121,7 +121,7 @@ const LoginFormHeader = ({ settings }) => {
             data-th-popup-action="login"
             style={applyButtonStyle(buttonStyle)}
           >
-            {__('Login', 'thlogin')}
+            {__('Login', 'th-login')}
           </button>
 
           <button 
@@ -130,7 +130,7 @@ const LoginFormHeader = ({ settings }) => {
             data-th-popup-action="register"
             style={applyButtonStyle(buttonStyle)}
           >
-            {__('Register', 'thlogin')}
+            {__('Register', 'th-login')}
           </button>
         </div>
       )}
@@ -374,6 +374,45 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		{ key: "header", label: __("Header", "thlogin") },
 	];
 
+	const getLoginPreviewUrl = (option) => {
+
+		let finalurl = '';
+
+		if (
+			typeof thlogin_admin_data !== 'undefined' &&
+			settings?.integration?.woocommerce?.enabled &&
+			thlogin_admin_data.woo_enabled &&
+			thlogin_admin_data.myaccount_url
+		) {
+			finalurl = thlogin_admin_data.myaccount_url;
+		} else if (
+			typeof thlogin_admin_data !== 'undefined' &&
+			thlogin_admin_data.thlogin_url &&
+			settings?.general?.display_mode === 'page'
+		) {
+			finalurl = thlogin_admin_data.thlogin_url;
+		}
+
+		if (finalurl && option.key === 'page') {
+			return (
+				<div className="th-login-previre-button">
+					<a
+						style={{textDecoration: 'none', cursor:'pointer'}}
+						href={finalurl}
+						target="_blank"
+
+						rel="noopener noreferrer"
+					>
+
+						<span className="dashicons dashicons-external" ></span>	
+					</a>
+				</div>
+			);
+		}
+
+		return null;
+	};
+
 	return (
 		<div className="settings-card">
 			<h2 className="section-title">
@@ -434,7 +473,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 							<AccordionSection title={__("Field Gap", "thlogin")} defaultOpen={false}>
 								<RangeControl
-									label={__('Gap', 'thlogin')}
+									label={__('Gap', 'th-login')}
 									value={parseInt(settings.design.form.form_gap || 0)}
 									onChange={(value) => handleSettingChange("design", ["form", "form_gap"], parseInt(value))}
 									min={0}
@@ -943,7 +982,11 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 							<div className="layout-label">
 								<Dashicon icon={option.icon} size={16} />
 								<span>{option.label}</span>
+
+								{getLoginPreviewUrl(option)}
+
 							</div>
+
 						</div>
 					))}
 				</div>

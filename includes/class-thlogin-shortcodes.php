@@ -91,8 +91,7 @@ class THLogin_Shortcodes {
 					'thlogin-google-fonts', 
 					esc_url( $google_font_url ), 
 					array(), 
-					null,
-					'async' 
+					THLOGIN_VERSION,
 				);
 			}
 		}

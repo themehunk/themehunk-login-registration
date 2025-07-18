@@ -90,21 +90,34 @@ class THLogin_Frontend {
 		if ( $disable_wp_login && isset( $_SERVER['REQUEST_URI'] ) ) {
 			$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
 
-			if ( strpos( $request_uri, 'wp-login.php' ) !== false || strpos( $request_uri, 'wp-admin' ) !== false ) {
-				$allowed_actions = array( 'logout', 'rp', 'resetpass' );
+			if (strpos($request_uri, 'wp-login.php') !== false || strpos($request_uri, 'wp-admin') !== false) {
+                $allowed_actions = array('logout', 'rp', 'resetpass');
 
-				if ( isset( $_GET['action'] ) && in_array( $_GET['action'], $allowed_actions, true ) ) {
-					return;
-				}
+                // Verify nonce for GET actions
+                if (isset($_GET['action']) && in_array($_GET['action'], $allowed_actions, true)) {
+                    // Add nonce verification for sensitive actions
+                    if ($_GET['action'] === 'resetpass' && isset($_GET['key']) && isset($_GET['login'])) {
+                      if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'reset-password')) {
+                            wp_die(esc_html__('Security check failed', 'th-login'));
+                        }
+                    }
+                    return;
+                }
 
-				if ( is_user_logged_in() ) {
-					wp_safe_redirect( admin_url() );
-					exit;
-				}
+                if (is_user_logged_in()) {
+                    wp_safe_redirect(admin_url());
+                    exit;
+                }
 
-				wp_safe_redirect( add_query_arg( 'th_login_action', 'login', home_url() ) );
-				exit;
-			}
+                // Generate a new nonce for the redirect URL
+                $redirect_url = add_query_arg([
+                    'th_login_action' => 'login',
+                    '_wpnonce' => wp_create_nonce('th-login-redirect')
+                ], home_url());
+                
+                wp_safe_redirect($redirect_url);
+                exit;
+            }
 		}
 	}
 

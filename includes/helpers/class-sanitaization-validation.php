@@ -410,8 +410,8 @@ class TH_Sanitization_validation {
 				}
 
 				if ( in_array( $field_id, $seen_ids, true ) ) {
-					// translators: 1: Field ID, 2: Form name/identifier
 					$error_message = sprintf(
+						/* translators: 1: Field ID, 2: Form name/identifier */
 						esc_html__( 'Duplicate field ID "%1$s" found in %2$s.', 'th-login' ),
 						esc_html( $field_id ),
 						esc_html( $form_key )
@@ -428,17 +428,16 @@ class TH_Sanitization_validation {
 
 				// Required fields must have label
 				if ( ! empty( $field['required'] ) && empty( $label ) ) {
-					/* translators: 1: Field ID, 2: Form name/identifier */
 					$errors->add(
 						'missing_required_label',
 						sprintf( 
+							/* translators: 1: Field ID, 2: Form name/identifier */
 							esc_html__( 'Field "%1$s" in %2$s is required but missing a label.', 'th-login' ),
 							esc_html( $field_id ),
 							esc_html( $form_key )
 						)
 					);
 				}
-
 
 				// Validate password field rules
 				if ( $field_id === 'password' ) {

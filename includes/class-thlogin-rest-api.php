@@ -786,11 +786,10 @@ class THLogin_REST_API {
 		);
 
 		// Email content
-		/* translators: 1: User's login name, 2: Password reset link */
+		
 		$message = sprintf(
-			esc_html__(
-					/* translators: 1: User's login name, 2: Password reset link */
-				'Someone has requested a password reset for the following account: %1$s. If this was a mistake, just ignore this email. To reset your password, visit the following address: %2$s',
+			/* translators: 1: User's login name, 2: Password reset link URL */
+			esc_html__( 'Someone has requested a password reset for the following account: %1$s. If this was a mistake, just ignore this email. To reset your password, visit the following address: %2$s',
 				'th-login'
 			),
 			$user->user_login,

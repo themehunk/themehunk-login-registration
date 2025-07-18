@@ -182,47 +182,61 @@ class THLogin_Security {
 	 * Handles the email verification request when a user clicks the verification link.
 	 */
 	public function handle_email_verification_request() {
-		if ( ! isset( $_GET['th_login_verify_email'] ) || ! isset( $_GET['user_id'] ) ) {
+		if (
+			! isset( $_GET['th_login_verify_email'], $_GET['user_id'], $_GET['_wpnonce'] ) ||
+			! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_verify_email' )
+		) {
 			return;
 		}
 
 		$verification_key = sanitize_text_field( wp_unslash( $_GET['th_login_verify_email'] ) );
-		$user_id = absint( wp_unslash( $_GET['user_id'] ) );
-
-		$user = get_user_by( 'id', $user_id );
+		$user_id          = absint( wp_unslash( $_GET['user_id'] ) );
+		$user             = get_user_by( 'id', $user_id );
 
 		if ( ! $user ) {
-			wp_die( esc_html__( 'Invalid user ID.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
+			wp_die(
+				esc_html__( 'Invalid user ID.', 'th-login' ),
+				esc_html__( 'Verification Error', 'th-login' )
+			);
 		}
 
 		$stored_key = get_user_meta( $user_id, 'th_login_email_verification_key', true );
 
 		if ( empty( $stored_key ) || $stored_key !== $verification_key ) {
-			wp_die( esc_html__( 'Invalid or expired verification link.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
+			wp_die(
+				esc_html__( 'Invalid or expired verification link.', 'th-login' ),
+				esc_html__( 'Verification Error', 'th-login' )
+			);
 		}
 
-		// Mark email as verified.
+		// ✅ Mark email as verified
 		update_user_meta( $user_id, 'th_login_email_verified', true );
-		delete_user_meta( $user_id, 'th_login_email_verification_key' ); // Remove key after use.
+		delete_user_meta( $user_id, 'th_login_email_verification_key' );
 
-		// Handle redirection after verification.
+		// 🔁 Handle redirection
 		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
-		$redirect_type = $general_settings['email_verification']['redirect_after_verification'] ?? 'login_form';
-		$redirect_url = home_url(); // Default fallback.
+		$redirect_type    = $general_settings['email_verification']['redirect_after_verification'] ?? 'login_form';
+		$redirect_url     = home_url(); // Default fallback
 
-		if ( 'dashboard' === $redirect_type ) {
-			$redirect_url = admin_url();
-		} elseif ( 'home_page' === $redirect_type ) {
-			$redirect_url = home_url();
-		} elseif ( 'custom_url' === $redirect_type && ! empty( $general_settings['email_verification']['custom_redirect_url'] ) ) {
-			$redirect_url = esc_url_raw( $general_settings['email_verification']['custom_redirect_url'] );
-		} elseif ( 'login_form' === $redirect_type ) {
-			// Redirect to a page with the login modal.
-			// For now, we'll redirect to home page with a success message parameter.
-			$redirect_url = add_query_arg( 'th_login_verified', 'true', home_url() );
+		switch ( $redirect_type ) {
+			case 'dashboard':
+				$redirect_url = admin_url();
+				break;
+			case 'custom_url':
+				if ( ! empty( $general_settings['email_verification']['custom_redirect_url'] ) ) {
+					$redirect_url = esc_url_raw( $general_settings['email_verification']['custom_redirect_url'] );
+				}
+				break;
+			case 'login_form':
+				$redirect_url = add_query_arg( 'th_login_verified', 'true', home_url() );
+				break;
+			case 'home_page':
+			default:
+				$redirect_url = home_url();
+				break;
 		}
 
-		// Auto-login if enabled and no manual approval needed.
+		// 🔐 Auto-login if no manual approval is enabled
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 		if ( ! $manual_user_approval_enabled ) {
 			wp_set_current_user( $user_id );
@@ -381,7 +395,9 @@ class THLogin_Security {
 				$user = get_user_by( 'id', $user_id );
 				if ( $user ) {
 					$subject = esc_html__( 'Your account has been approved!', 'th-login' );
+					
 					$message = sprintf(
+						/* translators: 1: Field ID, 2: Form name/identifier */
 						esc_html__( 'Hello %1$s, your account on %2$s has been approved. You can now log in.', 'th-login' ),
 						$user->user_login,
 						get_bloginfo( 'name' )

@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get references to the main modal elements.
-    const modal = document.getElementById('th-login-popup-modal');
-    const closeButton = modal ? modal.querySelector('.th-login-popup-close-button') : null;
-    const overlay = modal ? modal.querySelector('.th-login-popup-overlay') : null;
-    const formContainer = modal ? modal.querySelector('.th-login-popup-form-container') : null;
+    const modal = document.getElementById('thlogin-popup-modal');
+    const closeButton = modal ? modal.querySelector('.thlogin-popup-close-button') : null;
+    const overlay = modal ? modal.querySelector('.thlogin-popup-overlay') : null;
+    const formContainer = modal ? modal.querySelector('.thlogin-popup-form-container') : null;
 
     // Get references to all form types within the modal.
     const loginForm = modal ? modal.querySelector('[data-form-type="login"]') : null;
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal) return;
 
         // Apply animations (CSS classes will handle actual animation).
-        modal.classList.remove('th-login-popup-modal--closing');
-        modal.classList.add('th-login-popup-modal--opening');
+        modal.classList.remove('thlogin-popup-modal--closing');
+        modal.classList.add('thlogin-popup-modal--opening');
         modal.style.display = 'flex'; // Use flex to center content.
         modal.setAttribute('aria-hidden', 'false');
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add a class after a short delay to trigger CSS transitions for content.
         setTimeout(() => {
-            modal.classList.add('th-login-popup-modal--active');
+            modal.classList.add('thlogin-popup-modal--active');
         }, 50); // Small delay to allow 'display: flex' to apply before transition.
 
         // Record that the popup was shown for frequency control.
@@ -54,15 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = () => {
         if (!modal) return;
 
-        modal.classList.remove('th-login-popup-modal--opening');
-        modal.classList.add('th-login-popup-modal--closing');
+        modal.classList.remove('thlogin-popup-modal--opening');
+        modal.classList.add('thlogin-popup-modal--closing');
         modal.setAttribute('aria-hidden', 'true');
 
         // Listen for animation end to hide completely.
         modal.addEventListener('animationend', function handler() {
-            if (modal.classList.contains('th-login-popup-modal--closing')) {
+            if (modal.classList.contains('thlogin-popup-modal--closing')) {
                 modal.style.display = 'none';
-                modal.classList.remove('th-login-popup-modal--active', 'th-login-popup-modal--closing');
+                modal.classList.remove('thlogin-popup-modal--active', 'thlogin-popup-modal--closing');
             }
             modal.removeEventListener('animationend', handler);
         });
@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (form) {
                 // For forms within the main modal, hide/show.
                 // For shortcode-embedded forms, they manage their own display.
-                if (form.closest('#th-login-popup-modal')) { // Check if form is inside the modal
+                if (form.closest('#thlogin-popup-modal')) { // Check if form is inside the modal
                     if (form.dataset.formType === type) {
                         form.style.display = 'block'; // Or 'flex' if using flexbox for internal form layout
-                        form.classList.add('th-login-form--active');
+                        form.classList.add('thlogin-form--active');
                     } else {
                         form.style.display = 'none';
-                        form.classList.remove('th-login-form--active');
+                        form.classList.remove('thlogin-form--active');
                     }
                 }
             }
@@ -102,9 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {string} type 'success' or 'error'.
      */
     const showMessage = (formElement, message, type) => {
-        const messagesContainer = formElement.querySelector('.th-login-messages');
+        const messagesContainer = formElement.querySelector('.thlogin-messages');
         if (messagesContainer) {
-            messagesContainer.innerHTML = `<p class="th-login-message th-login-message--${type}">${message}</p>`;
+            messagesContainer.innerHTML = `<p class="thlogin-message thlogin-message--${type}">${message}</p>`;
             messagesContainer.style.display = 'block';
             // Clear message after a few seconds.
             setTimeout(() => {
@@ -226,13 +226,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- REST API Form Submission Handling ---
 
     // Target both modal forms and shortcode forms.
-    document.querySelectorAll('.th-login-ajax-form').forEach(form => {
+    document.querySelectorAll('.thlogin-ajax-form').forEach(form => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); // Prevent default form submission.
 
             const formType = form.dataset.formType; // 'login', 'register', 'forgot-password'
             const formData = new FormData(form);
-            const messagesContainer = form.querySelector('.th-login-messages');
+            const messagesContainer = form.querySelector('.thlogin-messages');
             messagesContainer.innerHTML = ''; // Clear previous messages.
             messagesContainer.style.display = 'none';
 
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Determine the REST API endpoint based on form type.
-            const endpoint = `${thLoginFrontendData.siteUrl}/wp-json/th-login/v1/${formType}`;
+            const endpoint = `${thLoginFrontendData.siteUrl}/wp-json/thlogin/v1/${formType}`;
 
             try {
                 // Simulate loading state.
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitButton.disabled = true;
                     // Store original button text to restore later.
                     submitButton.dataset.originalText = submitButton.innerHTML;
-                    submitButton.innerHTML = `<span class="th-login-spinner"></span> ${thLoginFrontendData.settings.design.buttons.primary.text_saving || 'Processing...'}`;
+                    submitButton.innerHTML = `<span class="thlogin-spinner"></span> ${thLoginFrontendData.settings.design.buttons.primary.text_saving || 'Processing...'}`;
                 }
 
                 const response = await fetch(endpoint, {
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // For forgot password, just show success message and keep modal open for user to read.
                     } else {
                         // For other successful submissions without redirect, just close the modal if it's the popup.
-                        if (form.closest('#th-login-popup-modal')) {
+                        if (form.closest('#thlogin-popup-modal')) {
                             setTimeout(closeModal, 1000);
                         }
                     }
@@ -394,8 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
     checkAndAutoOpenModal();
 
     // Ensure shortcode-embedded forms are visible by default.
-    document.querySelectorAll('.th-login-shortcode-form-wrapper .th-login-form').forEach(form => {
+    document.querySelectorAll('.thlogin-shortcode-form-wrapper .thlogin-form').forEach(form => {
         form.style.display = 'block';
-        form.classList.add('th-login-form--active'); // Mark as active if embedded directly.
+        form.classList.add('thlogin-form--active'); // Mark as active if embedded directly.
     });
 });

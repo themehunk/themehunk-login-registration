@@ -8,11 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Handles core form processing logic for TH Login (login, registration, password reset)
  * and rendering of dynamic form fields.
  */
-class TH_Login_Forms {
+class THLogin_Forms {
 
-	/**
-	 * Constructor.
-	 */
 	public function __construct() {
 		// No direct actions hooked here yet, as this class will primarily provide
 		// methods called by templates or AJAX handlers.
@@ -42,7 +39,7 @@ class TH_Login_Forms {
 	 * Renders custom registration fields.
 	 */
 	public function render_custom_registration_fields() {
-		$form_fields_settings = $this->safe_json_option( 'th_login_form_fields_settings' );
+		$form_fields_settings = $this->safe_json_option( 'thlogin_form_fields_settings' );
 		$custom_fields = $form_fields_settings['register']['custom_fields'] ?? array();
 
 		if ( empty( $custom_fields ) || ! is_array( $custom_fields ) ) {
@@ -62,10 +59,10 @@ class TH_Login_Forms {
 
 			$required_attr = $is_required ? 'required' : '';
 
-			echo '<p class="th-login-form-field th-login-custom-field th-login-custom-field--' . esc_attr( $field_type ) . '">';
+			echo '<p class="thlogin-form-field thlogin-custom-field thlogin-custom-field--' . esc_attr( $field_type ) . '">';
 			echo '<label for="th-register-custom-' . esc_attr( $field_id ) . '">' . esc_html( $field_label );
 			if ( $is_required ) {
-				echo ' <span class="th-login-required-asterisk">*</span>';
+				echo ' <span class="thlogin-required-asterisk">*</span>';
 			}
 			echo '</label>';
 
@@ -74,17 +71,17 @@ class TH_Login_Forms {
 				case 'email':
 				case 'url':
 				case 'number':
-					echo '<input type="' . esc_attr( $field_type ) . '" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . $required_attr . '>';
+					echo '<input type="' . esc_attr( $field_type ) . '" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . esc_attr( $required_attr ) . '>';
 					break;
 				case 'textarea':
-					echo '<textarea name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . $required_attr . '></textarea>';
+					echo '<textarea name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . esc_attr( $required_attr ) . '></textarea>';
 					break;
 				case 'checkbox':
-					echo '<input type="checkbox" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" value="1" ' . $required_attr . '>';
+					echo '<input type="checkbox" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" value="1" ' . esc_attr( $required_attr ) . '>';
 					break;
 				case 'select':
 					$options = $field['options'] ?? array();
-					echo '<select name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" ' . $required_attr . '>';
+					echo '<select name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" ' . esc_attr( $required_attr ) . '>';
 					echo '<option value="">' . esc_html__( 'Select an option', 'th-login' ) . '</option>';
 					foreach ( $options as $option_value ) {
 						echo '<option value="' . esc_attr( $option_value ) . '">' . esc_html( $option_value ) . '</option>';
@@ -94,7 +91,7 @@ class TH_Login_Forms {
 				// Add more field types (e.g., radio, date) as needed.
 				default:
 					// Fallback for unknown types.
-					echo '<input type="text" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . $required_attr . '>';
+					echo '<input type="text" name="' . esc_attr( $field_id ) . '" id="th-register-custom-' . esc_attr( $field_id ) . '" placeholder="' . esc_attr( $field_placeholder ) . '" ' . esc_attr( $required_attr ) . '>';
 					break;
 			}
 			

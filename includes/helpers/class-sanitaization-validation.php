@@ -8,8 +8,10 @@ class TH_Sanitization_validation {
     public function sanitize_general_settings( $settings ) {
 		$sanitized = array();
 		$sanitized['plugin_status']             = sanitize_text_field( $settings['plugin_status'] ?? 'enabled' );
+		$sanitized['replace_wordpress'] = rest_sanitize_boolean( $settings['replace_wordpress'] ?? true );
+		
 		$sanitized['form_type']             = sanitize_text_field( $settings['form_type'] ?? 'double' );
-		$sanitized['display_mode']             = sanitize_text_field( $settings['display_mode'] ?? 'popup' );
+		$sanitized['display_mode']             = sanitize_text_field( $settings['display_mode'] ?? 'page' );
 		$sanitized['default_register_role']             = sanitize_text_field( $settings['default_register_role'] ?? 'subscriber' );
 
 		$sanitized['auto_login_after_registration'] = rest_sanitize_boolean( $settings['auto_login_after_registration'] ?? false );
@@ -47,8 +49,6 @@ class TH_Sanitization_validation {
 		if ( ! in_array( $settings['plugin_status'], array( 'enabled', 'disabled' ), true ) ) {
 			$errors->add( 'invalid_plugin_status', esc_html__( 'Invalid plugin status.', 'th-login' ) );
 		}
-
-		// Add more specific validations as needed.
 
 		return $errors->has_errors() ? $errors : true;
 	}
@@ -196,6 +196,7 @@ class TH_Sanitization_validation {
 		foreach ( [ 'modal', 'form' ] as $section ) {
 			$type = $settings[ $section ][ "{$section}_background" ]['type'] ?? 'color';
 			if ( ! in_array( $type, $valid_types, true ) ) {
+				/* translators: %s: The form type (login/register) to be displayed in the link text */
 				$errors->add( "invalid_{$section}_background_type", sprintf( esc_html__( 'Invalid %s background type.', 'th-login' ), $section ) );
 			}
 		}
@@ -213,6 +214,7 @@ class TH_Sanitization_validation {
 				if ( isset( $radius[ $corner ] ) && intval( $radius[ $corner ] ) < 0 ) {
 					$errors->add(
 						"inappropriate_{$key}_{$corner}",
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
 						sprintf( esc_html__( '%s radius value must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
@@ -232,6 +234,7 @@ class TH_Sanitization_validation {
 				if ( isset( $padding[ $side ] ) && intval( $padding[ $side ] ) < 0 ) {
 					$errors->add(
 						"invalid_{$key}_{$side}",
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
 						sprintf( esc_html__( '%s padding must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
@@ -262,6 +265,7 @@ class TH_Sanitization_validation {
 			if ( $font_size && ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%)$/', $font_size ) ) {
 				$errors->add(
 					'invalid_' . strtolower( $key ) . '_font_size',
+					/* translators: %s: The form type (login/register) to be displayed in the link text */
 					sprintf( esc_html__( '%s font size must be a valid CSS size (e.g., 14px, 1.2em).', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
@@ -298,6 +302,7 @@ class TH_Sanitization_validation {
 			if ( $color && ! preg_match( $valid_color_regex, $color ) ) {
 				$errors->add(
 					'invalid_' . $key,
+					/* translators: %s: The form type (login/register) to be displayed in the link text */
 					sprintf( esc_html__( '%s must be a valid hex color.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
@@ -398,17 +403,26 @@ class TH_Sanitization_validation {
 				if ( empty( $field_id ) ) {
 					$errors->add(
 						'missing_field_id',
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
 						sprintf( esc_html__( 'A field in "%s" is missing an ID.', 'th-login' ), $form_key )
 					);
 					continue;
 				}
 
 				if ( in_array( $field_id, $seen_ids, true ) ) {
+					$error_message = sprintf(
+						/* translators: 1: Field ID, 2: Form name/identifier */
+						esc_html__( 'Duplicate field ID "%1$s" found in %2$s.', 'th-login' ),
+						esc_html( $field_id ),
+						esc_html( $form_key )
+					);
+					
 					$errors->add(
 						'duplicate_field_id',
-						sprintf( esc_html__( 'Duplicate field ID "%s" found in %s.', 'th-login' ), esc_html( $field_id ), $form_key )
+						$error_message
 					);
 				}
+
 
 				$seen_ids[] = $field_id;
 
@@ -416,7 +430,12 @@ class TH_Sanitization_validation {
 				if ( ! empty( $field['required'] ) && empty( $label ) ) {
 					$errors->add(
 						'missing_required_label',
-						sprintf( esc_html__( 'Field "%s" in %s is required but missing a label.', 'th-login' ), esc_html( $field_id ), $form_key )
+						sprintf( 
+							/* translators: 1: Field ID, 2: Form name/identifier */
+							esc_html__( 'Field "%1$s" in %2$s is required but missing a label.', 'th-login' ),
+							esc_html( $field_id ),
+							esc_html( $form_key )
+						)
 					);
 				}
 
@@ -463,7 +482,7 @@ class TH_Sanitization_validation {
 	public function sanitize_display_triggers_settings( $settings ) {
 		$sanitized = array();
 
-		$sanitized['trigger_css_class'] = sanitize_html_class( $settings['trigger_css_class'] ?? 'th-login-trigger' );
+		$sanitized['trigger_css_class'] = sanitize_html_class( $settings['trigger_css_class'] ?? 'thlogin-trigger' );
 
 		// Auto open on load.
 		$sanitized['auto_open_on_load']['enabled'] = rest_sanitize_boolean( $settings['auto_open_on_load']['enabled'] ?? true );
@@ -537,6 +556,40 @@ class TH_Sanitization_validation {
 		}
 
 		return $errors->has_errors() ? $errors : true;
+	}
+
+	public function sanitize_integration_settings( $settings ) {
+		$woocommerce = $settings['woocommerce'] ?? [];
+
+		return array(
+			'woocommerce' => array(
+				'enabled' => ! empty( $woocommerce['enabled'] ),
+			),
+		);
+	}
+
+	public function validate_integration_settings( $settings ) {
+		if ( ! is_array( $settings ) ) {
+			return new WP_Error( 'invalid_data', __( 'Integration settings must be an array.', 'th-login' ) );
+		}
+
+		if ( isset( $settings['woocommerce'] ) && is_array( $settings['woocommerce'] ) ) {
+			$allowed_woo_keys = [ 'enabled' ]; // Only allow the keys you're using
+
+			foreach ( $settings['woocommerce'] as $key => $val ) {
+				if ( ! in_array( $key, $allowed_woo_keys, true ) ) {
+					return new WP_Error(
+						'invalid_key',
+						/* translators: %s: The form type (login/register) to be displayed in the link text */
+						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'th-login' ), $key )
+					);
+				}
+			}
+		} else {
+			return new WP_Error( 'missing_woocommerce', __( 'WooCommerce integration settings missing or invalid.', 'th-login' ) );
+		}
+
+		return true;
 	}
 
 	public function sanitize_security_settings( $settings ) {

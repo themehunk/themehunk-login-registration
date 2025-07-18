@@ -39,7 +39,7 @@ if ( ! function_exists( 'th_login_get_icon_svg' ) ) {
 		static $icons;
 
 		if ( ! $icons ) {
-			$icons = require TH_LOGIN_PATH . 'includes/helpers/icons.php';
+			$icons = require THLOGIN_PATH . 'includes/helpers/icons.php';
 		}
 
 		return isset( $icons[ $icon_name ] ) ? $icons[ $icon_name ] : '';

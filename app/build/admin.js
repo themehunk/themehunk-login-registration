@@ -20599,6 +20599,7 @@ var App = function App() {
       design: _contant__WEBPACK_IMPORTED_MODULE_12__.design,
       form_fields: _contant__WEBPACK_IMPORTED_MODULE_12__.form_fields,
       display_triggers: _contant__WEBPACK_IMPORTED_MODULE_12__.display_triggers,
+      integration: _contant__WEBPACK_IMPORTED_MODULE_12__.integration,
       security: _contant__WEBPACK_IMPORTED_MODULE_12__.security
     }),
     _useState2 = _slicedToArray(_useState, 2),
@@ -20645,7 +20646,7 @@ var App = function App() {
               _context.p = 0;
               _context.n = 1;
               return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-                path: "th-login/v1/settings",
+                path: "thlogin/v1/settings",
                 method: "POST",
                 data: {
                   action: "fetch_settings"
@@ -20663,7 +20664,7 @@ var App = function App() {
               } else {
                 setMessage({
                   type: "error",
-                  text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "th-login")
+                  text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "thlogin")
                 });
               }
               _context.n = 3;
@@ -20674,7 +20675,7 @@ var App = function App() {
               console.error("Error fetching settings:", _t);
               setMessage({
                 type: "error",
-                text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "th-login")
+                text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "thlogin")
               });
             case 3:
               _context.p = 3;
@@ -20739,7 +20740,7 @@ var App = function App() {
             _context2.p = 1;
             _context2.n = 2;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-              path: "th-login/v1/settings",
+              path: "thlogin/v1/settings",
               method: "POST",
               data: settings
             });
@@ -20762,7 +20763,7 @@ var App = function App() {
             } else {
               setMessage({
                 type: "error",
-                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to save settings.", "th-login")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to save settings.", "thlogin")
               });
             }
             _context2.n = 4;
@@ -20772,7 +20773,7 @@ var App = function App() {
             _t2 = _context2.v;
             setMessage({
               type: "error",
-              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error saving settings. Please check console.", "th-login")
+              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error saving settings. Please check console.", "thlogin")
             });
             console.error("Error saving settings:", _t2);
           case 4:
@@ -20801,18 +20802,18 @@ var App = function App() {
       navigator.clipboard.writeText(settingsToExport).then(function () {
         return setMessage({
           type: "success",
-          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings copied to clipboard!", "th-login")
+          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings copied to clipboard!", "thlogin")
         });
       })["catch"](function () {
         return setMessage({
           type: "error",
-          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to copy settings to clipboard. Please copy manually.", "th-login")
+          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to copy settings to clipboard. Please copy manually.", "thlogin")
         });
       });
     } else {
       setMessage({
         type: "info",
-        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Please manually copy the settings from the text area below.", "th-login")
+        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Please manually copy the settings from the text area below.", "thlogin")
       });
       if (importTextareaRef.current) {
         importTextareaRef.current.select();
@@ -20833,11 +20834,11 @@ var App = function App() {
               _context3.n = 2;
               break;
             }
-            throw new Error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Invalid settings format. Please provide a valid JSON object.", "th-login"));
+            throw new Error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Invalid settings format. Please provide a valid JSON object.", "thlogin"));
           case 2:
             _context3.n = 3;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-              path: "th-login/v1/settings",
+              path: "thlogin/v1/settings",
               method: "POST",
               data: importedData // Send the imported data directly
             });
@@ -20861,7 +20862,7 @@ var App = function App() {
             } else {
               setMessage({
                 type: "error",
-                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to import settings.", "th-login")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to import settings.", "thlogin")
               });
             }
             _context3.n = 5;
@@ -20871,7 +20872,7 @@ var App = function App() {
             _t3 = _context3.v;
             setMessage({
               type: "error",
-              text: _t3.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error parsing or importing settings. Please ensure valid JSON.", "th-login")
+              text: _t3.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error parsing or importing settings. Please ensure valid JSON.", "thlogin")
             });
             console.error("Error importing settings:", _t3);
           case 5:
@@ -20902,7 +20903,7 @@ var App = function App() {
             _context4.p = 1;
             _context4.n = 2;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-              path: "th-login/v1/reset-settings",
+              path: "thlogin/v1/reset-settings",
               method: "POST"
             });
           case 2:
@@ -20918,7 +20919,7 @@ var App = function App() {
             // Re-fetch settings to load the newly reset defaults
             _context4.n = 3;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-              path: "th-login/v1/settings",
+              path: "thlogin/v1/settings",
               method: "POST",
               data: {
                 action: "fetch_settings"
@@ -20941,7 +20942,7 @@ var App = function App() {
           case 4:
             setMessage({
               type: "error",
-              text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to reset settings.", "th-login")
+              text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to reset settings.", "thlogin")
             });
           case 5:
             _context4.n = 7;
@@ -20951,7 +20952,7 @@ var App = function App() {
             _t4 = _context4.v;
             setMessage({
               type: "error",
-              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error resetting settings. Please check console.", "th-login")
+              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error resetting settings. Please check console.", "thlogin")
             });
             console.error("Error resetting settings:", _t4);
           case 7:
@@ -20972,30 +20973,31 @@ var App = function App() {
   }();
   if (isLoading) {
     return /*#__PURE__*/React.createElement("div", {
-      className: "th-login-admin-wrap"
+      className: "thlogin-admin-wrap"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "th-login-loader"
+      className: "thlogin-loader"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "th-login-loader-circle"
+      className: "thlogin-loader-circle"
     }), /*#__PURE__*/React.createElement("div", {
-      className: "th-login-loader-circle"
+      className: "thlogin-loader-circle"
     }), /*#__PURE__*/React.createElement("div", {
-      className: "th-login-loader-circle"
+      className: "thlogin-loader-circle"
     }), /*#__PURE__*/React.createElement("div", {
-      className: "th-login-loader-circle"
+      className: "thlogin-loader-circle"
     })), /*#__PURE__*/React.createElement("p", {
-      className: "th-login-loading-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loading settings...", "th-login")));
+      className: "thlogin-loading-text"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loading settings...", "thlogin")));
   }
+  console.log(settings);
   return /*#__PURE__*/React.createElement("div", {
-    className: "th-login-admin-modern"
+    className: "thlogin-admin-modern"
   }, /*#__PURE__*/React.createElement("div", {
     className: "admin-header"
   }, /*#__PURE__*/React.createElement("div", {
     className: "header-content"
   }, /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement("span", {
     className: "th-logo"
-  }, "TH"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Settings", "th-login")), message && /*#__PURE__*/React.createElement("div", {
+  }, "TH"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Settings", "thlogin")), message && /*#__PURE__*/React.createElement("div", {
     className: "notice-banner ".concat(message.type)
   }, /*#__PURE__*/React.createElement("p", null, message.text)))), /*#__PURE__*/React.createElement("div", {
     className: "admin-container"
@@ -21023,9 +21025,6 @@ var App = function App() {
   }), activeTab === "form-fields" && /*#__PURE__*/React.createElement(_components_form_feild_setiings__WEBPACK_IMPORTED_MODULE_7__["default"], {
     settings: settings,
     handleSettingChange: handleSettingChange
-    // addCustomField={addCustomField}
-    // updateCustomField={updateCustomField}
-    // removeCustomField={removeCustomField}
   }), activeTab === "display-triggers" && /*#__PURE__*/React.createElement(_components_display_trigger_settings__WEBPACK_IMPORTED_MODULE_8__["default"], {
     settings: settings,
     handleSettingChange: handleSettingChange
@@ -21052,11 +21051,11 @@ var App = function App() {
     onClick: handleSaveSettings,
     disabled: isSaving,
     className: "save-button"
-  }, isSaving && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Save Changes", "th-login"))), isResetConfirmOpen && /*#__PURE__*/React.createElement("div", {
+  }, isSaving && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Save Changes", "thlogin"))), isResetConfirmOpen && /*#__PURE__*/React.createElement("div", {
     className: "confirmation-modal"
   }, /*#__PURE__*/React.createElement("div", {
     className: "modal-content"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset All Settings?", "th-login")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("This will restore all settings to default values. This cannot be undone.", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset All Settings?", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("This will restore all settings to default values. This cannot be undone.", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "modal-actions"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     isSecondary: true,
@@ -21064,11 +21063,11 @@ var App = function App() {
       return setIsResetConfirmOpen(false);
     },
     className: "cancel-button"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     isDestructive: true,
     onClick: handleResetSettings,
     className: "confirm-button"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset Settings", "th-login"))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset Settings", "thlogin"))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
@@ -21332,7 +21331,7 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
     __nextHasNoMarginBottom: true,
     __next40pxDefaultSize: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Type", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Type", "thlogin"),
     value: type,
     isBlock: true,
     onChange: function onChange(newType) {
@@ -21340,13 +21339,13 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
     value: "color",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "thlogin")
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
     value: "gradient",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "thlogin")
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
     value: "image",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image", "thlogin")
   })), type === "color" && /*#__PURE__*/React.createElement("div", {
     className: "background-color-picker"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
@@ -21363,11 +21362,11 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["gradient"]), value);
     },
     gradients: [{
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "th-login"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "thlogin"),
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
       slug: "default"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ocean Blue", "th-login"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ocean Blue", "thlogin"),
       gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
       slug: "ocean-blue"
     }]
@@ -21376,7 +21375,7 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image URL", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image URL", "thlogin"),
     value: imageURL,
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "url"]), val);
@@ -21397,71 +21396,71 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
       objectFit: "cover"
     }
   })), /*#__PURE__*/React.createElement("div", {
-    className: "th-login-media-image"
+    className: "thlogin-media-image"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Position", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Position", "thlogin"),
     value: position,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Left", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Left", "thlogin"),
       value: "top left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Center", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Center", "thlogin"),
       value: "top center"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Right", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Right", "thlogin"),
       value: "top right"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Left", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Left", "thlogin"),
       value: "center left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Center", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Center", "thlogin"),
       value: "center center"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Right", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Right", "thlogin"),
       value: "center right"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Left", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Left", "thlogin"),
       value: "bottom left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Center", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Center", "thlogin"),
       value: "bottom center"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Right", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Right", "thlogin"),
       value: "bottom right"
     }],
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "position"]), val);
     }
   }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Size", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Size", "thlogin"),
     value: size,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cover", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cover", "thlogin"),
       value: "cover"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contain", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contain", "thlogin"),
       value: "contain"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto", "thlogin"),
       value: "auto"
     }],
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "size"]), val);
     }
   }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "thlogin"),
     value: repeat,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No Repeat", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No Repeat", "thlogin"),
       value: "no-repeat"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "thlogin"),
       value: "repeat"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat X", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat X", "thlogin"),
       value: "repeat-x"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat Y", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat Y", "thlogin"),
       value: "repeat-y"
     }],
     onChange: function onChange(val) {
@@ -21774,9 +21773,9 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
     title: title,
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
-    className: "th-login-border-controls"
+    className: "thlogin-border-controls"
   }, /*#__PURE__*/React.createElement(_border_box_control__WEBPACK_IMPORTED_MODULE_3__.BorderBoxControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "thlogin"),
     values: width,
     onChange: function onChange(newVal) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["width"]), newVal);
@@ -21784,22 +21783,22 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
     min: 0,
     max: 20
   })), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_5__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Style", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Style", "thlogin"),
     value: style,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "thlogin"),
       value: "solid"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "thlogin"),
       value: "dashed"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "thlogin"),
       value: "dotted"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "thlogin"),
       value: "double"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "thlogin"),
       value: "none"
     }],
     className: "modern-border-select-control",
@@ -21818,9 +21817,9 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Radius', 'th-login'),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
-    className: "th-login-border-controls"
+    className: "thlogin-border-controls"
   }, /*#__PURE__*/React.createElement(_border_radius_control__WEBPACK_IMPORTED_MODULE_4__.BorderRadiusControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius", "thlogin"),
     values: radius,
     onChange: function onChange(newVal) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["radius"]), newVal);
@@ -22140,25 +22139,25 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
     };
   };
   return /*#__PURE__*/React.createElement("div", {
-    className: "th-loginpreview-form-header-part"
+    className: "thloginpreview-form-header-part"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "th-loginpreview-cancel"
+    className: "thloginpreview-cancel"
   }, close_button && /*#__PURE__*/React.createElement("button", {
-    className: "th-loginpreview-popup-close-button",
+    className: "thloginpreview-popup-close-button",
     "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'th-login'),
     style: applyButtonStyle(cancelStyle)
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Dashicon, {
     icon: "no-alt"
   }))), form_type === 'double' && /*#__PURE__*/React.createElement("div", {
-    className: "th-login-prevuiew-form-toggle"
+    className: "thlogin-prevuiew-form-toggle"
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",
-    className: "th-login-prevuiew-toggle-button th-login-prevuiew-toggle-button--login",
+    className: "thlogin-prevuiew-toggle-button thlogin-prevuiew-toggle-button--login",
     "data-th-popup-action": "login",
     style: applyButtonStyle(buttonStyle)
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Login', 'th-login')), /*#__PURE__*/React.createElement("button", {
     type: "button",
-    className: "th-login-preview-toggle-button th-login-preview-toggle-button--register",
+    className: "thlogin-preview-toggle-button thlogin-preview-toggle-button--register",
     "data-th-popup-action": "register",
     style: applyButtonStyle(buttonStyle)
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Register', 'th-login'))));
@@ -22336,8 +22335,8 @@ var DesignEditor = function DesignEditor(_ref5) {
     var renderContent = function renderContent() {
       var _settings$form_fields;
       var fields = ((_settings$form_fields = settings.form_fields) === null || _settings$form_fields === void 0 ? void 0 : _settings$form_fields[activeForm]) || [];
-      var headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login");
-      if (activeForm === "register") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login");else if (activeForm === "forgot_password") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot Password", "th-login");
+      var headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "thlogin");
+      if (activeForm === "register") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "thlogin");else if (activeForm === "forgot_password") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot Password", "thlogin");
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(LoginFormHeader, {
         settings: settings
       }), /*#__PURE__*/React.createElement("h3", {
@@ -22372,21 +22371,46 @@ var DesignEditor = function DesignEditor(_ref5) {
   };
   var tabinside = [{
     key: "label",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label", "thlogin")
   }, {
     key: "form",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Form", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Form", "thlogin")
   }, {
     key: "header",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Header", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Header", "thlogin")
   }];
+  var getLoginPreviewUrl = function getLoginPreviewUrl(option) {
+    var _settings$integration, _settings$general2;
+    var finalurl = '';
+    if (typeof thlogin_admin_data !== 'undefined' && settings !== null && settings !== void 0 && (_settings$integration = settings.integration) !== null && _settings$integration !== void 0 && (_settings$integration = _settings$integration.woocommerce) !== null && _settings$integration !== void 0 && _settings$integration.enabled && thlogin_admin_data.woo_enabled && thlogin_admin_data.myaccount_url) {
+      finalurl = thlogin_admin_data.myaccount_url;
+    } else if (typeof thlogin_admin_data !== 'undefined' && thlogin_admin_data.thlogin_url && (settings === null || settings === void 0 || (_settings$general2 = settings.general) === null || _settings$general2 === void 0 ? void 0 : _settings$general2.display_mode) === 'page') {
+      finalurl = thlogin_admin_data.thlogin_url;
+    }
+    if (finalurl && option.key === 'page') {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "th-login-previre-button"
+      }, /*#__PURE__*/React.createElement("a", {
+        style: {
+          textDecoration: 'none',
+          cursor: 'pointer'
+        },
+        href: finalurl,
+        target: "_blank",
+        rel: "noopener noreferrer"
+      }, /*#__PURE__*/React.createElement("span", {
+        className: "dashicons dashicons-external"
+      })));
+    }
+    return null;
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "settings-card"
   }, /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-art"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Design Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Design Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "preview-switcher"
   }, renderTabs()), /*#__PURE__*/React.createElement("div", {
     className: "design-editor-layout"
@@ -22405,27 +22429,27 @@ var DesignEditor = function DesignEditor(_ref5) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "cutsom-tabs-inside-panel"
   }, insidetab === "form" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Foreground", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Foreground", "thlogin"),
     background: settings.design.modal.modal_background,
     path: ["modal", "modal_background"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "thlogin"),
     background: settings.design.form.form_background,
     path: ["form", "form_background"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "thlogin"),
     border: settings.design.form.form_border,
     path: ["form", "form_border"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "thlogin"),
     padding: settings.design.form.form_padding,
     path: ["form", "form_padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Field Gap", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Field Gap", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gap', 'th-login'),
@@ -22438,7 +22462,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     step: 1,
     withInputField: true
   }))), insidetab === "label" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heading", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heading", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22446,7 +22470,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.heading.color,
@@ -22457,7 +22481,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.heading.typography.size),
@@ -22470,14 +22494,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "thlogin"),
     value: settings.design.heading.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["heading", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Label", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Label", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22485,7 +22509,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.Input.labelcolor,
@@ -22496,7 +22520,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.Input.labeltypography.size),
@@ -22509,14 +22533,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Weight", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Weight", "thlogin"),
     value: settings.design.Input.labeltypography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["Input", "labeltypography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Box", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Box", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22524,7 +22548,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.Input.color,
@@ -22535,7 +22559,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.Input.background,
@@ -22546,7 +22570,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.Input.typography.size),
@@ -22559,14 +22583,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "thlogin"),
     value: settings.design.Input.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["Input", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22574,7 +22598,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.button.color,
@@ -22585,7 +22609,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.button.background,
@@ -22596,7 +22620,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.button.hoverBackground,
@@ -22607,7 +22631,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.button.typography.size),
@@ -22620,26 +22644,26 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "thlogin"),
     value: settings.design.button.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   })))), /*#__PURE__*/React.createElement("div", {
-    className: "th-login-border-managemnt-border"
+    className: "thlogin-border-managemnt-border"
   }, /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "thlogin"),
     padding: settings.design.button.padding,
     path: ["button", "padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "thlogin"),
     border: settings.design.button.border,
     path: ["button", "border"],
     handleSettingChange: handleSettingChange
   }))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remember Me", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remember Me", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22647,7 +22671,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.rememberme.color,
@@ -22658,7 +22682,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Checkbox Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Checkbox Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.rememberme.checkboxbackground,
@@ -22669,7 +22693,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.rememberme.typography.size),
@@ -22682,14 +22706,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "thlogin"),
     value: settings.design.rememberme.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["rememberme", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Icon", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Icon", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22697,7 +22721,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.icon.color,
@@ -22708,7 +22732,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.icon.size),
@@ -22717,7 +22741,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     },
     min: 1
   }))))), insidetab === 'header' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel Button", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel Button", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22725,7 +22749,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.cancel_button.color,
@@ -22736,7 +22760,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.cancel_button.background,
@@ -22747,7 +22771,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.cancel_button.hoverBackground,
@@ -22758,7 +22782,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.header.cancel_button.typography.size),
@@ -22768,24 +22792,24 @@ var DesignEditor = function DesignEditor(_ref5) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "thlogin"),
     value: settings.design.header.cancel_button.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["header", "cancel_button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "thlogin"),
     padding: settings.design.header.cancel_button.padding,
     path: ["header", "cancel_button", "padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "thlogin"),
     border: settings.design.header.cancel_button.border,
     path: ["header", "cancel_button", "border"],
     handleSettingChange: handleSettingChange
   })), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "thlogin"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -22793,7 +22817,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.button.color,
@@ -22804,7 +22828,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.button.background,
@@ -22815,7 +22839,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.button.hoverBackground,
@@ -22826,7 +22850,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "thlogin")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.header.button.typography.size),
@@ -22836,19 +22860,19 @@ var DesignEditor = function DesignEditor(_ref5) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "thlogin"),
     value: settings.design.header.button.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "thlogin"),
     padding: settings.design.header.button.padding,
     path: ["header", "button", "padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "thlogin"),
     border: settings.design.header.button.border,
     path: ["header", "button", "border"],
     handleSettingChange: handleSettingChange
@@ -22880,7 +22904,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Dashicon, {
       icon: option.icon,
       size: 16
-    }), /*#__PURE__*/React.createElement("span", null, option.label)));
+    }), /*#__PURE__*/React.createElement("span", null, option.label), getLoginPreviewUrl(option)));
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DesignEditor);
@@ -22928,7 +22952,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
-  var _settings$display_tri, _settings$display_tri2, _settings$display_tri3, _settings$display_tri4, _settings$display_tri5, _settings$display_tri6, _settings$display_tri7, _settings$display_tri8, _settings$display_tri9, _settings$display_tri0, _settings$display_tri1, _settings$display_tri10, _settings$display_tri11, _settings$display_tri12, _settings$display_tri13, _settings$display_tri14, _settings$display_tri15, _settings$display_tri16, _suggestions$categori2, _settings$display_tri17, _settings$display_tri18, _settings$display_tri19, _settings$display_tri20, _settings$display_tri21, _suggestions$tags2, _settings$display_tri22, _settings$display_tri23, _settings$display_tri24, _settings$display_tri25, _settings$display_tri26, _settings$display_tri27, _settings$display_tri28, _settings$display_tri29, _settings$display_tri30, _settings$display_tri31, _settings$display_tri32, _settings$display_tri33, _settings$display_tri34, _settings$display_tri35, _settings$display_tri36, _settings$display_tri37, _settings$display_tri38, _settings$display_tri39, _settings$display_tri40, _settings$display_tri41, _settings$display_tri42;
+  var _settings$display_tri, _settings$display_tri2, _settings$display_tri3, _settings$display_tri4, _settings$display_tri5, _settings$display_tri6, _settings$display_tri7, _settings$display_tri8, _settings$display_tri9, _settings$display_tri0, _settings$display_tri1, _settings$display_tri10, _settings$display_tri11, _settings$display_tri12, _settings$display_tri13, _settings$display_tri14, _settings$display_tri15, _settings$display_tri16, _suggestions$categori2, _settings$display_tri17, _settings$display_tri18, _settings$display_tri19, _settings$display_tri20, _settings$display_tri21, _suggestions$tags2, _settings$display_tri22, _settings$display_tri23, _settings$display_tri24, _settings$display_tri25, _settings$display_tri26, _settings$display_tri27, _settings$display_tri28, _settings$display_tri29, _settings$display_tri30, _settings$display_tri31, _settings$display_tri32, _settings$display_tri33, _settings$display_tri34, _settings$display_tri35, _settings$display_tri36, _settings$display_tri37, _settings$display_tri38, _settings$display_tri39, _settings$display_tri40;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)("auto_open"),
@@ -22954,7 +22978,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
               _context.p = 0;
               _context.n = 1;
               return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
-                path: "th-login/v1/content-suggestions"
+                path: "thlogin/v1/content-suggestions"
               });
             case 1:
               response = _context.v;
@@ -23379,35 +23403,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
         return s.trim();
       }));
     }
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on WooCommerce My Account Page", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal on the WooCommerce My Account page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri24 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri24 === void 0 ? void 0 : _settings$display_tri24.on_woocommerce_myaccount) || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_myaccount'], isChecked);
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on WooCommerce Checkout Page", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal on the WooCommerce Checkout page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri25 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri25 === void 0 ? void 0 : _settings$display_tri25.on_woocommerce_checkout) || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_checkout'], isChecked);
-    }
-  })))), activeTab === "device" && /*#__PURE__*/React.createElement("div", {
+  }))))), activeTab === "device" && /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
@@ -23421,7 +23417,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri26 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri26 === void 0 || (_settings$display_tri26 = _settings$display_tri26.device_visibility) === null || _settings$display_tri26 === void 0 ? void 0 : _settings$display_tri26.desktop) || false,
+    checked: ((_settings$display_tri24 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri24 === void 0 || (_settings$display_tri24 = _settings$display_tri24.device_visibility) === null || _settings$display_tri24 === void 0 ? void 0 : _settings$display_tri24.desktop) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "desktop"], isChecked);
     }
@@ -23435,7 +23431,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri27 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri27 === void 0 || (_settings$display_tri27 = _settings$display_tri27.device_visibility) === null || _settings$display_tri27 === void 0 ? void 0 : _settings$display_tri27.tablet) || false,
+    checked: ((_settings$display_tri25 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri25 === void 0 || (_settings$display_tri25 = _settings$display_tri25.device_visibility) === null || _settings$display_tri25 === void 0 ? void 0 : _settings$display_tri25.tablet) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "tablet"], isChecked);
     }
@@ -23449,7 +23445,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri28 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri28 === void 0 || (_settings$display_tri28 = _settings$display_tri28.device_visibility) === null || _settings$display_tri28 === void 0 ? void 0 : _settings$display_tri28.mobile) || false,
+    checked: ((_settings$display_tri26 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri26 === void 0 || (_settings$display_tri26 = _settings$display_tri26.device_visibility) === null || _settings$display_tri26 === void 0 ? void 0 : _settings$display_tri26.mobile) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["auto_open_conditions", "device_visibility", "mobile"], isChecked);
     }
@@ -23467,11 +23463,11 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri29 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri29 === void 0 ? void 0 : _settings$display_tri29.enabled) || false,
+    checked: ((_settings$display_tri27 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri27 === void 0 ? void 0 : _settings$display_tri27.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "enabled"], isChecked);
     }
-  }))), ((_settings$display_tri30 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri30 === void 0 ? void 0 : _settings$display_tri30.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$display_tri28 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri28 === void 0 ? void 0 : _settings$display_tri28.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -23480,7 +23476,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How to limit pop-up frequency", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control select-control-settings-popup"
   }, /*#__PURE__*/React.createElement("select", {
-    value: ((_settings$display_tri31 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri31 === void 0 ? void 0 : _settings$display_tri31.type) || "session",
+    value: ((_settings$display_tri29 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri29 === void 0 ? void 0 : _settings$display_tri29.type) || "session",
     onChange: function onChange(e) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "type"], e.target.value);
     }
@@ -23488,7 +23484,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     value: "session"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once per session", "th-login")), /*#__PURE__*/React.createElement("option", {
     value: "days"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "th-login"))))), ((_settings$display_tri32 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri32 === void 0 ? void 0 : _settings$display_tri32.type) === "days" && /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "th-login"))))), ((_settings$display_tri30 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri30 === void 0 ? void 0 : _settings$display_tri30.type) === "days" && /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -23501,7 +23497,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     __nextHasNoMarginBottom: true,
     type: "number",
     min: "1",
-    value: ((_settings$display_tri33 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri33 === void 0 ? void 0 : _settings$display_tri33.days) || 7,
+    value: ((_settings$display_tri31 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri31 === void 0 ? void 0 : _settings$display_tri31.days) || 7,
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "days"], parseInt(newValue, 10));
     }
@@ -23519,11 +23515,11 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri34 = settings.display_triggers.menu_integration) === null || _settings$display_tri34 === void 0 ? void 0 : _settings$display_tri34.enabled) || false,
+    checked: ((_settings$display_tri32 = settings.display_triggers.menu_integration) === null || _settings$display_tri32 === void 0 ? void 0 : _settings$display_tri32.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "enabled"], isChecked);
     }
-  }))), ((_settings$display_tri35 = settings.display_triggers.menu_integration) === null || _settings$display_tri35 === void 0 ? void 0 : _settings$display_tri35.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$display_tri33 = settings.display_triggers.menu_integration) === null || _settings$display_tri33 === void 0 ? void 0 : _settings$display_tri33.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -23534,7 +23530,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri36 = settings.display_triggers.menu_integration) === null || _settings$display_tri36 === void 0 ? void 0 : _settings$display_tri36.menu_slug) || "primary",
+    value: ((_settings$display_tri34 = settings.display_triggers.menu_integration) === null || _settings$display_tri34 === void 0 ? void 0 : _settings$display_tri34.menu_slug) || "primary",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "menu_slug"], newValue);
     }
@@ -23551,7 +23547,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri37 = settings.display_triggers.menu_integration) === null || _settings$display_tri37 === void 0 ? void 0 : _settings$display_tri37.item_text_login) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
+    value: ((_settings$display_tri35 = settings.display_triggers.menu_integration) === null || _settings$display_tri35 === void 0 ? void 0 : _settings$display_tri35.item_text_login) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_login"], newValue);
     }
@@ -23566,7 +23562,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri38 = settings.display_triggers.menu_integration) === null || _settings$display_tri38 === void 0 ? void 0 : _settings$display_tri38.item_icon_login) || "dashicons-admin-users",
+    value: ((_settings$display_tri36 = settings.display_triggers.menu_integration) === null || _settings$display_tri36 === void 0 ? void 0 : _settings$display_tri36.item_icon_login) || "dashicons-admin-users",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_icon_login"], newValue);
     }
@@ -23580,7 +23576,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri39 = settings.display_triggers.menu_integration) === null || _settings$display_tri39 === void 0 ? void 0 : _settings$display_tri39.visibility_login_logged_in) || false,
+    checked: ((_settings$display_tri37 = settings.display_triggers.menu_integration) === null || _settings$display_tri37 === void 0 ? void 0 : _settings$display_tri37.visibility_login_logged_in) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "visibility_login_logged_in"], isChecked);
     }
@@ -23597,7 +23593,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri40 = settings.display_triggers.menu_integration) === null || _settings$display_tri40 === void 0 ? void 0 : _settings$display_tri40.item_text_register) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
+    value: ((_settings$display_tri38 = settings.display_triggers.menu_integration) === null || _settings$display_tri38 === void 0 ? void 0 : _settings$display_tri38.item_text_register) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_register"], newValue);
     }
@@ -23612,7 +23608,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri41 = settings.display_triggers.menu_integration) === null || _settings$display_tri41 === void 0 ? void 0 : _settings$display_tri41.item_icon_register) || "dashicons-plus-alt",
+    value: ((_settings$display_tri39 = settings.display_triggers.menu_integration) === null || _settings$display_tri39 === void 0 ? void 0 : _settings$display_tri39.item_icon_register) || "dashicons-plus-alt",
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_icon_register"], newValue);
     }
@@ -23626,7 +23622,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$display_tri42 = settings.display_triggers.menu_integration) === null || _settings$display_tri42 === void 0 ? void 0 : _settings$display_tri42.visibility_register_logged_in) || false,
+    checked: ((_settings$display_tri40 = settings.display_triggers.menu_integration) === null || _settings$display_tri40 === void 0 ? void 0 : _settings$display_tri40.visibility_register_logged_in) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("display_triggers", ["menu_integration", "visibility_register_logged_in"], isChecked);
     }
@@ -23689,14 +23685,14 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 
 var TAB_KEYS = {
-  login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
-  register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
-  forgot_password: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password", "th-login")
+  login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "thlogin"),
+  register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "thlogin"),
+  forgot_password: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password", "thlogin")
 };
 var DEFAULT_FIELD = function DEFAULT_FIELD() {
   return {
     id: "ff_" + Math.random().toString(36).substring(2, 9),
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("New Field", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("New Field", "thlogin"),
     placeholder: "",
     icon: "admin-users",
     required: false,
@@ -23820,7 +23816,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   var handleAddField = function handleAddField() {
     var newField = DEFAULT_FIELD();
     updateFields([].concat(_toConsumableArray(fields), [newField]));
-    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field added successfully!", "th-login"));
+    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field added successfully!", "thlogin"));
   };
   var handleDeleteField = function handleDeleteField(fieldId) {
     var filtered = fields.filter(function (f) {
@@ -23828,7 +23824,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     });
     updateFields(filtered);
     if ((selectedField === null || selectedField === void 0 ? void 0 : selectedField.id) === fieldId) setSelectedField(null);
-    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field deleted", "th-login"));
+    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field deleted", "thlogin"));
   };
   var handleFieldChange = function handleFieldChange(key, value) {
     if (!selectedField) return;
@@ -23855,13 +23851,13 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }, []);
   var tabs = [{
     key: "general",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "thlogin")
   }, {
     key: "redirect",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "thlogin")
   }, {
     key: "shortcodes",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password", "thlogin")
   }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
@@ -23888,7 +23884,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-feedback"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form feild Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form feild Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "thl-form-fields-settings"
   }, /*#__PURE__*/React.createElement("div", {
     className: "thl-left-panel"
@@ -23908,9 +23904,9 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "fields-group"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "fields-group-title"
-  }, TAB_KEYS[activeTab], " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fields", "th-login")), fields.length === 0 ? /*#__PURE__*/React.createElement("p", {
+  }, TAB_KEYS[activeTab], " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fields", "thlogin")), fields.length === 0 ? /*#__PURE__*/React.createElement("p", {
     className: "no-fields"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No fields yet.", "th-login")) : fields.map(function (field) {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No fields yet.", "thlogin")) : fields.map(function (field) {
     return /*#__PURE__*/React.createElement("div", {
       key: field.id,
       className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("sortable-field-wrapper", {
@@ -23927,7 +23923,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isSecondary: true,
     onClick: handleAddField
-  }, "+ ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Field", "th-login")))), /*#__PURE__*/React.createElement("div", {
+  }, "+ ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Field", "thlogin")))), /*#__PURE__*/React.createElement("div", {
     className: "thl-right-panel"
   }, selectedField ? /*#__PURE__*/React.createElement("div", {
     className: "field-editor"
@@ -23936,7 +23932,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }, selectedField.label || selectedField.id), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label", "thlogin"),
     value: selectedField.label,
     onChange: function onChange(val) {
       return handleFieldChange("label", val);
@@ -23944,7 +23940,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Placeholder", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Placeholder", "thlogin"),
     value: selectedField.placeholder || "",
     onChange: function onChange(val) {
       return handleFieldChange("placeholder", val);
@@ -23952,7 +23948,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "thlogin"),
     placeholder: "https://example.com/terms",
     value: selectedField.link || "",
     onChange: function onChange(val) {
@@ -23961,7 +23957,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "thlogin"),
     value: selectedField.error_message || "",
     onChange: function onChange(val) {
       return handleFieldChange("error_message", val);
@@ -23970,7 +23966,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "thl-icon-picker"
   }, /*#__PURE__*/React.createElement("label", {
     className: "components-base-control__label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "icon-picker-trigger",
     onClick: function onClick() {
       return setIconPickerOpen(function (open) {
@@ -24004,7 +24000,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "thlogin"),
     value: selectedField.name || "",
     onChange: function onChange(val) {
       return handleFieldChange("name", val);
@@ -24012,13 +24008,13 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ID", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ID", "thlogin"),
     value: selectedField.id || "",
     onChange: function onChange(val) {
       return handleFieldChange("id", val);
     }
   }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_9__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field Type", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field Type", "thlogin"),
     value: selectedField.type || "text",
     options: [{
       label: "Text",
@@ -24034,17 +24030,17 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       return handleFieldChange("type", val);
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "th-login-toggle-one-line"
+    className: "thlogin-toggle-one-line"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Required", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Required", "thlogin"),
     checked: selectedField.required,
     onChange: function onChange(val) {
       return handleFieldChange("required", val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Field", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Field", "thlogin"),
     checked: selectedField.show !== false,
     onChange: function onChange(val) {
       return handleFieldChange("show", val);
@@ -24052,7 +24048,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }))), activeTab === "register" && selectedField.type === "password" && selectedField.predefined && selectedField.id !== "confirm_password" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Minimum Length", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Minimum Length", "thlogin"),
     type: "number",
     value: selectedField.minInput || "",
     onChange: function onChange(val) {
@@ -24061,7 +24057,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maximum Length", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maximum Length", "thlogin"),
     type: "number",
     value: selectedField.maxInput || "",
     onChange: function onChange(val) {
@@ -24071,28 +24067,28 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "check-group"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Letters (A-Z)", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Letters (A-Z)", "thlogin"),
     checked: ((_selectedField$check = selectedField.check) === null || _selectedField$check === void 0 ? void 0 : _selectedField$check.text) || false,
     onChange: function onChange() {
       return handleCheckToggle("text");
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Numbers (0-9)", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Numbers (0-9)", "thlogin"),
     checked: ((_selectedField$check2 = selectedField.check) === null || _selectedField$check2 === void 0 ? void 0 : _selectedField$check2.number) || false,
     onChange: function onChange() {
       return handleCheckToggle("number");
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Special Characters", "th-login"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Special Characters", "thlogin"),
     checked: ((_selectedField$check3 = selectedField.check) === null || _selectedField$check3 === void 0 ? void 0 : _selectedField$check3.special_character) || false,
     onChange: function onChange() {
       return handleCheckToggle("special_character");
     }
   })))) : /*#__PURE__*/React.createElement("div", {
     className: "placeholder"
-  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Click a field to edit its settings", "th-login")))), toastMessage && /*#__PURE__*/React.createElement(ToastNotice, {
+  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Click a field to edit its settings", "thlogin")))), toastMessage && /*#__PURE__*/React.createElement(ToastNotice, {
     message: toastMessage,
     onClose: function onClose() {
       return setToastMessage("");
@@ -24123,14 +24119,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.mjs");
-/* harmony import */ var react_icons_fa6__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa6 */ "./node_modules/react-icons/fa6/index.mjs");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.mjs");
+/* harmony import */ var react_icons_fa6__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/fa6 */ "./node_modules/react-icons/fa6/index.mjs");
+/* harmony import */ var _contant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contant */ "./src/admin/contant.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -24153,7 +24151,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
     setAvailableRoles = _useState2[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
-      path: "/th-login/v1/roles"
+      path: "/thlogin/v1/roles"
     }).then(function (roles) {
       setAvailableRoles(roles);
     });
@@ -24162,27 +24160,6 @@ var GeneralSettings = function GeneralSettings(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     copiedIndex = _useState4[0],
     setCopiedIndex = _useState4[1];
-  var shortcodes = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form", "th-login"),
-    shortcode: "[th_login_form]",
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the login form", "th-login")
-  }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register Form", "th-login"),
-    shortcode: "[th_register_form]",
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the register form", "th-login")
-  }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password Form", "th-login"),
-    shortcode: "[th_forgot_password_form]",
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the forgot password form", "th-login")
-  }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Combined Modal", "th-login"),
-    shortcode: "[th_login__combined_form]",
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shows the full login/register/forgot modal and auto-triggers it", "th-login")
-  }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup Link", "th-login"),
-    shortcode: "[th_login_popup_link]",
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Use this link to generate popup link.")
-  }];
   var handleCopy = function handleCopy(text, index) {
     navigator.clipboard.writeText(text).then(function () {
       setCopiedIndex(index);
@@ -24197,13 +24174,13 @@ var GeneralSettings = function GeneralSettings(_ref) {
     setActiveTab = _useState6[1];
   var tabs = [{
     key: "general",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "thlogin")
   }, {
     key: "redirect",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "thlogin")
   }, {
     key: "shortcodes",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Short Codes", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Short Codes", "thlogin")
   }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
@@ -24226,17 +24203,17 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-admin-settings"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General Settings", "th-login")), renderTabs(), activeTab === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General Settings", "thlogin")), renderTabs(), activeTab === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Plugin Status", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Plugin Status", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, settings.general.plugin_status === "enabled" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is active", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is inactive", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, settings.general.plugin_status === "enabled" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is active", "thlogin") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is inactive", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -24248,9 +24225,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allow User Registration", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allow User Registration", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If enabled, users can register an account using the register form.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If enabled, users can register an account using the register form.", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -24259,19 +24236,19 @@ var GeneralSettings = function GeneralSettings(_ref) {
       return handleSettingChange("general", ["allow_user_registration"], isChecked);
     }
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "settings-group th-login-modalchoose-form"
+    className: "settings-group thlogin-modalchoose-form"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form Type", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form Type", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "form-type-options"
   }, [{
     type: "single",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Form", "th-login"),
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only login form will be shown", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Form", "thlogin"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only login form will be shown", "thlogin")
   }, {
     type: "double",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "th-login"),
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "thlogin"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "thlogin")
   }].map(function (_ref2) {
     var type = _ref2.type,
       label = _ref2.label,
@@ -24314,32 +24291,32 @@ var GeneralSettings = function GeneralSettings(_ref) {
       className: "form-type-description"
     }, description));
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "settings-group th-login-modalchoose-form"
+    className: "settings-group thlogin-modalchoose-form"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Display Mode", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Display Mode", "thlogin")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: displayMode,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/ShortCode", "thlogin"),
       value: "page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "thlogin"),
       value: "popup"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "thlogin"),
       value: "slide_in_left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "thlogin"),
       value: "slide_in_right"
     }],
     onChange: function onChange(value) {
       return handleSettingChange("general", ["display_mode"], value);
     }
   })), /*#__PURE__*/React.createElement("div", {
-    className: "settings-group th-login-modalchoose-form"
+    className: "settings-group thlogin-modalchoose-form"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register user with role", "th-login"))), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register user with role", "thlogin"))), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: settings.general.default_register_role || "subscriber",
     options: availableRoles,
     onChange: function onChange(value) {
@@ -24349,9 +24326,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual User Approval", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual User Approval", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -24363,9 +24340,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Close Button", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Close Button", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If true without user login the panel can close.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If true without user login the panel can close.", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -24377,23 +24354,23 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "redirection-grid"
   }, /*#__PURE__*/React.createElement("div", {
     className: "redirection-card"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "thlogin")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: ((_settings$general$red = settings.general.redirects) === null || _settings$general$red === void 0 || (_settings$general$red = _settings$general$red.after_login) === null || _settings$general$red === void 0 ? void 0 : _settings$general$red.type) || "current_page",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "thlogin"),
       value: "current_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "thlogin"),
       value: "dashboard"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "thlogin"),
       value: "home_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "thlogin"),
       value: "custom_url"
     }],
     onChange: function onChange(newValue) {
@@ -24409,13 +24386,13 @@ var GeneralSettings = function GeneralSettings(_ref) {
     placeholder: "https://example.com/welcome"
   })), /*#__PURE__*/React.createElement("div", {
     className: "redirection-card"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout", "thlogin")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: ((_settings$general$red3 = settings.general.redirects) === null || _settings$general$red3 === void 0 || (_settings$general$red3 = _settings$general$red3.after_logout) === null || _settings$general$red3 === void 0 ? void 0 : _settings$general$red3.type) || "home_page",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "thlogin"),
       value: "home_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "thlogin"),
       value: "custom_url"
     }],
     onChange: function onChange(newValue) {
@@ -24433,9 +24410,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row settings-manage-toggle-resitartion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Login After Registration", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Login After Registration", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log users in after registration", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log users in after registration", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -24448,19 +24425,19 @@ var GeneralSettings = function GeneralSettings(_ref) {
     style: {
       marginTop: "12px"
     }
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Registration", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Registration", "thlogin")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: ((_settings$general$red5 = settings.general.redirects) === null || _settings$general$red5 === void 0 || (_settings$general$red5 = _settings$general$red5.after_register) === null || _settings$general$red5 === void 0 ? void 0 : _settings$general$red5.type) || "dashboard",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "thlogin"),
       value: "dashboard"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "thlogin"),
       value: "current_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "thlogin"),
       value: "home_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "thlogin"),
       value: "custom_url"
     }],
     onChange: function onChange(newValue) {
@@ -24475,12 +24452,12 @@ var GeneralSettings = function GeneralSettings(_ref) {
     },
     placeholder: "https://example.com/registration-success"
   }))))), activeTab === "shortcodes" && /*#__PURE__*/React.createElement("div", {
-    className: "settings-group th-login-shortcodes-list"
+    className: "settings-group thlogin-shortcodes-list"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shortcodes", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shortcodes", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "shortcode-grid"
-  }, shortcodes.map(function (_ref3, i) {
+  }, _contant__WEBPACK_IMPORTED_MODULE_5__.shortcodes.map(function (_ref3, i) {
     var label = _ref3.label,
       shortcode = _ref3.shortcode,
       description = _ref3.description;
@@ -24503,8 +24480,8 @@ var GeneralSettings = function GeneralSettings(_ref) {
       onClick: function onClick() {
         return handleCopy(shortcode, i);
       },
-      title: copiedIndex === i ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "th-login")
-    }, copiedIndex === i ? /*#__PURE__*/React.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__.FaCheck, null) : /*#__PURE__*/React.createElement(react_icons_fa6__WEBPACK_IMPORTED_MODULE_6__.FaCopy, null))));
+      title: copiedIndex === i ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "thlogin") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "thlogin")
+    }, copiedIndex === i ? /*#__PURE__*/React.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaCheck, null) : /*#__PURE__*/React.createElement(react_icons_fa6__WEBPACK_IMPORTED_MODULE_7__.FaCopy, null))));
   })))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GeneralSettings);
@@ -24604,7 +24581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var IntegrationSettings = function IntegrationSettings(_ref) {
-  var _settings$integration, _settings$integration2;
+  var _settings$integration;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
   return /*#__PURE__*/React.createElement("section", {
@@ -24615,51 +24592,35 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-admin-plugins"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
-    className: "settings-group"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WooCommerce Integration", "th-login")), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
+    className: "settings-group integration-woocommerce"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable WooCommerce Integration", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integrate with WooCommerce features", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
+    className: "settings-card woocommerce-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "woocommerce-card-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "woocommerce-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 128 128"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "#7f54b3",
+    d: "M116.3 89.1H11.7C5.2 89.1 0 83.9 0 77.4v-40C0 31 5.2 25.8 11.7 25.8h104.7c6.4 0 11.7 5.2 11.7 11.7v40c-.1 6.4-5.3 11.6-11.8 11.6z"
+  }), /*#__PURE__*/React.createElement("path", {
+    fill: "#FFF",
+    d: "M13.8 76.7s2.8 11.8 8.5 3.9 11.2-20.3 11.2-20.3.4-3.1 2 3.7S44 80 44 80s6.3 7.9 8.9-.4c-1-11 2.8-31 6.7-40.6 1.6-8.5-7.3-6.1-8.1-4.1s-6.3 14.8-6.7 28.2c0 0-4.7-12.8-5.1-17.4-.4-4.7-5.3-5.9-8.1-1.4S20.3 66.2 20.3 66.2l-5.5-28.4s-5.5-7.3-8.7 1.6c0 0 5.7 34.9 7.7 37.3zM87 45.7c-8.5-14.2-21.1-3.4-21.1-3.4s-9.6 11.1-5.3 26.2c6.9 14.9 16.6 8.3 19.2 7.1 2.7-1.3 14.1-14.3 7.2-29.9zm-6.5 12.5c0 5.9-4.9 11.4-8.9 10.2-2.2-1.3-3.6-4.8-3.6-10.8 2-9.7 6.4-11 8.7-10.8 4.3 2.3 4.1 7.4 3.8 11.4zM118.9 45.7c-8.5-14.2-21.1-3.4-21.1-3.4s-9.6 11.1-5.3 26.2c6.9 14.9 16.6 8.3 19.2 7.1 2.6-1.3 14.1-14.3 7.2-29.9zm-6.5 12.5c0 5.9-4.9 11.4-8.9 10.2-2.2-1.3-3.6-4.8-3.6-10.8 2-9.7 6.4-11 8.7-10.8 4.2 2.3 4 7.4 3.8 11.4z"
+  }), /*#__PURE__*/React.createElement("path", {
+    fill: "#7f54b3",
+    d: "M61.3 89.1l22.3 13.1-4.7-13.1-12.8-3.6z"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "woocommerce-info"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WooCommerce Integration", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable login features for WooCommerce like checkout login, account sync, etc.", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "woocommerce-toggle"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
     checked: ((_settings$integration = settings.integration) === null || _settings$integration === void 0 || (_settings$integration = _settings$integration.woocommerce) === null || _settings$integration === void 0 ? void 0 : _settings$integration.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "enabled"], isChecked);
-    }
-  }))), ((_settings$integration2 = settings.integration) === null || _settings$integration2 === void 0 || (_settings$integration2 = _settings$integration2.woocommerce) === null || _settings$integration2 === void 0 ? void 0 : _settings$integration2.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Replace WooCommerce Login", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Use this login form for WooCommerce", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: settings.integration.woocommerce.replace_login || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("integration", ["woocommerce", "replace_login"], isChecked);
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Replace WooCommerce Registration", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Use this registration form for WooCommerce", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: settings.integration.woocommerce.replace_registration || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("integration", ["woocommerce", "replace_registration"], isChecked);
     }
   })))))));
 };
@@ -24695,7 +24656,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-shield"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "th-login"))));
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "thlogin"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SecuritySettings);
 
@@ -24850,30 +24811,30 @@ var ToolsSettings = function ToolsSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-admin-tools"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Current Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Current Settings", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Backup your current configuration", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Backup your current configuration", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isSecondary: true,
     onClick: handleExportSettings
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "download"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "th-login")))), exportedSettings && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "thlogin")))), exportedSettings && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exported Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exported Settings", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy this JSON to save your settings", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy this JSON to save your settings", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     __nextHasNoMarginBottom: true,
@@ -24885,17 +24846,17 @@ var ToolsSettings = function ToolsSettings(_ref) {
     className: "copy-button ".concat(copied ? "copied" : ""),
     onClick: handleCopyToClipboard,
     isSmall: true
-  }, copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "th-login")))))), /*#__PURE__*/React.createElement("div", {
+  }, copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "thlogin") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "thlogin")))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste previously exported settings JSON", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste previously exported settings JSON", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     __nextHasNoMarginBottom: true,
@@ -24912,7 +24873,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
     disabled: !clipboardContent.trim()
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "clipboard"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste from Clipboard", "th-login")))), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste from Clipboard", "thlogin")))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
@@ -24922,17 +24883,17 @@ var ToolsSettings = function ToolsSettings(_ref) {
     disabled: isSaving || !importSettingsText.trim()
   }, isSaving ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "upload"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "th-login")))))), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "thlogin")))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset All Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset All Settings", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Restore all settings to default values", "th-login"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Restore all settings to default values", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isDestructive: true,
@@ -24941,7 +24902,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "undo"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "th-login")))))));
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "thlogin")))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ToolsSettings);
 
@@ -24962,8 +24923,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   fontWeightOptions: () => (/* binding */ fontWeightOptions),
 /* harmony export */   form_fields: () => (/* binding */ form_fields),
 /* harmony export */   general: () => (/* binding */ general),
+/* harmony export */   integration: () => (/* binding */ integration),
 /* harmony export */   layoutOptions: () => (/* binding */ layoutOptions),
 /* harmony export */   security: () => (/* binding */ security),
+/* harmony export */   shortcodes: () => (/* binding */ shortcodes),
 /* harmony export */   tabs: () => (/* binding */ tabs)
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -24973,37 +24936,38 @@ __webpack_require__.r(__webpack_exports__);
 //app
 var TABS = [{
   id: "general",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "thlogin"),
   icon: "admin-settings"
 }, {
   id: "form-fields",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Fields", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Fields", "thlogin"),
   icon: "feedback"
 }, {
   id: "display-triggers",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Display Triggers", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Display Triggers", "thlogin"),
   icon: "visibility"
 }, {
   id: "design",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Design", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Design", "thlogin"),
   icon: "art"
 }, {
   id: "integration",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration", "thlogin"),
   icon: "admin-plugins"
 }, {
   id: "security",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security", "thlogin"),
   icon: "shield"
 }, {
   id: "tools",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "thlogin"),
   icon: "admin-tools"
 }];
 var general = {
   plugin_status: "enabled",
+  replace_wordpress: true,
   form_type: 'double',
-  display_mode: 'popup',
+  display_mode: 'page',
   default_register_role: 'subscriber',
   auto_login_after_registration: false,
   close_button: true,
@@ -25350,7 +25314,7 @@ var design = {
   }
 };
 var display_triggers = {
-  trigger_css_class: "th-login-trigger",
+  trigger_css_class: "thlogin-trigger",
   auto_open_on_load: {
     enabled: true,
     delay_seconds: 2
@@ -25409,12 +25373,17 @@ var display_triggers = {
   menu_integration: {
     enabled: false,
     menu_slug: "primary",
-    item_text_login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
-    item_text_register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
+    item_text_login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "thlogin"),
+    item_text_register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "thlogin"),
     item_icon_login: "dashicons-admin-users",
     item_icon_register: "dashicons-plus-alt",
     visibility_login_logged_in: false,
     visibility_register_logged_in: false
+  }
+};
+var integration = {
+  woocommerce: {
+    enabled: true
   }
 };
 var security = {
@@ -25436,48 +25405,71 @@ var security = {
 //deisgn-settings
 var tabs = [{
   key: "login",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "thlogin")
 }, {
   key: "register",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "thlogin")
 }, {
   key: "forgot_password",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot", "th-login")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot", "thlogin")
 }];
 var layoutOptions = [{
   key: "page",
   icon: "admin-page",
   // more appropriate than "align-center"
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/ShortCode", "thlogin"),
   demoClass: "page"
 }, {
   key: "popup",
   icon: "align-center",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "thlogin"),
   demoClass: "popup"
 }, {
   key: "slide_in_left",
   icon: "align-pull-left",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "thlogin"),
   demoClass: "slide-left"
 }, {
   key: "slide_in_right",
   icon: "align-pull-right",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "thlogin"),
   demoClass: "slide-right"
 }];
 var fontWeightOptions = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "thlogin"),
   value: 300
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Medium", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Medium", "thlogin"),
   value: 500
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Semi-Bold", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Semi-Bold", "thlogin"),
   value: 700
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bold", "th-login"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bold", "thlogin"),
   value: 900
+}];
+
+//general-settings
+var shortcodes = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form", "thlogin"),
+  shortcode: "[th_login_form]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the login form", "thlogin")
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register Form", "thlogin"),
+  shortcode: "[th_register_form]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the register form", "thlogin")
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password Form", "thlogin"),
+  shortcode: "[th_forgot_password_form]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the forgot password form", "thlogin")
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Combined Modal", "thlogin"),
+  shortcode: "[th_login__combined_form]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shows the full login/register/forgot modal and auto-triggers it", "thlogin")
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup Link", "thlogin"),
+  shortcode: "[th_login_popup_auto]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Use this link to generate popup link.")
 }];
 
 /***/ }),
@@ -25647,11 +25639,11 @@ __webpack_require__.r(__webpack_exports__);
 
 // Render the main App component into the root element.
 document.addEventListener('DOMContentLoaded', function () {
-  var rootElement = document.getElementById('th-login-admin-root');
+  var rootElement = document.getElementById('thlogin-admin-root');
   if (rootElement) {
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.render)((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_App__WEBPACK_IMPORTED_MODULE_1__["default"]), rootElement);
   } else {
-    console.error('TH Login Admin: Root element #th-login-admin-root not found.');
+    console.error('TH Login Admin: Root element #thlogin-admin-root not found.');
   }
 });
 })();

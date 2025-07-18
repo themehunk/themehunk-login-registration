@@ -18,7 +18,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
     useEffect(() => {
         const fetchSuggestions = async () => {
             try {
-            const response = await apiFetch({ path: "th-login/v1/content-suggestions" });
+            const response = await apiFetch({ path: "thlogin/v1/content-suggestions" });
 
             if (response) {
                 setSuggestions(response);
@@ -556,40 +556,6 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                             </div>
                         )}
-
-                        <div className="setting-row">
-                            <div className="setting-label">
-                                <h4>{__("Show on WooCommerce My Account Page", "th-login")}</h4>
-                                <p className="description">
-                                {__("Automatically open the modal on the WooCommerce My Account page.", "th-login")}
-                                </p>
-                            </div>
-
-                            <div className="setting-control">
-                                <ToggleControl
-                                __nextHasNoMarginBottom={true}
-                                checked={settings.display_triggers.auto_open_conditions?.on_woocommerce_myaccount || false}
-                                onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_myaccount'], isChecked)}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="setting-row">
-                            <div className="setting-label">
-                                <h4>{__("Show on WooCommerce Checkout Page", "th-login")}</h4>
-                                <p className="description">
-                                {__("Automatically open the modal on the WooCommerce Checkout page.", "th-login")}
-                                </p>
-                            </div>
-
-                            <div className="setting-control">
-                                <ToggleControl
-                                __nextHasNoMarginBottom={true}
-                                checked={settings.display_triggers.auto_open_conditions?.on_woocommerce_checkout || false}
-                                onChange={(isChecked) => handleSettingChange('display_triggers', ['auto_open_conditions', 'on_woocommerce_checkout'], isChecked)}
-                                />
-                            </div>
-                        </div>
 
                     </div>
                 )}

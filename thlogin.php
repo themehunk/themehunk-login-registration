@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       TH Login
- * Plugin URI:        https://themehunk.com/th-login
+ * Plugin URI:        https://themehunk.com/thlogin
  * Description:       A powerful and highly customizable frontend login, registration, and password reset pop-up plugin for WordPress.
  * Version:           1.0.0
  * Requires at least: 5.8
@@ -21,13 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TH_LOGIN_VERSION', '1.0.0' );
-define( 'TH_LOGIN_FILE', __FILE__ );
-define( 'TH_LOGIN_PATH', plugin_dir_path( TH_LOGIN_FILE ) );
-define( 'TH_LOGIN_URL', plugin_dir_url( TH_LOGIN_FILE ) );
-define( 'TH_LOGIN_BASENAME', plugin_basename( TH_LOGIN_FILE ) );
+define( 'THLOGIN_VERSION', '1.0.0' );
+define( 'THLOGIN_FILE', __FILE__ );
+define( 'THLOGIN_PATH', plugin_dir_path( THLOGIN_FILE ) );
+define( 'THLOGIN_URL', plugin_dir_url( THLOGIN_FILE ) );
+define( 'THLOGIN_BASENAME', plugin_basename( THLOGIN_FILE ) );
 
-final class TH_Login {
+final class THLogin {
 
 	protected static $instance = null;
 
@@ -35,6 +35,7 @@ final class TH_Login {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
+
 		return self::$instance;
 	}
 
@@ -44,38 +45,38 @@ final class TH_Login {
 	}
 
 	private function define_hooks() {
-		register_activation_hook( TH_LOGIN_FILE, array( $this, 'activate' ) );
-		register_deactivation_hook( TH_LOGIN_FILE, array( $this, 'deactivate' ) );
+		register_activation_hook( THLOGIN_FILE, array( $this, 'activate' ) );
+		register_deactivation_hook( THLOGIN_FILE, array( $this, 'deactivate' ) );
 		add_action( 'plugins_loaded', array( $this, 'init_plugin' ) );
 	}
 
 	private function includes() {
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-admin.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-frontend.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-shortcodes.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-security.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-rest-api.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-forms.php';
-		require_once TH_LOGIN_PATH . 'includes/class-th-login-integrations.php';
-		require_once TH_LOGIN_PATH . 'includes/helpers.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-admin.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-frontend.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-shortcodes.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-security.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-rest-api.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-forms.php';
+		require_once THLOGIN_PATH . 'includes/class-thlogin-integrations.php';
+		require_once THLOGIN_PATH . 'includes/helpers.php';
 	}
 
 	public function init_plugin() {
-		load_plugin_textdomain( 'th-login', false, dirname( TH_LOGIN_BASENAME ) . '/languages' );
+		load_plugin_textdomain( 'th-login', false, dirname( THLOGIN_BASENAME ) . '/languages' );
 
-		new TH_Login_Admin();
-		new TH_Login_Frontend();
-		new TH_Login_Shortcodes();
-		new TH_Login_Security();
-		new TH_Login_REST_API();
-		new TH_Login_Forms();
-		new TH_Login_Integrations();
+		new THLogin_Admin();
+		new THLogin_Frontend();
+		new THLogin_Shortcodes();
+		new THLogin_Security();
+		new THLogin_REST_API();
+		new THLogin_Forms();
+		new THLogin_Integrations();
 
-		add_filter( 'plugin_action_links_' . TH_LOGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
+		add_filter( 'plugin_action_links_' . THLOGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
 	}
 
 	public function activate() {
-		th_login_set_default_options();
+		thlogin_set_default_options();
 	}
 
 	public function deactivate() {
@@ -83,18 +84,19 @@ final class TH_Login {
 	}
 
 	public function add_plugin_action_links( $links ) {
-		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=th-login-settings' ) ) . '">' . esc_html__( 'Settings', 'th-login' ) . '</a>';
+		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'th-login' ) . '</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}
 }
 
-function th_login_set_default_options() {
+function thlogin_set_default_options() {
 
 	$general_defaults = array(
 		'plugin_status' => 'enabled',
+		'repalce_wordpress' => true,
 		'form_type' => 'double',
-		'display_mode'=> 'popup',
+		'display_mode'=> 'page',
 		'default_register_role'=> 'subscriber', 
 		'auto_login_after_registration' => false,
 		'allow_user_registration' => get_option( 'users_can_register' ),
@@ -447,7 +449,7 @@ function th_login_set_default_options() {
 	);
 	
 	$display_triggers_defaults = array(
-		'trigger_css_class'          => 'th-login-trigger',
+		'trigger_css_class'          => 'thlogin-trigger',
 		'auto_open_on_load'          => array( 'enabled' => true, 'delay_seconds' => 2 ),
 		'auto_open_on_scroll'        => array( 'enabled' => false, 'scroll_percentage' => 50 ),
 		'auto_open_on_exit_intent'   => array( 'enabled' => false ),
@@ -493,12 +495,19 @@ function th_login_set_default_options() {
 		'honeypot_enabled'       => true,
 	);
 
+	$integration_defaults = array(
+		'woocommerce' => array(
+			'enabled' => true,
+		),
+	);
+
 	$defaults = array(
 		'general'           => $general_defaults,
 		'design'            => $design_defaults,
 		'form_fields'       => $form_fields_defaults,
 		'display_triggers'  => $display_triggers_defaults,
 		'security'          => $security_defaults,
+		'integration'       => $integration_defaults,
 	);
 
 	foreach ( $defaults as $key => $value ) {
@@ -507,16 +516,16 @@ function th_login_set_default_options() {
 
 }
 
-register_activation_hook( __FILE__, 'th_login_set_default_options' );
+register_activation_hook( __FILE__, 'thlogin_set_default_options' );
 
-require_once TH_LOGIN_PATH . 'includes/class-th-login-menu-integration.php';
-new TH_Login_Menu_Integration();
+require_once THLOGIN_PATH . 'includes/class-thlogin-menu-integration.php';
+new THLogin_Menu_Integration();
 
-require_once TH_LOGIN_PATH . 'includes/class-th-login-gutenberg-block.php';
-new TH_Login_Gutenberg_Block();
+require_once THLOGIN_PATH . 'includes/class-thlogin-gutenberg-block.php';
+new THLogin_Gutenberg_Block();
 
-function th_login_init() {
-	return TH_Login::instance();
+function thlogin_init() {
+	return THLogin::instance();
 }
 
-th_login_init();
+thlogin_init();

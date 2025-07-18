@@ -1,13 +1,13 @@
 // Base styles for the TH Login frontend modal and forms.
 
 // General body styling to prevent scroll when modal is open
-body.th-login-modal-open {
+body.thlogin-modal-open {
     overflow: hidden;
     padding-right: 15px; // Compensate for scrollbar to prevent layout shift
 }
 
 // Main modal container
-.th-login-popup-modal {
+.thlogin-popup-modal {
     display: none; // Hidden by default, shown by JS
     position: fixed;
     top: 0;
@@ -25,41 +25,41 @@ body.th-login-modal-open {
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 
-    &.th-login-popup-modal--active {
+    &.thlogin-popup-modal--active {
         opacity: 1;
         visibility: visible;
     }
 
     // Animation for opening
-    &.th-login-popup-modal--opening {
-        animation: th-login-fade-in 0.3s forwards;
+    &.thlogin-popup-modal--opening {
+        animation: thlogin-fade-in 0.3s forwards;
     }
 
     // Animation for closing
-    &.th-login-popup-modal--closing {
-        animation: th-login-fade-out 0.3s forwards;
+    &.thlogin-popup-modal--closing {
+        animation: thlogin-fade-out 0.3s forwards;
     }
 
     // Animation for opening
-    &.th-login-slide-in-right.th-login-popup-modal--opening .th-login-popup-form-container{
+    &.thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container{
        animation: slideInFromRight 0.5s forwards !important;
     }
 
-    &.th-login-slide-in-right.th-login-popup-modal--closing .th-login-popup-form-container{
+    &.thlogin-slide-in-right.thlogin-popup-modal--closing .thlogin-popup-form-container{
         animation: slideOutToRight 0.5s forwards !important;
     }
 
-    &.th-login-slide-in-left.th-login-popup-modal--opening .th-login-popup-form-container{
+    &.thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container{
        animation: slideInFromLeft 0.5s forwards !important;
     }
 
-    &.th-login-slide-in-left.th-login-popup-modal--closing .th-login-popup-form-container{
+    &.thlogin-slide-in-left.thlogin-popup-modal--closing .thlogin-popup-form-container{
         animation: slideOutToLeft 0.5s forwards !important;
     }
 }
 
 // Modal overlay
-.th-login-popup-overlay {
+.thlogin-popup-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -70,9 +70,9 @@ body.th-login-modal-open {
 }
 
 // Form container within the modal
-.th-login-popup-form-container {
+.thlogin-popup-form-container {
     position: relative;
-    z-index: 100000; // Above overlay
+    z-index: 100; // Above overlay
     max-width: 500px;
     width: 400px; // Default width
     margin: 20px; // Margin for smaller screens
@@ -93,7 +93,7 @@ body.th-login-modal-open {
 }
 
 // Close button
-.th-login-popup-close-button {
+.thlogin-popup-close-button {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -119,12 +119,12 @@ body.th-login-modal-open {
 }
 
 // Individual form styling (hidden/shown by JS)
-.th-login-form {
+.thlogin-form {
     display: none; // Hidden by default, shown by setActiveForm
     width: 100%; // Take full width of container
     box-sizing: border-box;
 
-    &.th-login-form--active {
+    &.thlogin-form--active {
         display: block; // Or flex, depending on internal layout
     }
 
@@ -137,13 +137,13 @@ body.th-login-modal-open {
 }
 
 // Form submission button
-.th-login-form-submit {
+.thlogin-form-submit {
     margin-top: 20px;
     text-align: center;
     width: 100%;
 
-    .th-login-button {
-        .th-login-spinner {
+    .thlogin-button {
+        .thlogin-spinner {
             display: inline-block;
             width: 16px;
             height: 16px;
@@ -158,7 +158,7 @@ body.th-login-modal-open {
 }
 
 // Form links (e.g., "Forgot Password?", "Back to Login")
-.th-login-form-links {
+.thlogin-form-links {
     margin-top: 15px;
     text-align: center;
     width: 100%;
@@ -177,12 +177,12 @@ body.th-login-modal-open {
 }
 
 // Messages (success/error)
-.th-login-messages {
+.thlogin-messages {
     width: 100%;
     margin-bottom: 15px;
     text-align: center;
 
-    p.th-login-message {
+    p.thlogin-message {
         padding: 10px 15px;
         border-radius: 4px;
         border: 1px solid;
@@ -203,7 +203,7 @@ body.th-login-modal-open {
 }
 
 // Shortcode form wrapper styles (for inline forms)
-.th-login-shortcode-form-wrapper {
+.thlogin-shortcode-form-wrapper {
     max-width: 500px; // Match modal form max-width for consistency
     margin: 30px auto;
     padding: 30px;
@@ -213,18 +213,18 @@ body.th-login-modal-open {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
 
-    .th-login-form {
+    .thlogin-form {
         display: block; // Always visible when embedded via shortcode
     }
 }
 
 // Animations
-@keyframes th-login-fade-in {
+@keyframes thlogin-fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@keyframes th-login-fade-out {
+@keyframes thlogin-fade-out {
     from { opacity: 1; }
     to { opacity: 0; }
 }
@@ -234,16 +234,16 @@ body.th-login-modal-open {
     100% { transform: rotate(360deg); }
 }
 
-.th-login-popup-modal.th-login-slide-in-right{
+.thlogin-popup-modal.thlogin-slide-in-right{
   justify-content: flex-end;
 }
 
-.th-login-popup-modal.th-login-slide-in-left {
+.thlogin-popup-modal.thlogin-slide-in-left {
     justify-content: flex-start;
 }
 
-.th-login-popup-modal.slide-in-left .th-login-popup-form-container,
-.th-login-popup-modal.slide-in-right .th-login-popup-form-container {
+.thlogin-popup-modal.slide-in-left .thlogin-popup-form-container,
+.thlogin-popup-modal.slide-in-right .thlogin-popup-form-container {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -264,8 +264,8 @@ body.th-login-modal-open {
 
 
 // Overlay hidden for slide modes or optionally semi-transparent behind panel
-.th-login-popup-modal.slide-in-left .th-login-popup-overlay,
-.th-login-popup-modal.slide-in-right .th-login-popup-overlay {
+.thlogin-popup-modal.slide-in-left .thlogin-popup-overlay,
+.thlogin-popup-modal.slide-in-right .thlogin-popup-overlay {
   display: none; // or reduce opacity if you want some dimming effect
 }
 
@@ -314,17 +314,17 @@ body.th-login-modal-open {
   }
 }
 
-.th-login-form-toggle {
+.thlogin-form-toggle {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
 	margin-bottom: 20px;
 }
 
-
 /* Main page mode layout */
-#th-login-popup-modal.th-login-page {
+#thlogin-popup-modal.thlogin-page {
     position: fixed;
+    display:none !important;
     top: 0;
     left: 0;
     width: 100vw;
@@ -338,12 +338,12 @@ body.th-login-modal-open {
 }
 
 //icon
-.th-login-label-with-icon {
+.thlogin-label-with-icon {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 
-	.th-login-label-icon {
+	.thlogin-label-icon {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -355,25 +355,25 @@ body.th-login-modal-open {
 		}
 	}
 
-	.th-login-label-text {
+	.thlogin-label-text {
 		display: inline-block;
 	}
 }
 
 //header
-.th-login-popup-close-button {
+.thlogin-popup-close-button {
     position: absolute;
     top: 3%;
     right: 3%;
 }
 
-.th-login-form-toggle {
+.thlogin-form-toggle {
     display: flex;
     gap: 10px;
     margin: 15px 0;
 }
 
-.th-login-toggle-button {
+.thlogin-toggle-button {
     padding: 8px 20px;
     border: none;
     border-radius: 4px;
@@ -381,26 +381,26 @@ body.th-login-modal-open {
     transition: all 0.3s ease;
 }
 
-.th-login-slide-in-left .th-login-popup-form-container{
+.thlogin-slide-in-left .thlogin-popup-form-container{
     height:100%;
     margin:0;
 }
 
-.th-login-slide-in-right .th-login-popup-form-container{
+.thlogin-slide-in-right .thlogin-popup-form-container{
     height:100%;
      margin:0;
 }
 
-.th-login-page .th-login-popup-form-container{
+.thlogin-page .thlogin-popup-form-container{
     height:100%;
 }
 
 
-.th-login-popup-modal .th-login-popup-form-container{
+.thlogin-popup-modal .thlogin-popup-form-container{
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.th-login-popup-modal-effect .th-login-popup-form-container {
+.thlogin-popup-modal-effect .thlogin-popup-form-container {
 	animation: thModalPopupOpen 0.3s ease-out forwards;
 	opacity: 0;
 	transform: scale(0.9);

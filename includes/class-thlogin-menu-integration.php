@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handles integration of Login/Register/Logout links into WordPress navigation menus.
  */
-class TH_Login_Menu_Integration {
+class THLogin_Menu_Integration {
 
 	/**
 	 * Constructor.
@@ -40,7 +40,7 @@ class TH_Login_Menu_Integration {
 	 * @return string Modified HTML list of menu items.
 	 */
 	public function add_login_register_logout_links( $items, $args ) {
-		$display_triggers_settings = $this->safe_json_option( 'th_login_display_triggers_settings' );
+		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
 		$menu_integration_settings = $display_triggers_settings['menu_integration'] ?? array();
 
 		if ( ! ( $menu_integration_settings['enabled'] ?? false ) ) {
@@ -71,7 +71,7 @@ class TH_Login_Menu_Integration {
 			$logout_text = esc_html__( 'Logout', 'th-login' );
 			$logout_icon = 'dashicons-admin-users'; // Default icon for logout.
 
-			$logout_link_html = '<li class="menu-item th-login-menu-item th-login-menu-item--logout">';
+			$logout_link_html = '<li class="menu-item thlogin-menu-item thlogin-menu-item--logout">';
 			$logout_link_html .= '<a href="' . esc_url( $logout_url ) . '">';
 			if ( ! empty( $logout_icon ) ) {
 				$logout_link_html .= '<span class="dashicons ' . esc_attr( $logout_icon ) . '"></span> ';
@@ -89,8 +89,8 @@ class TH_Login_Menu_Integration {
 
 		} else {
 			// Add Login link.
-			$login_link_html = '<li class="menu-item th-login-menu-item th-login-menu-item--login">';
-			$login_link_html .= '<a href="#" class="th-login-trigger" data-th-popup-action="login">';
+			$login_link_html = '<li class="menu-item thlogin-menu-item thlogin-menu-item--login">';
+			$login_link_html .= '<a href="#" class="thlogin-trigger" data-th-popup-action="login">';
 			if ( ! empty( $login_icon ) ) {
 				$login_link_html .= '<span class="dashicons ' . esc_attr( $login_icon ) . '"></span> ';
 			}
@@ -99,8 +99,8 @@ class TH_Login_Menu_Integration {
 
 			// Add Register link.
 			if ( get_option( 'users_can_register' ) ) {
-				$register_link_html = '<li class="menu-item th-login-menu-item th-login-menu-item--register">';
-				$register_link_html .= '<a href="#" class="th-login-trigger" data-th-popup-action="register">';
+				$register_link_html = '<li class="menu-item thlogin-menu-item thlogin-menu-item--register">';
+				$register_link_html .= '<a href="#" class="thlogin-trigger" data-th-popup-action="register">';
 				if ( ! empty( $register_icon ) ) {
 					$register_link_html .= '<span class="dashicons ' . esc_attr( $register_icon ) . '"></span> ';
 				}

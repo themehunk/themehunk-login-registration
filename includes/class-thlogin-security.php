@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * - Email verification for new registrations
  * - Manual user approval for new registrations
  */
-class TH_Login_Security {
+class THLogin_Security {
 
 	/**
 	 * Option key for storing failed login attempts.
@@ -65,7 +65,7 @@ class TH_Login_Security {
 	 * @param string $username The username that failed to log in.
 	 */
 	public function log_failed_login_attempt( $username ) {
-		$security_settings = $this->safe_json_option( 'th_login_security_settings' );
+		$security_settings = $this->safe_json_option( 'thlogin_security_settings' );
 		$brute_force_enabled = $security_settings['brute_force_protection']['enabled'] ?? true;
 
 		if ( ! $brute_force_enabled ) {
@@ -110,7 +110,7 @@ class TH_Login_Security {
 			return $user;
 		}
 
-		$security_settings = $this->safe_json_option( 'th_login_security_settings' );
+		$security_settings = $this->safe_json_option( 'thlogin_security_settings' );
 		$brute_force_enabled = $security_settings['brute_force_protection']['enabled'] ?? true;
 
 		if ( ! $brute_force_enabled ) {
@@ -160,15 +160,19 @@ class TH_Login_Security {
 	 * @return string
 	 */
 	private function get_user_ip_address() {
-		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-			$ip = $_SERVER['HTTP_CLIENT_IP'];
-		} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		} else {
-			$ip = $_SERVER['REMOTE_ADDR'];
+		$ip = '';
+
+		if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
+		} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+		} elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+			$ip = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 		}
-		return sanitize_text_field( $ip );
+
+		return $ip;
 	}
+
 
 	/**
 	 * --- Email Verification ---
@@ -178,47 +182,61 @@ class TH_Login_Security {
 	 * Handles the email verification request when a user clicks the verification link.
 	 */
 	public function handle_email_verification_request() {
-		if ( ! isset( $_GET['th_login_verify_email'] ) || ! isset( $_GET['user_id'] ) ) {
+		if (
+			! isset( $_GET['th_login_verify_email'], $_GET['user_id'], $_GET['_wpnonce'] ) ||
+			! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_verify_email' )
+		) {
 			return;
 		}
 
 		$verification_key = sanitize_text_field( wp_unslash( $_GET['th_login_verify_email'] ) );
-		$user_id = absint( wp_unslash( $_GET['user_id'] ) );
-
-		$user = get_user_by( 'id', $user_id );
+		$user_id          = absint( wp_unslash( $_GET['user_id'] ) );
+		$user             = get_user_by( 'id', $user_id );
 
 		if ( ! $user ) {
-			wp_die( esc_html__( 'Invalid user ID.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
+			wp_die(
+				esc_html__( 'Invalid user ID.', 'th-login' ),
+				esc_html__( 'Verification Error', 'th-login' )
+			);
 		}
 
 		$stored_key = get_user_meta( $user_id, 'th_login_email_verification_key', true );
 
 		if ( empty( $stored_key ) || $stored_key !== $verification_key ) {
-			wp_die( esc_html__( 'Invalid or expired verification link.', 'th-login' ), esc_html__( 'Verification Error', 'th-login' ) );
+			wp_die(
+				esc_html__( 'Invalid or expired verification link.', 'th-login' ),
+				esc_html__( 'Verification Error', 'th-login' )
+			);
 		}
 
-		// Mark email as verified.
+		// ✅ Mark email as verified
 		update_user_meta( $user_id, 'th_login_email_verified', true );
-		delete_user_meta( $user_id, 'th_login_email_verification_key' ); // Remove key after use.
+		delete_user_meta( $user_id, 'th_login_email_verification_key' );
 
-		// Handle redirection after verification.
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
-		$redirect_type = $general_settings['email_verification']['redirect_after_verification'] ?? 'login_form';
-		$redirect_url = home_url(); // Default fallback.
+		// 🔁 Handle redirection
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
+		$redirect_type    = $general_settings['email_verification']['redirect_after_verification'] ?? 'login_form';
+		$redirect_url     = home_url(); // Default fallback
 
-		if ( 'dashboard' === $redirect_type ) {
-			$redirect_url = admin_url();
-		} elseif ( 'home_page' === $redirect_type ) {
-			$redirect_url = home_url();
-		} elseif ( 'custom_url' === $redirect_type && ! empty( $general_settings['email_verification']['custom_redirect_url'] ) ) {
-			$redirect_url = esc_url_raw( $general_settings['email_verification']['custom_redirect_url'] );
-		} elseif ( 'login_form' === $redirect_type ) {
-			// Redirect to a page with the login modal.
-			// For now, we'll redirect to home page with a success message parameter.
-			$redirect_url = add_query_arg( 'th_login_verified', 'true', home_url() );
+		switch ( $redirect_type ) {
+			case 'dashboard':
+				$redirect_url = admin_url();
+				break;
+			case 'custom_url':
+				if ( ! empty( $general_settings['email_verification']['custom_redirect_url'] ) ) {
+					$redirect_url = esc_url_raw( $general_settings['email_verification']['custom_redirect_url'] );
+				}
+				break;
+			case 'login_form':
+				$redirect_url = add_query_arg( 'th_login_verified', 'true', home_url() );
+				break;
+			case 'home_page':
+			default:
+				$redirect_url = home_url();
+				break;
 		}
 
-		// Auto-login if enabled and no manual approval needed.
+		// 🔐 Auto-login if no manual approval is enabled
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 		if ( ! $manual_user_approval_enabled ) {
 			wp_set_current_user( $user_id );
@@ -241,7 +259,7 @@ class TH_Login_Security {
 			return $user;
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$email_verification_enabled = $general_settings['email_verification']['enabled'] ?? false;
 
 		if ( ! $email_verification_enabled ) {
@@ -270,7 +288,7 @@ class TH_Login_Security {
 	 * @param int $user_id The ID of the newly registered user.
 	 */
 	public function set_user_pending_approval_status( $user_id ) {
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( $manual_user_approval_enabled ) {
@@ -291,7 +309,7 @@ class TH_Login_Security {
 			return $user;
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( ! $manual_user_approval_enabled ) {
@@ -320,7 +338,7 @@ class TH_Login_Security {
 			return; // Only show for users who can edit other users.
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( ! $manual_user_approval_enabled ) {
@@ -356,31 +374,38 @@ class TH_Login_Security {
 			return;
 		}
 
-		$general_settings = $this->safe_json_option( 'th_login_general_settings' );
+		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
 		$manual_user_approval_enabled = $general_settings['manual_user_approval']['enabled'] ?? false;
 
 		if ( ! $manual_user_approval_enabled ) {
 			return;
 		}
 
-		if ( isset( $_POST['th_login_pending_approval'] ) ) {
-			$new_status = ( '1' === $_POST['th_login_pending_approval'] );
+		if (
+			isset( $_POST['th_login_pending_approval'] ) &&
+			isset( $_POST['_wpnonce'] ) &&
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'update-user_' . $user_id )
+		) {
+			$new_status = ( '1' === sanitize_text_field( wp_unslash( $_POST['th_login_pending_approval'] ) ) );
+			$was_pending = get_user_meta( $user_id, 'th_login_pending_approval', true );
+
 			update_user_meta( $user_id, 'th_login_pending_approval', $new_status );
 
-			// If changed from pending to approved, and email verification is not enabled,
-			// or if email is already verified, then auto-login (if setting allows)
-			// or send a notification.
-			if ( ! $new_status && get_user_meta( $user_id, 'th_login_pending_approval', true ) ) { // Was pending, now approved.
-				// Optionally, send an email to the user notifying them of approval.
-				// This would involve getting email content from settings.
-				// For now, just a basic notification.
+			if ( ! $new_status && $was_pending ) {
 				$user = get_user_by( 'id', $user_id );
 				if ( $user ) {
 					$subject = esc_html__( 'Your account has been approved!', 'th-login' );
-					$message = sprintf( esc_html__( 'Hello %s, your account on %s has been approved. You can now log in.', 'th-login' ), $user->user_login, get_bloginfo( 'name' ) );
+					
+					$message = sprintf(
+						/* translators: 1: Field ID, 2: Form name/identifier */
+						esc_html__( 'Hello %1$s, your account on %2$s has been approved. You can now log in.', 'th-login' ),
+						$user->user_login,
+						get_bloginfo( 'name' )
+					);
 					wp_mail( $user->user_email, $subject, $message );
 				}
 			}
 		}
 	}
+
 }

@@ -23,14 +23,14 @@ import { THL_ICONS } from "./icons";
 import { CustomSelectControl } from "./custom-select-control";
 
 const TAB_KEYS = {
-  login: __("Login", "th-login"),
-  register: __("Register", "th-login"),
-  forgot_password: __("Forgot Password", "th-login"),
+  login: __("Login", "thlogin"),
+  register: __("Register", "thlogin"),
+  forgot_password: __("Forgot Password", "thlogin"),
 };
 
 const DEFAULT_FIELD = () => ({
   id: "ff_" + Math.random().toString(36).substring(2, 9),
-  label: __("New Field", "th-login"),
+  label: __("New Field", "thlogin"),
   placeholder: "",
   icon: "admin-users",
   required: false,
@@ -131,14 +131,14 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
   const handleAddField = () => {
     const newField = DEFAULT_FIELD();
     updateFields([...fields, newField]);
-    setToastMessage(__("Field added successfully!", "th-login"));
+    setToastMessage(__("Field added successfully!", "thlogin"));
   };
 
   const handleDeleteField = (fieldId) => {
     const filtered = fields.filter((f) => f.id !== fieldId);
     updateFields(filtered);
     if (selectedField?.id === fieldId) setSelectedField(null);
-    setToastMessage(__("Field deleted", "th-login"));
+    setToastMessage(__("Field deleted", "thlogin"));
   };
 
   const handleFieldChange = (key, value) => {
@@ -170,9 +170,9 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
 
   
     const tabs = [
-        { key: "general", label: __("Login", "th-login") },
-        { key: "redirect", label: __("Register", "th-login") },
-        { key: "shortcodes", label: __("Forgot Password", "th-login") },
+        { key: "general", label: __("Login", "thlogin") },
+        { key: "redirect", label: __("Register", "thlogin") },
+        { key: "shortcodes", label: __("Forgot Password", "thlogin") },
     ];
     
     const renderTabs = () => (
@@ -200,7 +200,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
        <div className="settings-card">
           <h2 className="section-title">
               <i className="dashicons dashicons-feedback"></i>
-              {__("Form feild Settings", "th-login")}
+              {__("Form feild Settings", "thlogin")}
           </h2>
 
       <div className="thl-form-fields-settings">
@@ -222,10 +222,10 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               >
                 <div className="fields-group">
                   <h4 className="fields-group-title">
-                    {TAB_KEYS[activeTab]} {__("Fields", "th-login")}
+                    {TAB_KEYS[activeTab]} {__("Fields", "thlogin")}
                   </h4>
                   {fields.length === 0 ? (
-                    <p className="no-fields">{__("No fields yet.", "th-login")}</p>
+                    <p className="no-fields">{__("No fields yet.", "thlogin")}</p>
                   ) : (
                     fields.map((field) => (
                       <div
@@ -250,7 +250,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
 
           <div className="add-field-button-wrapper">
             <Button isSecondary onClick={handleAddField}>
-              + {__("Add Field", "th-login")}
+              + {__("Add Field", "thlogin")}
             </Button>
           </div>
         </div>
@@ -265,7 +265,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               <TextControl
                                               __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                label={__("Label", "th-login")}
+                label={__("Label", "thlogin")}
                 value={selectedField.label}
                 onChange={(val) => handleFieldChange("label", val)}
               />
@@ -273,7 +273,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               <TextControl
                                               __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                label={__("Placeholder", "th-login")}
+                label={__("Placeholder", "thlogin")}
                 value={selectedField.placeholder || ""}
                 onChange={(val) => handleFieldChange("placeholder", val)}
               />
@@ -282,7 +282,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                 <TextControl
                                                 __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                  label={__("Terms & Conditions Link", "th-login")}
+                  label={__("Terms & Conditions Link", "thlogin")}
                   placeholder="https://example.com/terms"
                   value={selectedField.link || ""}
                   onChange={(val) => handleFieldChange("link", val)}
@@ -292,14 +292,14 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
               <TextControl
                                               __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                label={__("Error Message", "th-login")}
+                label={__("Error Message", "thlogin")}
                 value={selectedField.error_message || ""}
                 onChange={(val) => handleFieldChange("error_message", val)}
               />
 
               <div className="thl-icon-picker">
                 <label className="components-base-control__label">
-                  {__("Choose Icon", "th-login")}
+                  {__("Choose Icon", "thlogin")}
                 </label>
 
                 <div
@@ -341,19 +341,19 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                   <TextControl
                                                   __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                    label={__("Name", "th-login")}
+                    label={__("Name", "thlogin")}
                     value={selectedField.name || ""}
                     onChange={(val) => handleFieldChange("name", val)}
                   />
                   <TextControl
                                                   __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                    label={__("ID", "th-login")}
+                    label={__("ID", "thlogin")}
                     value={selectedField.id || ""}
                     onChange={(val) => handleFieldChange("id", val)}
                   />
                   <CustomSelectControl
-                    label={__("Field Type", "th-login")}
+                    label={__("Field Type", "thlogin")}
                     value={selectedField.type || "text"}
                     options={[
                       { label: "Text", value: "text" },
@@ -362,16 +362,16 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                     ]}
                     onChange={(val) => handleFieldChange("type", val)}
                   />
-                  <div className="th-login-toggle-one-line">
+                  <div className="thlogin-toggle-one-line">
                     <ToggleControl
                     __nextHasNoMarginBottom={true}
-                      label={__("Required", "th-login")}
+                      label={__("Required", "thlogin")}
                       checked={selectedField.required}
                       onChange={(val) => handleFieldChange("required", val)}
                     />
                     <ToggleControl
                     __nextHasNoMarginBottom={true}
-                      label={__("Show Field", "th-login")}
+                      label={__("Show Field", "thlogin")}
                       checked={selectedField.show !== false}
                       onChange={(val) => handleFieldChange("show", val)}
                     />
@@ -387,7 +387,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                     <TextControl
                                                     __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                      label={__("Minimum Length", "th-login")}
+                      label={__("Minimum Length", "thlogin")}
                       type="number"
                       value={selectedField.minInput || ""}
                       onChange={(val) => handleFieldChange("minInput", parseInt(val))}
@@ -395,7 +395,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                     <TextControl
                                                     __next40pxDefaultSize = {true}
                                   __nextHasNoMarginBottom={true}
-                      label={__("Maximum Length", "th-login")}
+                      label={__("Maximum Length", "thlogin")}
                       type="number"
                       value={selectedField.maxInput || ""}
                       onChange={(val) => handleFieldChange("maxInput", parseInt(val))}
@@ -403,19 +403,19 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
                     <div className="check-group">
                       <ToggleControl
                       __nextHasNoMarginBottom={true}
-                        label={__("Require Letters (A-Z)", "th-login")}
+                        label={__("Require Letters (A-Z)", "thlogin")}
                         checked={selectedField.check?.text || false}
                         onChange={() => handleCheckToggle("text")}
                       />
                       <ToggleControl
                       __nextHasNoMarginBottom={true}
-                        label={__("Require Numbers (0-9)", "th-login")}
+                        label={__("Require Numbers (0-9)", "thlogin")}
                         checked={selectedField.check?.number || false}
                         onChange={() => handleCheckToggle("number")}
                       />
                       <ToggleControl
                       __nextHasNoMarginBottom={true}
-                        label={__("Require Special Characters", "th-login")}
+                        label={__("Require Special Characters", "thlogin")}
                         checked={selectedField.check?.special_character || false}
                         onChange={() => handleCheckToggle("special_character")}
                       />
@@ -425,7 +425,7 @@ const FormFieldsSettings = ({ settings, handleSettingChange }) => {
             </div>
           ) : (
             <div className="placeholder">
-              <p>{__("Click a field to edit its settings", "th-login")}</p>
+              <p>{__("Click a field to edit its settings", "thlogin")}</p>
             </div>
           )}
         </div>

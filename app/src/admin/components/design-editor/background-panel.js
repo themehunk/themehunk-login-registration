@@ -23,16 +23,16 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 			<ToggleGroupControl
 				__nextHasNoMarginBottom={true}
 				__next40pxDefaultSize = {true}
-				label={__("Background Type", "th-login")}
+				label={__("Background Type", "thlogin")}
 				value={type}
 				isBlock
 				onChange={(newType) => {
 					handleSettingChange("design", [...path, "type"], newType);
 				}}
 			>
-				<ToggleGroupControlOption value="color" label={__("Color", "th-login")} />
-				<ToggleGroupControlOption value="gradient" label={__("Gradient", "th-login")} />
-				<ToggleGroupControlOption value="image" label={__("Image", "th-login")} />
+				<ToggleGroupControlOption value="color" label={__("Color", "thlogin")} />
+				<ToggleGroupControlOption value="gradient" label={__("Gradient", "thlogin")} />
+				<ToggleGroupControlOption value="image" label={__("Image", "thlogin")} />
 			</ToggleGroupControl>
 
 			{type === "color" && (
@@ -54,12 +54,12 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 						onChange={(value) => handleSettingChange("design", [...path, "gradient"], value)}
 						gradients={[
 							{
-								name: __("Default", "th-login"),
+								name: __("Default", "thlogin"),
 								gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
 								slug: "default",
 							},
 							{
-								name: __("Ocean Blue", "th-login"),
+								name: __("Ocean Blue", "thlogin"),
 								gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
 								slug: "ocean-blue",
 							},
@@ -74,7 +74,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 						<TextControl
 							__next40pxDefaultSize
 							__nextHasNoMarginBottom={true}
-							label={__("Image URL", "th-login")}
+							label={__("Image URL", "thlogin")}
 							value={imageURL}
 							onChange={(val) =>
 								handleSettingChange("design", [...path, "image", "url"], val)
@@ -99,20 +99,20 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 								/>
 							</div>
 
-							<div className="th-login-media-image">
+							<div className="thlogin-media-image">
 								<CustomSelectControl
-									label={__("Position", "th-login")}
+									label={__("Position", "thlogin")}
 									value={position}
 									options={[
-										{ label: __("Top Left", "th-login"), value: "top left" },
-										{ label: __("Top Center", "th-login"), value: "top center" },
-										{ label: __("Top Right", "th-login"), value: "top right" },
-										{ label: __("Center Left", "th-login"), value: "center left" },
-										{ label: __("Center Center", "th-login"), value: "center center" },
-										{ label: __("Center Right", "th-login"), value: "center right" },
-										{ label: __("Bottom Left", "th-login"), value: "bottom left" },
-										{ label: __("Bottom Center", "th-login"), value: "bottom center" },
-										{ label: __("Bottom Right", "th-login"), value: "bottom right" },
+										{ label: __("Top Left", "thlogin"), value: "top left" },
+										{ label: __("Top Center", "thlogin"), value: "top center" },
+										{ label: __("Top Right", "thlogin"), value: "top right" },
+										{ label: __("Center Left", "thlogin"), value: "center left" },
+										{ label: __("Center Center", "thlogin"), value: "center center" },
+										{ label: __("Center Right", "thlogin"), value: "center right" },
+										{ label: __("Bottom Left", "thlogin"), value: "bottom left" },
+										{ label: __("Bottom Center", "thlogin"), value: "bottom center" },
+										{ label: __("Bottom Right", "thlogin"), value: "bottom right" },
 									]}
 									onChange={(val) =>
 										handleSettingChange("design", [...path, "image", "position"], val)
@@ -120,12 +120,12 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 								/>
 
 								<CustomSelectControl
-									label={__("Size", "th-login")}
+									label={__("Size", "thlogin")}
 									value={size}
 									options={[
-										{ label: __("Cover", "th-login"), value: "cover" },
-										{ label: __("Contain", "th-login"), value: "contain" },
-										{ label: __("Auto", "th-login"), value: "auto" },
+										{ label: __("Cover", "thlogin"), value: "cover" },
+										{ label: __("Contain", "thlogin"), value: "contain" },
+										{ label: __("Auto", "thlogin"), value: "auto" },
 									]}
 									onChange={(val) =>
 										handleSettingChange("design", [...path, "image", "size"], val)
@@ -133,13 +133,13 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 								/>
 
 								<CustomSelectControl
-									label={__("Repeat", "th-login")}
+									label={__("Repeat", "thlogin")}
 									value={repeat}
 									options={[
-										{ label: __("No Repeat", "th-login"), value: "no-repeat" },
-										{ label: __("Repeat", "th-login"), value: "repeat" },
-										{ label: __("Repeat X", "th-login"), value: "repeat-x" },
-										{ label: __("Repeat Y", "th-login"), value: "repeat-y" },
+										{ label: __("No Repeat", "thlogin"), value: "no-repeat" },
+										{ label: __("Repeat", "thlogin"), value: "repeat" },
+										{ label: __("Repeat X", "thlogin"), value: "repeat-x" },
+										{ label: __("Repeat Y", "thlogin"), value: "repeat-y" },
 									]}
 									onChange={(val) =>
 										handleSettingChange("design", [...path, "image", "repeat"], val)
@@ -153,7 +153,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 
 			{/* <div className="background-opacity-slider" style={{ marginTop: "16px" }}>
 				<RangeControl
-					label={__("Opacity", "th-login")}
+					label={__("Opacity", "thlogin")}
 					value={opacity}
 					onChange={(val) => {
 						handleSettingChange("design", [...path, "opacity"], val);

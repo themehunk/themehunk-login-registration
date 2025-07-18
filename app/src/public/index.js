@@ -2,10 +2,10 @@ import './styles/frontend.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Elements ---
-    const modal = document.getElementById('th-login-popup-modal');
+    const modal = document.getElementById('thlogin-popup-modal');
     if (!modal) return;
 
-    const formContainer = modal.querySelector('.th-login-popup-form-container');
+    const formContainer = modal.querySelector('.thlogin-popup-form-container');
 
     const loginForm = modal.querySelector('[data-form-type="login"]');
     const registerForm = modal.querySelector('[data-form-type="register"]');
@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const setActiveForm = (type) => {
         [loginForm, registerForm, forgotPasswordForm].forEach(form => {
             if (!form) return;
-            if (form.closest('#th-login-popup-modal')) {
+            if (form.closest('#thlogin-popup-modal')) {
                 if (form.dataset.formType === type) {
                     form.style.display = 'block';
-                    form.classList.add('th-login-form--active');
+                    form.classList.add('thlogin-form--active');
                 } else {
                     form.style.display = 'none';
-                    form.classList.remove('th-login-form--active');
+                    form.classList.remove('thlogin-form--active');
                 }
             }
         });
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const showMessage = (formElement, message, type) => {
-        const container = formElement.querySelector('.th-login-messages');
+        const container = formElement.querySelector('.thlogin-messages');
         if (!container) return;
-        container.innerHTML = `<p class="th-login-message th-login-message--${type}">${message}</p>`;
+        container.innerHTML = `<p class="thlogin-message thlogin-message--${type}">${message}</p>`;
         container.style.display = 'block';
         setTimeout(() => {
             container.innerHTML = '';
@@ -94,31 +94,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal) return;
 
         modal.classList.remove(
-            'th-login-popup-modal-effect',
-            'th-login-slide-in-left',
-            'th-login-slide-in-right',
-            'th-login-page',
-            'th-login-popup-modal--closing',
-            'th-login-popup-modal--active'
+            'thlogin-popup-modal-effect',
+            'thlogin-slide-in-left',
+            'thlogin-slide-in-right',
+            'thlogin-page',
+            'thlogin-popup-modal--closing',
+            'thlogin-popup-modal--active'
         );
-        modal.classList.add('th-login-popup-modal--opening');
+        modal.classList.add('thlogin-popup-modal--opening');
         modal.style.display = 'flex';
         modal.setAttribute('aria-hidden', 'false');
 
         if (display_type === 'slide_in_left') {
-            modal.classList.add('th-login-slide-in-left');
+            modal.classList.add('thlogin-slide-in-left');
         } else if (display_type === 'slide_in_right') {
-            modal.classList.add('th-login-slide-in-right');
+            modal.classList.add('thlogin-slide-in-right');
         } else if(display_type === 'page'){
-            modal.classList.add('th-login-page');
+            modal.classList.add('thlogin-page');
         }else{
-            modal.classList.add('th-login-popup-modal-effect');
+            modal.classList.add('thlogin-popup-modal-effect');
         }
 
         setActiveForm(formType);
 
         setTimeout(() => {
-            modal.classList.add('th-login-popup-modal--active');
+            modal.classList.add('thlogin-popup-modal--active');
         }, 50);
 
         recordPopupShown();
@@ -132,15 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = () => {
         if (!modal) return;
 
-        modal.classList.remove('th-login-popup-modal--opening');
-        modal.classList.add('th-login-popup-modal--closing');
-        modal.classList.remove('th-login-slide-in-left', 'th-login-slide-in-right', 'th-login-page', 'th-login-popup-modal-effect');
+        modal.classList.remove('thlogin-popup-modal--opening');
+        modal.classList.add('thlogin-popup-modal--closing');
+        modal.classList.remove('thlogin-slide-in-left', 'thlogin-slide-in-right', 'thlogin-page', 'thlogin-popup-modal-effect');
         modal.setAttribute('aria-hidden', 'true');
 
         animationEndHandler = function handler() {
-            if (modal.classList.contains('th-login-popup-modal--closing')) {
+            if (modal.classList.contains('thlogin-popup-modal--closing')) {
                 modal.style.display = 'none';
-                modal.classList.remove('th-login-popup-modal--active', 'th-login-popup-modal--closing');
+                modal.classList.remove('thlogin-popup-modal--active', 'thlogin-popup-modal--closing');
             }
             modal.removeEventListener('animationend', animationEndHandler);
             animationEndHandler = null;
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.addEventListener('click', e => {
         // Close modal: overlay or close button
-        if (e.target.closest('.th-login-popup-close-button') || e.target.closest('.th-login-popup-overlay')) {
+        if (e.target.closest('.thlogin-popup-close-button') || e.target.closest('.thlogin-popup-overlay')) {
             closeModal();
         }
         // Open modal via trigger elements
@@ -180,13 +180,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Form Submission Handling ---
-    document.querySelectorAll('.th-login-ajax-form').forEach(form => {
+    document.querySelectorAll('.thlogin-ajax-form').forEach(form => {
         form.addEventListener('submit', async e => {
             e.preventDefault();
 
             const formType = form.dataset.formType;
             const formData = new FormData(form);
-            const messagesContainer = form.querySelector('.th-login-messages');
+            const messagesContainer = form.querySelector('.thlogin-messages');
 
             if (messagesContainer) {
                 messagesContainer.innerHTML = '';
@@ -198,14 +198,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 requestData[key] = value;
             }
 
-            const endpoint = `${thLoginFrontendData.siteUrl}/wp-json/th-login/v1/${formType}`;
+            const endpoint = `${thLoginFrontendData.siteUrl}/wp-json/thlogin/v1/${formType}`;
 
             try {
                 const submitButton = form.querySelector('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
                     submitButton.dataset.originalText = submitButton.innerHTML;
-                    submitButton.innerHTML = `<span class="th-login-spinner"></span> ${thLoginFrontendData.settings.design?.buttons?.primary?.text_saving || 'Processing...'}`;
+                    submitButton.innerHTML = `<span class="thlogin-spinner"></span> ${thLoginFrontendData.settings.design?.buttons?.primary?.text_saving || 'Processing...'}`;
                 }
 
                 const response = await fetch(endpoint, {
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (formType === 'forgot-password') {
                         // Keep modal open so user can see success
                     } else {
-                        if (form.closest('#th-login-popup-modal')) {
+                        if (form.closest('#thlogin-popup-modal')) {
                             setTimeout(closeModal, 1000);
                         }
                     }
@@ -314,13 +314,13 @@ document.addEventListener('DOMContentLoaded', () => {
     checkAndAutoOpenModal();
 
     // Show shortcode embedded forms by default (visible)
-    document.querySelectorAll('.th-login-shortcode-form-wrapper .th-login-form').forEach(f => {
+    document.querySelectorAll('.thlogin-shortcode-form-wrapper .thlogin-form').forEach(f => {
         f.style.display = 'block';
-        f.classList.add('th-login-form--active');
+        f.classList.add('thlogin-form--active');
     });
 
         // Force auto-open if shortcode was used on this page
-    const isShortcodeBasedModal = document.querySelector('.th-login-shortcode-form-wrapper');
+    const isShortcodeBasedModal = document.querySelector('.thlogin-shortcode-form-wrapper');
     if (isShortcodeBasedModal && canShowModal()) {
         openModal('login'); // You can dynamically read form type if needed
     }

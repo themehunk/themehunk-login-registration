@@ -24636,12 +24636,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./custom-select-control */ "./src/admin/components/custom-select-control.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -24685,7 +24687,6 @@ var SecuritySettings = function SecuritySettings(_ref) {
       }, tab.label);
     }));
   };
-  console.log(settings);
   return /*#__PURE__*/React.createElement("section", {
     className: "settings-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -24790,16 +24791,20 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Version of reCAPTCHA to use", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
-  }, /*#__PURE__*/React.createElement("select", {
+  }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_3__.CustomSelectControl, {
     value: ((_settings$security$re3 = settings.security.recaptcha) === null || _settings$security$re3 === void 0 ? void 0 : _settings$security$re3.type) || "v2_checkbox",
-    onChange: function onChange(e) {
-      return handleSettingChange("security", ["recaptcha", "type"], e.target.value);
-    }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "v2_checkbox"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA v2 Checkbox", "thlogin")), /*#__PURE__*/React.createElement("option", {
-    value: "v3"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA v3 Invisible", "thlogin"))))), /*#__PURE__*/React.createElement("div", {
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("v2 Checkbox", "th-login"),
+      value: "v2_checkbox"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("v3", "th-login"),
+      value: "v3"
+    }],
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["recaptcha", "type"], value);
+    },
+    className: "modrn-size-fixer-167"
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"

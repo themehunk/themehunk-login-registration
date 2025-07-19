@@ -17,7 +17,6 @@ class THLogin_Security {
 				'permission_callback' => '__return_true'
 			] );
 		});
-		
 	}
 
 	private function safe_json_option( $key, $default = [] ) {
@@ -153,5 +152,67 @@ class THLogin_Security {
 		}
 
 		return [ 'locked_out' => false ];
+	}
+
+	/**
+	 * Verifies reCAPTCHA v2 or v3 response.
+	 *
+	 * @param string $token reCAPTCHA response token from frontend.
+	 * @param string $expected_action Action name (for v3).
+	 * @return true|WP_REST_Response
+	 */
+	public function verify_recaptcha( $token, $expected_action = 'login' ) {
+		$settings = $this->safe_json_option( 'thlogin_security_settings' );
+
+		if ( empty( $settings['recaptcha']['enabled'] ) ) {
+			return true;
+		}
+
+		if ( empty( $token ) ) {
+			return new WP_REST_Response( [
+				'success' => false,
+				'data' => [ 'message' => __( 'Please complete the reCAPTCHA verification.', 'th-login' ) ],
+			], 400 );
+		}
+
+		$response = wp_remote_post( 'https://www.google.com/recaptcha/api/siteverify', [
+			'body' => [
+				'secret'   => $settings['recaptcha']['secret_key'],
+				'response' => $token,
+				'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+			],
+		] );
+
+		if ( is_wp_error( $response ) ) {
+			return new WP_REST_Response( [
+				'success' => false,
+				'data' => [ 'message' => __( 'reCAPTCHA verification failed. Please try again.', 'th-login' ) ],
+			], 400 );
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+		if ( $settings['recaptcha']['type'] === 'v3' ) {
+			$threshold = 0.5;
+			if (
+				empty( $body['success'] ) ||
+				! isset( $body['score'] ) ||
+				$body['score'] < $threshold ||
+				empty( $body['action'] ) ||
+				$body['action'] !== $expected_action
+			) {
+				return new WP_REST_Response( [
+					'success' => false,
+					'data' => [ 'message' => __( 'reCAPTCHA v3 verification failed or suspicious activity detected.', 'th-login' ) ],
+				], 400 );
+			}
+		} elseif ( empty( $body['success'] ) ) {
+			return new WP_REST_Response( [
+				'success' => false,
+				'data' => [ 'message' => __( 'reCAPTCHA verification failed.', 'th-login' ) ],
+			], 400 );
+		}
+
+		return true;
 	}
 }

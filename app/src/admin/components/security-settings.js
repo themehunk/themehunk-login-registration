@@ -1,6 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { ToggleControl, TextControl, TextareaControl,ExternalLink } from "@wordpress/components";
 import { useState } from "react";
+import { CustomSelectControl } from './custom-select-control';
 
 const SecuritySettings = ({ settings, handleSettingChange }) => {
 
@@ -30,8 +31,6 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
         ))}
         </div>
     );
-
-    console.log(settings);
 
   return (  
     <section className="settings-section">
@@ -216,25 +215,18 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                           </p>
                         </div>
                         <div className="setting-control">
-                          <select
-                            value={
-                              settings.security.recaptcha?.type || "v2_checkbox"
-                            }
-                            onChange={(e) =>
-                              handleSettingChange(
-                                "security",
-                                ["recaptcha", "type"],
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="v2_checkbox">
-                              {__("reCAPTCHA v2 Checkbox", "thlogin")}
-                            </option>
-                            <option value="v3">
-                              {__("reCAPTCHA v3 Invisible", "thlogin")}
-                            </option>
-                          </select>
+
+                           <CustomSelectControl
+                              value={settings.security.recaptcha?.type || "v2_checkbox"}
+                              options={[
+                                { label: __("v2 Checkbox", "th-login"), value: "v2_checkbox" },
+                                { label: __("v3", "th-login"), value: "v3" },
+                              ]}
+                              onChange={(value) =>
+                                handleSettingChange("security", ["recaptcha", "type"], value)
+                              }
+                              className="modrn-size-fixer-167"
+                            />
                         </div>
                       </div>
 

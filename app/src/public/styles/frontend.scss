@@ -417,3 +417,18 @@ body.thlogin-modal-open {
 	}
 }
 
+/* reCAPTCHA styles */
+.g-recaptcha {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    
+    iframe {
+        max-width: 100%;
+    }
+}
+
+/* For v3 badge - optionally hide it */
+.grecaptcha-badge {
+    visibility: hidden;
+}

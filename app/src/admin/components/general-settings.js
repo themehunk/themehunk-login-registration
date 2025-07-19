@@ -33,9 +33,9 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
     const [activeTab, setActiveTab] = useState("general");
 
     const tabs = [
-        { key: "general", label: __("General", "thlogin") },
-        { key: "redirect", label: __("Redirect", "thlogin") },
-        { key: "shortcodes", label: __("Short Codes", "thlogin") },
+        { key: "general", label: __("General", "th-login") },
+        { key: "redirect", label: __("Redirect", "th-login") },
+        { key: "shortcodes", label: __("Short Codes", "th-login") },
     ];
     
     const renderTabs = () => (
@@ -59,7 +59,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
             <div className="settings-card">
                 <h2 className="section-title">
                     <i className="dashicons dashicons-admin-settings"></i>
-                    {__("General Settings", "thlogin")}
+                    {__("General Settings", "th-login")}
                 </h2>
 
                 {renderTabs()}
@@ -68,17 +68,17 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                     <>
                         
                         <div className="settings-group">
-                            <h3 className="group-title">{__("General", "thlogin")}</h3>
+                            <h3 className="group-title">{__("General", "th-login")}</h3>
                         </div>
 
                         {/* Plugin Status */}
                         <div className="setting-row">
                             <div className="setting-label">
-                            <h3>{__("Plugin Status", "thlogin")}</h3>
+                            <h3>{__("Plugin Status", "th-login")}</h3>
                             <p className="description">
                                 {settings.general.plugin_status === "enabled"
-                                ? __("Th Login Plugin is active", "thlogin")
-                                : __("Th Login Plugin is inactive", "thlogin")}
+                                ? __("Th Login Plugin is active", "th-login")
+                                : __("Th Login Plugin is inactive", "th-login")}
                             </p>
                             </div>
                             <div className="setting-control">
@@ -95,11 +95,11 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                        {/* Replace Default WordPress Forms Toggle
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h3>{__("Replace WordPress Login/Registration", "thlogin")}</h3>
+                                <h3>{__("Replace WordPress Login/Registration", "th-login")}</h3>
                                 <p className="description">
                                     {__(
                                         "Enable this to override default WordPress login, register, and lost password pages with TH Login popup/modal.",
-                                        "thlogin"
+                                        "th-login"
                                     )}
                                 </p>
                             </div>
@@ -118,9 +118,9 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                         {/* Allow User Registration Toggle */}
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h3>{__("Allow User Registration", "thlogin")}</h3>
+                                <h3>{__("Allow User Registration", "th-login")}</h3>
                                 <p className="description">
-                                    {__("If enabled, users can register an account using the register form.", "thlogin")}
+                                    {__("If enabled, users can register an account using the register form.", "th-login")}
                                 </p>
                             </div>
                             <div className="setting-control">
@@ -136,19 +136,19 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                         {/* Login Form Type */}
                         <div className="settings-group thlogin-modalchoose-form">
-                            <h4 className="group-title">{__("Login Form Type", "thlogin")}</h4>
+                            <h4 className="group-title">{__("Login Form Type", "th-login")}</h4>
 
                             <div className="form-type-options">
                                 {[
                                 {
                                     type: "single",
-                                    label: __("Single Form", "thlogin"),
-                                    description: __("Only login form will be shown", "thlogin"),
+                                    label: __("Single Form", "th-login"),
+                                    description: __("Only login form will be shown", "th-login"),
                                 },
                                 {
                                     type: "double",
-                                    label: __("Double Form", "thlogin"),
-                                    description: __("Users can toggle between Login and Register forms", "thlogin"),
+                                    label: __("Double Form", "th-login"),
+                                    description: __("Users can toggle between Login and Register forms", "th-login"),
                                 },
                                 ].map(({ type, label, description }) => (
                                 <div
@@ -185,14 +185,14 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                         {/* Display Mode */}
                         <div className="settings-group thlogin-modalchoose-form">
-                            <h4 className="group-title">{__("Login Display Mode", "thlogin")}</h4>
+                            <h4 className="group-title">{__("Login Display Mode", "th-login")}</h4>
                             <CustomSelectControl
                                 value={displayMode}
                                 options={[
-                                    { label: __("Page/ShortCode", "thlogin"), value: "page" },
-                                    { label: __("Popup", "thlogin"), value: "popup" },
-                                    { label: __("Slide-in-left", "thlogin"), value: "slide_in_left" },
-                                    { label: __("Slide-in-right", "thlogin"), value: "slide_in_right" },
+                                    { label: __("Page/ShortCode", "th-login"), value: "page" },
+                                    { label: __("Popup", "th-login"), value: "popup" },
+                                    { label: __("Slide-in-left", "th-login"), value: "slide_in_left" },
+                                    { label: __("Slide-in-right", "th-login"), value: "slide_in_right" },
                                 ]}
                                 onChange={(value) => handleSettingChange("general", ["display_mode"], value)}
                             />
@@ -200,7 +200,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                         <div className="settings-group thlogin-modalchoose-form">
                             <div>
-                                <h4 className="group-title">{__("Register user with role", "thlogin")}</h4>
+                                <h4 className="group-title">{__("Register user with role", "th-login")}</h4>
                             </div>
                             <CustomSelectControl
                                 value={settings.general.default_register_role || "subscriber"}
@@ -213,9 +213,9 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                            <h3>{__("Manual User Approval", "thlogin")}</h3>
+                            <h3>{__("Manual User Approval", "th-login")}</h3>
                             <p className="description">
-                            {__("Require admin approval for new registrations", "thlogin")}
+                            {__("Require admin approval for new registrations", "th-login")}
                             </p>
                             </div>
                             <div className="setting-control">
@@ -230,9 +230,9 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                            <h3>{__("Close Button", "thlogin")}</h3>
+                            <h3>{__("Close Button", "th-login")}</h3>
                             <p className="description">
-                            {__("If true without user login the panel can close.", "thlogin")}
+                            {__("If true without user login the panel can close.", "th-login")}
                             </p>
                             </div>
                             <div className="setting-control">
@@ -250,17 +250,17 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                 {activeTab === "redirect" && (
                     <div className="settings-group">
-                        <h3 className="group-title">{__("Redirect", "thlogin")}</h3>
+                        <h3 className="group-title">{__("Redirect", "th-login")}</h3>
                         <div className="redirection-grid">
                             <div className="redirection-card">
-                            <h4>{__("Login", "thlogin")}</h4>
+                            <h4>{__("Login", "th-login")}</h4>
                             <CustomSelectControl
                                 value={settings.general.redirects?.after_login?.type || "current_page"}
                                 options={[
-                                { label: __("Current Page", "thlogin"), value: "current_page" },
-                                { label: __("Dashboard", "thlogin"), value: "dashboard" },
-                                { label: __("Home Page", "thlogin"), value: "home_page" },
-                                { label: __("Custom URL", "thlogin"), value: "custom_url" },
+                                { label: __("Current Page", "th-login"), value: "current_page" },
+                                { label: __("Dashboard", "th-login"), value: "dashboard" },
+                                { label: __("Home Page", "th-login"), value: "home_page" },
+                                { label: __("Custom URL", "th-login"), value: "custom_url" },
                                 ]}
                                 onChange={(newValue) =>
                                 handleSettingChange("general", ["redirects", "after_login", "type"], newValue)
@@ -280,12 +280,12 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                             </div>
 
                             <div className="redirection-card">
-                            <h4>{__("Logout", "thlogin")}</h4>
+                            <h4>{__("Logout", "th-login")}</h4>
                             <CustomSelectControl
                                 value={settings.general.redirects?.after_logout?.type || "home_page"}
                                 options={[
-                                { label: __("Home Page", "thlogin"), value: "home_page" },
-                                { label: __("Custom URL", "thlogin"), value: "custom_url" },
+                                { label: __("Home Page", "th-login"), value: "home_page" },
+                                { label: __("Custom URL", "th-login"), value: "custom_url" },
                                 ]}
                                 onChange={(newValue) =>
                                 handleSettingChange("general", ["redirects", "after_logout", "type"], newValue)
@@ -308,9 +308,9 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                         {/* Auto Login Toggle + Conditional Registration Redirect */}
                         <div className="setting-row settings-manage-toggle-resitartion">
                             <div className="setting-label">
-                                <h4>{__("Auto-Login After Registration", "thlogin")}</h4>
+                                <h4>{__("Auto-Login After Registration", "th-login")}</h4>
                                 <p className="description">
-                                    {__("Automatically log users in after registration", "thlogin")}
+                                    {__("Automatically log users in after registration", "th-login")}
                                 </p>
                                 </div>
                                 <div className="setting-control">
@@ -324,14 +324,14 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                                     {settings.general.auto_login_after_registration && (
                                         <div className="redirection-card th-inline-registration-redirect" style={{ marginTop: "12px" }}>
-                                        <h4>{__("Registration", "thlogin")}</h4>
+                                        <h4>{__("Registration", "th-login")}</h4>
                                         <CustomSelectControl
                                             value={settings.general.redirects?.after_register?.type || "dashboard"}
                                             options={[
-                                            { label: __("Dashboard", "thlogin"), value: "dashboard" },
-                                            { label: __("Current Page", "thlogin"), value: "current_page" },
-                                            { label: __("Home Page", "thlogin"), value: "home_page" },
-                                            { label: __("Custom URL", "thlogin"), value: "custom_url" },
+                                            { label: __("Dashboard", "th-login"), value: "dashboard" },
+                                            { label: __("Current Page", "th-login"), value: "current_page" },
+                                            { label: __("Home Page", "th-login"), value: "home_page" },
+                                            { label: __("Custom URL", "th-login"), value: "custom_url" },
                                             ]}
                                             onChange={(newValue) =>
                                             handleSettingChange("general", ["redirects", "after_register", "type"], newValue)
@@ -357,7 +357,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
 
                 {activeTab === "shortcodes" && (
                     <div className="settings-group thlogin-shortcodes-list">
-                        <h3 className="group-title">{__("Shortcodes", "thlogin")}</h3>
+                        <h3 className="group-title">{__("Shortcodes", "th-login")}</h3>
                         <div className="shortcode-grid">
                             {shortcodes.map(({ label, shortcode, description }, i) => (
                                 <div className="shortcode-card" key={i}>
@@ -373,7 +373,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                                     <button
                                             className="components-button is-secondary copy-button"
                                             onClick={() => handleCopy(shortcode, i)}
-                                            title={copiedIndex === i ? __("Copied!", "thlogin") : __("Copy", "thlogin")}
+                                            title={copiedIndex === i ? __("Copied!", "th-login") : __("Copy", "th-login")}
                                         >
                                             {copiedIndex === i ? <FaCheck /> : <FaCopy />}
                                         </button>

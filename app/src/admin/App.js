@@ -334,7 +334,7 @@ const App = () => {
     );
   }
 
-  console.log(settings);
+  // console.log(settings);
 
   return (
     <div className="thlogin-admin-modern">

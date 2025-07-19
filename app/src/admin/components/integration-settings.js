@@ -21,7 +21,7 @@ const IntegrationSettings = ({ settings, handleSettingChange }) => {
               <p>
                 {__(
                   "Enable login features for WooCommerce like checkout login, account sync, etc.",
-                  "thlogin"
+                  "th-ogin"
                 )}
               </p>
             </div>

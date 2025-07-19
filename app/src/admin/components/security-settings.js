@@ -8,12 +8,12 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
     const [activeTab, setActiveTab] = useState("bruteforce");
 
     const tabs = [
-      { key: "bruteforce", label: __("Brute Force", "thlogin") },
-      { key: "recaptcha", label: __("ReCaptcha", "thlogin") },
-      { key: "honeypot", label: __("HoneyPot", "thlogin") },
-      { key: "emailVerifictaion", label: __("Email Verifictaion", "thlogin") },
-      { key: "manualApproval", label: __("Manual Approval", "thlogin") },
-      { key: "twoFactorAuthentication", label: __("Two-Factor Authentication", "thlogin") },
+      { key: "bruteforce", label: __("Brute Force", "th-login") },
+      { key: "recaptcha", label: __("ReCaptcha", "th-login") },
+      { key: "honeypot", label: __("HoneyPot", "th-login") },
+      { key: "emailVerifictaion", label: __("Email Verifictaion", "th-login") },
+      { key: "manualApproval", label: __("Manual Approval", "th-login") },
+      { key: "twoFactorAuthentication", label: __("Two-Factor Authentication", "th-login") },
     ];
     
     const renderTabs = () => (
@@ -37,7 +37,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
         <div className="settings-card">
           <h2 className="section-title">
             <i className="dashicons dashicons-shield"></i>
-            {__("Security Settings", "thlogin")}
+            {__("Security Settings", "th-login")}
           </h2>
 
             {renderTabs()}
@@ -45,14 +45,14 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
             {activeTab === 'bruteforce' && (
               <div className="settings-group">
                 <h3 className="group-title">
-                  {__("Brute Force Protection", "thlogin")}
+                  {__("Brute Force Protection", "th-login")}
                 </h3>
 
                 <div className="setting-row">
                   <div className="setting-label">
-                    <h4>{__("Enable Protection", "thlogin")}</h4>
+                    <h4>{__("Enable Protection", "th-login")}</h4>
                     <p className="description">
-                      {__("Prevent brute force login attacks", "thlogin")}
+                      {__("Prevent brute force login attacks", "th-login")}
                     </p>
                   </div>
                   <div className="setting-control">
@@ -77,11 +77,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                   <div className="menu-item-group ">
                     <div className="setting-row text-small-box ">
                       <div className="setting-label">
-                        <h4>{__("Max Login Attempts", "thlogin")}</h4>
+                        <h4>{__("Max Login Attempts", "th-login")}</h4>
                         <p className="description">
                           {__(
                             "Allowed failed attempts before lockout",
-                            "thlogin"
+                            "th-login"
                           )}
                         </p>
                       </div>
@@ -109,12 +109,12 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                     <div className="setting-row text-small-box ">
                       <div className="setting-label">
                         <h4>
-                          {__("Lockout Duration (minutes)", "thlogin")}
+                          {__("Lockout Duration (minutes)", "th-login")}
                         </h4>
                         <p className="description">
                           {__(
                             "Time before another attempt is allowed",
-                            "thlogin"
+                            "th-login"
                           )}
                         </p>
                       </div>
@@ -144,11 +144,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                     <div className="setting-row">
                       <div className="setting-label">
-                        <h4>{__("Auto IP Blacklisting", "thlogin")}</h4>
+                        <h4>{__("Auto IP Blacklisting", "th-login")}</h4>
                         <p className="description">
                           {__(
                             "Automatically blacklist repeat offenders",
-                            "thlogin"
+                            "th-login"
                           )}
                         </p>
                       </div>
@@ -180,14 +180,14 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
             {activeTab === 'recaptcha' && (
               <div className="settings-group">
                 <h3 className="group-title">
-                  {__("reCAPTCHA Settings", "thlogin")}
+                  {__("reCAPTCHA Settings", "th-login")}
                 </h3>
 
                 <div className="setting-row">
                   <div className="setting-label">
-                    <h4>{__("Enable reCAPTCHA", "thlogin")}</h4>
+                    <h4>{__("Enable reCAPTCHA", "th-login")}</h4>
                     <p className="description">
-                      {__("Add Google reCAPTCHA to forms", "thlogin")}
+                      {__("Add Google reCAPTCHA to forms", "th-login")}
                     </p>
                   </div>
                   <div className="setting-control">
@@ -209,9 +209,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                   <div className="menu-item-group ">
                       <div className="setting-row">
                         <div className="setting-label">
-                          <h4>{__("reCAPTCHA Type", "thlogin")}</h4>
+                          <h4>{__("reCAPTCHA Type", "th-login")}</h4>
                           <p className="description">
-                            {__("Version of reCAPTCHA to use", "thlogin")}
+                            {__("Version of reCAPTCHA to use", "th-login")}
                           </p>
                         </div>
                         <div className="setting-control">
@@ -232,11 +232,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                       <div className="setting-row">
                         <div className="setting-label">
-                          <h4>{__("Site Key", "thlogin")}</h4>
+                          <h4>{__("Site Key", "th-login")}</h4>
                           <p className="description">
-                            {__("Your reCAPTCHA site key", "thlogin")}{' '}
+                            {__("Your reCAPTCHA site key", "th-login")}{' '}
                             <ExternalLink href="https://www.google.com/recaptcha/admin">
-                              {__("Google reCAPTCHA Admin", "thlogin")}
+                              {__("Google reCAPTCHA Admin", "th-login")}
                             </ExternalLink>
                           </p>
                         </div>
@@ -258,9 +258,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                       <div className="setting-row">
                         <div className="setting-label">
-                          <h4>{__("Secret Key", "thlogin")}</h4>
+                          <h4>{__("Secret Key", "th-login")}</h4>
                           <p className="description">
-                            {__("Your reCAPTCHA secret key", "thlogin")}
+                            {__("Your reCAPTCHA secret key", "th-login")}
                           </p>
                         </div>
                         <div className="setting-control">
@@ -288,14 +288,14 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
             {activeTab === 'honeypot' && (
               <div className="settings-group">
                 <h3 className="group-title">
-                  {__("Honeypot Protection", "thlogin")}
+                  {__("Honeypot Protection", "th-login")}
                 </h3>
 
                 <div className="setting-row">
                   <div className="setting-label">
-                    <h4>{__("Enable Honeypot", "thlogin")}</h4>
+                    <h4>{__("Enable Honeypot", "th-login")}</h4>
                     <p className="description">
-                      {__("Add hidden field to catch bots", "thlogin")}
+                      {__("Add hidden field to catch bots", "th-login")}
                     </p>
                   </div>
                   <div className="setting-control">

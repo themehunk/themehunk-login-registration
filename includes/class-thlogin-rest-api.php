@@ -39,7 +39,7 @@ class THLogin_REST_API {
 						'type'              => 'object',
 						'sanitize_callback' => array( $this, 'sanitize_general_settings' ),
 						'validate_callback' => array( $this, 'validate_general_settings' ),
-						'required'          => false, // Allow partial updates if needed, but we send full object from React.
+						'required'          => false,
 					),
 					'design' => array(
 						'type'              => 'object',
@@ -355,6 +355,21 @@ class THLogin_REST_API {
 	public function handle_frontend_login( WP_REST_Request $request ) {
 		$params = $request->get_params();
 
+		// Brute-force lockout check using internal API logic
+		$lockout_check = ( new THLogin_Security() )->get_lockout_status( $request );
+
+
+		if ( ! empty( $lockout_check['locked_out'] ) ) {
+			return new WP_REST_Response( [
+				'success' => false,
+				'data' => [
+					'message' => $lockout_check['message'] ?? __( 'Too many failed attempts. Try again later.', 'th-login' ),
+					'locked_out' => true,
+					'remaining_time' => $lockout_check['remaining_time'] ?? 0,
+				],
+			], 429 );
+		}
+
 		// Load saved login fields
 		$form_fields_settings = get_option( 'thlogin_form_fields_settings', '{}' );
 		$form_fields = json_decode( $form_fields_settings, true )['login'] ?? [];
@@ -411,6 +426,7 @@ class THLogin_REST_API {
 			'user_password' => $user_password,
 			'remember'      => $remember,
 		];
+
 
 		$user = wp_signon( $creds, false );
 
@@ -835,29 +851,60 @@ class THLogin_REST_API {
 		return new WP_REST_Response( $all_settings, 200 );
 	}
 
-	public function reset_settings( WP_REST_Request $request ) {
+	public function reset_settings(WP_REST_Request $request) {
+		// Security checks
+		if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
+			return new WP_REST_Response([
+				'success' => false,
+				'message' => __('Invalid nonce', 'th-login')
+			], 403);
+		}
+
+		if (!current_user_can('manage_options')) {
+			return new WP_REST_Response([
+				'success' => false,
+				'message' => __('Insufficient permissions', 'th-login')
+			], 403);
+		}
 
 		require_once THLOGIN_PATH . 'thlogin.php';
-
-		if ( function_exists( 'thlogin_set_default_options' ) ) {
+		
+		if (function_exists('thlogin_set_default_options')) {
+			// Clear all existing settings
+			$option_keys = [
+				'th_login_general_settings',
+				'th_login_design_settings',
+				'th_login_form_fields_settings',
+				'th_login_display_triggers_settings',
+				'th_login_security_settings',
+				'th_login_integration_settings'
+			];
+			
+			foreach ($option_keys as $key) {
+				delete_option($key);
+			}
+			
+			// Set fresh defaults
 			thlogin_set_default_options();
-
-			return new WP_REST_Response(
-				array(
-					'success' => true,
-					'message' => esc_html__( 'All settings have been reset to default.', 'th-login' ),
-				),
-				200
-			);
-		} else {
-			return new WP_REST_Response(
-				array(
-					'success' => false,
-					'message' => esc_html__( 'Reset function not found. Please deactivate and reactivate the plugin to reset.', 'th-login' ),
-				),
-				500
-			);
+			
+			// Get and return properly decoded fresh settings
+			$fresh_settings = [];
+			foreach ($option_keys as $key) {
+				$value = get_option($key, '{}');
+				$fresh_settings[str_replace('th_login_', '', str_replace('_settings', '', $key))] = json_decode($value, true);
+			}
+			
+			return new WP_REST_Response([
+				'success' => true,
+				'message' => esc_html__('Settings reset successfully', 'th-login'),
+				'settings' => $fresh_settings
+			], 200);
 		}
+		
+		return new WP_REST_Response([
+			'success' => false,
+			'message' => esc_html__('Reset function not available', 'th-login')
+		], 500);
 	}
 
 	public function sanitize_general_settings( $settings ) {

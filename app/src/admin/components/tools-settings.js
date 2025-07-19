@@ -4,9 +4,8 @@ import {
   Spinner,
   TextareaControl,
   Dashicon,
-  Notice,
 } from "@wordpress/components";
-import { useEffect, useState } from "@wordpress/element";
+import { useEffect, useState, useRef } from "@wordpress/element";
 
 const ToolsSettings = ({
   settings,
@@ -21,6 +20,7 @@ const ToolsSettings = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [clipboardContent, setClipboardContent] = useState("");
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const checkClipboard = async () => {
@@ -48,6 +48,36 @@ const ToolsSettings = ({
       setTimeout(() => setCopied(false), 2000);
     } catch (e) {
       console.error("Failed to copy", e);
+    }
+  };
+
+  const handleDownloadJSON = () => {
+    const blob = new Blob([exportedSettings], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "th-login-settings.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleUploadFile = (event) => {
+    const file = event.target.files?.[0];
+    if (file && file.type === "application/json") {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const json = JSON.parse(e.target.result);
+          setImportSettingsText(JSON.stringify(json, null, 2));
+        } catch (err) {
+          alert(__("Invalid JSON file", "thlogin"));
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      alert(__("Please upload a valid JSON file", "thlogin"));
     }
   };
 
@@ -88,22 +118,22 @@ const ToolsSettings = ({
           </div>
 
           {exportedSettings && (
-            <>
-              <div className="setting-row">
-                <div className="setting-label">
-                  <h4>{__("Exported Settings", "thlogin")}</h4>
-                  <p className="description">
-                    {__("Copy this JSON to save your settings", "thlogin")}
-                  </p>
-                </div>
-                <div className="setting-control">
-                  <TextareaControl
+            <div className="setting-row">
+              <div className="setting-label">
+                <h4>{__("Exported Settings", "thlogin")}</h4>
+                <p className="description">
+                  {__("Copy or download this JSON to save your settings", "thlogin")}
+                </p>
+              </div>
+              <div className="setting-control">
+                <TextareaControl
                   __nextHasNoMarginBottom={true}
-                    value={exportedSettings}
-                    readOnly
-                    rows={10}
-                    className="export-textarea"
-                  />
+                  value={exportedSettings}
+                  readOnly
+                  rows={10}
+                  className="export-textarea"
+                />
+                <div style={{ display: "flex", gap: "10px", marginTop: "8px" }}>
                   <Button
                     className={`copy-button ${copied ? "copied" : ""}`}
                     onClick={handleCopyToClipboard}
@@ -111,9 +141,16 @@ const ToolsSettings = ({
                   >
                     {copied ? __("Copied!", "thlogin") : __("Copy", "thlogin")}
                   </Button>
+                  <Button
+                    className="copy-button"
+                    onClick={handleDownloadJSON}
+                    isSmall
+                  >
+                    {__("Download", "thlogin")}
+                  </Button>
                 </div>
               </div>
-            </>
+            </div>
           )}
         </div>
 
@@ -125,26 +162,44 @@ const ToolsSettings = ({
             <div className="setting-label">
               <h4>{__("Import Settings", "thlogin")}</h4>
               <p className="description">
-                {__("Paste previously exported settings JSON", "thlogin")}
+                {__("Paste or upload previously exported settings JSON", "thlogin")}
               </p>
             </div>
-            <div className="setting-control">
+            <div className="setting-control" style={{maxWidth: '240px'}}>
               <TextareaControl
-              __nextHasNoMarginBottom={true}
+                __nextHasNoMarginBottom={true}
                 value={importSettingsText}
                 onChange={(newValue) => setImportSettingsText(newValue)}
                 rows={10}
                 className="import-textarea"
               />
-              <Button
-                isSecondary
-                className="paste-button"
-                onClick={handlePasteFromClipboard}
-                disabled={!clipboardContent.trim()}
-              >
-                <Dashicon icon="clipboard" />
-                {__("Paste from Clipboard", "thlogin")}
-              </Button>
+              <div style={{ display: "flex", gap: "10px", marginTop: "8px" }}>
+                <Button
+                  isSecondary
+                  className="paste-button"
+                  onClick={handlePasteFromClipboard}
+                  disabled={!clipboardContent.trim()}
+                >
+                  <Dashicon icon="clipboard" />
+                  {__("Paste", "thlogin")}
+                </Button>
+
+                <Button
+                  isSecondary
+                  className="paste-button"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Dashicon icon="upload" />
+                  {__("Upload JSON File", "thlogin")}
+                </Button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".json"
+                  style={{ display: "none" }}
+                  onChange={handleUploadFile}
+                />
+              </div>
             </div>
           </div>
 
@@ -180,10 +235,7 @@ const ToolsSettings = ({
               </p>
             </div>
             <div className="setting-control">
-              <Button
-                isDestructive
-                onClick={() => setIsResetConfirmOpen(true)}
-              >
+              <Button isDestructive onClick={() => setIsResetConfirmOpen(true)}>
                 <Dashicon icon="undo" />
                 {__("Reset Settings", "thlogin")}
               </Button>

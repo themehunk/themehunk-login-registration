@@ -20731,7 +20731,7 @@ var App = function App() {
   // Handle saving settings.
   var handleSaveSettings = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-      var response, _mergedSettings$form_, _mergedSettings$gener2, fetchedSettings, mergedSettings, _t2;
+      var response, _mergedSettings$gener2, fetchedSettings, mergedSettings, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.n) {
           case 0:
@@ -20752,10 +20752,7 @@ var App = function App() {
                 text: response.message
               });
               fetchedSettings = response.settings; // Deep merge again to ensure the state is fully consistent with backend and defaults.
-              mergedSettings = _deepMerge(settings, fetchedSettings); // Ensure specific arrays are initialized.
-              if (!Array.isArray((_mergedSettings$form_ = mergedSettings.form_fields) === null || _mergedSettings$form_ === void 0 || (_mergedSettings$form_ = _mergedSettings$form_.register) === null || _mergedSettings$form_ === void 0 ? void 0 : _mergedSettings$form_.custom_fields)) {
-                mergedSettings.form_fields.register.custom_fields = [];
-              }
+              mergedSettings = _deepMerge(settings, fetchedSettings);
               if (!Array.isArray((_mergedSettings$gener2 = mergedSettings.general) === null || _mergedSettings$gener2 === void 0 || (_mergedSettings$gener2 = _mergedSettings$gener2.redirects) === null || _mergedSettings$gener2 === void 0 ? void 0 : _mergedSettings$gener2.role_based_redirects)) {
                 mergedSettings.general.redirects.role_based_redirects = [];
               }
@@ -20822,7 +20819,7 @@ var App = function App() {
   };
   var handleImportSettings = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
-      var importedData, response, _mergedSettings$form_2, _mergedSettings$gener3, fetchedSettings, mergedSettings, _t3;
+      var importedData, response, _mergedSettings$gener3, fetchedSettings, mergedSettings, _t3;
       return _regenerator().w(function (_context3) {
         while (1) switch (_context3.n) {
           case 0:
@@ -20851,9 +20848,6 @@ var App = function App() {
               });
               fetchedSettings = response.settings;
               mergedSettings = _deepMerge(settings, fetchedSettings);
-              if (!Array.isArray((_mergedSettings$form_2 = mergedSettings.form_fields) === null || _mergedSettings$form_2 === void 0 || (_mergedSettings$form_2 = _mergedSettings$form_2.register) === null || _mergedSettings$form_2 === void 0 ? void 0 : _mergedSettings$form_2.custom_fields)) {
-                mergedSettings.form_fields.register.custom_fields = [];
-              }
               if (!Array.isArray((_mergedSettings$gener3 = mergedSettings.general) === null || _mergedSettings$gener3 === void 0 || (_mergedSettings$gener3 = _mergedSettings$gener3.redirects) === null || _mergedSettings$gener3 === void 0 ? void 0 : _mergedSettings$gener3.role_based_redirects)) {
                 mergedSettings.general.redirects.role_based_redirects = [];
               }
@@ -20893,7 +20887,7 @@ var App = function App() {
   }();
   var handleResetSettings = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4() {
-      var response, fetchResponse, _mergedSettings$form_3, _mergedSettings$gener4, mergedSettings, _t4;
+      var response, fetchResponse, _mergedSettings$gener4, mergedSettings, _t4;
       return _regenerator().w(function (_context4) {
         while (1) switch (_context4.n) {
           case 0:
@@ -20929,9 +20923,6 @@ var App = function App() {
             fetchResponse = _context4.v;
             if (fetchResponse.success) {
               mergedSettings = _deepMerge(settings, fetchResponse.settings);
-              if (!Array.isArray((_mergedSettings$form_3 = mergedSettings.form_fields) === null || _mergedSettings$form_3 === void 0 || (_mergedSettings$form_3 = _mergedSettings$form_3.register) === null || _mergedSettings$form_3 === void 0 ? void 0 : _mergedSettings$form_3.custom_fields)) {
-                mergedSettings.form_fields.register.custom_fields = [];
-              }
               if (!Array.isArray((_mergedSettings$gener4 = mergedSettings.general) === null || _mergedSettings$gener4 === void 0 || (_mergedSettings$gener4 = _mergedSettings$gener4.redirects) === null || _mergedSettings$gener4 === void 0 ? void 0 : _mergedSettings$gener4.role_based_redirects)) {
                 mergedSettings.general.redirects.role_based_redirects = [];
               }
@@ -22170,7 +22161,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     _useState8 = _slicedToArray(_useState7, 2),
     activeForm = _useState8[0],
     setActiveForm = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('label'),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('form'),
     _useState0 = _slicedToArray(_useState9, 2),
     insidetab = _useState0[0],
     setinsidetab = _useState0[1];
@@ -22370,11 +22361,11 @@ var DesignEditor = function DesignEditor(_ref5) {
     }));
   };
   var tabinside = [{
-    key: "label",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label", "thlogin")
-  }, {
     key: "form",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Form", "thlogin")
+  }, {
+    key: "label",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label", "thlogin")
   }, {
     key: "header",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Header", "thlogin")
@@ -24643,11 +24634,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 var SecuritySettings = function SecuritySettings(_ref) {
+  var _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("bruteforce"),
+    _useState2 = _slicedToArray(_useState, 2),
+    activeTab = _useState2[0],
+    setActiveTab = _useState2[1];
+  var tabs = [{
+    key: "bruteforce",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force", "thlogin")
+  }, {
+    key: "recaptcha",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ReCaptcha", "thlogin")
+  }, {
+    key: "honeypot",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("HoneyPot", "thlogin")
+  }, {
+    key: "emailVerifictaion",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Verifictaion", "thlogin")
+  }, {
+    key: "manualApproval",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual Approval", "thlogin")
+  }, {
+    key: "twoFactorAuthentication",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Two-Factor Authentication", "thlogin")
+  }];
+  var renderTabs = function renderTabs() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "custom-tabs"
+    }, tabs.map(function (tab) {
+      return /*#__PURE__*/React.createElement("button", {
+        key: tab.key,
+        className: "custom-tab-button ".concat(activeTab === tab.key ? "active" : ""),
+        onClick: function onClick() {
+          return setActiveTab(tab.key);
+        }
+      }, tab.label);
+    }));
+  };
+  console.log(settings);
   return /*#__PURE__*/React.createElement("section", {
     className: "settings-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -24656,7 +24694,162 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-shield"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "thlogin"))));
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "thlogin")), renderTabs(), activeTab === 'bruteforce' && /*#__PURE__*/React.createElement("div", {
+    className: "settings-group"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "group-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force Protection", "thlogin")), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Protection", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prevent brute force login attacks", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$security$br = settings.security.brute_force_protection) === null || _settings$security$br === void 0 ? void 0 : _settings$security$br.enabled) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["brute_force_protection", "enabled"], isChecked);
+    }
+  }))), ((_settings$security$br2 = settings.security.brute_force_protection) === null || _settings$security$br2 === void 0 ? void 0 : _settings$security$br2.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group "
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row text-small-box "
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Max Login Attempts", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allowed failed attempts before lockout", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    type: "number",
+    min: "1",
+    value: ((_settings$security$br3 = settings.security.brute_force_protection) === null || _settings$security$br3 === void 0 ? void 0 : _settings$security$br3.max_attempts) || 5,
+    onChange: function onChange(newValue) {
+      return handleSettingChange("security", ["brute_force_protection", "max_attempts"], parseInt(newValue, 10));
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row text-small-box "
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lockout Duration (minutes)", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time before another attempt is allowed", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    type: "number",
+    min: "1",
+    value: ((_settings$security$br4 = settings.security.brute_force_protection) === null || _settings$security$br4 === void 0 ? void 0 : _settings$security$br4.lockout_duration_minutes) || 30,
+    onChange: function onChange(newValue) {
+      return handleSettingChange("security", ["brute_force_protection", "lockout_duration_minutes"], parseInt(newValue, 10));
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto IP Blacklisting", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically blacklist repeat offenders", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$security$br5 = settings.security.brute_force_protection) === null || _settings$security$br5 === void 0 ? void 0 : _settings$security$br5.auto_ip_blacklist_enabled) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["brute_force_protection", "auto_ip_blacklist_enabled"], isChecked);
+    }
+  }))))), activeTab === 'recaptcha' && /*#__PURE__*/React.createElement("div", {
+    className: "settings-group"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "group-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable reCAPTCHA", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Google reCAPTCHA to forms", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$security$re = settings.security.recaptcha) === null || _settings$security$re === void 0 ? void 0 : _settings$security$re.enabled) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["recaptcha", "enabled"], isChecked);
+    }
+  }))), ((_settings$security$re2 = settings.security.recaptcha) === null || _settings$security$re2 === void 0 ? void 0 : _settings$security$re2.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group "
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Type", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Version of reCAPTCHA to use", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement("select", {
+    value: ((_settings$security$re3 = settings.security.recaptcha) === null || _settings$security$re3 === void 0 ? void 0 : _settings$security$re3.type) || "v2_checkbox",
+    onChange: function onChange(e) {
+      return handleSettingChange("security", ["recaptcha", "type"], e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "v2_checkbox"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA v2 Checkbox", "thlogin")), /*#__PURE__*/React.createElement("option", {
+    value: "v3"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA v3 Invisible", "thlogin"))))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Site Key", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA site key", "thlogin"), ' ', /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ExternalLink, {
+    href: "https://www.google.com/recaptcha/admin"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Google reCAPTCHA Admin", "thlogin")))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    value: ((_settings$security$re4 = settings.security.recaptcha) === null || _settings$security$re4 === void 0 ? void 0 : _settings$security$re4.site_key) || "",
+    onChange: function onChange(newValue) {
+      return handleSettingChange("security", ["recaptcha", "site_key"], newValue);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secret Key", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA secret key", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    value: ((_settings$security$re5 = settings.security.recaptcha) === null || _settings$security$re5 === void 0 ? void 0 : _settings$security$re5.secret_key) || "",
+    onChange: function onChange(newValue) {
+      return handleSettingChange("security", ["recaptcha", "secret_key"], newValue);
+    }
+  }))))), activeTab === 'honeypot' && /*#__PURE__*/React.createElement("div", {
+    className: "settings-group"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "group-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Honeypot Protection", "thlogin")), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Honeypot", "thlogin")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add hidden field to catch bots", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: settings.security.honeypot_enabled || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["honeypot_enabled"], isChecked);
+    }
+  }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SecuritySettings);
 
@@ -24710,6 +24903,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     clipboardContent = _useState4[0],
     setClipboardContent = _useState4[1];
+  var fileInputRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useRef)(null);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     var checkClipboard = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
@@ -24776,6 +24970,37 @@ var ToolsSettings = function ToolsSettings(_ref) {
       return _ref3.apply(this, arguments);
     };
   }();
+  var handleDownloadJSON = function handleDownloadJSON() {
+    var blob = new Blob([exportedSettings], {
+      type: "application/json"
+    });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "th-login-settings.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+  var handleUploadFile = function handleUploadFile(event) {
+    var _event$target$files;
+    var file = (_event$target$files = event.target.files) === null || _event$target$files === void 0 ? void 0 : _event$target$files[0];
+    if (file && file.type === "application/json") {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          var json = JSON.parse(e.target.result);
+          setImportSettingsText(JSON.stringify(json, null, 2));
+        } catch (err) {
+          alert((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Invalid JSON file", "thlogin"));
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      alert((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Please upload a valid JSON file", "thlogin"));
+    }
+  };
   var handlePasteFromClipboard = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3() {
       var text, _t3;
@@ -24828,13 +25053,13 @@ var ToolsSettings = function ToolsSettings(_ref) {
     onClick: handleExportSettings
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "download"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "thlogin")))), exportedSettings && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "thlogin")))), exportedSettings && /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
   }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exported Settings", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy this JSON to save your settings", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy or download this JSON to save your settings", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     __nextHasNoMarginBottom: true,
@@ -24842,11 +25067,21 @@ var ToolsSettings = function ToolsSettings(_ref) {
     readOnly: true,
     rows: 10,
     className: "export-textarea"
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: "10px",
+      marginTop: "8px"
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "copy-button ".concat(copied ? "copied" : ""),
     onClick: handleCopyToClipboard,
     isSmall: true
-  }, copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "thlogin") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "thlogin")))))), /*#__PURE__*/React.createElement("div", {
+  }, copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "thlogin") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    className: "copy-button",
+    onClick: handleDownloadJSON,
+    isSmall: true
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Download", "thlogin")))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
@@ -24856,8 +25091,11 @@ var ToolsSettings = function ToolsSettings(_ref) {
     className: "setting-label"
   }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "thlogin")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste previously exported settings JSON", "thlogin"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste or upload previously exported settings JSON", "thlogin"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control",
+    style: {
+      maxWidth: '240px'
+    }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     __nextHasNoMarginBottom: true,
     value: importSettingsText,
@@ -24866,14 +25104,37 @@ var ToolsSettings = function ToolsSettings(_ref) {
     },
     rows: 10,
     className: "import-textarea"
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: "10px",
+      marginTop: "8px"
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isSecondary: true,
     className: "paste-button",
     onClick: handlePasteFromClipboard,
     disabled: !clipboardContent.trim()
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "clipboard"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste from Clipboard", "thlogin")))), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    isSecondary: true,
+    className: "paste-button",
+    onClick: function onClick() {
+      var _fileInputRef$current;
+      return (_fileInputRef$current = fileInputRef.current) === null || _fileInputRef$current === void 0 ? void 0 : _fileInputRef$current.click();
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "upload"
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Upload JSON File", "thlogin")), /*#__PURE__*/React.createElement("input", {
+    ref: fileInputRef,
+    type: "file",
+    accept: ".json",
+    style: {
+      display: "none"
+    },
+    onChange: handleUploadFile
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-control"

@@ -141,7 +141,7 @@ const LoginFormHeader = ({ settings }) => {
 
 const DesignEditor = ({ settings, handleSettingChange }) => {
 	const [activeForm, setActiveForm] = useState("login");
-	const [insidetab, setinsidetab] = useState('label');
+	const [insidetab, setinsidetab] = useState('form');
 	const inputBase = settings.design.Input;
 	const buttonBase = settings.design.button;
 
@@ -369,8 +369,8 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 	);
 
 	const tabinside = [
-		{ key: "label", label: __("Label", "thlogin") },
 		{ key: "form", label: __("Form", "thlogin") },
+		{ key: "label", label: __("Label", "thlogin") },
 		{ key: "header", label: __("Header", "thlogin") },
 	];
 

@@ -288,7 +288,8 @@ export  const design = {
   },
   icon:{
     color:"#111111",
-    size:"20px"
+    size:"20px",
+    icon_position: "with-label"
   },
   header:{
     button:{

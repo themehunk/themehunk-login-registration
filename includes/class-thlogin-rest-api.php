@@ -478,11 +478,15 @@ class THLogin_REST_API {
 			], 403 );
 		}
 
-		// 6. Email verification check
-		if ( ! get_user_meta( $user->ID, 'th_login_email_verified', true ) ) {
+		$security_settings = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
+
+		if (
+			! empty( $security_settings['email_verification']['enabled'] ) &&
+			! get_user_meta( $user->ID, 'th_login_email_verified', true )
+		) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'data' => [ 'message' => __( 'Please verify your email before logging in.', 'th-login' ) ],
+				'data'    => [ 'message' => __( 'Please verify your email before logging in.', 'th-login' ) ],
 			], 403 );
 		}
 
@@ -1020,60 +1024,91 @@ class THLogin_REST_API {
 		return new WP_REST_Response( $all_settings, 200 );
 	}
 
+	//reset-settings
 	public function reset_settings(WP_REST_Request $request) {
 		// Security checks
-		if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
-			return new WP_REST_Response([
+		if ( ! wp_verify_nonce( $request->get_header( 'X-WP-Nonce' ), 'wp_rest' ) ) {
+			return new WP_REST_Response( [
 				'success' => false,
-				'message' => __('Invalid nonce', 'th-login')
-			], 403);
+				'message' => __( 'Invalid nonce', 'th-login' ),
+			], 403 );
 		}
 
-		if (!current_user_can('manage_options')) {
-			return new WP_REST_Response([
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return new WP_REST_Response( [
 				'success' => false,
-				'message' => __('Insufficient permissions', 'th-login')
-			], 403);
+				'message' => __( 'Insufficient permissions', 'th-login' ),
+			], 403 );
 		}
 
 		require_once THLOGIN_PATH . 'thlogin.php';
-		
-		if (function_exists('thlogin_set_default_options')) {
-			// Clear all existing settings
+
+		if ( function_exists( 'thlogin_set_default_options' ) ) {
+			// Delete old settings
 			$option_keys = [
 				'th_login_general_settings',
 				'th_login_design_settings',
 				'th_login_form_fields_settings',
 				'th_login_display_triggers_settings',
 				'th_login_security_settings',
-				'th_login_integration_settings'
+				'th_login_integration_settings',
 			];
-			
-			foreach ($option_keys as $key) {
-				delete_option($key);
+
+			foreach ( $option_keys as $key ) {
+				delete_option( $key );
+				wp_cache_delete( $key, 'options' );
 			}
-			
-			// Set fresh defaults
+
+			// Set default options
 			thlogin_set_default_options();
-			
-			// Get and return properly decoded fresh settings
-			$fresh_settings = [];
-			foreach ($option_keys as $key) {
-				$value = get_option($key, '{}');
-				$fresh_settings[str_replace('th_login_', '', str_replace('_settings', '', $key))] = json_decode($value, true);
-			}
-			
-			return new WP_REST_Response([
-				'success' => true,
-				'message' => esc_html__('Settings reset successfully', 'th-login'),
-				'settings' => $fresh_settings
-			], 200);
+
+			// Now explicitly fetch, sanitize, and re-save them just like `save_settings`
+			$general    = get_option( 'th_login_general_settings', '{}' );
+			$design     = get_option( 'th_login_design_settings', '{}' );
+			$formFields = get_option( 'th_login_form_fields_settings', '{}' );
+			$display    = get_option( 'th_login_display_triggers_settings', '{}' );
+			$security   = get_option( 'th_login_security_settings', '{}' );
+			$integration = get_option( 'th_login_integration_settings', '{}' );
+
+			// Parse & sanitize
+			$general_array    = $this->sanitize_general_settings( json_decode( $general, true ) );
+			$design_array     = $this->sanitize_design_settings( json_decode( $design, true ) );
+			$formFields_array = $this->sanitize_form_fields_settings( json_decode( $formFields, true ) );
+			$display_array    = $this->sanitize_display_triggers_settings( json_decode( $display, true ) );
+			$security_array   = $this->sanitize_security_settings( json_decode( $security, true ) );
+			$integration_array = $this->sanitize_integration_settings( json_decode( $integration, true ) );
+
+			// Save to DB
+			update_option( 'thlogin_general_settings', wp_json_encode( $general_array ) );
+			update_option( 'users_can_register', $general_array['allow_user_registration'] ? 1 : 0 );
+
+			update_option( 'thlogin_design_settings', wp_json_encode( $design_array ) );
+			update_option( 'thlogin_form_fields_settings', wp_json_encode( $formFields_array ) );
+			update_option( 'thlogin_display_triggers_settings', wp_json_encode( $display_array ) );
+			update_option( 'thlogin_security_settings', wp_json_encode( $security_array ) );
+			update_option( 'thlogin_integration_settings', wp_json_encode( $integration_array ) );
+
+			// Return sanitized+saved fresh settings
+			$fresh_settings = array(
+				'general'          => $general_array,
+				'design'           => $design_array,
+				'form_fields'      => $formFields_array,
+				'display_triggers' => $display_array,
+				'security'         => $security_array,
+				'integration'      => $integration_array,
+			);
+
+			return new WP_REST_Response( [
+				'success'  => true,
+				'message'  => esc_html__( 'Settings reset and saved successfully.', 'th-login' ),
+				'settings' => $fresh_settings,
+			], 200 );
 		}
-		
-		return new WP_REST_Response([
+
+		return new WP_REST_Response( [
 			'success' => false,
-			'message' => esc_html__('Reset function not available', 'th-login')
-		], 500);
+			'message' => esc_html__( 'Reset function not available.', 'th-login' ),
+		], 500 );
 	}
 
 	//sanitization-valdiation

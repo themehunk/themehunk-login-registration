@@ -284,6 +284,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 } else {
                     showMessage(form, data.data.message || 'An error occurred. Please try again.', 'error');
+
+                    if (
+                        typeof grecaptcha !== 'undefined' &&
+                        thLoginFrontendData.settings.security?.recaptcha?.enabled &&
+                        thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox'
+                    ) {
+                        grecaptcha.reset();
+                    }
                 }
             } catch (error) {
                 showMessage(form, 'An unexpected error occurred. Please check your network.', 'error');

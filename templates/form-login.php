@@ -9,12 +9,14 @@ $form_fields_settings = json_decode(get_option('thlogin_form_fields_settings', '
 $general_settings = json_decode(get_option('thlogin_general_settings', '{}'), true);
 $login_fields = $form_fields_settings['login'] ?? array();
 $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), true);
+
 ?>
+
 
 <div class="thlogin-form thlogin-form--login" data-form-type="login">
     <?php require THLOGIN_PATH . 'templates/parts/form-header.php'; ?>
 
-    <form class="thlogin-ajax-form" data-form-type="login">
+    <form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="login">
         <div class="thlogin-messages" aria-live="polite"></div>
 
         <h3><?php esc_html_e('Login', 'th-login'); ?></h3>
@@ -56,7 +58,13 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
             } elseif (stripos($name, 'pass') !== false) {
                 $autocomplete = 'current-password';
             }
+
+            $icon_position = $design_settings['icon']['icon_position'] ?? 'with-label';
+            $show_icon_in_label = $icon && $icon_position === 'with-label';
+            $show_icon_in_input = $icon && $icon_position === 'inside-input';
+
             ?>
+
             <div class="<?php echo esc_attr($field_class); ?>">
                 <?php if ($type === 'checkbox') : ?>
                     <input
@@ -72,8 +80,8 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
                     </label>
                 <?php else : ?>
                     <label for="<?php echo esc_attr($id); ?>" class="thlogin-label-with-icon">
-                        <?php if ($icon) : ?>
-                            <span class="thlogin-label-icon"><?php echo wp_kses_post(th_login_get_icon_svg($icon)); ?></span>
+                         <?php if ($show_icon_in_label) : ?>
+                            <span class="thlogin-label-icon"><?php echo th_login_get_icon_svg($icon); ?></span>
                         <?php endif; ?>
                         <span class="thlogin-label-text">
                             <?php echo esc_html($label); ?>
@@ -82,6 +90,10 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
                     </label>
 
                     <input
+                        class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+                        <?php if ($show_icon_in_input) : ?>
+                            style="background-image: <?php echo th_login_get_icon_svg_data_uri($icon); ?>;"
+                        <?php endif; ?>
                         type="<?php echo esc_attr($type); ?>"
                         name="<?php echo esc_attr($name); ?>"
                         id="<?php echo esc_attr($id); ?>"
@@ -91,6 +103,7 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
                     />
                 <?php endif; ?>
             </div>
+
         <?php endforeach; ?>
 
         <?php

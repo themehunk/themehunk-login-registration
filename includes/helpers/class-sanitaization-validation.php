@@ -139,6 +139,7 @@ class TH_Sanitization_validation {
 		$sanitized['icon'] = array(
 			'color' => $this->sanitize_color_input( $settings['icon']['color'] ?? '#111111' ),
 			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '20px' ),
+			'icon_position' => sanitize_text_field( $settings['icon']['icon_position'] ?? 'with-label' ),
 		);
 
 		$sanitized['header']['button']        = $this->sanitize_button_style( $settings['header']['button'] ?? [] );

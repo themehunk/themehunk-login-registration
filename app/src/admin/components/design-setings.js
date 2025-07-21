@@ -271,47 +271,65 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		.filter(field => field.show !== false)
 		.map((field, i) => {
 			const Icon = field.icon && THL_ICONS[field.icon] ? THL_ICONS[field.icon] : null;
+			const IconPosition = settings.design.icon.icon_position || "with-label";
+
+			const hasIcon = Icon !== null;
+
 
 			return (
 				<div key={i} className="th-preview-field-group" style={{ width: '100%' }}>
 					<div className="design-label-wrapper">
-					{Icon && (
+					{(Icon && IconPosition === 'with-label') && (
 						<div
-						dangerouslySetInnerHTML={{ __html: THL_ICONS[field.icon] }}
-						style={{
-							color: settings.design.icon.color,
-							width: settings.design.icon.size,
-							flexShrink: 0,
-						}}
+							dangerouslySetInnerHTML={{ __html: THL_ICONS[field.icon] }}
+							style={{
+								color: settings.design.icon.color,
+								width: settings.design.icon.size,
+								flexShrink: 0,
+							}}
 						/>
 					)}
 
 					{field.type !== 'checkbox' && field.label && (
 						<label
-						style={{
-							display: "block",
-							marginBottom: "5px",
-							fontSize: inputBase.labeltypography.size,
-							fontWeight: inputBase.labeltypography.fontWeight,
-							color: inputBase.labelcolor || '#333',
-						}}
+							style={{
+								display: "block",
+								marginBottom: "5px",
+								fontSize: inputBase.labeltypography.size,
+								fontWeight: inputBase.labeltypography.fontWeight,
+								color: inputBase.labelcolor || '#333',
+							}}
 						>
 						{field.label}
 						</label>
 					)}
 					</div>
+{/* 
+
+					{Icon && IconPosition === 'with-input' && (
+						<span  
+							dangerouslySetInnerHTML={{ __html: THL_ICONS[field.icon] }}
+							style={{
+								color: settings.design.icon.color,
+								width: settings.design.icon.size,
+								flexShrink: 0,
+							}}
+						>
+						</span>
+					)} */}
+
 
 					{field.type === 'checkbox' ? (
 						<InteractiveCheckbox {...checkboxProps}>
 							{field.label}
 						</InteractiveCheckbox>
 					) : (
-					<InteractiveInput
-						type={field.type || "text"}
-						placeholder={field.placeholder || ""}
-						base={inputProps.base}
-						active={inputProps.active}
-					/>
+						<InteractiveInput
+							type={field.type || "text"}
+							placeholder={field.placeholder || ""}
+							base={inputProps.base}
+							active={inputProps.active}
+						/>
 					)}
 				</div>
 			);
@@ -442,47 +460,76 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 					<div className="cutsom-tabs-inside-panel">
 						{insidetab === "form" && (
-						<>
-							<BackgroundSettingsPanel
-							title={__("Foreground", "th-login")}
-							background={settings.design.modal.modal_background}
-							path={["modal", "modal_background"]}
-							handleSettingChange={handleSettingChange}
-							/>
+							<>
+								<AccordionSection title={__("layout", "th-login")} defaultOpen={false} className='deisgn-layout-adjust'>
+									<div className="th-layout-picker">
+										{layoutOptions.map((option) => (
+											<div
+												key={option.key}
+												className={`th-layout-card ${settings.general.display_mode === option.key ? "active" : ""}`}
+												onClick={() => handleSettingChange("general", ["display_mode"], option.key)}
+											>
+												<div className={`layout-preview ${option.demoClass}`}>
+													<div className="form-box">
+														<div className="form-line"></div>
+														<div className="form-line short"></div>
+														<div className="form-button"></div>
+													</div>
+												</div>
 
-							<BackgroundSettingsPanel
-							title={__("Background", "th-login")}
-							background={settings.design.form.form_background}
-							path={["form", "form_background"]}
-							handleSettingChange={handleSettingChange}
-							/>
+												<div className="layout-label">
+													<Dashicon icon={option.icon} size={16} />
+													<span>{option.label}</span>
 
-							<BorderSettingsPanel
-							title={__("Border", "th-login")}
-							border={settings.design.form.form_border}
-							path={["form", "form_border"]}
-							handleSettingChange={handleSettingChange}
-							/>
+													{getLoginPreviewUrl(option)}
 
-							<PaddingSettingsPanel
-							title={__("Padding", "th-login")}
-							padding={settings.design.form.form_padding}
-							path={["form", "form_padding"]}
-							handleSettingChange={handleSettingChange}
-							/>
+												</div>
 
-							<AccordionSection title={__("Field Gap", "th-login")} defaultOpen={false}>
-								<RangeControl
-									label={__('Gap', 'th-login')}
-									value={parseInt(settings.design.form.form_gap || 0)}
-									onChange={(value) => handleSettingChange("design", ["form", "form_gap"], parseInt(value))}
-									min={0}
-									max={50}
-									step={1}
-									withInputField
+											</div>
+										))}
+									</div>
+								</AccordionSection>
+
+								<BackgroundSettingsPanel
+									title={__("Foreground", "th-login")}
+									background={settings.design.modal.modal_background}
+									path={["modal", "modal_background"]}
+									handleSettingChange={handleSettingChange}
 								/>
-							</AccordionSection>
-						</>
+
+								<BackgroundSettingsPanel
+									title={__("Background", "th-login")}
+									background={settings.design.form.form_background}
+									path={["form", "form_background"]}
+									handleSettingChange={handleSettingChange}
+								/>
+
+								<BorderSettingsPanel
+									title={__("Border", "th-login")}
+									border={settings.design.form.form_border}
+									path={["form", "form_border"]}
+									handleSettingChange={handleSettingChange}
+								/>
+
+								<PaddingSettingsPanel
+								title={__("Padding", "th-login")}
+								padding={settings.design.form.form_padding}
+								path={["form", "form_padding"]}
+								handleSettingChange={handleSettingChange}
+								/>
+
+								<AccordionSection title={__("Field Gap", "th-login")} defaultOpen={false}>
+									<RangeControl
+										label={__('Gap', 'th-login')}
+										value={parseInt(settings.design.form.form_gap || 0)}
+										onChange={(value) => handleSettingChange("design", ["form", "form_gap"], parseInt(value))}
+										min={0}
+										max={50}
+										step={1}
+										withInputField
+									/>
+								</AccordionSection>
+							</>
 						)}
 
 						{insidetab === "label" && (
@@ -774,7 +821,6 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												}
 											/>
 										</div>
-
 										
 										<div className="th-setting-row">
 											<label className="th-setting-label">{__("Size", "th-login")}</label>
@@ -786,6 +832,21 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 													handleSettingChange("design", ["icon", "size"], `${e.target.value}px`)
 												}
 												min={1}
+											/>
+										</div>
+
+										<div className="th-setting-row">
+											<CustomSelectControl
+												label={__("Icon Position", "th-login")}
+												value={settings.design.icon.icon_position}
+												onChange={(value) =>
+													handleSettingChange("design", ["icon", "icon_position"], value)
+												}
+												options={[
+													{ label: __("With Label", "th-login"), value: "with-label" },
+													{ label: __("Inside Input", "th-login"), value: "inside-input" },
+												]}
+												className="modrn-size-fixer-167"	
 											/>
 										</div>
 
@@ -960,36 +1021,11 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 				<div className="preview-panel">
 					<div className={`th-preview-container layout-${settings.general.display_mode}`}>
-					{renderFormPreview()}
+						{renderFormPreview()}
 					</div>
 				</div>
 
-				<div className="th-layout-picker">
-					{layoutOptions.map((option) => (
-						<div
-							key={option.key}
-							className={`th-layout-card ${settings.general.display_mode === option.key ? "active" : ""}`}
-							onClick={() => handleSettingChange("general", ["display_mode"], option.key)}
-						>
-							<div className={`layout-preview ${option.demoClass}`}>
-								<div className="form-box">
-									<div className="form-line"></div>
-									<div className="form-line short"></div>
-									<div className="form-button"></div>
-								</div>
-							</div>
-
-							<div className="layout-label">
-								<Dashicon icon={option.icon} size={16} />
-								<span>{option.label}</span>
-
-								{getLoginPreviewUrl(option)}
-
-							</div>
-
-						</div>
-					))}
-				</div>
+				
 			</div>
 		</div>
 	);

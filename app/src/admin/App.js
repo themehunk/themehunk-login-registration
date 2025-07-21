@@ -271,46 +271,40 @@ const App = () => {
   };
 
   const handleResetSettings = async () => {
-    setIsResetConfirmOpen(false); // Close confirmation dialog
+    setIsResetConfirmOpen(false);
     setIsSaving(true);
     setMessage(null);
+
     try {
       const response = await apiFetch({
-        path: "thlogin/v1/reset-settings", 
+        path: "thlogin/v1/reset-settings",
         method: "POST",
       });
 
+
       if (response.success) {
         setMessage({ type: "success", text: response.message });
-        // Re-fetch settings to load the newly reset defaults
-        const fetchResponse = await apiFetch({
-          path: "thlogin/v1/settings",
-          method: "POST",
-          data: { action: "fetch_settings" },
-        });
-        
-        if (fetchResponse.success) {
-          const mergedSettings = deepMerge(settings, fetchResponse.settings);
-          
-          if (
-            !Array.isArray(
-              mergedSettings.general?.redirects?.role_based_redirects
-            )
-          ) {
-            mergedSettings.general.redirects.role_based_redirects = [];
-          }
-          setSettings(mergedSettings);
+
+        const newSettings = response.settings;
+
+        // Ensure structure safety
+        if (
+          !Array.isArray(newSettings.general?.redirects?.role_based_redirects)
+        ) {
+          newSettings.general.redirects.role_based_redirects = [];
         }
+
+        setSettings(newSettings); //  apply new settings
       } else {
         setMessage({
           type: "error",
-          text: response.message || __("Failed to reset settings.", "thlogin"),
+          text: response.message || __("Failed to reset settings.", "th-login"),
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: __("Error resetting settings. Please check console.", "thlogin"),
+        text: __("Error resetting settings. Please check console.", "th-login"),
       });
       console.error("Error resetting settings:", error);
     } finally {
@@ -473,6 +467,7 @@ const App = () => {
           </div>
         </div>
       )}
+      
     </div>
   );
 };

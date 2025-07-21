@@ -143,12 +143,7 @@ const App = () => {
         const fetchedSettings = response.settings;
         // Deep merge again to ensure the state is fully consistent with backend and defaults.
         const mergedSettings = deepMerge(settings, fetchedSettings);
-        // Ensure specific arrays are initialized.
-        if (
-          !Array.isArray(mergedSettings.form_fields?.register?.custom_fields)
-        ) {
-          mergedSettings.form_fields.register.custom_fields = [];
-        }
+    
         if (
           !Array.isArray(
             mergedSettings.general?.redirects?.role_based_redirects
@@ -242,11 +237,7 @@ const App = () => {
         setMessage({ type: "success", text: response.message });
         const fetchedSettings = response.settings;
         const mergedSettings = deepMerge(settings, fetchedSettings);
-        if (
-          !Array.isArray(mergedSettings.form_fields?.register?.custom_fields)
-        ) {
-          mergedSettings.form_fields.register.custom_fields = [];
-        }
+        
         if (
           !Array.isArray(
             mergedSettings.general?.redirects?.role_based_redirects
@@ -301,11 +292,7 @@ const App = () => {
         
         if (fetchResponse.success) {
           const mergedSettings = deepMerge(settings, fetchResponse.settings);
-          if (
-            !Array.isArray(mergedSettings.form_fields?.register?.custom_fields)
-          ) {
-            mergedSettings.form_fields.register.custom_fields = [];
-          }
+          
           if (
             !Array.isArray(
               mergedSettings.general?.redirects?.role_based_redirects
@@ -347,7 +334,7 @@ const App = () => {
     );
   }
 
-  console.log(settings);
+  // console.log(settings);
 
   return (
     <div className="thlogin-admin-modern">

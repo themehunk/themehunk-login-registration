@@ -74,6 +74,18 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 
 document.addEventListener('DOMContentLoaded', function () {
+  var _thLoginFrontendData$;
+  // Load reCAPTCHA script if enabled
+  if ((_thLoginFrontendData$ = thLoginFrontendData.settings.security) !== null && _thLoginFrontendData$ !== void 0 && (_thLoginFrontendData$ = _thLoginFrontendData$.recaptcha) !== null && _thLoginFrontendData$ !== void 0 && _thLoginFrontendData$.enabled) {
+    var recaptchaType = thLoginFrontendData.settings.security.recaptcha.type;
+    var siteKey = thLoginFrontendData.settings.security.recaptcha.site_key;
+    var script = document.createElement('script');
+    script.src = "https://www.google.com/recaptcha/api.js?render=".concat(siteKey);
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+
   // --- Elements ---
   var modal = document.getElementById('thlogin-popup-modal');
   if (!modal) return;
@@ -229,11 +241,50 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.thlogin-ajax-form').forEach(function (form) {
     form.addEventListener('submit', /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
-        var formType, formData, messagesContainer, requestData, _iterator, _step, _step$value, key, value, endpoint, submitButton, _thLoginFrontendData$, response, data, _submitButton, _t;
+        var _thLoginFrontendData$2;
+        var token, tokenField, formType, formData, messagesContainer, requestData, _iterator, _step, _step$value, key, value, endpoint, submitButton, _thLoginFrontendData$3, response, data, _submitButton, _t, _t2;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.n) {
             case 0:
               e.preventDefault();
+
+              // Handle reCAPTCHA v3 if enabled
+              if (!((_thLoginFrontendData$2 = thLoginFrontendData.settings.security) !== null && _thLoginFrontendData$2 !== void 0 && (_thLoginFrontendData$2 = _thLoginFrontendData$2.recaptcha) !== null && _thLoginFrontendData$2 !== void 0 && _thLoginFrontendData$2.enabled && thLoginFrontendData.settings.security.recaptcha.type === 'v3')) {
+                _context.n = 5;
+                break;
+              }
+              _context.p = 1;
+              if (!(typeof grecaptcha === 'undefined')) {
+                _context.n = 2;
+                break;
+              }
+              showMessage(form, 'Security verification is loading. Please wait...', 'error');
+              return _context.a(2);
+            case 2:
+              _context.n = 3;
+              return grecaptcha.execute(thLoginFrontendData.settings.security.recaptcha.site_key, {
+                action: 'login'
+              });
+            case 3:
+              token = _context.v;
+              // Add token to form data
+              tokenField = form.querySelector('input[name="g-recaptcha-response"]');
+              if (!tokenField) {
+                tokenField = document.createElement('input');
+                tokenField.type = 'hidden';
+                tokenField.name = 'g-recaptcha-response';
+                form.appendChild(tokenField);
+              }
+              tokenField.value = token;
+              _context.n = 5;
+              break;
+            case 4:
+              _context.p = 4;
+              _t = _context.v;
+              showMessage(form, 'Security verification failed. Please try again.', 'error');
+              console.error('reCAPTCHA v3 error:', _t);
+              return _context.a(2);
+            case 5:
               formType = form.dataset.formType;
               formData = new FormData(form);
               messagesContainer = form.querySelector('.thlogin-messages');
@@ -254,14 +305,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 _iterator.f();
               }
               endpoint = "".concat(thLoginFrontendData.siteUrl, "/wp-json/thlogin/v1/").concat(formType);
-              _context.p = 1;
+              _context.p = 6;
               submitButton = form.querySelector('button[type="submit"]');
               if (submitButton) {
                 submitButton.disabled = true;
                 submitButton.dataset.originalText = submitButton.innerHTML;
-                submitButton.innerHTML = "<span class=\"thlogin-spinner\"></span> ".concat(((_thLoginFrontendData$ = thLoginFrontendData.settings.design) === null || _thLoginFrontendData$ === void 0 || (_thLoginFrontendData$ = _thLoginFrontendData$.buttons) === null || _thLoginFrontendData$ === void 0 || (_thLoginFrontendData$ = _thLoginFrontendData$.primary) === null || _thLoginFrontendData$ === void 0 ? void 0 : _thLoginFrontendData$.text_saving) || 'Processing...');
+                submitButton.innerHTML = "<span class=\"thlogin-spinner\"></span> ".concat(((_thLoginFrontendData$3 = thLoginFrontendData.settings.design) === null || _thLoginFrontendData$3 === void 0 || (_thLoginFrontendData$3 = _thLoginFrontendData$3.buttons) === null || _thLoginFrontendData$3 === void 0 || (_thLoginFrontendData$3 = _thLoginFrontendData$3.primary) === null || _thLoginFrontendData$3 === void 0 ? void 0 : _thLoginFrontendData$3.text_saving) || 'Processing...');
               }
-              _context.n = 2;
+              _context.n = 7;
               return fetch(endpoint, {
                 method: 'POST',
                 headers: {
@@ -270,11 +321,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify(requestData)
               });
-            case 2:
+            case 7:
               response = _context.v;
-              _context.n = 3;
+              _context.n = 8;
               return response.json();
-            case 3:
+            case 8:
               data = _context.v;
               if (data.success) {
                 showMessage(form, data.data.message || 'Success!', 'success');
@@ -296,25 +347,25 @@ document.addEventListener('DOMContentLoaded', function () {
               } else {
                 showMessage(form, data.data.message || 'An error occurred. Please try again.', 'error');
               }
-              _context.n = 5;
+              _context.n = 10;
               break;
-            case 4:
-              _context.p = 4;
-              _t = _context.v;
+            case 9:
+              _context.p = 9;
+              _t2 = _context.v;
               showMessage(form, 'An unexpected error occurred. Please check your network.', 'error');
-              console.error('TH Login: Frontend REST API Error:', _t);
-            case 5:
-              _context.p = 5;
+              console.error('TH Login: Frontend REST API Error:', _t2);
+            case 10:
+              _context.p = 10;
               _submitButton = form.querySelector('button[type="submit"]');
               if (_submitButton) {
                 _submitButton.disabled = false;
                 _submitButton.innerHTML = _submitButton.dataset.originalText || 'Submit';
               }
-              return _context.f(5);
-            case 6:
+              return _context.f(10);
+            case 11:
               return _context.a(2);
           }
-        }, _callee, null, [[1, 4, 5, 6]]);
+        }, _callee, null, [[6, 9, 10, 11], [1, 4]]);
       }));
       return function (_x) {
         return _ref.apply(this, arguments);

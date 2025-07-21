@@ -16,7 +16,7 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
       <AccordionSection title={title} defaultOpen={false}>
         <div className="thlogin-border-controls">
           <BorderBoxControl
-            label={__("Border Width", "thlogin")}
+            label={__("Border Width", "th-login")}
             values={width}
             onChange={(newVal) =>
               handleSettingChange("design", [...path, "width"], newVal)
@@ -27,14 +27,14 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
         </div>
 
         <CustomSelectControl
-          label={__("Style", "thlogin")}
+          label={__("Style", "th-login")}
           value={style}
           options={[
-            { label: __("Solid", "thlogin"), value: "solid" },
-            { label: __("Dashed", "thlogin"), value: "dashed" },
-            { label: __("Dotted", "thlogin"), value: "dotted" },
-            { label: __("Double", "thlogin"), value: "double" },
-            { label: __("None", "thlogin"), value: "none" },
+            { label: __("Solid", "th-login"), value: "solid" },
+            { label: __("Dashed", "th-login"), value: "dashed" },
+            { label: __("Dotted", "th-login"), value: "dotted" },
+            { label: __("Double", "th-login"), value: "double" },
+            { label: __("None", "th-login"), value: "none" },
           ]}
           className="modern-border-select-control"
           onChange={(val) =>
@@ -57,7 +57,7 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
       <AccordionSection title={__('Radius', 'th-login')} defaultOpen={false}>
         <div className="thlogin-border-controls">
           <BorderRadiusControl
-            label={__("Border Radius", "thlogin")}
+            label={__("Border Radius", "th-login")}
             values={radius}
             onChange={(newVal) =>
               handleSettingChange("design", [...path, "radius"], newVal)

@@ -4,37 +4,37 @@ import { __ } from "@wordpress/i18n";
 export const TABS = [
   {
     id: "general",
-    label: __("General", "thlogin"),
+    label: __("General", "th-login"),
     icon: "admin-settings"
   },
    {
     id: "form-fields",
-    label: __("Form Fields", "thlogin"),
+    label: __("Form Fields", "th-login"),
     icon: "feedback"
   },
   {
     id: "display-triggers",
-    label: __("Display Triggers", "thlogin"),
+    label: __("Display Triggers", "th-login"),
     icon: "visibility"
   },
   {
     id: "design",
-    label: __("Design", "thlogin"),
+    label: __("Design", "th-login"),
     icon: "art"
   },
   {
     id: "integration",
-    label: __("Integration", "thlogin"),
+    label: __("Integration", "th-login"),
     icon: "admin-plugins"
   },
   {
     id: "security",
-    label: __("Security", "thlogin"),
+    label: __("Security", "th-login"),
     icon: "shield"
   },
   {
     id: "tools",
-    label: __("Tools", "thlogin"),
+    label: __("Tools", "th-login"),
     icon: "admin-tools"
   }
 ];
@@ -350,8 +350,8 @@ export  const display_triggers = {
       menu_integration: {
         enabled: false,
         menu_slug: "primary",
-        item_text_login: __("Login", "thlogin"),
-        item_text_register: __("Register", "thlogin"),
+        item_text_login: __("Login", "th-login"),
+        item_text_register: __("Register", "th-login"),
         item_icon_login: "dashicons-admin-users",
         item_icon_register: "dashicons-plus-alt",
         visibility_login_logged_in: false,
@@ -383,69 +383,69 @@ export  const security = {
 
 //deisgn-settings
 export const tabs = [
-  { key: "login", label: __("Login", "thlogin") },
-  { key: "register", label: __("Register", "thlogin") },
-  { key: "forgot_password", label: __("Forgot", "thlogin") },
+  { key: "login", label: __("Login", "th-login") },
+  { key: "register", label: __("Register", "th-login") },
+  { key: "forgot_password", label: __("Forgot", "th-login") },
 ];
 
 export const layoutOptions = [
   {
     key: "page",
     icon: "admin-page", // more appropriate than "align-center"
-    label: __("Page/ShortCode", "thlogin"),
+    label: __("Page/ShortCode", "th-login"),
     demoClass: "page",
   },
   {	
     key: "popup",
     icon: "align-center",
-    label: __("Popup", "thlogin"),
+    label: __("Popup", "th-login"),
     demoClass: "popup",
   },
   {
     key: "slide_in_left",
     icon: "align-pull-left",
-    label: __("Slide-in-left", "thlogin"),
+    label: __("Slide-in-left", "th-login"),
     demoClass: "slide-left",
   },
   {
     key: "slide_in_right",
     icon: "align-pull-right",
-    label: __("Slide-in-right", "thlogin"),
+    label: __("Slide-in-right", "th-login"),
     demoClass: "slide-right",
   },
 ];
 
 export const fontWeightOptions = [
-  { label: __("Normal", "thlogin"), value: 300 },
-  { label: __("Medium", "thlogin"), value: 500 },
-  { label: __("Semi-Bold", "thlogin"), value: 700 },
-  { label: __("Bold", "thlogin"), value: 900 },
+  { label: __("Normal", "th-login"), value: 300 },
+  { label: __("Medium", "th-login"), value: 500 },
+  { label: __("Semi-Bold", "th-login"), value: 700 },
+  { label: __("Bold", "th-login"), value: 900 },
 ];
 
 //general-settings
 export const shortcodes = [
     {
-      label: __("Login Form", "thlogin"),
+      label: __("Login Form", "th-login"),
       shortcode: "[th_login_form]",
-      description: __("Displays only the login form", "thlogin"),
+      description: __("Displays only the login form", "th-login"),
     },
     {
-      label: __("Register Form", "thlogin"),
+      label: __("Register Form", "th-login"),
       shortcode: "[th_register_form]",
-      description: __("Displays only the register form", "thlogin"),
+      description: __("Displays only the register form", "th-login"),
     },
     {
-      label: __("Forgot Password Form", "thlogin"),
+      label: __("Forgot Password Form", "th-login"),
       shortcode: "[th_forgot_password_form]",
-      description: __("Displays only the forgot password form", "thlogin"),
+      description: __("Displays only the forgot password form", "th-login"),
     },
     {
-      label: __("Combined Modal", "thlogin"),
+      label: __("Combined Modal", "th-login"),
       shortcode: "[th_login__combined_form]",
-      description: __("Shows the full login/register/forgot modal and auto-triggers it", "thlogin"),
+      description: __("Shows the full login/register/forgot modal and auto-triggers it", "th-login"),
     },
         {
-            label: __("Popup Link", "thlogin"),
+            label: __("Popup Link", "th-login"),
             shortcode : "[th_login_popup_auto]",
             description:__("Use this link to generate popup link.")
         }

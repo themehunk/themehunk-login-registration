@@ -23,16 +23,16 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 			<ToggleGroupControl
 				__nextHasNoMarginBottom={true}
 				__next40pxDefaultSize = {true}
-				label={__("Background Type", "thlogin")}
+				label={__("Background Type", "th-login")}
 				value={type}
 				isBlock
 				onChange={(newType) => {
 					handleSettingChange("design", [...path, "type"], newType);
 				}}
 			>
-				<ToggleGroupControlOption value="color" label={__("Color", "thlogin")} />
-				<ToggleGroupControlOption value="gradient" label={__("Gradient", "thlogin")} />
-				<ToggleGroupControlOption value="image" label={__("Image", "thlogin")} />
+				<ToggleGroupControlOption value="color" label={__("Color", "th-login")} />
+				<ToggleGroupControlOption value="gradient" label={__("Gradient", "th-login")} />
+				<ToggleGroupControlOption value="image" label={__("Image", "th-login")} />
 			</ToggleGroupControl>
 
 			{type === "color" && (
@@ -54,14 +54,64 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 						onChange={(value) => handleSettingChange("design", [...path, "gradient"], value)}
 						gradients={[
 							{
-								name: __("Default", "thlogin"),
+								name: __("Default", "th-login"),
 								gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
 								slug: "default",
 							},
 							{
-								name: __("Ocean Blue", "thlogin"),
+								name: __("Ocean Blue", "th-login"),
 								gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
 								slug: "ocean-blue",
+							},
+							{
+								name: __("Sunset", "th-login"),
+								gradient: "linear-gradient(135deg,#ff7e5f 0%,#feb47b 100%)",
+								slug: "sunset",
+							},
+							{
+								name: __("Cool Sky", "th-login"),
+								gradient: "linear-gradient(135deg,#2980b9 0%,#6dd5fa 100%)",
+								slug: "cool-sky",
+							},
+							{
+								name: __("Peach", "th-login"),
+								gradient: "linear-gradient(135deg,#ed4264 0%,#ffedbc 100%)",
+								slug: "peach",
+							},
+							{
+								name: __("Purple Dream", "th-login"),
+								gradient: "linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%)",
+								slug: "purple-dream",
+							},
+							{
+								name: __("Mango", "th-login"),
+								gradient: "linear-gradient(135deg,#ffe259 0%,#ffa751 100%)",
+								slug: "mango",
+							},
+							{
+								name: __("Frost", "th-login"),
+								gradient: "linear-gradient(135deg,#000428 0%,#004e92 100%)",
+								slug: "frost",
+							},
+							{
+								name: __("Cherry Blossom", "th-login"),
+								gradient: "linear-gradient(135deg,#ff9a9e 0%,#fad0c4 99%,#fad0c4 100%)",
+								slug: "cherry-blossom",
+							},
+							{
+								name: __("Lush Green", "th-login"),
+								gradient: "linear-gradient(135deg,#56ab2f 0%,#a8e063 100%)",
+								slug: "lush-green",
+							},
+							{
+								name: __("Deep Space", "th-login"),
+								gradient: "linear-gradient(135deg,#000000 0%,#434343 100%)",
+								slug: "deep-space",
+							},
+							{
+								name: __("Rose Gold", "th-login"),
+								gradient: "linear-gradient(135deg,#b76e79 0%,#ffe6e6 100%)",
+								slug: "rose-gold",
 							},
 						]}
 					/>
@@ -74,7 +124,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 						<TextControl
 							__next40pxDefaultSize
 							__nextHasNoMarginBottom={true}
-							label={__("Image URL", "thlogin")}
+							label={__("Image URL", "th-login")}
 							value={imageURL}
 							onChange={(val) =>
 								handleSettingChange("design", [...path, "image", "url"], val)
@@ -101,18 +151,18 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 
 							<div className="thlogin-media-image">
 								<CustomSelectControl
-									label={__("Position", "thlogin")}
+									label={__("Position", "th-login")}
 									value={position}
 									options={[
-										{ label: __("Top Left", "thlogin"), value: "top left" },
-										{ label: __("Top Center", "thlogin"), value: "top center" },
-										{ label: __("Top Right", "thlogin"), value: "top right" },
-										{ label: __("Center Left", "thlogin"), value: "center left" },
-										{ label: __("Center Center", "thlogin"), value: "center center" },
-										{ label: __("Center Right", "thlogin"), value: "center right" },
-										{ label: __("Bottom Left", "thlogin"), value: "bottom left" },
-										{ label: __("Bottom Center", "thlogin"), value: "bottom center" },
-										{ label: __("Bottom Right", "thlogin"), value: "bottom right" },
+										{ label: __("Top Left", "th-login"), value: "top left" },
+										{ label: __("Top Center", "th-login"), value: "top center" },
+										{ label: __("Top Right", "th-login"), value: "top right" },
+										{ label: __("Center Left", "th-login"), value: "center left" },
+										{ label: __("Center Center", "th-login"), value: "center center" },
+										{ label: __("Center Right", "th-login"), value: "center right" },
+										{ label: __("Bottom Left", "th-login"), value: "bottom left" },
+										{ label: __("Bottom Center", "th-login"), value: "bottom center" },
+										{ label: __("Bottom Right", "th-login"), value: "bottom right" },
 									]}
 									onChange={(val) =>
 										handleSettingChange("design", [...path, "image", "position"], val)
@@ -120,12 +170,12 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 								/>
 
 								<CustomSelectControl
-									label={__("Size", "thlogin")}
+									label={__("Size", "th-login")}
 									value={size}
 									options={[
-										{ label: __("Cover", "thlogin"), value: "cover" },
-										{ label: __("Contain", "thlogin"), value: "contain" },
-										{ label: __("Auto", "thlogin"), value: "auto" },
+										{ label: __("Cover", "th-login"), value: "cover" },
+										{ label: __("Contain", "th-login"), value: "contain" },
+										{ label: __("Auto", "th-login"), value: "auto" },
 									]}
 									onChange={(val) =>
 										handleSettingChange("design", [...path, "image", "size"], val)
@@ -133,13 +183,13 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 								/>
 
 								<CustomSelectControl
-									label={__("Repeat", "thlogin")}
+									label={__("Repeat", "th-login")}
 									value={repeat}
 									options={[
-										{ label: __("No Repeat", "thlogin"), value: "no-repeat" },
-										{ label: __("Repeat", "thlogin"), value: "repeat" },
-										{ label: __("Repeat X", "thlogin"), value: "repeat-x" },
-										{ label: __("Repeat Y", "thlogin"), value: "repeat-y" },
+										{ label: __("No Repeat", "th-login"), value: "no-repeat" },
+										{ label: __("Repeat", "th-login"), value: "repeat" },
+										{ label: __("Repeat X", "th-login"), value: "repeat-x" },
+										{ label: __("Repeat Y", "th-login"), value: "repeat-y" },
 									]}
 									onChange={(val) =>
 										handleSettingChange("design", [...path, "image", "repeat"], val)
@@ -153,7 +203,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 
 			{/* <div className="background-opacity-slider" style={{ marginTop: "16px" }}>
 				<RangeControl
-					label={__("Opacity", "thlogin")}
+					label={__("Opacity", "th-login")}
 					value={opacity}
 					onChange={(val) => {
 						handleSettingChange("design", [...path, "opacity"], val);

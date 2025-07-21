@@ -1,6 +1,18 @@
 import './styles/frontend.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Load reCAPTCHA script if enabled
+    if (thLoginFrontendData.settings.security?.recaptcha?.enabled) {
+        const recaptchaType = thLoginFrontendData.settings.security.recaptcha.type;
+        const siteKey = thLoginFrontendData.settings.security.recaptcha.site_key;
+        
+        const script = document.createElement('script');
+        script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+
     // --- Elements ---
     const modal = document.getElementById('thlogin-popup-modal');
     if (!modal) return;
@@ -183,6 +195,41 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.thlogin-ajax-form').forEach(form => {
         form.addEventListener('submit', async e => {
             e.preventDefault();
+
+             // Handle reCAPTCHA v3 if enabled
+            if (thLoginFrontendData.settings.security?.recaptcha?.enabled && 
+                thLoginFrontendData.settings.security.recaptcha.type === 'v3') {
+                
+                try {
+                    // Ensure grecaptcha is loaded
+                    if (typeof grecaptcha === 'undefined') {
+                        showMessage(form, 'Security verification is loading. Please wait...', 'error');
+                        return;
+                    }
+                    
+                    // Execute reCAPTCHA v3
+                    const token = await grecaptcha.execute(
+                        thLoginFrontendData.settings.security.recaptcha.site_key, 
+                        {action: 'login'}
+                    );
+                    
+                    // Add token to form data
+                    let tokenField = form.querySelector('input[name="g-recaptcha-response"]');
+
+                    if (!tokenField) {
+                        tokenField = document.createElement('input');
+                        tokenField.type = 'hidden';
+                        tokenField.name = 'g-recaptcha-response';
+                        form.appendChild(tokenField);
+                    }
+                    tokenField.value = token;
+                    
+                } catch (error) {
+                    showMessage(form, 'Security verification failed. Please try again.', 'error');
+                    console.error('reCAPTCHA v3 error:', error);
+                    return;
+                }
+            }
 
             const formType = form.dataset.formType;
             const formData = new FormData(form);

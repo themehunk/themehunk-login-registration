@@ -139,6 +139,7 @@ class TH_Sanitization_validation {
 		$sanitized['icon'] = array(
 			'color' => $this->sanitize_color_input( $settings['icon']['color'] ?? '#111111' ),
 			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '20px' ),
+			'icon_position' => sanitize_text_field( $settings['icon']['icon_position'] ?? 'with-label' ),
 		);
 
 		$sanitized['header']['button']        = $this->sanitize_button_style( $settings['header']['button'] ?? [] );
@@ -605,11 +606,20 @@ class TH_Sanitization_validation {
 
 		// reCAPTCHA.
 		$sanitized['recaptcha']['enabled'] = rest_sanitize_boolean( $settings['recaptcha']['enabled'] ?? false );
+		$sanitized['recaptcha']['show_on'] = sanitize_text_field( $settings['recaptcha']['show_on'] ?? 'all' );
 		$sanitized['recaptcha']['type'] = sanitize_text_field( $settings['recaptcha']['type'] ?? 'v2_checkbox' );
 		$sanitized['recaptcha']['site_key'] = sanitize_text_field( $settings['recaptcha']['site_key'] ?? '' );
 		$sanitized['recaptcha']['secret_key'] = sanitize_text_field( $settings['recaptcha']['secret_key'] ?? '' );
 
+		// Honeypot.
 		$sanitized['honeypot_enabled'] = rest_sanitize_boolean( $settings['honeypot_enabled'] ?? true );
+
+		// Email Verification.
+		$sanitized['email_verification']['enabled']       = rest_sanitize_boolean( $settings['email_verification']['enabled'] ?? false );
+		$sanitized['email_verification']['from_name']     = sanitize_text_field( $settings['email_verification']['from_name'] ?? '' );
+		$sanitized['email_verification']['from_email']    = sanitize_email( $settings['email_verification']['from_email'] ?? '' );
+		$sanitized['email_verification']['email_subject'] = sanitize_text_field( $settings['email_verification']['email_subject'] ?? 'Verify your email' );
+		$sanitized['email_verification']['email_content'] = wp_kses_post( $settings['email_verification']['email_content'] ?? 'Click the link to verify: {verification_link}' );
 
 		return $sanitized;
 	}
@@ -617,7 +627,7 @@ class TH_Sanitization_validation {
 	public function validate_security_settings( $settings ) {
 		$errors = new WP_Error();
 
-		// Example validation: reCAPTCHA keys are required if enabled.
+		// Validate reCAPTCHA keys if enabled.
 		if ( ( $settings['recaptcha']['enabled'] ?? false ) ) {
 			if ( empty( $settings['recaptcha']['site_key'] ?? '' ) ) {
 				$errors->add( 'missing_recaptcha_site_key', esc_html__( 'reCAPTCHA Site Key is required when reCAPTCHA is enabled.', 'th-login' ) );
@@ -627,6 +637,24 @@ class TH_Sanitization_validation {
 			}
 		}
 
+		// Validate email verification if enabled.
+		if ( ( $settings['email_verification']['enabled'] ?? false ) ) {
+			if ( empty( $settings['email_verification']['from_email'] ?? '' ) ) {
+				$errors->add( 'missing_from_email', esc_html__( 'From Email is required for email verification.', 'th-login' ) );
+			} elseif ( ! is_email( $settings['email_verification']['from_email'] ) ) {
+				$errors->add( 'invalid_from_email', esc_html__( 'From Email must be a valid email address.', 'th-login' ) );
+			}
+
+			if ( empty( $settings['email_verification']['email_subject'] ?? '' ) ) {
+				$errors->add( 'missing_email_subject', esc_html__( 'Email Subject is required for verification email.', 'th-login' ) );
+			}
+
+			if ( empty( $settings['email_verification']['email_content'] ?? '' ) ) {
+				$errors->add( 'missing_email_content', esc_html__( 'Email Content is required for verification email.', 'th-login' ) );
+			}
+		}
+
 		return $errors->has_errors() ? $errors : true;
 	}
+
 }

@@ -288,7 +288,8 @@ export  const design = {
   },
   icon:{
     color:"#111111",
-    size:"20px"
+    size:"20px",
+    icon_position: "with-label"
   },
   header:{
     button:{
@@ -375,10 +376,19 @@ export  const security = {
   recaptcha: {
     enabled: false,
     type: "v2_checkbox",
+    show_on:"all",
     site_key: "",
     secret_key: "",
   },
   honeypot_enabled: true,
+  email_verification: {
+    enabled: false,
+    from_name: '',
+    from_email: '',
+    email_subject: 'Verify your email',
+    email_content: 'Click the link below to verify your email: {verification_link}'
+  }
+
 };
 
 //deisgn-settings

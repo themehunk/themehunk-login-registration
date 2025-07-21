@@ -25,15 +25,14 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [message, setMessage] = useState(null); // { type: 'success' | 'error', text: '...' }
+  const [message, setMessage] = useState(null);
   const [exportedSettings, setExportedSettings] = useState("");
   const [importSettingsText, setImportSettingsText] = useState("");
-  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false); // State for reset confirmation dialog
+  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("general");
 
-  const importTextareaRef = useRef(null); // Ref for import textarea
+  const importTextareaRef = useRef(null); 
 
-  // Fetch settings on component mount.
   useEffect(() => {
     const fetchSettings = async () => {
       try {
@@ -75,7 +74,7 @@ const App = () => {
     };
 
     fetchSettings();
-  }, []); // Empty dependency array means this runs once on mount.
+  }, []);
 
   const deepMerge = (target, source) => {
     const output = { ...target };
@@ -272,46 +271,40 @@ const App = () => {
   };
 
   const handleResetSettings = async () => {
-    setIsResetConfirmOpen(false); // Close confirmation dialog
+    setIsResetConfirmOpen(false);
     setIsSaving(true);
     setMessage(null);
+
     try {
       const response = await apiFetch({
-        path: "thlogin/v1/reset-settings", 
+        path: "thlogin/v1/reset-settings",
         method: "POST",
       });
 
+
       if (response.success) {
         setMessage({ type: "success", text: response.message });
-        // Re-fetch settings to load the newly reset defaults
-        const fetchResponse = await apiFetch({
-          path: "thlogin/v1/settings",
-          method: "POST",
-          data: { action: "fetch_settings" },
-        });
-        
-        if (fetchResponse.success) {
-          const mergedSettings = deepMerge(settings, fetchResponse.settings);
-          
-          if (
-            !Array.isArray(
-              mergedSettings.general?.redirects?.role_based_redirects
-            )
-          ) {
-            mergedSettings.general.redirects.role_based_redirects = [];
-          }
-          setSettings(mergedSettings);
+
+        const newSettings = response.settings;
+
+        // Ensure structure safety
+        if (
+          !Array.isArray(newSettings.general?.redirects?.role_based_redirects)
+        ) {
+          newSettings.general.redirects.role_based_redirects = [];
         }
+
+        setSettings(newSettings); //  apply new settings
       } else {
         setMessage({
           type: "error",
-          text: response.message || __("Failed to reset settings.", "thlogin"),
+          text: response.message || __("Failed to reset settings.", "th-login"),
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: __("Error resetting settings. Please check console.", "thlogin"),
+        text: __("Error resetting settings. Please check console.", "th-login"),
       });
       console.error("Error resetting settings:", error);
     } finally {
@@ -334,8 +327,7 @@ const App = () => {
     );
   }
 
-  // console.log(settings);
-
+  console.log(settings);
   return (
     <div className="thlogin-admin-modern">
       
@@ -475,6 +467,7 @@ const App = () => {
           </div>
         </div>
       )}
+      
     </div>
   );
 };

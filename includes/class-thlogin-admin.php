@@ -9,17 +9,36 @@ class THLogin_Admin {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'register_admin_menu_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+		add_action( 'admin_head', function () {
+				$image_url = esc_url( plugins_url( '../assets/images/th-login-new.svg', __FILE__ ) );
+				echo '<style>
+					#adminmenu .toplevel_page_thlogin-settings .wp-menu-image:before {
+						content: "";
+						display: inline-block;
+						width: 20px;
+						height: 20px;
+						background-size: contain;
+						background-repeat: no-repeat;
+						background-position: center;
+						background-image: url("' . $image_url . '");
+					}
+					#adminmenu .toplevel_page_thlogin-settings .wp-menu-image img {
+						display: none;
+					}
+				</style>';
+			} );
 	}
+
 
 	public function register_admin_menu_page() {
 		add_menu_page(
 			esc_html__( 'TH Login', 'th-login' ), // Page title
 			esc_html__( 'TH Login', 'th-login' ), // Menu title
-			'manage_options',                    // Capability required to access
-			'thlogin-settings',                 // Menu slug
-			array( $this, 'render_admin_page' ), // Callback function to render page content
-			'dashicons-admin-users',             // Icon for the menu item
-			59                                   // Position in the menu
+			'manage_options',                     // Capability
+			'thlogin-settings',                   // Slug
+			array( $this, 'render_admin_page' ),  // Callback
+			'thlogin-icon',
+			59
 		);
 	}
 

@@ -71,6 +71,12 @@ if (!function_exists('th_login_get_padding_style')) {
     margin: 0 auto;
 }
 
+.th-login-from-feilds-combine{
+    display: flex;
+    flex-direction: column;
+    gap: <?php echo esc_attr($design['form']['form_gap']); ?>px;
+}
+
 .thlogin-form h3 {
     color: <?php echo esc_attr($design['heading']['color']); ?>;
     font-size: <?php echo esc_attr($design['heading']['typography']['size']); ?>;
@@ -141,6 +147,13 @@ if (!function_exists('th_login_get_padding_style')) {
     width: <?php echo esc_attr($design['icon']['size']); ?>;
     height: <?php echo esc_attr($design['icon']['size']); ?>;
     color: <?php echo esc_attr($design['icon']['color']); ?>;
+}
+
+.icon-activated-input{
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: <?php echo esc_attr($design['icon']['size']); ?>;
+    padding-left: calc(20px + <?php echo esc_attr($design['icon']['size']); ?>) !important;
 }
 
 .thlogin-link-separator {

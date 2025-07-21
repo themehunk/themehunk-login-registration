@@ -45,3 +45,13 @@ if ( ! function_exists( 'th_login_get_icon_svg' ) ) {
 		return isset( $icons[ $icon_name ] ) ? $icons[ $icon_name ] : '';
 	}
 }
+
+
+if ( ! function_exists( 'th_login_get_icon_svg_data_uri' ) ) {
+function th_login_get_icon_svg_data_uri($icon) {
+    $svg = th_login_get_icon_svg($icon);
+    if (empty($svg)) return '';
+    return "url('data:image/svg+xml," . rawurlencode($svg) . "')";
+}
+
+}

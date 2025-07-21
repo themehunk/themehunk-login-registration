@@ -3,11 +3,11 @@ import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 import { Icon } from '@wordpress/components';
 
-const AccordionSection = ({ title, children, defaultOpen = false }) => {
+const AccordionSection = ({ title, children, defaultOpen = false ,className=''}) => {
 	const [open, setOpen] = useState(defaultOpen);
 
 	return (
-		<div className={`th-accordion-section ${open ? "open" : ""}`}>
+		<div className={`th-accordion-section ${open ? "open" : ""} ${className}`}>
 			<div className="accordion-header" onClick={() => setOpen(!open)}>
 				<span>{title}</span>
 				<span className="accordion-icon rotated">

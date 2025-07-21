@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $form_fields_settings   = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true );
 $forgot_password_fields = $form_fields_settings['forgot_password'] ?? array();
+$security_settings      = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
 ?>
 
 <div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">
@@ -56,6 +57,19 @@ $forgot_password_fields = $form_fields_settings['forgot_password'] ?? array();
 				/>
 			</p>
 		<?php endforeach; ?>
+
+		<?php if ( ! empty( $security_settings['honeypot_enabled'] ) ) : ?>
+			<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">
+				<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'th-login' ); ?></label>
+				<input
+					type="text"
+					name="thlogin_hp"
+					id="thlogin_hp"
+					tabindex="-1"
+					autocomplete="off"
+				>
+			</p>
+		<?php endif; ?>
 
 		<p class="thlogin-form-submit">
 			<button type="submit" class="thlogin-button thlogin-button--primary">

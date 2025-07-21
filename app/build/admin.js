@@ -20616,7 +20616,7 @@ var App = function App() {
   var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState8 = _slicedToArray(_useState7, 2),
     message = _useState8[0],
-    setMessage = _useState8[1]; // { type: 'success' | 'error', text: '...' }
+    setMessage = _useState8[1];
   var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState0 = _slicedToArray(_useState9, 2),
     exportedSettings = _useState0[0],
@@ -20628,14 +20628,12 @@ var App = function App() {
   var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
     isResetConfirmOpen = _useState12[0],
-    setIsResetConfirmOpen = _useState12[1]; // State for reset confirmation dialog
+    setIsResetConfirmOpen = _useState12[1];
   var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)("general"),
     _useState14 = _slicedToArray(_useState13, 2),
     activeTab = _useState14[0],
     setActiveTab = _useState14[1];
-  var importTextareaRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null); // Ref for import textarea
-
-  // Fetch settings on component mount.
+  var importTextareaRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchSettings = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
@@ -20691,8 +20689,7 @@ var App = function App() {
       };
     }();
     fetchSettings();
-  }, []); // Empty dependency array means this runs once on mount.
-
+  }, []);
   var _deepMerge = function deepMerge(target, source) {
     var output = _objectSpread({}, target);
     if (target && _typeof(target) === "object" && source && _typeof(source) === "object") {
@@ -20979,9 +20976,7 @@ var App = function App() {
       className: "thlogin-loading-text"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loading settings...", "thlogin")));
   }
-
-  // console.log(settings);
-
+  console.log(settings);
   return /*#__PURE__*/React.createElement("div", {
     className: "thlogin-admin-modern"
   }, /*#__PURE__*/React.createElement("div", {
@@ -24676,9 +24671,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./custom-select-control */ "./src/admin/components/custom-select-control.js");
+/* harmony import */ var _custom_select_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./custom-select-control */ "./src/admin/components/custom-select-control.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { if (r) i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n;else { var o = function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); }; o("next", 0), o("throw", 1), o("return", 2); } }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -24689,11 +24690,13 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+
 var SecuritySettings = function SecuritySettings(_ref) {
-  var _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5;
+  var _settings$general$man2, _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5, _settings$security$re6, _settings$general$man3, _settings$general$man4, _settings$security$em, _settings$security$em2, _settings$security$em3, _settings$security$em4, _settings$security$em5, _settings$security$em6;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("bruteforce"),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("bruteforce"),
     _useState2 = _slicedToArray(_useState, 2),
     activeTab = _useState2[0],
     setActiveTab = _useState2[1];
@@ -24707,15 +24710,14 @@ var SecuritySettings = function SecuritySettings(_ref) {
     key: "honeypot",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("HoneyPot", "th-login")
   }, {
-    key: "emailVerifictaion",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Verifictaion", "th-login")
-  }, {
     key: "manualApproval",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual Approval", "th-login")
   }, {
-    key: "twoFactorAuthentication",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Two-Factor Authentication", "th-login")
-  }];
+    key: "emailVerifictaion",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Verifictaion", "th-login")
+  }
+  // { key: "twoFactorAuthentication", label: __("Two-Factor Authentication", "th-login") },
+  ];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
       className: "custom-tabs"
@@ -24729,6 +24731,95 @@ var SecuritySettings = function SecuritySettings(_ref) {
       }, tab.label);
     }));
   };
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    pendingUsers = _useState4[0],
+    setPendingUsers = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    loadingUsers = _useState6[0],
+    setLoadingUsers = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    approvingId = _useState8[0],
+    setApprovingId = _useState8[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    var _settings$general$man;
+    if (activeTab === "manualApproval" && (_settings$general$man = settings.general.manual_user_approval) !== null && _settings$general$man !== void 0 && _settings$general$man.enabled) {
+      fetchPendingUsers();
+    }
+  }, [activeTab, (_settings$general$man2 = settings.general.manual_user_approval) === null || _settings$general$man2 === void 0 ? void 0 : _settings$general$man2.enabled]);
+  var fetchPendingUsers = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var users, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.n) {
+          case 0:
+            setLoadingUsers(true);
+            _context.p = 1;
+            _context.n = 2;
+            return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+              path: "/th-login/v1/pending-users"
+            });
+          case 2:
+            users = _context.v;
+            setPendingUsers(users);
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            console.error("Error fetching pending users:", _t);
+          case 4:
+            setLoadingUsers(false);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3]]);
+    }));
+    return function fetchPendingUsers() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var approveUser = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(userId) {
+      var _t2;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            setApprovingId(userId);
+            _context2.p = 1;
+            _context2.n = 2;
+            return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+              path: "/th-login/v1/approve-user",
+              method: "POST",
+              data: {
+                user_id: userId
+              }
+            });
+          case 2:
+            setPendingUsers(function (prev) {
+              return prev.filter(function (user) {
+                return user.id !== userId;
+              });
+            });
+            _context2.n = 4;
+            break;
+          case 3:
+            _context2.p = 3;
+            _t2 = _context2.v;
+            console.error("Error approving user:", _t2);
+          case 4:
+            setApprovingId(null);
+          case 5:
+            return _context2.a(2);
+        }
+      }, _callee2, null, [[1, 3]]);
+    }));
+    return function approveUser(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
   return /*#__PURE__*/React.createElement("section", {
     className: "settings-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -24829,19 +24920,43 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Show", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show reCaptcha to from", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+    label: '',
+    value: ((_settings$security$re3 = settings.security.recaptcha) === null || _settings$security$re3 === void 0 ? void 0 : _settings$security$re3.show_on) || "all",
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("All Forms", "th-login"),
+      value: "all"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Only", "th-login"),
+      value: "login"
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register Only", "th-login"),
+      value: "register"
+    }],
+    onChange: function onChange(val) {
+      return handleSettingChange("security", ["recaptcha", "show_on"], val);
+    },
+    className: "modrn-size-fixer-167"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
   }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Type", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Version of reCAPTCHA to use", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_3__.CustomSelectControl, {
-    value: ((_settings$security$re3 = settings.security.recaptcha) === null || _settings$security$re3 === void 0 ? void 0 : _settings$security$re3.type) || "v2_checkbox",
+  }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+    value: ((_settings$security$re4 = settings.security.recaptcha) === null || _settings$security$re4 === void 0 ? void 0 : _settings$security$re4.type) || "v2_checkbox",
     options: [{
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("v2 Checkbox", "th-login"),
       value: "v2_checkbox"
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("v3", "th-login"),
-      value: "v3"
-    }],
+    }
+    // { label: __("v3", "th-login"), value: "v3" },
+    ],
     onChange: function onChange(value) {
       return handleSettingChange("security", ["recaptcha", "type"], value);
     },
@@ -24859,7 +24974,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$security$re4 = settings.security.recaptcha) === null || _settings$security$re4 === void 0 ? void 0 : _settings$security$re4.site_key) || "",
+    value: ((_settings$security$re5 = settings.security.recaptcha) === null || _settings$security$re5 === void 0 ? void 0 : _settings$security$re5.site_key) || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("security", ["recaptcha", "site_key"], newValue);
     }
@@ -24874,7 +24989,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$security$re5 = settings.security.recaptcha) === null || _settings$security$re5 === void 0 ? void 0 : _settings$security$re5.secret_key) || "",
+    value: ((_settings$security$re6 = settings.security.recaptcha) === null || _settings$security$re6 === void 0 ? void 0 : _settings$security$re6.secret_key) || "",
     onChange: function onChange(newValue) {
       return handleSettingChange("security", ["recaptcha", "secret_key"], newValue);
     }
@@ -24896,7 +25011,107 @@ var SecuritySettings = function SecuritySettings(_ref) {
     onChange: function onChange(isChecked) {
       return handleSettingChange("security", ["honeypot_enabled"], isChecked);
     }
-  }))))));
+  })))), activeTab === 'manualApproval' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual User Approval", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$general$man3 = settings.general.manual_user_approval) === null || _settings$general$man3 === void 0 ? void 0 : _settings$general$man3.enabled) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("general", ["manual_user_approval", "enabled"], isChecked);
+    }
+  }))), ((_settings$general$man4 = settings.general.manual_user_approval) === null || _settings$general$man4 === void 0 ? void 0 : _settings$general$man4.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "pending-users-list"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pending Users", "th-login")), loadingUsers ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : pendingUsers.length === 0 ? /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No pending users found.", "th-login")) : /*#__PURE__*/React.createElement("ul", null, pendingUsers.map(function (user) {
+    return /*#__PURE__*/React.createElement("li", {
+      key: user.id,
+      className: "pending-user-item"
+    }, /*#__PURE__*/React.createElement("strong", null, user.display_name), " (", user.email, ")", /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      isSecondary: true,
+      onClick: function onClick() {
+        return approveUser(user.id);
+      },
+      disabled: approvingId === user.id
+    }, approvingId === user.id ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approving...", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approve", "th-login")));
+  }))))), activeTab === 'emailVerifictaion' && /*#__PURE__*/React.createElement("div", {
+    className: "settings-group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Email Verification", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require users to verify their email after registration.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$security$em = settings.security.email_verification) === null || _settings$security$em === void 0 ? void 0 : _settings$security$em.enabled) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["email_verification", "enabled"], isChecked);
+    }
+  }))), ((_settings$security$em2 = settings.security.email_verification) === null || _settings$security$em2 === void 0 ? void 0 : _settings$security$em2.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: ((_settings$security$em3 = settings.security.email_verification) === null || _settings$security$em3 === void 0 ? void 0 : _settings$security$em3.from_name) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "from_name"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    type: "email",
+    value: ((_settings$security$em4 = settings.security.email_verification) === null || _settings$security$em4 === void 0 ? void 0 : _settings$security$em4.from_email) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "from_email"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: ((_settings$security$em5 = settings.security.email_verification) === null || _settings$security$em5 === void 0 ? void 0 : _settings$security$em5.email_subject) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "email_subject"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+    value: ((_settings$security$em6 = settings.security.email_verification) === null || _settings$security$em6 === void 0 ? void 0 : _settings$security$em6.email_content) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "email_content"], value);
+    }
+  })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SecuritySettings);
 
@@ -25704,10 +25919,18 @@ var security = {
   recaptcha: {
     enabled: false,
     type: "v2_checkbox",
+    show_on: "all",
     site_key: "",
     secret_key: ""
   },
-  honeypot_enabled: true
+  honeypot_enabled: true,
+  email_verification: {
+    enabled: false,
+    from_name: '',
+    from_email: '',
+    email_subject: 'Verify your email',
+    email_content: 'Click the link below to verify your email: {verification_link}'
+  }
 };
 
 //deisgn-settings

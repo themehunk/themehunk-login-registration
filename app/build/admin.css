@@ -3794,4 +3794,47 @@ input[type=range]::-webkit-slider-thumb {
   width: 167px;
 }
 
+.pending-users-list {
+  margin-top: 24px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pending-users-list h4 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.pending-users-list p {
+  margin: 0;
+  color: #666;
+}
+
+.pending-users-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pending-user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.pending-user-item:last-child {
+  border-bottom: none;
+}
+
+.pending-user-item strong {
+  color: #222;
+  margin-right: 6px;
+}
+
 /*# sourceMappingURL=admin.css.map*/

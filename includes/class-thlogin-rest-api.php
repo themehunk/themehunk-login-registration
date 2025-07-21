@@ -166,6 +166,31 @@ class THLogin_REST_API {
 			'permission_callback' => '__return_true',
 		]);
 
+		register_rest_route( 'th-login/v1', '/pending-users', [
+			'methods'  => 'GET',
+			'callback' => [ $this, 'get_pending_users' ],
+			'permission_callback' => function () {
+				return current_user_can( 'list_users' );
+			},
+		] );
+
+		register_rest_route( 'th-login/v1', '/approve-user', [
+			'methods'  => 'POST',
+			'callback' => [ $this, 'approve_user' ],
+			'permission_callback' => function () {
+				return current_user_can( 'edit_users' );
+			},
+			'args' => [
+				'user_id' => [
+					'required' => true,
+					'type'     => 'integer',
+					'validate_callback' => function ( $param ) {
+						return get_user_by( 'id', $param ) !== false;
+					},
+				],
+			],
+		] );
+
 	}
 
 	public function get_content_suggestions( $request ) {
@@ -352,13 +377,64 @@ class THLogin_REST_API {
 		);
 	}
 
+	public function get_pending_users( $request ) {
+		$args = [
+			'meta_key'   => 'th_login_pending_approval',
+			'meta_value' => '1',
+			'number'     => 50,
+			'fields'     => [ 'ID', 'display_name', 'user_email' ],
+		];
+
+		$users = get_users( $args );
+
+
+		$response = array_map( function ( $user ) {
+			$meta = get_user_meta( $user->ID );
+
+			return [
+				'id'           => $user->ID,
+				'display_name' => $user->display_name,
+				'email'        => $user->user_email,
+			];
+		}, $users );
+
+		return rest_ensure_response( $response );
+	}
+
+	public function approve_user( $request ) {
+		$user_id = $request->get_param( 'user_id' );
+
+		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+			return new WP_Error( 'thlogin_no_permission', __( 'You do not have permission to approve this user.', 'th-login' ), [ 'status' => 403 ] );
+		}
+
+		delete_user_meta( $user_id, 'th_login_pending_approval' );
+
+		return rest_ensure_response( [
+			'success' => true,
+			'message' => __( 'User approved successfully.', 'th-login' ),
+		] );
+	}
+
 	//login
 	public function handle_frontend_login( WP_REST_Request $request ) {
 		$params = $request->get_params();
 
-		// 1. reCAPTCHA
-		$recaptcha_result = ( new THLogin_Security() )->verify_recaptcha( $params['g-recaptcha-response'] ?? '', 'login' );
-		if ( $recaptcha_result instanceof WP_REST_Response ) return $recaptcha_result;
+		// 0. Honeypot check
+		$honeypot = $this->validate_honeypot( $params );
+		if ( $honeypot instanceof WP_REST_Response ) return $honeypot;
+
+		// 1. reCAPTCHA check only if enabled and set to show on login
+		$security_settings = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
+		$recaptcha_settings = $security_settings['recaptcha'] ?? [];
+
+		if (
+			! empty( $recaptcha_settings['enabled'] ) &&
+			in_array( $recaptcha_settings['show_on'] ?? 'all', [ 'all', 'login' ], true )
+		) {
+			$recaptcha_result = ( new THLogin_Security() )->verify_recaptcha( $params['g-recaptcha-response'] ?? '', 'login' );
+			if ( $recaptcha_result instanceof WP_REST_Response ) return $recaptcha_result;
+		}
 
 		// 2. Brute-force check
 		$lockout_check = ( new THLogin_Security() )->get_lockout_status( $request );
@@ -369,7 +445,7 @@ class THLogin_REST_API {
 			], 429 );
 		}
 
-		// 3. Credentials
+		// 3. Credentials extraction
 		$form_fields = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true )['login'] ?? [];
 		[ $user_login, $user_password, $remember ] = $this->extract_login_credentials( $params, $form_fields );
 
@@ -382,9 +458,9 @@ class THLogin_REST_API {
 
 		// 4. Signon
 		$user = wp_signon( [
-			'user_login' => $user_login,
+			'user_login'    => $user_login,
 			'user_password' => $user_password,
-			'remember' => $remember,
+			'remember'      => $remember,
 		], false );
 
 		if ( is_wp_error( $user ) ) {
@@ -394,15 +470,31 @@ class THLogin_REST_API {
 			], 401 );
 		}
 
-		// 5. Validate extra meta fields
+		// 5. Manual approval check
+		if ( get_user_meta( $user->ID, 'th_login_pending_approval', true ) ) {
+			return new WP_REST_Response( [
+				'success' => false,
+				'data'    => [ 'message' => __( 'Your account is pending admin approval.', 'th-login' ) ],
+			], 403 );
+		}
+
+		// 6. Email verification check
+		if ( ! get_user_meta( $user->ID, 'th_login_email_verified', true ) ) {
+			return new WP_REST_Response( [
+				'success' => false,
+				'data' => [ 'message' => __( 'Please verify your email before logging in.', 'th-login' ) ],
+			], 403 );
+		}
+
+		// 7. Validate custom meta fields
 		$meta_check = $this->validate_login_meta_fields( $user->ID, $params, $form_fields );
 		if ( $meta_check instanceof WP_REST_Response ) return $meta_check;
 
-		// 6. Redirect
+		// 8. Success response
 		return new WP_REST_Response( [
 			'success' => true,
 			'data' => [
-				'message' => __( 'Login successful!', 'th-login' ),
+				'message'      => __( 'Login successful!', 'th-login' ),
 				'redirect_url' => $this->get_redirect_url( $user, $request ),
 			],
 		], 200 );
@@ -501,6 +593,23 @@ class THLogin_REST_API {
 		return [ $user_login, $user_password, $remember ];
 	}
 
+	private function validate_honeypot( $params ) {
+		$security_settings = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
+
+		if ( ! empty( $security_settings['honeypot_enabled'] ) ) {
+			foreach ( $params as $key => $value ) {
+				if ( stripos( $key, 'thlogin_hp' ) === 0 && ! empty( $value ) ) {
+					return new WP_REST_Response( [
+						'success' => false,
+						'data'    => [ 'message' => __( 'Bot detection triggered. Please refresh and try again.', 'th-login' ) ],
+					], 400 );
+				}
+			}
+		}
+
+		return true;
+	}
+
 	//register
 	public function handle_frontend_register( WP_REST_Request $request ) {
 		$form_fields       = $this->safe_json_option( 'thlogin_form_fields_settings' );
@@ -513,6 +622,27 @@ class THLogin_REST_API {
 		$email            = '';
 		$password         = '';
 		$confirm_password = '';
+		
+		// Honeypot validation
+		$honeypot_result = $this->validate_honeypot( $request->get_params() );
+		if ( $honeypot_result instanceof WP_REST_Response ) return $honeypot_result;
+
+
+		// reCAPTCHA validation (only if enabled and shown on register)
+		$recaptcha_settings = $security_settings['recaptcha'] ?? [];
+
+		if (
+			! empty( $recaptcha_settings['enabled'] ) &&
+			in_array( $recaptcha_settings['show_on'] ?? 'all', [ 'all', 'register' ], true )
+		) {
+			$recaptcha_result = ( new THLogin_Security() )->verify_recaptcha(
+				$request->get_param( 'g-recaptcha-response' ) ?? '',
+				'register'
+			);
+
+			if ( $recaptcha_result instanceof WP_REST_Response ) return $recaptcha_result;
+		}
+
 
 		foreach ( $register_fields as $field ) {
 			$field_id   = $field['id'] ?? '';
@@ -552,6 +682,7 @@ class THLogin_REST_API {
 		if ( ! is_email( $email ) ) {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Invalid email address.', 'th-login' ) ] ], 400 );
 		}
+
 		if ( username_exists( $username ) ) {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This username is already taken.', 'th-login' ) ] ], 409 );
 		}
@@ -627,15 +758,6 @@ class THLogin_REST_API {
 			}
 		}
 
-		// Honeypot detection
-		if ( $security_settings['honeypot_enabled'] ?? true ) {
-			foreach ( $request->get_params() as $key => $val ) {
-				if ( strpos( $key, 'th_login_hp_' ) === 0 && ! empty( $val ) ) {
-					return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Spam detected.', 'th-login' ) ] ], 403 );
-				}
-			}
-		}
-
 		// Create user
 		$user_data = [
 			'user_login' => $username,
@@ -678,18 +800,16 @@ class THLogin_REST_API {
 		}
 
 		// Email verification
-		if ( $general_settings['email_verification']['enabled'] ?? false ) {
-			$key = md5( microtime() . $user_id );
-			update_user_meta( $user_id, 'th_login_email_verification_key', $key );
-			update_user_meta( $user_id, 'th_login_email_verified', false );
+		if ( $security_settings['email_verification']['enabled'] ?? false ) {
+			$this->th_login_send_verification_email( $user_id, $email );
 
-			$link    = add_query_arg( [ 'th_login_verify_email' => $key, 'user_id' => $user_id ], home_url() );
-			$subject = $general_settings['email_verification']['email_subject'] ?? __( 'Verify your email', 'th-login' );
-			$content = str_replace( '{verification_link}', esc_url( $link ), $general_settings['email_verification']['email_content'] ?? 'Click to verify: {verification_link}' );
-
-			wp_mail( $email, $subject, $content );
-
-			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please verify your email.', 'th-login' ) ] ], 200 );
+			return new WP_REST_Response( [
+				'success' => true,
+				'data'    => [
+					'message'       => __( 'Registration successful! Please verify your email.', 'th-login' ),
+					'redirect_url'  => home_url( '/?email_verification=sent' ),
+				],
+			], 200 );
 		}
 
 		// Manual approval
@@ -727,8 +847,61 @@ class THLogin_REST_API {
 		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'th-login' ), 'redirect_url' => home_url( '/?th_login_action=login' ) ] ], 200 );
 	}
 
+	function th_login_send_verification_email( $user_id, $email ) {
+		$key = md5( microtime() . $user_id );
+
+		update_user_meta( $user_id, 'th_login_email_verification_key', $key );
+		update_user_meta( $user_id, 'th_login_email_verified', false );
+
+		// Generate verification link.
+		$verification_link = add_query_arg(
+			[
+				'th_login_verify_email' => $key,
+				'user_id'               => $user_id,
+			],
+			home_url()
+		);
+
+		// Fetch email verification settings.
+		$security_settings = json_decode( get_option( 'th_login_security_settings', '{}' ), true );
+		$email_settings    = $security_settings['email_verification'] ?? [];
+
+		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? 'TH Login' );
+		$from_email    = sanitize_email( $email_settings['from_email'] ?? get_bloginfo( 'admin_email' ) );
+		$email_subject = sanitize_text_field( $email_settings['email_subject'] ?? 'Verify your email' );
+		$email_content = wp_kses_post( $email_settings['email_content'] ?? 'Click the following link to verify your email: {verification_link}' );
+
+		// Replace placeholder.
+		$email_content = str_replace( '{verification_link}', esc_url( $verification_link ), $email_content );
+
+		// Prepare headers.
+		$headers = [
+			'Content-Type: text/html; charset=UTF-8',
+			'From: ' . $from_name . ' <' . $from_email . '>',
+			'Reply-To: ' . sanitize_email( $email ),
+		];
+
+		// Send the email.
+		$sent = wp_mail( sanitize_email( $email ), $email_subject, nl2br( $email_content ), $headers );
+
+		if ( $sent ) {
+			error_log( '✅ Verification email sent to: ' . $email );
+			return true;
+		} else {
+			$last_error = error_get_last();
+			error_log( '❌ Email sending failed to: ' . $email );
+			error_log( '❌ Error detail: ' . print_r( $last_error, true ) );
+			return false;
+		}
+	}
+
+	//forgot-password
 	public function handle_frontend_forgot_password( WP_REST_Request $request ) {
 		$params = $request->get_params();
+		
+		// Honeypot validation
+		$honeypot_result = $this->validate_honeypot( $params );
+		if ( $honeypot_result instanceof WP_REST_Response ) return $honeypot_result;
 
 		// Load forgot password fields
 		$form_fields_settings = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true );
@@ -833,6 +1006,7 @@ class THLogin_REST_API {
 		], 200 );
 	}
 
+	//tools-panel
 	public function export_settings( WP_REST_Request $request ) {
 		$all_settings = array(
 			'general'          => $this->safe_json_option( 'thlogin_general_settings' ),
@@ -902,6 +1076,7 @@ class THLogin_REST_API {
 		], 500);
 	}
 
+	//sanitization-valdiation
 	public function sanitize_general_settings( $settings ) {
 		return $this->sanitizer->sanitize_general_settings( $settings );
 	}

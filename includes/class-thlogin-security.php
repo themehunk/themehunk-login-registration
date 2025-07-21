@@ -5,6 +5,7 @@ class THLogin_Security {
 	const FAILED_ATTEMPTS_OPTION = 'th_login_failed_attempts';
 
 	public function __construct() {
+		add_action( 'template_redirect', [ $this, 'maybe_verify_email' ] );
 		add_action( 'wp_login_failed', [ $this, 'log_failed_login_attempt' ], 10, 1 );
 		add_filter( 'authenticate', [ $this, 'check_brute_force_lockout' ], 20, 3 );
 		add_action( 'init', [ $this, 'debug_failed_attempts_viewer' ] );
@@ -154,13 +155,6 @@ class THLogin_Security {
 		return [ 'locked_out' => false ];
 	}
 
-	/**
-	 * Verifies reCAPTCHA v2 or v3 response.
-	 *
-	 * @param string $token reCAPTCHA response token from frontend.
-	 * @param string $expected_action Action name (for v3).
-	 * @return true|WP_REST_Response
-	 */
 	public function verify_recaptcha( $token, $expected_action = 'login' ) {
 		$settings = $this->safe_json_option( 'thlogin_security_settings' );
 
@@ -214,5 +208,27 @@ class THLogin_Security {
 		}
 
 		return true;
+	}
+
+	public function maybe_verify_email() {
+		if ( isset( $_GET['th_login_verify_email'], $_GET['user_id'] ) ) {
+			$user_id = absint( $_GET['user_id'] );
+			$key     = sanitize_text_field( $_GET['th_login_verify_email'] );
+
+			$saved_key = get_user_meta( $user_id, 'th_login_email_verification_key', true );
+
+			if ( $saved_key && $saved_key === $key ) {
+				update_user_meta( $user_id, 'th_login_email_verified', true );
+				delete_user_meta( $user_id, 'th_login_email_verification_key' );
+
+				// Redirect to success page or show a message
+				wp_redirect( home_url( '/?th_login_email_verified=success' ) );
+				exit;
+			}
+
+			// Invalid or expired key
+			wp_redirect( home_url( '/?th_login_email_verified=failed' ) );
+			exit;
+		}
 	}
 }

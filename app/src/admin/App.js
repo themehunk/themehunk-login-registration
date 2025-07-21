@@ -25,15 +25,14 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [message, setMessage] = useState(null); // { type: 'success' | 'error', text: '...' }
+  const [message, setMessage] = useState(null);
   const [exportedSettings, setExportedSettings] = useState("");
   const [importSettingsText, setImportSettingsText] = useState("");
-  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false); // State for reset confirmation dialog
+  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("general");
 
-  const importTextareaRef = useRef(null); // Ref for import textarea
+  const importTextareaRef = useRef(null); 
 
-  // Fetch settings on component mount.
   useEffect(() => {
     const fetchSettings = async () => {
       try {
@@ -75,7 +74,7 @@ const App = () => {
     };
 
     fetchSettings();
-  }, []); // Empty dependency array means this runs once on mount.
+  }, []);
 
   const deepMerge = (target, source) => {
     const output = { ...target };
@@ -334,8 +333,7 @@ const App = () => {
     );
   }
 
-  // console.log(settings);
-
+  console.log(settings);
   return (
     <div className="thlogin-admin-modern">
       

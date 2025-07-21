@@ -489,10 +489,18 @@ function thlogin_set_default_options() {
 		'recaptcha'              => array(
 			'enabled'    => false,
 			'type'       => 'v2_checkbox',
+			'show_on'    => 'all',
 			'site_key'   => '',
 			'secret_key' => '',
 		),
 		'honeypot_enabled'       => true,
+		'email_verification'     => array(
+			'enabled'   => false,
+			'from_name'      => '',
+			'from_email'     => '',
+			'email_subject'  => 'Verify your email',
+			'email_content'  => 'Click the link to verify: {verification_link}',
+		),
 	);
 
 	$integration_defaults = array(

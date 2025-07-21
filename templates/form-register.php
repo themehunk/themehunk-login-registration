@@ -10,6 +10,7 @@ if ( ! get_option( 'users_can_register' ) ) {
 
 $form_fields_settings = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true );
 $register_fields      = $form_fields_settings['register'] ?? array();
+$security_settings    = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
 ?>
 
 <div class="thlogin-form thlogin-form--register" data-form-type="register" style="display: none;">
@@ -84,30 +85,49 @@ $register_fields      = $form_fields_settings['register'] ?? array();
 			</p>
 		<?php endforeach; ?>
 
-		<?php
-		// Honeypot
-		$honeypot_enabled = false;
-		foreach ( $register_fields as $f ) {
-			if ( ( $f['id'] ?? '' ) === 'honeypot' && ! empty( $f['hidden'] ) ) {
-				$honeypot_enabled = true;
-				break;
-			}
-		}
-		if ( $honeypot_enabled ) :
-			$honeypot_field_name = 'th_login_hp_' . wp_rand( 1000, 9999 );
-			?>
+		<?php if ( ! empty( $security_settings['honeypot_enabled'] ) ) : ?>
 			<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">
-				<label for="<?php echo esc_attr( $honeypot_field_name ); ?>">
-					<?php esc_html_e( 'Please leave this field empty', 'th-login' ); ?>
-				</label>
+				<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'th-login' ); ?></label>
 				<input
 					type="text"
-					name="<?php echo esc_attr( $honeypot_field_name ); ?>"
-					id="<?php echo esc_attr( $honeypot_field_name ); ?>"
+					name="thlogin_hp"
+					id="thlogin_hp"
 					tabindex="-1"
 					autocomplete="off"
 				>
 			</p>
+		<?php endif; ?>
+
+		<?php
+			$recaptcha = $security_settings['recaptcha'] ?? [];
+			$show_on = $recaptcha['show_on'] ?? 'all';
+
+			if (
+				!empty($recaptcha['enabled']) &&
+				($show_on === 'all' || $show_on === 'register')
+			) :
+			?>
+
+			<?php if ($security_settings['recaptcha']['type'] === 'v2_checkbox') : ?>
+				<div class="thlogin-form-field">
+					<div class="g-recaptcha" data-sitekey="<?php echo esc_attr($security_settings['recaptcha']['site_key']); ?>"></div>
+				</div>
+			<?php elseif ($security_settings['recaptcha']['type'] === 'v3') : ?>
+				<input type="hidden" id="g-recaptcha-response-register" name="g-recaptcha-response">
+				<script>
+				document.addEventListener('DOMContentLoaded', function () {
+					if (typeof grecaptcha !== 'undefined') {
+						grecaptcha.ready(function () {
+							grecaptcha.execute('<?php echo esc_attr($security_settings['recaptcha']['site_key']); ?>', {
+								action: 'register'
+							}).then(function (token) {
+								document.getElementById('g-recaptcha-response-register').value = token;
+							});
+						});
+					}
+				});
+				</script>
+			<?php endif; ?>
 		<?php endif; ?>
 
 		<p class="thlogin-form-submit">

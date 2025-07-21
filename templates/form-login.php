@@ -19,6 +19,17 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
 
         <h3><?php esc_html_e('Login', 'th-login'); ?></h3>
 
+        <?php
+            // Show email verification result messages
+            if ( isset( $_GET['th_login_email_verified'] ) ) {
+                if ( $_GET['th_login_email_verified'] === 'success' ) {
+                    echo '<div class="th-login-message success">Your email has been verified successfully.</div>';
+                } else {
+                    echo '<div class="th-login-message error">Invalid or expired verification link.</div>';
+                }
+            }
+        ?>
+
         <?php foreach ($login_fields as $field) :
             if (!empty($field['hidden'])) {
                 continue;
@@ -82,7 +93,24 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
             </div>
         <?php endforeach; ?>
 
-        <?php if (!empty($security_settings['recaptcha']['enabled'])) : ?>
+        <?php
+        // Honeypot Field
+        if (!empty($security_settings['honeypot_enabled'])) : ?>
+            <div class="thlogin-honeypot-field" style="display: none;">
+                <label for="thlogin_hp"><?php esc_html_e('Leave this field empty', 'th-login'); ?></label>
+                <input type="text" name="thlogin_hp" id="thlogin_hp" autocomplete="off" />
+            </div>
+        <?php endif; ?>
+
+        <?php
+            $recaptcha = $security_settings['recaptcha'] ?? [];
+            $show_on = $recaptcha['show_on'] ?? 'all';
+
+            if (
+                !empty($recaptcha['enabled']) &&
+                ($show_on === 'all' || $show_on === 'login')
+            ) :
+        ?>
             <?php if ($security_settings['recaptcha']['type'] === 'v2_checkbox') : ?>
                 <div class="thlogin-form-field">
                     <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($security_settings['recaptcha']['site_key']); ?>"></div>
@@ -90,13 +118,12 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
             <?php elseif ($security_settings['recaptcha']['type'] === 'v3') : ?>
                 <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                 <script>
-                // Load reCAPTCHA v3 script
-                document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function () {
                     if (typeof grecaptcha !== 'undefined') {
-                        grecaptcha.ready(function() {
+                        grecaptcha.ready(function () {
                             grecaptcha.execute('<?php echo esc_attr($security_settings['recaptcha']['site_key']); ?>', {
                                 action: 'login'
-                            }).then(function(token) {
+                            }).then(function (token) {
                                 document.getElementById('g-recaptcha-response').value = token;
                             });
                         });
@@ -127,4 +154,3 @@ $security_settings = json_decode(get_option('thlogin_security_settings', '{}'), 
 <?php if (!empty($security_settings['recaptcha']['enabled']) && $security_settings['recaptcha']['type'] === 'v2_checkbox') : ?>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php endif; ?>
-

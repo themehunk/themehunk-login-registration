@@ -45,14 +45,6 @@ const App = () => {
         if (response.success) {
           // Deep merge fetched settings with default structure to ensure all keys exist.
           const mergedSettings = deepMerge(settings, response.settings);
-        
-          if (
-            !Array.isArray(
-              mergedSettings.general?.redirects?.role_based_redirects
-            )
-          ) {
-            mergedSettings.general.redirects.role_based_redirects = [];
-          }
 
           setSettings(mergedSettings);
         } else {
@@ -143,13 +135,6 @@ const App = () => {
         // Deep merge again to ensure the state is fully consistent with backend and defaults.
         const mergedSettings = deepMerge(settings, fetchedSettings);
     
-        if (
-          !Array.isArray(
-            mergedSettings.general?.redirects?.role_based_redirects
-          )
-        ) {
-          mergedSettings.general.redirects.role_based_redirects = [];
-        }
         setSettings(mergedSettings);
       } else {
         setMessage({
@@ -237,13 +222,6 @@ const App = () => {
         const fetchedSettings = response.settings;
         const mergedSettings = deepMerge(settings, fetchedSettings);
         
-        if (
-          !Array.isArray(
-            mergedSettings.general?.redirects?.role_based_redirects
-          )
-        ) {
-          mergedSettings.general.redirects.role_based_redirects = [];
-        }
         setSettings(mergedSettings);
         setImportSettingsText(""); // Clear textarea after successful import
       } else {
@@ -287,13 +265,6 @@ const App = () => {
 
         const newSettings = response.settings;
 
-        // Ensure structure safety
-        if (
-          !Array.isArray(newSettings.general?.redirects?.role_based_redirects)
-        ) {
-          newSettings.general.redirects.role_based_redirects = [];
-        }
-
         setSettings(newSettings); //  apply new settings
       } else {
         setMessage({
@@ -327,7 +298,6 @@ const App = () => {
     );
   }
 
-  console.log(settings);
   return (
     <div className="thlogin-admin-modern">
       

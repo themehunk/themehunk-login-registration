@@ -25,7 +25,6 @@ Designed with flexibility and performance in mind, TH Login lets you display for
 * 🔁 Role-based redirection after login, logout, registration
 * 🧾 Manual user approval & email verification (optional)
 * ⚙️ Add and manage custom registration fields
-* 🧱 Gutenberg block support
 * 📱 Mobile-responsive design
 * 🔗 Navigation menu integration with login/logout links
 * ⚡ Auto popup triggers: on delay, scroll, or exit intent
@@ -67,15 +66,14 @@ Yes. You can enable manual user approval from the settings.
 4. Popup login modal
 5. Admin settings panel
 6. Design customization interface
-7. Gutenberg block editor for form insertion
-8. WooCommerce integration in My Account area
+7. WooCommerce integration in My Account area
 
 == Changelog ==
 
 = 1.0.0 =
 * Initial release with complete frontend login, registration, and password reset flow.
 * Fully customizable popup and inline form layouts.
-* WooCommerce integration and Gutenberg support.
+* WooCommerce integration.
 * reCAPTCHA, honeypot, and brute force protection.
 * Role-based redirection, menu link login/logout support.
 * Auto-display popups and manual user approval options.

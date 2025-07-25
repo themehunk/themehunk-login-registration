@@ -1,12 +1,13 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-$design_settings = json_decode(get_option('thlogin_design_settings', '{}'), true);
+$all_settings = get_option('thlogin_settings', []);
+$design_settings = $all_settings['design'] ?? [];
 $design = wp_parse_args($design_settings);
 
 // Helper function to get background style
-if (!function_exists('th_login_get_background_style')) {
-    function th_login_get_background_style($background) {
+if (!function_exists('thlogin_get_background_style')) {
+    function thlogin_get_background_style($background) {
         $type = $background['type'] ?? 'color';
         $style = '';
 
@@ -24,8 +25,8 @@ if (!function_exists('th_login_get_background_style')) {
 }
 
 // Helper function to get border style
-if (!function_exists('th_login_get_border_style')) {
-    function th_login_get_border_style($border) {
+if (!function_exists('thlogin_get_border_style')) {
+    function thlogin_get_border_style($border) {
         $width = $border['width'] ?? [];
         $radius = $border['radius'] ?? [];
 
@@ -46,8 +47,8 @@ if (!function_exists('th_login_get_border_style')) {
 }
 
 // Helper function to get padding style
-if (!function_exists('th_login_get_padding_style')) {
-    function th_login_get_padding_style($padding) {
+if (!function_exists('thlogin_get_padding_style')) {
+    function thlogin_get_padding_style($padding) {
         return sprintf(
             "padding-top: %dpx; padding-right: %dpx; padding-bottom: %dpx; padding-left: %dpx;",
             $padding['top'] ?? 0,
@@ -61,9 +62,9 @@ if (!function_exists('th_login_get_padding_style')) {
 
 <style>
 .thlogin-popup-form-container {
-    <?php echo esc_attr(th_login_get_background_style($design['form']['form_background'])); ?>
-    <?php echo esc_attr(th_login_get_border_style($design['form']['form_border'])); ?>
-    <?php echo esc_attr(th_login_get_padding_style($design['form']['form_padding'])); ?>
+    <?php echo esc_attr(thlogin_get_background_style($design['form']['form_background'])); ?>
+    <?php echo esc_attr(thlogin_get_border_style($design['form']['form_border'])); ?>
+    <?php echo esc_attr(thlogin_get_padding_style($design['form']['form_padding'])); ?>
     display: flex;
     flex-direction: column;
     gap: <?php echo esc_attr($design['form']['form_gap']); ?>px;
@@ -123,7 +124,7 @@ if (!function_exists('th_login_get_padding_style')) {
     font-size: <?php echo esc_attr($design['button']['typography']['size']); ?>;
     font-weight: <?php echo esc_attr($design['button']['typography']['fontWeight']); ?>;
     padding: <?php echo esc_attr($design['button']['padding']['top']); ?>px <?php echo esc_attr($design['button']['padding']['right']); ?>px;
-    <?php echo esc_attr(th_login_get_border_style($design['button']['border'])); ?>
+    <?php echo esc_attr(thlogin_get_border_style($design['button']['border'])); ?>
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -166,8 +167,8 @@ if (!function_exists('th_login_get_padding_style')) {
     background-color: <?php echo esc_attr($design['header']['button']['background']); ?>;
     font-size: <?php echo esc_attr($design['header']['button']['typography']['size']); ?>;
     font-weight: <?php echo esc_attr($design['header']['button']['typography']['fontWeight']); ?>;
-    <?php echo esc_attr(th_login_get_padding_style($design['header']['button']['padding'])); ?>
-    <?php echo esc_attr(th_login_get_border_style($design['header']['button']['border'])); ?>
+    <?php echo esc_attr(thlogin_get_padding_style($design['header']['button']['padding'])); ?>
+    <?php echo esc_attr(thlogin_get_border_style($design['header']['button']['border'])); ?>
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -181,8 +182,8 @@ if (!function_exists('th_login_get_padding_style')) {
     background-color: <?php echo esc_attr($design['header']['cancel_button']['background']); ?>;
     font-size: <?php echo esc_attr($design['header']['cancel_button']['typography']['size']); ?>;
     font-weight: <?php echo esc_attr($design['header']['cancel_button']['typography']['fontWeight']); ?>;
-    <?php echo esc_attr(th_login_get_padding_style($design['header']['cancel_button']['padding'])); ?>
-    <?php echo esc_attr(th_login_get_border_style($design['header']['cancel_button']['border'])); ?>
+    <?php echo esc_attr(thlogin_get_padding_style($design['header']['cancel_button']['padding'])); ?>
+    <?php echo esc_attr(thlogin_get_border_style($design['header']['cancel_button']['border'])); ?>
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: flex;

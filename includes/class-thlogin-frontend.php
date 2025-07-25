@@ -48,11 +48,13 @@ class THLogin_Frontend {
 
 		wp_enqueue_style( 'dashicons' );
 
-		$general_settings          = json_decode( get_option( 'thlogin_general_settings', '{}' ), true );
-		$design_settings           = json_decode( get_option( 'thlogin_design_settings', '{}' ), true );
-		$form_fields_settings      = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true );
-		$display_triggers_settings = json_decode( get_option( 'thlogin_display_triggers_settings', '{}' ), true );
-		$security_settings         = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
+		$all_settings = get_option( 'thlogin_settings', array() );
+		$general_settings          = $all_settings['general'] ?? array();
+		$design_settings           = $all_settings['design'] ?? array();
+		$form_fields_settings      = $all_settings['form_fields'] ?? array();
+		$display_triggers_settings = $all_settings['display_triggers'] ?? array();
+		$security_settings         = $all_settings['security'] ?? array();
+
 
 		wp_localize_script(
 			'thlogin-frontend-script',
@@ -76,7 +78,8 @@ class THLogin_Frontend {
 	}
 
 	public function render_modal_wrapper() {
-		$general_settings = json_decode( get_option( 'thlogin_general_settings', '{}' ), true );
+		$all_settings = get_option( 'thlogin_settings', array() );
+		$general_settings = $all_settings['general'] ?? array();
 		if ( ( $general_settings['plugin_status'] ?? 'enabled' ) === 'disabled' ) {
 			return;
 		}
@@ -84,7 +87,9 @@ class THLogin_Frontend {
 	}
 
 	public function handle_wp_login_redirect() {
-		$general_settings = json_decode( get_option( 'thlogin_general_settings', '{}' ), true );
+		$all_settings = get_option( 'thlogin_settings', array() );
+		$general_settings = $all_settings['general'] ?? array();
+
 		$disable_wp_login = $general_settings['disable_wp_login_page'] ?? false;
 
 		if ( $disable_wp_login && isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -111,7 +116,7 @@ class THLogin_Frontend {
 
                 // Generate a new nonce for the redirect URL
                 $redirect_url = add_query_arg([
-                    'th_login_action' => 'login',
+                    'thlogin_action' => 'login',
                     '_wpnonce' => wp_create_nonce('th-login-redirect')
                 ], home_url());
                 
@@ -122,7 +127,9 @@ class THLogin_Frontend {
 	}
 
 	public function handle_logout_redirect() {
-		$general_settings  = json_decode( get_option( 'thlogin_general_settings', '{}' ), true );
+		$all_settings = get_option( 'thlogin_settings', array() );
+		$general_settings = $all_settings['general'] ?? array();
+
 		$redirect_settings = $general_settings['redirects']['after_logout'] ?? array( 'type' => 'home_page' );
 		$redirect_url      = home_url();
 
@@ -136,18 +143,20 @@ class THLogin_Frontend {
 
 	public function handle_email_verification() {
 		if (
-			isset( $_GET['th_login_verify_email'], $_GET['user_id'], $_GET['_wpnonce'] )
+			isset( $_GET['thlogin_verify_email'], $_GET['user_id'], $_GET['_wpnonce'] )
 			&& wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_verify_email' )
 		) {
-			$verification_key = sanitize_text_field( wp_unslash( $_GET['th_login_verify_email'] ) );
+			$verification_key = sanitize_text_field( wp_unslash( $_GET['thlogin_verify_email'] ) );
 			$user_id          = absint( $_GET['user_id'] );
-			$stored_key       = get_user_meta( $user_id, 'th_login_email_verification_key', true );
+			$stored_key       = get_user_meta( $user_id, 'thlogin_email_verification_key', true );
 
 			if ( $stored_key === $verification_key ) {
-				update_user_meta( $user_id, 'th_login_email_verified', true );
-				delete_user_meta( $user_id, 'th_login_email_verification_key' );
+				update_user_meta( $user_id, 'thlogin_email_verified', true );
+				delete_user_meta( $user_id, 'thlogin_email_verification_key' );
 
-				$general_settings = json_decode( get_option( 'thlogin_general_settings', '{}' ), true );
+				$all_settings = get_option( 'thlogin_settings', array() );
+				$general_settings = $all_settings['general'] ?? array();
+
 				$redirect_type    = $general_settings['email_verification']['redirect_after_verification'] ?? 'login_form';
 				$custom_url       = $general_settings['email_verification']['custom_redirect_url'] ?? '';
 				$redirect_url     = home_url();
@@ -162,7 +171,7 @@ class THLogin_Frontend {
 						}
 						break;
 					case 'login_form':
-						$redirect_url = add_query_arg( 'th_login_action', 'login', home_url() );
+						$redirect_url = add_query_arg( 'thlogin_action', 'login', home_url() );
 						break;
 					default:
 						$redirect_url = home_url();

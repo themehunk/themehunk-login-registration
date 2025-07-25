@@ -14,10 +14,9 @@ class THLogin_Defaults {
 			'security'          => self::security(),
 			'integration'       => self::integration(),
 		);
+			
+		update_option( 'thlogin_settings', $defaults );
 
-		foreach ( $defaults as $key => $value ) {
-			update_option( "th_login_{$key}_settings", wp_json_encode( $value ) );
-		}
 	}
 
 	public static function general() {
@@ -402,7 +401,7 @@ class THLogin_Defaults {
 			'on_woocommerce_myaccount' => false,
 			'on_woocommerce_checkout'  => false,
 			'device_visibility'        => array( 'desktop' => true, 'tablet' => true, 'mobile' => true ),
-			'url_parameter_trigger'    => array( 'enabled' => false, 'param_name' => 'th_login', 'param_value' => 'open' ),
+			'url_parameter_trigger'    => array( 'enabled' => false, 'param_name' => 'thlogin', 'param_value' => 'open' ),
 			'referrer_detection'       => array( 'enabled' => false, 'referrer_urls' => array() ),
 		),
 		'pop_up_frequency'           => array( 'enabled' => false, 'type' => 'session', 'days' => 7 ),
@@ -447,11 +446,10 @@ class THLogin_Defaults {
 	}
 
 	public static function integration() {
-		// move your full `$integration_defaults` array here
 		return array(
-		'woocommerce' => array(
-			'enabled' => true,
-		),
-	    ); // ← Replace with actual defaults
+			'woocommerce' => array(
+				'enabled' => true,
+			),
+	    ); 
 	}
 }

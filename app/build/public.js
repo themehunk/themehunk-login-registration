@@ -144,9 +144,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var isDesktop = w > 1024;
     if (isMobile && !deviceVisibility.mobile || isTablet && !deviceVisibility.tablet || isDesktop && !deviceVisibility.desktop) return false;
     if ((_displayTriggers$pop_ = displayTriggers.pop_up_frequency) !== null && _displayTriggers$pop_ !== void 0 && _displayTriggers$pop_.enabled) {
-      var lastShown = localStorage.getItem('th_login_last_shown');
+      var lastShown = localStorage.getItem('thlogin_last_shown');
       var now = Date.now();
-      if (displayTriggers.pop_up_frequency.type === 'session' && sessionStorage.getItem('th_login_session_shown')) {
+      if (displayTriggers.pop_up_frequency.type === 'session' && sessionStorage.getItem('thlogin_session_shown')) {
         return false;
       }
       if (displayTriggers.pop_up_frequency.type === 'days' && lastShown) {
@@ -159,8 +159,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var recordPopupShown = function recordPopupShown() {
     var _displayTriggers$pop_2;
     if ((_displayTriggers$pop_2 = displayTriggers.pop_up_frequency) !== null && _displayTriggers$pop_2 !== void 0 && _displayTriggers$pop_2.enabled) {
-      localStorage.setItem('th_login_last_shown', Date.now().toString());
-      sessionStorage.setItem('th_login_session_shown', 'true');
+      localStorage.setItem('thlogin_last_shown', Date.now().toString());
+      sessionStorage.setItem('thlogin_session_shown', 'true');
     }
   };
   var openModal = function openModal() {
@@ -381,7 +381,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var _displayTriggers$auto, _displayTriggers$auto2, _displayTriggers$auto3, _displayTriggers$auto4, _displayTriggers$auto5;
     if (!canShowModal()) return;
     var urlParams = new URLSearchParams(window.location.search);
-    var wcAction = urlParams.get('th_login_action');
+    var wcAction = urlParams.get('thlogin_action');
     var customParamName = displayTriggers.auto_open_conditions.url_parameter_trigger.param_name;
     var customParamValue = displayTriggers.auto_open_conditions.url_parameter_trigger.param_value;
     var customParamTriggered = urlParams.has(customParamName) && urlParams.get(customParamName) === customParamValue;

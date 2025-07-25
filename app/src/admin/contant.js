@@ -342,7 +342,7 @@ export  const display_triggers = {
         device_visibility: { desktop: true, tablet: true, mobile: true },
         url_parameter_trigger: {
           enabled: false,
-          param_name: "th_login",
+          param_name: "thlogin",
           param_value: "open",
         },
         referrer_detection: { enabled: false, referrer_urls: [] },
@@ -436,7 +436,7 @@ export const fontWeightOptions = [
 export const shortcodes = [
     {
       label: __("Login Form", "th-login"),
-      shortcode: "[th_login_form]",
+      shortcode: "[thlogin_form]",
       description: __("Displays only the login form", "th-login"),
     },
     {
@@ -451,12 +451,12 @@ export const shortcodes = [
     },
     {
       label: __("Combined Modal", "th-login"),
-      shortcode: "[th_login__combined_form]",
+      shortcode: "[thlogin__combined_form]",
       description: __("Shows the full login/register/forgot modal and auto-triggers it", "th-login"),
     },
         {
             label: __("Popup Link", "th-login"),
-            shortcode : "[th_login_popup_auto]",
+            shortcode : "[thlogin_popup_auto]",
             description:__("Use this link to generate popup link.")
         }
 ];

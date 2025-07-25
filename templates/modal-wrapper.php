@@ -6,7 +6,9 @@ if (!defined('ABSPATH')) {
 // Include shared styles
 require THLOGIN_PATH . 'templates/styles/th-front-styles.php';
 
-$design_settings = json_decode(get_option('thlogin_design_settings', '{}'), true);
+$all_settings    = get_option( 'thlogin_settings', [] );
+$design_settings = $all_settings['design'] ?? [];
+
 $modal_design = $design_settings['modal']['modal_background'] ?? [];
 $opacity = isset($modal_design['opacity']) ? floatval($modal_design['opacity']) : 1;
 $modal_bg_style = '';

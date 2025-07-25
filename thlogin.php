@@ -100,9 +100,6 @@ register_activation_hook( __FILE__, 'thlogin_set_default_options' );
 require_once THLOGIN_PATH . 'includes/class-thlogin-menu-integration.php';
 new THLogin_Menu_Integration();
 
-require_once THLOGIN_PATH . 'includes/class-thlogin-gutenberg-block.php';
-new THLogin_Gutenberg_Block();
-
 function thlogin_init() {
 	return THLogin::instance();
 }

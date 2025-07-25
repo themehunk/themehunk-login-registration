@@ -6,26 +6,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 class THLogin_Shortcodes {
 
 	public function __construct() {
-		add_shortcode( 'th_login_form', array( $this, 'render_login_form_shortcode' ) );
+		add_shortcode( 'thlogin_form', array( $this, 'render_login_form_shortcode' ) );
 		add_shortcode( 'th_register_form', array( $this, 'render_register_form_shortcode' ) );
 		add_shortcode( 'th_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
-		add_shortcode( 'th_login_combined_form', array( $this, 'render_combined_form_shortcode' ) );
-		add_shortcode( 'th_login_popup_auto', array( $this, 'render_auto_popup_shortcode' ) );
+		add_shortcode( 'thlogin_combined_form', array( $this, 'render_combined_form_shortcode' ) );
+		add_shortcode( 'thlogin_popup_auto', array( $this, 'render_auto_popup_shortcode' ) );
 
-	}
-
-	private function safe_json_option( $option_key, $default = array() ) {
-		$value = get_option( $option_key );
-		if ( ! is_string( $value ) || empty( $value ) ) {
-			$value = '{}';
-		}
-		$decoded = json_decode( $value, true );
-		return is_array( $decoded ) ? $decoded : $default;
 	}
 
 	public function enqueue_shortcode_assets() {
 		if ( ! wp_style_is( 'thlogin-frontend-style', 'enqueued' ) ) {
-			$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
+			$settings = get_option( 'thlogin_settings', [] );
+			$general_settings = $settings['general'] ?? [];
+
 			$plugin_status = $general_settings['plugin_status'] ?? 'enabled';
 
 			if ( 'enabled' !== $plugin_status ) {
@@ -59,15 +52,15 @@ class THLogin_Shortcodes {
 				$asset_config['version']
 			);
 
-			$design_settings = $this->safe_json_option( 'thlogin_design_settings' );
-			$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
+			$design_settings = $settings['design'] ?? [];
+			$display_triggers_settings = $settings['display_triggers'] ?? [];
 
 			wp_localize_script(
 				'thlogin-frontend-script',
 				'thLoginFrontendData',
 				array(
 					'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
-					'nonce'             => wp_create_nonce( 'th_login_frontend_nonce' ),
+					'nonce'             => wp_create_nonce( 'thlogin_frontend_nonce' ),
 					'siteUrl'           => get_site_url(),
 					'currentUrl'        => home_url( add_query_arg( null, null ) ),
 					'settings'          => array(
@@ -148,7 +141,7 @@ class THLogin_Shortcodes {
 				'auto_open' => 'false',
 			),
 			$atts,
-			'th_login_popup_link'
+			'thlogin_popup_link'
 		);
 
 		$type        = sanitize_text_field( $atts['type'] );
@@ -156,7 +149,9 @@ class THLogin_Shortcodes {
 		$extra_class = sanitize_html_class( $atts['class'] );
 		$auto_open   = filter_var( $atts['auto_open'], FILTER_VALIDATE_BOOLEAN );
 
-		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
+		$settings = get_option( 'thlogin_settings', [] );
+		$display_triggers_settings = $settings['display_triggers'] ?? [];
+
 		$trigger_css_class         = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
 
 		$classes = array( $trigger_css_class, 'thlogin-shortcode-link' );

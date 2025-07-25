@@ -46,7 +46,10 @@ $forgot_password_fields = $form_fields_settings['forgot_password'] ?? [];
 				<p class="thlogin-form-field">
 					<label for="<?php echo esc_attr( $id ); ?>" class="thlogin-label-with-icon">
 						<?php if ($show_icon_in_label) : ?>
-                            <span class="thlogin-label-icon"><?php echo thlogin_get_icon_svg($icon); ?></span>
+                           <span class="thlogin-label-icon">
+								<?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
+							</span>
+
                         <?php endif; ?>
 						<span class="thlogin-label-text">
 							<?php echo esc_html( $label ); ?>
@@ -56,7 +59,7 @@ $forgot_password_fields = $form_fields_settings['forgot_password'] ?? [];
 					<input
 						class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
                         <?php if ($show_icon_in_input) : ?>
-                            style="background-image: <?php echo thlogin_get_icon_svg_data_uri($icon); ?>;"
+                           style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
                         <?php endif; ?>
 						type="<?php echo esc_attr( $type ); ?>"
 						name="<?php echo esc_attr( $name ); ?>"

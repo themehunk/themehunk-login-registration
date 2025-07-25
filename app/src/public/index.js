@@ -79,10 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
             (isDesktop && !deviceVisibility.desktop)) return false;
 
         if (displayTriggers.pop_up_frequency?.enabled) {
-            const lastShown = localStorage.getItem('th_login_last_shown');
+            const lastShown = localStorage.getItem('thlogin_last_shown');
             const now = Date.now();
 
-            if (displayTriggers.pop_up_frequency.type === 'session' && sessionStorage.getItem('th_login_session_shown')) {
+            if (displayTriggers.pop_up_frequency.type === 'session' && sessionStorage.getItem('thlogin_session_shown')) {
                 return false;
             }
 
@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const recordPopupShown = () => {
         if (displayTriggers.pop_up_frequency?.enabled) {
-            localStorage.setItem('th_login_last_shown', Date.now().toString());
-            sessionStorage.setItem('th_login_session_shown', 'true');
+            localStorage.setItem('thlogin_last_shown', Date.now().toString());
+            sessionStorage.setItem('thlogin_session_shown', 'true');
         }
     };
 
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!canShowModal()) return;
 
         const urlParams = new URLSearchParams(window.location.search);
-        const wcAction = urlParams.get('th_login_action');
+        const wcAction = urlParams.get('thlogin_action');
         const customParamName = displayTriggers.auto_open_conditions.url_parameter_trigger.param_name;
         const customParamValue = displayTriggers.auto_open_conditions.url_parameter_trigger.param_value;
         const customParamTriggered = urlParams.has(customParamName) && urlParams.get(customParamName) === customParamValue;

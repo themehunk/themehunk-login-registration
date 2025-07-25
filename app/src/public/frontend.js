@@ -146,14 +146,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check pop-up frequency.
         if (displayTriggers.pop_up_frequency?.enabled) {
-            const lastShown = localStorage.getItem('th_login_last_shown');
+            const lastShown = localStorage.getItem('thlogin_last_shown');
             if (lastShown) {
                 const lastShownTime = parseInt(lastShown, 10);
                 const currentTime = Date.now();
 
                 if (displayTriggers.pop_up_frequency.type === 'session') {
                     // If already shown in this session, don't show again.
-                    if (sessionStorage.getItem('th_login_session_shown')) {
+                    if (sessionStorage.getItem('thlogin_session_shown')) {
                         return false;
                     }
                 } else if (displayTriggers.pop_up_frequency.type === 'days') {
@@ -177,8 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const recordPopupShown = () => {
         if (displayTriggers.pop_up_frequency?.enabled) {
-            localStorage.setItem('th_login_last_shown', Date.now().toString());
-            sessionStorage.setItem('th_login_session_shown', 'true');
+            localStorage.setItem('thlogin_last_shown', Date.now().toString());
+            sessionStorage.setItem('thlogin_session_shown', 'true');
         }
     };
 
@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Priority for URL parameter from WooCommerce or custom triggers.
         const urlParams = new URLSearchParams(window.location.search);
-        const wcAction = urlParams.get('th_login_action'); // For WooCommerce redirects.
+        const wcAction = urlParams.get('thlogin_action'); // For WooCommerce redirects.
         const customParamName = displayTriggers.auto_open_conditions.url_parameter_trigger.param_name;
         const customParamValue = displayTriggers.auto_open_conditions.url_parameter_trigger.param_value;
         const customParamTriggered = urlParams.has(customParamName) && urlParams.get(customParamName) === customParamValue;

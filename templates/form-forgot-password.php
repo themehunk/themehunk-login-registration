@@ -4,9 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$form_fields_settings   = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true );
-$forgot_password_fields = $form_fields_settings['forgot_password'] ?? array();
-$security_settings      = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
+$all_settings           = get_option( 'thlogin_settings', [] );
+$form_fields_settings   = $all_settings['form_fields'] ?? [];
+$security_settings      = $all_settings['security'] ?? [];
+$design_settings        = $all_settings['design'] ?? [];
+$forgot_password_fields = $form_fields_settings['forgot_password'] ?? [];
 ?>
 
 <div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">
@@ -16,7 +18,6 @@ $security_settings      = json_decode( get_option( 'thlogin_security_settings', 
 		<div class="thlogin-messages" aria-live="polite"></div>
 
 		<h3><?php esc_html_e( 'Reset Password', 'th-login' ); ?></h3>
-
 
 			<?php foreach ( $forgot_password_fields as $field ) :
 				if ( ! empty( $field['hidden'] ) ) {
@@ -41,11 +42,11 @@ $security_settings      = json_decode( get_option( 'thlogin_security_settings', 
 				}
 
 				$autocomplete = ( stripos( $name, 'email' ) !== false ) ? 'email' : 'username';
-				?>
+			?>
 				<p class="thlogin-form-field">
 					<label for="<?php echo esc_attr( $id ); ?>" class="thlogin-label-with-icon">
 						<?php if ($show_icon_in_label) : ?>
-                            <span class="thlogin-label-icon"><?php echo th_login_get_icon_svg($icon); ?></span>
+                            <span class="thlogin-label-icon"><?php echo thlogin_get_icon_svg($icon); ?></span>
                         <?php endif; ?>
 						<span class="thlogin-label-text">
 							<?php echo esc_html( $label ); ?>
@@ -55,7 +56,7 @@ $security_settings      = json_decode( get_option( 'thlogin_security_settings', 
 					<input
 						class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
                         <?php if ($show_icon_in_input) : ?>
-                            style="background-image: <?php echo th_login_get_icon_svg_data_uri($icon); ?>;"
+                            style="background-image: <?php echo thlogin_get_icon_svg_data_uri($icon); ?>;"
                         <?php endif; ?>
 						type="<?php echo esc_attr( $type ); ?>"
 						name="<?php echo esc_attr( $name ); ?>"

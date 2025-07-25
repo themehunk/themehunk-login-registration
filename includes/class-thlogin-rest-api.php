@@ -14,15 +14,6 @@ class THLogin_REST_API {
 		$this->sanitizer = new TH_Sanitization_Validation();
 	}
 
-	private function safe_json_option( $option_key, $default = array() ) {
-		$value = get_option( $option_key );
-		if ( ! is_string( $value ) || empty( $value ) ) {
-			$value = '{}';
-		}
-		$decoded = json_decode( $value, true );
-		return is_array( $decoded ) ? $decoded : $default;
-	}
-
 	public function register_routes() {
 		$namespace = 'thlogin/v1';
 
@@ -134,7 +125,10 @@ class THLogin_REST_API {
 		);
 
 		//Route for gettings categoy id tags slugs of wordpress defgaults
-		register_rest_route( 'thlogin/v1', '/content-suggestions', array(
+		register_rest_route( 
+			$namespace, 
+			'/content-suggestions', 
+			array(
 			'methods'  => 'GET',
 			'callback' => array( $this, 'get_content_suggestions' ),
 			'permission_callback' => function () {
@@ -143,7 +137,10 @@ class THLogin_REST_API {
 		) );
 
 		//Route for gettings roles 
-		register_rest_route('thlogin/v1', '/roles', [
+		register_rest_route(
+			$namespace, 
+			'/roles', 
+			[
 			'methods'  => 'GET',
 			'callback' => function () {
 				global $wp_roles;
@@ -166,7 +163,10 @@ class THLogin_REST_API {
 			'permission_callback' => '__return_true',
 		]);
 
-		register_rest_route( 'th-login/v1', '/pending-users', [
+		register_rest_route( 
+			$namespace, 
+			'/pending-users', 
+			[
 			'methods'  => 'GET',
 			'callback' => [ $this, 'get_pending_users' ],
 			'permission_callback' => function () {
@@ -174,7 +174,10 @@ class THLogin_REST_API {
 			},
 		] );
 
-		register_rest_route( 'th-login/v1', '/approve-user', [
+		register_rest_route( 
+			$namespace, 
+			'/approve-user', 
+			[
 			'methods'  => 'POST',
 			'callback' => [ $this, 'approve_user' ],
 			'permission_callback' => function () {
@@ -190,7 +193,6 @@ class THLogin_REST_API {
 				],
 			],
 		] );
-
 	}
 
 	public function get_content_suggestions( $request ) {
@@ -248,40 +250,45 @@ class THLogin_REST_API {
 		$security_settings_data         = $request->get_param( 'security' );
 		$integration_settings_data      = $request->get_param( 'integration' );
 
-		// 1. Save General Settings
+		$all_settings = get_option( 'thlogin_settings', [] );
+		if ( ! is_array( $all_settings ) ) {
+			$all_settings = [];
+		}
+
+		// 1. General Settings
 		if ( null !== $general_settings_data ) {
 			$sanitized_general   = $this->sanitize_general_settings( $general_settings_data );
 			$validation_general  = $this->validate_general_settings( $sanitized_general );
 
 			if ( is_wp_error( $validation_general ) ) {
 				return new WP_REST_Response(
-					array( 'success' => false, 'message' => $validation_general->get_error_message() ),
+					[ 'success' => false, 'message' => $validation_general->get_error_message() ],
 					400
 				);
 			}
 
-			update_option( 'thlogin_general_settings', json_encode( $sanitized_general ) );
+			$all_settings['general'] = $sanitized_general;
 
-			// 🔁 Sync with WordPress default registration setting
+			// Sync with WordPress default registration setting
 			update_option( 'users_can_register', $sanitized_general['allow_user_registration'] ? 1 : 0 );
 		}
 
-		// 2. Save Design Settings
+		// 2. Design Settings
 		if ( null !== $design_settings_data ) {
 			$sanitized_design  = $this->sanitize_design_settings( $design_settings_data );
 			$validation_design = $this->validate_design_settings( $sanitized_design );
 
 			if ( is_wp_error( $validation_design ) ) {
 				return new WP_REST_Response(
-					array( 'success' => false, 'message' => $validation_design->get_error_message() ),
+					[ 'success' => false, 'message' => $validation_design->get_error_message() ],
 					400
 				);
 			}
 
-			update_option( 'thlogin_design_settings', json_encode( $sanitized_design ) );
+			$all_settings['design'] = $sanitized_design;
 		}
 
-		// 3. Save Form Fields
+		// 3. Form Fields
 		if ( null !== $form_fields_settings_data ) {
 			$cleaned = [];
 
@@ -300,90 +307,79 @@ class THLogin_REST_API {
 
 			if ( is_wp_error( $validation_form_fields ) ) {
 				return new WP_REST_Response(
-					array(
-						'success' => false,
-						'message' => $validation_form_fields->get_error_message(),
-					),
+					[ 'success' => false, 'message' => $validation_form_fields->get_error_message() ],
 					400
 				);
 			}
 
-			update_option( 'thlogin_form_fields_settings', json_encode( $sanitized_form_fields ) );
+			$all_settings['form_fields'] = $sanitized_form_fields;
 		}
 
-		// 4. Save Display Triggers
+		// 4. Display Triggers
 		if ( null !== $display_triggers_settings_data ) {
 			$sanitized_display_triggers  = $this->sanitize_display_triggers_settings( $display_triggers_settings_data );
 			$validation_display_triggers = $this->validate_display_triggers_settings( $sanitized_display_triggers );
 
 			if ( is_wp_error( $validation_display_triggers ) ) {
 				return new WP_REST_Response(
-					array( 'success' => false, 'message' => $validation_display_triggers->get_error_message() ),
+					[ 'success' => false, 'message' => $validation_display_triggers->get_error_message() ],
 					400
 				);
 			}
 
-			update_option( 'thlogin_display_triggers_settings', json_encode( $sanitized_display_triggers ) );
+			$all_settings['display_triggers'] = $sanitized_display_triggers;
 		}
 
-		// 5. Save Security Settings
+		// 5. Security Settings
 		if ( null !== $security_settings_data ) {
 			$sanitized_security  = $this->sanitize_security_settings( $security_settings_data );
 			$validation_security = $this->validate_security_settings( $sanitized_security );
 
 			if ( is_wp_error( $validation_security ) ) {
 				return new WP_REST_Response(
-					array( 'success' => false, 'message' => $validation_security->get_error_message() ),
+					[ 'success' => false, 'message' => $validation_security->get_error_message() ],
 					400
 				);
 			}
 
-			update_option( 'thlogin_security_settings', json_encode( $sanitized_security ) );
+			$all_settings['security'] = $sanitized_security;
 		}
 
-		// 6. Save Integration Settings
+		// 6. Integration Settings
 		if ( null !== $integration_settings_data ) {
-	
 			$sanitized_integration  = $this->sanitize_integration_settings( $integration_settings_data );
 			$validation_integration = $this->validate_integration_settings( $sanitized_integration );
 
 			if ( is_wp_error( $validation_integration ) ) {
 				return new WP_REST_Response(
-					array( 'success' => false, 'message' => $validation_integration->get_error_message() ),
+					[ 'success' => false, 'message' => $validation_integration->get_error_message() ],
 					400
 				);
 			}
 
-			update_option( 'thlogin_integration_settings', json_encode( $sanitized_integration ) );
+			$all_settings['integration'] = $sanitized_integration;
 		}
 
-		// ✅ Final updated settings response
-		$updated_settings = array(
-			'general'          => $this->safe_json_option( 'thlogin_general_settings' ),
-			'design'           => $this->safe_json_option( 'thlogin_design_settings' ),
-			'form_fields'      => $this->safe_json_option( 'thlogin_form_fields_settings' ),
-			'display_triggers' => $this->safe_json_option( 'thlogin_display_triggers_settings' ),
-			'security'         => $this->safe_json_option( 'thlogin_security_settings' ),
-			'integration'      => $this->safe_json_option( 'thlogin_integration_settings' ),
-		);
+		//  Save all settings in one option
+		update_option( 'thlogin_settings', $all_settings );
 
 		return new WP_REST_Response(
-			array(
+			[
 				'success'  => true,
 				'message'  => esc_html__( 'Settings saved successfully!', 'th-login' ),
-				'settings' => $updated_settings,
-			),
+				'settings' => $all_settings,
+			],
 			200
 		);
 	}
 
 	public function get_pending_users( $request ) {
 		$args = [
-			'meta_key'   => 'th_login_pending_approval',
+			'meta_key'   => 'thlogin_pending_approval',
 			'meta_value' => '1',
 			'number'     => 50,
 			'fields'     => [ 'ID', 'display_name', 'user_email' ],
-		];
+		];	
 
 		$users = get_users( $args );
 
@@ -408,7 +404,7 @@ class THLogin_REST_API {
 			return new WP_Error( 'thlogin_no_permission', __( 'You do not have permission to approve this user.', 'th-login' ), [ 'status' => 403 ] );
 		}
 
-		delete_user_meta( $user_id, 'th_login_pending_approval' );
+		delete_user_meta( $user_id, 'thlogin_pending_approval' );
 
 		return rest_ensure_response( [
 			'success' => true,
@@ -425,7 +421,8 @@ class THLogin_REST_API {
 		if ( $honeypot instanceof WP_REST_Response ) return $honeypot;
 
 		// 1. reCAPTCHA check only if enabled and set to show on login
-		$security_settings = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
+		$settings = get_option( 'thlogin_settings', [] );
+		$security_settings = $settings['security'] ?? [];
 		$recaptcha_settings = $security_settings['recaptcha'] ?? [];
 
 		if (
@@ -446,7 +443,8 @@ class THLogin_REST_API {
 		}
 
 		// 3. Credentials extraction
-		$form_fields = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true )['login'] ?? [];
+		$form_fields = ( $settings['form_fields']['login'] ?? [] );
+
 		[ $user_login, $user_password, $remember ] = $this->extract_login_credentials( $params, $form_fields );
 
 		if ( empty( $user_login ) || empty( $user_password ) ) {
@@ -471,18 +469,16 @@ class THLogin_REST_API {
 		}
 
 		// 5. Manual approval check
-		if ( get_user_meta( $user->ID, 'th_login_pending_approval', true ) ) {
+		if ( get_user_meta( $user->ID, 'thlogin_pending_approval', true ) ) {
 			return new WP_REST_Response( [
 				'success' => false,
 				'data'    => [ 'message' => __( 'Your account is pending admin approval.', 'th-login' ) ],
 			], 403 );
 		}
 
-		$security_settings = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
-
 		if (
 			! empty( $security_settings['email_verification']['enabled'] ) &&
-			! get_user_meta( $user->ID, 'th_login_email_verified', true )
+			! get_user_meta( $user->ID, 'thlogin_email_verified', true )
 		) {
 			return new WP_REST_Response( [
 				'success' => false,
@@ -505,7 +501,9 @@ class THLogin_REST_API {
 	}
 
 	private function get_redirect_url( $user, $request ) {
-		$general_settings = $this->safe_json_option( 'thlogin_general_settings' );
+		$settings = get_option( 'thlogin_settings', [] );
+		$general_settings = $settings['general'] ?? [];
+
 		$redirect_settings = $general_settings['redirects']['after_login'] ?? [ 'type' => 'current_page' ];
 
 		if ( 'dashboard' === $redirect_settings['type'] ) {
@@ -537,6 +535,7 @@ class THLogin_REST_API {
 			$label = $field['label'] ?? ucfirst( $name );
 			$value = sanitize_text_field( $params[ $name ] ?? '' );
 			$existing = get_user_meta( $user_id, $name, true );
+			// translators: %s: Field label like "Email" or "Username"
 			$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'th-login' ), $label );
 
 			if ( ! empty( $field['required'] ) && $value === '' ) {
@@ -549,6 +548,7 @@ class THLogin_REST_API {
 			if ( $existing && $value && $existing !== $value ) {
 				return new WP_REST_Response( [
 					'success' => false,
+					// translators: %s: Field label like "Email" or "Username"
 					'data' => [ 'message' => sprintf( __( 'Invalid value for %s.', 'th-login' ), $label ) ],
 				], 403 );
 			}
@@ -598,7 +598,9 @@ class THLogin_REST_API {
 	}
 
 	private function validate_honeypot( $params ) {
-		$security_settings = json_decode( get_option( 'thlogin_security_settings', '{}' ), true );
+		$settings = get_option( 'thlogin_settings', [] );
+		$security_settings = $settings['security'] ?? [];
+
 
 		if ( ! empty( $security_settings['honeypot_enabled'] ) ) {
 			foreach ( $params as $key => $value ) {
@@ -616,11 +618,12 @@ class THLogin_REST_API {
 
 	//register
 	public function handle_frontend_register( WP_REST_Request $request ) {
-		$form_fields       = $this->safe_json_option( 'thlogin_form_fields_settings' );
-		$register_fields   = $form_fields['register'] ?? [];
-		$general_settings  = $this->safe_json_option( 'thlogin_general_settings' );
-		$security_settings = $this->safe_json_option( 'thlogin_security_settings' );
-		$integration_settings = $this->safe_json_option( 'thlogin_integration_settings' );
+		$settings = get_option( 'thlogin_settings', [] );
+		$form_fields = $settings['form_fields'] ?? [];
+		$register_fields = $form_fields['register'] ?? [];
+		$general_settings = $settings['general'] ?? [];
+		$security_settings = $settings['security'] ?? [];
+		$integration_settings = $settings['integration'] ?? [];
 
 		$username         = '';
 		$email            = '';
@@ -805,7 +808,7 @@ class THLogin_REST_API {
 
 		// Email verification
 		if ( $security_settings['email_verification']['enabled'] ?? false ) {
-			$this->th_login_send_verification_email( $user_id, $email );
+			$this->thlogin_send_verification_email( $user_id, $email );
 
 			return new WP_REST_Response( [
 				'success' => true,
@@ -818,7 +821,7 @@ class THLogin_REST_API {
 
 		// Manual approval
 		if ( $general_settings['manual_user_approval']['enabled'] ?? false ) {
-			update_user_meta( $user_id, 'th_login_pending_approval', true );
+			update_user_meta( $user_id, 'thlogin_pending_approval', true );
 			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Awaiting admin approval.', 'th-login' ) ] ], 200 );
 		}
 
@@ -848,26 +851,28 @@ class THLogin_REST_API {
 		}
 
 		// Default
-		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'th-login' ), 'redirect_url' => home_url( '/?th_login_action=login' ) ] ], 200 );
+		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'th-login' ), 'redirect_url' => home_url( '/?thlogin_action=login' ) ] ], 200 );
 	}
 
-	function th_login_send_verification_email( $user_id, $email ) {
+	function thlogin_send_verification_email( $user_id, $email ) {
 		$key = md5( microtime() . $user_id );
 
-		update_user_meta( $user_id, 'th_login_email_verification_key', $key );
-		update_user_meta( $user_id, 'th_login_email_verified', false );
+		update_user_meta( $user_id, 'thlogin_email_verification_key', $key );
+		update_user_meta( $user_id, 'thlogin_email_verified', false );
 
 		// Generate verification link.
 		$verification_link = add_query_arg(
 			[
-				'th_login_verify_email' => $key,
+				'thlogin_verify_email' => $key,
 				'user_id'               => $user_id,
 			],
 			home_url()
 		);
 
 		// Fetch email verification settings.
-		$security_settings = json_decode( get_option( 'th_login_security_settings', '{}' ), true );
+		$settings = get_option( 'thlogin_settings', [] );
+		$security_settings = $settings['security'] ?? [];
+
 		$email_settings    = $security_settings['email_verification'] ?? [];
 
 		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? 'TH Login' );
@@ -889,12 +894,9 @@ class THLogin_REST_API {
 		$sent = wp_mail( sanitize_email( $email ), $email_subject, nl2br( $email_content ), $headers );
 
 		if ( $sent ) {
-			error_log( '✅ Verification email sent to: ' . $email );
 			return true;
 		} else {
 			$last_error = error_get_last();
-			error_log( '❌ Email sending failed to: ' . $email );
-			error_log( '❌ Error detail: ' . print_r( $last_error, true ) );
 			return false;
 		}
 	}
@@ -907,9 +909,9 @@ class THLogin_REST_API {
 		$honeypot_result = $this->validate_honeypot( $params );
 		if ( $honeypot_result instanceof WP_REST_Response ) return $honeypot_result;
 
-		// Load forgot password fields
-		$form_fields_settings = json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true );
-		$forgot_fields        = $form_fields_settings['forgot_password'] ?? [];
+		$settings = get_option( 'thlogin_settings', [] );
+		$form_fields = $settings['form_fields'] ?? [];
+		$forgot_fields = $form_fields['forgot_password'] ?? [];
 
 		$user_login = '';
 		$field_error_message = '';
@@ -1012,20 +1014,13 @@ class THLogin_REST_API {
 
 	//tools-panel
 	public function export_settings( WP_REST_Request $request ) {
-		$all_settings = array(
-			'general'          => $this->safe_json_option( 'thlogin_general_settings' ),
-			'design'           => $this->safe_json_option( 'thlogin_design_settings' ),
-			'form_fields'      => $this->safe_json_option( 'thlogin_form_fields_settings' ),
-			'display_triggers' => $this->safe_json_option( 'thlogin_display_triggers_settings' ),
-			'integration'      => $this->safe_json_option( 'thlogin_integration_settings' ),
-			'security'         => $this->safe_json_option( 'thlogin_security_settings' ),
-		);
+		$all_settings = get_option( 'thlogin_settings', [] );
 
 		return new WP_REST_Response( $all_settings, 200 );
 	}
 
 	//reset-settings
-	public function reset_settings(WP_REST_Request $request) {
+	public function reset_settings( WP_REST_Request $request ) {
 		// Security checks
 		if ( ! wp_verify_nonce( $request->get_header( 'X-WP-Nonce' ), 'wp_rest' ) ) {
 			return new WP_REST_Response( [
@@ -1044,59 +1039,31 @@ class THLogin_REST_API {
 		require_once THLOGIN_PATH . 'thlogin.php';
 
 		if ( function_exists( 'thlogin_set_default_options' ) ) {
-			// Delete old settings
-			$option_keys = [
-				'th_login_general_settings',
-				'th_login_design_settings',
-				'th_login_form_fields_settings',
-				'th_login_display_triggers_settings',
-				'th_login_security_settings',
-				'th_login_integration_settings',
-			];
+			delete_option( 'thlogin_settings' );
+			wp_cache_delete( 'thlogin_settings', 'options' );
 
-			foreach ( $option_keys as $key ) {
-				delete_option( $key );
-				wp_cache_delete( $key, 'options' );
-			}
-
-			// Set default options
 			thlogin_set_default_options();
 
-			// Now explicitly fetch, sanitize, and re-save them just like `save_settings`
-			$general    = get_option( 'th_login_general_settings', '{}' );
-			$design     = get_option( 'th_login_design_settings', '{}' );
-			$formFields = get_option( 'th_login_form_fields_settings', '{}' );
-			$display    = get_option( 'th_login_display_triggers_settings', '{}' );
-			$security   = get_option( 'th_login_security_settings', '{}' );
-			$integration = get_option( 'th_login_integration_settings', '{}' );
+			$fresh_settings_raw = get_option( 'thlogin_settings', [] );
+			$fresh_settings     = is_array( $fresh_settings_raw ) ? $fresh_settings_raw : maybe_unserialize( $fresh_settings_raw );
 
-			// Parse & sanitize
-			$general_array    = $this->sanitize_general_settings( json_decode( $general, true ) );
-			$design_array     = $this->sanitize_design_settings( json_decode( $design, true ) );
-			$formFields_array = $this->sanitize_form_fields_settings( json_decode( $formFields, true ) );
-			$display_array    = $this->sanitize_display_triggers_settings( json_decode( $display, true ) );
-			$security_array   = $this->sanitize_security_settings( json_decode( $security, true ) );
-			$integration_array = $this->sanitize_integration_settings( json_decode( $integration, true ) );
+			if ( ! is_array( $fresh_settings ) ) {
+				return new WP_REST_Response( [
+					'success' => false,
+					'message' => __( 'Settings data is not in a valid format.', 'th-login' ),
+				], 500 );
+			}
 
-			// Save to DB
-			update_option( 'thlogin_general_settings', wp_json_encode( $general_array ) );
-			update_option( 'users_can_register', $general_array['allow_user_registration'] ? 1 : 0 );
+			$fresh_settings['general']          = $this->sanitize_general_settings( $fresh_settings['general'] ?? [] );
+			$fresh_settings['design']           = $this->sanitize_design_settings( $fresh_settings['design'] ?? [] );
+			$fresh_settings['form_fields']      = $this->sanitize_form_fields_settings( $fresh_settings['form_fields'] ?? [] );
+			$fresh_settings['display_triggers'] = $this->sanitize_display_triggers_settings( $fresh_settings['display_triggers'] ?? [] );
+			$fresh_settings['security']         = $this->sanitize_security_settings( $fresh_settings['security'] ?? [] );
+			$fresh_settings['integration']      = $this->sanitize_integration_settings( $fresh_settings['integration'] ?? [] );
 
-			update_option( 'thlogin_design_settings', wp_json_encode( $design_array ) );
-			update_option( 'thlogin_form_fields_settings', wp_json_encode( $formFields_array ) );
-			update_option( 'thlogin_display_triggers_settings', wp_json_encode( $display_array ) );
-			update_option( 'thlogin_security_settings', wp_json_encode( $security_array ) );
-			update_option( 'thlogin_integration_settings', wp_json_encode( $integration_array ) );
+			update_option( 'thlogin_settings', $fresh_settings );
 
-			// Return sanitized+saved fresh settings
-			$fresh_settings = array(
-				'general'          => $general_array,
-				'design'           => $design_array,
-				'form_fields'      => $formFields_array,
-				'display_triggers' => $display_array,
-				'security'         => $security_array,
-				'integration'      => $integration_array,
-			);
+			update_option( 'users_can_register', ! empty( $fresh_settings['general']['allow_user_registration'] ) ? 1 : 0 );
 
 			return new WP_REST_Response( [
 				'success'  => true,
@@ -1113,51 +1080,51 @@ class THLogin_REST_API {
 
 	//sanitization-valdiation
 	public function sanitize_general_settings( $settings ) {
-		return $this->sanitizer->sanitize_general_settings( $settings );
+		return $this->sanitizer->sanitize_general_settings( (array) $settings );
 	}
 
 	public function validate_general_settings( $settings ) {
-		return $this->sanitizer->validate_general_settings( $settings );
+		return $this->sanitizer->validate_general_settings((array) $settings );
 	}
 
 	// Repeat for other categories:
 	public function sanitize_design_settings( $settings ) {
-		return $this->sanitizer->sanitize_design_settings( $settings );
+		return $this->sanitizer->sanitize_design_settings( (array) $settings );
 	}
 
 	public function validate_design_settings( $settings ) {
-		return $this->sanitizer->validate_design_settings( $settings );
+		return $this->sanitizer->validate_design_settings((array) $settings );
 	}
 
 	public function sanitize_form_fields_settings( $settings ) {
-		return $this->sanitizer->sanitize_form_fields_settings( $settings );
+		return $this->sanitizer->sanitize_form_fields_settings((array) $settings );
 	}
 
 	public function validate_form_fields_settings( $settings ) {
-		return $this->sanitizer->validate_form_fields_settings( $settings );
+		return $this->sanitizer->validate_form_fields_settings( (array) $settings );
 	}
 
 	public function sanitize_display_triggers_settings( $settings ) {
-		return $this->sanitizer->sanitize_display_triggers_settings( $settings );
+		return $this->sanitizer->sanitize_display_triggers_settings((array) $settings );
 	}
 
 	public function validate_display_triggers_settings( $settings ) {
-		return $this->sanitizer->validate_display_triggers_settings( $settings );
+		return $this->sanitizer->validate_display_triggers_settings((array) $settings );
 	}
 
 	public function sanitize_security_settings( $settings ) {
-		return $this->sanitizer->sanitize_security_settings( $settings );
+		return $this->sanitizer->sanitize_security_settings((array) $settings );
 	}
 
 	public function validate_security_settings( $settings ) {
-		return $this->sanitizer->validate_security_settings( $settings );
+		return $this->sanitizer->validate_security_settings((array) $settings );
 	}
 
 	public function sanitize_integration_settings( $settings ) {
-		return $this->sanitizer->sanitize_integration_settings( $settings );
+		return $this->sanitizer->sanitize_integration_settings((array) $settings );
 	}
 
 	public function validate_integration_settings( $settings ) {
-		return $this->sanitizer->validate_integration_settings( $settings );
+		return $this->sanitizer->validate_integration_settings((array) $settings );
 	}
 }

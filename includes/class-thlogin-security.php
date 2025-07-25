@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class THLogin_Security {
-	const FAILED_ATTEMPTS_OPTION = 'th_login_failed_attempts';
+	const FAILED_ATTEMPTS_OPTION = 'thlogin_failed_attempts';
 
 	public function __construct() {
 		add_action( 'template_redirect', [ $this, 'maybe_verify_email' ] );
@@ -20,26 +20,22 @@ class THLogin_Security {
 		});
 	}
 
-	private function safe_json_option( $key, $default = [] ) {
-		$value = get_option( $key );
-		$decoded = json_decode( is_string($value) ? $value : '{}', true );
-		return is_array( $decoded ) ? $decoded : $default;
-	}
-
 	private function get_user_ip_address() {
 		foreach ( [ 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR', 'HTTP_CLIENT_IP' ] as $key ) {
-			if ( ! empty( $_SERVER[ $key ] ) ) {
-				$ip = explode( ',', $_SERVER[ $key ] )[0];
-				return sanitize_text_field( wp_unslash( trim( $ip ) ) );
+			$value = isset( $_SERVER[ $key ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) ) : '';
+
+			if ( ! empty( $value ) ) {
+				$ip = explode( ',', $value )[0];
+				return trim( $ip );
 			}
 		}
 		return 'unknown';
 	}
 
 	public function log_failed_login_attempt( $username ) {
-		error_log( '[THLogin] Failed login: ' . $username );
 
-		$settings = $this->safe_json_option( 'thlogin_security_settings' );
+		$settings = get_option( 'thlogin_settings', [] )['security'] ?? [];
+
 		if ( empty( $settings['brute_force_protection']['enabled'] ) ) return;
 
 		$ip = $this->get_user_ip_address();
@@ -56,13 +52,13 @@ class THLogin_Security {
 		];
 
 		set_transient( self::FAILED_ATTEMPTS_OPTION, $attempts, $duration );
-		error_log( '[THLogin] Failed attempts count: ' . count( $attempts ) );
 	}
 
 	public function check_brute_force_lockout( $user, $username, $password ) {
 		if ( is_wp_error( $user ) || is_a( $user, 'WP_User' ) ) return $user;
 
-		$settings = $this->safe_json_option( 'thlogin_security_settings' );
+		$settings = get_option( 'thlogin_settings', [] )['security'] ?? [];
+
 		if ( empty( $settings['brute_force_protection']['enabled'] ) ) return $user;
 
 		$ip       = $this->get_user_ip_address();
@@ -90,21 +86,21 @@ class THLogin_Security {
 
 		if ( $ip_count >= $max || $user_count >= $max ) {
 			$remaining = $duration - ( $time_now - $latest_time );
-			error_log( "[THLogin] BLOCKED: $username for $remaining seconds" );
 			return new WP_Error(
-				'th_login_locked_out',
-				sprintf(
-					__( 'Too many failed login attempts. Please try again after %s minutes (%s seconds).', 'th-login' ),
+				'thlogin_locked_out',
+				// translators: %1$s: Minutes remaining, %2$s: Seconds remaining
+				sprintf(__( 'Too many failed login attempts. Please try again after %1$s minutes (%2$s seconds).', 'th-login' ),
 					ceil( $remaining / 60 ),
 					$remaining
 				)
+
 			);
 		}
 
 		return $user;
 	}
 
-	// 🔍 Debug URL: ?thlogin_debug=1
+	//  Debug URL: ?thlogin_debug=1
 	public function debug_failed_attempts_viewer() {
 		if ( isset( $_GET['thlogin_debug'] ) && current_user_can( 'manage_options' ) ) {
 			echo '<pre style="background:#111;color:#0f0;padding:10px;">';
@@ -115,11 +111,12 @@ class THLogin_Security {
 		}
 	}
 
-	// 📡 REST API: /wp-json/thlogin/v1/lockout?username=admin
+	//  REST API: /wp-json/thlogin/v1/lockout?username=admin
 	public function get_lockout_status( $request ) {
 		$username = sanitize_text_field( $request->get_param( 'username' ) );
 		$ip = $this->get_user_ip_address();
-		$settings = $this->safe_json_option( 'thlogin_security_settings' );
+		$settings = get_option( 'thlogin_settings', [] )['security'] ?? [];
+
 		$max = $settings['brute_force_protection']['max_attempts'] ?? 5;
 		$duration = ( $settings['brute_force_protection']['lockout_duration_minutes'] ?? 30 ) * MINUTE_IN_SECONDS;
 		$attempts = get_transient( self::FAILED_ATTEMPTS_OPTION ) ?: [];
@@ -148,6 +145,7 @@ class THLogin_Security {
 				'locked_out'      => true,
 				'remaining_time'  => $remaining,
 				'remaining_mins'  => ceil( $remaining / 60 ),
+				// translators: %s: Field label like "Email" or "Username"
 				'message'         => sprintf( __( 'You are blocked for %s more seconds.', 'th-login' ), $remaining )
 			];
 		}
@@ -156,7 +154,7 @@ class THLogin_Security {
 	}
 
 	public function verify_recaptcha( $token, $expected_action = 'login' ) {
-		$settings = $this->safe_json_option( 'thlogin_security_settings' );
+		$settings = get_option( 'thlogin_settings', [] )['security'] ?? [];
 
 		if ( empty( $settings['recaptcha']['enabled'] ) ) {
 			return true;
@@ -211,23 +209,23 @@ class THLogin_Security {
 	}
 
 	public function maybe_verify_email() {
-		if ( isset( $_GET['th_login_verify_email'], $_GET['user_id'] ) ) {
+		if ( isset( $_GET['thlogin_verify_email'], $_GET['user_id'] ) ) {
 			$user_id = absint( $_GET['user_id'] );
-			$key     = sanitize_text_field( $_GET['th_login_verify_email'] );
+			$key     = sanitize_text_field( $_GET['thlogin_verify_email'] );
 
-			$saved_key = get_user_meta( $user_id, 'th_login_email_verification_key', true );
+			$saved_key = get_user_meta( $user_id, 'thlogin_email_verification_key', true );
 
 			if ( $saved_key && $saved_key === $key ) {
-				update_user_meta( $user_id, 'th_login_email_verified', true );
-				delete_user_meta( $user_id, 'th_login_email_verification_key' );
+				update_user_meta( $user_id, 'thlogin_email_verified', true );
+				delete_user_meta( $user_id, 'thlogin_email_verification_key' );
 
 				// Redirect to success page or show a message
-				wp_redirect( home_url( '/?th_login_email_verified=success' ) );
+				wp_redirect( home_url( '/?thlogin_email_verified=success' ) );
 				exit;
 			}
 
 			// Invalid or expired key
-			wp_redirect( home_url( '/?th_login_email_verified=failed' ) );
+			wp_redirect( home_url( '/?thlogin_email_verified=failed' ) );
 			exit;
 		}
 	}

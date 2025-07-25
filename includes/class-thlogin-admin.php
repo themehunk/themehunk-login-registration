@@ -10,25 +10,26 @@ class THLogin_Admin {
 		add_action( 'admin_menu', array( $this, 'register_admin_menu_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 		add_action( 'admin_head', function () {
-				$image_url = esc_url( plugins_url( '../assets/images/th-login-new.svg', __FILE__ ) );
-				echo '<style>
-					#adminmenu .toplevel_page_thlogin-settings .wp-menu-image:before {
-						content: "";
-						display: inline-block;
-						width: 20px;
-						height: 20px;
-						background-size: contain;
-						background-repeat: no-repeat;
-						background-position: center;
-						background-image: url("' . $image_url . '");
-					}
-					#adminmenu .toplevel_page_thlogin-settings .wp-menu-image img {
-						display: none;
-					}
-				</style>';
-			} );
-	}
+			$image_url = esc_url( plugins_url( '../assets/images/th-login-new.svg', __FILE__ ) );
 
+			echo '<style>
+				#adminmenu .toplevel_page_thlogin-settings .wp-menu-image:before {
+					content: "";
+					display: inline-block;
+					width: 20px;
+					height: 20px;
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center;
+					background-image: url("' . esc_url( $image_url ) . '");
+				}
+				#adminmenu .toplevel_page_thlogin-settings .wp-menu-image img {
+					display: none;
+				}
+			</style>';
+		} );
+
+	}
 
 	public function register_admin_menu_page() {
 		add_menu_page(
@@ -37,7 +38,7 @@ class THLogin_Admin {
 			'manage_options',                     // Capability
 			'thlogin-settings',                   // Slug
 			array( $this, 'render_admin_page' ),  // Callback
-			'thlogin-icon',
+			'',
 			59
 		);
 	}
@@ -47,9 +48,14 @@ class THLogin_Admin {
 			return; // Security check.
 		}
 		?>
-		<div id="thlogin-admin-root" class="wrap">
-			<h1><?php echo esc_html__( 'TH Login Settings', 'th-login' ); ?></h1>
-			<p><?php echo esc_html__( 'Loading settings...', 'th-login' ); ?></p>
+		 <div id="thlogin-admin-root" class="thlogin-admin-wrap wrap">
+			<div class="thlogin-loader">
+				<div class="thlogin-loader-circle"></div>
+				<div class="thlogin-loader-circle"></div>
+				<div class="thlogin-loader-circle"></div>
+				<div class="thlogin-loader-circle"></div>
+					<p class="thlogin-loading-text"><?php echo esc_html__( 'Loading settings...', 'th-login' ); ?></p>
+			</div>
 		</div>
 		<?php
 	}
@@ -92,13 +98,14 @@ class THLogin_Admin {
 			$asset_config['version']
 		);
 
-		// Localize script with settings data
+		$all_settings = get_option( 'thlogin_settings', array() );
+
 		$settings_data = array(
-			'general'          => json_decode( get_option( 'thlogin_general_settings', '{}' ), true ),
-			'design'           => json_decode( get_option( 'thlogin_design_settings', '{}' ), true ),
-			'form_fields'      => json_decode( get_option( 'thlogin_form_fields_settings', '{}' ), true ),
-			'display_triggers' => json_decode( get_option( 'thlogin_display_triggers_settings', '{}' ), true ),
-			'security'         => json_decode( get_option( 'thlogin_security_settings', '{}' ), true ),
+			'general'          => $all_settings['general'] ?? array(),
+			'design'           => $all_settings['design'] ?? array(),
+			'form_fields'      => $all_settings['form_fields'] ?? array(),
+			'display_triggers' => $all_settings['display_triggers'] ?? array(),
+			'security'         => $all_settings['security'] ?? array(),
 		);
 
 		wp_localize_script(

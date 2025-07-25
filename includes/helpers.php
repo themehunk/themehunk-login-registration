@@ -16,17 +16,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param mixed  $default_value The default value if the setting is not found.
  * @return mixed The option value or default.
  */
-if ( ! function_exists( 'th_login_get_option' ) ) {
-	function th_login_get_option( $option_key, $setting_key = null, $default_value = null ) {
-		$options = json_decode( get_option( 'th_login_' . $option_key . '_settings', '{}' ), true );
+if ( ! function_exists( 'thlogin_get_option' ) ) {
+	function thlogin_get_option( $section_key, $setting_key = null, $default_value = null ) {
+		$settings = get_option( 'thlogin_settings', [] );
 
-		if ( null === $setting_key ) {
-			return $options; // Return the entire option array.
+		if ( ! is_array( $settings ) ) {
+			return $default_value;
 		}
 
-		return isset( $options[ $setting_key ] ) ? $options[ $setting_key ] : $default_value;
+		$section = $settings[ $section_key ] ?? [];
+
+		if ( null === $setting_key ) {
+			return $section; // Return full section
+		}
+
+		return $section[ $setting_key ] ?? $default_value;
 	}
 }
+
 
 /**
  * Retrieve the SVG markup for a given icon name.
@@ -34,8 +41,8 @@ if ( ! function_exists( 'th_login_get_option' ) ) {
  * @param string $icon_name The icon key name (e.g., 'user', 'email').
  * @return string SVG markup or empty string if not found.
  */
-if ( ! function_exists( 'th_login_get_icon_svg' ) ) {
-	function th_login_get_icon_svg( $icon_name ) {
+if ( ! function_exists( 'thlogin_get_icon_svg' ) ) {
+	function thlogin_get_icon_svg( $icon_name ) {
 		static $icons;
 
 		if ( ! $icons ) {
@@ -47,9 +54,9 @@ if ( ! function_exists( 'th_login_get_icon_svg' ) ) {
 }
 
 
-if ( ! function_exists( 'th_login_get_icon_svg_data_uri' ) ) {
-function th_login_get_icon_svg_data_uri($icon) {
-    $svg = th_login_get_icon_svg($icon);
+if ( ! function_exists( 'thlogin_get_icon_svg_data_uri' ) ) {
+function thlogin_get_icon_svg_data_uri($icon) {
+    $svg = thlogin_get_icon_svg($icon);
     if (empty($svg)) return '';
     return "url('data:image/svg+xml," . rawurlencode($svg) . "')";
 }

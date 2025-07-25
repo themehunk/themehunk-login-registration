@@ -4,43 +4,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Handles integration of Login/Register/Logout links into WordPress navigation menus.
- */
 class THLogin_Menu_Integration {
 
-	/**
-	 * Constructor.
-	 */
 	public function __construct() {
 		add_filter( 'wp_nav_menu_items', array( $this, 'add_login_register_logout_links' ), 10, 2 );
 	}
 
-	/**
-	 * Safely decode JSON option.
-	 *
-	 * @param string $option_key The option key to retrieve.
-	 * @param array  $default    The default value if the option is not found or invalid.
-	 * @return array Decoded JSON as an associative array, or default.
-	 */
-	private function safe_json_option( $option_key, $default = array() ) {
-		$value = get_option( $option_key );
-		if ( ! is_string( $value ) || empty( $value ) ) {
-			$value = '{}';
-		}
-		$decoded = json_decode( $value, true );
-		return is_array( $decoded ) ? $decoded : $default;
-	}
-
-	/**
-	 * Adds Login, Register, and Logout links to navigation menus.
-	 *
-	 * @param string   $items The HTML list of the current menu items.
-	 * @param stdClass $args  An object containing wp_nav_menu() arguments.
-	 * @return string Modified HTML list of menu items.
-	 */
 	public function add_login_register_logout_links( $items, $args ) {
-		$display_triggers_settings = $this->safe_json_option( 'thlogin_display_triggers_settings' );
+		$settings = get_option( 'thlogin_settings', array() );
+		$display_triggers_settings = $settings['display_triggers'] ?? array();
+
 		$menu_integration_settings = $display_triggers_settings['menu_integration'] ?? array();
 
 		if ( ! ( $menu_integration_settings['enabled'] ?? false ) ) {

@@ -8,10 +8,11 @@ class THLogin_Integrations {
 
  	public function __construct() {
 
-        $general = $this->safe_json_option('thlogin_general_settings');
-        $display_mode = $general['display_mode'] ?? 'page';
+     	$settings         = get_option( 'thlogin_settings', array() );
+		$general_settings = $settings['general'] ?? array();
+		$integration      = $settings['integration'] ?? array();
+		$display_mode         = $general_settings['display_mode'] ?? 'page';
 
-        $integration = $this->safe_json_option('thlogin_integration_settings');
         $woocommerce_enabled = !empty($integration['woocommerce']['enabled']);
 
         // If WooCommerce is active AND integration enabled → override myaccount page
@@ -56,12 +57,12 @@ class THLogin_Integrations {
 				'post_name'    => 'th-login',
 				'post_status'  => 'publish',
 				'post_type'    => 'page',
-				'post_content' => '[th_login_combined_form]',
-				'meta_input'   => array( '_th_login_page' => '1' )
+				'post_content' => '[thlogin_combined_form]',
+				'meta_input'   => array( '_thlogin_page' => '1' )
 			) );
 		} else {
 			// Page exists — ensure correct shortcode is present
-			$expected_shortcode = '[th_login_combined_form]';
+			$expected_shortcode = '[thlogin_combined_form]';
 
 			if ( strpos( $page->post_content, $expected_shortcode ) === false ) {
 				// Shortcode missing — update page content
@@ -83,16 +84,7 @@ class THLogin_Integrations {
 	}
 
 	public function render_thlogin_combined_form( $content ) {
-		return do_shortcode( '[th_login_combined_form]' );
-	}
-
-	private function safe_json_option( $option_key, $default = array() ) {
-		$value = get_option( $option_key );
-		if ( ! is_string( $value ) || empty( $value ) ) {
-			$value = '{}';
-		}
-		$decoded = json_decode( $value, true );
-		return is_array( $decoded ) ? $decoded : $default;
+		return do_shortcode( '[thlogin_combined_form]' );
 	}
 }
 

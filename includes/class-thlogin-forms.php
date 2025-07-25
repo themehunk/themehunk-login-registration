@@ -15,31 +15,9 @@ class THLogin_Forms {
 		// methods called by templates or AJAX handlers.
 	}
 
-	/**
-	 * Safely decode JSON option.
-	 *
-	 * @param string $option_key The option key to retrieve.
-	 * @param array  $default    The default value if the option is not found or invalid.
-	 * @return array Decoded JSON as an associative array, or default.
-	 */
-	private function safe_json_option( $option_key, $default = array() ) {
-		$value = get_option( $option_key ); // Get the raw value.
-
-		// If the value is not a string, or is an empty string, treat it as an empty JSON object.
-		if ( ! is_string( $value ) || empty( $value ) ) {
-			$value = '{}';
-		}
-
-		$decoded = json_decode( $value, true );
-		// Ensure the result is an array, otherwise return the provided default.
-		return is_array( $decoded ) ? $decoded : $default;
-	}
-
-	/**
-	 * Renders custom registration fields.
-	 */
 	public function render_custom_registration_fields() {
-		$form_fields_settings = $this->safe_json_option( 'thlogin_form_fields_settings' );
+		$all_settings = get_option( 'thlogin_settings', array() );
+		$form_fields_settings = $all_settings['form_fields'] ?? array();
 		$custom_fields = $form_fields_settings['register']['custom_fields'] ?? array();
 
 		if ( empty( $custom_fields ) || ! is_array( $custom_fields ) ) {
@@ -99,14 +77,6 @@ class THLogin_Forms {
 		}
 	}
 
-	/**
-	 * Processes form submissions (login, register, forgot password).
-	 * This method is primarily for internal use by REST API callbacks, not direct action hooks.
-	 *
-	 * @param string $form_type The type of form being submitted ('login', 'register', 'forgot-password').
-	 * @param array  $data      The sanitized data from the form submission.
-	 * @return array A result array with 'success' (bool) and 'message' (string), and optional 'redirect_url'.
-	 */
 	public function process_form_submission( $form_type, $data ) {
 		// This method will contain the core logic for processing each form type.
 		// For now, the REST API endpoints directly call WP functions.

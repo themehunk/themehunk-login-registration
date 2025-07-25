@@ -3,12 +3,15 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$design_settings       = json_decode( get_option( 'thlogin_design_settings', '{}' ), true );
-$general_settings      = json_decode( get_option( 'thlogin_general_settings', '{}' ), true );
-$logo_settings         = $design_settings['logo'] ?? array();
-$header_html_settings  = $design_settings['typography']['form_header_html'] ?? array();
+$all_settings = get_option( 'thlogin_settings', [] );
+
+$design_settings       = $all_settings['design'] ?? [];
+$general_settings      = $all_settings['general'] ?? [];
+$logo_settings         = $design_settings['logo'] ?? [];
+$header_html_settings  = $design_settings['typography']['form_header_html'] ?? [];
 $form_type             = $general_settings['form_type'] ?? 'double';
 $close_button_settings = $general_settings['close_button'] ?? true;
+
 ?>
 
 <div class="thlogin-form-header-part">

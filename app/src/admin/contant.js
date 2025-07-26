@@ -43,7 +43,7 @@ export const general = {
       plugin_status: "enabled",
       replace_wordpress: true,
       form_type: 'double',
-      display_mode:'page',
+      display_mode:'popup',
       default_register_role: 'subscriber', 
       auto_login_after_registration: false,
       close_button:true,
@@ -209,7 +209,7 @@ export  const design = {
   modal: {
     modal_background: {
       type: "color",     // 'color' | 'gradient' | 'image'
-      color: "#ffffff",
+      color: "#FFFFFF00",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
       opacity:1,
       image: {
@@ -219,6 +219,7 @@ export  const design = {
         repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
       }
     },
+    modal_input_layout: "stack",
   }, 
   form : {
     form_background: {
@@ -265,7 +266,7 @@ export  const design = {
     color:"#000000",
     labelcolor:"#000000",
     labeltypography:{size: "15px", fontWeight: 300},
-    background:"#EEEcec",
+    background:"#ffffff",
     typography:{size: "12px", fontWeight: 300}
   },
   button:{
@@ -397,6 +398,11 @@ export const tabs = [
   { key: "register", label: __("Register", "th-login") },
   { key: "forgot_password", label: __("Forgot", "th-login") },
 ];
+
+export const tabdeisgn = [
+  { key: "design", label: __("Design", "th-login") },
+  { key: "preview", label: __("Preview", "th-login") },
+]
 
 export const layoutOptions = [
   {

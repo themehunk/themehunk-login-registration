@@ -24,7 +24,7 @@ class THLogin_Defaults {
 			'plugin_status' => 'enabled',
             'repalce_wordpress' => true,
             'form_type' => 'double',
-            'display_mode'=> 'page',
+            'display_mode'=> 'popup',
             'default_register_role'=> 'subscriber', 
             'auto_login_after_registration' => false,
             'allow_user_registration' => get_option( 'users_can_register' ),
@@ -45,7 +45,7 @@ class THLogin_Defaults {
 		'modal' => array(
 			'modal_background' => array(
 				'type'     => 'color',
-				'color'    => '#ffffff',
+				'color'    => '#FFFFFF00',
 				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
 				'opacity'  => 1,
 				'image'    => array(
@@ -55,6 +55,7 @@ class THLogin_Defaults {
 					'repeat'   => 'no-repeat',
 				),
 			),
+			'modal_input_layout'=>  'stack',
 		),
 
 		'form' => array(
@@ -110,7 +111,7 @@ class THLogin_Defaults {
 				'size'       => '15px',
 				'fontWeight' => 300,
 			),
-			'background' => '#EEEcec',
+			'background' => '#ffffff',
 			'typography' => array(
 				'size'       => '12px',
 				'fontWeight' => 300,

@@ -11,7 +11,7 @@ class TH_Sanitization_validation {
 		$sanitized['replace_wordpress'] = rest_sanitize_boolean( $settings['replace_wordpress'] ?? true );
 		
 		$sanitized['form_type']             = sanitize_text_field( $settings['form_type'] ?? 'double' );
-		$sanitized['display_mode']             = sanitize_text_field( $settings['display_mode'] ?? 'page' );
+		$sanitized['display_mode']             = sanitize_text_field( $settings['display_mode'] ?? 'popup' );
 		$sanitized['default_register_role']             = sanitize_text_field( $settings['default_register_role'] ?? 'subscriber' );
 
 		$sanitized['auto_login_after_registration'] = rest_sanitize_boolean( $settings['auto_login_after_registration'] ?? false );
@@ -57,12 +57,13 @@ class TH_Sanitization_validation {
 		$sanitized = array();
 
 		$sanitized['modal']['layout_type'] = sanitize_text_field( $settings['modal']['layout_type'] ?? 'popup' );
+		$sanitized['modal']['modal_input_layout'] = sanitize_text_field( $settings['modal']['modal_input_layout'] ?? 'stack' );
 
 		foreach ( [ 'modal', 'form' ] as $section ) {
 			$bg = $settings[ $section ][ "{$section}_background" ] ?? array();
 			$sanitized[ $section ][ "{$section}_background" ] = array(
 				'type'     => sanitize_text_field( $bg['type'] ?? 'color' ),
-				'color'    => $this->sanitize_color_input( $bg['color'] ?? '#ffffff' ),
+				'color'    => $this->sanitize_color_input( $bg['color'] ?? '#FFFFFF00' ),
 				'gradient' => sanitize_text_field( $bg['gradient'] ?? '' ),
 				'opacity'  => floatval( $bg['opacity'] ?? 1 ),
 				'image'    => array(
@@ -215,6 +216,20 @@ class TH_Sanitization_validation {
 				// translators: %s: Field label like "Email" or "Username"
 				$errors->add( "invalid_{$section}_background_type", sprintf( esc_html__( 'Invalid %s background type.', 'th-login' ), $section ) );
 			}
+		}
+
+		// Validate modal_input_layout
+		$valid_input_layouts = [ 'stack', 'inline', 'floating' ];
+		$modal_input_layout = $settings['modal']['modal_input_layout'] ?? '';
+
+		if ( $modal_input_layout && ! in_array( $modal_input_layout, $valid_input_layouts, true ) ) {
+			$errors->add(
+				'invalid_modal_input_layout',
+				sprintf(
+					esc_html__( 'Invalid modal input layout. Allowed values are: %s.', 'th-login' ),
+					implode( ', ', $valid_input_layouts )
+				)
+			);
 		}
 
 		$radius_fields = array(

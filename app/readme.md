@@ -21,7 +21,7 @@ th-login/
 │   └── helpers/
 │       ├── class-thlogin-defaults.php                      # Settings defaults loader
 │       ├── class-sanitaization-validation.php              # Sanitization and validation for fields
-│       └── icon.php                                        # 60+ default SVG icons
+│       └── icon.php                                        # 100+ default SVG icons
 ├── templates/                                              # Form markup templates
 │   ├── modal-wrapper.php                                   # Main modal wrapper
 │   ├── form-login.php                                      # Login form markup
@@ -46,7 +46,7 @@ th-login/
 │   │   │       ├── display-trigger-settings.js             # Popup trigger settings
 │   │   │       ├── form-field-settings.js                  # Form field manager
 │   │   │       ├── general-settings.js                     # General settings tab
-│   │   │       ├── icons.js                                # SVG Icon picker
+│   │   │       ├── icons.js                                # 100+icons SVG Icon picker
 │   │   │       ├── integration-settings.js                 # WooCommerce integration UI
 │   │   │       ├── security-settings.js                    # Security tab UI
 │   │   │       ├── tools-settings.js                       # Export/Import/Reset settings
@@ -118,7 +118,6 @@ REST API Endpoints (Defined in class-thlogin-rest-api.php)
     GET /wp-json/thlogin/v1/pending-users
 
         Purpose: Fetch users pending manual approval.
-
         Permission: list_users
 
     POST /wp-json/thlogin/v1/approve-user
@@ -143,7 +142,7 @@ REST API Endpoints (Defined in class-thlogin-rest-api.php)
 
 ## REST API Endpoints (class-thlogin-rest-api.php)
 
-* **POST** `/wp-json/thlogin/v1/settings`: Save all settings.
+* **POST** `/wp-json/thlogin/v1/settings`:Save all settings.
 * **POST** `/wp-json/thlogin/v1/login`: Frontend login.
 * **POST** `/wp-json/thlogin/v1/register`: Register user.
 * **POST** `/wp-json/thlogin/v1/forgot-password`: Trigger password reset email.
@@ -154,7 +153,6 @@ REST API Endpoints (Defined in class-thlogin-rest-api.php)
 * **GET** `/wp-json/thlogin/v1/pending-users`: Get users awaiting approval.
 * **POST** `/wp-json/thlogin/v1/approve-user`: Approve pending user.
 * **GET** `/wp-json/thlogin/v1/lockout`: Brute force status query.
-
 
 File: includes/helpers/class-thlogin-defaults.php
     Purpose: This class defines the default settings for all major panels of the TH Login plugin. It provides a centralized method to reset or initialize all plugin options with structured, validated values. Useful during plugin activation, reset, or migrations.
@@ -331,7 +329,7 @@ File: class-thlogin-shortcodes.php
 
         ###  `render_popup_link_shortcode( $atts, $content )`
 
-        > 🔒 **Internal use or optional shortcode (not registered in constructor)**
+        >  **Internal use or optional shortcode (not registered in constructor)**
 
         Generates a link or auto-popup for triggering the modal from any anchor.
 
@@ -445,9 +443,7 @@ File:includes/class-thlogin-security.php
         * `get_user_ip_address()` – Detects client IP safely from headers
         * `debug_failed_attempts_viewer()` – Prints all active attempts (admin only)
 
-
         This class is extendable and useful for building custom security flows, showing lockout notices on login UIs, or integrating with frontend logic via the exposed REST API.
-
 
 
 File: THLogin_Menu_Integration

@@ -71,7 +71,10 @@ $design_settings = $all_settings['design'] ?? [];
 				<p class="thlogin-form-field">
 					<label for="th-register-<?php echo esc_attr( $field_id ); ?>" class="thlogin-label-with-icon">
 						<?php if ($show_icon_in_label) : ?>
-                            <span class="thlogin-label-icon"><?php echo thlogin_get_icon_svg($icon); ?></span>
+                            <span class="thlogin-label-icon">
+								<?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
+							</span>
+
                         <?php endif; ?>
 						<span class="thlogin-label-text">
 							<?php echo esc_html( $field_label ); ?>
@@ -81,7 +84,7 @@ $design_settings = $all_settings['design'] ?? [];
 					<input
 						class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
                         <?php if ($show_icon_in_input) : ?>
-                            style="background-image: <?php echo thlogin_get_icon_svg_data_uri($icon); ?>;"
+                            style="background-image: <?php echo esc_attr(thlogin_get_icon_svg_data_uri($icon)); ?>;"
                         <?php endif; ?>
 						type="<?php echo esc_attr( $field_type ); ?>"
 						name="<?php echo esc_attr( $field_name ); ?>"

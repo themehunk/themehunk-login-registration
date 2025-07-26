@@ -61,4 +61,37 @@ function thlogin_get_icon_svg_data_uri($icon) {
     return "url('data:image/svg+xml," . rawurlencode($svg) . "')";
 }
 
+if ( ! function_exists( 'thlogin_get_allowed_svg_tags' ) ) {
+function thlogin_get_allowed_svg_tags() {
+	return [
+		'svg'  => [
+			'xmlns'       => true,
+			'width'       => true,
+			'height'      => true,
+			'viewBox'     => true,
+			'fill'        => true,
+			'stroke'      => true,
+			'class'       => true,
+			'aria-hidden' => true,
+			'role'        => true,
+			'focusable'   => true,
+		],
+		'path' => [
+			'd'           => true,
+			'fill'        => true,
+			'stroke'      => true,
+			'stroke-width'=> true,
+			'stroke-linecap' => true,
+			'stroke-linejoin'=> true,
+		],
+		'g'    => [
+			'fill'   => true,
+			'stroke' => true,
+			'class'  => true,
+		],
+	];
+}
+}
+
+
 }

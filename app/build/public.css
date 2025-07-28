@@ -310,6 +310,9 @@ body.thlogin-modal-open {
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
 }
 .thlogin-label-with-icon .thlogin-label-icon {
   display: inline-flex;
@@ -392,6 +395,33 @@ body.thlogin-modal-open {
 /* For v3 badge - optionally hide it */
 .grecaptcha-badge {
   visibility: hidden;
+}
+
+.thlogin-layout-inline {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.thlogin-form-field--checkbox.thlogin-layout-inline {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.thlogin-form-field {
+  margin: 0;
+}
+
+.thlogin-layout-inline .thlogin-label-with-icon .thlogin-label-icon {
+  display: none;
+}
+
+.thlogin-form-field.thlogin-form-field--terms, .thlogin-form-field--checkbox {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 10px;
 }
 
 /*# sourceMappingURL=public.css.map*/

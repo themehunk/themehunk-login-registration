@@ -13,6 +13,7 @@ $form_fields_settings = $all_settings['form_fields'] ?? [];
 $register_fields      = $form_fields_settings['register'] ?? [];
 $security_settings    = $all_settings['security'] ?? [];
 $design_settings = $all_settings['design'] ?? [];
+$layout = $design_settings['modal']['modal_input_layout'] ?? 'stack';
 ?>
 
 <div class="thlogin-form thlogin-form--register" data-form-type="register" style="display: none;">
@@ -47,6 +48,16 @@ $design_settings = $all_settings['design'] ?? [];
 					$autocomplete_attr = 'email';
 				}
 
+				$field_class = 'thlogin-form-field';
+		
+				if($layout === 'stack'){
+					$field_class .= ' thlogin-layout-stack';
+				}elseif($layout === 'inline'){
+					$field_class .= ' thlogin-layout-inline';
+				}elseif($layout === 'floating'){
+					$field_class .= ' thlogin-layout-floating';
+				}
+
 				// Handle Terms & Conditions separately
 				if ( $field_type === 'checkbox' && strpos( strtolower( $field_name ), 'terms' ) !== false ) : ?>
 					<p class="thlogin-form-field thlogin-form-field--terms">
@@ -66,34 +77,58 @@ $design_settings = $all_settings['design'] ?? [];
 					</p>
 					<?php continue;
 				endif;
-				?>
+			?>
 
-				<p class="thlogin-form-field">
-					<label for="th-register-<?php echo esc_attr( $field_id ); ?>" class="thlogin-label-with-icon">
-						<?php if ($show_icon_in_label) : ?>
-                            <span class="thlogin-label-icon">
-								<?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
+				<?php if ( $layout === 'floating' ) : ?>
+					<div class="<?php echo esc_attr( $field_class ); ?>">
+						<div class="floating-wrapper">
+							<input
+								class="floating-input <?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+								<?php if ( $show_icon_in_input ) : ?>
+									style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
+								<?php endif; ?>
+								type="<?php echo esc_attr( $field_type ); ?>"
+								name="<?php echo esc_attr( $field_name ); ?>"
+								id="th-register-<?php echo esc_attr( $field_id ); ?>"
+								placeholder=" "
+								<?php echo $is_required ? 'required' : ''; ?>
+								<?php echo $autocomplete_attr ? 'autocomplete="' . esc_attr( $autocomplete_attr ) . '"' : ''; ?>
+							/>
+							<label for="th-register-<?php echo esc_attr( $field_id ); ?>" class="floating-label">
+								<?php echo esc_html( $field_label ); ?>
+								<?php if ( $is_required ) : ?><span class="th-required">*</span><?php endif; ?>
+							</label>
+						</div>
+					</div>
+				<?php else : ?>
+					<p class="<?php echo esc_attr($field_class); ?>">
+						<label for="th-register-<?php echo esc_attr( $field_id ); ?>" class="thlogin-label-with-icon">
+							<?php if ($show_icon_in_label) : ?>
+								<span class="thlogin-label-icon">
+									<?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
+								</span>
+
+							<?php endif; ?>
+							<span class="thlogin-label-text">
+								<?php echo esc_html( $field_label ); ?>
+								<?php if ( $is_required ) : ?><span class="th-required">*</span><?php endif; ?>
 							</span>
+						</label>
+						<input
+							class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+							<?php if ($show_icon_in_input) : ?>
+								style="background-image: <?php echo esc_attr(thlogin_get_icon_svg_data_uri($icon)); ?>;"
+							<?php endif; ?>
+							type="<?php echo esc_attr( $field_type ); ?>"
+							name="<?php echo esc_attr( $field_name ); ?>"
+							id="th-register-<?php echo esc_attr( $field_id ); ?>"
+							placeholder="<?php echo esc_attr( $placeholder ); ?>"
+							<?php echo $is_required ? 'required' : ''; ?>
+							<?php echo $autocomplete_attr ? 'autocomplete="' . esc_attr( $autocomplete_attr ) . '"' : ''; ?>
+						>
+					</p>
+				<?php endif; ?>
 
-                        <?php endif; ?>
-						<span class="thlogin-label-text">
-							<?php echo esc_html( $field_label ); ?>
-							<?php if ( $is_required ) : ?><span class="th-required">*</span><?php endif; ?>
-						</span>
-					</label>
-					<input
-						class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
-                        <?php if ($show_icon_in_input) : ?>
-                            style="background-image: <?php echo esc_attr(thlogin_get_icon_svg_data_uri($icon)); ?>;"
-                        <?php endif; ?>
-						type="<?php echo esc_attr( $field_type ); ?>"
-						name="<?php echo esc_attr( $field_name ); ?>"
-						id="th-register-<?php echo esc_attr( $field_id ); ?>"
-						placeholder="<?php echo esc_attr( $placeholder ); ?>"
-						<?php echo $is_required ? 'required' : ''; ?>
-						<?php echo $autocomplete_attr ? 'autocomplete="' . esc_attr( $autocomplete_attr ) . '"' : ''; ?>
-					>
-				</p>
 			<?php endforeach; ?>
 
 			<?php if ( ! empty( $security_settings['honeypot_enabled'] ) ) : ?>

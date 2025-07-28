@@ -201,4 +201,45 @@ if (!function_exists('thlogin_get_padding_style')) {
     height: <?php echo esc_attr($design['header']['cancel_button']['typography']['size']); ?>;
     font-size: <?php echo esc_attr($design['header']['cancel_button']['typography']['size']); ?>;
 }
+
+/*  FLOATING Layout */
+.thlogin-layout-floating .floating-wrapper {
+	position: relative;
+}
+
+.thlogin-layout-floating .floating-input {
+	width: 100%;
+    padding: 10px;
+    color: <?php echo esc_attr($design['Input']['color']); ?>;
+    background-color: <?php echo esc_attr($design['Input']['background']); ?>;
+    font-size: <?php echo esc_attr($design['Input']['typography']['size']); ?>;
+    font-weight: <?php echo esc_attr($design['Input']['typography']['fontWeight']); ?>;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.thlogin-layout-floating .floating-label {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: white;
+	padding: 0 4px;
+	pointer-events: none;
+	transition: all 0.2s ease;
+	white-space: nowrap;
+    color: <?php echo esc_attr($design['Input']['labelcolor']); ?>;
+    font-size: <?php echo esc_attr($design['Input']['labeltypography']['size']); ?>;
+    font-weight: <?php echo esc_attr($design['Input']['labeltypography']['fontWeight']); ?>;
+}
+
+.thlogin-layout-floating .floating-input:focus + .floating-label,
+.thlogin-layout-floating .floating-input:not(:placeholder-shown) + .floating-label {
+	top: 0px;
+	left: 8px;
+	font-size: 12px;
+	color: #007cba;
+	background-color: <?php echo esc_attr($design['Input']['background']); ?>;
+}
+
 </style>

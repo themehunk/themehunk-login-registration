@@ -9,6 +9,7 @@ $form_fields_settings   = $all_settings['form_fields'] ?? [];
 $security_settings      = $all_settings['security'] ?? [];
 $design_settings        = $all_settings['design'] ?? [];
 $forgot_password_fields = $form_fields_settings['forgot_password'] ?? [];
+$layout = $design_settings['modal']['modal_input_layout'] ?? 'stack';
 ?>
 
 <div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">
@@ -41,34 +42,68 @@ $forgot_password_fields = $form_fields_settings['forgot_password'] ?? [];
 					continue;
 				}
 
+				$field_class = 'thlogin-form-field';
+				if($layout === 'stack'){
+                	$field_class .= ' thlogin-layout-stack';
+				}elseif($layout === 'inline'){
+					$field_class .= ' thlogin-layout-inline';
+				}elseif($layout === 'floating'){
+					$field_class .= ' thlogin-layout-floating';
+				}
+
 				$autocomplete = ( stripos( $name, 'email' ) !== false ) ? 'email' : 'username';
 			?>
-				<p class="thlogin-form-field">
-					<label for="<?php echo esc_attr( $id ); ?>" class="thlogin-label-with-icon">
-						<?php if ($show_icon_in_label) : ?>
-                           <span class="thlogin-label-icon">
-								<?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
-							</span>
 
-                        <?php endif; ?>
-						<span class="thlogin-label-text">
-							<?php echo esc_html( $label ); ?>
-							<?php if ( $required ) : ?><span class="th-required">*</span><?php endif; ?>
-						</span>
-					</label>
-					<input
-						class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
-                        <?php if ($show_icon_in_input) : ?>
-                           style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
-                        <?php endif; ?>
-						type="<?php echo esc_attr( $type ); ?>"
-						name="<?php echo esc_attr( $name ); ?>"
-						id="<?php echo esc_attr( $id ); ?>"
-						placeholder="<?php echo esc_attr( $placeholder ); ?>"
-						<?php echo $required ? 'required' : ''; ?>
-						autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
-					/>
-				</p>
+				<?php if ( $layout === 'floating' ) : ?>
+					<div class="<?php echo esc_attr($field_class); ?>">
+						<div class="floating-wrapper">
+							<input
+								class="floating-input <?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+								<?php if ($show_icon_in_input) : ?>
+									style="background-image: <?php echo esc_attr(thlogin_get_icon_svg_data_uri($icon)); ?>;"
+								<?php endif; ?>
+								type="<?php echo esc_attr($type); ?>"
+								name="<?php echo esc_attr($name); ?>"
+								id="<?php echo esc_attr($id); ?>"
+								placeholder=" "
+								<?php echo $required ? 'required' : ''; ?>
+								autocomplete="<?php echo esc_attr($autocomplete); ?>"
+							/>
+							<label for="<?php echo esc_attr($id); ?>" class="floating-label">
+								<?php echo esc_html($label); ?>
+								<?php if ($required) : ?><span class="th-required">*</span><?php endif; ?>
+							</label>
+						</div>
+					</div>
+				<?php else : ?>
+					<p class="<?php echo esc_attr($field_class); ?>">
+						<label for="<?php echo esc_attr( $id ); ?>" class="thlogin-label-with-icon">
+							<?php if ($show_icon_in_label) : ?>
+								<span class="thlogin-label-icon">
+									<?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
+								</span>
+
+							<?php endif; ?>
+							<span class="thlogin-label-text">
+								<?php echo esc_html( $label ); ?>
+								<?php if ( $required ) : ?><span class="th-required">*</span><?php endif; ?>
+							</span>
+						</label>
+						<input
+							class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+							<?php if ($show_icon_in_input) : ?>
+								style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
+							<?php endif; ?>
+							type="<?php echo esc_attr( $type ); ?>"
+							name="<?php echo esc_attr( $name ); ?>"
+							id="<?php echo esc_attr( $id ); ?>"
+							placeholder="<?php echo esc_attr( $placeholder ); ?>"
+							<?php echo $required ? 'required' : ''; ?>
+							autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
+						/>
+					</p>
+				<?php endif; ?>
+
 			<?php endforeach; ?>
 
 			<?php if ( ! empty( $security_settings['honeypot_enabled'] ) ) : ?>

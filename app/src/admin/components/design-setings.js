@@ -5,10 +5,16 @@ import BackgroundSettingsPanel from "./design-editor/background-panel";
 import BorderSettingsPanel from "./design-editor/border-settings-panel";
 import { PaddingSettingsPanel } from "./design-editor/padding-settings-panel";
 import { CustomSelectControl } from './custom-select-control';
-import { Dashicon, RangeControl } from "@wordpress/components";
-import {tabs,tabdeisgn, layoutOptions, fontWeightOptions} from '../contant';
+import { Dashicon, RangeControl,ToggleControl } from "@wordpress/components";
+import {tabs,tabdeisgn, layoutOptions, fontWeightOptions, tabicon} from '../contant';
 import { THL_ICONS } from "./icons";
 import { FiMail } from 'react-icons/fi';
+
+const tabinside = [
+	{ key: "form", label: __("Form", "th-login") },
+	{ key: "label", label: __("Label", "th-login") },
+	{ key: "header", label: __("Button", "th-login") },
+];
 
 //intertivity
 const InteractiveInput = ({ base, hover, active, ...props }) => {
@@ -422,12 +428,6 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		</div>
 	);
 
-	const tabinside = [
-		{ key: "form", label: __("Form", "th-login") },
-		{ key: "label", label: __("Label", "th-login") },
-		{ key: "header", label: __("Button", "th-login") },
-	];
-
 	const getLoginPreviewUrl = (option) => {
 
 		let finalurl = '';
@@ -469,22 +469,20 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 	const renderDesignOptions = () => (
 		<div className="deisgn-settings-select-icon-place">
+
 			<div className="icon-th-setting-row">
 				<label className="icon-setting-label">Icon Placement</label>
-				<div className="icon-icon-position-toggle">
-					<button
-						className={`icon-toggle-option ${settings.design.icon.icon_position === 'with-label' ? 'active' : ''}`}
-						onClick={() => handleSettingChange("design", ["icon", "icon_position"], "with-label")}
-					>
-						With Label
-					</button>
-					<button
-						className={`icon-toggle-option ${settings.design.icon.icon_position === 'inside-input' ? 'active' : ''}`}
-						onClick={() => handleSettingChange("design", ["icon", "icon_position"], "inside-input")}
-					>
-						Inside Input
-					</button>
-				</div>
+					<div className="custom-tabs">
+						{tabicon.map((tab) => (
+							<button
+								key={tab.key}
+								className={`custom-tab-button ${settings.design.icon.icon_position === tab.key ? "active" : ""}`}
+								onClick={() => handleSettingChange("design", ["icon", "icon_position"], tab.key)}
+							>
+								{tab.label}
+							</button>
+						))}
+					</div>
 			</div>
 
 			<div className="design-options-wrapper">
@@ -583,7 +581,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 			
 			<div className="design-editor-layout">
 				
-				<div className="settings-panel">
+				<div className={`settings-panel ${deisgnpreview === 'design' ? 'disabled-panel' : ''}`}>
 
 					<div className="custom-tabs">
 						{tabinside.map((tab) => (
@@ -918,80 +916,122 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								{/* Add Header Button (Submit) Settings */}
 								<AccordionSection title={__("Login/Registration Button", "th-login")} defaultOpen={false}>
-								<div className="th-heading-settings">
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Text Color", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.header.button.color}
-										onChange={(e) =>
-										handleSettingChange("design", ["header", "button", "color"], e.target.value)
-										}
-									/>
-									</div>
 
 									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Background", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.header.button.background}
-										onChange={(e) =>
-										handleSettingChange("design", ["header", "button", "background"], e.target.value)
-										}
-									/>
+										<label className="th-setting-label">{__("Show Buttons", "th-login")}</label>
+										<ToggleControl
+											checked={settings.design.header.showButtons}
+											onChange={(value) =>
+												handleSettingChange("design", ["header", "showButtons"], value)
+											}
+										/>
 									</div>
 
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Hover Background", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.header.button.hoverBackground}
-										onChange={(e) =>
-										handleSettingChange("design", ["header", "button", "hoverBackground"], e.target.value)
-										}
-									/>
-									</div>
+									{settings.design.header.showButtons && (
+										<>
 
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Font Size", "th-login")}</label>
-									<input
-										type="number"
-										className="th-number-input"
-										value={parseInt(settings.design.header.button.typography.size)}
-										onChange={(e) =>
-										handleSettingChange("design", ["header", "button", "typography", "size"], `${e.target.value}px`)
-										}
-									/>
-									</div>
+											<div className="th-setting-row th-setting-row-text">
+												<label className="th-setting-label">{__("Login Button Text", "th-login")}</label>
+												<input
+													type="text"
+													className="th-text-input"
+													value={settings.design.header.loginText}
+													onChange={(e) =>
+														handleSettingChange("design", ["header", "loginText"], e.target.value)
+													}
+												/>
+											</div>
 
-									<div className="th-setting-row modern-sleect-heaidng">
-									<CustomSelectControl
-										label={__("Font Weight", "th-login")}
-										value={settings.design.header.button.typography.fontWeight}
-										onChange={(value) =>
-										handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value)
-										}
-										options={fontWeightOptions}
-									/>
-									</div>
-								</div>
+											<div className="th-setting-row th-setting-row-text">
+												<label className="th-setting-label">{__("Registration Button Text", "th-login")}</label>
+												<input
+													type="text"
+													className="th-text-input"
+													value={settings.design.header.registerText}
+													onChange={(e) =>
+														handleSettingChange("design", ["header", "registerText"], e.target.value)
+													}
+												/>
+											</div>
 
-								<PaddingSettingsPanel
-									title={__("Padding", "th-login")}
-									padding={settings.design.header.button.padding}
-									path={["header", "button", "padding"]}
-									handleSettingChange={handleSettingChange}
-								/>
+											<div className="th-heading-settings">
+												<div className="th-setting-row">
+												<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+												<input
+													type="color"
+													className="th-color-input"
+													value={settings.design.header.button.color}
+													onChange={(e) =>
+													handleSettingChange("design", ["header", "button", "color"], e.target.value)
+													}
+												/>
+												</div>
 
-								<BorderSettingsPanel
-									title={__("Border", "th-login")}
-									border={settings.design.header.button.border}
-									path={["header", "button", "border"]}
-									handleSettingChange={handleSettingChange}
-								/>
+												<div className="th-setting-row">
+												<label className="th-setting-label">{__("Background", "th-login")}</label>
+												<input
+													type="color"
+													className="th-color-input"
+													value={settings.design.header.button.background}
+													onChange={(e) =>
+													handleSettingChange("design", ["header", "button", "background"], e.target.value)
+													}
+												/>
+												</div>
+
+												<div className="th-setting-row">
+												<label className="th-setting-label">{__("Hover Background", "th-login")}</label>
+												<input
+													type="color"
+													className="th-color-input"
+													value={settings.design.header.button.hoverBackground}
+													onChange={(e) =>
+													handleSettingChange("design", ["header", "button", "hoverBackground"], e.target.value)
+													}
+												/>
+												</div>
+
+												<div className="th-setting-row">
+												<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+												<input
+													type="number"
+													className="th-number-input"
+													value={parseInt(settings.design.header.button.typography.size)}
+													onChange={(e) =>
+													handleSettingChange("design", ["header", "button", "typography", "size"], `${e.target.value}px`)
+													}
+												/>
+												</div>
+
+												<div className="th-setting-row modern-sleect-heaidng">
+												<CustomSelectControl
+													label={__("Font Weight", "th-login")}
+													value={settings.design.header.button.typography.fontWeight}
+													onChange={(value) =>
+													handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value)
+													}
+													options={fontWeightOptions}
+												/>
+												</div>
+											</div>
+
+											<PaddingSettingsPanel
+												title={__("Padding", "th-login")}
+												padding={settings.design.header.button.padding}
+												path={["header", "button", "padding"]}
+												handleSettingChange={handleSettingChange}
+											/>
+
+											<BorderSettingsPanel
+												title={__("Border", "th-login")}
+												border={settings.design.header.button.border}
+												path={["header", "button", "border"]}
+												handleSettingChange={handleSettingChange}
+											/>
+										
+										</>
+									)}
+
 								</AccordionSection>
 
 								<AccordionSection title={__("Submit Button", "th-login")} defaultOpen={false}>

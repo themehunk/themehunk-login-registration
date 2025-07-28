@@ -118,11 +118,11 @@ class TH_Sanitization_validation {
 			'labelcolor'   => $this->sanitize_color_input( $input['labelcolor'] ?? '#000000' ),
 			'background'   => $this->sanitize_color_input( $input['background'] ?? '#ffffff' ),
 			'typography'   => array(
-				'size'       => sanitize_text_field( $input['typography']['size'] ?? '12px' ),
+				'size'       => sanitize_text_field( $input['typography']['size'] ?? '15px' ),
 				'fontWeight' => intval( $input['typography']['fontWeight'] ?? 400 ),
 			),
 			'labeltypography' => array(
-				'size'       => sanitize_text_field( $input['labeltypography']['size'] ?? '15px' ),
+				'size'       => sanitize_text_field( $input['labeltypography']['size'] ?? '17px' ),
 				'fontWeight' => intval( $input['labeltypography']['fontWeight'] ?? 400 ),
 			),
 		);
@@ -139,12 +139,23 @@ class TH_Sanitization_validation {
 
 		$sanitized['icon'] = array(
 			'color' => $this->sanitize_color_input( $settings['icon']['color'] ?? '#111111' ),
-			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '20px' ),
+			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '25px' ),
 			'icon_position' => sanitize_text_field( $settings['icon']['icon_position'] ?? 'with-label' ),
 		);
 
 		$sanitized['header']['button']        = $this->sanitize_button_style( $settings['header']['button'] ?? [] );
 		$sanitized['header']['cancel_button'] = $this->sanitize_button_style( $settings['header']['cancel_button'] ?? [] );
+
+		$sanitized['header']['showButtons']  = isset( $settings['header']['showButtons'] ) ? (bool) $settings['header']['showButtons'] : true;
+		$sanitized['header']['loginText']    = sanitize_text_field( $settings['header']['loginText'] ?? 'Login' );
+		$sanitized['header']['registerText'] = sanitize_text_field( $settings['header']['registerText'] ?? 'Register' );
+
+		$submit_button = $settings['submitButton'] ?? array();
+		$sanitized['submitButton'] = array(
+			'login'    => sanitize_text_field( $submit_button['login'] ?? 'Login' ),
+			'register' => sanitize_text_field( $submit_button['register'] ?? 'Register' ),
+			'forgot_password'   => sanitize_text_field( $submit_button['forgot_password'] ?? 'Reset' ),
+		);
 
 		return $sanitized;
 	}
@@ -327,6 +338,40 @@ class TH_Sanitization_validation {
 					'invalid_' . $key,
 					// translators: %s: Field label like "Email" or "Username"
 					sprintf( esc_html__( '%s must be a valid CSS color.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+				);
+			}
+		}
+
+		$submit_button = $settings['submitButton'] ?? array();
+
+		foreach ( [ 'login', 'register', 'forgot_password' ] as $key ) {
+			if ( empty( $submit_button[ $key ] ) || ! is_string( $submit_button[ $key ] ) ) {
+				$errors->add(
+					'invalid_submit_button_' . $key,
+					sprintf(
+						esc_html__( 'Submit button text for "%s" must be a non-empty string.', 'th-login' ),
+						$key
+					)
+				);
+			}
+		}
+
+		// Validate header button visibility toggle and button texts
+		if ( isset( $settings['header']['showButtons'] ) && ! is_bool( $settings['header']['showButtons'] ) ) {
+			$errors->add(
+				'invalid_header_show_buttons',
+				esc_html__( 'Header showButtons must be a boolean value.', 'th-login' )
+			);
+		}
+
+		foreach ( [ 'loginText', 'registerText' ] as $key ) {
+			if ( empty( $settings['header'][ $key ] ) || ! is_string( $settings['header'][ $key ] ) ) {
+				$errors->add(
+					'invalid_header_' . $key,
+					sprintf(
+						esc_html__( 'Header text for "%s" must be a non-empty string.', 'th-login' ),
+						$key
+					)
 				);
 			}
 		}

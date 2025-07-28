@@ -223,8 +223,8 @@ if (!function_exists('thlogin_get_padding_style')) {
 	left: 12px;
 	top: 50%;
 	transform: translateY(-50%);
-	background-color: white;
 	padding: 0 4px;
+    border-radius: 4px;
 	pointer-events: none;
 	transition: all 0.2s ease;
 	white-space: nowrap;

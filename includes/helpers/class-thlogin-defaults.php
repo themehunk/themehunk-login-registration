@@ -45,7 +45,7 @@ class THLogin_Defaults {
 			'modal' => array(
 				'modal_background' => array(
 					'type'     => 'color',
-					'color'    => '#FFFFFF00',
+					'color'    => '#5954549c',
 					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
 					'opacity'  => 1,
 					'image'    => array(
@@ -54,6 +54,12 @@ class THLogin_Defaults {
 						'size'     => 'cover',
 						'repeat'   => 'no-repeat',
 					),
+				),
+				'foreground' => array(
+					'blur'       => '4px',
+					'brightness' => '100%',
+					'contrast'   => '100%',
+					'opacity'    => 1,
 				),
 				'modal_input_layout'=>  'stack',
 			),
@@ -234,9 +240,9 @@ class THLogin_Defaults {
 			),
 
 			'submitButton' => array(
-				'login'=>'login',
-				'register'=>'register',
-				'forgot_password'=> 'reset',
+				'login'=>'Login',
+				'register'=>'Register',
+				'forgot_password'=> 'Reset',
 	    	),
 		);
 	}
@@ -397,35 +403,33 @@ class THLogin_Defaults {
 	public static function display_triggers() {
 		// move your full `$display_triggers_defaults` array here
 		return array(
-		'trigger_css_class'          => 'thlogin-trigger',
-		'auto_open_on_load'          => array( 'enabled' => true, 'delay_seconds' => 2 ),
-		'auto_open_on_scroll'        => array( 'enabled' => false, 'scroll_percentage' => 50 ),
-		'auto_open_on_exit_intent'   => array( 'enabled' => false ),
-		'auto_open_on_time_on_page'  => array( 'enabled' => false, 'time_seconds' => 10 ),
-		'auto_open_conditions'       => array(
-			'for_logged_out_only'      => true,
-			'for_specific_roles'       => array(),
-			'on_specific_pages'        => array( 'enabled' => false, 'page_ids' => array(), 'page_slugs' => array() ),
-			'on_specific_categories'   => array( 'enabled' => false, 'category_ids' => array(), 'category_slugs' => array() ),
-			'on_specific_tags'         => array( 'enabled' => false, 'tag_ids' => array(), 'tag_slugs' => array() ),
-			'on_woocommerce_myaccount' => false,
-			'on_woocommerce_checkout'  => false,
-			'device_visibility'        => array( 'desktop' => true, 'tablet' => true, 'mobile' => true ),
-			'url_parameter_trigger'    => array( 'enabled' => false, 'param_name' => 'thlogin', 'param_value' => 'open' ),
-			'referrer_detection'       => array( 'enabled' => false, 'referrer_urls' => array() ),
-		),
-		'pop_up_frequency'           => array( 'enabled' => false, 'type' => 'session', 'days' => 7 ),
-		'menu_integration'           => array(
-			'enabled'                    => false,
-			'menu_slug'                  => 'primary',
-			'item_text_login'            => __( 'Login', 'th-login' ),
-			'item_text_register'         => __( 'Register', 'th-login' ),
-			'item_icon_login'            => 'dashicons-admin-users',
-			'item_icon_register'         => 'dashicons-plus-alt',
-			'visibility_login_logged_in' => false,
-			'visibility_register_logged_in' => false,
-		),
-	    ); // ← Replace with actual defaults
+			'trigger_css_class'          => 'thlogin-trigger',
+			'auto_open_on_load'          => array( 'enabled' => true, 'delay_seconds' => 2 ),
+			'auto_open_on_scroll'        => array( 'enabled' => false, 'scroll_percentage' => 50 ),
+			'auto_open_on_exit_intent'   => array( 'enabled' => false ),
+			'auto_open_on_time_on_page'  => array( 'enabled' => false, 'time_seconds' => 10 ),
+			'auto_open_conditions'       => array(
+				'for_logged_out_only'      => true,
+				'for_specific_roles'       => array(),
+				'on_specific_pages'        => array( 'enabled' => false, 'page_ids' => array(), 'page_slugs' => array() ),
+				'on_specific_categories'   => array( 'enabled' => false, 'category_ids' => array(), 'category_slugs' => array() ),
+				'on_specific_tags'         => array( 'enabled' => false, 'tag_ids' => array(), 'tag_slugs' => array() ),
+				'on_woocommerce_myaccount' => false,
+				'on_woocommerce_checkout'  => false,
+				'device_visibility'        => array( 'desktop' => true, 'tablet' => true, 'mobile' => true ),
+				'url_parameter_trigger'    => array( 'enabled' => false, 'param_name' => 'thlogin', 'param_value' => 'open' ),
+				'referrer_detection'       => array( 'enabled' => false, 'referrer_urls' => array() ),
+			),
+			'pop_up_frequency'           => array( 'enabled' => false, 'type' => 'session', 'days' => 7 ),
+			'menu_integration' => array(
+				'enabled'            => false,
+				'item_text_login'    => __( 'Login', 'th-login' ),
+				'item_icon_login'    => '',
+				'logout'             => true,
+				'item_text_logout'   => __( 'Logout', 'th-login' ),
+				'item_icon_logout'   => '',
+			),
+	    ); 
 	}
 
 	public static function security() {

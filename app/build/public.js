@@ -449,6 +449,35 @@ document.addEventListener('DOMContentLoaded', function () {
     openModal('login'); // You can dynamically read form type if needed
   }
 });
+document.addEventListener('DOMContentLoaded', function () {
+  var _thLoginFrontendData;
+  var menuSettings = (_thLoginFrontendData = thLoginFrontendData) === null || _thLoginFrontendData === void 0 || (_thLoginFrontendData = _thLoginFrontendData.settings) === null || _thLoginFrontendData === void 0 || (_thLoginFrontendData = _thLoginFrontendData.display_triggers) === null || _thLoginFrontendData === void 0 ? void 0 : _thLoginFrontendData.menu_integration;
+  if (!(menuSettings !== null && menuSettings !== void 0 && menuSettings.enabled)) return;
+  var isUserLoggedIn = thLoginFrontendData.isUserLoggedIn;
+  var logoutEnabled = menuSettings.logout !== false;
+  var loginText = menuSettings.item_text_login || __('Login', 'th-login');
+  var logoutText = menuSettings.item_text_logout || __('Logout', 'th-login');
+  var icons = thLoginFrontendData.icons || {};
+
+  // SVG icons as HTML
+  var loginIcon = menuSettings.item_icon_login && icons[menuSettings.item_icon_login] ? icons[menuSettings.item_icon_login] : '';
+  var logoutIcon = menuSettings.item_icon_logout && icons[menuSettings.item_icon_logout] ? icons[menuSettings.item_icon_logout] : '';
+  var navigation = document.querySelector('.wp-block-navigation ul');
+  if (!navigation) return;
+
+  // Remove old button if already present (avoid duplicates)
+  var existing = navigation.querySelector('.thlogin-menu-item');
+  if (existing) existing.remove();
+  var menuItem = document.createElement('li');
+  menuItem.className = 'wp-block-navigation-item thlogin-menu-item';
+  if (isUserLoggedIn && logoutEnabled) {
+    var logoutUrl = thLoginFrontendData.logoutUrl;
+    menuItem.innerHTML = "<a href=\"".concat(logoutUrl, "\" class=\"th-login-menu-integration\">").concat(logoutIcon).concat(logoutText, "</a>");
+  } else if (!isUserLoggedIn) {
+    menuItem.innerHTML = "<a href=\"#\" class=\"thlogin-trigger\" data-th-popup-action=\"login\">".concat(loginIcon).concat(loginText, "</a>");
+  }
+  navigation.appendChild(menuItem);
+});
 })();
 
 /******/ })()

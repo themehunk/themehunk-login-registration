@@ -16,6 +16,23 @@ class THLogin_Frontend {
 	public function enqueue_scripts() {
 		$asset_file = THLOGIN_PATH . 'app/build/public.asset.php';
 
+		// ---- GET ICON SETTINGS ---- //
+		$settings       = get_option( 'thlogin_settings', [] );
+		$menu_settings  = $settings['display_triggers']['menu_integration'] ?? [];
+
+		$login_icon_slug  = $menu_settings['item_icon_login'] ?? '';
+		$logout_icon_slug = $menu_settings['item_icon_logout'] ?? '';
+
+		$icons_for_js = [];
+
+		if ( $login_icon_slug ) {
+			$icons_for_js[ $login_icon_slug ] = thlogin_get_icon_svg( $login_icon_slug );
+		}
+
+		if ( $logout_icon_slug ) {
+			$icons_for_js[ $logout_icon_slug ] = thlogin_get_icon_svg( $logout_icon_slug );
+		}
+
 		$asset_config = file_exists( $asset_file ) ? require $asset_file : array(
 			'dependencies' => array(),
 			'version'      => THLOGIN_VERSION,
@@ -73,6 +90,8 @@ class THLogin_Frontend {
 				),
 				'isUserLoggedIn'   => is_user_logged_in(),
 				'currentUserRoles' => is_user_logged_in() ? wp_get_current_user()->roles : array(),
+				'logoutUrl'        => wp_logout_url( home_url() ),
+				'icons'            => $icons_for_js,
 			)
 		);
 	}

@@ -59,11 +59,19 @@ class TH_Sanitization_validation {
 		$sanitized['modal']['layout_type'] = sanitize_text_field( $settings['modal']['layout_type'] ?? 'popup' );
 		$sanitized['modal']['modal_input_layout'] = sanitize_text_field( $settings['modal']['modal_input_layout'] ?? 'stack' );
 
+		$foreground = $settings['modal']['foreground'] ?? array();
+		$sanitized['modal']['foreground'] = array(
+			'blur'       => sanitize_text_field( $foreground['blur'] ?? '4px' ),
+			'brightness' => sanitize_text_field( $foreground['brightness'] ?? '100%' ),
+			'contrast'   => sanitize_text_field( $foreground['contrast'] ?? '100%' ),
+			'opacity'    => floatval( $foreground['opacity'] ?? 1 ),
+		);
+
 		foreach ( [ 'modal', 'form' ] as $section ) {
 			$bg = $settings[ $section ][ "{$section}_background" ] ?? array();
 			$sanitized[ $section ][ "{$section}_background" ] = array(
 				'type'     => sanitize_text_field( $bg['type'] ?? 'color' ),
-				'color'    => $this->sanitize_color_input( $bg['color'] ?? '#FFFFFF00' ),
+				'color'    => $this->sanitize_color_input( $bg['color'] ?? '#5954549c' ),
 				'gradient' => sanitize_text_field( $bg['gradient'] ?? '' ),
 				'opacity'  => floatval( $bg['opacity'] ?? 1 ),
 				'image'    => array(
@@ -376,6 +384,21 @@ class TH_Sanitization_validation {
 			}
 		}
 
+		// Validate modal foreground settings
+		$foreground = $settings['modal']['foreground'] ?? array();
+		if ( isset( $foreground['blur'] ) && ! preg_match( '/^\d+(\.\d+)?(px)?$/', $foreground['blur'] ) ) {
+			$errors->add( 'invalid_foreground_blur', esc_html__( 'Foreground blur must be a valid CSS length (e.g., 4px).', 'th-login' ) );
+		}
+		foreach ( [ 'brightness', 'contrast' ] as $key ) {
+			if ( isset( $foreground[ $key ] ) && ! preg_match( '/^\d+%$/', $foreground[ $key ] ) ) {
+				$errors->add( "invalid_foreground_{$key}", sprintf( esc_html__( 'Foreground %s must be a percentage value (e.g., 100%%).', 'th-login' ), $key ) );
+			}
+		}
+		if ( isset( $foreground['opacity'] ) && ( $foreground['opacity'] < 0 || $foreground['opacity'] > 1 ) ) {
+			$errors->add( 'invalid_foreground_opacity', esc_html__( 'Foreground opacity must be between 0 and 1.', 'th-login' ) );
+		}
+
+
 		return $errors->has_errors() ? $errors : true;
 	}
 
@@ -604,13 +627,13 @@ class TH_Sanitization_validation {
 
 		// Menu integration.
 		$sanitized['menu_integration']['enabled'] = rest_sanitize_boolean( $settings['menu_integration']['enabled'] ?? false );
-		$sanitized['menu_integration']['menu_slug'] = sanitize_text_field( $settings['menu_integration']['menu_slug'] ?? 'primary' );
-		$sanitized['menu_integration']['item_text_login'] = sanitize_text_field( $settings['menu_integration']['item_text_login'] ?? 'Login' );
-		$sanitized['menu_integration']['item_text_register'] = sanitize_text_field( $settings['menu_integration']['item_text_register'] ?? 'Register' );
-		$sanitized['menu_integration']['item_icon_login'] = sanitize_text_field( $settings['menu_integration']['item_icon_login'] ?? 'dashicons-admin-users' );
-		$sanitized['menu_integration']['item_icon_register'] = sanitize_text_field( $settings['menu_integration']['item_icon_register'] ?? 'dashicons-plus-alt' );
-		$sanitized['menu_integration']['visibility_login_logged_in'] = rest_sanitize_boolean( $settings['menu_integration']['visibility_login_logged_in'] ?? false );
-		$sanitized['menu_integration']['visibility_register_logged_in'] = rest_sanitize_boolean( $settings['menu_integration']['visibility_register_logged_in'] ?? false );
+		$sanitized['menu_integration']['logout']  = rest_sanitize_boolean( $settings['menu_integration']['logout'] ?? true );
+
+		$sanitized['menu_integration']['item_text_login']  = sanitize_text_field( $settings['menu_integration']['item_text_login'] ?? 'Login' );
+		$sanitized['menu_integration']['item_icon_login']  = sanitize_text_field( $settings['menu_integration']['item_icon_login'] ?? '' );
+
+		$sanitized['menu_integration']['item_text_logout'] = sanitize_text_field( $settings['menu_integration']['item_text_logout'] ?? 'Logout' );
+		$sanitized['menu_integration']['item_icon_logout'] = sanitize_text_field( $settings['menu_integration']['item_icon_logout'] ?? '' );
 
 		return $sanitized;
 	}
@@ -618,9 +641,14 @@ class TH_Sanitization_validation {
 	public function validate_display_triggers_settings( $settings ) {
 		$errors = new WP_Error();
 
-		// Example validation: delay_seconds must be positive.
-		if ( ( $settings['auto_open_on_load']['enabled'] ?? false ) && ( $settings['auto_open_on_load']['delay_seconds'] ?? 0 ) < 0 ) {
-			$errors->add( 'invalid_delay_seconds', esc_html__( 'Delay seconds must be a non-negative number.', 'th-login' ) );
+		if (
+			( $settings['auto_open_on_load']['enabled'] ?? false ) &&
+			( $settings['auto_open_on_load']['delay_seconds'] ?? 0 ) < 0
+		) {
+			$errors->add(
+				'invalid_delay_seconds',
+				esc_html__( 'Delay seconds must be a non-negative number.', 'th-login' )
+			);
 		}
 
 		return $errors->has_errors() ? $errors : true;

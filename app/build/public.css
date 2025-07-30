@@ -439,4 +439,8 @@ body.thlogin-modal-open {
   margin-left: 25px;
 }
 
+.thlogin-menu-item svg {
+  width: 25px;
+}
+
 /*# sourceMappingURL=public.css.map*/

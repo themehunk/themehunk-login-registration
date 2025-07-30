@@ -381,3 +381,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	const menuSettings = thLoginFrontendData?.settings?.display_triggers?.menu_integration;
+
+	if (!menuSettings?.enabled) return;
+
+	const isUserLoggedIn = thLoginFrontendData.isUserLoggedIn;
+	const logoutEnabled = menuSettings.logout !== false;
+
+	const loginText = menuSettings.item_text_login || __('Login', 'th-login');
+	const logoutText = menuSettings.item_text_logout || __('Logout', 'th-login');
+
+
+    const icons = thLoginFrontendData.icons || {};
+
+	// SVG icons as HTML
+	const loginIcon = menuSettings.item_icon_login && icons[menuSettings.item_icon_login]
+		? icons[menuSettings.item_icon_login]
+		: '';
+
+	const logoutIcon = menuSettings.item_icon_logout && icons[menuSettings.item_icon_logout]
+		? icons[menuSettings.item_icon_logout]
+		: '';
+
+	const navigation = document.querySelector('.wp-block-navigation ul');
+	if (!navigation) return;
+
+	// Remove old button if already present (avoid duplicates)
+	const existing = navigation.querySelector('.thlogin-menu-item');
+	if (existing) existing.remove();
+
+	const menuItem = document.createElement('li');
+	menuItem.className = 'wp-block-navigation-item thlogin-menu-item';
+
+	if (isUserLoggedIn && logoutEnabled) {
+		const logoutUrl = thLoginFrontendData.logoutUrl;
+		menuItem.innerHTML = `<a href="${logoutUrl}" class="th-login-menu-integration">${logoutIcon}${logoutText}</a>`;
+	} else if(! isUserLoggedIn) {
+		menuItem.innerHTML = `<a href="#" class="thlogin-trigger" data-th-popup-action="login">${loginIcon}${loginText}</a>`;
+	}
+
+	navigation.appendChild(menuItem);
+});
+

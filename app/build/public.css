@@ -419,4 +419,24 @@ body.thlogin-modal-open {
   gap: 10px;
 }
 
+.thlogin-shortcode-form-wrapper .thlogin-header-top-row,
+.thlogin-shortcode-form-wrapper .thlogin-header-cancel-button,
+.thlogin-shortcode-form-wrapper .thlogin-form-toggle,
+.thlogin-shortcode-form-wrapper .thlogin-link-separator,
+.thlogin-shortcode-form-wrapper .thlogin-link[data-th-popup-action=register] {
+  display: none;
+}
+
+.thlogin-layout-floating .layout-placehold input {
+  border: none !important;
+  border-bottom: 1px solid black !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.icon-activated-input-wrapper .floating-label {
+  margin-left: 25px;
+}
+
 /*# sourceMappingURL=public.css.map*/

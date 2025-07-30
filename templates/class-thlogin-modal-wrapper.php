@@ -3,8 +3,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-// Include required form classes
-require_once THLOGIN_PATH . 'templates/styles/th-front-styles.php';
 require_once THLOGIN_PATH . 'templates/class-thlogin-login-form.php';
 require_once THLOGIN_PATH . 'templates/class-thlogin-register-form.php';
 require_once THLOGIN_PATH . 'templates/class-thlogin-forgot-password-form.php';

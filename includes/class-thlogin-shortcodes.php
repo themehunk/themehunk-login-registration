@@ -9,9 +9,58 @@ class THLogin_Shortcodes {
 		add_shortcode( 'thlogin_form', array( $this, 'render_login_form_shortcode' ) );
 		add_shortcode( 'th_register_form', array( $this, 'render_register_form_shortcode' ) );
 		add_shortcode( 'th_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
-		add_shortcode( 'thlogin_combined_form', array( $this, 'render_combined_form_shortcode' ) );
+		add_shortcode( 'thlogin__combined_form', array( $this, 'render_combined_form_shortcode' ) );
 		add_shortcode( 'thlogin_popup_auto', array( $this, 'render_auto_popup_shortcode' ) );
 
+		add_action( 'wp_enqueue_scripts', [ $this, 'conditionally_enqueue_assets' ] );
+		add_action( 'wp_head', [ $this, 'conditionally_render_inline_styles' ], 20 );
+
+	}
+
+	public function conditionally_enqueue_assets() {
+		global $post;
+
+		if (
+			is_a( $post, 'WP_Post' ) &&
+			(
+				has_shortcode( $post->post_content, 'thlogin_form' ) ||
+				has_shortcode( $post->post_content, 'th_register_form' ) ||
+				has_shortcode( $post->post_content, 'th_forgot_password_form' ) ||
+				has_shortcode( $post->post_content, 'thlogin_combined_form' ) ||
+				has_shortcode( $post->post_content, 'thlogin_popup_auto' )
+			)
+		) {
+			$this->enqueue_shortcode_assets();
+		}
+	}
+
+	public function conditionally_render_inline_styles() {
+        global $post;
+        
+        // Check if any of our shortcodes exist
+        $has_shortcode = false;
+        $shortcodes = [
+            'thlogin_form',
+            'th_register_form',
+            'th_forgot_password_form',
+            'thlogin_combined_form',
+            'thlogin_popup_auto'
+        ];
+        
+        foreach ($shortcodes as $shortcode) {
+            if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, $shortcode)) {
+                $has_shortcode = true;
+                break;
+            }
+        }
+        
+        if ($has_shortcode) {
+            $this->render_inline_styles();
+        }
+    }
+
+	public function render_inline_styles() {
+		( new THLogin_Style_Renderer() )->render_inline_styles();
 	}
 
 	public function enqueue_shortcode_assets() {
@@ -36,7 +85,7 @@ class THLogin_Shortcodes {
 			// Using defer for the main frontend script as it needs DOM and other dependencies
 			wp_enqueue_script(
 				'thlogin-frontend-script',
-				THLOGIN_URL . 'app/build/frontend.js',
+				THLOGIN_URL . 'app/build/public.js',
 				$asset_config['dependencies'],
 				$asset_config['version'],
 				array(
@@ -98,6 +147,7 @@ class THLogin_Shortcodes {
 
 		$form = new THLogin_Login_Form();
 		echo $form->render();
+
 		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
@@ -105,9 +155,12 @@ class THLogin_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
+		ob_start();
 		require_once THLOGIN_PATH . 'templates/class-thlogin-register-form.php';
-		echo $form->render();
-        echo $register_form->render();
+
+		$register_form = new THLogin_Register_Form();
+		echo $register_form->render();
+
 
 		$form_html = ob_get_clean();
 

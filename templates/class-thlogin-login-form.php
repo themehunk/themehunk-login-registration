@@ -96,6 +96,7 @@ class THLogin_Login_Form {
         if ($this->layout === 'stack') $field_class .= ' thlogin-layout-stack';
         if ($this->layout === 'inline') $field_class .= ' thlogin-layout-inline';
         if ($this->layout === 'floating') $field_class .= ' thlogin-layout-floating';
+        if ($this->layout === 'placehold') $field_class .= ' thlogin-layout-floating';
 
         $autocomplete = '';
         if (stripos($name, 'user') !== false) $autocomplete = 'username';
@@ -107,40 +108,40 @@ class THLogin_Login_Form {
         $show_icon_in_input = $icon && $icon_position === 'inside-input';
 
         echo '<div class="' . esc_attr($field_class) . '">';
-        if ($type === 'checkbox') {
-            echo '<input type="checkbox" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" value="1"' . ($required ? ' required' : '') . ' />';
-            echo '<label for="' . esc_attr($id) . '">' . esc_html($label);
-            if ($required) echo '<span class="th-required">*</span>';
-            echo '</label>';
-        } else {
-            if ($this->layout === 'floating') {
-                echo '<div class="floating-wrapper">';
-                echo '<input class="floating-input ' . ($show_icon_in_input ? 'icon-activated-input' : '') . '"'
-                    . ($show_icon_in_input ? ' style="background-image: ' . esc_attr(thlogin_get_icon_svg_data_uri($icon)) . ';"' : '')
-                    . ' type="' . esc_attr($type) . '" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" placeholder=" "'
-                    . ($required ? ' required' : '')
-                    . ($autocomplete ? ' autocomplete="' . esc_attr($autocomplete) . '"' : '')
-                    . ' />';
-                echo '<label for="' . esc_attr($id) . '" class="floating-label">' . esc_html($label);
+            if ($type === 'checkbox') {
+                echo '<input type="checkbox" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" value="1"' . ($required ? ' required' : '') . ' />';
+                echo '<label for="' . esc_attr($id) . '">' . esc_html($label);
                 if ($required) echo '<span class="th-required">*</span>';
-                echo '</label></div>';
+                echo '</label>';
             } else {
-                echo '<label for="' . esc_attr($id) . '" class="thlogin-label-with-icon">';
-                if ($show_icon_in_label) {
-                    echo '<span class="thlogin-label-icon">' . wp_kses(thlogin_get_icon_svg($icon), thlogin_get_allowed_svg_tags()) . '</span>';
-                }
-                echo '<span class="thlogin-label-text">' . esc_html($label);
-                if ($required) echo '<span class="th-required">*</span>';
-                echo '</span></label>';
+                if (in_array($this->layout, ['floating', 'placehold'], true)) {
+                    echo '<div class="floating-wrapper layout-' . esc_attr($this->layout) . ' ' . ($show_icon_in_input ? 'icon-activated-input-wrapper' : '') . '">';
+                    echo '<input class="floating-input ' . ($show_icon_in_input ? 'icon-activated-input' : '') . '"'
+                        . ($show_icon_in_input ? ' style="background-image: ' . esc_attr(thlogin_get_icon_svg_data_uri($icon)) . ';"' : '')
+                        . ' type="' . esc_attr($type) . '" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" placeholder=" "'
+                        . ($required ? ' required' : '')
+                        . ($autocomplete ? ' autocomplete="' . esc_attr($autocomplete) . '"' : '')
+                        . ' />';
+                    echo '<label for="' . esc_attr($id) . '" class="floating-label">' . esc_html($label);
+                    if ($required) echo '<span class="th-required">*</span>';
+                    echo '</label></div>';
+                } else {
+                    echo '<label for="' . esc_attr($id) . '" class="thlogin-label-with-icon">';
+                    if ($show_icon_in_label) {
+                        echo '<span class="thlogin-label-icon">' . wp_kses(thlogin_get_icon_svg($icon), thlogin_get_allowed_svg_tags()) . '</span>';
+                    }
+                    echo '<span class="thlogin-label-text">' . esc_html($label);
+                    if ($required) echo '<span class="th-required">*</span>';
+                    echo '</span></label>';
 
-                echo '<input class="' . ($show_icon_in_input ? 'icon-activated-input' : '') . '"'
-                    . ($show_icon_in_input ? ' style="background-image: ' . esc_attr(thlogin_get_icon_svg_data_uri($icon)) . ';"' : '')
-                    . ' type="' . esc_attr($type) . '" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" placeholder="' . esc_attr($placeholder) . '"'
-                    . ($required ? ' required' : '')
-                    . ($autocomplete ? ' autocomplete="' . esc_attr($autocomplete) . '"' : '')
-                    . ' />';
+                    echo '<input class="' . ($show_icon_in_input ? 'icon-activated-input' : '') . '"'
+                        . ($show_icon_in_input ? ' style="background-image: ' . esc_attr(thlogin_get_icon_svg_data_uri($icon)) . ';"' : '')
+                        . ' type="' . esc_attr($type) . '" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" placeholder="' . esc_attr($placeholder) . '"'
+                        . ($required ? ' required' : '')
+                        . ($autocomplete ? ' autocomplete="' . esc_attr($autocomplete) . '"' : '')
+                        . ' />';
+                }
             }
-        }
         echo '</div>';
     }
 

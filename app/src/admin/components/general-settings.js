@@ -3,8 +3,8 @@ import { ToggleControl, TextControl } from "@wordpress/components";
 import { CustomSelectControl } from './custom-select-control';
 import { useEffect, useState } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
-import {  FaCheck } from "react-icons/fa"; 
-import { FaCopy } from "react-icons/fa6";
+import { check,copy   } from '@wordpress/icons';
+import { Icon } from '@wordpress/components';
 import { shortcodes } from '../contant';
 
 const GeneralSettings = ({ settings, handleSettingChange}) => {
@@ -375,7 +375,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                                             onClick={() => handleCopy(shortcode, i)}
                                             title={copiedIndex === i ? __("Copied!", "th-login") : __("Copy", "th-login")}
                                         >
-                                            {copiedIndex === i ? <FaCheck /> : <FaCopy />}
+                                            {copiedIndex === i ? <Icon icon={check} /> : <Icon icon={copy} />}
                                         </button>
                                     </div>
                                 </div>

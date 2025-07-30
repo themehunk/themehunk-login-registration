@@ -323,7 +323,7 @@ const App = () => {
             <ul>
                 {TABS.map((tab) => (
                 <li key={tab.id} className={activeTab === tab.id ? "active" : ""}>
-                    <button onClick={() => setActiveTab(tab.id)}>
+                    <button onClick={() => setActiveTab(tab.id)} className={`th-login-${tab.label}`}>
                     <i className={`dashicons dashicons-${tab.icon}`}></i>
                     {tab.label}
                     </button>
@@ -390,6 +390,7 @@ const App = () => {
               setIsResetConfirmOpen={setIsResetConfirmOpen}
             />
           )}
+          
         </div>
       </div>
 

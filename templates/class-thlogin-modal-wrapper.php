@@ -27,17 +27,26 @@ class THLogin_Modal_Wrapper {
 			aria-modal="true"
 			aria-hidden="true"
 			style="display: none; <?php echo esc_attr($modal_bg_style); ?>">
+
+			<?php do_action('thlogin_before_modal_content'); ?>
+
 			<div class="thlogin-popup-form-container">
 				<?php
-				$login_form = new THLogin_Login_Form();
+				do_action('thlogin_before_forms');
+
+				$login_form    = new THLogin_Login_Form();
 				$register_form = new THLogin_Register_Form();
-				$forgot_form = new THLogin_Forgot_Password_Form();
+				$forgot_form   = new THLogin_Forgot_Password_Form();
 
 				$login_form->render();
 				$register_form->render();
 				$forgot_form->render();
+
+				do_action('thlogin_after_forms');
 				?>
 			</div>
+
+			<?php do_action('thlogin_after_modal_content'); ?>
 		</div>
 		<?php
 	}

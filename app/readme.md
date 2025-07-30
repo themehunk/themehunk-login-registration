@@ -590,3 +590,20 @@ File: Sanitization and Validation Documentation
 
     ## Final Notes
         The `TH_Sanitization_Validation` class ensures your plugin's settings are robust, safe, and user-proof. This helps avoid frontend rendering issues, invalid configurations, and security vulnerabilities.
+
+
+
+Hooks-  Modal-wrapper.php
+            thlogin_before_modal_content - Inject before .form-container	 -Just inside modal wrapper <div>
+            thlogin_before_forms	     - Inject before forms	             -Before $login_form->render()
+            thlogin_after_forms	         - Inject after all forms	         -After $forgot_form->render()
+            thlogin_after_modal_content	 - Inject at the bottom of modal	 -Before closing </div>
+        Login-form.php
+            thlogin_before_login_form    – Inject before <form> starts        – Just inside .thlogin-form--login
+            thlogin_after_login_form     – Inject after </form> ends          – Before closing .thlogin-form--login
+        Register-form.php
+            thlogin_before_register_form  – Inject before <form> starts        – Just inside .thlogin-form--register
+            thlogin_after_register_form   – Inject after </form> ends          – Before closing .thlogin-form--register
+        forgot-password-form.php
+            thlogin_before_forgot_password_form	   - Inject before form starts Before <form> tag
+            thlogin_after_forgot_password_form	   - Inject after form ends	After </form> but inside wrapper

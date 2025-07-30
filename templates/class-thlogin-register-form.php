@@ -29,8 +29,13 @@ class THLogin_Register_Form {
 		echo '<div class="thlogin-form thlogin-form--register" data-form-type="register" style="display: none;">';
 		echo thlogin_render_form_header();
 
+		/**
+		 * Hook: thlogin_before_register_form
+		 */
+		do_action( 'thlogin_before_register_form' );
+
 		echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="register">';
-		echo '<div class="thlogin-messages" aria-live="polite"></div>';
+			echo '<div class="thlogin-messages" aria-live="polite"></div>';
 		echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
 
 		foreach ( $this->fields as $field ) {
@@ -43,8 +48,8 @@ class THLogin_Register_Form {
 
 		if ( ! empty( $security['honeypot_enabled'] ) ) {
 			echo '<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">';
-			echo '<label for="thlogin_hp">' . esc_html__( 'Leave this field empty', 'th-login' ) . '</label>';
-			echo '<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">';
+				echo '<label for="thlogin_hp">' . esc_html__( 'Leave this field empty', 'th-login' ) . '</label>';
+				echo '<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">';
 			echo '</p>';
 		}
 
@@ -55,10 +60,16 @@ class THLogin_Register_Form {
 		echo '</p>';
 
 		echo '<p class="thlogin-form-links">';
-		echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__( 'Already have an account? Log In', 'th-login' ) . '</a>';
+			echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__( 'Already have an account? Log In', 'th-login' ) . '</a>';
 		echo '</p>';
 
 		echo '</form>';
+
+		/**
+		 * Hook: thlogin_after_register_form
+		 */
+		do_action( 'thlogin_after_register_form' );
+
 		echo '</div>';
 
 		if ( ! empty( $security['recaptcha']['enabled'] ) && $security['recaptcha']['type'] === 'v2_checkbox' ) {

@@ -6,6 +6,8 @@
 /* ========== Ultra Modern Base Styles ========== */
 .thlogin-admin-modern {
   --primary-color: #4361ee;
+  --wp-components-color-accent: #3153e7;
+  --wp-components-color-accent-darker-10:#1f43e2;
   --primary-hover: #3a56d4;
   --primary-light: rgba(67, 97, 238, 0.1);
   --error-color: #ef233c;
@@ -2421,7 +2423,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .mockup-header {
-  background: #6366f1;
+  background: #4361ee;
   color: white;
   padding: 3px 6px;
   border-radius: 4px;
@@ -2446,7 +2448,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .mockup-tab-row .tab.active {
-  background: #4f46e5;
+  background: #4361ee;
   color: white;
 }
 
@@ -3153,7 +3155,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .custom-tab-button.active {
-  background: #2563eb;
+  background: #4361ee;
   color: #fff;
 }
 

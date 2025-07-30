@@ -24,6 +24,12 @@ class THLogin_Forgot_Password_Form {
 
 		echo '<div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">';
 		echo thlogin_render_form_header();
+
+		/**
+		 * Hook: thlogin_before_forgot_password_form
+		 */
+		do_action('thlogin_before_forgot_password_form');
+
 		echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="forgot-password">';
 		echo '<div class="thlogin-messages" aria-live="polite"></div>';
 		echo '<h3>' . esc_html__('Reset Password', 'th-login') . '</h3>';
@@ -81,10 +87,16 @@ class THLogin_Forgot_Password_Form {
 		echo '</p>';
 
 		echo '<p class="thlogin-form-links">';
-		echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__('Back to Login', 'th-login') . '</a>';
+			echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__('Back to Login', 'th-login') . '</a>';
 		echo '</p>';
 
 		echo '</form>';
+
+		/**
+		 * Hook: thlogin_after_forgot_password_form
+		 */
+		do_action('thlogin_after_forgot_password_form');
+		
 		echo '</div>';
 	}
 

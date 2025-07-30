@@ -26,9 +26,13 @@ class THLogin_Login_Form {
         echo '<div class="thlogin-form thlogin-form--login" data-form-type="login">';
         echo thlogin_render_form_header();
 
+        do_action('thlogin_before_login_form');
+
         echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="login">';
         echo '<div class="thlogin-messages" aria-live="polite"></div>';
-        echo '<h3>' . esc_html__('Login', 'th-login') . '</h3>';
+        
+        // Translators: Use printf + esc_html__ for consistent safe translations
+        printf( '<h3>%s</h3>', esc_html__( 'Login', 'th-login' ) );
 
         if (isset($_GET['thlogin_email_verified'])) {
             $status = $_GET['thlogin_email_verified'];
@@ -68,6 +72,9 @@ class THLogin_Login_Form {
         echo '</div>';
 
         echo '</form>';
+
+        do_action('thlogin_after_login_form');
+        
         echo '</div>';
 
         if (!empty($security['recaptcha']['enabled']) && $security['recaptcha']['type'] === 'v2_checkbox') {

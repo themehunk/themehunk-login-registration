@@ -23,13 +23,15 @@ th-login/
 │       ├── class-sanitaization-validation.php              # Sanitization and validation for fields
 │       └── icon.php                                        # 100+ default SVG icons
 ├── templates/                                              # Form markup templates
-│   ├── modal-wrapper.php                                   # Main modal wrapper
-│   ├── form-login.php                                      # Login form markup
-│   ├── form-register.php                                   # Registration form markup
-│   ├── form-forgot-password.php                            # Forgot password form markup
+│   ├── class-thlogin-modal-wrapper.php                     # Main modal wrapper
+│   ├── class-thlogin-login-form.php                        # Login form markup
+│   ├── class-thlogin-register-form.php                     # Registration form markup
+│   ├── class-thlogin-forgot-password-form.php              # Forgot password form markup
 │   └── parts/
 │       ├── form-header.php                                 # Reusable header component
 │       └── form-footer.php                                 # Reusable footer component
+|   └── styles
+|       └── th-front-styles.php
 ├── app/                                                    # React Admin Interface & Build Tools
 │   ├── build/                                              # Compiled build output
 │   ├── node_modules/                                       # NPM dependencies

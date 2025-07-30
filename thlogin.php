@@ -60,6 +60,7 @@ final class THLogin {
 		require_once THLOGIN_PATH . 'includes/class-thlogin-integrations.php';
 		require_once THLOGIN_PATH . 'includes/helpers.php';
 		require_once THLOGIN_PATH . 'includes/helpers/class-thlogin-defaults.php';
+		require_once THLOGIN_PATH . 'templates/styles/th-front-styles.php';
 	}
 
 	public function init_plugin() {
@@ -74,6 +75,11 @@ final class THLogin {
 		new THLogin_Integrations();
 
 		add_filter( 'plugin_action_links_' . THLOGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
+		add_action( 'wp_head', [ $this, 'enqueue_inline_styles' ], 20 );
+	}
+
+	public function enqueue_inline_styles() {
+		( new THLogin_Style_Renderer() )->render_inline_styles();
 	}
 
 	public function activate() {

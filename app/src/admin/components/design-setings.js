@@ -8,7 +8,8 @@ import { CustomSelectControl } from './custom-select-control';
 import { Dashicon, RangeControl,ToggleControl } from "@wordpress/components";
 import {tabs,tabdeisgn, layoutOptions, fontWeightOptions, tabicon} from '../contant';
 import { THL_ICONS } from "./icons";
-import { FiMail } from 'react-icons/fi';
+import { envelope } from '@wordpress/icons';
+import { Icon } from '@wordpress/components';
 
 const tabinside = [
 	{ key: "form", label: __("Form", "th-login") },
@@ -151,6 +152,8 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 	const [insidetab, setinsidetab] = useState('form');
 	const [deisgnpreview, setdeisgnpreview] = useState('preview');
 	const [floatingFocused, setFloatingFocused] = useState(true);
+	const [floatingFocusedplace, setFloatingFocusedplace] = useState(false);
+
 
 	const inputBase = settings.design.Input;
 	const buttonBase = settings.design.button;
@@ -319,6 +322,29 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 							/>
 							<label className="floating-label" style={{background:inputProps.base.backgroundColor,fontSize: inputBase.	labeltypography.size,fontWeight: inputBase.labeltypography.fontWeight,color: inputBase.labelcolor || '#333', }}>{field.label}</label>
 						</div>
+					) : layout === 'placehold' ? (
+						<div className="placehold-wrapper layout-placehold" style={{ position: 'relative' }}>
+							{iconSpan}
+							<InteractiveInput
+								type={field.type || 'text'}
+								placeholder=" "
+								base={inputProps.base}
+								active={inputProps.active}
+								className="floating-input"
+								style={showIconInside ? { paddingLeft: '30px' } : {}}
+							/>
+							<label
+								className="placehold-label"
+								style={{
+									background: inputProps.base.backgroundColor,
+									fontSize: inputBase.labeltypography.size,
+									fontWeight: inputBase.labeltypography.fontWeight,
+									color: inputBase.labelcolor || '#333',
+								}}
+							>
+								{field.label}
+							</label>
+						</div>
 					) : (
 						<>
 							{IconPosition === 'with-label' && (Icon || field.label) ? (
@@ -486,7 +512,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 			</div>
 
 			<div className="design-options-wrapper">
-				{['stack', 'inline', 'floating'].map((type) => (
+				{['stack', 'inline', 'floating', 'placehold'].map((type) => (
 					<div
 						key={type}
 						className={`design-card ${settings.design.modal.modal_input_layout === type ? 'selected' : ''}`}
@@ -495,22 +521,25 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 						tabIndex={0}
 						onKeyDown={(e) => e.key === 'Enter' && handleSettingChange("design", ["modal", "modal_input_layout"], type)}
 					>
+
 						<div className="label-title">
 							{type === 'stack'
 								? 'Label Top'
 								: type === 'inline'
 								? 'Label Inline'
-								: 'Floating Label'}
+								: type === 'floating'
+								? 'Floating Label'
+								: 'Placeholder Only'}
 						</div>
 
 						{type === 'stack' && (
 							<div className="preview preview-stack">
 								<label>
-									{settings.design.icon.icon_position === 'with-label' && <FiMail className="email-icon label-icon" />}
+									{settings.design.icon.icon_position === 'with-label' && <Icon icon={envelope} className="email-icon label-icon" />}
 									Email Address
 								</label>
 								<div className="input-wrap">
-									{settings.design.icon.icon_position === 'inside-input' && <FiMail className="email-icon input-icon" />}
+									{settings.design.icon.icon_position === 'inside-input' && <Icon icon={envelope} className="email-icon input-icon" />}
 									<input type="email" placeholder="Enter your email" readOnly />
 								</div>
 							</div>
@@ -522,7 +551,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									Email:
 								</label>
 								<div className="input-wrap">
-									{settings.design.icon.icon_position === 'inside-input' && <FiMail className="email-icon input-icon" />}
+									{settings.design.icon.icon_position === 'inside-input' && <Icon icon={envelope} className="email-icon input-icon" />}
 									<input type="email" placeholder="you@example.com" readOnly />
 								</div>
 							</div>
@@ -532,7 +561,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 							<div className="preview preview-floating">
 								<div className="input-wrap">
 									{settings.design.icon.icon_position === 'inside-input' && (
-										<FiMail className="email-icon input-icon" />
+										<Icon icon={envelope} className="email-icon input-icon" />
 									)}
 									<input
 										type="email"
@@ -545,6 +574,26 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								</div>
 							</div>
 						)}
+
+						{type === 'placehold' && (
+							<div className="preview preview-placehold">
+								<div className={`input-wrap placehold-input ${floatingFocusedplace ? 'focused' : ''}`}>
+									{settings.design.icon.icon_position === 'inside-input' && (
+										<Icon icon={envelope} className="email-icon input-icon" />
+									)}
+									<input
+										type="email"
+										placeholder=" "
+										className="floating-input"
+										readOnly
+										onFocus={() => setFloatingFocusedplace(true)}
+										onBlur={() => setFloatingFocusedplace(false)}
+									/>
+									<label className="placehold-label">Enter your email</label>
+								</div>
+							</div>
+						)}
+
 					</div>
 				))}
 			</div>

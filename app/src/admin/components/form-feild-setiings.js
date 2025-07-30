@@ -132,6 +132,7 @@
     const handleAddField = () => {
       const newField = DEFAULT_FIELD();
       updateFields([...fields, newField]);
+      setSelectedField(newField);
       setToastMessage(__("Field added successfully!", "th-login"));
     };
 

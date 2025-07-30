@@ -163,6 +163,7 @@ class THLogin_REST_API {
 			'permission_callback' => '__return_true',
 		]);
 
+		//Route for pending users
 		register_rest_route( 
 			$namespace, 
 			'/pending-users', 
@@ -174,6 +175,7 @@ class THLogin_REST_API {
 			},
 		] );
 
+		//Route for approve-user 
 		register_rest_route( 
 			$namespace, 
 			'/approve-user', 
@@ -1087,7 +1089,6 @@ class THLogin_REST_API {
 		return $this->sanitizer->validate_general_settings((array) $settings );
 	}
 
-	// Repeat for other categories:
 	public function sanitize_design_settings( $settings ) {
 		return $this->sanitizer->sanitize_design_settings( (array) $settings );
 	}

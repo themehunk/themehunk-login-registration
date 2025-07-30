@@ -58,6 +58,9 @@ class THLogin_Forgot_Password_Form {
 			if ($this->layout === 'stack') $field_class .= ' thlogin-layout-stack';
 			elseif ($this->layout === 'inline') $field_class .= ' thlogin-layout-inline';
 			elseif ($this->layout === 'floating') $field_class .= ' thlogin-layout-floating';
+			else if ($this->layout === 'placehold') {
+				$field_class .= ' thlogin-layout-floating';
+			}
 
 			$this->render_field([
 				'type' => $type,
@@ -77,8 +80,8 @@ class THLogin_Forgot_Password_Form {
 		// Honeypot
 		if (!empty($security['honeypot_enabled'])) {
 			echo '<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">';
-			echo '<label for="thlogin_hp">' . esc_html__('Leave this field empty', 'th-login') . '</label>';
-			echo '<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">';
+				echo '<label for="thlogin_hp">' . esc_html__('Leave this field empty', 'th-login') . '</label>';
+				echo '<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">';
 			echo '</p>';
 		}
 
@@ -103,9 +106,9 @@ class THLogin_Forgot_Password_Form {
 	protected function render_field($args) {
 		extract($args); // for cleaner access
 
-		if ($this->layout === 'floating') {
+		if (in_array($this->layout, ['floating', 'placehold'], true)) {
 			echo '<div class="' . esc_attr($field_class) . '">';
-			echo '<div class="floating-wrapper">';
+			echo '<div class="floating-wrapper layout-' . esc_attr($this->layout) . ' ' . ($show_icon_in_input ? 'icon-activated-input-wrapper' : '') . '">';
 			echo '<input class="floating-input ' . ($show_icon_in_input ? 'icon-activated-input' : '') . '"'
 				. ($show_icon_in_input ? ' style="background-image: ' . esc_attr(thlogin_get_icon_svg_data_uri($icon)) . ';"' : '')
 				. ' type="' . esc_attr($type) . '" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" placeholder=" "'

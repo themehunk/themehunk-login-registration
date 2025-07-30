@@ -230,7 +230,7 @@ class TH_Sanitization_validation {
 		}
 
 		// Validate modal_input_layout
-		$valid_input_layouts = [ 'stack', 'inline', 'floating' ];
+		$valid_input_layouts = [ 'stack', 'inline', 'floating', 'placehold' ];
 		$modal_input_layout = $settings['modal']['modal_input_layout'] ?? '';
 
 		if ( $modal_input_layout && ! in_array( $modal_input_layout, $valid_input_layouts, true ) ) {

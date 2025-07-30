@@ -104,6 +104,8 @@ class THLogin_Register_Form {
 			$field_class .= ' thlogin-layout-inline';
 		} elseif ( $this->layout === 'floating' ) {
 			$field_class .= ' thlogin-layout-floating';
+		}else if ($this->layout === 'placehold') {
+			$field_class .= ' thlogin-layout-floating';
 		}
 
 		// Handle terms checkbox separately
@@ -117,9 +119,9 @@ class THLogin_Register_Form {
 		}
 
 		// Floating layout
-		if ( $this->layout === 'floating' ) {
+		if ( in_array($this->layout, ['floating', 'placehold'], true)) {
 			echo '<div class="' . esc_attr( $field_class ) . '">';
-			echo '<div class="floating-wrapper">';
+			echo '<div class="floating-wrapper layout-' . esc_attr($this->layout) . ' ' . ($show_icon_in_input ? 'icon-activated-input-wrapper' : '') . '">';
 			echo '<input class="floating-input ' . ( $show_icon_in_input ? 'icon-activated-input' : '' ) . '"'
 				. ( $show_icon_in_input ? ' style="background-image: ' . esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ) . ';"' : '' )
 				. ' type="' . esc_attr( $type ) . '" name="' . esc_attr( $name ) . '" id="th-register-' . esc_attr( $id ) . '" placeholder=" "'

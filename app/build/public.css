@@ -318,11 +318,6 @@ body.thlogin-modal-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--th-icon-color, #111);
-}
-.thlogin-label-with-icon .thlogin-label-icon svg {
-  width: var(--th-icon-size, 20px);
-  height: var(--th-icon-size, 20px);
 }
 .thlogin-label-with-icon .thlogin-label-text {
   display: inline-block;

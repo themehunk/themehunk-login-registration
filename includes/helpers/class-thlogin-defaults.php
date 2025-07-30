@@ -42,139 +42,91 @@ class THLogin_Defaults {
 	public static function design() {
 		// move your full `$design_defaults` array here
 		return array(
-		'modal' => array(
-			'modal_background' => array(
-				'type'     => 'color',
-				'color'    => '#FFFFFF00',
-				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
-				'opacity'  => 1,
-				'image'    => array(
-					'url'      => '',
-					'position' => 'center center',
-					'size'     => 'cover',
-					'repeat'   => 'no-repeat',
+			'modal' => array(
+				'modal_background' => array(
+					'type'     => 'color',
+					'color'    => '#FFFFFF00',
+					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+					'opacity'  => 1,
+					'image'    => array(
+						'url'      => '',
+						'position' => 'center center',
+						'size'     => 'cover',
+						'repeat'   => 'no-repeat',
+					),
+				),
+				'modal_input_layout'=>  'stack',
+			),
+
+			'form' => array(
+				'form_background' => array(
+					'type'     => 'color',
+					'color'    => '#ffffff',
+					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+					'opacity'  => 1,
+					'image'    => array(
+						'url'      => '',
+						'position' => 'center center',
+						'size'     => 'cover',
+						'repeat'   => 'no-repeat',
+					),
+				),
+				'form_border' => array(
+					'width' => array(
+						'top'    => 0,
+						'right'  => 0,
+						'bottom' => 0,
+						'left'   => 0,
+					),
+					'style'  => 'solid',
+					'color'  => '#000000',
+					'radius' => array(
+						'topLeft'     => 6,
+						'topRight'    => 6,
+						'bottomRight' => 6,
+						'bottomLeft'  => 6,
+					),
+				),
+				'form_padding' => array(
+					'top'    => 15,
+					'right'  => 50,
+					'bottom' => 15,
+					'left'   => 50,
+				),
+				'form_gap' => 12,
+			),
+
+			'heading' => array(
+				'color'     => '#000000',
+				'typography' => array(
+					'size'       => '25px',
+					'fontWeight' => 700,
 				),
 			),
-			'modal_input_layout'=>  'stack',
-		),
 
-		'form' => array(
-			'form_background' => array(
-				'type'     => 'color',
-				'color'    => '#ffffff',
-				'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
-				'opacity'  => 1,
-				'image'    => array(
-					'url'      => '',
-					'position' => 'center center',
-					'size'     => 'cover',
-					'repeat'   => 'no-repeat',
+			'Input' => array(
+				'color'      => '#000000',
+				'labelcolor' => '#000000',
+				'labeltypography' => array(
+					'size'       => '17px',
+					'fontWeight' => 300,
+				),
+				'background' => '#ffffff',
+				'typography' => array(
+					'size'       => '15px',
+					'fontWeight' => 300,
 				),
 			),
-			'form_border' => array(
-				'width' => array(
-					'top'    => 0,
-					'right'  => 0,
-					'bottom' => 0,
-					'left'   => 0,
-				),
-				'style'  => 'solid',
-				'color'  => '#000000',
-				'radius' => array(
-					'topLeft'     => 6,
-					'topRight'    => 6,
-					'bottomRight' => 6,
-					'bottomLeft'  => 6,
-				),
-			),
-			'form_padding' => array(
-				'top'    => 15,
-				'right'  => 50,
-				'bottom' => 15,
-				'left'   => 50,
-			),
-			'form_gap' => 12,
-		),
 
-		'heading' => array(
-			'color'     => '#000000',
-			'typography' => array(
-				'size'       => '25px',
-				'fontWeight' => 700,
-			),
-		),
-
-		'Input' => array(
-			'color'      => '#000000',
-			'labelcolor' => '#000000',
-			'labeltypography' => array(
-				'size'       => '15px',
-				'fontWeight' => 300,
-			),
-			'background' => '#ffffff',
-			'typography' => array(
-				'size'       => '12px',
-				'fontWeight' => 300,
-			),
-		),
-
-		'button' => array(
-			'color'           => '#ffffff',
-			'background'      => '#0B59f4',
-			'hoverBackground' => '#1c21ba',
-			'padding'         => array(
-				'top'    => 6,
-				'right'  => 10,
-				'bottom' => 15,
-				'left'   => 15,
-			),
-			'typography' => array(
-				'size'       => '14px',
-				'fontWeight' => 500,
-			),
-			'border' => array(
-				'width' => array(
-					'top'    => 0,
-					'right'  => 0,
-					'bottom' => 0,
-					'left'   => 0,
-				),
-				'style'  => 'solid',
-				'color'  => '#000000',
-				'radius' => array(
-					'topLeft'     => 5,
-					'topRight'    => 5,
-					'bottomRight' => 5,
-					'bottomLeft'  => 5,
-				),
-			),
-		),
-
-		'rememberme' => array(
-			'color'              => '#000000',
-			'checkboxbackground' => '#ffffff',
-			'typography'         => array(
-				'size'       => '12px',
-				'fontWeight' => 300,
-			),
-		),
-
-		'icon' => array(
-			'color' => '#111111',
-			'size'  => '20px',
-			'icon_position' => 'with-label'
-		),
-
-		'header' => array(
 			'button' => array(
 				'color'           => '#ffffff',
 				'background'      => '#0B59f4',
 				'hoverBackground' => '#1c21ba',
 				'padding'         => array(
-					'top'    => 8,
-					'right'  => 12,
-					'bottom' => 8,
-					'left'   => 12,
+					'top'    => 6,
+					'right'  => 10,
+					'bottom' => 15,
+					'left'   => 15,
 				),
 				'typography' => array(
 					'size'       => '14px',
@@ -197,39 +149,96 @@ class THLogin_Defaults {
 					),
 				),
 			),
-			'cancel_button' => array(
-				'color'           => '#f31212',
-				'background'      => '#E6e6e6',
-				'hoverBackground' => '#9a9a9e',
-				'padding'         => array(
-					'top'    => 3,
-					'right'  => 3,
-					'bottom' => 3,
-					'left'   => 3,
-				),
-				'typography' => array(
+
+			'rememberme' => array(
+				'color'              => '#000000',
+				'checkboxbackground' => '#ffffff',
+				'typography'         => array(
 					'size'       => '14px',
-					'fontWeight' => 500,
+					'fontWeight' => 300,
 				),
-				'border' => array(
-					'width' => array(
-						'top'    => 0,
-						'right'  => 0,
-						'bottom' => 0,
-						'left'   => 0,
+			),
+
+			'icon' => array(
+				'color' => '#111111',
+				'size'  => '25px',
+				'icon_position' => 'with-label'
+			),
+
+			'header' => array(
+				'showButtons'=> true, 
+				'loginText'=> 'Login',
+				'registerText'=> 'Register',
+				'button' => array(
+					'color'           => '#ffffff',
+					'background'      => '#0B59f4',
+					'hoverBackground' => '#1c21ba',
+					'padding'         => array(
+						'top'    => 8,
+						'right'  => 12,
+						'bottom' => 8,
+						'left'   => 12,
 					),
-					'style'  => 'solid',
-					'color'  => '#000000',
-					'radius' => array(
-						'topLeft'     => 20,
-						'topRight'    => 20,
-						'bottomRight' => 20,
-						'bottomLeft'  => 20,
+					'typography' => array(
+						'size'       => '14px',
+						'fontWeight' => 500,
+					),
+					'border' => array(
+						'width' => array(
+							'top'    => 0,
+							'right'  => 0,
+							'bottom' => 0,
+							'left'   => 0,
+						),
+						'style'  => 'solid',
+						'color'  => '#000000',
+						'radius' => array(
+							'topLeft'     => 5,
+							'topRight'    => 5,
+							'bottomRight' => 5,
+							'bottomLeft'  => 5,
+						),
+					),
+				),
+				'cancel_button' => array(
+					'color'           => '#f31212',
+					'background'      => '#E6e6e6',
+					'hoverBackground' => '#9a9a9e',
+					'padding'         => array(
+						'top'    => 3,
+						'right'  => 3,
+						'bottom' => 3,
+						'left'   => 3,
+					),
+					'typography' => array(
+						'size'       => '14px',
+						'fontWeight' => 500,
+					),
+					'border' => array(
+						'width' => array(
+							'top'    => 0,
+							'right'  => 0,
+							'bottom' => 0,
+							'left'   => 0,
+						),
+						'style'  => 'solid',
+						'color'  => '#000000',
+						'radius' => array(
+							'topLeft'     => 20,
+							'topRight'    => 20,
+							'bottomRight' => 20,
+							'bottomLeft'  => 20,
+						),
 					),
 				),
 			),
-		),
-	    ); 
+
+			'submitButton' => array(
+				'login'=>'login',
+				'register'=>'register',
+				'forgot_password'=> 'reset',
+	    	),
+		);
 	}
 
 	public static function form_fields() {

@@ -83,7 +83,10 @@ class THLogin_Frontend {
 		if ( ( $general_settings['plugin_status'] ?? 'enabled' ) === 'disabled' ) {
 			return;
 		}
-		require_once THLOGIN_PATH . 'templates/modal-wrapper.php';
+		require_once THLOGIN_PATH . 'templates/class-thlogin-modal-wrapper.php';
+		$modal = new THLogin_Modal_Wrapper();
+		$modal->render();
+
 	}
 
 	public function handle_wp_login_redirect() {

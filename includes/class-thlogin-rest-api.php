@@ -875,10 +875,10 @@ class THLogin_REST_API {
 
 		$email_settings    = $security_settings['email_verification'] ?? [];
 
-		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? 'TH Login' );
+		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? __( 'TH Login', 'th-login' ) );
 		$from_email    = sanitize_email( $email_settings['from_email'] ?? get_bloginfo( 'admin_email' ) );
-		$email_subject = sanitize_text_field( $email_settings['email_subject'] ?? 'Verify your email' );
-		$email_content = wp_kses_post( $email_settings['email_content'] ?? 'Click the following link to verify your email: {verification_link}' );
+		$email_subject = sanitize_text_field( $email_settings['email_subject'] ?? __( 'Verify your email', 'th-login' ) );
+		$email_content = wp_kses_post( $email_settings['email_content'] ?? __( 'Click the following link to verify your email: {verification_link}', 'th-login' ) );
 
 		// Replace placeholder.
 		$email_content = str_replace( '{verification_link}', esc_url( $verification_link ), $email_content );

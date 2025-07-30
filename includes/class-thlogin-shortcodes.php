@@ -94,7 +94,10 @@ class THLogin_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require THLOGIN_PATH . 'templates/form-login.php';
+		require_once THLOGIN_PATH . 'templates/class-thlogin-login-form.php';
+
+		$form = new THLogin_Login_Form();
+		echo $form->render();
 		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
 
@@ -102,7 +105,10 @@ class THLogin_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require THLOGIN_PATH . 'templates/form-register.php';
+		require_once THLOGIN_PATH . 'templates/class-thlogin-register-form.php';
+		echo $form->render();
+        echo $register_form->render();
+
 		$form_html = ob_get_clean();
 
 		// 1. Remove inline style="display: none;" from register form wrapper
@@ -118,7 +124,11 @@ class THLogin_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require THLOGIN_PATH . 'templates/form-forgot-password.php';
+		require_once THLOGIN_PATH . 'templates/class-thlogin-forgot-password-form.php';
+
+		$forgot_form = new THLogin_Forgot_Password_Form();
+		echo $forgot_form->render();
+
 		$form_html = ob_get_clean();
 
 		// 1. Remove inline "display: none;" from forgot password form
@@ -206,7 +216,10 @@ class THLogin_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require THLOGIN_PATH . 'templates/modal-wrapper.php';
+		require_once THLOGIN_PATH . 'templates/class-thlogin-modal-wrapper.php';
+		$modal = new THLogin_Modal_Wrapper();
+		$modal->render();
+
 		$output = ob_get_clean();
 
 		// Styles to force popup visible and highlight active toggle
@@ -280,7 +293,10 @@ class THLogin_Shortcodes {
 		$this->enqueue_shortcode_assets();
 
 		ob_start();
-		require THLOGIN_PATH . 'templates/modal-wrapper.php'; // Reuse the popup template
+		require_once THLOGIN_PATH . 'templates/class-thlogin-modal-wrapper.php';
+		$modal = new THLogin_Modal_Wrapper();
+		$modal->render();
+
 		$output = ob_get_clean();
 
 		// 1. Remove popup-specific classes/IDs/styles

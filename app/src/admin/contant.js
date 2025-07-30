@@ -265,9 +265,9 @@ export  const design = {
   Input:{
     color:"#000000",
     labelcolor:"#000000",
-    labeltypography:{size: "15px", fontWeight: 300},
+    labeltypography:{size: "17px", fontWeight: 300},
     background:"#ffffff",
-    typography:{size: "12px", fontWeight: 300}
+    typography:{size: "15px", fontWeight: 300}
   },
   button:{
     color:"#ffffff",
@@ -285,14 +285,17 @@ export  const design = {
   rememberme:{
     color:"#000000",
     checkboxbackground:"#ffffff",
-    typography:{size: "12px",fontWeight: 300},
+    typography:{size: "14px",fontWeight: 300},
   },
   icon:{
     color:"#111111",
-    size:"20px",
+    size:"25px",
     icon_position: "with-label"
   },
   header:{
+    showButtons: true, 
+    loginText: "Login",
+    registerText: "Register",
     button:{
       color:"#ffffff",
       background:"#0B59f4",
@@ -319,6 +322,11 @@ export  const design = {
         radius: { topLeft: 20, topRight: 20, bottomRight: 20, bottomLeft: 20}
       },
     }
+  },
+  submitButton: {
+    login: "Login",
+    register: "Register",
+    forgot_password: "Reset"
   }
 };
 
@@ -402,6 +410,11 @@ export const tabs = [
 export const tabdeisgn = [
   { key: "design", label: __("Design", "th-login") },
   { key: "preview", label: __("Preview", "th-login") },
+]
+
+export const tabicon = [
+  { key: "with-label", label: __("With Label", "th-login") },
+  { key: "inside-input", label: __("Inside Input", "th-login") },
 ]
 
 export const layoutOptions = [

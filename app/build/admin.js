@@ -8732,8 +8732,14 @@ var InteractiveButton = function InteractiveButton(_ref2) {
     }
   }, children);
 };
+var decodeEntities = function decodeEntities(html) {
+  var txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+};
 var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
   var base = _ref3.base,
+    terms = _ref3.terms,
     children = _ref3.children;
   var checkboxStyle = {
     accentColor: base.checkboxbackground,
@@ -8748,6 +8754,40 @@ var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
     fontWeight: base.typography.fontWeight,
     cursor: 'pointer'
   };
+
+  // Decode HTML entities in the label text first
+  var decodedLabel = decodeEntities(children);
+  if (terms) {
+    return /*#__PURE__*/React.createElement("label", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        cursor: 'pointer'
+      }
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      style: checkboxStyle
+    }), /*#__PURE__*/React.createElement("span", {
+      style: labelStyle
+    }, decodedLabel.split(/(\[.*?\])/).map(function (part, i) {
+      if (part.startsWith('[') && part.endsWith(']')) {
+        var term = part.slice(1, -1);
+        return /*#__PURE__*/React.createElement("a", {
+          key: i,
+          href: "#",
+          style: {
+            color: base.linkColor || '#0073aa',
+            textDecoration: 'none'
+          },
+          onClick: function onClick(e) {
+            return e.preventDefault();
+          }
+        }, term);
+      }
+      return part;
+    })));
+  }
   return /*#__PURE__*/React.createElement("label", {
     style: {
       display: "flex",
@@ -8760,7 +8800,7 @@ var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
     style: checkboxStyle
   }), /*#__PURE__*/React.createElement("span", {
     style: labelStyle
-  }, children));
+  }, decodedLabel));
 };
 
 //login-loader
@@ -8964,6 +9004,13 @@ var DesignEditor = function DesignEditor(_ref5) {
         typography: settings.design.rememberme.typography
       }
     };
+    var termsProps = {
+      base: {
+        color: settings.design.term.color,
+        linkColor: settings.design.term.link,
+        typography: settings.design.term.typography // Using same typography as remember me
+      }
+    };
     var renderInputs = function renderInputs(fields) {
       return fields.filter(function (field) {
         return field.show !== false;
@@ -8988,7 +9035,9 @@ var DesignEditor = function DesignEditor(_ref5) {
           style: {
             width: '100%'
           }
-        }, field.type === 'checkbox' ? /*#__PURE__*/React.createElement(InteractiveCheckbox, checkboxProps, field.label) : layout === 'floating' ? /*#__PURE__*/React.createElement("div", {
+        }, field.type === 'checkbox' ? field.id === 'terms_and_conditions' ? /*#__PURE__*/React.createElement(InteractiveCheckbox, _extends({}, termsProps, {
+          terms: true
+        }), field.label) : /*#__PURE__*/React.createElement(InteractiveCheckbox, checkboxProps, field.label) : layout === 'floating' ? /*#__PURE__*/React.createElement("div", {
           className: "floating-wrapper layout-floating",
           style: {
             position: 'relative'
@@ -9467,6 +9516,56 @@ var DesignEditor = function DesignEditor(_ref5) {
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terms and Condition", "th-login"),
+    defaultOpen: false
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-heading-settings"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "color",
+    className: "th-color-input",
+    value: settings.design.term.color,
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["term", "color"], e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Link Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "color",
+    className: "th-color-input",
+    value: settings.design.term.link,
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["term", "link"], e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    className: "th-number-input",
+    value: parseInt(settings.design.term.typography.size),
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["term", "typography", "size"], "".concat(e.target.value, "px"));
+    },
+    min: 1
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-select-wrapper modern-sleect-heaidng"
+  }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    value: settings.design.term.typography.fontWeight,
+    onChange: function onChange(value) {
+      return handleSettingChange("design", ["term", "typography", "fontWeight"], value);
+    },
+    options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
+  }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remember Me", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
@@ -9481,17 +9580,6 @@ var DesignEditor = function DesignEditor(_ref5) {
     value: settings.design.rememberme.color,
     onChange: function onChange(e) {
       return handleSettingChange("design", ["rememberme", "color"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Checkbox Color", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.rememberme.checkboxbackground,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["rememberme", "checkboxbackground"], e.target.value);
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row"
@@ -10686,7 +10774,12 @@ var SortableFieldItem = function SortableFieldItem(_ref2) {
     className: "field-drag-handle"
   }, attributes, listeners), /*#__PURE__*/React.createElement("span", {
     className: "dashicons dashicons-move"
-  })), /*#__PURE__*/React.createElement("div", {
+  })), field.id === 'terms_and_conditions' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "field-label",
+    dangerouslySetInnerHTML: {
+      __html: 'Terms & Condition'
+    }
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "selected-icon",
     dangerouslySetInnerHTML: {
       __html: _icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS[field.icon] || ""
@@ -10696,7 +10789,7 @@ var SortableFieldItem = function SortableFieldItem(_ref2) {
     dangerouslySetInnerHTML: {
       __html: field.label || field.placeholder
     }
-  }), field.predefined ? /*#__PURE__*/React.createElement("span", {
+  })), field.predefined ? /*#__PURE__*/React.createElement("span", {
     className: "field-action-icon lock",
     title: "Predefined field (locked)"
   }, /*#__PURE__*/React.createElement("span", {
@@ -10816,6 +10909,11 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       }, TAB_KEYS[key]);
     }));
   };
+  var decodeEntities = function decodeEntities(html) {
+    var txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "settings-card"
   }, /*#__PURE__*/React.createElement("h2", {
@@ -10884,15 +10982,24 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "field-editor"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "field-editor-title"
-  }, selectedField.label || selectedField.id), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  }, selectedField.label || selectedField.id), selectedField.type != "checkbox" && selectedField.id != "terms_and_conditions" ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label", "th-login"),
-    value: selectedField.label,
+    value: decodeEntities(selectedField.label),
     onChange: function onChange(val) {
       return handleFieldChange("label", val);
     }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  }) : /*#__PURE__*/React.createElement("div", {
+    className: "terms-conditions-editor"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms Text", "th-login"),
+    value: decodeEntities(selectedField.label) || "I agree to the [Terms] & [Conditions]",
+    onChange: function onChange(val) {
+      return handleFieldChange("label", val);
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wrap linkable text in [square brackets]", "th-login")
+  })), selectedField.id !== "terms_and_conditions" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Placeholder", "th-login"),
@@ -10900,7 +11007,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     onChange: function onChange(val) {
       return handleFieldChange("placeholder", val);
     }
-  }), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  })), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "th-login"),
@@ -10913,11 +11020,53 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "th-login"),
-    value: selectedField.error_message || "",
+    value: decodeEntities(selectedField.error_message) || "",
     onChange: function onChange(val) {
       return handleFieldChange("error_message", val);
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && selectedField.label && /*#__PURE__*/React.createElement("div", {
+    className: "terms-preview",
+    style: {
+      padding: '12px',
+      backgroundColor: '#f6f7f7',
+      borderRadius: '4px',
+      gridColumn: '1 / -1'
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginBottom: '8px',
+      fontSize: '13px',
+      color: '#757575'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Live Preview:", "th-login")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: '14px'
+    }
+  }, decodeEntities(selectedField.label).split(/(\[.*?\])/).map(function (part, i) {
+    if (part.startsWith('[') && part.endsWith(']')) {
+      var _selectedField$links;
+      var term = part.slice(1, -1);
+      var url = ((_selectedField$links = selectedField.links) === null || _selectedField$links === void 0 ? void 0 : _selectedField$links[term]) || '#';
+      return /*#__PURE__*/React.createElement("a", {
+        key: i,
+        href: url,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        style: {
+          color: '#007cba',
+          textDecoration: 'none'
+        }
+      }, term);
+    }
+    return part;
+  })), decodeEntities(selectedField.label).includes('[') && !selectedField.links && /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: '8px',
+      fontSize: '12px',
+      color: '#d63638',
+      fontStyle: 'italic'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Don't forget to set URLs for each bracketed term above", "th-login"))), selectedField.id !== "terms_and_conditions" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "thl-icon-picker"
   }, /*#__PURE__*/React.createElement("label", {
     className: "components-base-control__label"
@@ -10952,7 +11101,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
         __html: _icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS[key]
       }
     });
-  }))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  })))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "th-login"),
@@ -12605,14 +12754,14 @@ var form_fields = {
     predefined: false
   }, {
     id: 'terms_and_conditions',
-    label: 'I agree to the Terms & Conditions',
+    label: '[I agree to the Terms & Conditions.]',
     name: 'terms_and_conditions',
     type: 'checkbox',
     required: true,
     icon: '',
     show: true,
     error_message: 'You must agree to the Terms & Conditions.',
-    predefined: false,
+    predefined: true,
     link: ""
   }, {
     id: 'honeypot',
@@ -12757,6 +12906,14 @@ var design = {
   rememberme: {
     color: "#000000",
     checkboxbackground: "#ffffff",
+    typography: {
+      size: "14px",
+      fontWeight: 300
+    }
+  },
+  term: {
+    color: "#000000",
+    link: "#007cba ",
     typography: {
       size: "14px",
       fontWeight: 300

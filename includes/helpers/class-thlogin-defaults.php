@@ -165,6 +165,16 @@ class THLogin_Defaults {
 				),
 			),
 
+			'term' => array(
+				'color' => '#000000',
+				'link'  => '#007cba ',
+				'checkboxbackground' => '#ffffff',
+				'typography'         => array(
+					'size'       => '14px',
+					'fontWeight' => 300,
+				),
+			),
+
 			'icon' => array(
 				'color' => '#111111',
 				'size'  => '25px',
@@ -361,15 +371,16 @@ class THLogin_Defaults {
 			),
 			array(
 				'id'            => 'terms_and_conditions',
-				'label'         => esc_html__( 'I agree to the Terms & Conditions', 'th-login' ),
+				'label'         => esc_html__( '[I agree to the Terms & Conditions.]', 'th-login' ),
 				'name'          => 'terms_and_conditions',
 				'type'          => 'checkbox',
 				'required'      => true,
 				'icon'          => '',
 				'show'          => true,
 				'error_message' => esc_html__( 'You must agree to the Terms & Conditions.', 'th-login' ),
-				'predefined'    => false,
+				'predefined'    => true,
 				'link'          => "",
+				'link'          => '',
 			),
 			array(
 				'id'            => 'honeypot',
@@ -397,7 +408,7 @@ class THLogin_Defaults {
 				'predefined'    => true,
 			),
 		),
-	    ); // ← Replace with actual defaults
+	    ); 
 	}
 
 	public static function display_triggers() {

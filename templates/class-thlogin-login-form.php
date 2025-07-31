@@ -51,8 +51,7 @@ class THLogin_Login_Form {
 
         if (!empty($security['honeypot_enabled'])) {
             echo '<div class="thlogin-honeypot-field" style="display: none;">';
-            echo '<label for="thlogin_hp">' . esc_html__('Leave this field empty', 'th-login') . '</label>';
-            echo '<input type="text" name="thlogin_hp" id="thlogin_hp" autocomplete="off" />';
+                echo '<input type="text" name="thlogin_hp" id="thlogin_hp" autocomplete="off" />';
             echo '</div>';
         }
 

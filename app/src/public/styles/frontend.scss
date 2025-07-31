@@ -486,3 +486,7 @@ body.thlogin-modal-open {
 .thlogin-honeypot-field, .thlogin-form-field--honeypot{
   display:none;
 }
+
+.thlogin-form-field--terms a{
+    text-decoration: none !important;
+}

@@ -61,8 +61,13 @@ const InteractiveButton = ({ base, hover, children }) => {
     </button>
   );
 };
+const decodeEntities = (html) => {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+};
 
-const InteractiveCheckbox = ({ base, children }) => {
+const InteractiveCheckbox = ({ base, terms, children }) => {
   const checkboxStyle = {
     accentColor: base.checkboxbackground,
     marginRight: '5px',
@@ -78,10 +83,42 @@ const InteractiveCheckbox = ({ base, children }) => {
     cursor: 'pointer',
   };
 
+  // Decode HTML entities in the label text first
+  const decodedLabel = decodeEntities(children);
+
+  if (terms) {
+    return (
+      <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: 'pointer' }}>
+        <input type="checkbox" style={checkboxStyle} />
+        <span style={labelStyle}>
+          {decodedLabel.split(/(\[.*?\])/).map((part, i) => {
+            if (part.startsWith('[') && part.endsWith(']')) {
+              const term = part.slice(1, -1);
+              return (
+                <a 
+                  key={i} 
+                  href="#" 
+                  style={{ 
+                    color: base.linkColor || '#0073aa',
+                    textDecoration: 'none'
+                  }}
+                  onClick={(e) => e.preventDefault()}
+                >
+                  {term}
+                </a>
+              );
+            }
+            return part;
+          })}
+        </span>
+      </label>
+    );
+  }
+
   return (
     <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: 'pointer' }}>
       <input type="checkbox" style={checkboxStyle} />
-      <span style={labelStyle}>{children}</span>
+      <span style={labelStyle}>{decodedLabel}</span>
     </label>
   );
 };
@@ -285,6 +322,14 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 			},
 		};
 
+		const termsProps = {
+			base: {
+				color: settings.design.term.color,
+				linkColor: settings.design.term.link,
+				typography: settings.design.term.typography, // Using same typography as remember me
+			},
+		};
+
 		const renderInputs = (fields) =>
 			fields
 			.filter((field) => field.show !== false)
@@ -312,77 +357,43 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 					style={{ width: '100%' }}
 				>
 					{field.type === 'checkbox' ? (
-						<InteractiveCheckbox {...checkboxProps}>{field.label}</InteractiveCheckbox>
-					) : layout === 'floating' ? (
-						<div className="floating-wrapper layout-floating" style={{ position: 'relative' }}>
-							{iconSpan}
-							<InteractiveInput
-								type={field.type || 'text'}
-								placeholder=" "
-								base={inputProps.base}
-								active={inputProps.active}
-								className="floating-input"
-								style={showIconInside ? { paddingLeft: '30px' } : {}}
-							/>
-							<label className="floating-label" style={{background:inputProps.base.backgroundColor,fontSize: inputBase.	labeltypography.size,fontWeight: inputBase.labeltypography.fontWeight,color: inputBase.labelcolor || '#333', }}>{field.label}</label>
-						</div>
-					) : layout === 'placehold' ? (
-						<div className="placehold-wrapper layout-placehold" style={{ position: 'relative' }}>
-							{iconSpan}
-							<InteractiveInput
-								type={field.type || 'text'}
-								placeholder=" "
-								base={inputProps.base}
-								active={inputProps.active}
-								className="floating-input"
-								style={showIconInside ? { paddingLeft: '30px' } : {}}
-							/>
-							<label
-								className="placehold-label"
-								style={{
-									background: inputProps.base.backgroundColor,
-									fontSize: inputBase.labeltypography.size,
-									fontWeight: inputBase.labeltypography.fontWeight,
-									color: inputBase.labelcolor || '#333',
-								}}
-							>
-								{field.label}
-							</label>
-						</div>
-					) : (
-						<>
-							{IconPosition === 'with-label' && (Icon || field.label) ? (
-								<div className="icon-label-wrapper">
-									{Icon && (
-										<span
-											className="icon-with-label"
-											dangerouslySetInnerHTML={{ __html: THL_ICONS[field.icon] }}
-											style={{
-												color: settings.design.icon.color,
-												width: settings.design.icon.size,
-											}}
-										/>
-									)}
-									{field.label && (
-										<label
-											className="inline-stack-label"
-											style={{
-												fontSize: inputBase.labeltypography.size,
-												fontWeight: inputBase.labeltypography.fontWeight,
-												color: inputBase.labelcolor || '#333',
-												margin: 0,
-											}}
-										>
-											{field.label}
-										</label>
-									)}
-								</div>
-							) : field.label && (
+						field.id === 'terms_and_conditions' ? (
+							<InteractiveCheckbox {...termsProps} terms={true}>
+							{field.label}
+							</InteractiveCheckbox>
+						) : (
+							<InteractiveCheckbox {...checkboxProps}>
+							{field.label}
+							</InteractiveCheckbox>
+						)
+						) : layout === 'floating' ? (
+							<div className="floating-wrapper layout-floating" style={{ position: 'relative' }}>
+								{iconSpan}
+								<InteractiveInput
+									type={field.type || 'text'}
+									placeholder=" "
+									base={inputProps.base}
+									active={inputProps.active}
+									className="floating-input"
+									style={showIconInside ? { paddingLeft: '30px' } : {}}
+								/>
+								<label className="floating-label" style={{background:inputProps.base.backgroundColor,fontSize: inputBase.	labeltypography.size,fontWeight: inputBase.labeltypography.fontWeight,color: inputBase.labelcolor || '#333', }}>{field.label}</label>
+							</div>
+						) : layout === 'placehold' ? (
+							<div className="placehold-wrapper layout-placehold" style={{ position: 'relative' }}>
+								{iconSpan}
+								<InteractiveInput
+									type={field.type || 'text'}
+									placeholder=" "
+									base={inputProps.base}
+									active={inputProps.active}
+									className="floating-input"
+									style={showIconInside ? { paddingLeft: '30px' } : {}}
+								/>
 								<label
-									className="inline-stack-label"
+									className="placehold-label"
 									style={{
-										display: 'block',
-										marginBottom: layout === 'stack' ? '6px' : '0',
+										background: inputProps.base.backgroundColor,
 										fontSize: inputBase.labeltypography.size,
 										fontWeight: inputBase.labeltypography.fontWeight,
 										color: inputBase.labelcolor || '#333',
@@ -390,19 +401,61 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								>
 									{field.label}
 								</label>
-							)}
-
-							<div style={{ position: 'relative' }}>
-								{iconSpan}
-								<InteractiveInput
-									type={field.type || 'text'}
-									placeholder={field.placeholder || ''}
-									base={inputProps.base}
-									active={inputProps.active}
-								/>
 							</div>
-						</>
-					)}
+						) : (
+							<>
+								{IconPosition === 'with-label' && (Icon || field.label) ? (
+									<div className="icon-label-wrapper">
+										{Icon && (
+											<span
+												className="icon-with-label"
+												dangerouslySetInnerHTML={{ __html: THL_ICONS[field.icon] }}
+												style={{
+													color: settings.design.icon.color,
+													width: settings.design.icon.size,
+												}}
+											/>
+										)}
+										{field.label && (
+											<label
+												className="inline-stack-label"
+												style={{
+													fontSize: inputBase.labeltypography.size,
+													fontWeight: inputBase.labeltypography.fontWeight,
+													color: inputBase.labelcolor || '#333',
+													margin: 0,
+												}}
+											>
+												{field.label}
+											</label>
+										)}
+									</div>
+								) : field.label && (
+									<label
+										className="inline-stack-label"
+										style={{
+											display: 'block',
+											marginBottom: layout === 'stack' ? '6px' : '0',
+											fontSize: inputBase.labeltypography.size,
+											fontWeight: inputBase.labeltypography.fontWeight,
+											color: inputBase.labelcolor || '#333',
+										}}
+									>
+										{field.label}
+									</label>
+								)}
+
+								<div style={{ position: 'relative' }}>
+									{iconSpan}
+									<InteractiveInput
+										type={field.type || 'text'}
+										placeholder={field.placeholder || ''}
+										base={inputProps.base}
+										active={inputProps.active}
+									/>
+								</div>
+							</>
+						)}
 				</div>
 			);
 		});
@@ -870,6 +923,62 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									</div>
 								</AccordionSection>
 
+								<AccordionSection title={__("Terms and Condition", "th-login")} defaultOpen={false}>
+									<div className="th-heading-settings">
+										<div className="th-setting-row">
+											<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+											<input
+												type="color"
+												className="th-color-input"
+												value={settings.design.term.color}
+												onChange={(e) =>
+												handleSettingChange("design", ["term", "color"], e.target.value)
+												}
+											/>
+										</div>
+
+										<div className="th-setting-row">
+											<label className="th-setting-label">{__("Link Color", "th-login")}</label>
+											<input
+												type="color"
+												className="th-color-input"
+												value={settings.design.term.link}
+												onChange={(e) =>
+												handleSettingChange("design", ["term", "link"], e.target.value)
+												}
+											/>
+										</div>
+
+										<div className="th-setting-row">
+											<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+											<input
+												type="number"
+												className="th-number-input"
+												value={parseInt(settings.design.term.typography.size)}
+												onChange={(e) =>
+												handleSettingChange("design", ["term", "typography", "size"], `${e.target.value}px`)
+												}
+												min={1}
+											/>
+											</div>
+
+											<div className="th-setting-row">
+											<div className="th-select-wrapper modern-sleect-heaidng">
+												<CustomSelectControl
+												label={__("Font Weight", "th-login")}
+												value={settings.design.term.typography.fontWeight}
+												onChange={(value) =>
+													handleSettingChange("design", ["term", "typography", "fontWeight"], value)
+												}
+												options={fontWeightOptions}
+												/>
+											</div>
+										</div>
+									</div>
+
+
+								</AccordionSection>
+
 								<AccordionSection title={__("Remember Me", "th-login")} defaultOpen={false}>
 									<div className="th-heading-settings">
 										<div className="th-setting-row">
@@ -882,19 +991,21 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 											handleSettingChange("design", ["rememberme", "color"], e.target.value)
 											}
 										/>
+
+										
 										</div>
 
-										<div className="th-setting-row">
-										<label className="th-setting-label">{__("Checkbox Color", "th-login")}</label>
-										<input
-											type="color"
-											className="th-color-input"
-											value={settings.design.rememberme.checkboxbackground}
-											onChange={(e) =>
-											handleSettingChange("design", ["rememberme", "checkboxbackground"], e.target.value)
-											}
-										/>
-										</div>
+										{/* <div className="th-setting-row">
+											<label className="th-setting-label">{__("Checkbox Color", "th-login")}</label>
+											<input
+												type="color"
+												className="th-color-input"
+												value={settings.design.rememberme.checkboxbackground}
+												onChange={(e) =>
+												handleSettingChange("design", ["rememberme", "checkboxbackground"], e.target.value)
+												}
+											/>
+										</div> */}
 
 										<div className="th-setting-row">
 										<label className="th-setting-label">{__("Font Size", "th-login")}</label>

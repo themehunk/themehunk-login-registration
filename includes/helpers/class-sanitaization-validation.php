@@ -145,6 +145,16 @@ class TH_Sanitization_validation {
 			),
 		);
 
+		$sanitized['term'] = array(
+			'color' => $this->sanitize_color_input( $settings['term']['color'] ?? '#000000' ),
+			'link'  => $this->sanitize_color_input( $settings['term']['link'] ?? '#007cba' ),
+			'checkboxbackground' => $this->sanitize_color_input( $settings['term']['checkboxbackground'] ?? '#000000' ),
+			'typography'         => array(
+				'size'       => sanitize_text_field( $settings['term']['typography']['size'] ?? '14px' ),
+				'fontWeight' => intval( $settings['term']['typography']['fontWeight'] ?? 400 ),
+			),
+		);
+
 		$sanitized['icon'] = array(
 			'color' => $this->sanitize_color_input( $settings['icon']['color'] ?? '#111111' ),
 			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '25px' ),
@@ -302,6 +312,7 @@ class TH_Sanitization_validation {
 			'Input_label'            => $settings['Input']['labeltypography']['size'] ?? '',
 			'button'                 => $settings['button']['typography']['size'] ?? '',
 			'rememberme'             => $settings['rememberme']['typography']['size'] ?? '',
+			'term'             => $settings['term']['typography']['size'] ?? '',
 			'icon'                   => $settings['icon']['size'] ?? '',
 			'header_button'          => $settings['header']['button']['typography']['size'] ?? '',
 			'header_cancel_button'   => $settings['header']['cancel_button']['typography']['size'] ?? '',
@@ -338,6 +349,8 @@ class TH_Sanitization_validation {
 			'header_cancel_background'   => $settings['header']['cancel_button']['background'] ?? '',
 			'header_cancel_hover_bg'     => $settings['header']['cancel_button']['hoverBackground'] ?? '',
 			'header_cancel_border_color' => $settings['header']['cancel_button']['border']['color'] ?? '',
+			'term_color'             	 => $settings['term']['color'] ?? '',
+			'term_link'              	 => $settings['term']['link'] ?? '',
 		);
 
 		foreach ( $color_fields as $key => $color ) {
@@ -469,6 +482,11 @@ class TH_Sanitization_validation {
 					$sanitized_field['link'] = esc_url_raw( $field['link'] );
 				}
 
+				if ( $sanitized_field['id'] === 'terms_and_conditions' && isset( $field['termsText'] ) ) {
+					$sanitized_field['termsText'] = wp_kses_post( $field['termsText'] );
+				}
+
+
 				$sanitized[ $form_key ][] = $sanitized_field;
 			}
 		}
@@ -564,6 +582,16 @@ class TH_Sanitization_validation {
 						);
 					}
 				}
+
+				if ( $field_id === 'terms_and_conditions' && isset( $field['termsText'] ) ) {
+					if ( strlen( wp_strip_all_tags( $field['termsText'] ) ) < 2 ) {
+						$errors->add(
+							'invalid_terms_text',
+							esc_html__( 'The Terms & Conditions label must be at least 5 characters.', 'th-login' )
+						);
+					}
+				}
+
 			}
 		}
 

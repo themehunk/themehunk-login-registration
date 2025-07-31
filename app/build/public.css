@@ -447,4 +447,8 @@ body.thlogin-modal-open {
   display: none;
 }
 
+.thlogin-form-field--terms a {
+  text-decoration: none !important;
+}
+
 /*# sourceMappingURL=public.css.map*/

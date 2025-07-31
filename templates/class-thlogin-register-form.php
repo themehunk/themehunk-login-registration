@@ -18,7 +18,6 @@ class THLogin_Register_Form {
 
 	public function render() {
 		if ( ! get_option( 'users_can_register' ) ) {
-			echo '<p class="thlogin-error-message">' . esc_html__( 'User registration is currently disabled on this site.', 'th-login' ) . '</p>';
 			return;
 		}
 
@@ -108,13 +107,8 @@ class THLogin_Register_Form {
 			$field_class .= ' thlogin-layout-floating';
 		}
 
-		// Handle terms checkbox separately
 		if ( $type === 'checkbox' && strpos( strtolower( $name ), 'terms' ) !== false ) {
-			echo '<p class="thlogin-form-field thlogin-form-field--terms">';
-			echo '<input type="checkbox" name="' . esc_attr( $name ) . '" id="th-register-' . esc_attr( $id ) . '" value="1" ' . ( $required ? 'required' : '' ) . '>';
-			echo '<label for="th-register-' . esc_attr( $id ) . '">';
-			echo wp_kses_post( $label ?: esc_html__( 'I agree to the Terms & Conditions', 'th-login' ) );
-			echo '</label></p>';
+			$this->render_terms_checkbox( $field );
 			return;
 		}
 
@@ -148,6 +142,27 @@ class THLogin_Register_Form {
 				. ' />';
 			echo '</p>';
 		}
+	}
+
+	protected function render_terms_checkbox( $field ) {
+		$id     = sanitize_key( $field['id'] ?? '' );
+		$name   = sanitize_key( $field['name'] ?? $id );
+		$label  = sanitize_text_field( $field['label'] ?? '' );
+		$required = ! empty( $field['required'] );
+		$link   = ! empty( $field['link'] ) ? esc_url( $field['link'] ) : '#';
+
+		$parsed_text = preg_replace_callback(
+			'/\[(.*?)\]/',
+			function ( $matches ) use ( $link ) {
+				return '<a href="' . esc_url( $link ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $matches[1] ) . '</a>';
+			},
+			$label
+		);
+
+		echo '<p class="thlogin-form-field thlogin-form-field--terms">';
+			echo '<input type="checkbox" name="' . esc_attr( $name ) . '" id="th-register-' . esc_attr( $id ) . '" value="1" ' . ( $required ? 'required' : '' ) . '>';
+			echo '<label for="th-register-' . esc_attr( $id ) . '">' . wp_kses_post( $parsed_text ) . '</label>';
+		echo '</p>';
 	}
 
 	protected function render_recaptcha( $security ) {

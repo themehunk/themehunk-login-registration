@@ -168,15 +168,15 @@ export  const form_fields = {
     },
     {
       id: 'terms_and_conditions',
-      label: 'I agree to the Terms & Conditions',
+      label: '[I agree to the Terms & Conditions.]',
       name: 'terms_and_conditions',
       type: 'checkbox',
       required: true,
       icon: '',
       show: true,
       error_message: 'You must agree to the Terms & Conditions.',
-      predefined:false,
-      link:""
+      predefined:true,
+      link:"",
     },
     {
       id: 'honeypot',
@@ -291,6 +291,11 @@ export  const design = {
   rememberme:{
     color:"#000000",
     checkboxbackground:"#ffffff",
+    typography:{size: "14px",fontWeight: 300},
+  },
+  term: {
+    color:"#000000",
+    link:"#007cba ",
     typography:{size: "14px",fontWeight: 300},
   },
   icon:{

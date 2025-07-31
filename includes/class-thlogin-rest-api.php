@@ -603,7 +603,6 @@ class THLogin_REST_API {
 		$settings = get_option( 'thlogin_settings', [] );
 		$security_settings = $settings['security'] ?? [];
 
-
 		if ( ! empty( $security_settings['honeypot_enabled'] ) ) {
 			foreach ( $params as $key => $value ) {
 				if ( stripos( $key, 'thlogin_hp' ) === 0 && ! empty( $value ) ) {

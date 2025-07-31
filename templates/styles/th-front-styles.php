@@ -130,11 +130,35 @@ class THLogin_Style_Renderer {
                 cursor: pointer;
             }
 
-            .thlogin-form-field--checkbox label,
-            .thlogin-form-field--terms label {
+            .thlogin-form-field--checkbox label {
                 color: <?php echo esc_attr( $d['rememberme']['color'] ); ?>;
                 font-size: <?php echo esc_attr( $d['rememberme']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['rememberme']['typography']['fontWeight'] ); ?>;
+                cursor: pointer;
+            }
+
+            .thlogin-button {
+                color: <?php echo esc_attr( $d['button']['color'] ); ?>;
+                background-color: <?php echo esc_attr( $d['button']['background'] ); ?>;
+                font-size: <?php echo esc_attr( $d['button']['typography']['size'] ); ?>;
+                font-weight: <?php echo esc_attr( $d['button']['typography']['fontWeight'] ); ?>;
+                padding: <?php echo esc_attr( $d['button']['padding']['top'] ); ?>px <?php echo esc_attr( $d['button']['padding']['right'] ); ?>px;
+                <?php echo esc_attr( $this->get_border_style( $d['button']['border'] ) ); ?>
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .thlogin-form-field--terms label {
+                color: <?php echo esc_attr( $d['term']['color'] ); ?>;
+                font-size: <?php echo esc_attr( $d['term']['typography']['size'] ); ?>;
+                font-weight: <?php echo esc_attr( $d['term']['typography']['fontWeight'] ); ?>;
+                cursor: pointer;
+            }
+
+            .thlogin-form-field--terms a {
+                color: <?php echo esc_attr( $d['term']['link'] ); ?>;
+                font-size: <?php echo esc_attr( $d['term']['typography']['size'] ); ?>;
+                font-weight: <?php echo esc_attr( $d['term']['typography']['fontWeight'] ); ?>;
                 cursor: pointer;
             }
 

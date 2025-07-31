@@ -4629,4 +4629,8 @@ input[type=range]::-webkit-slider-thumb {
   pointer-events: none;
 }
 
+.shortcode-copy-wrap svg {
+  width: 20px;
+}
+
 /*# sourceMappingURL=admin.css.map*/

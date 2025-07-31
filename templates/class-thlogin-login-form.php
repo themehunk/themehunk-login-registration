@@ -82,8 +82,6 @@ class THLogin_Login_Form {
         
         echo '</div>';
 
-        $this->enqueue_recaptcha_script( $security['recaptcha']['type'] );
-
     }
 
     protected function render_field($field, $design) {
@@ -175,19 +173,6 @@ class THLogin_Login_Form {
             }
         }
     }
-
-    public function enqueue_recaptcha_script( $type = 'v2_checkbox' ) {
-        if ( $type === 'v2_checkbox' ) {
-            wp_enqueue_script(
-                'thlogin-recaptcha-v2',
-                'https://www.google.com/recaptcha/api.js',
-                array(),
-                THLOGIN_VERSION,
-                true
-            );
-        }
-    }
-
 }
 
 // Usage:

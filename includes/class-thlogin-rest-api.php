@@ -507,7 +507,7 @@ class THLogin_REST_API {
 			],
 		], 200 );
 	}
-
+	
 	private function get_redirect_url( $user, $request ) {
 		$settings = get_option( 'thlogin_settings', [] );
 		$general_settings = $settings['general'] ?? [];

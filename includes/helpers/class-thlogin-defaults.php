@@ -40,7 +40,6 @@ class THLogin_Defaults {
 	}
 
 	public static function design() {
-		// move your full `$design_defaults` array here
 		return array(
 			'modal' => array(
 				'modal_background' => array(
@@ -94,32 +93,32 @@ class THLogin_Defaults {
 					),
 				),
 				'form_padding' => array(
-					'top'    => 15,
-					'right'  => 50,
-					'bottom' => 15,
-					'left'   => 50,
+					'top'    => 10,
+					'right'  => 35,
+					'bottom' => 30,
+					'left'   => 35,
 				),
-				'form_gap' => 12,
+				'form_gap' => 18,
 			),
 
 			'heading' => array(
 				'color'     => '#000000',
 				'typography' => array(
 					'size'       => '25px',
-					'fontWeight' => 700,
+					'fontWeight' => 500,
 				),
 			),
 
 			'Input' => array(
-				'color'      => '#000000',
-				'labelcolor' => '#000000',
+				'color'      => '#8392A5',
+				'labelcolor' => '#262626',
 				'labeltypography' => array(
-					'size'       => '17px',
-					'fontWeight' => 300,
+					'size'       => '16px',
+					'fontWeight' => 500,
 				),
 				'background' => '#ffffff',
 				'typography' => array(
-					'size'       => '15px',
+					'size'       => '14px',
 					'fontWeight' => 300,
 				),
 			),
@@ -129,10 +128,10 @@ class THLogin_Defaults {
 				'background'      => '#0B59f4',
 				'hoverBackground' => '#1c21ba',
 				'padding'         => array(
-					'top'    => 6,
-					'right'  => 10,
-					'bottom' => 15,
-					'left'   => 15,
+					'top'    => 12,
+					'right'  => 12,
+					'bottom' => 12,
+					'left'   => 12,
 				),
 				'typography' => array(
 					'size'       => '14px',
@@ -157,7 +156,7 @@ class THLogin_Defaults {
 			),
 
 			'rememberme' => array(
-				'color'              => '#000000',
+				'color'              => '#8392A5',
 				'checkboxbackground' => '#ffffff',
 				'typography'         => array(
 					'size'       => '14px',
@@ -166,9 +165,8 @@ class THLogin_Defaults {
 			),
 
 			'term' => array(
-				'color' => '#000000',
-				'link'  => '#007cba ',
-				'checkboxbackground' => '#ffffff',
+				'color'              => '#8392A5',
+				'link'               => '#007cba ',
 				'typography'         => array(
 					'size'       => '14px',
 					'fontWeight' => 300,
@@ -176,15 +174,15 @@ class THLogin_Defaults {
 			),
 
 			'icon' => array(
-				'color' => '#111111',
-				'size'  => '25px',
-				'icon_position' => 'with-label'
+				'color'         => '#8392A5',
+				'size'          => '17px',
+				'icon_position' => 'inside-input',
 			),
 
 			'header' => array(
-				'showButtons'=> true, 
-				'loginText'=> 'Login',
-				'registerText'=> 'Register',
+				'showButtons'   => false,
+				'loginText'     => 'Login',
+				'registerText'  => 'Register',
 				'button' => array(
 					'color'           => '#ffffff',
 					'background'      => '#0B59f4',
@@ -250,10 +248,10 @@ class THLogin_Defaults {
 			),
 
 			'submitButton' => array(
-				'login'=>'Login',
-				'register'=>'Register',
-				'forgot_password'=> 'Reset',
-	    	),
+				'login'           => 'Login',
+				'register'        => 'Register',
+				'forgot_password' => 'Reset',
+			),
 		);
 	}
 
@@ -446,28 +444,34 @@ class THLogin_Defaults {
 	public static function security() {
 		// move your full `$security_defaults` array here
 		return array(
-		'brute_force_protection' => array(
-			'enabled'                   => true,
-			'max_attempts'              => 5,
-			'lockout_duration_minutes'  => 30,
-			'auto_ip_blacklist_enabled' => true,
-		),
-		'recaptcha'              => array(
-			'enabled'    => false,
-			'type'       => 'v2_checkbox',
-			'show_on'    => 'all',
-			'site_key'   => '',
-			'secret_key' => '',
-		),
-		'honeypot_enabled'       => true,
-		'email_verification'     => array(
-			'enabled'   => false,
-			'from_name'      => '',
-			'from_email'     => '',
-			'email_subject'  => 'Verify your email',
-			'email_content'  => 'Click the link to verify: {verification_link}',
-		),
-	    ); // ← Replace with actual defaults
+			'brute_force_protection' => array(
+				'enabled'                   => true,
+				'max_attempts'              => 5,
+				'lockout_duration_minutes'  => 30,
+				'auto_ip_blacklist_enabled' => true,
+			),
+			'recaptcha'              => array(
+				'enabled'    => false,
+				'type'       => 'v2_checkbox',
+				'show_on'    => 'all',
+				'site_key'   => '',
+				'secret_key' => '',
+			),
+			'honeypot_enabled'       => true,
+			'email_verification'     => array(
+				'enabled'   => false,
+				'from_name'      => '',
+				'from_email'     => '',
+				'email_subject'  => 'Verify your email',
+				'email_content'  => 'Click the link to verify: {verification_link}',
+			),
+			'session_timeout'=> array(
+				'enabled'=> true,
+				'duration'=> 15,
+				'show_warning'=> true,
+				'warning_duration'=> 60
+			),
+	    ); 
 	}
 
 	public static function integration() {

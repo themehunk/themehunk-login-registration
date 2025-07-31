@@ -257,29 +257,29 @@ export  const design = {
       }
     },
     form_padding :{
-      top:15,
-      left:50,
-      right:50,
-      bottom:15,
+      top:10,
+      left:35,
+      right:35,
+      bottom:30,
     },
-    form_gap:12,
+    form_gap:18,
   }, 
   heading:{
     color:"#000000",
-    typography:{size: "25px", fontWeight: 700}
+    typography:{size: "25px", fontWeight: 500}
   },
   Input:{
-    color:"#000000",
-    labelcolor:"#000000",
-    labeltypography:{size: "17px", fontWeight: 300},
+    color:"#8392A5",
+    labelcolor:"#262626",
+    labeltypography:{size: "16px", fontWeight: 500},
     background:"#ffffff",
-    typography:{size: "15px", fontWeight: 300}
+    typography:{size: "14px", fontWeight: 300}
   },
   button:{
     color:"#ffffff",
     background:"#0B59f4",
     hoverBackground:"#1c21ba",
-    padding:{ top:6, left:15, right:10, bottom:15},
+    padding:{ top:12, left:12, right:12, bottom:12},
     typography:{size: "14px",fontWeight: 500},
     border: {
       width: { top: 0, right: 0, bottom: 0, left: 0 },
@@ -289,22 +289,22 @@ export  const design = {
     },
   },
   rememberme:{
-    color:"#000000",
+    color:"#8392A5",
     checkboxbackground:"#ffffff",
     typography:{size: "14px",fontWeight: 300},
   },
   term: {
-    color:"#000000",
+    color:"#8392A5",
     link:"#007cba ",
     typography:{size: "14px",fontWeight: 300},
   },
   icon:{
-    color:"#111111",
-    size:"25px",
-    icon_position: "with-label"
+    color:"#8392A5",
+    size:"17px",
+    icon_position: "inside-input"
   },
   header:{
-    showButtons: true, 
+    showButtons: false, 
     loginText: "Login",
     registerText: "Register",
     button:{
@@ -407,8 +407,13 @@ export  const security = {
     from_email: '',
     email_subject: 'Verify your email',
     email_content: 'Click the link below to verify your email: {verification_link}'
+  },
+  session_timeout: {
+    enabled: true,
+    duration: 15,
+    show_warning: true,
+    warning_duration: 60
   }
-
 };
 
 //deisgn-settings

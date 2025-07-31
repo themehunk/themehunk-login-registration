@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
         var _thLoginFrontendData$2;
-        var token, tokenField, formType, formData, messagesContainer, requestData, _iterator, _step, _step$value, key, value, endpoint, submitButton, _thLoginFrontendData$3, response, data, _thLoginFrontendData$4, _submitButton, _t, _t2;
+        var token, tokenField, _thLoginFrontendData$3, formType, formData, messagesContainer, requestData, _iterator, _step, _step$value, key, value, endpoint, submitButton, _thLoginFrontendData$4, response, data, _thLoginFrontendData$5, _thLoginFrontendData$6, _submitButton, _t, _t2;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.n) {
             case 0:
@@ -286,6 +286,11 @@ document.addEventListener('DOMContentLoaded', function () {
               _t = _context.v;
               showMessage(form, 'Security verification failed. Please try again.', 'error');
               console.error('reCAPTCHA v3 error:', _t);
+
+              // 🔁 Reset reCAPTCHA v2 on fetch error
+              if (typeof grecaptcha !== 'undefined' && (_thLoginFrontendData$3 = thLoginFrontendData.settings.security) !== null && _thLoginFrontendData$3 !== void 0 && (_thLoginFrontendData$3 = _thLoginFrontendData$3.recaptcha) !== null && _thLoginFrontendData$3 !== void 0 && _thLoginFrontendData$3.enabled && thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox') {
+                grecaptcha.reset();
+              }
               return _context.a(2);
             case 5:
               formType = form.dataset.formType;
@@ -313,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function () {
               if (submitButton) {
                 submitButton.disabled = true;
                 submitButton.dataset.originalText = submitButton.innerHTML;
-                submitButton.innerHTML = "<span class=\"thlogin-spinner\"></span> ".concat(((_thLoginFrontendData$3 = thLoginFrontendData.settings.design) === null || _thLoginFrontendData$3 === void 0 || (_thLoginFrontendData$3 = _thLoginFrontendData$3.buttons) === null || _thLoginFrontendData$3 === void 0 || (_thLoginFrontendData$3 = _thLoginFrontendData$3.primary) === null || _thLoginFrontendData$3 === void 0 ? void 0 : _thLoginFrontendData$3.text_saving) || 'Processing...');
+                submitButton.innerHTML = "<span class=\"thlogin-spinner\"></span> ".concat(((_thLoginFrontendData$4 = thLoginFrontendData.settings.design) === null || _thLoginFrontendData$4 === void 0 || (_thLoginFrontendData$4 = _thLoginFrontendData$4.buttons) === null || _thLoginFrontendData$4 === void 0 || (_thLoginFrontendData$4 = _thLoginFrontendData$4.primary) === null || _thLoginFrontendData$4 === void 0 ? void 0 : _thLoginFrontendData$4.text_saving) || 'Processing...');
               }
               _context.n = 7;
               return fetch(endpoint, {
@@ -349,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
               } else {
                 showMessage(form, data.data.message || 'An error occurred. Please try again.', 'error');
-                if (typeof grecaptcha !== 'undefined' && (_thLoginFrontendData$4 = thLoginFrontendData.settings.security) !== null && _thLoginFrontendData$4 !== void 0 && (_thLoginFrontendData$4 = _thLoginFrontendData$4.recaptcha) !== null && _thLoginFrontendData$4 !== void 0 && _thLoginFrontendData$4.enabled && thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox') {
+                if (typeof grecaptcha !== 'undefined' && (_thLoginFrontendData$5 = thLoginFrontendData.settings.security) !== null && _thLoginFrontendData$5 !== void 0 && (_thLoginFrontendData$5 = _thLoginFrontendData$5.recaptcha) !== null && _thLoginFrontendData$5 !== void 0 && _thLoginFrontendData$5.enabled && thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox') {
                   grecaptcha.reset();
                 }
               }
@@ -360,6 +365,9 @@ document.addEventListener('DOMContentLoaded', function () {
               _t2 = _context.v;
               showMessage(form, 'An unexpected error occurred. Please check your network.', 'error');
               console.error('TH Login: Frontend REST API Error:', _t2);
+              if (typeof grecaptcha !== 'undefined' && (_thLoginFrontendData$6 = thLoginFrontendData.settings.security) !== null && _thLoginFrontendData$6 !== void 0 && (_thLoginFrontendData$6 = _thLoginFrontendData$6.recaptcha) !== null && _thLoginFrontendData$6 !== void 0 && _thLoginFrontendData$6.enabled && thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox') {
+                grecaptcha.reset();
+              }
             case 10:
               _context.p = 10;
               _submitButton = form.querySelector('button[type="submit"]');

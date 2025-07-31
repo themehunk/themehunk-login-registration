@@ -125,27 +125,27 @@ const ToolsSettings = ({
                   {__("Copy or download this JSON to save your settings", "th-login")}
                 </p>
               </div>
-              <div className="setting-control">
+              <div className="setting-control" style={{maxWidth: '230px'}}>
                 <TextareaControl
                   __nextHasNoMarginBottom={true}
                   value={exportedSettings}
                   readOnly
                   rows={10}
-                  className="export-textarea"
+                  className="import-textarea"
                 />
                 <div style={{ display: "flex", gap: "10px", marginTop: "8px" }}>
                   <Button
                     className={`copy-button ${copied ? "copied" : ""}`}
                     onClick={handleCopyToClipboard}
-                    isSmall
                   >
+                     <span className="dashicons dashicons-admin-page" style={{ marginRight: 3 }}></span>
                     {copied ? __("Copied!", "th-login") : __("Copy", "th-login")}
                   </Button>
                   <Button
                     className="copy-button"
                     onClick={handleDownloadJSON}
-                    isSmall
-                  >
+                  > 
+                     <span className="dashicons dashicons-download" style={{ marginRight: 3 }}></span>
                     {__("Download", "th-login")}
                   </Button>
                 </div>
@@ -165,7 +165,7 @@ const ToolsSettings = ({
                 {__("Paste or upload previously exported settings JSON", "th-login")}
               </p>
             </div>
-            <div className="setting-control" style={{maxWidth: '240px'}}>
+            <div className="setting-control" style={{maxWidth: '230px'}}>
               <TextareaControl
                 __nextHasNoMarginBottom={true}
                 value={importSettingsText}
@@ -175,8 +175,7 @@ const ToolsSettings = ({
               />
               <div style={{ display: "flex", gap: "10px", marginTop: "8px" }}>
                 <Button
-                  isSecondary
-                  className="paste-button"
+                  className={`copy-button`}
                   onClick={handlePasteFromClipboard}
                   disabled={!clipboardContent.trim()}
                 >
@@ -185,8 +184,7 @@ const ToolsSettings = ({
                 </Button>
 
                 <Button
-                  isSecondary
-                  className="paste-button"
+                  className={`copy-button`}
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Dashicon icon="upload" />

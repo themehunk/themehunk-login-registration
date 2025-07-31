@@ -58,6 +58,23 @@ class THLogin_Frontend {
 			)
 		);
 
+		wp_enqueue_script(
+			'thlogin-session-timeout',
+			THLOGIN_URL . 'assets/js/session-timeout.js',
+			array( 'jquery' ),
+			THLOGIN_VERSION,
+			true
+		);
+
+		wp_localize_script( 'thlogin-session-timeout', 'thloginSessionSettings', array(
+			'enabled'           => $settings['security']['session_timeout']['enabled'] ?? false,
+			'duration'          => intval( $settings['security']['session_timeout']['duration'] ?? 15 ) * 60, // in seconds
+			'show_warning'      => $settings['security']['session_timeout']['show_warning'] ?? false,
+			'warning_duration'  => intval( $settings['security']['session_timeout']['warning_duration'] ?? 60 ),
+			'logout_url'        => wp_logout_url(), // default WP logout
+			'is_logged_in'      => is_user_logged_in(),
+		) );
+
 		wp_enqueue_style(
 			'thlogin-frontend-style',
 			THLOGIN_URL . 'app/build/public.css',

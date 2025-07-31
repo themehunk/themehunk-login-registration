@@ -159,7 +159,7 @@ const LoginFormHeader = ({ settings }) => {
         )}
       </div>
 
-      {form_type === 'double' && (
+      {settings.design.header.showButtons && form_type === 'double' && (
         <div className="thlogin-prevuiew-form-toggle">
           <button 
             type="button" 
@@ -310,6 +310,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				border: `${buttonBase.border.width?.top ?? 1}px ${buttonBase.border.style || 'solid'} ${buttonBase.border.color || '#000'}`,
 				borderRadius: `${buttonBase.border.radius?.topLeft ?? 4}px`,
 				cursor: 'pointer',
+				width: '100%',
 			},
 			hover: { backgroundColor: buttonBase.hoverBackground },
 		};
@@ -470,6 +471,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 			return (
 				<>
 
+			
 					<LoginFormHeader settings={settings} />
 
 					<h3 style={commonHeadingStyle}>{headingLabel}</h3>

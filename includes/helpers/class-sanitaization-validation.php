@@ -56,7 +56,6 @@ class TH_Sanitization_validation {
 	public function sanitize_design_settings( $settings ) {
 		$sanitized = array();
 
-		$sanitized['modal']['layout_type'] = sanitize_text_field( $settings['modal']['layout_type'] ?? 'popup' );
 		$sanitized['modal']['modal_input_layout'] = sanitize_text_field( $settings['modal']['modal_input_layout'] ?? 'stack' );
 
 		$foreground = $settings['modal']['foreground'] ?? array();
@@ -71,8 +70,8 @@ class TH_Sanitization_validation {
 			$bg = $settings[ $section ][ "{$section}_background" ] ?? array();
 			$sanitized[ $section ][ "{$section}_background" ] = array(
 				'type'     => sanitize_text_field( $bg['type'] ?? 'color' ),
-				'color'    => $this->sanitize_color_input( $bg['color'] ?? '#5954549c' ),
-				'gradient' => sanitize_text_field( $bg['gradient'] ?? '' ),
+				'color'    => $this->sanitize_color_input( $bg['color'] ?? ( $section === 'modal' ? '#5954549c' : '#ffffff' ) ),
+				'gradient' => sanitize_text_field( $bg['gradient'] ?? 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)' ),
 				'opacity'  => floatval( $bg['opacity'] ?? 1 ),
 				'image'    => array(
 					'url'      => esc_url_raw( $bg['image']['url'] ?? '' ),
@@ -81,98 +80,116 @@ class TH_Sanitization_validation {
 					'repeat'   => sanitize_text_field( $bg['image']['repeat'] ?? 'no-repeat' ),
 				),
 			);
-
-			$border = $settings[ $section ][ "{$section}_border" ] ?? array();
-			$sanitized[ $section ][ "{$section}_border" ] = array(
-				'width' => array(
-					'top'    => intval( $border['width']['top'] ?? 0 ),
-					'right'  => intval( $border['width']['right'] ?? 0 ),
-					'bottom' => intval( $border['width']['bottom'] ?? 0 ),
-					'left'   => intval( $border['width']['left'] ?? 0 ),
-				),
-				'style'  => sanitize_text_field( $border['style'] ?? 'solid' ),
-				'color'  => $this->sanitize_color_input( $border['color'] ?? '#000000' ),
-				'radius' => array(
-					'topLeft'     => intval( $border['radius']['topLeft'] ?? 0 ),
-					'topRight'    => intval( $border['radius']['topRight'] ?? 0 ),
-					'bottomRight' => intval( $border['radius']['bottomRight'] ?? 0 ),
-					'bottomLeft'  => intval( $border['radius']['bottomLeft'] ?? 0 ),
-				),
-			);
-
-			$padding = $settings[ $section ][ "{$section}_padding" ] ?? array();
-			$sanitized[ $section ][ "{$section}_padding" ] = array(
-				'top'    => intval( $padding['top'] ?? 0 ),
-				'right'  => intval( $padding['right'] ?? 0 ),
-				'bottom' => intval( $padding['bottom'] ?? 0 ),
-				'left'   => intval( $padding['left'] ?? 0 ),
-			);
 		}
 
-		$sanitized['form']['form_gap'] = intval( $settings['form']['form_gap'] ?? 0 );
+		$border = $settings['form']['form_border'] ?? array();
+		$sanitized['form']['form_border'] = array(
+			'width' => array(
+				'top'    => intval( $border['width']['top'] ?? 0 ),
+				'right'  => intval( $border['width']['right'] ?? 0 ),
+				'bottom' => intval( $border['width']['bottom'] ?? 0 ),
+				'left'   => intval( $border['width']['left'] ?? 0 ),
+			),
+			'style'  => sanitize_text_field( $border['style'] ?? 'solid' ),
+			'color'  => $this->sanitize_color_input( $border['color'] ?? '#000000' ),
+			'radius' => array(
+				'topLeft'     => intval( $border['radius']['topLeft'] ?? 6 ),
+				'topRight'    => intval( $border['radius']['topRight'] ?? 6 ),
+				'bottomRight' => intval( $border['radius']['bottomRight'] ?? 6 ),
+				'bottomLeft'  => intval( $border['radius']['bottomLeft'] ?? 6 ),
+			),
+		);
+
+		$padding = $settings['form']['form_padding'] ?? array();
+		$sanitized['form']['form_padding'] = array(
+			'top'    => intval( $padding['top'] ?? 10 ),
+			'right'  => intval( $padding['right'] ?? 35 ),
+			'bottom' => intval( $padding['bottom'] ?? 30 ),
+			'left'   => intval( $padding['left'] ?? 35 ),
+		);
+
+		$sanitized['form']['form_gap'] = intval( $settings['form']['form_gap'] ?? 18 );
 
 		$heading = $settings['heading'] ?? array();
 		$sanitized['heading'] = array(
 			'color'      => $this->sanitize_color_input( $heading['color'] ?? '#000000' ),
 			'typography' => array(
-				'size'       => sanitize_text_field( $heading['typography']['size'] ?? '14px' ),
-				'fontWeight' => intval( $heading['typography']['fontWeight'] ?? 400 ),
+				'size'       => sanitize_text_field( $heading['typography']['size'] ?? '25px' ),
+				'fontWeight' => intval( $heading['typography']['fontWeight'] ?? 500 ),
 			),
 		);
 
 		$input = $settings['Input'] ?? array();
 		$sanitized['Input'] = array(
-			'color'        => $this->sanitize_color_input( $input['color'] ?? '#000000' ),
-			'labelcolor'   => $this->sanitize_color_input( $input['labelcolor'] ?? '#000000' ),
+			'color'        => $this->sanitize_color_input( $input['color'] ?? '#8392A5' ),
+			'labelcolor'   => $this->sanitize_color_input( $input['labelcolor'] ?? '#262626' ),
 			'background'   => $this->sanitize_color_input( $input['background'] ?? '#ffffff' ),
 			'typography'   => array(
-				'size'       => sanitize_text_field( $input['typography']['size'] ?? '15px' ),
-				'fontWeight' => intval( $input['typography']['fontWeight'] ?? 400 ),
+				'size'       => sanitize_text_field( $input['typography']['size'] ?? '14px' ),
+				'fontWeight' => intval( $input['typography']['fontWeight'] ?? 300 ),
 			),
 			'labeltypography' => array(
-				'size'       => sanitize_text_field( $input['labeltypography']['size'] ?? '17px' ),
-				'fontWeight' => intval( $input['labeltypography']['fontWeight'] ?? 400 ),
+				'size'       => sanitize_text_field( $input['labeltypography']['size'] ?? '16px' ),
+				'fontWeight' => intval( $input['labeltypography']['fontWeight'] ?? 500 ),
 			),
 		);
 
-		$sanitized['button'] = $this->sanitize_button_style( $settings['button'] ?? array() );
+		$sanitized['button'] = $this->sanitize_button_style( $settings['button'] ?? array(), array(
+			'color'      => '#ffffff',
+			'background' => '#0B59f4',
+			'hover'      => '#1c21ba',
+			'padding'    => array( 'top' => 12, 'right' => 12, 'bottom' => 12, 'left' => 12 ),
+			'radius'     => array( 'topLeft' => 5, 'topRight' => 5, 'bottomRight' => 5, 'bottomLeft' => 5 ),
+		) );
+
 		$sanitized['rememberme'] = array(
-			'color'              => $this->sanitize_color_input( $settings['rememberme']['color'] ?? '#000000' ),
-			'checkboxbackground' => $this->sanitize_color_input( $settings['rememberme']['checkboxbackground'] ?? '#000000' ),
+			'color'              => $this->sanitize_color_input( $settings['rememberme']['color'] ?? '#8392A5' ),
+			'checkboxbackground' => $this->sanitize_color_input( $settings['rememberme']['checkboxbackground'] ?? '#ffffff' ),
 			'typography'         => array(
 				'size'       => sanitize_text_field( $settings['rememberme']['typography']['size'] ?? '14px' ),
-				'fontWeight' => intval( $settings['rememberme']['typography']['fontWeight'] ?? 400 ),
+				'fontWeight' => intval( $settings['rememberme']['typography']['fontWeight'] ?? 300 ),
 			),
 		);
 
 		$sanitized['term'] = array(
-			'color' => $this->sanitize_color_input( $settings['term']['color'] ?? '#000000' ),
+			'color' => $this->sanitize_color_input( $settings['term']['color'] ?? '#8392A5' ),
 			'link'  => $this->sanitize_color_input( $settings['term']['link'] ?? '#007cba' ),
-			'checkboxbackground' => $this->sanitize_color_input( $settings['term']['checkboxbackground'] ?? '#000000' ),
-			'typography'         => array(
+			'typography' => array(
 				'size'       => sanitize_text_field( $settings['term']['typography']['size'] ?? '14px' ),
-				'fontWeight' => intval( $settings['term']['typography']['fontWeight'] ?? 400 ),
+				'fontWeight' => intval( $settings['term']['typography']['fontWeight'] ?? 300 ),
 			),
 		);
 
 		$sanitized['icon'] = array(
-			'color' => $this->sanitize_color_input( $settings['icon']['color'] ?? '#111111' ),
-			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '25px' ),
-			'icon_position' => sanitize_text_field( $settings['icon']['icon_position'] ?? 'with-label' ),
+			'color' => $this->sanitize_color_input( $settings['icon']['color'] ?? '#8392A5' ),
+			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '17px' ),
+			'icon_position' => sanitize_text_field( $settings['icon']['icon_position'] ?? 'inside-input' ),
 		);
 
-		$sanitized['header']['button']        = $this->sanitize_button_style( $settings['header']['button'] ?? [] );
-		$sanitized['header']['cancel_button'] = $this->sanitize_button_style( $settings['header']['cancel_button'] ?? [] );
+		$sanitized['header'] = array(
+			'showButtons'   => isset( $settings['header']['showButtons'] ) ? (bool) $settings['header']['showButtons'] : false,
+			'loginText'     => sanitize_text_field( $settings['header']['loginText'] ?? 'Login' ),
+			'registerText'  => sanitize_text_field( $settings['header']['registerText'] ?? 'Register' ),
+			'button'        => $this->sanitize_button_style( $settings['header']['button'] ?? array(), array(
+				'color' => '#ffffff',
+				'background' => '#0B59f4',
+				'hover' => '#1c21ba',
+				'padding' => array( 'top' => 8, 'right' => 12, 'bottom' => 8, 'left' => 12 ),
+				'radius' => array( 'topLeft' => 5, 'topRight' => 5, 'bottomRight' => 5, 'bottomLeft' => 5 ),
+			) ),
+			'cancel_button' => $this->sanitize_button_style( $settings['header']['cancel_button'] ?? array(), array(
+				'color' => '#f31212',
+				'background' => '#E6e6e6',
+				'hover' => '#9a9a9e',
+				'padding' => array( 'top' => 3, 'right' => 3, 'bottom' => 3, 'left' => 3 ),
+				'radius' => array( 'topLeft' => 20, 'topRight' => 20, 'bottomRight' => 20, 'bottomLeft' => 20 ),
+			) ),
+		);
 
-		$sanitized['header']['showButtons']  = isset( $settings['header']['showButtons'] ) ? (bool) $settings['header']['showButtons'] : true;
-		$sanitized['header']['loginText']    = sanitize_text_field( $settings['header']['loginText'] ?? 'Login' );
-		$sanitized['header']['registerText'] = sanitize_text_field( $settings['header']['registerText'] ?? 'Register' );
-
-		$submit_button = $settings['submitButton'] ?? array();
 		$sanitized['submitButton'] = array(
-			'login'    => sanitize_text_field( $submit_button['login'] ?? 'Login' ),
-			'register' => sanitize_text_field( $submit_button['register'] ?? 'Register' ),
-			'forgot_password'   => sanitize_text_field( $submit_button['forgot_password'] ?? 'Reset' ),
+			'login'           => sanitize_text_field( $settings['submitButton']['login'] ?? 'Login' ),
+			'register'        => sanitize_text_field( $settings['submitButton']['register'] ?? 'Register' ),
+			'forgot_password' => sanitize_text_field( $settings['submitButton']['forgot_password'] ?? 'Reset' ),
 		);
 
 		return $sanitized;
@@ -746,6 +763,12 @@ class TH_Sanitization_validation {
 		$sanitized['email_verification']['email_subject'] = sanitize_text_field( $settings['email_verification']['email_subject'] ?? 'Verify your email' );
 		$sanitized['email_verification']['email_content'] = wp_kses_post( $settings['email_verification']['email_content'] ?? 'Click the link to verify: {verification_link}' );
 
+		// Session Timeout.
+		$sanitized['session_timeout']['enabled'] = rest_sanitize_boolean( $settings['session_timeout']['enabled'] ?? true );
+		$sanitized['session_timeout']['duration'] = absint( $settings['session_timeout']['duration'] ?? 15 );
+		$sanitized['session_timeout']['show_warning'] = rest_sanitize_boolean( $settings['session_timeout']['show_warning'] ?? true );
+		$sanitized['session_timeout']['warning_duration'] = absint( $settings['session_timeout']['warning_duration'] ?? 60 );
+
 		return $sanitized;
 	}
 
@@ -776,6 +799,17 @@ class TH_Sanitization_validation {
 
 			if ( empty( $settings['email_verification']['email_content'] ?? '' ) ) {
 				$errors->add( 'missing_email_content', esc_html__( 'Email Content is required for verification email.', 'th-login' ) );
+			}
+		}
+
+		// Validate Session Timeout.
+		if ( ( $settings['session_timeout']['enabled'] ?? false ) ) {
+			if ( empty( $settings['session_timeout']['duration'] ) || ! is_numeric( $settings['session_timeout']['duration'] ) ) {
+				$errors->add( 'invalid_session_timeout_duration', esc_html__( 'Session timeout duration must be a valid number.', 'th-login' ) );
+			}
+			if ( ( $settings['session_timeout']['show_warning'] ?? false ) && 
+				( empty( $settings['session_timeout']['warning_duration'] ) || ! is_numeric( $settings['session_timeout']['warning_duration'] ) ) ) {
+				$errors->add( 'invalid_session_warning_duration', esc_html__( 'Warning duration must be a valid number.', 'th-login' ) );
 			}
 		}
 

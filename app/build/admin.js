@@ -11589,6 +11589,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   var _settings$integration;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
+  var isWooEnabled = thlogin_admin_data.woo_enabled;
   return /*#__PURE__*/React.createElement("section", {
     className: "settings-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -11624,10 +11625,18 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
     checked: ((_settings$integration = settings.integration) === null || _settings$integration === void 0 || (_settings$integration = _settings$integration.woocommerce) === null || _settings$integration === void 0 ? void 0 : _settings$integration.enabled) || false,
+    disabled: !isWooEnabled,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "enabled"], isChecked);
     }
-  })))))));
+  }))), !isWooEnabled && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: "15px"
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+    status: "warning",
+    isDismissible: false
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("To enable WooCommerce integration, please install and activate the WooCommerce plugin.", "thlogin")))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IntegrationSettings);
 

@@ -443,4 +443,8 @@ body.thlogin-modal-open {
   width: 25px;
 }
 
+.thlogin-honeypot-field, .thlogin-form-field--honeypot {
+  display: none;
+}
+
 /*# sourceMappingURL=public.css.map*/

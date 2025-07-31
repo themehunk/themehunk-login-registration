@@ -63,6 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const canShowModal = () => {
+
+        if (thLoginFrontendData.hasShortcode) {
+            return false;
+        }
+
         if (isUserLoggedIn && displayTriggers.auto_open_conditions.for_logged_out_only) return false;
 
         const specificRoles = displayTriggers.auto_open_conditions.for_specific_roles || [];
@@ -374,14 +379,13 @@ document.addEventListener('DOMContentLoaded', () => {
         f.classList.add('thlogin-form--active');
     });
 
-        // Force auto-open if shortcode was used on this page
+    // Force auto-open if shortcode was used on this page
     const isShortcodeBasedModal = document.querySelector('.thlogin-shortcode-form-wrapper');
     if (isShortcodeBasedModal && canShowModal()) {
         openModal('login'); // You can dynamically read form type if needed
     }
 
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
 	const menuSettings = thLoginFrontendData?.settings?.display_triggers?.menu_integration;

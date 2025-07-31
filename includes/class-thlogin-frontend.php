@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class THLogin_Frontend {
 
+	private $has_shortcode = false;
+
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'wp_footer', array( $this, 'render_modal_wrapper' ) );
@@ -72,6 +74,30 @@ class THLogin_Frontend {
 		$display_triggers_settings = $all_settings['display_triggers'] ?? array();
 		$security_settings         = $all_settings['security'] ?? array();
 
+		global $post;
+
+		$has_shortcode = false;
+
+		if ( is_a( $post, 'WP_Post' ) ) {
+			$content = $post->post_content;
+
+			$shortcodes_to_check = array(
+				'thlogin_form',
+				'th_register_form',
+				'th_forgot_password_form',
+				'thlogin__combined_form',
+				'thlogin_popup_auto'
+			);
+
+			foreach ( $shortcodes_to_check as $shortcode ) {
+				if ( has_shortcode( $content, $shortcode ) ) {
+					$has_shortcode = true;
+					break;
+				}
+			}
+		}
+
+		$this->has_shortcode = $has_shortcode;
 
 		wp_localize_script(
 			'thlogin-frontend-script',
@@ -92,6 +118,7 @@ class THLogin_Frontend {
 				'currentUserRoles' => is_user_logged_in() ? wp_get_current_user()->roles : array(),
 				'logoutUrl'        => wp_logout_url( home_url() ),
 				'icons'            => $icons_for_js,
+				'hasShortcode'     => $this->has_shortcode ?? false,
 			)
 		);
 	}

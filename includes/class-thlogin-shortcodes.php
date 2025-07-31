@@ -14,7 +14,6 @@ class THLogin_Shortcodes {
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'conditionally_enqueue_assets' ] );
 		add_action( 'wp_head', [ $this, 'conditionally_render_inline_styles' ], 20 );
-
 	}
 
 	public function conditionally_enqueue_assets() {
@@ -26,7 +25,7 @@ class THLogin_Shortcodes {
 				has_shortcode( $post->post_content, 'thlogin_form' ) ||
 				has_shortcode( $post->post_content, 'th_register_form' ) ||
 				has_shortcode( $post->post_content, 'th_forgot_password_form' ) ||
-				has_shortcode( $post->post_content, 'thlogin_combined_form' ) ||
+				has_shortcode( $post->post_content, 'thlogin__combined_form' ) ||
 				has_shortcode( $post->post_content, 'thlogin_popup_auto' )
 			)
 		) {
@@ -43,7 +42,7 @@ class THLogin_Shortcodes {
             'thlogin_form',
             'th_register_form',
             'th_forgot_password_form',
-            'thlogin_combined_form',
+            'thlogin__combined_form',
             'thlogin_popup_auto'
         ];
         

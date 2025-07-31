@@ -3,10 +3,13 @@ import { ToggleControl, TextControl, FormTokenField} from "@wordpress/components
 import { useState } from "@wordpress/element";
 import { useEffect } from "react";
 import apiFetch from "@wordpress/api-fetch";
+import { THL_ICONS } from "./icons";
 
 const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
     const [activeTab, setActiveTab] = useState("auto_open");
+    const [iconPickerOpen, setIconPickerOpen] = useState(false);
+    const [iconPickerOpenlog, setIconPickerOpenlog] = useState(false);
 
     const [suggestions, setSuggestions] = useState({
         pages: [],
@@ -755,236 +758,245 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                 {activeTab === "menu" && (
                     <div className="settings-group">
+
                         <h3 className="group-title">
                         {__("Menu Integration", "th-login")}
                         </h3>
 
                         <div className="setting-row">
-                        <div className="setting-label">
-                            <h4>{__("Enable Menu Items", "th-login")}</h4>
-                            <p className="description">
-                            {__("Add login/register links to menus", "th-login")}
-                            </p>
-                        </div>
-                        <div className="setting-control">
-                            <ToggleControl
-                            __nextHasNoMarginBottom={true}
-                            checked={
-                                settings.display_triggers.menu_integration?.enabled ||
-                                false
-                            }
-                            onChange={(isChecked) =>
-                                handleSettingChange(
-                                "display_triggers",
-                                ["menu_integration", "enabled"],
-                                isChecked
-                                )
-                            }
-                            />
-                        </div>
-                        </div>
-
-                        {settings.display_triggers.menu_integration?.enabled && (
-                        <>
-                            <div className="setting-row under-small-portion">
                             <div className="setting-label">
-                                <h4>{__("Menu Slug", "th-login")}</h4>
+                                <h4>{__("Enable Menu Items", "th-login")}</h4>
                                 <p className="description">
-                                {__('Menu to add items to (or "all")', "th-login")}
+                                {__("Add login/register links to menus", "th-login")}
                                 </p>
                             </div>
                             <div className="setting-control">
-                                <TextControl
-                                                                __next40pxDefaultSize = {true}
+                                <ToggleControl
                                 __nextHasNoMarginBottom={true}
-                                value={
-                                    settings.display_triggers.menu_integration
-                                    ?.menu_slug || "primary"
+                                checked={
+                                    settings.display_triggers.menu_integration?.enabled ||
+                                    false
                                 }
-                                onChange={(newValue) =>
+                                onChange={(isChecked) =>
                                     handleSettingChange(
                                     "display_triggers",
-                                    ["menu_integration", "menu_slug"],
-                                    newValue
+                                    ["menu_integration", "enabled"],
+                                    isChecked
                                     )
                                 }
                                 />
                             </div>
-                            </div>
+                        </div>
 
-                            <div className="menu-item-group login-group">
-                                <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Login Item Text", "th-login")}</h4>
-                                    <p className="description">
-                                    {__("Text for login menu item", "th-login")}
-                                    </p>
-                                </div>
-                                <div className="setting-control">
-                                    <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    value={
-                                        settings.display_triggers.menu_integration
-                                        ?.item_text_login || __("Login", "th-login")
-                                    }
-                                    onChange={(newValue) =>
-                                        handleSettingChange(
-                                        "display_triggers",
-                                        ["menu_integration", "item_text_login"],
-                                        newValue
-                                        )
-                                    }
-                                    />
-                                </div>
-                                </div>
+                        {settings.display_triggers.menu_integration?.enabled && (
+                            <>
+                                <div className="menu-item-group login-group">
+                                    <div className="setting-row under-small-portion">
+                                        <div className="setting-label">
+                                            <h4>{__("Item Text", "th-login")}</h4>
+                                            <p className="description">
+                                            {__("Text for menu item", "th-login")}
+                                            </p>
+                                        </div>
 
-                                <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Login Item Icon", "th-login")}</h4>
-                                    <p className="description">
-                                    {__("Dashicon for login menu item", "th-login")}
-                                    </p>
-                                </div>
-                                <div className="setting-control">
-                                    <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    value={
-                                        settings.display_triggers.menu_integration
-                                        ?.item_icon_login || "dashicons-admin-users"
-                                    }
-                                    onChange={(newValue) =>
-                                        handleSettingChange(
-                                        "display_triggers",
-                                        ["menu_integration", "item_icon_login"],
-                                        newValue
-                                        )
-                                    }
-                                    />
-                                </div>
-                                </div>
-
-                                <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Hide Login When Logged In", "th-login")}</h4>
-                                    <p className="description">
-                                    {__(
-                                        "Hide login item for logged in users",
-                                        "th-login"
-                                    )}
-                                    </p>
-                                </div>
-                                <div className="setting-control">
-                                    <ToggleControl
-                                    __nextHasNoMarginBottom={true}
-                                    checked={
-                                        settings.display_triggers.menu_integration
-                                        ?.visibility_login_logged_in || false
-                                    }
-                                    onChange={(isChecked) =>
-                                        handleSettingChange(
-                                        "display_triggers",
-                                        [
-                                            "menu_integration",
-                                            "visibility_login_logged_in",
-                                        ],
-                                        isChecked
-                                        )
-                                    }
-                                    />
-                                </div>
-                                </div>
-                            </div>
-
-                            <div className="menu-item-group login-group">
-                                <div className="setting-row under-small-portion">
-                                    <div className="setting-label">
-                                        <h4>{__("Register Item Text", "th-login")}</h4>
-                                        <p className="description">
-                                        {__("Text for register menu item", "th-login")}
-                                        </p>
+                                        <div className="setting-control">
+                                            <TextControl
+                                                __next40pxDefaultSize = {true}
+                                                __nextHasNoMarginBottom={true}
+                                                value={
+                                                    settings.display_triggers.menu_integration
+                                                    ?.item_text_login || __("Login", "th-login")
+                                                }
+                                                onChange={(newValue) =>
+                                                    handleSettingChange(
+                                                    "display_triggers",
+                                                    ["menu_integration", "item_text_login"],
+                                                    newValue
+                                                    )
+                                                }
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="setting-control">
-                                        <TextControl
-                                            __next40pxDefaultSize = {true}
-                                            __nextHasNoMarginBottom={true}
-                                        value={
-                                            settings.display_triggers.menu_integration
-                                            ?.item_text_register ||
-                                            __("Register", "th-login")
-                                        }
-                                        onChange={(newValue) =>
-                                            handleSettingChange(
-                                            "display_triggers",
-                                            ["menu_integration", "item_text_register"],
-                                            newValue
-                                            )
-                                        }
-                                        />
+
+                                    <div className="setting-row under-small-portion">
+                                        <div className="setting-label">
+                                            <h4>{__("Login Item Icon", "th-login")}</h4>
+                                            <p className="description">
+                                            {__("Dashicon for login menu item", "th-login")}
+                                            </p>
+                                        </div>
+                                        <div className="setting-control">
+
+                                            <div className="thl-icon-picker">
+                                            <label className="components-base-control__label">
+                                                {__("Choose Icon", "th-login")}
+                                            </label>
+
+                                            <div
+                                                className="icon-picker-trigger"
+                                                onClick={() => setIconPickerOpen((open) => !open)}
+                                            >
+                                                <div
+                                                    className="selected-icon"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: THL_ICONS[settings.display_triggers.menu_integration?.item_icon_login] || "",
+                                                    }}
+                                                />
+                                                <span className="icon-name">{settings.display_triggers.menu_integration?.item_icon_login || ""}</span>
+                                                <span className="icon-caret">▾</span>
+                                            </div>
+
+                                                {iconPickerOpen && (
+                                                    <div className="icon-picker-dropdown">
+                                                    {Object.keys(THL_ICONS).map((key) => (
+                                                        <div
+                                                            key={key}
+                                                            className={`icon-option ${
+                                                                settings.display_triggers.menu_integration?.item_icon_login === key ? "active" : ""
+                                                            }`}
+                                                            onClick={() => {
+                                                                handleSettingChange(
+                                                                    "display_triggers",
+                                                                    ["menu_integration", "item_icon_login"],
+                                                                    key
+                                                                    )
+                                                                setIconPickerOpen(false);
+                                                            }}
+                                                            title={key}
+                                                            dangerouslySetInnerHTML={{ __html: THL_ICONS[key] }}
+                                                        />
+                                                    ))}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                        </div>
+
                                     </div>
+
                                 </div>
 
-                                <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>{__("Register Item Icon", "th-login")}</h4>
-                                    <p className="description">
-                                    {__("Dashicon for register menu item", "th-login")}
-                                    </p>
-                                </div>
-                                <div className="setting-control">
-                                    <TextControl
-                                                                    __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    value={
-                                        settings.display_triggers.menu_integration
-                                        ?.item_icon_register || "dashicons-plus-alt"
-                                    }
-                                    onChange={(newValue) =>
-                                        handleSettingChange(
-                                        "display_triggers",
-                                        ["menu_integration", "item_icon_register"],
-                                        newValue
-                                        )
-                                    }
-                                    />
-                                </div>
-                                </div>
+                                <div className="menu-item-group login-group log-out-menu-integration">
 
-                                <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                    <h4>
-                                    {__("Hide Register When Logged In", "th-login")}
-                                    </h4>
-                                    <p className="description">
-                                    {__(
-                                        "Hide register item for logged in users",
-                                        "th-login"
-                                    )}
-                                    </p>
+                                    <div className="setting-row under-small-portion">
+
+                                        <div className="setting-row">
+                                            <div className="setting-label">
+                                                <h4>{__("Enable Log Out Button", "th-login")}</h4>
+                                                <p className="description">
+                                                    {__("Add log out button to menus", "th-login")}
+                                                </p>
+                                            </div>
+                                            <div className="setting-control">
+                                                <ToggleControl
+                                                __nextHasNoMarginBottom={true}
+                                                checked={
+                                                    settings.display_triggers.menu_integration?.logout ||
+                                                    false
+                                                }
+                                                onChange={(isChecked) =>
+                                                    handleSettingChange(
+                                                    "display_triggers",
+                                                    ["menu_integration", "logout"],
+                                                    isChecked
+                                                    )
+                                                }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {settings.display_triggers.menu_integration?.logout && (
+                                            <div className="th-login-out-menu-inetgration">
+                                                
+                                                <div className="setting-row under-small-portion th-login-logout-integration">
+                                                    <div className="setting-label">
+                                                        <h4>{__("Item Text", "th-login")}</h4>
+                                                        <p className="description">
+                                                        {__("Text for menu item", "th-login")}
+                                                        </p>
+                                                    </div>
+
+                                                    <div className="setting-control">
+                                                        <TextControl
+                                                            __next40pxDefaultSize = {true}
+                                                            __nextHasNoMarginBottom={true}
+                                                            value={
+                                                                settings.display_triggers.menu_integration
+                                                                ?.item_text_logout || __("Login", "th-login")
+                                                            }
+                                                            onChange={(newValue) =>
+                                                                handleSettingChange(
+                                                                "display_triggers",
+                                                                ["menu_integration", "item_text_logout"],
+                                                                newValue
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="setting-row under-small-portion th-login-logout-integration">
+                                                    <div className="setting-label">
+                                                        <h4>{__("Logout Item Icon", "th-login")}</h4>
+                                                        <p className="description">
+                                                        {__("Dashicon for logout menu item", "th-login")}
+                                                        </p>
+                                                    </div>
+                                                    <div className="setting-control">
+
+                                                        <div className="thl-icon-picker">
+                                                        <label className="components-base-control__label">
+                                                            {__("Choose Icon", "th-login")}
+                                                        </label>
+
+                                                        <div
+                                                            className="icon-picker-trigger"
+                                                            onClick={() => setIconPickerOpenlog((open) => !open)}
+                                                        >
+                                                            <div
+                                                                className="selected-icon"
+                                                                dangerouslySetInnerHTML={{
+                                                                    __html: THL_ICONS[settings.display_triggers.menu_integration?.item_icon_logout] || "",
+                                                                }}
+                                                            />
+                                                            <span className="icon-name">{settings.display_triggers.menu_integration?.item_icon_logout || ""}</span>
+                                                            <span className="icon-caret">▾</span>
+                                                        </div>
+
+                                                            {iconPickerOpenlog && (
+                                                                <div className="icon-picker-dropdown">
+                                                                {Object.keys(THL_ICONS).map((key) => (
+                                                                    <div
+                                                                        key={key}
+                                                                        className={`icon-option ${
+                                                                            settings.display_triggers.menu_integration?.item_icon_logout === key ? "active" : ""
+                                                                        }`}
+                                                                        onClick={() => {
+                                                                            handleSettingChange(
+                                                                                "display_triggers",
+                                                                                ["menu_integration", "item_icon_logout"],
+                                                                                key
+                                                                                )
+                                                                            setIconPickerOpenlog(false);
+                                                                        }}
+                                                                        title={key}
+                                                                        dangerouslySetInnerHTML={{ __html: THL_ICONS[key] }}
+                                                                    />
+                                                                ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        )}
+                                        
+                                    </div>
+
                                 </div>
-                                <div className="setting-control">
-                                    <ToggleControl
-                                    __nextHasNoMarginBottom={true}
-                                    checked={
-                                        settings.display_triggers.menu_integration
-                                        ?.visibility_register_logged_in || false
-                                    }
-                                    onChange={(isChecked) =>
-                                        handleSettingChange(
-                                        "display_triggers",
-                                        [
-                                            "menu_integration",
-                                            "visibility_register_logged_in",
-                                        ],
-                                        isChecked
-                                        )
-                                    }
-                                    />
-                                </div>
-                                </div>
-                            </div>
-                        </>
+                            </>
                         )}
 
                     </div>

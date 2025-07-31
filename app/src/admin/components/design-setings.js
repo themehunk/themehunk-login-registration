@@ -10,6 +10,7 @@ import {tabs,tabdeisgn, layoutOptions, fontWeightOptions, tabicon} from '../cont
 import { THL_ICONS } from "./icons";
 import { envelope } from '@wordpress/icons';
 import { Icon } from '@wordpress/components';
+import ForegroundSettingsPanel from './design-editor/foreground-panel';
 
 const tabinside = [
 	{ key: "form", label: __("Form", "th-login") },
@@ -154,7 +155,6 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 	const [floatingFocused, setFloatingFocused] = useState(true);
 	const [floatingFocusedplace, setFloatingFocusedplace] = useState(false);
 
-
 	const inputBase = settings.design.Input;
 	const buttonBase = settings.design.button;
 
@@ -220,6 +220,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		height: '100%',
 		'--th-input-color': inputBase.color,
 		'--th-backgroundColor': `0 0 0 1000px ${inputBase.background} inset`,
+		'--thlogin-foreground-filter': `
+		blur(${settings.design.modal.foreground.blur || '0px'})
+		brightness(${settings.design.modal.foreground.brightness || '100%'})
+		contrast(${settings.design.modal.foreground.contrast || '100%'})`,
 	};
 
 	const formStyle = {
@@ -678,10 +682,18 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								<BackgroundSettingsPanel
 									title={__("Foreground", "th-login")}
-									background={settings.design.modal.modal_background}
+									foreground={settings.design.modal.modal_background}
 									path={["modal", "modal_background"]}
 									handleSettingChange={handleSettingChange}
 								/>
+
+								<AccordionSection title={__("Foreground Filter", "th-login")} defaultOpen={false} className='deisgn-layout-adjust'>
+									<ForegroundSettingsPanel
+										foreground={settings.design.modal.foreground}
+										path={["modal", "foreground"]}
+										handleSettingChange={handleSettingChange}
+									/>
+								</AccordionSection>
 
 								<BackgroundSettingsPanel
 									title={__("Background", "th-login")}

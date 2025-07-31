@@ -57,6 +57,15 @@ class THLogin_Style_Renderer {
 		);
 	}
 
+    private function get_foreground_filter( $f ) {
+        $blur = isset( $f['blur'] ) ? $f['blur'] : '0px';
+        $brightness = isset( $f['brightness'] ) ? $f['brightness'] : '100%';
+        $contrast = isset( $f['contrast'] ) ? $f['contrast'] : '100%';
+
+        return "blur({$blur}) brightness({$brightness}) contrast({$contrast})";
+    }
+
+
 	private function get_form_styles( $d ) {
 		ob_start();
 		?>
@@ -70,6 +79,17 @@ class THLogin_Style_Renderer {
                 gap: <?php echo esc_attr( $d['form']['form_gap'] ); ?>px;
                 max-width: 400px;
                 margin: 0 auto;
+            }
+
+            .thlogin-popup-modal::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+                background: inherit; 
+                filter: <?php echo esc_attr( $this->get_foreground_filter( $d['modal']['foreground'] ?? [] ) ); ?>;
+                opacity: 1;
+                pointer-events: none;
             }
 
             .th-login-from-feilds-combine {

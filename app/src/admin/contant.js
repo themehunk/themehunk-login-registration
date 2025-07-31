@@ -209,7 +209,7 @@ export  const design = {
   modal: {
     modal_background: {
       type: "color",     // 'color' | 'gradient' | 'image'
-      color: "#FFFFFF00",
+      color: "#5954549c",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
       opacity:1,
       image: {
@@ -218,6 +218,12 @@ export  const design = {
         size: "cover",   // 'cover' | 'contain' | 'auto'
         repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
       }
+    },
+    foreground:{
+      blur      : '4px',
+			brightness : '100%',
+			contrast   : '100%',
+			opacity    : 1,
     },
     modal_input_layout: "stack",
   }, 
@@ -358,15 +364,15 @@ export  const display_triggers = {
       },
       pop_up_frequency: { enabled: false, type: "session", days: 7 },
       menu_integration: {
-        enabled: false,
-        menu_slug: "primary",
-        item_text_login: __("Login", "th-login"),
-        item_text_register: __("Register", "th-login"),
-        item_icon_login: "dashicons-admin-users",
-        item_icon_register: "dashicons-plus-alt",
-        visibility_login_logged_in: false,
-        visibility_register_logged_in: false,
-      },
+        enabled: false, 
+        item_text_login: __("Login", "th-login"), 
+        item_icon_login: "", 
+
+        logout: true, 
+        item_text_logout: __("Logout", "th-login"), 
+        item_icon_logout: "", 
+      }
+
 };
 
 export const integration = {

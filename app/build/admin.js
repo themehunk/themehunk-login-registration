@@ -7208,58 +7208,66 @@ var App = function App() {
     _useState14 = _slicedToArray(_useState13, 2),
     activeTab = _useState14[0],
     setActiveTab = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    hasFetched = _useState16[0],
+    setHasFetched = _useState16[1]; // new flag
+
   var importTextareaRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var fetchSettings = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var response, mergedSettings, _t;
-        return _regenerator().w(function (_context) {
-          while (1) switch (_context.n) {
-            case 0:
-              _context.p = 0;
-              _context.n = 1;
-              return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-                path: "thlogin/v1/settings",
-                method: "POST",
-                data: {
-                  action: "fetch_settings"
-                }
-              });
-            case 1:
-              response = _context.v;
-              if (response.success) {
-                // Deep merge fetched settings with default structure to ensure all keys exist.
-                mergedSettings = _deepMerge(settings, response.settings);
-                setSettings(mergedSettings);
-              } else {
-                setMessage({
-                  type: "error",
-                  text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "thlogin")
-                });
+  var fetchSettings = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var response, mergedSettings, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.n) {
+          case 0:
+            setIsLoading(true);
+            setMessage(null);
+            _context.p = 1;
+            _context.n = 2;
+            return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
+              path: "thlogin/v1/settings",
+              method: "POST",
+              data: {
+                action: "fetch_settings"
               }
-              _context.n = 3;
-              break;
-            case 2:
-              _context.p = 2;
-              _t = _context.v;
-              console.error("Error fetching settings:", _t);
+            });
+          case 2:
+            response = _context.v;
+            if (response.success) {
+              // Deep merge fetched settings with default structure to ensure all keys exist.
+              mergedSettings = _deepMerge(settings, response.settings);
+              setSettings(mergedSettings);
+            } else {
               setMessage({
                 type: "error",
-                text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "thlogin")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "thlogin")
               });
-            case 3:
-              _context.p = 3;
-              setIsLoading(false);
-              return _context.f(3);
-            case 4:
-              return _context.a(2);
-          }
-        }, _callee, null, [[0, 2, 3, 4]]);
-      }));
-      return function fetchSettings() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+            }
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            console.error("Error fetching settings:", _t);
+            setMessage({
+              type: "error",
+              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "thlogin")
+            });
+          case 4:
+            _context.p = 4;
+            setIsLoading(false);
+            setHasFetched(true);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }));
+    return function fetchSettings() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetchSettings();
   }, []);
   var _deepMerge = function deepMerge(target, source) {
@@ -7504,23 +7512,6 @@ var App = function App() {
       return _ref4.apply(this, arguments);
     };
   }();
-  if (isLoading) {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-admin-wrap"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    })), /*#__PURE__*/React.createElement("p", {
-      className: "thlogin-loading-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loading settings...", "thlogin")));
-  }
   return /*#__PURE__*/React.createElement("div", {
     className: "thlogin-admin-modern"
   }, /*#__PURE__*/React.createElement("div", {
@@ -7531,7 +7522,16 @@ var App = function App() {
     className: "th-logo"
   }, "TH"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Settings", "thlogin")), message && /*#__PURE__*/React.createElement("div", {
     className: "notice-banner ".concat(message.type)
-  }, /*#__PURE__*/React.createElement("p", null, message.text)))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("p", null, message.text)))), !isLoading && hasFetched && !(settings !== null && settings !== void 0 && settings.general) && /*#__PURE__*/React.createElement("div", {
+    className: "thlogin-fetch-error-overlay"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "error-box"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dashicons dashicons-warning"
+  }), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unable to load settings", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorry, we're currently unable to fetch your settings. Please try again.", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    isSecondary: true,
+    onClick: fetchSettings
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Retry", "thlogin")))), /*#__PURE__*/React.createElement("div", {
     className: "admin-container"
   }, /*#__PURE__*/React.createElement("nav", {
     className: "admin-sidebar"
@@ -8732,8 +8732,14 @@ var InteractiveButton = function InteractiveButton(_ref2) {
     }
   }, children);
 };
+var decodeEntities = function decodeEntities(html) {
+  var txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+};
 var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
   var base = _ref3.base,
+    terms = _ref3.terms,
     children = _ref3.children;
   var checkboxStyle = {
     accentColor: base.checkboxbackground,
@@ -8748,6 +8754,40 @@ var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
     fontWeight: base.typography.fontWeight,
     cursor: 'pointer'
   };
+
+  // Decode HTML entities in the label text first
+  var decodedLabel = decodeEntities(children);
+  if (terms) {
+    return /*#__PURE__*/React.createElement("label", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        cursor: 'pointer'
+      }
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      style: checkboxStyle
+    }), /*#__PURE__*/React.createElement("span", {
+      style: labelStyle
+    }, decodedLabel.split(/(\[.*?\])/).map(function (part, i) {
+      if (part.startsWith('[') && part.endsWith(']')) {
+        var term = part.slice(1, -1);
+        return /*#__PURE__*/React.createElement("a", {
+          key: i,
+          href: "#",
+          style: {
+            color: base.linkColor || '#0073aa',
+            textDecoration: 'none'
+          },
+          onClick: function onClick(e) {
+            return e.preventDefault();
+          }
+        }, term);
+      }
+      return part;
+    })));
+  }
   return /*#__PURE__*/React.createElement("label", {
     style: {
       display: "flex",
@@ -8760,7 +8800,7 @@ var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
     style: checkboxStyle
   }), /*#__PURE__*/React.createElement("span", {
     style: labelStyle
-  }, children));
+  }, decodedLabel));
 };
 
 //login-loader
@@ -8964,6 +9004,13 @@ var DesignEditor = function DesignEditor(_ref5) {
         typography: settings.design.rememberme.typography
       }
     };
+    var termsProps = {
+      base: {
+        color: settings.design.term.color,
+        linkColor: settings.design.term.link,
+        typography: settings.design.term.typography // Using same typography as remember me
+      }
+    };
     var renderInputs = function renderInputs(fields) {
       return fields.filter(function (field) {
         return field.show !== false;
@@ -8988,7 +9035,9 @@ var DesignEditor = function DesignEditor(_ref5) {
           style: {
             width: '100%'
           }
-        }, field.type === 'checkbox' ? /*#__PURE__*/React.createElement(InteractiveCheckbox, checkboxProps, field.label) : layout === 'floating' ? /*#__PURE__*/React.createElement("div", {
+        }, field.type === 'checkbox' ? field.id === 'terms_and_conditions' ? /*#__PURE__*/React.createElement(InteractiveCheckbox, _extends({}, termsProps, {
+          terms: true
+        }), field.label) : /*#__PURE__*/React.createElement(InteractiveCheckbox, checkboxProps, field.label) : layout === 'floating' ? /*#__PURE__*/React.createElement("div", {
           className: "floating-wrapper layout-floating",
           style: {
             position: 'relative'
@@ -9467,6 +9516,56 @@ var DesignEditor = function DesignEditor(_ref5) {
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terms and Condition", "th-login"),
+    defaultOpen: false
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-heading-settings"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "color",
+    className: "th-color-input",
+    value: settings.design.term.color,
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["term", "color"], e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Link Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "color",
+    className: "th-color-input",
+    value: settings.design.term.link,
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["term", "link"], e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    className: "th-number-input",
+    value: parseInt(settings.design.term.typography.size),
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["term", "typography", "size"], "".concat(e.target.value, "px"));
+    },
+    min: 1
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-select-wrapper modern-sleect-heaidng"
+  }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
+    value: settings.design.term.typography.fontWeight,
+    onChange: function onChange(value) {
+      return handleSettingChange("design", ["term", "typography", "fontWeight"], value);
+    },
+    options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
+  }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remember Me", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
@@ -9481,17 +9580,6 @@ var DesignEditor = function DesignEditor(_ref5) {
     value: settings.design.rememberme.color,
     onChange: function onChange(e) {
       return handleSettingChange("design", ["rememberme", "color"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Checkbox Color", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.rememberme.checkboxbackground,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["rememberme", "checkboxbackground"], e.target.value);
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row"
@@ -10686,7 +10774,12 @@ var SortableFieldItem = function SortableFieldItem(_ref2) {
     className: "field-drag-handle"
   }, attributes, listeners), /*#__PURE__*/React.createElement("span", {
     className: "dashicons dashicons-move"
-  })), /*#__PURE__*/React.createElement("div", {
+  })), field.id === 'terms_and_conditions' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "field-label",
+    dangerouslySetInnerHTML: {
+      __html: 'Terms & Condition'
+    }
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "selected-icon",
     dangerouslySetInnerHTML: {
       __html: _icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS[field.icon] || ""
@@ -10696,7 +10789,7 @@ var SortableFieldItem = function SortableFieldItem(_ref2) {
     dangerouslySetInnerHTML: {
       __html: field.label || field.placeholder
     }
-  }), field.predefined ? /*#__PURE__*/React.createElement("span", {
+  })), field.predefined ? /*#__PURE__*/React.createElement("span", {
     className: "field-action-icon lock",
     title: "Predefined field (locked)"
   }, /*#__PURE__*/React.createElement("span", {
@@ -10816,6 +10909,11 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       }, TAB_KEYS[key]);
     }));
   };
+  var decodeEntities = function decodeEntities(html) {
+    var txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "settings-card"
   }, /*#__PURE__*/React.createElement("h2", {
@@ -10884,15 +10982,24 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "field-editor"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "field-editor-title"
-  }, selectedField.label || selectedField.id), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  }, selectedField.label || selectedField.id), selectedField.type != "checkbox" && selectedField.id != "terms_and_conditions" ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label", "th-login"),
-    value: selectedField.label,
+    value: decodeEntities(selectedField.label),
     onChange: function onChange(val) {
       return handleFieldChange("label", val);
     }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  }) : /*#__PURE__*/React.createElement("div", {
+    className: "terms-conditions-editor"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms Text", "th-login"),
+    value: decodeEntities(selectedField.label) || "I agree to the [Terms] & [Conditions]",
+    onChange: function onChange(val) {
+      return handleFieldChange("label", val);
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wrap linkable text in [square brackets]", "th-login")
+  })), selectedField.id !== "terms_and_conditions" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Placeholder", "th-login"),
@@ -10900,7 +11007,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     onChange: function onChange(val) {
       return handleFieldChange("placeholder", val);
     }
-  }), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  })), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "th-login"),
@@ -10913,11 +11020,53 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "th-login"),
-    value: selectedField.error_message || "",
+    value: decodeEntities(selectedField.error_message) || "",
     onChange: function onChange(val) {
       return handleFieldChange("error_message", val);
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  }), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && selectedField.label && /*#__PURE__*/React.createElement("div", {
+    className: "terms-preview",
+    style: {
+      padding: '12px',
+      backgroundColor: '#f6f7f7',
+      borderRadius: '4px',
+      gridColumn: '1 / -1'
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginBottom: '8px',
+      fontSize: '13px',
+      color: '#757575'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Live Preview:", "th-login")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: '14px'
+    }
+  }, decodeEntities(selectedField.label).split(/(\[.*?\])/).map(function (part, i) {
+    if (part.startsWith('[') && part.endsWith(']')) {
+      var _selectedField$links;
+      var term = part.slice(1, -1);
+      var url = ((_selectedField$links = selectedField.links) === null || _selectedField$links === void 0 ? void 0 : _selectedField$links[term]) || '#';
+      return /*#__PURE__*/React.createElement("a", {
+        key: i,
+        href: url,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        style: {
+          color: '#007cba',
+          textDecoration: 'none'
+        }
+      }, term);
+    }
+    return part;
+  })), decodeEntities(selectedField.label).includes('[') && !selectedField.links && /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: '8px',
+      fontSize: '12px',
+      color: '#d63638',
+      fontStyle: 'italic'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Don't forget to set URLs for each bracketed term above", "th-login"))), selectedField.id !== "terms_and_conditions" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "thl-icon-picker"
   }, /*#__PURE__*/React.createElement("label", {
     className: "components-base-control__label"
@@ -10952,7 +11101,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
         __html: _icons__WEBPACK_IMPORTED_MODULE_8__.THL_ICONS[key]
       }
     });
-  }))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  })))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "th-login"),
@@ -11589,6 +11738,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   var _settings$integration;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
+  var isWooEnabled = thlogin_admin_data.woo_enabled;
   return /*#__PURE__*/React.createElement("section", {
     className: "settings-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -11624,10 +11774,18 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
     checked: ((_settings$integration = settings.integration) === null || _settings$integration === void 0 || (_settings$integration = _settings$integration.woocommerce) === null || _settings$integration === void 0 ? void 0 : _settings$integration.enabled) || false,
+    disabled: !isWooEnabled,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "enabled"], isChecked);
     }
-  })))))));
+  }))), !isWooEnabled && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: "15px"
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+    status: "warning",
+    isDismissible: false
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("To enable WooCommerce integration, please install and activate the WooCommerce plugin.", "thlogin")))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IntegrationSettings);
 
@@ -12596,14 +12754,14 @@ var form_fields = {
     predefined: false
   }, {
     id: 'terms_and_conditions',
-    label: 'I agree to the Terms & Conditions',
+    label: '[I agree to the Terms & Conditions.]',
     name: 'terms_and_conditions',
     type: 'checkbox',
     required: true,
     icon: '',
     show: true,
     error_message: 'You must agree to the Terms & Conditions.',
-    predefined: false,
+    predefined: true,
     link: ""
   }, {
     id: 'honeypot',
@@ -12748,6 +12906,14 @@ var design = {
   rememberme: {
     color: "#000000",
     checkboxbackground: "#ffffff",
+    typography: {
+      size: "14px",
+      fontWeight: 300
+    }
+  },
+  term: {
+    color: "#000000",
+    link: "#007cba ",
     typography: {
       size: "14px",
       fontWeight: 300

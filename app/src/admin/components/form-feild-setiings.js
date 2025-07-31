@@ -1,5 +1,5 @@
   import { __ } from "@wordpress/i18n";
-  import { Button, TextControl, ToggleControl } from "@wordpress/components";
+  import { Button, TextControl, ToggleControl ,TextareaControl} from "@wordpress/components";
   import {
     DndContext,
     closestCenter,
@@ -70,15 +70,27 @@
         <span className="field-drag-handle" {...attributes} {...listeners}>
           <span className="dashicons dashicons-move"></span>
         </span>
+        {field.id === 'terms_and_conditions' ? (
+          <>
 
-        <div
-          className="selected-icon"
-          dangerouslySetInnerHTML={{ __html: THL_ICONS[field.icon] || "" }}
-        />
-        <span
-          className="field-label"
-          dangerouslySetInnerHTML={{ __html: field.label || field.placeholder }}
-        ></span>
+            <span
+              className="field-label"
+              dangerouslySetInnerHTML={{ __html: 'Terms & Condition' }}
+            ></span>
+            </>
+        ):(
+          <>
+            <div
+              className="selected-icon"
+              dangerouslySetInnerHTML={{ __html: THL_ICONS[field.icon] || "" }}
+            />
+            <span
+              className="field-label"
+              dangerouslySetInnerHTML={{ __html: field.label || field.placeholder }}
+            ></span>
+          </>
+        )}
+
         {field.predefined ? (
           <span className="field-action-icon lock" title="Predefined field (locked)">
             <span className="dashicons dashicons-lock"></span>
@@ -192,6 +204,13 @@
         </div>
     );
 
+    const decodeEntities = (html) => {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+    };
+
+
     return (
         <div className="settings-card">
             <h2 className="section-title">
@@ -278,26 +297,41 @@
                     {selectedField.label || selectedField.id}
                   </h3>
 
-                  <TextControl
-                                                  __next40pxDefaultSize = {true}
-                                      __nextHasNoMarginBottom={true}
-                    label={__("Label", "th-login")}
-                    value={selectedField.label}
-                    onChange={(val) => handleFieldChange("label", val)}
-                  />
-
-                  <TextControl
-                                                  __next40pxDefaultSize = {true}
-                                      __nextHasNoMarginBottom={true}
-                    label={__("Placeholder", "th-login")}
-                    value={selectedField.placeholder || ""}
-                    onChange={(val) => handleFieldChange("placeholder", val)}
-                  />
+                  {selectedField.type != "checkbox" && selectedField.id != "terms_and_conditions" ? (
+                    <TextControl
+                        __next40pxDefaultSize = {true}
+                        __nextHasNoMarginBottom={true}
+                        label={__("Label", "th-login")}
+                        value={decodeEntities(selectedField.label)}
+                        onChange={(val) => handleFieldChange("label", val)}
+                    />
+                  ):(
+                    <div className="terms-conditions-editor">
+                      <TextControl
+                        label={__("Terms Text", "th-login")}
+                        value={decodeEntities(selectedField.label) || "I agree to the [Terms] & [Conditions]"}
+                        onChange={(val) => handleFieldChange("label", val)}
+                        help={__("Wrap linkable text in [square brackets]", "th-login")}
+                      />
+                    </div>
+                  )}
+              
+                  {selectedField.id !== "terms_and_conditions" && (
+                    <>
+                      <TextControl
+                        __next40pxDefaultSize = {true}
+                        __nextHasNoMarginBottom={true}
+                        label={__("Placeholder", "th-login")}
+                        value={selectedField.placeholder || ""}
+                        onChange={(val) => handleFieldChange("placeholder", val)}
+                      />
+                    </>
+                  )}
 
                   {selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && (
                     <TextControl
-                                                    __next40pxDefaultSize = {true}
-                                      __nextHasNoMarginBottom={true}
+                      __next40pxDefaultSize = {true}
+                     __nextHasNoMarginBottom={true}
                       label={__("Terms & Conditions Link", "th-login")}
                       placeholder="https://example.com/terms"
                       value={selectedField.link || ""}
@@ -309,61 +343,110 @@
                     __next40pxDefaultSize = {true}
                      __nextHasNoMarginBottom={true}
                     label={__("Error Message", "th-login")}
-                    value={selectedField.error_message || ""}
+                    value={decodeEntities(selectedField.error_message) || ""}
                     onChange={(val) => handleFieldChange("error_message", val)}
                   />
 
-                  <div className="thl-icon-picker">
-                    <label className="components-base-control__label">
-                      {__("Choose Icon", "th-login")}
-                    </label>
-
-                    <div
-                      className="icon-picker-trigger"
-                      onClick={() => setIconPickerOpen((open) => !open)}
-                    >
-                      <div
-                        className="selected-icon"
-                        dangerouslySetInnerHTML={{
-                          __html: THL_ICONS[selectedField.icon] || "",
-                        }}
-                      />
-                      <span className="icon-name">{selectedField.icon}</span>
-                      <span className="icon-caret">▾</span>
-                    </div>
-
-                    {iconPickerOpen && (
-                      <div className="icon-picker-dropdown">
-                        {Object.keys(THL_ICONS).map((key) => (
-                          <div
-                            key={key}
-                            className={`icon-option ${
-                              selectedField.icon === key ? "active" : ""
-                            }`}
-                            onClick={() => {
-                              handleFieldChange("icon", key);
-                              setIconPickerOpen(false);
-                            }}
-                            title={key}
-                            dangerouslySetInnerHTML={{ __html: THL_ICONS[key] }}
-                          />
-                        ))}
+                  {selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && selectedField.label && (
+                    <div className="terms-preview" style={{
+                      padding: '12px',
+                      backgroundColor: '#f6f7f7',
+                      borderRadius: '4px',
+                      gridColumn: '1 / -1',
+                    }}>
+                      <p style={{
+                        marginBottom: '8px',
+                        fontSize: '13px',
+                        color: '#757575'
+                      }}>
+                        {__("Live Preview:", "th-login")}
+                      </p>
+                      
+                      <div style={{ fontSize: '14px' }}>
+                        {decodeEntities(selectedField.label).split(/(\[.*?\])/).map((part, i) => {
+                          if (part.startsWith('[') && part.endsWith(']')) {
+                            const term = part.slice(1, -1);
+                            const url = selectedField.links?.[term] || '#';
+                            return (
+                              <a key={i} href={url} target="_blank" rel="noopener noreferrer" 
+                                style={{ color: '#007cba', textDecoration: 'none' }}>
+                                {term}
+                              </a>
+                            );
+                          }
+                          return part;
+                        })}
                       </div>
-                    )}
-                  </div>
+
+                      {/* Show URL hints if brackets exist but no links set */}
+                      {decodeEntities(selectedField.label).includes('[') && !selectedField.links && (
+                        <p style={{
+                          marginTop: '8px',
+                          fontSize: '12px',
+                          color: '#d63638',
+                          fontStyle: 'italic'
+                        }}>
+                          {__("Don't forget to set URLs for each bracketed term above", "th-login")}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {selectedField.id !== "terms_and_conditions" && (
+                    <>
+                      <div className="thl-icon-picker">
+                        <label className="components-base-control__label">
+                          {__("Choose Icon", "th-login")}
+                        </label>
+
+                        <div
+                          className="icon-picker-trigger"
+                          onClick={() => setIconPickerOpen((open) => !open)}
+                        >
+                          <div
+                            className="selected-icon"
+                            dangerouslySetInnerHTML={{
+                              __html: THL_ICONS[selectedField.icon] || "",
+                            }}
+                          />
+                          <span className="icon-name">{selectedField.icon}</span>
+                          <span className="icon-caret">▾</span>
+                        </div>
+
+                        {iconPickerOpen && (
+                          <div className="icon-picker-dropdown">
+                            {Object.keys(THL_ICONS).map((key) => (
+                              <div
+                                key={key}
+                                className={`icon-option ${
+                                  selectedField.icon === key ? "active" : ""
+                                }`}
+                                onClick={() => {
+                                  handleFieldChange("icon", key);
+                                  setIconPickerOpen(false);
+                                }}
+                                title={key}
+                                dangerouslySetInnerHTML={{ __html: THL_ICONS[key] }}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
 
                   {!selectedField.predefined && (
                     <>
                       <TextControl
-                                                      __next40pxDefaultSize = {true}
-                                      __nextHasNoMarginBottom={true}
+                        __next40pxDefaultSize = {true}
+                        __nextHasNoMarginBottom={true}
                         label={__("Name", "th-login")}
                         value={selectedField.name || ""}
                         onChange={(val) => handleFieldChange("name", val)}
                       />
                       <TextControl
-                                                      __next40pxDefaultSize = {true}
-                                      __nextHasNoMarginBottom={true}
+                          __next40pxDefaultSize = {true}
+                          __nextHasNoMarginBottom={true}
                         label={__("ID", "th-login")}
                         value={selectedField.id || ""}
                         onChange={(val) => handleFieldChange("id", val)}

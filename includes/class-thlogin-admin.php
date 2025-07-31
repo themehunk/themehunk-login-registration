@@ -108,6 +108,10 @@ class THLogin_Admin {
 			'security'         => $all_settings['security'] ?? array(),
 		);
 
+		$woo_active  = class_exists('WooCommerce');
+		$thlogin_page = get_page_by_path('th-login');
+		$thlogin_url  = $thlogin_page ? get_permalink($thlogin_page) : '';
+
 		wp_localize_script(
 			'thlogin-admin-script',
 			'thLoginData',
@@ -121,9 +125,7 @@ class THLogin_Admin {
 			)
 		);
 
-		$woo_active  = class_exists('WooCommerce');
-		$thlogin_page = get_page_by_path('th-login');
-		$thlogin_url  = $thlogin_page ? get_permalink($thlogin_page) : '';
+
 
 		wp_localize_script('thlogin-admin-script', 'thlogin_admin_data', array(
 			'woo_enabled'   => $woo_active,

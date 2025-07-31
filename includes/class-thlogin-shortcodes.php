@@ -14,7 +14,6 @@ class THLogin_Shortcodes {
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'conditionally_enqueue_assets' ] );
 		add_action( 'wp_head', [ $this, 'conditionally_render_inline_styles' ], 20 );
-
 	}
 
 	public function conditionally_enqueue_assets() {
@@ -26,7 +25,7 @@ class THLogin_Shortcodes {
 				has_shortcode( $post->post_content, 'thlogin_form' ) ||
 				has_shortcode( $post->post_content, 'th_register_form' ) ||
 				has_shortcode( $post->post_content, 'th_forgot_password_form' ) ||
-				has_shortcode( $post->post_content, 'thlogin_combined_form' ) ||
+				has_shortcode( $post->post_content, 'thlogin__combined_form' ) ||
 				has_shortcode( $post->post_content, 'thlogin_popup_auto' )
 			)
 		) {
@@ -43,7 +42,7 @@ class THLogin_Shortcodes {
             'thlogin_form',
             'th_register_form',
             'th_forgot_password_form',
-            'thlogin_combined_form',
+            'thlogin__combined_form',
             'thlogin_popup_auto'
         ];
         
@@ -146,7 +145,7 @@ class THLogin_Shortcodes {
 		require_once THLOGIN_PATH . 'templates/class-thlogin-login-form.php';
 
 		$form = new THLogin_Login_Form();
-		echo $form->render();
+		echo wp_kses_post( $form->render() );
 
 		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
@@ -159,8 +158,7 @@ class THLogin_Shortcodes {
 		require_once THLOGIN_PATH . 'templates/class-thlogin-register-form.php';
 
 		$register_form = new THLogin_Register_Form();
-		echo $register_form->render();
-
+		echo wp_kses_post($register_form->render());
 
 		$form_html = ob_get_clean();
 
@@ -180,7 +178,7 @@ class THLogin_Shortcodes {
 		require_once THLOGIN_PATH . 'templates/class-thlogin-forgot-password-form.php';
 
 		$forgot_form = new THLogin_Forgot_Password_Form();
-		echo $forgot_form->render();
+		echo wp_kses_post($forgot_form->render());
 
 		$form_html = ob_get_clean();
 

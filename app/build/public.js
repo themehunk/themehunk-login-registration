@@ -132,6 +132,9 @@ document.addEventListener('DOMContentLoaded', function () {
   };
   var canShowModal = function canShowModal() {
     var _displayTriggers$pop_;
+    if (thLoginFrontendData.hasShortcode) {
+      return false;
+    }
     if (isUserLoggedIn && displayTriggers.auto_open_conditions.for_logged_out_only) return false;
     var specificRoles = displayTriggers.auto_open_conditions.for_specific_roles || [];
     if (specificRoles.length && !currentUserRoles.some(function (role) {

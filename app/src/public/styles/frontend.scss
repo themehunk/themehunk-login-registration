@@ -482,3 +482,11 @@ body.thlogin-modal-open {
 .thlogin-menu-item svg{
     width:25px;
 }
+
+.thlogin-honeypot-field, .thlogin-form-field--honeypot{
+  display:none;
+}
+
+.thlogin-form-field--terms a{
+    text-decoration: none !important;
+}

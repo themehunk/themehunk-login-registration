@@ -30,11 +30,13 @@ const App = () => {
   const [importSettingsText, setImportSettingsText] = useState("");
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("general");
+  const [hasFetched, setHasFetched] = useState(false); // new flag
 
   const importTextareaRef = useRef(null); 
 
-  useEffect(() => {
-    const fetchSettings = async () => {
+  const fetchSettings = async () => {
+      setIsLoading(true);
+      setMessage(null);
       try {
         const response = await apiFetch({
           path: "thlogin/v1/settings",
@@ -62,9 +64,11 @@ const App = () => {
         });
       } finally {
         setIsLoading(false);
+        setHasFetched(true); 
       }
-    };
+  };
 
+  useEffect(() => {
     fetchSettings();
   }, []);
 
@@ -284,20 +288,6 @@ const App = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="thlogin-admin-wrap">
-        <div className="thlogin-loader">
-          <div className="thlogin-loader-circle"></div>
-          <div className="thlogin-loader-circle"></div>
-          <div className="thlogin-loader-circle"></div>
-          <div className="thlogin-loader-circle"></div>
-        </div>
-        <p className="thlogin-loading-text">{__("Loading settings...", "thlogin")}</p>
-      </div>
-    );
-  }
-
   return (
     <div className="thlogin-admin-modern">
       
@@ -317,6 +307,19 @@ const App = () => {
         </div>
       </div>
 
+      {!isLoading && hasFetched && !settings?.general && (
+        <div className="thlogin-fetch-error-overlay">
+          <div className="error-box">
+            <span className="dashicons dashicons-warning"></span>
+            <h2>{__("Unable to load settings", "thlogin")}</h2>
+            <p>{__("Sorry, we're currently unable to fetch your settings. Please try again.", "thlogin")}</p>
+            <Button isSecondary onClick={fetchSettings}>
+              {__("Retry", "thlogin")}
+            </Button>
+          </div>
+        </div>
+      )}
+
       <div className="admin-container">
         {/* Side Navigation */}
         <nav className="admin-sidebar">
@@ -331,7 +334,7 @@ const App = () => {
                 ))}
             </ul>
         </nav>
-
+  
         {/* Content Area */}
         <div className="admin-content">
 
@@ -392,6 +395,7 @@ const App = () => {
           )}
           
         </div>
+      
       </div>
 
       <div className="save-settings">
@@ -441,6 +445,6 @@ const App = () => {
       
     </div>
   );
-};
+};  
 
 export default App;

@@ -1,7 +1,10 @@
 import { __ } from "@wordpress/i18n";
-import { ToggleControl } from "@wordpress/components";
+import { ToggleControl, Notice } from "@wordpress/components";
 
 const IntegrationSettings = ({ settings, handleSettingChange }) => {
+
+	const isWooEnabled = thlogin_admin_data.woo_enabled;
+
   return (
     <section className="settings-section">
       <div className="settings-card">
@@ -29,12 +32,25 @@ const IntegrationSettings = ({ settings, handleSettingChange }) => {
               <ToggleControl
                 __nextHasNoMarginBottom={true}
                 checked={settings.integration?.woocommerce?.enabled || false}
+                disabled={!isWooEnabled}
                 onChange={(isChecked) =>
                   handleSettingChange("integration", ["woocommerce", "enabled"], isChecked)
                 }
               />
             </div>
           </div>
+
+          {!isWooEnabled && (
+							<div style={{ marginTop: "15px" }}>
+								<Notice status="warning" isDismissible={false}>
+									{__(
+										"To enable WooCommerce integration, please install and activate the WooCommerce plugin.",
+										"thlogin"
+									)}
+								</Notice>
+							</div>
+						)}
+
         </div>
       </div>
       </div>

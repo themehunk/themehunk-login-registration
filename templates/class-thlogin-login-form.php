@@ -24,7 +24,7 @@ class THLogin_Login_Form {
         $submit_text = $design['submitButton']['login'] ?? esc_html__('Log In', 'th-login');
 
         echo '<div class="thlogin-form thlogin-form--login" data-form-type="login">';
-        echo thlogin_render_form_header();
+        echo wp_kses_post(thlogin_render_form_header());
 
         do_action('thlogin_before_login_form');
 
@@ -34,13 +34,19 @@ class THLogin_Login_Form {
         // Translators: Use printf + esc_html__ for consistent safe translations
         printf( '<h3>%s</h3>', esc_html__( 'Login', 'th-login' ) );
 
-        if (isset($_GET['thlogin_email_verified'])) {
-            $status = $_GET['thlogin_email_verified'];
+        if (
+            isset( $_GET['thlogin_email_verified'], $_GET['_wpnonce'] ) &&
+            wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_email_verify' )
+        ) {
+            $status = sanitize_text_field( wp_unslash( $_GET['thlogin_email_verified'] ) );
+
             $msg = $status === 'success'
-                ? esc_html__('Your email has been verified successfully.', 'th-login')
-                : esc_html__('Invalid or expired verification link.', 'th-login');
+                ? esc_html__( 'Your email has been verified successfully.', 'th-login' )
+                : esc_html__( 'Invalid or expired verification link.', 'th-login' );
+
             $class = $status === 'success' ? 'success' : 'error';
-            echo '<div class="th-login-message ' . esc_attr($class) . '">' . esc_html($msg) . '</div>';
+
+            echo '<div class="th-login-message ' . esc_attr( $class ) . '">' . esc_html( $msg ) . '</div>';
         }
 
         foreach ($this->fields as $field) {
@@ -76,9 +82,8 @@ class THLogin_Login_Form {
         
         echo '</div>';
 
-        if (!empty($security['recaptcha']['enabled']) && $security['recaptcha']['type'] === 'v2_checkbox') {
-            echo '<script src="https://www.google.com/recaptcha/api.js" async defer></script>';
-        }
+        $this->enqueue_recaptcha_script( $security['recaptcha']['type'] );
+
     }
 
     protected function render_field($field, $design) {
@@ -170,6 +175,19 @@ class THLogin_Login_Form {
             }
         }
     }
+
+    public function enqueue_recaptcha_script( $type = 'v2_checkbox' ) {
+        if ( $type === 'v2_checkbox' ) {
+            wp_enqueue_script(
+                'thlogin-recaptcha-v2',
+                'https://www.google.com/recaptcha/api.js',
+                array(),
+                THLOGIN_VERSION,
+                true
+            );
+        }
+    }
+
 }
 
 // Usage:

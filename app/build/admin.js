@@ -7208,58 +7208,66 @@ var App = function App() {
     _useState14 = _slicedToArray(_useState13, 2),
     activeTab = _useState14[0],
     setActiveTab = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    hasFetched = _useState16[0],
+    setHasFetched = _useState16[1]; // new flag
+
   var importTextareaRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var fetchSettings = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var response, mergedSettings, _t;
-        return _regenerator().w(function (_context) {
-          while (1) switch (_context.n) {
-            case 0:
-              _context.p = 0;
-              _context.n = 1;
-              return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-                path: "thlogin/v1/settings",
-                method: "POST",
-                data: {
-                  action: "fetch_settings"
-                }
-              });
-            case 1:
-              response = _context.v;
-              if (response.success) {
-                // Deep merge fetched settings with default structure to ensure all keys exist.
-                mergedSettings = _deepMerge(settings, response.settings);
-                setSettings(mergedSettings);
-              } else {
-                setMessage({
-                  type: "error",
-                  text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "thlogin")
-                });
+  var fetchSettings = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+      var response, mergedSettings, _t;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.n) {
+          case 0:
+            setIsLoading(true);
+            setMessage(null);
+            _context.p = 1;
+            _context.n = 2;
+            return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
+              path: "thlogin/v1/settings",
+              method: "POST",
+              data: {
+                action: "fetch_settings"
               }
-              _context.n = 3;
-              break;
-            case 2:
-              _context.p = 2;
-              _t = _context.v;
-              console.error("Error fetching settings:", _t);
+            });
+          case 2:
+            response = _context.v;
+            if (response.success) {
+              // Deep merge fetched settings with default structure to ensure all keys exist.
+              mergedSettings = _deepMerge(settings, response.settings);
+              setSettings(mergedSettings);
+            } else {
               setMessage({
                 type: "error",
-                text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "thlogin")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "thlogin")
               });
-            case 3:
-              _context.p = 3;
-              setIsLoading(false);
-              return _context.f(3);
-            case 4:
-              return _context.a(2);
-          }
-        }, _callee, null, [[0, 2, 3, 4]]);
-      }));
-      return function fetchSettings() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+            }
+            _context.n = 4;
+            break;
+          case 3:
+            _context.p = 3;
+            _t = _context.v;
+            console.error("Error fetching settings:", _t);
+            setMessage({
+              type: "error",
+              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "thlogin")
+            });
+          case 4:
+            _context.p = 4;
+            setIsLoading(false);
+            setHasFetched(true);
+            return _context.f(4);
+          case 5:
+            return _context.a(2);
+        }
+      }, _callee, null, [[1, 3, 4, 5]]);
+    }));
+    return function fetchSettings() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetchSettings();
   }, []);
   var _deepMerge = function deepMerge(target, source) {
@@ -7504,23 +7512,6 @@ var App = function App() {
       return _ref4.apply(this, arguments);
     };
   }();
-  if (isLoading) {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-admin-wrap"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "thlogin-loader-circle"
-    })), /*#__PURE__*/React.createElement("p", {
-      className: "thlogin-loading-text"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Loading settings...", "thlogin")));
-  }
   return /*#__PURE__*/React.createElement("div", {
     className: "thlogin-admin-modern"
   }, /*#__PURE__*/React.createElement("div", {
@@ -7531,7 +7522,16 @@ var App = function App() {
     className: "th-logo"
   }, "TH"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Settings", "thlogin")), message && /*#__PURE__*/React.createElement("div", {
     className: "notice-banner ".concat(message.type)
-  }, /*#__PURE__*/React.createElement("p", null, message.text)))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("p", null, message.text)))), !isLoading && hasFetched && !(settings !== null && settings !== void 0 && settings.general) && /*#__PURE__*/React.createElement("div", {
+    className: "thlogin-fetch-error-overlay"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "error-box"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dashicons dashicons-warning"
+  }), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unable to load settings", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorry, we're currently unable to fetch your settings. Please try again.", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    isSecondary: true,
+    onClick: fetchSettings
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Retry", "thlogin")))), /*#__PURE__*/React.createElement("div", {
     className: "admin-container"
   }, /*#__PURE__*/React.createElement("nav", {
     className: "admin-sidebar"

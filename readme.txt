@@ -1,6 +1,6 @@
 === TH Login ===
 Contributors: ThemeHunk  
-Tags: login, registration, popup, frontend login, user registration, password reset, WooCommerce, Gutenberg, authentication, custom login form  
+Tags: login, registration, popup, WooCommerce, frontend login
 Requires at least: 5.8  
 Tested up to: 6.8  
 Requires PHP: 7.4  

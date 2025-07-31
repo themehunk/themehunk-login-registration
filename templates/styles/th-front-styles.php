@@ -7,7 +7,7 @@ class THLogin_Style_Renderer {
 		$design = $this->get_design_settings();
 
 		echo '<style type="text/css" id="thlogin-front-styles">';
-		    echo $this->get_form_styles( $design );
+		    echo wp_kses_post($this->get_form_styles( $design ));
 		echo '</style>';
 	}
 

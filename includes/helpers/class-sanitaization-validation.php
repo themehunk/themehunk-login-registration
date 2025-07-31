@@ -255,6 +255,7 @@ class TH_Sanitization_validation {
 			$errors->add(
 				'invalid_modal_input_layout',
 				sprintf(
+					// translators: %s is a comma-separated list of allowed modal input layout values.
 					esc_html__( 'Invalid modal input layout. Allowed values are: %s.', 'th-login' ),
 					implode( ', ', $valid_input_layouts )
 				)
@@ -370,6 +371,7 @@ class TH_Sanitization_validation {
 				$errors->add(
 					'invalid_submit_button_' . $key,
 					sprintf(
+						// translators: %s is a comma-separated list of allowed modal input layout values.
 						esc_html__( 'Submit button text for "%s" must be a non-empty string.', 'th-login' ),
 						$key
 					)
@@ -390,6 +392,7 @@ class TH_Sanitization_validation {
 				$errors->add(
 					'invalid_header_' . $key,
 					sprintf(
+						// translators: %s is a comma-separated list of allowed modal input layout values.
 						esc_html__( 'Header text for "%s" must be a non-empty string.', 'th-login' ),
 						$key
 					)
@@ -404,6 +407,7 @@ class TH_Sanitization_validation {
 		}
 		foreach ( [ 'brightness', 'contrast' ] as $key ) {
 			if ( isset( $foreground[ $key ] ) && ! preg_match( '/^\d+%$/', $foreground[ $key ] ) ) {
+				// translators: %s is a comma-separated list of allowed modal input layout values.
 				$errors->add( "invalid_foreground_{$key}", sprintf( esc_html__( 'Foreground %s must be a percentage value (e.g., 100%%).', 'th-login' ), $key ) );
 			}
 		}

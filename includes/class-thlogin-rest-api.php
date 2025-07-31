@@ -376,9 +376,15 @@ class THLogin_REST_API {
 	}
 
 	public function get_pending_users( $request ) {
+		
 		$args = [
-			'meta_key'   => 'thlogin_pending_approval',
-			'meta_value' => '1',
+		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			'meta_query' => [
+			[
+				'key'   => 'thlogin_pending_approval',
+				'value' => '1',
+			],
+			],
 			'number'     => 50,
 			'fields'     => [ 'ID', 'display_name', 'user_email' ],
 		];	
@@ -866,6 +872,7 @@ class THLogin_REST_API {
 			[
 				'thlogin_verify_email' => $key,
 				'user_id'               => $user_id,
+				'_wpnonce'             => wp_create_nonce( 'thlogin_email_verify' ),
 			],
 			home_url()
 		);

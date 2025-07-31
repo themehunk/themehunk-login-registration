@@ -102,10 +102,15 @@ class THLogin_Security {
 
 	//  Debug URL: ?thlogin_debug=1
 	public function debug_failed_attempts_viewer() {
-		if ( isset( $_GET['thlogin_debug'] ) && current_user_can( 'manage_options' ) ) {
+		if (
+			isset( $_GET['thlogin_debug'], $_GET['_wpnonce'] ) &&
+			current_user_can( 'manage_options' ) &&
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_debug_nonce' )
+		) {
 			echo '<pre style="background:#111;color:#0f0;padding:10px;">';
 			echo "--- TH Login Brute Force Debug ---\n";
-			print_r( get_transient( self::FAILED_ATTEMPTS_OPTION ) );
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+				print_r( get_transient( self::FAILED_ATTEMPTS_OPTION ) );
 			echo '</pre>';
 			exit;
 		}
@@ -171,7 +176,10 @@ class THLogin_Security {
 			'body' => [
 				'secret'   => $settings['recaptcha']['secret_key'],
 				'response' => $token,
-				'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+				'remoteip' => isset( $_SERVER['REMOTE_ADDR'] )
+					? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) )
+					: '',
+
 			],
 		] );
 
@@ -209,9 +217,12 @@ class THLogin_Security {
 	}
 
 	public function maybe_verify_email() {
-		if ( isset( $_GET['thlogin_verify_email'], $_GET['user_id'] ) ) {
-			$user_id = absint( $_GET['user_id'] );
-			$key     = sanitize_text_field( $_GET['thlogin_verify_email'] );
+		if (
+			isset( $_GET['thlogin_verify_email'], $_GET['user_id'], $_GET['_wpnonce'] ) &&
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_email_verification' )
+		) {
+			$user_id = absint( wp_unslash( $_GET['user_id'] ) );
+			$key     = sanitize_text_field( wp_unslash( $_GET['thlogin_verify_email'] ) );
 
 			$saved_key = get_user_meta( $user_id, 'thlogin_email_verification_key', true );
 
@@ -219,14 +230,13 @@ class THLogin_Security {
 				update_user_meta( $user_id, 'thlogin_email_verified', true );
 				delete_user_meta( $user_id, 'thlogin_email_verification_key' );
 
-				// Redirect to success page or show a message
 				wp_redirect( home_url( '/?thlogin_email_verified=success' ) );
 				exit;
 			}
 
-			// Invalid or expired key
 			wp_redirect( home_url( '/?thlogin_email_verified=failed' ) );
 			exit;
 		}
 	}
+
 }

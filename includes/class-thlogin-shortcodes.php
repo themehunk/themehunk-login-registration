@@ -145,7 +145,7 @@ class THLogin_Shortcodes {
 		require_once THLOGIN_PATH . 'templates/class-thlogin-login-form.php';
 
 		$form = new THLogin_Login_Form();
-		echo $form->render();
+		echo wp_kses_post( $form->render() );
 
 		return '<div class="thlogin-shortcode-form-wrapper">' . ob_get_clean() . '</div>';
 	}
@@ -158,8 +158,7 @@ class THLogin_Shortcodes {
 		require_once THLOGIN_PATH . 'templates/class-thlogin-register-form.php';
 
 		$register_form = new THLogin_Register_Form();
-		echo $register_form->render();
-
+		echo wp_kses_post($register_form->render());
 
 		$form_html = ob_get_clean();
 
@@ -179,7 +178,7 @@ class THLogin_Shortcodes {
 		require_once THLOGIN_PATH . 'templates/class-thlogin-forgot-password-form.php';
 
 		$forgot_form = new THLogin_Forgot_Password_Form();
-		echo $forgot_form->render();
+		echo wp_kses_post($forgot_form->render());
 
 		$form_html = ob_get_clean();
 

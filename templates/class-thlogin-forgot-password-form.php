@@ -23,7 +23,7 @@ class THLogin_Forgot_Password_Form {
 		$submit_text = $design['submitButton']['forgot_password'] ?? esc_html__('Reset', 'th-login');
 
 		echo '<div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">';
-		echo thlogin_render_form_header();
+		echo wp_kses_post( thlogin_render_form_header() );
 
 		/**
 		 * Hook: thlogin_before_forgot_password_form

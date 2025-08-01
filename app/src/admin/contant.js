@@ -385,6 +385,10 @@ export const integration = {
   woocommerce: {
     enabled: true,
   },
+  wordpress:{
+    enabled: false,
+    url:"",
+  }
 };
 
 export  const security = {

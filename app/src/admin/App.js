@@ -390,6 +390,7 @@ const App = () => {
                 <IntegrationSettings 
                   settings={settings}
                   handleSettingChange={handleSettingChange}
+                  isLoading={isLoading}
                 />
               )}
 

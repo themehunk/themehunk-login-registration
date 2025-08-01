@@ -475,6 +475,10 @@ class THLogin_Defaults {
 			'woocommerce' => array(
 				'enabled' => true,
 			),
-	    ); 
+			'wordpress' => array(
+				'enabled'           => false,
+				'url'               => '',
+			),
+		);
 	}
 }

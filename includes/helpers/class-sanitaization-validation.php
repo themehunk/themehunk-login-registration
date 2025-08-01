@@ -683,11 +683,16 @@ class TH_Sanitization_validation {
 	}
 
 	public function sanitize_integration_settings( $settings ) {
-		$woocommerce = $settings['woocommerce'] ?? [];
+		$woocommerce = $settings['woocommerce'] ?? array();
+		$wordpress   = $settings['wordpress'] ?? array();
 
 		return array(
 			'woocommerce' => array(
 				'enabled' => ! empty( $woocommerce['enabled'] ),
+			),
+			'wordpress' => array(
+				'enabled'          => ! empty( $wordpress['enabled'] ),
+				'url'     => sanitize_title( $wordpress['url'] ?? 'login' ),
 			),
 		);
 	}
@@ -697,20 +702,43 @@ class TH_Sanitization_validation {
 			return new WP_Error( 'invalid_data', __( 'Integration settings must be an array.', 'th-login' ) );
 		}
 
+		// ✅ Validate WooCommerce settings
 		if ( isset( $settings['woocommerce'] ) && is_array( $settings['woocommerce'] ) ) {
-			$allowed_woo_keys = [ 'enabled' ]; // Only allow the keys you're using
+			$allowed_woo_keys = [ 'enabled' ];
 
 			foreach ( $settings['woocommerce'] as $key => $val ) {
 				if ( ! in_array( $key, $allowed_woo_keys, true ) ) {
 					return new WP_Error(
 						'invalid_key',
-						/* translators: %s: The form type (login/register) to be displayed in the link text */
-						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'th-login' ), $key )
+						/* translators: %s: The invalid key in WooCommerce settings */
+						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'th-login' ), esc_html( $key ) )
 					);
 				}
 			}
 		} else {
 			return new WP_Error( 'missing_woocommerce', __( 'WooCommerce integration settings missing or invalid.', 'th-login' ) );
+		}
+
+		// ✅ Validate WordPress settings
+		if ( isset( $settings['wordpress'] ) && is_array( $settings['wordpress'] ) ) {
+			$allowed_wp_keys = [ 'enabled', 'url' ]; // ⛔ removed replace_wp_login (not used anywhere)
+
+			foreach ( $settings['wordpress'] as $key => $val ) {
+				if ( ! in_array( $key, $allowed_wp_keys, true ) ) {
+					return new WP_Error(
+						'invalid_key',
+						/* translators: %s: The invalid key in WordPress settings */
+						sprintf( __( 'Unexpected key "%s" in WordPress settings.', 'th-login' ), esc_html( $key ) )
+					);
+				}
+			}
+
+			// ✅ Ensure login slug is a string (optional but strict)
+			if ( isset( $settings['wordpress']['url'] ) && ! is_string( $settings['wordpress']['url'] ) ) {
+				return new WP_Error( 'invalid_url', __( 'Login URL must be a string.', 'th-login' ) );
+			}
+		} else {
+			return new WP_Error( 'missing_wordpress', __( 'WordPress integration settings missing or invalid.', 'th-login' ) );
 		}
 
 		return true;

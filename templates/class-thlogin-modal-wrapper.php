@@ -51,7 +51,7 @@ class THLogin_Modal_Wrapper {
 				$register_form->render();
 				$forgot_form->render();
 
-				do_action('thlogin_after_forms');
+				do_action('thlogin_after_forms');	
 				?>
 			</div>
 
@@ -59,7 +59,6 @@ class THLogin_Modal_Wrapper {
 		</div>
 		<?php
 	}
-
 
 	protected function get_background_style() {
 		$modal = $this->design['modal']['modal_background'] ?? [];

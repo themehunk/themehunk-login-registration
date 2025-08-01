@@ -10,7 +10,6 @@ import {tabs,tabdeisgn, layoutOptions, fontWeightOptions, tabicon} from '../cont
 import { THL_ICONS } from "./icons";
 import { envelope } from '@wordpress/icons';
 import { Icon } from '@wordpress/components';
-import ForegroundSettingsPanel from './design-editor/foreground-panel';
 
 const tabinside = [
 	{ key: "form", label: __("Form", "th-login") },
@@ -257,10 +256,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		height: '100%',
 		'--th-input-color': inputBase.color,
 		'--th-backgroundColor': `0 0 0 1000px ${inputBase.background} inset`,
-		'--thlogin-foreground-filter': `
-		blur(${settings.design.modal.foreground.blur || '0px'})
-		brightness(${settings.design.modal.foreground.brightness || '100%'})
-		contrast(${settings.design.modal.foreground.contrast || '100%'})`,
+		backdropFilter: `blur(${settings.design.modal?.modal_background?.filter}px)`,
 	};
 
 	const formStyle = {
@@ -296,8 +292,15 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				fontSize: inputBase.typography.size,
 				fontWeight: inputBase.typography.fontWeight,
 				...(settings.design.icon.icon_position ==='inside-input' ? { paddingLeft: '30px' } : {}),
+				'--hover-input-color': inputBase.activecolor,
 			},
-			active: { backgroundColor: inputBase.activeBackground },
+			hover: {
+				borderColor: inputBase.activecolor,
+			},
+			active: {
+				backgroundColor: inputBase.activeBackground,
+				borderColor: inputBase.activecolor,
+			},
 		};
 
 		const buttonProps = {
@@ -737,18 +740,11 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								<BackgroundSettingsPanel
 									title={__("Foreground", "th-login")}
-									foreground={settings.design.modal.modal_background}
+									background={settings.design.modal.modal_background}
 									path={["modal", "modal_background"]}
 									handleSettingChange={handleSettingChange}
+									blur={true}
 								/>
-
-								<AccordionSection title={__("Foreground Filter", "th-login")} defaultOpen={false} className='deisgn-layout-adjust'>
-									<ForegroundSettingsPanel
-										foreground={settings.design.modal.foreground}
-										path={["modal", "foreground"]}
-										handleSettingChange={handleSettingChange}
-									/>
-								</AccordionSection>
 
 								<BackgroundSettingsPanel
 									title={__("Background", "th-login")}
@@ -765,10 +761,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								/>
 
 								<PaddingSettingsPanel
-								title={__("Padding", "th-login")}
-								padding={settings.design.form.form_padding}
-								path={["form", "form_padding"]}
-								handleSettingChange={handleSettingChange}
+									title={__("Padding", "th-login")}
+									padding={settings.design.form.form_padding}
+									path={["form", "form_padding"]}
+									handleSettingChange={handleSettingChange}
 								/>
 
 								<AccordionSection title={__("Field Gap", "th-login")} defaultOpen={false}>
@@ -881,6 +877,18 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												value={settings.design.Input.color}
 												onChange={(e) =>
 												handleSettingChange("design", ["Input", "color"], e.target.value)
+												}
+											/>
+										</div>
+
+										<div className="th-setting-row">
+											<label className="th-setting-label">{__("Active Color", "th-login")}</label>
+											<input
+												type="color"
+												className="th-color-input"
+												value={settings.design.Input.activecolor}
+												onChange={(e) =>
+													handleSettingChange("design", ["Input", "activecolor"], e.target.value)
 												}
 											/>
 										</div>

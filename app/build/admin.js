@@ -7136,9 +7136,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_form_feild_setiings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/form-feild-setiings */ "./src/admin/components/form-feild-setiings.js");
 /* harmony import */ var _components_display_trigger_settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/display-trigger-settings */ "./src/admin/components/display-trigger-settings.js");
 /* harmony import */ var _components_security_settings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/security-settings */ "./src/admin/components/security-settings.js");
-/* harmony import */ var _components_integration_settings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/integration-settings */ "./src/admin/components/integration-settings.js");
-/* harmony import */ var _components_tools_settings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/tools-settings */ "./src/admin/components/tools-settings.js");
-/* harmony import */ var _contant__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./contant */ "./src/admin/contant.js");
+/* harmony import */ var _components_email_settings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/email-settings */ "./src/admin/components/email-settings.js");
+/* harmony import */ var _components_integration_settings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/integration-settings */ "./src/admin/components/integration-settings.js");
+/* harmony import */ var _components_tools_settings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/tools-settings */ "./src/admin/components/tools-settings.js");
+/* harmony import */ var _contant__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./contant */ "./src/admin/contant.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -7168,14 +7169,15 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var App = function App() {
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      general: _contant__WEBPACK_IMPORTED_MODULE_12__.general,
-      design: _contant__WEBPACK_IMPORTED_MODULE_12__.design,
-      form_fields: _contant__WEBPACK_IMPORTED_MODULE_12__.form_fields,
-      display_triggers: _contant__WEBPACK_IMPORTED_MODULE_12__.display_triggers,
-      integration: _contant__WEBPACK_IMPORTED_MODULE_12__.integration,
-      security: _contant__WEBPACK_IMPORTED_MODULE_12__.security
+      general: _contant__WEBPACK_IMPORTED_MODULE_13__.general,
+      design: _contant__WEBPACK_IMPORTED_MODULE_13__.design,
+      form_fields: _contant__WEBPACK_IMPORTED_MODULE_13__.form_fields,
+      display_triggers: _contant__WEBPACK_IMPORTED_MODULE_13__.display_triggers,
+      integration: _contant__WEBPACK_IMPORTED_MODULE_13__.integration,
+      security: _contant__WEBPACK_IMPORTED_MODULE_13__.security
     }),
     _useState2 = _slicedToArray(_useState, 2),
     settings = _useState2[0],
@@ -7543,7 +7545,7 @@ var App = function App() {
     className: "admin-container"
   }, /*#__PURE__*/React.createElement("nav", {
     className: "admin-sidebar"
-  }, /*#__PURE__*/React.createElement("ul", null, _contant__WEBPACK_IMPORTED_MODULE_12__.TABS.map(function (tab) {
+  }, /*#__PURE__*/React.createElement("ul", null, _contant__WEBPACK_IMPORTED_MODULE_13__.TABS.map(function (tab) {
     return /*#__PURE__*/React.createElement("li", {
       key: tab.id,
       className: activeTab === tab.id ? "active" : ""
@@ -7572,10 +7574,13 @@ var App = function App() {
   }), activeTab === "security" && /*#__PURE__*/React.createElement(_components_security_settings__WEBPACK_IMPORTED_MODULE_9__["default"], {
     settings: settings,
     handleSettingChange: handleSettingChange
-  }), activeTab === "integration" && /*#__PURE__*/React.createElement(_components_integration_settings__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), activeTab === "email" && /*#__PURE__*/React.createElement(_components_email_settings__WEBPACK_IMPORTED_MODULE_10__["default"], {
     settings: settings,
     handleSettingChange: handleSettingChange
-  }), activeTab === "tools" && /*#__PURE__*/React.createElement(_components_tools_settings__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }), activeTab === "integration" && /*#__PURE__*/React.createElement(_components_integration_settings__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    settings: settings,
+    handleSettingChange: handleSettingChange
+  }), activeTab === "tools" && /*#__PURE__*/React.createElement(_components_tools_settings__WEBPACK_IMPORTED_MODULE_12__["default"], {
     settings: settings,
     exportedSettings: exportedSettings,
     setExportedSettings: setExportedSettings,
@@ -7862,7 +7867,9 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
     background = _ref$background === void 0 ? {} : _ref$background,
     _ref$path = _ref.path,
     path = _ref$path === void 0 ? [] : _ref$path,
-    handleSettingChange = _ref.handleSettingChange;
+    handleSettingChange = _ref.handleSettingChange,
+    _ref$blur = _ref.blur,
+    blur = _ref$blur === void 0 ? false : _ref$blur;
   var type = background.type || "color";
   var color = background.color || "#ffffff";
   var gradient = background.gradient || "";
@@ -7872,6 +7879,7 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
   var size = image.size || "cover";
   var repeat = image.repeat || "no-repeat";
   var opacity = (_background$opacity = background.opacity) !== null && _background$opacity !== void 0 ? _background$opacity : 1;
+  var filter = background === null || background === void 0 ? void 0 : background.filter;
   return /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: title,
     defaultOpen: false
@@ -8053,7 +8061,24 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "repeat"]), val);
     }
-  })))));
+  })))), blur && /*#__PURE__*/React.createElement("div", {
+    className: "background-opacity-slider",
+    style: {
+      marginTop: "16px"
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Backdrop Filter", "th-login"),
+    value: filter,
+    onChange: function onChange(val) {
+      handleSettingChange("design", [].concat(_toConsumableArray(path), ["filter"]), val);
+    },
+    min: 0,
+    max: 30,
+    step: 1,
+    withInputField: true,
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BackgroundSettingsPanel);
 
@@ -8119,17 +8144,16 @@ var BorderBoxControl = function BorderBoxControl(_ref) {
   }, []); // run once on mount
 
   var handleChange = function handleChange(side, value) {
-    var cleanValue = parseInt(value, 10) || 0;
-    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    var clean = value === '' ? '' : Math.max(min, Math.min(max, parseInt(value, 10) || 0));
     if (syncAll) {
       onChange({
-        top: cleanValue,
-        right: cleanValue,
-        bottom: cleanValue,
-        left: cleanValue
+        top: clean,
+        right: clean,
+        bottom: clean,
+        left: clean
       });
     } else {
-      onChange(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, side, cleanValue)));
+      onChange(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, side, clean)));
     }
   };
   var toggleSync = function toggleSync() {
@@ -8170,7 +8194,7 @@ var BorderBoxControl = function BorderBoxControl(_ref) {
       type: "number",
       min: min,
       max: max,
-      value: values[side],
+      value: values[side] === 0 ? '0' : values[side] || '',
       onChange: function onChange(val) {
         return handleChange(side, val);
       }
@@ -8239,17 +8263,16 @@ var BorderRadiusControl = function BorderRadiusControl(_ref) {
     }
   }, []);
   var handleChange = function handleChange(corner, value) {
-    var cleanValue = parseInt(value, 10) || 0;
-    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    var clean = value === '' ? '' : Math.max(min, Math.min(max, parseInt(value, 10) || 0));
     if (syncAll) {
       onChange({
-        topLeft: cleanValue,
-        topRight: cleanValue,
-        bottomRight: cleanValue,
-        bottomLeft: cleanValue
+        topLeft: clean,
+        topRight: clean,
+        bottomRight: clean,
+        bottomLeft: clean
       });
     } else {
-      onChange(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, corner, cleanValue)));
+      onChange(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, corner, clean)));
     }
   };
   var toggleSync = function toggleSync() {
@@ -8304,7 +8327,7 @@ var BorderRadiusControl = function BorderRadiusControl(_ref) {
       type: "number",
       min: min,
       max: max,
-      value: values[key],
+      value: values[key] === 0 ? '0' : values[key] || '',
       onChange: function onChange(val) {
         return handleChange(key, val);
       }
@@ -8368,7 +8391,7 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["width"]), newVal);
     },
     min: 0,
-    max: 20
+    max: 1000
   })), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_5__.CustomSelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Style", "th-login"),
     value: style,
@@ -8412,75 +8435,10 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["radius"]), newVal);
     },
     min: 0,
-    max: 20
+    max: 1000
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BorderSettingsPanel);
-
-/***/ }),
-
-/***/ "./src/admin/components/design-editor/foreground-panel.js":
-/*!****************************************************************!*\
-  !*** ./src/admin/components/design-editor/foreground-panel.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-
-
-var ForegroundSettingsPanel = function ForegroundSettingsPanel(_ref) {
-  var foreground = _ref.foreground,
-    path = _ref.path,
-    handleSettingChange = _ref.handleSettingChange;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "thlogin-panel"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
-    label: /*#__PURE__*/React.createElement("span", {
-      className: "thlogin-range-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Blur', 'th-login')),
-    value: parseInt(foreground.blur),
-    min: 0,
-    max: 20,
-    onChange: function onChange(value) {
-      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["blur"]), "".concat(value, "px"));
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
-    label: /*#__PURE__*/React.createElement("span", {
-      className: "thlogin-range-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Brightness', 'th-login')),
-    value: parseInt(foreground.brightness),
-    min: 50,
-    max: 150,
-    onChange: function onChange(value) {
-      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["brightness"]), "".concat(value, "%"));
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
-    label: /*#__PURE__*/React.createElement("span", {
-      className: "thlogin-range-label"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Contrast', 'th-login')),
-    value: parseInt(foreground.contrast),
-    min: 50,
-    max: 200,
-    onChange: function onChange(value) {
-      return handleSettingChange("design", [].concat(_toConsumableArray(path), ["contrast"]), "".concat(value, "%"));
-    }
-  }));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ForegroundSettingsPanel);
 
 /***/ }),
 
@@ -8530,7 +8488,7 @@ var PaddingSettingsPanel = function PaddingSettingsPanel(_ref) {
     _ref$min = _ref.min,
     min = _ref$min === void 0 ? 0 : _ref$min,
     _ref$max = _ref.max,
-    max = _ref$max === void 0 ? 100 : _ref$max;
+    max = _ref$max === void 0 ? 1000 : _ref$max;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     syncAll = _useState2[0],
@@ -8545,18 +8503,17 @@ var PaddingSettingsPanel = function PaddingSettingsPanel(_ref) {
   }, []); // run only on mount
 
   var handlePaddingChange = function handlePaddingChange(side, value) {
-    var cleanValue = parseInt(value, 10) || 0;
-    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    var clean = value === '' ? '' : Math.max(min, Math.min(max, parseInt(value, 10) || 0));
     if (syncAll) {
       var newPadding = {
-        top: cleanValue,
-        right: cleanValue,
-        bottom: cleanValue,
-        left: cleanValue
+        top: clean,
+        right: clean,
+        bottom: clean,
+        left: clean
       };
       handleSettingChange('design', _toConsumableArray(path), newPadding);
     } else {
-      handleSettingChange('design', [].concat(_toConsumableArray(path), [side]), cleanValue);
+      handleSettingChange('design', [].concat(_toConsumableArray(path), [side]), clean);
     }
   };
   var toggleSync = function toggleSync() {
@@ -8616,7 +8573,7 @@ var PaddingSettingsPanel = function PaddingSettingsPanel(_ref) {
       type: "number",
       min: min,
       max: max,
-      value: padding[key] || 0,
+      value: padding[key] === 0 ? '0' : padding[key] || '',
       onChange: function onChange(val) {
         return handlePaddingChange(key, val);
       }
@@ -8650,8 +8607,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _contant__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../contant */ "./src/admin/contant.js");
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icons */ "./src/admin/components/icons.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/envelope.js");
-/* harmony import */ var _design_editor_foreground_panel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./design-editor/foreground-panel */ "./src/admin/components/design-editor/foreground-panel.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/envelope.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var _excluded = ["base", "hover", "active"];
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -8668,7 +8624,6 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
 function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
-
 
 
 
@@ -8870,7 +8825,7 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Register', 'th-login'))));
 };
 var DesignEditor = function DesignEditor(_ref5) {
-  var _settings$design$moda, _settings$design$form, _settings$design$form2, _settings$design$form3;
+  var _settings$design$moda, _settings$design$moda2, _settings$design$form, _settings$design$form2, _settings$design$form3;
   var settings = _ref5.settings,
     handleSettingChange = _ref5.handleSettingChange;
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("login"),
@@ -8957,7 +8912,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     height: '100%',
     '--th-input-color': inputBase.color,
     '--th-backgroundColor': "0 0 0 1000px ".concat(inputBase.background, " inset"),
-    '--thlogin-foreground-filter': "\n\t\tblur(".concat(settings.design.modal.foreground.blur || '0px', ")\n\t\tbrightness(").concat(settings.design.modal.foreground.brightness || '100%', ")\n\t\tcontrast(").concat(settings.design.modal.foreground.contrast || '100%', ")")
+    backdropFilter: "blur(".concat((_settings$design$moda2 = settings.design.modal) === null || _settings$design$moda2 === void 0 || (_settings$design$moda2 = _settings$design$moda2.modal_background) === null || _settings$design$moda2 === void 0 ? void 0 : _settings$design$moda2.filter, "px)")
   });
   var formStyle = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle((_settings$design$form = settings.design.form) === null || _settings$design$form === void 0 ? void 0 : _settings$design$form.form_background)), getBorderStyle((_settings$design$form2 = settings.design.form) === null || _settings$design$form2 === void 0 ? void 0 : _settings$design$form2.form_border)), getPaddingStyle((_settings$design$form3 = settings.design.form) === null || _settings$design$form3 === void 0 ? void 0 : _settings$design$form3.form_padding)), {}, {
     gap: "".concat(settings.design.form.form_gap || 0, "px"),
@@ -8978,7 +8933,7 @@ var DesignEditor = function DesignEditor(_ref5) {
       margin: 0
     };
     var inputProps = {
-      base: _objectSpread({
+      base: _objectSpread(_objectSpread({
         padding: '10px',
         border: '1px solid #ccc',
         width: '100%',
@@ -8989,9 +8944,15 @@ var DesignEditor = function DesignEditor(_ref5) {
         fontWeight: inputBase.typography.fontWeight
       }, settings.design.icon.icon_position === 'inside-input' ? {
         paddingLeft: '30px'
-      } : {}),
+      } : {}), {}, {
+        '--hover-input-color': inputBase.activecolor
+      }),
+      hover: {
+        borderColor: inputBase.activecolor
+      },
       active: {
-        backgroundColor: inputBase.activeBackground
+        backgroundColor: inputBase.activeBackground,
+        borderColor: inputBase.activecolor
       }
     };
     var buttonProps = {
@@ -9232,12 +9193,12 @@ var DesignEditor = function DesignEditor(_ref5) {
       }, type === 'stack' ? 'Label Top' : type === 'inline' ? 'Label Inline' : type === 'floating' ? 'Floating Label' : 'Placeholder Only'), type === 'stack' && /*#__PURE__*/React.createElement("div", {
         className: "preview preview-stack"
       }, /*#__PURE__*/React.createElement("label", null, settings.design.icon.icon_position === 'with-label' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
         className: "email-icon label-icon"
       }), "Email Address"), /*#__PURE__*/React.createElement("div", {
         className: "input-wrap"
       }, settings.design.icon.icon_position === 'inside-input' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
         className: "email-icon input-icon"
       }), /*#__PURE__*/React.createElement("input", {
         type: "email",
@@ -9248,7 +9209,7 @@ var DesignEditor = function DesignEditor(_ref5) {
       }, /*#__PURE__*/React.createElement("label", null, "Email:"), /*#__PURE__*/React.createElement("div", {
         className: "input-wrap"
       }, settings.design.icon.icon_position === 'inside-input' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
         className: "email-icon input-icon"
       }), /*#__PURE__*/React.createElement("input", {
         type: "email",
@@ -9259,7 +9220,7 @@ var DesignEditor = function DesignEditor(_ref5) {
       }, /*#__PURE__*/React.createElement("div", {
         className: "input-wrap"
       }, settings.design.icon.icon_position === 'inside-input' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
         className: "email-icon input-icon"
       }), /*#__PURE__*/React.createElement("input", {
         type: "email",
@@ -9276,7 +9237,7 @@ var DesignEditor = function DesignEditor(_ref5) {
       }, /*#__PURE__*/React.createElement("div", {
         className: "input-wrap placehold-input ".concat(floatingFocusedplace ? 'focused' : '')
       }, settings.design.icon.icon_position === 'inside-input' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Icon, {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
         className: "email-icon input-icon"
       }), /*#__PURE__*/React.createElement("input", {
         type: "email",
@@ -9361,18 +9322,11 @@ var DesignEditor = function DesignEditor(_ref5) {
     }), /*#__PURE__*/React.createElement("span", null, option.label), getLoginPreviewUrl(option)));
   }))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Foreground", "th-login"),
-    foreground: settings.design.modal.modal_background,
+    background: settings.design.modal.modal_background,
     path: ["modal", "modal_background"],
-    handleSettingChange: handleSettingChange
-  }), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Foreground Filter", "th-login"),
-    defaultOpen: false,
-    className: "deisgn-layout-adjust"
-  }, /*#__PURE__*/React.createElement(_design_editor_foreground_panel__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    foreground: settings.design.modal.foreground,
-    path: ["modal", "foreground"],
-    handleSettingChange: handleSettingChange
-  })), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    handleSettingChange: handleSettingChange,
+    blur: true
+  }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
     background: settings.design.form.form_background,
     path: ["form", "form_background"],
@@ -9493,6 +9447,17 @@ var DesignEditor = function DesignEditor(_ref5) {
     value: settings.design.Input.color,
     onChange: function onChange(e) {
       return handleSettingChange("design", ["Input", "color"], e.target.value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Active Color", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "color",
+    className: "th-color-input",
+    value: settings.design.Input.activecolor,
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["Input", "activecolor"], e.target.value);
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row"
@@ -10694,6 +10659,114 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
 
 /***/ }),
 
+/***/ "./src/admin/components/email-settings.js":
+/*!************************************************!*\
+  !*** ./src/admin/components/email-settings.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var EmailSettings = function EmailSettings(_ref) {
+  var _settings$security$em, _settings$security$em2, _settings$security$em3, _settings$security$em4, _settings$security$em5, _settings$security$em6;
+  var settings = _ref.settings,
+    handleSettingChange = _ref.handleSettingChange;
+  return /*#__PURE__*/React.createElement("section", {
+    className: "settings-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "settings-card"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, /*#__PURE__*/React.createElement("i", {
+    className: "dashicons dashicons-email"
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
+    className: "settings-group"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "group-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Email Verification", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require users to verify their email after registration.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$security$em = settings.security.email_verification) === null || _settings$security$em === void 0 ? void 0 : _settings$security$em.enabled) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["email_verification", "enabled"], isChecked);
+    }
+  }))), ((_settings$security$em2 = settings.security.email_verification) === null || _settings$security$em2 === void 0 ? void 0 : _settings$security$em2.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: ((_settings$security$em3 = settings.security.email_verification) === null || _settings$security$em3 === void 0 ? void 0 : _settings$security$em3.from_name) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "from_name"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    type: "email",
+    value: ((_settings$security$em4 = settings.security.email_verification) === null || _settings$security$em4 === void 0 ? void 0 : _settings$security$em4.from_email) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "from_email"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: ((_settings$security$em5 = settings.security.email_verification) === null || _settings$security$em5 === void 0 ? void 0 : _settings$security$em5.email_subject) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "email_subject"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+    value: ((_settings$security$em6 = settings.security.email_verification) === null || _settings$security$em6 === void 0 ? void 0 : _settings$security$em6.email_content) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "email_content"], value);
+    }
+  }))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmailSettings);
+
+/***/ }),
+
 /***/ "./src/admin/components/form-feild-setiings.js":
 /*!*****************************************************!*\
   !*** ./src/admin/components/form-feild-setiings.js ***!
@@ -11335,7 +11408,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "th-login")
   }, {
     key: "shortcodes",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Short Codes", "th-login")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ShortCodes", "th-login")
   }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
@@ -11860,7 +11933,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var SecuritySettings = function SecuritySettings(_ref) {
-  var _settings$general$man2, _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5, _settings$security$re6, _settings$general$man3, _settings$general$man4, _settings$security$em, _settings$security$em2, _settings$security$em3, _settings$security$em4, _settings$security$em5, _settings$security$em6, _settings$security$se, _settings$security$se2, _settings$security$se3, _settings$security$se4, _settings$security$se5, _settings$security$se6;
+  var _settings$general$man2, _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5, _settings$security$re6, _settings$general$man3, _settings$general$man4, _settings$security$se, _settings$security$se2, _settings$security$se3, _settings$security$se4, _settings$security$se5, _settings$security$se6;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("bruteforce"),
@@ -11891,9 +11964,6 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, {
     key: "manualApproval",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual Approval", "th-login")
-  }, {
-    key: "emailVerifictaion",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Verifictaion", "th-login")
   }, {
     key: "autologout",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto logout", "th-login")
@@ -12208,77 +12278,6 @@ var SecuritySettings = function SecuritySettings(_ref) {
       },
       disabled: approvingId === user.id
     }, approvingId === user.id ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approving...", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approve", "th-login")));
-  }))))), activeTab === 'emailVerifictaion' && /*#__PURE__*/React.createElement("div", {
-    className: "settings-group"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Email Verification", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require users to verify their email after registration.", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    __nextHasNoMarginBottom: true,
-    checked: ((_settings$security$em = settings.security.email_verification) === null || _settings$security$em === void 0 ? void 0 : _settings$security$em.enabled) || false,
-    onChange: function onChange(isChecked) {
-      return handleSettingChange("security", ["email_verification", "enabled"], isChecked);
-    }
-  }))), ((_settings$security$em2 = settings.security.email_verification) === null || _settings$security$em2 === void 0 ? void 0 : _settings$security$em2.enabled) && /*#__PURE__*/React.createElement("div", {
-    className: "menu-item-group"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    value: ((_settings$security$em3 = settings.security.email_verification) === null || _settings$security$em3 === void 0 ? void 0 : _settings$security$em3.from_name) || "",
-    onChange: function onChange(value) {
-      return handleSettingChange("security", ["email_verification", "from_name"], value);
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    type: "email",
-    value: ((_settings$security$em4 = settings.security.email_verification) === null || _settings$security$em4 === void 0 ? void 0 : _settings$security$em4.from_email) || "",
-    onChange: function onChange(value) {
-      return handleSettingChange("security", ["email_verification", "from_email"], value);
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    value: ((_settings$security$em5 = settings.security.email_verification) === null || _settings$security$em5 === void 0 ? void 0 : _settings$security$em5.email_subject) || "",
-    onChange: function onChange(value) {
-      return handleSettingChange("security", ["email_verification", "email_subject"], value);
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-row"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "th-login")), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
-    value: ((_settings$security$em6 = settings.security.email_verification) === null || _settings$security$em6 === void 0 ? void 0 : _settings$security$em6.email_content) || "",
-    onChange: function onChange(value) {
-      return handleSettingChange("security", ["email_verification", "email_content"], value);
-    }
   }))))), activeTab === 'autologout' && /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
@@ -12729,6 +12728,10 @@ var TABS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security", "th-login"),
   icon: "shield"
 }, {
+  id: "email",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "th-login"),
+  icon: "email"
+}, {
   id: "tools",
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "th-login"),
   icon: "admin-tools"
@@ -12903,6 +12906,7 @@ var design = {
       color: "#5954549c",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
       opacity: 1,
+      filter: 10,
       image: {
         url: "",
         // Image URL
@@ -12912,12 +12916,6 @@ var design = {
         // 'cover' | 'contain' | 'auto'
         repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
       }
-    },
-    foreground: {
-      blur: '4px',
-      brightness: '100%',
-      contrast: '100%',
-      opacity: 1
     },
     modal_input_layout: "stack"
   },
@@ -12972,6 +12970,7 @@ var design = {
   Input: {
     color: "#8392A5",
     labelcolor: "#262626",
+    activecolor: "#262626",
     labeltypography: {
       size: "16px",
       fontWeight: 500

@@ -70,7 +70,7 @@ class THLogin_Login_Form {
         echo '<div class="thlogin-form-links">';
         echo '<a href="#" class="thlogin-link" data-th-popup-action="forgot-password">' . esc_html__('Forgot Password?', 'th-login') . '</a>';
 
-        if (!empty($general['form_type']) && $general['form_type'] === 'double' && $allow_user_registration) {
+        if ( $allow_user_registration) {
             echo '<span class="thlogin-link-separator">|</span>';
             echo '<a href="#" class="thlogin-link" data-th-popup-action="register">' . esc_html__('Register', 'th-login') . '</a>';
         }

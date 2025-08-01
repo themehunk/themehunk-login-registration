@@ -33,6 +33,11 @@ export const TABS = [
     icon: "shield"
   },
   {
+    id: "email",
+    label: __("Email Settings", "th-login"),
+    icon: "email"
+  },
+  {
     id: "tools",
     label: __("Tools", "th-login"),
     icon: "admin-tools"
@@ -212,18 +217,13 @@ export  const design = {
       color: "#5954549c",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
       opacity:1,
+      filter:10,
       image: {
         url: "",         // Image URL
         position: "center center",  // e.g. 'top left', 'center center'
         size: "cover",   // 'cover' | 'contain' | 'auto'
         repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
       }
-    },
-    foreground:{
-      blur      : '4px',
-			brightness : '100%',
-			contrast   : '100%',
-			opacity    : 1,
     },
     modal_input_layout: "stack",
   }, 
@@ -271,6 +271,7 @@ export  const design = {
   Input:{
     color:"#8392A5",
     labelcolor:"#262626",
+    activecolor: "#262626",
     labeltypography:{size: "16px", fontWeight: 500},
     background:"#ffffff",
     typography:{size: "14px", fontWeight: 300}

@@ -4895,3 +4895,8 @@ width:max-content;
   border-color: #28a745 !important;
   color: #fff !important;
 }
+
+
+.th-preview-input:hover{
+  border-color: var(--hover-input-color) !important;
+}

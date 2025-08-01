@@ -7,7 +7,7 @@ import {
 } from '@wordpress/components';
 import AccordionSection from "./accordion-section";
 
-const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSettingChange }) => {
+const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSettingChange, blur=false }) => {
 	const type = background.type || "color";
 	const color = background.color || "#ffffff";
 	const gradient = background.gradient || "";
@@ -17,6 +17,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 	const size = image.size || "cover";
 	const repeat = image.repeat || "no-repeat";
 	const opacity = background.opacity ?? 1;
+	const filter  = background?.filter;
 
 	return (
 		<AccordionSection title={title} defaultOpen={false}>
@@ -201,6 +202,26 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 				</>
 			)}
 
+			{blur && (
+
+				<div className="background-opacity-slider" style={{ marginTop: "16px" }}>
+					<RangeControl
+						label={__("Backdrop Filter", "th-login")}
+						value={filter}
+						onChange={(val) => {
+							handleSettingChange("design", [...path, "filter"], val);
+						}}
+						min={0}
+						max={30}
+						step={1}
+						withInputField
+						__next40pxDefaultSize={true}
+						__nextHasNoMarginBottom={true}
+					/>
+				</div> 
+			)}
+
+
 			{/* <div className="background-opacity-slider" style={{ marginTop: "16px" }}>
 				<RangeControl
 					label={__("Opacity", "th-login")}
@@ -216,6 +237,8 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 					__nextHasNoMarginBottom={true}
 				/>
 			</div> */}
+
+
 		</AccordionSection>
 	);
 };

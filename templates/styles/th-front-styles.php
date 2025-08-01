@@ -96,6 +96,8 @@ class THLogin_Style_Renderer {
                 display: flex;
                 flex-direction: column;
                 gap: <?php echo esc_attr( $d['form']['form_gap'] ); ?>px;
+                align-items: center;
+                justify-content: center;
             }
 
             .thlogin-form h3 {
@@ -203,9 +205,22 @@ class THLogin_Style_Renderer {
                 width: 85% !important;
             }
 
+            .icon-activated-input:hover {
+                border-color: <?php echo esc_attr( $d['Input']['activecolor'] ); ?> !important;
+            }
+
+            .icon-activated-input:active {
+                border-color: <?php echo esc_attr( $d['Input']['activecolor'] ); ?> !important;
+            }
+
+            .icon-activated-input:focus-visible {
+                border-color: <?php echo esc_attr( $d['Input']['activecolor'] ); ?> !important;
+                outline: none !important;
+            }
+
             .thlogin-popup-form-container input::placeholder {
                 color: <?php echo esc_attr( $d['Input']['color'] ); ?>;
-               font-size: <?php echo esc_attr( $d['Input']['typography']['size'] ); ?>;
+                font-size: <?php echo esc_attr( $d['Input']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['Input']['typography']['fontWeight'] ); ?>;
             }
 

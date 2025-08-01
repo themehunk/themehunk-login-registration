@@ -58,14 +58,6 @@ class TH_Sanitization_validation {
 
 		$sanitized['modal']['modal_input_layout'] = sanitize_text_field( $settings['modal']['modal_input_layout'] ?? 'stack' );
 
-		$foreground = $settings['modal']['foreground'] ?? array();
-		$sanitized['modal']['foreground'] = array(
-			'blur'       => sanitize_text_field( $foreground['blur'] ?? '4px' ),
-			'brightness' => sanitize_text_field( $foreground['brightness'] ?? '100%' ),
-			'contrast'   => sanitize_text_field( $foreground['contrast'] ?? '100%' ),
-			'opacity'    => floatval( $foreground['opacity'] ?? 1 ),
-		);
-
 		foreach ( [ 'modal', 'form' ] as $section ) {
 			$bg = $settings[ $section ][ "{$section}_background" ] ?? array();
 			$sanitized[ $section ][ "{$section}_background" ] = array(
@@ -73,6 +65,7 @@ class TH_Sanitization_validation {
 				'color'    => $this->sanitize_color_input( $bg['color'] ?? ( $section === 'modal' ? '#5954549c' : '#ffffff' ) ),
 				'gradient' => sanitize_text_field( $bg['gradient'] ?? 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)' ),
 				'opacity'  => floatval( $bg['opacity'] ?? 1 ),
+				'filter'   => floatval( $bg['filter'] ?? 10 ),
 				'image'    => array(
 					'url'      => esc_url_raw( $bg['image']['url'] ?? '' ),
 					'position' => sanitize_text_field( $bg['image']['position'] ?? 'center center' ),
@@ -123,6 +116,7 @@ class TH_Sanitization_validation {
 		$sanitized['Input'] = array(
 			'color'        => $this->sanitize_color_input( $input['color'] ?? '#8392A5' ),
 			'labelcolor'   => $this->sanitize_color_input( $input['labelcolor'] ?? '#262626' ),
+			'activecolor'   => $this->sanitize_color_input( $input['activecolor'] ?? '#262626' ),
 			'background'   => $this->sanitize_color_input( $input['background'] ?? '#ffffff' ),
 			'typography'   => array(
 				'size'       => sanitize_text_field( $input['typography']['size'] ?? '14px' ),
@@ -350,6 +344,7 @@ class TH_Sanitization_validation {
 			'heading_color'              => $settings['heading']['color'] ?? '',
 			'input_color'                => $settings['Input']['color'] ?? '',
 			'input_labelcolor'           => $settings['Input']['labelcolor'] ?? '',
+			'input_activecolor'           => $settings['Input']['activecolor'] ?? '',
 			'input_background'           => $settings['Input']['background'] ?? '',
 			'button_color'               => $settings['button']['color'] ?? '',
 			'button_background'          => $settings['button']['background'] ?? '',
@@ -416,22 +411,6 @@ class TH_Sanitization_validation {
 				);
 			}
 		}
-
-		// Validate modal foreground settings
-		$foreground = $settings['modal']['foreground'] ?? array();
-		if ( isset( $foreground['blur'] ) && ! preg_match( '/^\d+(\.\d+)?(px)?$/', $foreground['blur'] ) ) {
-			$errors->add( 'invalid_foreground_blur', esc_html__( 'Foreground blur must be a valid CSS length (e.g., 4px).', 'th-login' ) );
-		}
-		foreach ( [ 'brightness', 'contrast' ] as $key ) {
-			if ( isset( $foreground[ $key ] ) && ! preg_match( '/^\d+%$/', $foreground[ $key ] ) ) {
-				// translators: %s is a comma-separated list of allowed modal input layout values.
-				$errors->add( "invalid_foreground_{$key}", sprintf( esc_html__( 'Foreground %s must be a percentage value (e.g., 100%%).', 'th-login' ), $key ) );
-			}
-		}
-		if ( isset( $foreground['opacity'] ) && ( $foreground['opacity'] < 0 || $foreground['opacity'] > 1 ) ) {
-			$errors->add( 'invalid_foreground_opacity', esc_html__( 'Foreground opacity must be between 0 and 1.', 'th-login' ) );
-		}
-
 
 		return $errors->has_errors() ? $errors : true;
 	}

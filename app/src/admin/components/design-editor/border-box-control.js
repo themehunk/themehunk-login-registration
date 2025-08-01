@@ -23,23 +23,23 @@ export const BorderBoxControl = ({
   }, []); // run once on mount
 
   const handleChange = (side, value) => {
-    let cleanValue = parseInt(value, 10) || 0;
-    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    const clean = value === '' ? '' : Math.max(min, Math.min(max, parseInt(value, 10) || 0));
 
     if (syncAll) {
       onChange({
-        top: cleanValue,
-        right: cleanValue,
-        bottom: cleanValue,
-        left: cleanValue,
+        top: clean,
+        right: clean,
+        bottom: clean,
+        left: clean,
       });
     } else {
       onChange({
         ...values,
-        [side]: cleanValue,
+        [side]: clean,
       });
     }
   };
+
 
   const toggleSync = () => {
     const newSyncState = !syncAll;
@@ -86,7 +86,7 @@ export const BorderBoxControl = ({
               type="number"
               min={min}
               max={max}
-              value={values[side]}
+             value={values[side] === 0 ? '0' : values[side] || ''}
               onChange={(val) => handleChange(side, val)}
             />
           </div>

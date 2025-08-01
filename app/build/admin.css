@@ -4705,4 +4705,8 @@ input[type=range]::-webkit-slider-thumb {
   color: #fff !important;
 }
 
+.th-preview-input:hover {
+  border-color: var(--hover-input-color) !important;
+}
+
 /*# sourceMappingURL=admin.css.map*/

@@ -22,7 +22,7 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
               handleSettingChange("design", [...path, "width"], newVal)
             }
             min={0}
-            max={20}
+             max={1000}
           />
         </div>
 
@@ -63,7 +63,7 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
               handleSettingChange("design", [...path, "radius"], newVal)
             }
             min={0}
-            max={20}
+            max={1000}
           />
         </div>
       </AccordionSection>

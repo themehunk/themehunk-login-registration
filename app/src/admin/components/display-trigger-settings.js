@@ -44,17 +44,17 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
     const renderTabs = () => (
         <div className="custom-tabs">
-        {tabs.map((tab) => (
-            <button
-            key={tab.key}
-            className={`custom-tab-button ${
-                activeTab === tab.key ? "active" : ""
-            }`}
-            onClick={() => setActiveTab(tab.key)}
-            >
-            {tab.label}
-            </button>
-        ))}
+            {tabs.map((tab) => (
+                <button
+                key={tab.key}
+                className={`custom-tab-button ${
+                    activeTab === tab.key ? "active" : ""
+                }`}
+                onClick={() => setActiveTab(tab.key)}
+                >
+                {tab.label}
+                </button>
+            ))}
         </div>
     );
 
@@ -102,31 +102,34 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
 
                         {settings.display_triggers.auto_open_on_load?.enabled && (
-                            <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                <h4>{__("Delay (seconds)", "th-login")}</h4>
-                                <p className="description">
-                                    {__("Delay before showing the modal", "th-login")}
-                                </p>
-                                </div>
-                                <div className="setting-control text-small-box">
-                                <TextControl
-                                                                __next40pxDefaultSize = {true}
-                                    __nextHasNoMarginBottom={true}
-                                    type="number"
-                                    min="0"
-                                    value={
-                                    settings.display_triggers.auto_open_on_load
-                                        ?.delay_seconds || 0
-                                    }
-                                    onChange={(newValue) =>
-                                    handleSettingChange(
-                                        "display_triggers",
-                                        ["auto_open_on_load", "delay_seconds"],
-                                        parseInt(newValue, 10)
-                                    )
-                                    }
-                                />
+
+                            <div className="menu-item-group login-group">
+                                <div className="setting-row under-small-portion">
+                                    <div className="setting-label">
+                                    <h4>{__("Delay (seconds)", "th-login")}</h4>
+                                    <p className="description">
+                                        {__("Delay before showing the modal", "th-login")}
+                                    </p>
+                                    </div>
+                                    <div className="setting-control text-small-box">
+                                    <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                        __nextHasNoMarginBottom={true}
+                                        type="number"
+                                        min="0"
+                                        value={
+                                        settings.display_triggers.auto_open_on_load
+                                            ?.delay_seconds || 0
+                                        }
+                                        onChange={(newValue) =>
+                                        handleSettingChange(
+                                            "display_triggers",
+                                            ["auto_open_on_load", "delay_seconds"],
+                                            parseInt(newValue, 10)
+                                        )
+                                        }
+                                    />
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -149,23 +152,26 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
 
                         {settings.display_triggers.auto_open_on_scroll?.enabled && (
-                            <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                <h4>{__("Scroll Percentage (%)", "th-login")}</h4>
-                                <p className="description">
-                                    {__("Percentage of the page scrolled before the modal opens.", "th-login")}
-                                </p>
-                                </div>
-                                <div className="setting-control text-small-box">
-                                <TextControl
-                                                                __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
-                                    type="number"
-                                    min="1"
-                                    max="100"
-                                    value={settings.display_triggers.auto_open_on_scroll?.scroll_percentage || 50}
-                                    onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_on_scroll', 'scroll_percentage'], parseInt(newValue, 10))}
-                                />
+
+                            <div className="menu-item-group login-group">
+                                <div className="setting-row under-small-portion">
+                                    <div className="setting-label">
+                                    <h4>{__("Scroll Percentage (%)", "th-login")}</h4>
+                                    <p className="description">
+                                        {__("Percentage of the page scrolled before the modal opens.", "th-login")}
+                                    </p>
+                                    </div>
+                                    <div className="setting-control text-small-box">
+                                    <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                    __nextHasNoMarginBottom={true}
+                                        type="number"
+                                        min="1"
+                                        max="100"
+                                        value={settings.display_triggers.auto_open_on_scroll?.scroll_percentage || 50}
+                                        onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_on_scroll', 'scroll_percentage'], parseInt(newValue, 10))}
+                                    />
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -205,24 +211,27 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                         </div>
 
                         {settings.display_triggers.auto_open_on_time_on_page?.enabled && (
-                            <div className="setting-row under-small-portion">
-                                <div className="setting-label">
-                                <h4>{__("Time on Page (seconds)", "th-login")}</h4>
-                                <p className="description">
-                                    {__("Time in seconds before the modal opens.", "th-login")}
-                                </p>
+
+                            <div className="menu-item-group login-group">
+                                <div className="setting-row under-small-portion">
+                                    <div className="setting-label">
+                                    <h4>{__("Time on Page (seconds)", "th-login")}</h4>
+                                    <p className="description">
+                                        {__("Time in seconds before the modal opens.", "th-login")}
+                                    </p>
+                                    </div>
+                                    <div className="setting-control text-small-box">
+                                    <TextControl
+                                                                    __next40pxDefaultSize = {true}
+                                        __nextHasNoMarginBottom={true}
+                                        type="number"
+                                        min="1"
+                                        value={settings.display_triggers.auto_open_on_time_on_page?.time_seconds || 10}
+                                        onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'time_seconds'], parseInt(newValue, 10))}
+                                    />
+                                    </div>
                                 </div>
-                                <div className="setting-control text-small-box">
-                                <TextControl
-                                                                __next40pxDefaultSize = {true}
-                                    __nextHasNoMarginBottom={true}
-                                    type="number"
-                                    min="1"
-                                    value={settings.display_triggers.auto_open_on_time_on_page?.time_seconds || 10}
-                                    onChange={(newValue) => handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'time_seconds'], parseInt(newValue, 10))}
-                                />
-                                </div>
-                            </div>
+                             </div>
                         )}
 
                     </div>
@@ -691,36 +700,39 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         {settings.display_triggers.pop_up_frequency?.enabled && (
                         <>
+                          <div className="menu-item-group login-group">
                             <div className="setting-row under-small-portion">
-                            <div className="setting-label">
-                                <h4>{__("Frequency Type", "th-login")}</h4>
-                                <p className="description">
-                                {__("How to limit pop-up frequency", "th-login")}
-                                </p>
-                            </div>
-                                <div className="setting-control select-control-settings-popup">
-                                    <select
-                                        value={
-                                            settings.display_triggers.pop_up_frequency
-                                            ?.type || "session"
-                                        }
-                                        onChange={(e) =>
-                                            handleSettingChange(
-                                            "display_triggers",
-                                            ["pop_up_frequency", "type"],
-                                            e.target.value
-                                            )
-                                        }
-                                        >
-                                        <option value="session">
-                                            {__("Once per session", "th-login")}
-                                        </option>
-                                        <option value="days">
-                                            {__("Once every X days", "th-login")}
-                                        </option>
-                                    </select>
+                                <div className="setting-label">
+                                    <h4>{__("Frequency Type", "th-login")}</h4>
+                                    <p className="description">
+                                    {__("How to limit pop-up frequency", "th-login")}
+                                    </p>
                                 </div>
+
+
+                                <div className="setting-control thlogin-toggle-group" style={{maxWidth: '350px'}}>
+                                    <div className="custom-tabs">
+                                        {[
+                                        { key: "session", label: __("Once per session", "th-login") },
+                                        { key: "days", label: __("Once every X days", "th-login") },
+                                        ].map((tab) => (
+                                        <button
+                                            key={tab.key}
+                                            className={`custom-tab-button ${
+                                            settings.display_triggers.pop_up_frequency?.type === tab.key ? "active" : ""
+                                            }`}
+                                            onClick={() =>
+                                            handleSettingChange("display_triggers", ["pop_up_frequency", "type"], tab.key)
+                                            }
+                                        >
+                                            {tab.label}
+                                        </button>
+                                        ))}
+                                    </div>
+                                </div>
+
                             </div>
+                          </div>
                             {settings.display_triggers.pop_up_frequency?.type ===
                             "days" && (
                             <div className="setting-row under-small-portion">
@@ -732,8 +744,8 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 </div>
                                 <div className="setting-control text-small-box">
                                 <TextControl
-                                                                __next40pxDefaultSize = {true}
-                                __nextHasNoMarginBottom={true}
+                                    __next40pxDefaultSize = {true}
+                                    __nextHasNoMarginBottom={true}
                                     type="number"
                                     min="1"
                                     value={

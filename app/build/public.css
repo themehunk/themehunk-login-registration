@@ -118,9 +118,9 @@ body.thlogin-modal-open {
 }
 
 .thlogin-form-submit {
-  margin-top: 20px;
   text-align: center;
   width: 100%;
+  margin: 0;
 }
 .thlogin-form-submit .thlogin-button .thlogin-spinner {
   display: inline-block;
@@ -135,10 +135,10 @@ body.thlogin-modal-open {
 }
 
 .thlogin-form-links {
-  margin-top: 15px;
   text-align: center;
   width: 100%;
   font-size: 14px;
+  margin: 0;
 }
 .thlogin-form-links a {
   color: #007cba;
@@ -449,6 +449,28 @@ body.thlogin-modal-open {
 
 .thlogin-form-field--terms a {
   text-decoration: none !important;
+}
+
+.thlogin-session-warning {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 15px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.thlogin-session-warning-inner button {
+  background: #0073aa;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=public.css.map*/

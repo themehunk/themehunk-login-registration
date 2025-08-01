@@ -7186,32 +7186,36 @@ var App = function App() {
     setIsLoading = _useState4[1];
   var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isSaving = _useState6[0],
-    setIsSaving = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    isSaved = _useState6[0],
+    setIsSaved = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    message = _useState8[0],
-    setMessage = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    isSaving = _useState8[0],
+    setIsSaving = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState0 = _slicedToArray(_useState9, 2),
-    exportedSettings = _useState0[0],
-    setExportedSettings = _useState0[1];
+    message = _useState0[0],
+    setMessage = _useState0[1];
   var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState10 = _slicedToArray(_useState1, 2),
-    importSettingsText = _useState10[0],
-    setImportSettingsText = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    exportedSettings = _useState10[0],
+    setExportedSettings = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState12 = _slicedToArray(_useState11, 2),
-    isResetConfirmOpen = _useState12[0],
-    setIsResetConfirmOpen = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)("general"),
+    importSettingsText = _useState12[0],
+    setImportSettingsText = _useState12[1];
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    activeTab = _useState14[0],
-    setActiveTab = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    isResetConfirmOpen = _useState14[0],
+    setIsResetConfirmOpen = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)("general"),
     _useState16 = _slicedToArray(_useState15, 2),
-    hasFetched = _useState16[0],
-    setHasFetched = _useState16[1]; // new flag
+    activeTab = _useState16[0],
+    setActiveTab = _useState16[1];
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState18 = _slicedToArray(_useState17, 2),
+    hasFetched = _useState18[0],
+    setHasFetched = _useState18[1]; // new flag
 
   var importTextareaRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var fetchSettings = /*#__PURE__*/function () {
@@ -7331,6 +7335,10 @@ var App = function App() {
               fetchedSettings = response.settings; // Deep merge again to ensure the state is fully consistent with backend and defaults.
               mergedSettings = _deepMerge(settings, fetchedSettings);
               setSettings(mergedSettings);
+              setIsSaved(true); // Show "Saved" message
+              setTimeout(function () {
+                return setIsSaved(false);
+              }, 3000); // Hide after 3 seconds
             } else {
               setMessage({
                 type: "error",
@@ -7522,7 +7530,7 @@ var App = function App() {
     className: "th-logo"
   }, "TH"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Settings", "thlogin")), message && /*#__PURE__*/React.createElement("div", {
     className: "notice-banner ".concat(message.type)
-  }, /*#__PURE__*/React.createElement("p", null, message.text)))), !isLoading && hasFetched && !(settings !== null && settings !== void 0 && settings.general) && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("p", null, message.text)))), !isLoading && hasFetched && !(settings !== null && settings !== void 0 && settings.general) ? /*#__PURE__*/React.createElement("div", {
     className: "thlogin-fetch-error-overlay"
   }, /*#__PURE__*/React.createElement("div", {
     className: "error-box"
@@ -7531,7 +7539,7 @@ var App = function App() {
   }), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unable to load settings", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorry, we're currently unable to fetch your settings. Please try again.", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     isSecondary: true,
     onClick: fetchSettings
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Retry", "thlogin")))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Retry", "thlogin")))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "admin-container"
   }, /*#__PURE__*/React.createElement("nav", {
     className: "admin-sidebar"
@@ -7583,8 +7591,12 @@ var App = function App() {
     isPrimary: true,
     onClick: handleSaveSettings,
     disabled: isSaving,
-    className: "save-button"
-  }, isSaving && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Save Changes", "thlogin"))), isResetConfirmOpen && /*#__PURE__*/React.createElement("div", {
+    className: "save-button ".concat(isSaved ? 'saved' : '')
+  }, isSaving ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: '8px'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saving...", "thlogin"))) : isSaved ? /*#__PURE__*/React.createElement(React.Fragment, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saved", "thlogin")) : /*#__PURE__*/React.createElement(React.Fragment, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Save Changes", "thlogin"))))), isResetConfirmOpen && /*#__PURE__*/React.createElement("div", {
     className: "confirmation-modal"
   }, /*#__PURE__*/React.createElement("div", {
     className: "modal-content"
@@ -8843,7 +8855,7 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
     style: applyButtonStyle(cancelStyle)
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Dashicon, {
     icon: "no-alt"
-  }))), form_type === 'double' && /*#__PURE__*/React.createElement("div", {
+  }))), settings.design.header.showButtons && form_type === 'double' && /*#__PURE__*/React.createElement("div", {
     className: "thlogin-prevuiew-form-toggle"
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",
@@ -8991,7 +9003,8 @@ var DesignEditor = function DesignEditor(_ref5) {
         padding: "".concat(buttonBase.padding.top, "px ").concat(buttonBase.padding.right, "px"),
         border: "".concat((_buttonBase$border$wi = (_buttonBase$border$wi2 = buttonBase.border.width) === null || _buttonBase$border$wi2 === void 0 ? void 0 : _buttonBase$border$wi2.top) !== null && _buttonBase$border$wi !== void 0 ? _buttonBase$border$wi : 1, "px ").concat(buttonBase.border.style || 'solid', " ").concat(buttonBase.border.color || '#000'),
         borderRadius: "".concat((_buttonBase$border$ra = (_buttonBase$border$ra2 = buttonBase.border.radius) === null || _buttonBase$border$ra2 === void 0 ? void 0 : _buttonBase$border$ra2.topLeft) !== null && _buttonBase$border$ra !== void 0 ? _buttonBase$border$ra : 4, "px"),
-        cursor: 'pointer'
+        cursor: 'pointer',
+        width: '100%'
       },
       hover: {
         backgroundColor: buttonBase.hoverBackground
@@ -9941,7 +9954,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
-  var _settings$display_tri, _settings$display_tri2, _settings$display_tri3, _settings$display_tri4, _settings$display_tri5, _settings$display_tri6, _settings$display_tri7, _settings$display_tri8, _settings$display_tri9, _settings$display_tri0, _settings$display_tri1, _settings$display_tri10, _settings$display_tri11, _settings$display_tri12, _settings$display_tri13, _settings$display_tri14, _settings$display_tri15, _settings$display_tri16, _suggestions$categori2, _settings$display_tri17, _settings$display_tri18, _settings$display_tri19, _settings$display_tri20, _settings$display_tri21, _suggestions$tags2, _settings$display_tri22, _settings$display_tri23, _settings$display_tri24, _settings$display_tri25, _settings$display_tri26, _settings$display_tri27, _settings$display_tri28, _settings$display_tri29, _settings$display_tri30, _settings$display_tri31, _settings$display_tri32, _settings$display_tri33, _settings$display_tri34, _settings$display_tri35, _settings$display_tri36, _settings$display_tri38, _settings$display_tri39, _settings$display_tri40, _settings$display_tri41, _settings$display_tri42;
+  var _settings$display_tri, _settings$display_tri2, _settings$display_tri3, _settings$display_tri4, _settings$display_tri5, _settings$display_tri6, _settings$display_tri7, _settings$display_tri8, _settings$display_tri9, _settings$display_tri0, _settings$display_tri1, _settings$display_tri10, _settings$display_tri11, _settings$display_tri12, _settings$display_tri13, _settings$display_tri14, _settings$display_tri15, _settings$display_tri16, _suggestions$categori2, _settings$display_tri17, _settings$display_tri18, _settings$display_tri19, _settings$display_tri20, _settings$display_tri21, _suggestions$tags2, _settings$display_tri22, _settings$display_tri23, _settings$display_tri24, _settings$display_tri25, _settings$display_tri26, _settings$display_tri27, _settings$display_tri28, _settings$display_tri30, _settings$display_tri31, _settings$display_tri32, _settings$display_tri33, _settings$display_tri34, _settings$display_tri35, _settings$display_tri36, _settings$display_tri38, _settings$display_tri39, _settings$display_tri40, _settings$display_tri41, _settings$display_tri42;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)("auto_open"),
@@ -10055,6 +10068,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
       return handleSettingChange("display_triggers", ["auto_open_on_load", "enabled"], isChecked);
     }
   }))), ((_settings$display_tri2 = settings.display_triggers.auto_open_on_load) === null || _settings$display_tri2 === void 0 ? void 0 : _settings$display_tri2.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group login-group"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -10071,7 +10086,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["auto_open_on_load", "delay_seconds"], parseInt(newValue, 10));
     }
-  }))), /*#__PURE__*/React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -10086,6 +10101,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
       return handleSettingChange('display_triggers', ['auto_open_on_scroll', 'enabled'], isChecked);
     }
   }))), ((_settings$display_tri5 = settings.display_triggers.auto_open_on_scroll) === null || _settings$display_tri5 === void 0 ? void 0 : _settings$display_tri5.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group login-group"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -10103,7 +10120,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_on_scroll', 'scroll_percentage'], parseInt(newValue, 10));
     }
-  }))), /*#__PURE__*/React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -10132,6 +10149,8 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
       return handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'enabled'], isChecked);
     }
   }))), ((_settings$display_tri9 = settings.display_triggers.auto_open_on_time_on_page) === null || _settings$display_tri9 === void 0 ? void 0 : _settings$display_tri9.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group login-group"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -10148,7 +10167,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     onChange: function onChange(newValue) {
       return handleSettingChange('display_triggers', ['auto_open_on_time_on_page', 'time_seconds'], parseInt(newValue, 10));
     }
-  })))), activeTab === "page_conditions" && /*#__PURE__*/React.createElement("div", {
+  }))))), activeTab === "page_conditions" && /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
@@ -10465,23 +10484,36 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
       return handleSettingChange("display_triggers", ["pop_up_frequency", "enabled"], isChecked);
     }
   }))), ((_settings$display_tri28 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri28 === void 0 ? void 0 : _settings$display_tri28.enabled) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group login-group"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
   }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frequency Type", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How to limit pop-up frequency", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control select-control-settings-popup"
-  }, /*#__PURE__*/React.createElement("select", {
-    value: ((_settings$display_tri29 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri29 === void 0 ? void 0 : _settings$display_tri29.type) || "session",
-    onChange: function onChange(e) {
-      return handleSettingChange("display_triggers", ["pop_up_frequency", "type"], e.target.value);
+    className: "setting-control thlogin-toggle-group",
+    style: {
+      maxWidth: '350px'
     }
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "session"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once per session", "th-login")), /*#__PURE__*/React.createElement("option", {
-    value: "days"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "th-login"))))), ((_settings$display_tri30 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri30 === void 0 ? void 0 : _settings$display_tri30.type) === "days" && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "custom-tabs"
+  }, [{
+    key: "session",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once per session", "th-login")
+  }, {
+    key: "days",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "th-login")
+  }].map(function (tab) {
+    var _settings$display_tri29;
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.key,
+      className: "custom-tab-button ".concat(((_settings$display_tri29 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri29 === void 0 ? void 0 : _settings$display_tri29.type) === tab.key ? "active" : ""),
+      onClick: function onClick() {
+        return handleSettingChange("display_triggers", ["pop_up_frequency", "type"], tab.key);
+      }
+    }, tab.label);
+  }))))), ((_settings$display_tri30 = settings.display_triggers.pop_up_frequency) === null || _settings$display_tri30 === void 0 ? void 0 : _settings$display_tri30.type) === "days" && /*#__PURE__*/React.createElement("div", {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -11828,13 +11860,25 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var SecuritySettings = function SecuritySettings(_ref) {
-  var _settings$general$man2, _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5, _settings$security$re6, _settings$general$man3, _settings$general$man4, _settings$security$em, _settings$security$em2, _settings$security$em3, _settings$security$em4, _settings$security$em5, _settings$security$em6;
+  var _settings$general$man2, _settings$security$br, _settings$security$br2, _settings$security$br3, _settings$security$br4, _settings$security$br5, _settings$security$re, _settings$security$re2, _settings$security$re3, _settings$security$re4, _settings$security$re5, _settings$security$re6, _settings$general$man3, _settings$general$man4, _settings$security$em, _settings$security$em2, _settings$security$em3, _settings$security$em4, _settings$security$em5, _settings$security$em6, _settings$security$se, _settings$security$se2, _settings$security$se3, _settings$security$se4, _settings$security$se5, _settings$security$se6;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("bruteforce"),
     _useState2 = _slicedToArray(_useState, 2),
     activeTab = _useState2[0],
     setActiveTab = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    pendingUsers = _useState4[0],
+    setPendingUsers = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    loadingUsers = _useState6[0],
+    setLoadingUsers = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    approvingId = _useState8[0],
+    setApprovingId = _useState8[1];
   var tabs = [{
     key: "bruteforce",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force", "th-login")
@@ -11850,9 +11894,10 @@ var SecuritySettings = function SecuritySettings(_ref) {
   }, {
     key: "emailVerifictaion",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Verifictaion", "th-login")
-  }
-  // { key: "twoFactorAuthentication", label: __("Two-Factor Authentication", "th-login") },
-  ];
+  }, {
+    key: "autologout",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto logout", "th-login")
+  }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
       className: "custom-tabs"
@@ -11866,18 +11911,6 @@ var SecuritySettings = function SecuritySettings(_ref) {
       }, tab.label);
     }));
   };
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
-    _useState4 = _slicedToArray(_useState3, 2),
-    pendingUsers = _useState4[0],
-    setPendingUsers = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState6 = _slicedToArray(_useState5, 2),
-    loadingUsers = _useState6[0],
-    setLoadingUsers = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null),
-    _useState8 = _slicedToArray(_useState7, 2),
-    approvingId = _useState8[0],
-    setApprovingId = _useState8[1];
   (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     var _settings$general$man;
     if (activeTab === "manualApproval" && (_settings$general$man = settings.general.manual_user_approval) !== null && _settings$general$man !== void 0 && _settings$general$man.enabled) {
@@ -12246,6 +12279,74 @@ var SecuritySettings = function SecuritySettings(_ref) {
     onChange: function onChange(value) {
       return handleSettingChange("security", ["email_verification", "email_content"], value);
     }
+  }))))), activeTab === 'autologout' && /*#__PURE__*/React.createElement("div", {
+    className: "settings-group"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "group-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Session Timeout / Auto Logout", "th-login")), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Auto Logout", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log out inactive users after specified duration.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$security$se = settings.security.session_timeout) === null || _settings$security$se === void 0 ? void 0 : _settings$security$se.enabled) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["session_timeout", "enabled"], isChecked);
+    }
+  }))), ((_settings$security$se2 = settings.security.session_timeout) === null || _settings$security$se2 === void 0 ? void 0 : _settings$security$se2.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "menu-item-group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row text-small-box"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inactivity Duration (minutes)", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("User will be logged out after this period of inactivity.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    type: "number",
+    min: "1",
+    value: ((_settings$security$se3 = settings.security.session_timeout) === null || _settings$security$se3 === void 0 ? void 0 : _settings$security$se3.duration) || 15,
+    onChange: function onChange(newValue) {
+      return handleSettingChange("security", ["session_timeout", "duration"], parseInt(newValue, 10));
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Warning Before Logout", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays a countdown warning before automatic logout.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    __nextHasNoMarginBottom: true,
+    checked: ((_settings$security$se4 = settings.security.session_timeout) === null || _settings$security$se4 === void 0 ? void 0 : _settings$security$se4.show_warning) || false,
+    onChange: function onChange(isChecked) {
+      return handleSettingChange("security", ["session_timeout", "show_warning"], isChecked);
+    }
+  }))), ((_settings$security$se5 = settings.security.session_timeout) === null || _settings$security$se5 === void 0 ? void 0 : _settings$security$se5.show_warning) && /*#__PURE__*/React.createElement("div", {
+    className: "setting-row text-small-box"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Warning Countdown Duration (seconds)", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time shown in warning popup before session expires.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    type: "number",
+    min: "5",
+    value: ((_settings$security$se6 = settings.security.session_timeout) === null || _settings$security$se6 === void 0 ? void 0 : _settings$security$se6.warning_duration) || 60,
+    onChange: function onChange(newValue) {
+      return handleSettingChange("security", ["session_timeout", "warning_duration"], parseInt(newValue, 10));
+    },
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true
   })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SecuritySettings);
@@ -12457,13 +12558,16 @@ var ToolsSettings = function ToolsSettings(_ref) {
   }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exported Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy or download this JSON to save your settings", "th-login"))), /*#__PURE__*/React.createElement("div", {
-    className: "setting-control"
+    className: "setting-control",
+    style: {
+      maxWidth: '230px'
+    }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     __nextHasNoMarginBottom: true,
     value: exportedSettings,
     readOnly: true,
     rows: 10,
-    className: "export-textarea"
+    className: "import-textarea"
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
@@ -12472,13 +12576,21 @@ var ToolsSettings = function ToolsSettings(_ref) {
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "copy-button ".concat(copied ? "copied" : ""),
-    onClick: handleCopyToClipboard,
-    isSmall: true
-  }, copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    onClick: handleCopyToClipboard
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dashicons dashicons-admin-page",
+    style: {
+      marginRight: 3
+    }
+  }), copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "copy-button",
-    onClick: handleDownloadJSON,
-    isSmall: true
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Download", "th-login")))))), /*#__PURE__*/React.createElement("div", {
+    onClick: handleDownloadJSON
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dashicons dashicons-download",
+    style: {
+      marginRight: 3
+    }
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Download", "th-login")))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
@@ -12491,7 +12603,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste or upload previously exported settings JSON", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control",
     style: {
-      maxWidth: '240px'
+      maxWidth: '230px'
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     __nextHasNoMarginBottom: true,
@@ -12508,15 +12620,13 @@ var ToolsSettings = function ToolsSettings(_ref) {
       marginTop: "8px"
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isSecondary: true,
-    className: "paste-button",
+    className: "copy-button",
     onClick: handlePasteFromClipboard,
     disabled: !clipboardContent.trim()
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "clipboard"
   }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isSecondary: true,
-    className: "paste-button",
+    className: "copy-button",
     onClick: function onClick() {
       var _fileInputRef$current;
       return (_fileInputRef$current = fileInputRef.current) === null || _fileInputRef$current === void 0 ? void 0 : _fileInputRef$current.click();
@@ -12845,30 +12955,30 @@ var design = {
       }
     },
     form_padding: {
-      top: 15,
-      left: 50,
-      right: 50,
-      bottom: 15
+      top: 10,
+      left: 35,
+      right: 35,
+      bottom: 30
     },
-    form_gap: 12
+    form_gap: 18
   },
   heading: {
     color: "#000000",
     typography: {
       size: "25px",
-      fontWeight: 700
+      fontWeight: 500
     }
   },
   Input: {
-    color: "#000000",
-    labelcolor: "#000000",
+    color: "#8392A5",
+    labelcolor: "#262626",
     labeltypography: {
-      size: "17px",
-      fontWeight: 300
+      size: "16px",
+      fontWeight: 500
     },
     background: "#ffffff",
     typography: {
-      size: "15px",
+      size: "14px",
       fontWeight: 300
     }
   },
@@ -12877,10 +12987,10 @@ var design = {
     background: "#0B59f4",
     hoverBackground: "#1c21ba",
     padding: {
-      top: 6,
-      left: 15,
-      right: 10,
-      bottom: 15
+      top: 12,
+      left: 12,
+      right: 12,
+      bottom: 12
     },
     typography: {
       size: "14px",
@@ -12904,7 +13014,7 @@ var design = {
     }
   },
   rememberme: {
-    color: "#000000",
+    color: "#8392A5",
     checkboxbackground: "#ffffff",
     typography: {
       size: "14px",
@@ -12912,7 +13022,7 @@ var design = {
     }
   },
   term: {
-    color: "#000000",
+    color: "#8392A5",
     link: "#007cba ",
     typography: {
       size: "14px",
@@ -12920,12 +13030,12 @@ var design = {
     }
   },
   icon: {
-    color: "#111111",
-    size: "25px",
-    icon_position: "with-label"
+    color: "#8392A5",
+    size: "17px",
+    icon_position: "inside-input"
   },
   header: {
-    showButtons: true,
+    showButtons: false,
     loginText: "Login",
     registerText: "Register",
     button: {
@@ -13089,6 +13199,12 @@ var security = {
     from_email: '',
     email_subject: 'Verify your email',
     email_content: 'Click the link below to verify your email: {verification_link}'
+  },
+  session_timeout: {
+    enabled: true,
+    duration: 15,
+    show_warning: true,
+    warning_duration: 60
   }
 };
 

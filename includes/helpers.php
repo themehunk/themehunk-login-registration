@@ -39,12 +39,44 @@ if ( ! function_exists( 'thlogin_get_icon_svg' ) ) {
 }
 
 if ( ! function_exists( 'thlogin_get_icon_svg_data_uri' ) ) {
-	function thlogin_get_icon_svg_data_uri($icon) {
-		$svg = thlogin_get_icon_svg($icon);
-		if (empty($svg)) return '';
-		return "url('data:image/svg+xml," . rawurlencode($svg) . "')";
+	function thlogin_get_icon_svg_data_uri( $icon ) {
+		$svg = thlogin_get_icon_svg( $icon );
+
+		if ( empty( $svg ) ) {
+			return '';
+		}
+
+		$settings = get_option( 'thlogin_settings', [] );
+		$color    = ! empty( $settings['design']['icon']['color'] ) ? $settings['design']['icon']['color'] : '#999';
+
+		$has_stroke = stripos( $svg, 'stroke=' ) !== false;
+		$has_fill   = stripos( $svg, 'fill=' ) !== false;
+
+		$has_fill_none = preg_match( '/fill=["\']none["\']/i', $svg );
+
+		if ( $has_stroke && ( ! $has_fill || $has_fill_none ) ) {
+			// Remove stroke and inject stroke color, preserve fill="none"
+			$svg = preg_replace( '/\sstroke="[^"]*"/i', '', $svg );
+			$svg = preg_replace(
+				'/<svg([^>]*)>/i',
+				'<svg$1 stroke="' . esc_attr( $color ) . '">',
+				$svg
+			);
+		} elseif ( $has_fill && ! $has_stroke && ! $has_fill_none ) {
+			// Remove fill and inject fill color
+			$svg = preg_replace( '/\sfill="[^"]*"/i', '', $svg );
+			$svg = preg_replace(
+				'/<svg([^>]*)>/i',
+				'<svg$1 fill="' . esc_attr( $color ) . '">',
+				$svg
+			);
+		}
+		// else: keep original if both fill+stroke or anything complex
+
+		return "url('data:image/svg+xml," . rawurlencode( $svg ) . "')";
 	}
 }
+
 
 if ( ! function_exists( 'thlogin_get_allowed_svg_tags' ) ) {
 	function thlogin_get_allowed_svg_tags() {

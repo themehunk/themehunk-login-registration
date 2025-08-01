@@ -8,6 +8,9 @@ import { Button, Spinner } from "@wordpress/components";
 const SecuritySettings = ({ settings, handleSettingChange }) => {
 
   const [activeTab, setActiveTab] = useState("bruteforce");
+  const [pendingUsers, setPendingUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
+  const [approvingId, setApprovingId] = useState(null);
 
   const tabs = [
     { key: "bruteforce", label: __("Brute Force", "th-login") },
@@ -15,7 +18,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
     { key: "honeypot", label: __("HoneyPot", "th-login") },
     { key: "manualApproval", label: __("Manual Approval", "th-login") },
     { key: "emailVerifictaion", label: __("Email Verifictaion", "th-login") },
-    // { key: "twoFactorAuthentication", label: __("Two-Factor Authentication", "th-login") },
+    { key: "autologout", label: __("Auto logout", "th-login") },
   ];
   
   const renderTabs = () => (
@@ -33,10 +36,6 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
       ))}
       </div>
   );
-
-  const [pendingUsers, setPendingUsers] = useState([]);
-  const [loadingUsers, setLoadingUsers] = useState(false);
-  const [approvingId, setApprovingId] = useState(null);
 
   useEffect(() => {
     if (activeTab === "manualApproval" && settings.general.manual_user_approval?.enabled) {
@@ -534,6 +533,104 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                  </div>
                 )}
 
+              </div>
+            )}
+
+            {activeTab === 'autologout' && (
+              <div className="settings-group">
+                <h3 className="group-title">{__("Session Timeout / Auto Logout", "th-login")}</h3>
+
+                <div className="setting-row">
+                  <div className="setting-label">
+                    <h4>{__("Enable Auto Logout", "th-login")}</h4>
+                    <p className="description">
+                      {__("Automatically log out inactive users after specified duration.", "th-login")}
+                    </p>
+                  </div>
+                  <div className="setting-control">
+                    <ToggleControl
+                      __nextHasNoMarginBottom={true}
+                      checked={settings.security.session_timeout?.enabled || false}
+                      onChange={(isChecked) =>
+                        handleSettingChange("security", ["session_timeout", "enabled"], isChecked)
+                      }
+                    />
+                  </div>
+                </div>
+
+                {settings.security.session_timeout?.enabled && (
+                  <div className="menu-item-group">
+                    <div className="setting-row text-small-box">
+                      <div className="setting-label">
+                        <h4>{__("Inactivity Duration (minutes)", "th-login")}</h4>
+                        <p className="description">
+                          {__("User will be logged out after this period of inactivity.", "th-login")}
+                        </p>
+                      </div>
+                      <div className="setting-control">
+                        <TextControl
+                          type="number"
+                          min="1"
+                          value={settings.security.session_timeout?.duration || 15}
+                          onChange={(newValue) =>
+                            handleSettingChange(
+                              "security",
+                              ["session_timeout", "duration"],
+                              parseInt(newValue, 10)
+                            )
+                          }
+                          __next40pxDefaultSize={true}
+                          __nextHasNoMarginBottom={true}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="setting-row">
+                      <div className="setting-label">
+                        <h4>{__("Show Warning Before Logout", "th-login")}</h4>
+                        <p className="description">
+                          {__("Displays a countdown warning before automatic logout.", "th-login")}
+                        </p>
+                      </div>
+                      <div className="setting-control">
+                        <ToggleControl
+                          __nextHasNoMarginBottom={true}
+                          checked={settings.security.session_timeout?.show_warning || false}
+                          onChange={(isChecked) =>
+                            handleSettingChange("security", ["session_timeout", "show_warning"], isChecked)
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    {settings.security.session_timeout?.show_warning && (
+                      <div className="setting-row text-small-box">
+                        <div className="setting-label">
+                          <h4>{__("Warning Countdown Duration (seconds)", "th-login")}</h4>
+                          <p className="description">
+                            {__("Time shown in warning popup before session expires.", "th-login")}
+                          </p>
+                        </div>
+                        <div className="setting-control">
+                          <TextControl
+                            type="number"
+                            min="5"
+                            value={settings.security.session_timeout?.warning_duration || 60}
+                            onChange={(newValue) =>
+                              handleSettingChange(
+                                "security",
+                                ["session_timeout", "warning_duration"],
+                                parseInt(newValue, 10)
+                              )
+                            }
+                            __next40pxDefaultSize={true}
+                            __nextHasNoMarginBottom={true}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             )}
 

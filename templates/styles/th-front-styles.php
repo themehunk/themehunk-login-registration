@@ -113,7 +113,7 @@ class THLogin_Style_Renderer {
             .thlogin-form-field input[type="url"],
             .thlogin-form-field input[type="number"] {
                 width: 100%;
-                padding: 10px;
+                padding: 13px;
                 color: <?php echo esc_attr( $d['Input']['color'] ); ?>;
                 background-color: <?php echo esc_attr( $d['Input']['background'] ); ?>;
                 font-size: <?php echo esc_attr( $d['Input']['typography']['size'] ); ?>;
@@ -171,6 +171,7 @@ class THLogin_Style_Renderer {
                 <?php echo esc_attr( $this->get_border_style( $d['button']['border'] ) ); ?>
                 cursor: pointer;
                 transition: background-color 0.3s ease;
+                width: 100%;
             }
 
             .thlogin-button:hover {
@@ -199,6 +200,13 @@ class THLogin_Style_Renderer {
                 background-position: 12px center;
                 background-size: <?php echo esc_attr( $d['icon']['size'] ); ?>;
                 padding-left: calc(20px + <?php echo esc_attr( $d['icon']['size'] ); ?>) !important;
+                width: 85% !important;
+            }
+
+            .thlogin-popup-form-container input::placeholder {
+                color: <?php echo esc_attr( $d['Input']['color'] ); ?>;
+               font-size: <?php echo esc_attr( $d['Input']['typography']['size'] ); ?>;
+                font-weight: <?php echo esc_attr( $d['Input']['typography']['fontWeight'] ); ?>;
             }
 
             .thlogin-link-separator {

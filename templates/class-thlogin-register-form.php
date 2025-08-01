@@ -71,10 +71,6 @@ class THLogin_Register_Form {
 
 		echo '</div>';
 
-		if ( ! empty( $security['recaptcha']['enabled'] ) && $security['recaptcha']['type'] === 'v2_checkbox' ) {
-			$this->enqueue_recaptcha_script_register( 'v2_checkbox' );
-		}
-
 	}
 
 	protected function render_field( $field, $design ) {
@@ -190,20 +186,6 @@ class THLogin_Register_Form {
 					});
 				</script>';
 			}
-		}
-	}
-
-	public function enqueue_recaptcha_script_register( $type = 'v2_checkbox' ) {
-		if ( $type === 'v2_checkbox' ) {
-			add_action( 'wp_enqueue_scripts', function () {
-				wp_enqueue_script(
-					'thlogin-recaptcha-v2',
-					'https://www.google.com/recaptcha/api.js',
-					array(),
-					 THLOGIN_VERSION,
-					true
-				);
-			} );
 		}
 	}
 

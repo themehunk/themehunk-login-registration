@@ -232,6 +232,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 } catch (error) {
                     showMessage(form, 'Security verification failed. Please try again.', 'error');
                     console.error('reCAPTCHA v3 error:', error);
+
+                    // 🔁 Reset reCAPTCHA v2 on fetch error
+                    if (
+                        typeof grecaptcha !== 'undefined' &&
+                        thLoginFrontendData.settings.security?.recaptcha?.enabled &&
+                        thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox'
+                    ) {
+                        grecaptcha.reset();
+                    }
+                    
                     return;
                 }
             }
@@ -301,6 +311,15 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 showMessage(form, 'An unexpected error occurred. Please check your network.', 'error');
                 console.error('TH Login: Frontend REST API Error:', error);
+
+                 if (
+                    typeof grecaptcha !== 'undefined' &&
+                    thLoginFrontendData.settings.security?.recaptcha?.enabled &&
+                    thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox'
+                ) {
+                    grecaptcha.reset();
+                }
+
             } finally {
                 const submitButton = form.querySelector('button[type="submit"]');
                 if (submitButton) {
@@ -429,4 +448,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	navigation.appendChild(menuItem);
 });
-

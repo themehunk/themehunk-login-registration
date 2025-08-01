@@ -9,7 +9,7 @@ import { Dashicon, RangeControl,ToggleControl } from "@wordpress/components";
 import {tabs,tabdeisgn, layoutOptions, fontWeightOptions, tabicon} from '../contant';
 import { THL_ICONS } from "./icons";
 import { envelope } from '@wordpress/icons';
-import { Icon } from '@wordpress/components';
+import { Icon,TextControl } from '@wordpress/components';
 
 const tabinside = [
 	{ key: "form", label: __("Form", "th-login") },
@@ -60,6 +60,7 @@ const InteractiveButton = ({ base, hover, children }) => {
     </button>
   );
 };
+
 const decodeEntities = (html) => {
   const txt = document.createElement('textarea');
   txt.innerHTML = html;
@@ -287,19 +288,19 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				border: '1px solid #ccc',
 				width: '100%',
 				borderRadius: '4px',
-				color: inputBase.color,
-				backgroundColor: inputBase.background,
-				fontSize: inputBase.typography.size,
-				fontWeight: inputBase.typography.fontWeight,
+				color: settings.design.Input?.color,
+				backgroundColor: settings.design.Input?.background,
+				fontSize: settings.design.Input?.typography.size,
+				fontWeight: settings.design.Input?.typography.fontWeight,
 				...(settings.design.icon.icon_position ==='inside-input' ? { paddingLeft: '30px' } : {}),
-				'--hover-input-color': inputBase.activecolor,
+				'--hover-input-color': settings.design.Input?.activecolor,
 			},
 			hover: {
-				borderColor: inputBase.activecolor,
+				borderColor: settings.design.Input?.activecolor,
 			},
 			active: {
-				backgroundColor: inputBase.activeBackground,
-				borderColor: inputBase.activecolor,
+				backgroundColor: settings.design.Input?.background,
+				borderColor: settings.design.Input?.activecolor,
 			},
 		};
 
@@ -477,7 +478,28 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 			
 					<LoginFormHeader settings={settings} />
 
-					<h3 style={commonHeadingStyle}>{headingLabel}</h3>
+					{settings.design.logo?.url ? (
+						<div className="logo-wrapper">
+							<div
+							className="th-preview-logo-wrapper"
+							>
+							<img
+								src={settings.design.logo.url}
+								alt="Logo"
+								style={{
+									height: settings.design.logo.size,
+									maxHeight: settings.design.logo.size,
+									objectFit: 'cover',
+								}}
+							/>
+							</div>
+
+							<h3 style={commonHeadingStyle}>{headingLabel}</h3>
+						</div>
+						) : (
+						<h3 style={commonHeadingStyle}>{headingLabel}</h3>
+					)}
+
 					{renderInputs(fields)}
 					<InteractiveButton {...buttonProps}>
 						{headingLabel}
@@ -691,9 +713,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 			)}
 			
 			<div className="design-editor-layout">
-				
 				<div className={`settings-panel ${deisgnpreview === 'design' ? 'disabled-panel' : ''}`}>
-
 					<div className="custom-tabs">
 						{tabinside.map((tab) => (
 							<button
@@ -821,6 +841,33 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										options={fontWeightOptions}
 										/>
 									</div>
+									</div>
+								</div>
+								</AccordionSection>
+
+								<AccordionSection title={__("Logo", "th-login")} defaultOpen={false}>
+								<div className="th-heading-settings">
+									<div className="th-setting-row">
+									<label className="th-setting-label">{__("Image URL", "th-login")}</label>
+									<TextControl
+										value={settings.design.logo.url}
+										onChange={(value) =>
+										handleSettingChange("design", ["logo", "url"], value)
+										}
+									/>
+									</div>
+
+									<div className="th-setting-row">
+									<label className="th-setting-label">{__("Size", "th-login")}</label>
+									<input
+										type="number"
+										className="th-number-input"
+										value={parseInt(settings.design.logo.size)}
+										onChange={(e) =>
+										handleSettingChange("design", ["logo", "size"], `${e.target.value}px`)
+										}
+										min={1}
+									/>
 									</div>
 								</div>
 								</AccordionSection>
@@ -1397,7 +1444,6 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 						
 					</div>
 				</div>
-
 			</div>
 
 		</div>

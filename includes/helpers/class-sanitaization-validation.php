@@ -186,6 +186,13 @@ class TH_Sanitization_validation {
 			'forgot_password' => sanitize_text_field( $settings['submitButton']['forgot_password'] ?? 'Reset' ),
 		);
 
+		$logo = $settings['logo'] ?? array();
+		$sanitized['logo'] = array(
+			'size'  => sanitize_text_field( $logo['size'] ?? '30px' ),
+			'color' => $this->sanitize_color_input( $logo['color'] ?? 'black' ),
+			'url'   => esc_url_raw( $logo['url'] ?? '' ),
+		);
+
 		return $sanitized;
 	}
 
@@ -246,27 +253,21 @@ class TH_Sanitization_validation {
 		$errors = new WP_Error();
 
 		$valid_types = array( 'color', 'gradient', 'image' );
-
-		// Updated regex for color formats: hex, rgb(), rgba(), and named colors
 		$valid_color_regex = '/^(#([A-Fa-f0-9]{3,8})|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(,\s*(\d+(\.\d+)?|1|0))?\s*\)|[a-zA-Z]+)$/';
 
 		foreach ( [ 'modal', 'form' ] as $section ) {
 			$type = $settings[ $section ][ "{$section}_background" ]['type'] ?? 'color';
 			if ( ! in_array( $type, $valid_types, true ) ) {
-				// translators: %s: Field label like "Email" or "Username"
 				$errors->add( "invalid_{$section}_background_type", sprintf( esc_html__( 'Invalid %s background type.', 'th-login' ), $section ) );
 			}
 		}
 
-		// Validate modal_input_layout
 		$valid_input_layouts = [ 'stack', 'inline', 'floating', 'placehold' ];
 		$modal_input_layout = $settings['modal']['modal_input_layout'] ?? '';
-
 		if ( $modal_input_layout && ! in_array( $modal_input_layout, $valid_input_layouts, true ) ) {
 			$errors->add(
 				'invalid_modal_input_layout',
 				sprintf(
-					// translators: %s is a comma-separated list of allowed modal input layout values.
 					esc_html__( 'Invalid modal input layout. Allowed values are: %s.', 'th-login' ),
 					implode( ', ', $valid_input_layouts )
 				)
@@ -274,10 +275,10 @@ class TH_Sanitization_validation {
 		}
 
 		$radius_fields = array(
-			'form_border'            => $settings['form']['form_border']['radius'] ?? array(),
-			'button_border'          => $settings['button']['border']['radius'] ?? array(),
-			'header_button_border'   => $settings['header']['button']['border']['radius'] ?? array(),
-			'header_cancel_border'   => $settings['header']['cancel_button']['border']['radius'] ?? array(),
+			'form_border'          => $settings['form']['form_border']['radius'] ?? array(),
+			'button_border'        => $settings['button']['border']['radius'] ?? array(),
+			'header_button_border' => $settings['header']['button']['border']['radius'] ?? array(),
+			'header_cancel_border' => $settings['header']['cancel_button']['border']['radius'] ?? array(),
 		);
 
 		foreach ( $radius_fields as $key => $radius ) {
@@ -285,7 +286,6 @@ class TH_Sanitization_validation {
 				if ( isset( $radius[ $corner ] ) && intval( $radius[ $corner ] ) < 0 ) {
 					$errors->add(
 						"inappropriate_{$key}_{$corner}",
-						// translators: %s: Field label like "Email" or "Username"
 						sprintf( esc_html__( '%s radius value must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
@@ -293,10 +293,10 @@ class TH_Sanitization_validation {
 		}
 
 		$padding_fields = array(
-			'form_padding'             => $settings['form']['form_padding'] ?? array(),
-			'button_padding'           => $settings['button']['padding'] ?? array(),
-			'header_button_padding'    => $settings['header']['button']['padding'] ?? array(),
-			'header_cancel_padding'    => $settings['header']['cancel_button']['padding'] ?? array(),
+			'form_padding'           => $settings['form']['form_padding'] ?? array(),
+			'button_padding'         => $settings['button']['padding'] ?? array(),
+			'header_button_padding'  => $settings['header']['button']['padding'] ?? array(),
+			'header_cancel_padding'  => $settings['header']['cancel_button']['padding'] ?? array(),
 		);
 
 		foreach ( $padding_fields as $key => $padding ) {
@@ -304,7 +304,6 @@ class TH_Sanitization_validation {
 				if ( isset( $padding[ $side ] ) && intval( $padding[ $side ] ) < 0 ) {
 					$errors->add(
 						"invalid_{$key}_{$side}",
-						// translators: %s: Field label like "Email" or "Username"
 						sprintf( esc_html__( '%s padding must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
@@ -319,22 +318,21 @@ class TH_Sanitization_validation {
 		}
 
 		$typography_fields = array(
-			'heading'                => $settings['heading']['typography']['size'] ?? '',
-			'Input'                  => $settings['Input']['typography']['size'] ?? '',
-			'Input_label'            => $settings['Input']['labeltypography']['size'] ?? '',
-			'button'                 => $settings['button']['typography']['size'] ?? '',
-			'rememberme'             => $settings['rememberme']['typography']['size'] ?? '',
-			'term'             => $settings['term']['typography']['size'] ?? '',
-			'icon'                   => $settings['icon']['size'] ?? '',
-			'header_button'          => $settings['header']['button']['typography']['size'] ?? '',
-			'header_cancel_button'   => $settings['header']['cancel_button']['typography']['size'] ?? '',
+			'heading'               => $settings['heading']['typography']['size'] ?? '',
+			'Input'                 => $settings['Input']['typography']['size'] ?? '',
+			'Input_label'           => $settings['Input']['labeltypography']['size'] ?? '',
+			'button'                => $settings['button']['typography']['size'] ?? '',
+			'rememberme'            => $settings['rememberme']['typography']['size'] ?? '',
+			'term'                  => $settings['term']['typography']['size'] ?? '',
+			'icon'                  => $settings['icon']['size'] ?? '',
+			'header_button'         => $settings['header']['button']['typography']['size'] ?? '',
+			'header_cancel_button'  => $settings['header']['cancel_button']['typography']['size'] ?? '',
 		);
 
 		foreach ( $typography_fields as $key => $font_size ) {
 			if ( $font_size && ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%)$/', $font_size ) ) {
 				$errors->add(
 					'invalid_' . strtolower( $key ) . '_font_size',
-					// translators: %s: Field label like "Email" or "Username"
 					sprintf( esc_html__( '%s font size must be a valid CSS size (e.g., 14px, 1.2em).', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
@@ -344,7 +342,7 @@ class TH_Sanitization_validation {
 			'heading_color'              => $settings['heading']['color'] ?? '',
 			'input_color'                => $settings['Input']['color'] ?? '',
 			'input_labelcolor'           => $settings['Input']['labelcolor'] ?? '',
-			'input_activecolor'           => $settings['Input']['activecolor'] ?? '',
+			'input_activecolor'          => $settings['Input']['activecolor'] ?? '',
 			'input_background'           => $settings['Input']['background'] ?? '',
 			'button_color'               => $settings['button']['color'] ?? '',
 			'button_background'          => $settings['button']['background'] ?? '',
@@ -362,15 +360,14 @@ class TH_Sanitization_validation {
 			'header_cancel_background'   => $settings['header']['cancel_button']['background'] ?? '',
 			'header_cancel_hover_bg'     => $settings['header']['cancel_button']['hoverBackground'] ?? '',
 			'header_cancel_border_color' => $settings['header']['cancel_button']['border']['color'] ?? '',
-			'term_color'             	 => $settings['term']['color'] ?? '',
-			'term_link'              	 => $settings['term']['link'] ?? '',
+			'term_color'                 => $settings['term']['color'] ?? '',
+			'term_link'                  => $settings['term']['link'] ?? '',
 		);
 
 		foreach ( $color_fields as $key => $color ) {
 			if ( $color && ! preg_match( $valid_color_regex, trim( $color ) ) ) {
 				$errors->add(
 					'invalid_' . $key,
-					// translators: %s: Field label like "Email" or "Username"
 					sprintf( esc_html__( '%s must be a valid CSS color.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
@@ -382,16 +379,11 @@ class TH_Sanitization_validation {
 			if ( empty( $submit_button[ $key ] ) || ! is_string( $submit_button[ $key ] ) ) {
 				$errors->add(
 					'invalid_submit_button_' . $key,
-					sprintf(
-						// translators: %s is a comma-separated list of allowed modal input layout values.
-						esc_html__( 'Submit button text for "%s" must be a non-empty string.', 'th-login' ),
-						$key
-					)
+					sprintf( esc_html__( 'Submit button text for "%s" must be a non-empty string.', 'th-login' ), $key )
 				);
 			}
 		}
 
-		// Validate header button visibility toggle and button texts
 		if ( isset( $settings['header']['showButtons'] ) && ! is_bool( $settings['header']['showButtons'] ) ) {
 			$errors->add(
 				'invalid_header_show_buttons',
@@ -403,12 +395,29 @@ class TH_Sanitization_validation {
 			if ( empty( $settings['header'][ $key ] ) || ! is_string( $settings['header'][ $key ] ) ) {
 				$errors->add(
 					'invalid_header_' . $key,
-					sprintf(
-						// translators: %s is a comma-separated list of allowed modal input layout values.
-						esc_html__( 'Header text for "%s" must be a non-empty string.', 'th-login' ),
-						$key
-					)
+					sprintf( esc_html__( 'Header text for "%s" must be a non-empty string.', 'th-login' ), $key )
 				);
+			}
+		}
+
+		// ✅ Logo validation
+		if ( isset( $settings['logo']['url'] ) && ! empty( $settings['logo']['url'] ) ) {
+			if ( ! filter_var( $settings['logo']['url'], FILTER_VALIDATE_URL ) ) {
+				$errors->add(
+					'invalid_logo_url',
+					esc_html__( 'Logo URL must be a valid URL.', 'th-login' )
+				);
+			}
+		}
+
+		foreach ( [ 'width', 'height' ] as $dim ) {
+			if ( isset( $settings['logo'][ $dim ] ) && $settings['logo'][ $dim ] !== '' ) {
+				if ( ! preg_match( '/^\d+(px|em|rem|%)?$/', $settings['logo'][ $dim ] ) ) {
+					$errors->add(
+						'invalid_logo_' . $dim,
+						sprintf( esc_html__( 'Logo %s must be a valid CSS size (e.g., 100px, 5em).', 'th-login' ), $dim )
+					);
+				}
 			}
 		}
 

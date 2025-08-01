@@ -8926,7 +8926,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     margin: '0 auto'
   });
   var renderFormPreview = function renderFormPreview() {
-    var _buttonBase$border$wi, _buttonBase$border$wi2, _buttonBase$border$ra, _buttonBase$border$ra2;
+    var _settings$design$Inpu, _settings$design$Inpu2, _settings$design$Inpu3, _settings$design$Inpu4, _settings$design$Inpu5, _settings$design$Inpu6, _settings$design$Inpu7, _settings$design$Inpu8, _buttonBase$border$wi, _buttonBase$border$wi2, _buttonBase$border$ra, _buttonBase$border$ra2;
     var commonHeadingStyle = {
       color: settings.design.heading.color,
       fontSize: settings.design.heading.typography.size,
@@ -8939,21 +8939,21 @@ var DesignEditor = function DesignEditor(_ref5) {
         border: '1px solid #ccc',
         width: '100%',
         borderRadius: '4px',
-        color: inputBase.color,
-        backgroundColor: inputBase.background,
-        fontSize: inputBase.typography.size,
-        fontWeight: inputBase.typography.fontWeight
+        color: (_settings$design$Inpu = settings.design.Input) === null || _settings$design$Inpu === void 0 ? void 0 : _settings$design$Inpu.color,
+        backgroundColor: (_settings$design$Inpu2 = settings.design.Input) === null || _settings$design$Inpu2 === void 0 ? void 0 : _settings$design$Inpu2.background,
+        fontSize: (_settings$design$Inpu3 = settings.design.Input) === null || _settings$design$Inpu3 === void 0 ? void 0 : _settings$design$Inpu3.typography.size,
+        fontWeight: (_settings$design$Inpu4 = settings.design.Input) === null || _settings$design$Inpu4 === void 0 ? void 0 : _settings$design$Inpu4.typography.fontWeight
       }, settings.design.icon.icon_position === 'inside-input' ? {
         paddingLeft: '30px'
       } : {}), {}, {
-        '--hover-input-color': inputBase.activecolor
+        '--hover-input-color': (_settings$design$Inpu5 = settings.design.Input) === null || _settings$design$Inpu5 === void 0 ? void 0 : _settings$design$Inpu5.activecolor
       }),
       hover: {
-        borderColor: inputBase.activecolor
+        borderColor: (_settings$design$Inpu6 = settings.design.Input) === null || _settings$design$Inpu6 === void 0 ? void 0 : _settings$design$Inpu6.activecolor
       },
       active: {
-        backgroundColor: inputBase.activeBackground,
-        borderColor: inputBase.activecolor
+        backgroundColor: (_settings$design$Inpu7 = settings.design.Input) === null || _settings$design$Inpu7 === void 0 ? void 0 : _settings$design$Inpu7.background,
+        borderColor: (_settings$design$Inpu8 = settings.design.Input) === null || _settings$design$Inpu8 === void 0 ? void 0 : _settings$design$Inpu8.activecolor
       }
     };
     var buttonProps = {
@@ -9097,13 +9097,27 @@ var DesignEditor = function DesignEditor(_ref5) {
       });
     };
     var renderContent = function renderContent() {
-      var _settings$form_fields;
+      var _settings$form_fields, _settings$design$logo;
       var fields = ((_settings$form_fields = settings.form_fields) === null || _settings$form_fields === void 0 ? void 0 : _settings$form_fields[activeForm]) || [];
       var headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login");
       if (activeForm === "register") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login");else if (activeForm === "forgot_password") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot Password", "th-login");
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(LoginFormHeader, {
         settings: settings
-      }), /*#__PURE__*/React.createElement("h3", {
+      }), (_settings$design$logo = settings.design.logo) !== null && _settings$design$logo !== void 0 && _settings$design$logo.url ? /*#__PURE__*/React.createElement("div", {
+        className: "logo-wrapper"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "th-preview-logo-wrapper"
+      }, /*#__PURE__*/React.createElement("img", {
+        src: settings.design.logo.url,
+        alt: "Logo",
+        style: {
+          height: settings.design.logo.size,
+          maxHeight: settings.design.logo.size,
+          objectFit: 'cover'
+        }
+      })), /*#__PURE__*/React.createElement("h3", {
+        style: commonHeadingStyle
+      }, headingLabel)) : /*#__PURE__*/React.createElement("h3", {
         style: commonHeadingStyle
       }, headingLabel), renderInputs(fields), /*#__PURE__*/React.createElement(InteractiveButton, buttonProps, headingLabel));
     };
@@ -9395,6 +9409,32 @@ var DesignEditor = function DesignEditor(_ref5) {
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Logo", "th-login"),
+    defaultOpen: false
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-heading-settings"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image URL", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.TextControl, {
+    value: settings.design.logo.url,
+    onChange: function onChange(value) {
+      return handleSettingChange("design", ["logo", "url"], value);
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "th-setting-row"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "th-setting-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "th-login")), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    className: "th-number-input",
+    value: parseInt(settings.design.logo.size),
+    onChange: function onChange(e) {
+      return handleSettingChange("design", ["logo", "size"], "".concat(e.target.value, "px"));
+    },
+    min: 1
+  })))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Label", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
@@ -13191,6 +13231,11 @@ var design = {
     login: "Login",
     register: "Register",
     forgot_password: "Reset"
+  },
+  logo: {
+    size: "30px",
+    color: "black",
+    url: ""
   }
 };
 var display_triggers = {

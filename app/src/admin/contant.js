@@ -339,6 +339,11 @@ export  const design = {
     login: "Login",
     register: "Register",
     forgot_password: "Reset"
+  },
+  logo:{
+    size:"30px",
+    color:"black",
+    url: "",
   }
 };
 

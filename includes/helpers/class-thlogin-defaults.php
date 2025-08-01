@@ -248,6 +248,12 @@ class THLogin_Defaults {
 				'register'        => 'Register',
 				'forgot_password' => 'Reset',
 			),
+
+			'logo' => array(
+				'size'  => '30px',
+				'color' => 'black',
+				'url'   =>  '',
+			),
 		);
 	}
 

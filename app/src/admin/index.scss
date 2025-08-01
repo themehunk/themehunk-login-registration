@@ -3315,11 +3315,14 @@ width:max-content;
   display: flex;
   align-items: center;
   justify-content: center;
+ 
 }
 
 /* Modal Preview Styles (foreground) */
 .th-modal-preview {
   width: 100%;
+   padding-top: 160px; 
+	box-sizing: border-box;
   height: 100%;
   position: relative;
   overflow-x: hidden;
@@ -3459,8 +3462,6 @@ width:max-content;
     left: 125%;
   }
 }
-
-
 
 /* Header */
 .woocommerce-card-header {
@@ -4132,7 +4133,6 @@ width:max-content;
 	border: none !important;
 	border-bottom: 1px solid black !important;
 	outline: none !important;
-	background: transparent;
 	border-radius: 0 !important;
 	box-shadow: none !important;
 }
@@ -4152,7 +4152,7 @@ width:max-content;
 	font-size: 16px;
 	pointer-events: none;
 	transition: all 0.2s ease;
-    background:none !important;
+  background:none !important;
 }
 
 .floating-input:focus + .placehold-label,
@@ -4816,6 +4816,9 @@ width:max-content;
 	filter: var(--thlogin-foreground-filter, none);
   opacity:1;
 	pointer-events: none;
+
+    height: 130%;
+    width: 100%;
 }
 
 .shortcode-copy-wrap svg{
@@ -5009,7 +5012,6 @@ width:max-content;
   }
 }
 
-
 .premium-openeer-toggle {
   border-radius: 12px;
   background: #f9fafa;
@@ -5061,4 +5063,16 @@ width:max-content;
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+
+.th-setting-row .components-base-control {
+    margin-bottom: 0;
+}
+
+.logo-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }

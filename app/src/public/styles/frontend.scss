@@ -512,3 +512,10 @@ body.thlogin-modal-open {
 	border-radius: 3px;
 	cursor: pointer;
 }
+
+.thlogin-form-logo{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    gap:10px;
+}

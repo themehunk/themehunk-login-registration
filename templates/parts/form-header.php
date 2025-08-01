@@ -29,48 +29,6 @@ if ( ! function_exists( 'thlogin_render_form_header' ) ) {
                 <?php endif; ?>
             </div>
 
-            <?php if ( ! empty( $logo_settings['url'] ) ) : ?>
-                <div class="thlogin-logo">
-                    <?php
-                    $logo_tag    = 'img';
-                    $logo_url    = esc_url( $logo_settings['url'] );
-                    $logo_alt    = esc_html__( 'Plugin Logo', 'th-login' );
-                    $logo_width  = esc_attr( $logo_settings['width']['desktop'] ?? '150px' );
-                    $logo_margin = esc_attr( $logo_settings['margin_bottom'] ?? '20px' );
-
-                    $logo_element = sprintf(
-                        '<%1$s src="%2$s" alt="%3$s" style="max-width:%4$s; margin-bottom:%5$s;" />',
-                        esc_attr( $logo_tag ),
-                        esc_url( $logo_url ),
-                        esc_attr( $logo_alt ),
-                        esc_attr( $logo_width ),
-                        esc_attr( $logo_margin )
-                    );
-
-                    if ( ! empty( $logo_settings['link_url'] ) ) {
-                        echo wp_kses(
-                            sprintf(
-                                '<a href="%s">%s</a>',
-                                esc_url( $logo_settings['link_url'] ),
-                                $logo_element
-                            ),
-                            [
-                                'a' => [ 'href' => [] ],
-                                'img' => [ 'src' => [], 'alt' => [], 'style' => [] ],
-                            ]
-                        );
-                    } else {
-                        echo wp_kses(
-                            $logo_element,
-                            [
-                                'img' => [ 'src' => [], 'alt' => [], 'style' => [] ],
-                            ]
-                        );
-                    }
-                    ?>
-                </div>
-            <?php endif; ?>
-
             <?php if ( ! empty( $header_html_settings['enabled'] ) && ! empty( $header_html_settings['content'] ) ) : ?>
                 <div class="thlogin-custom-header-html">
                     <?php echo wp_kses_post( $header_html_settings['content'] ); ?>

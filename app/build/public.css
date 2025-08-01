@@ -473,4 +473,11 @@ body.thlogin-modal-open {
   cursor: pointer;
 }
 
+.thlogin-form-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 /*# sourceMappingURL=public.css.map*/

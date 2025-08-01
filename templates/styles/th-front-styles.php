@@ -104,7 +104,6 @@ class THLogin_Style_Renderer {
                 color: <?php echo esc_attr( $d['heading']['color'] ); ?>;
                 font-size: <?php echo esc_attr( $d['heading']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['heading']['typography']['fontWeight'] ); ?>;
-                margin: 0 0 15px 0;
                 text-align: center;
             }
 

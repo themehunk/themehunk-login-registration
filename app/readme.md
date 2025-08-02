@@ -60,7 +60,6 @@ th-login/
 │   │   │           └── padding-settings-panel.js           # Padding spacing settings
 │   │   └── public/
 │   │       ├── styles/                                     # Public-facing CSS
-│   │       ├── customizer-preview.js                       # For Customizer preview sync
 │   │       ├── frontend.js                                 # Frontend behavior (modals, forms)
 │   │       ├── index.js                                    # Public entrypoint
 │   │       └── webpack.config.js                           # Webpack config

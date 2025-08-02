@@ -112,6 +112,13 @@ class THLogin_Admin {
 		$thlogin_page = get_page_by_path('th-login');
 		$thlogin_url  = $thlogin_page ? get_permalink($thlogin_page) : '';
 
+
+		$integration_wp = $all_settings['integration']['wordpress'] ?? array();
+		$wp_enabled     = ! empty( $integration_wp['enabled'] );
+		$wp_custom_slug = sanitize_title( $integration_wp['url'] ?? 'login' );
+		$wp_login_url   = $wp_enabled ? home_url( '/' . $wp_custom_slug ) : '';
+
+
 		wp_localize_script(
 			'thlogin-admin-script',
 			'thLoginData',
@@ -125,12 +132,11 @@ class THLogin_Admin {
 			)
 		);
 
-
-
 		wp_localize_script('thlogin-admin-script', 'thlogin_admin_data', array(
 			'woo_enabled'   => $woo_active,
 			'myaccount_url' => $woo_active ? wc_get_page_permalink('myaccount') : '',
 			'thlogin_url'   => $thlogin_page ? $thlogin_url : '',
+			'wp_login_url'   => $wp_login_url, 
 		));
 
 	}

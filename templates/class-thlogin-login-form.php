@@ -22,6 +22,10 @@ class THLogin_Login_Form {
         $security = $this->settings['security'] ?? [];
         $allow_user_registration = $general['allow_user_registration'] ?? true;
         $submit_text = $design['submitButton']['login'] ?? esc_html__('Log In', 'th-login');
+       
+        $logo = $design['logo'] ?? [];
+        $logo_url = !empty($logo['url']) ? esc_url($logo['url']) : '';
+        $logo_size = !empty($logo['size']) ? esc_attr($logo['size']) : '30px';
 
         echo '<div class="thlogin-form thlogin-form--login" data-form-type="login">';
         echo wp_kses_post(thlogin_render_form_header());
@@ -30,9 +34,24 @@ class THLogin_Login_Form {
 
         echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="login">';
         echo '<div class="thlogin-messages" aria-live="polite"></div>';
-        
-        // Translators: Use printf + esc_html__ for consistent safe translations
-        printf( '<h3>%s</h3>', esc_html__( 'Login', 'th-login' ) );
+       
+
+
+        if ( $logo_url ) {
+            echo '<div class="thlogin-form-logo">';
+                echo '<div class="thlogin-form-logo-wrapper">';
+                    echo '<img 
+                        src="' . $logo_url . '" 
+                        alt="' . esc_attr__('Logo', 'th-login') . '" 
+                        class="thlogin-form-logo" 
+                        style="height:' . $logo_size . ';max-height:' . $logo_size . ';object-fit:cover;" 
+                    />';
+                echo '</div>';
+               echo '<h3>' . esc_html__('Login', 'th-login') . '</h3>';
+            echo '</div>';
+        }else{
+          	echo '<h3>' . esc_html__('Login', 'th-login') . '</h3>';
+        }
 
         if (
             isset( $_GET['thlogin_email_verified'], $_GET['_wpnonce'] ) &&
@@ -70,7 +89,7 @@ class THLogin_Login_Form {
         echo '<div class="thlogin-form-links">';
         echo '<a href="#" class="thlogin-link" data-th-popup-action="forgot-password">' . esc_html__('Forgot Password?', 'th-login') . '</a>';
 
-        if (!empty($general['form_type']) && $general['form_type'] === 'double' && $allow_user_registration) {
+        if ( $allow_user_registration) {
             echo '<span class="thlogin-link-separator">|</span>';
             echo '<a href="#" class="thlogin-link" data-th-popup-action="register">' . esc_html__('Register', 'th-login') . '</a>';
         }

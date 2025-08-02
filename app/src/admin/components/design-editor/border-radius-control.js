@@ -23,23 +23,23 @@ export const BorderRadiusControl = ({
   }, []);
 
   const handleChange = (corner, value) => {
-    let cleanValue = parseInt(value, 10) || 0;
-    cleanValue = Math.max(min, Math.min(max, cleanValue));
+  const clean = value === '' ? '' : Math.max(min, Math.min(max, parseInt(value, 10) || 0));
 
-    if (syncAll) {
-      onChange({
-        topLeft: cleanValue,
-        topRight: cleanValue,
-        bottomRight: cleanValue,
-        bottomLeft: cleanValue,
-      });
-    } else {
-      onChange({
-        ...values,
-        [corner]: cleanValue,
-      });
-    }
-  };
+  if (syncAll) {
+    onChange({
+      topLeft: clean,
+      topRight: clean,
+      bottomRight: clean,
+      bottomLeft: clean,
+    });
+  } else {
+    onChange({
+      ...values,
+      [corner]: clean,
+    });
+  }
+};
+
 
   const toggleSync = () => {
     const newSyncState = !syncAll;
@@ -89,7 +89,8 @@ export const BorderRadiusControl = ({
               type="number"
               min={min}
               max={max}
-              value={values[key]}
+             value={values[key] === 0 ? '0' : values[key] || ''}
+
               onChange={(val) => handleChange(key, val)}
             />
           </div>

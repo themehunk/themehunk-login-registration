@@ -47,18 +47,13 @@ class THLogin_Defaults {
 					'color'    => '#5954549c',
 					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
 					'opacity'  => 1,
+					'filter'   => 10,
 					'image'    => array(
 						'url'      => '',
 						'position' => 'center center',
 						'size'     => 'cover',
 						'repeat'   => 'no-repeat',
 					),
-				),
-				'foreground' => array(
-					'blur'       => '4px',
-					'brightness' => '100%',
-					'contrast'   => '100%',
-					'opacity'    => 1,
 				),
 				'modal_input_layout'=>  'stack',
 			),
@@ -112,6 +107,7 @@ class THLogin_Defaults {
 			'Input' => array(
 				'color'      => '#8392A5',
 				'labelcolor' => '#262626',
+				'activecolor'=> '#262626',
 				'labeltypography' => array(
 					'size'       => '16px',
 					'fontWeight' => 500,
@@ -251,6 +247,12 @@ class THLogin_Defaults {
 				'login'           => 'Login',
 				'register'        => 'Register',
 				'forgot_password' => 'Reset',
+			),
+
+			'logo' => array(
+				'size'  => '30px',
+				'color' => 'black',
+				'url'   =>  '',
 			),
 		);
 	}
@@ -479,6 +481,10 @@ class THLogin_Defaults {
 			'woocommerce' => array(
 				'enabled' => true,
 			),
-	    ); 
+			'wordpress' => array(
+				'enabled'           => false,
+				'url'               => '',
+			),
+		);
 	}
 }

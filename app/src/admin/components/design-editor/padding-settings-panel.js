@@ -9,7 +9,7 @@ export const PaddingSettingsPanel = ({
   path,
   handleSettingChange,
   min = 0,
-  max = 100,
+  max = 1000,
 }) => {
   const [syncAll, setSyncAll] = useState(false);
 
@@ -26,21 +26,24 @@ export const PaddingSettingsPanel = ({
   }, []); // run only on mount
 
   const handlePaddingChange = (side, value) => {
-    let cleanValue = parseInt(value, 10) || 0;
-    cleanValue = Math.max(min, Math.min(max, cleanValue));
+    const clean =
+      value === ''
+        ? ''
+        : Math.max(min, Math.min(max, parseInt(value, 10) || 0));
 
     if (syncAll) {
       const newPadding = {
-        top: cleanValue,
-        right: cleanValue,
-        bottom: cleanValue,
-        left: cleanValue
+        top: clean,
+        right: clean,
+        bottom: clean,
+        left: clean,
       };
       handleSettingChange('design', [...path], newPadding);
     } else {
-      handleSettingChange('design', [...path, side], cleanValue);
+      handleSettingChange('design', [...path, side], clean);
     }
   };
+
 
   const toggleSync = () => {
     const newSyncState = !syncAll;
@@ -92,7 +95,8 @@ export const PaddingSettingsPanel = ({
               type="number"
               min={min}
               max={max}
-              value={padding[key] || 0}
+             value={padding[key] === 0 ? '0' : padding[key] || ''}
+
               onChange={(val) => handlePaddingChange(key, val)}
             />
           </div>

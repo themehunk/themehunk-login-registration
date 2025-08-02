@@ -35,7 +35,7 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
     const tabs = [
         { key: "general", label: __("General", "th-login") },
         { key: "redirect", label: __("Redirect", "th-login") },
-        { key: "shortcodes", label: __("Short Codes", "th-login") },
+        { key: "shortcodes", label: __("ShortCodes", "th-login") },
     ];
     
     const renderTabs = () => (

@@ -22,6 +22,10 @@ class THLogin_Forgot_Password_Form {
 		$design = $this->settings['design'] ?? [];
 		$submit_text = $design['submitButton']['forgot_password'] ?? esc_html__('Reset', 'th-login');
 
+        $logo = $design['logo'] ?? [];
+        $logo_url = !empty($logo['url']) ? esc_url($logo['url']) : '';
+        $logo_size = !empty($logo['size']) ? esc_attr($logo['size']) : '30px';
+
 		echo '<div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">';
 		echo wp_kses_post( thlogin_render_form_header() );
 
@@ -32,7 +36,23 @@ class THLogin_Forgot_Password_Form {
 
 		echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="forgot-password">';
 		echo '<div class="thlogin-messages" aria-live="polite"></div>';
-		echo '<h3>' . esc_html__('Reset Password', 'th-login') . '</h3>';
+
+
+		if ( $logo_url ) {
+            echo '<div class="thlogin-form-logo">';
+                echo '<div class="thlogin-form-logo-wrapper">';
+                    echo '<img 
+                        src="' . $logo_url . '" 
+                        alt="' . esc_attr__('Logo', 'th-login') . '" 
+                        class="thlogin-form-logo" 
+                        style="height:' . $logo_size . ';max-height:' . $logo_size . ';object-fit:cover;" 
+                    />';
+                echo '</div>';
+               echo '<h3>' . esc_html__('Reset Password', 'th-login') . '</h3>';
+            echo '</div>';
+        }else{
+          	echo '<h3>' . esc_html__('Reset Password', 'th-login') . '</h3>';
+        }
 
 		foreach ($this->fields as $field) {
 			if (!empty($field['hidden'])) continue;

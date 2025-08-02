@@ -8,6 +8,7 @@ import DesignSettings from './components/design-setings';
 import FormFieldsSettings from './components/form-feild-setiings';
 import DisplayTriggersSettings from './components/display-trigger-settings';
 import SecuritySettings from './components/security-settings';
+import EmailSettings from './components/email-settings';
 import IntegrationSettings from './components/integration-settings';
 import ToolsSettings from './components/tools-settings';
 import { TABS, general, form_fields, design, display_triggers, security, integration } from "./contant";
@@ -324,103 +325,112 @@ const App = () => {
         </div>
       ):(
         <>
-        <div className="admin-container">
-          {/* Side Navigation */}
-          <nav className="admin-sidebar">
-              <ul>
-                  {TABS.map((tab) => (
-                  <li key={tab.id} className={activeTab === tab.id ? "active" : ""}>
-                      <button onClick={() => setActiveTab(tab.id)} className={`th-login-${tab.label}`}>
-                      <i className={`dashicons dashicons-${tab.icon}`}></i>
-                      {tab.label}
-                      </button>
-                  </li>
-                  ))}
-              </ul>
-          </nav>
-    
-          {/* Content Area */}
-          <div className="admin-content">
 
-            {activeTab === "general" && (
-              <GeneralSettings 
-                settings={settings} 
-                handleSettingChange={handleSettingChange}
-              />
-            )}
+          <div className="admin-container">
+            {/* Side Navigation */}
+            <nav className="admin-sidebar">
+                <ul>
+                    {TABS.map((tab) => (
+                    <li key={tab.id} className={activeTab === tab.id ? "active" : ""}>
+                        <button onClick={() => setActiveTab(tab.id)} className={`th-login-${tab.label}`}>
+                        <i className={`dashicons dashicons-${tab.icon}`}></i>
+                        {tab.label}
+                        </button>
+                    </li>
+                    ))}
+                </ul>
+            </nav>
+      
+            {/* Content Area */}
+            <div className="admin-content">
 
-            {activeTab === "design" && (
-              <DesignSettings 
-                settings={settings}
-                handleSettingChange={handleSettingChange}
-              />
-            )}
+              {activeTab === "general" && (
+                <GeneralSettings 
+                  settings={settings} 
+                  handleSettingChange={handleSettingChange}
+                />
+              )}
 
-            {activeTab === "form-fields" && (
-              <FormFieldsSettings
-                settings={settings}
-                handleSettingChange={handleSettingChange}
-              />
-            )}
-
-            {activeTab === "display-triggers" && (
-              <DisplayTriggersSettings
+              {activeTab === "design" && (
+                <DesignSettings 
                   settings={settings}
                   handleSettingChange={handleSettingChange}
-              />
-            )}
+                />
+              )}
 
-            {activeTab === "security" && (
-              <SecuritySettings
+              {activeTab === "form-fields" && (
+                <FormFieldsSettings
                   settings={settings}
                   handleSettingChange={handleSettingChange}
-              />
-            )}
+                />
+              )}
 
-            {activeTab === "integration" && (
-              <IntegrationSettings 
-                settings={settings}
-                handleSettingChange={handleSettingChange}
-              />
-            )}
+              {activeTab === "display-triggers" && (
+                <DisplayTriggersSettings
+                    settings={settings}
+                    handleSettingChange={handleSettingChange}
+                />
+              )}
 
-            {activeTab === "tools" && (
-              <ToolsSettings
-                settings={settings}
-                exportedSettings={exportedSettings}
-                setExportedSettings={setExportedSettings}
-                importSettingsText={ importSettingsText}
-                setImportSettingsText={setImportSettingsText}
-                handleExportSettings={handleExportSettings}
-                handleImportSettings={handleImportSettings}
-                isSaving={isSaving}
-                setIsResetConfirmOpen={setIsResetConfirmOpen}
-              />
-            )}
-            
+              {activeTab === "security" && (
+                <SecuritySettings
+                    settings={settings}
+                    handleSettingChange={handleSettingChange}
+                />
+              )}
+
+              {activeTab === "email" && (
+                <EmailSettings
+                  settings={settings}
+                  handleSettingChange={handleSettingChange}
+                />
+              )}
+
+              {activeTab === "integration" && (
+                <IntegrationSettings 
+                  settings={settings}
+                  handleSettingChange={handleSettingChange}
+                  isLoading={isLoading}
+                />
+              )}
+
+              {activeTab === "tools" && (
+                <ToolsSettings
+                  settings={settings}
+                  exportedSettings={exportedSettings}
+                  setExportedSettings={setExportedSettings}
+                  importSettingsText={ importSettingsText}
+                  setImportSettingsText={setImportSettingsText}
+                  handleExportSettings={handleExportSettings}
+                  handleImportSettings={handleImportSettings}
+                  isSaving={isSaving}
+                  setIsResetConfirmOpen={setIsResetConfirmOpen}
+                />
+              )}
+              
+            </div>
+          
           </div>
-        
-        </div>
 
-       <div className="save-settings">
-        <Button 
-          isPrimary
-          onClick={handleSaveSettings}
-          disabled={isSaving}
-          className={`save-button ${isSaved ? 'saved' : ''}`}
-        >
-          {isSaving ? (
-            <>
-              <Spinner />
-              <span style={{ marginLeft: '8px' }}>{__("Saving...", "thlogin")}</span>
-            </>
-          ) : isSaved ? (
-            <>{__("Saved", "thlogin")}</>
-          ) : (
-            <>{__("Save Changes", "thlogin")}</>
-          )}
-        </Button>
-      </div>
+          <div className="save-settings">
+          <Button 
+            isPrimary
+            onClick={handleSaveSettings}
+            disabled={isSaving}
+            className={`save-button ${isSaved ? 'saved' : ''}`}
+          >
+            {isSaving ? (
+              <>
+                <Spinner />
+                <span style={{ marginLeft: '8px' }}>{__("Saving...", "thlogin")}</span>
+              </>
+            ) : isSaved ? (
+              <>{__("Saved", "thlogin")}</>
+            ) : (
+              <>{__("Save Changes", "thlogin")}</>
+            )}
+          </Button>
+          </div>
       
       </>
       )}

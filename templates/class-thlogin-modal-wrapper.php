@@ -17,15 +17,26 @@ class THLogin_Modal_Wrapper {
 	}
 
 	public function render() {
+
+		$all_settings = get_option( 'thlogin_settings', [] );
+		$d  = $all_settings['design'] ?? [];
+
 		$modal_bg_style = $this->get_background_style();
+		$filter = isset( $d['form']['form_background']['filter'] ) ? intval( $d['form']['form_background']['filter'] ) : 0;
+
+		$style  = 'display: none;';
+		$style .= rtrim( $modal_bg_style, ';' ) . ';'; // ensure it ends with semicolon
+		$style .= "backdrop-filter: blur({$filter}px);";
+		$style .= "-webkit-backdrop-filter: blur({$filter}px);";
 		?>
+		
 		<div id="thlogin-popup-modal"
 			class="thlogin-popup-modal"
 			role="dialog"
 			aria-modal="true"
 			aria-hidden="true"
-			style="display: none; <?php echo esc_attr($modal_bg_style); ?>">
-
+			style="<?php echo esc_attr( $style ); ?>">
+			
 			<?php do_action('thlogin_before_modal_content'); ?>
 
 			<div class="thlogin-popup-form-container">
@@ -40,7 +51,7 @@ class THLogin_Modal_Wrapper {
 				$register_form->render();
 				$forgot_form->render();
 
-				do_action('thlogin_after_forms');
+				do_action('thlogin_after_forms');	
 				?>
 			</div>
 

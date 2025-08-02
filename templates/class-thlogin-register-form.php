@@ -25,6 +25,10 @@ class THLogin_Register_Form {
 		$design   = $this->settings['design'] ?? [];
 		$submit_text = $design['submitButton']['register'] ?? esc_html__('Register', 'th-login');
 
+        $logo = $design['logo'] ?? [];
+        $logo_url = !empty($logo['url']) ? esc_url($logo['url']) : '';
+        $logo_size = !empty($logo['size']) ? esc_attr($logo['size']) : '30px';
+
 		echo '<div class="thlogin-form thlogin-form--register" data-form-type="register" style="display: none;">';
 		echo wp_kses_post(thlogin_render_form_header());
 
@@ -35,7 +39,24 @@ class THLogin_Register_Form {
 
 		echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="register">';
 			echo '<div class="thlogin-messages" aria-live="polite"></div>';
-		echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
+
+
+		if ( $logo_url ) {
+            echo '<div class="thlogin-form-logo">';
+                echo '<div class="thlogin-form-logo-wrapper">';
+                    echo '<img 
+                        src="' . $logo_url . '" 
+                        alt="' . esc_attr__('Logo', 'th-login') . '" 
+                        class="thlogin-form-logo" 
+                        style="height:' . $logo_size . ';max-height:' . $logo_size . ';object-fit:cover;" 
+                    />';
+                echo '</div>';
+                echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
+            echo '</div>';
+        }else{
+          	echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
+        }
+
 
 		foreach ( $this->fields as $field ) {
 			if ( ! ( $field['show'] ?? true ) || ( $field['hidden'] ?? false ) ) {

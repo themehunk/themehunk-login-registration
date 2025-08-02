@@ -3321,7 +3321,7 @@ width:max-content;
 /* Modal Preview Styles (foreground) */
 .th-modal-preview {
   width: 100%;
-   padding-top: 160px; 
+  //  padding-top: 160px; 
 	box-sizing: border-box;
   height: 100%;
   position: relative;
@@ -3338,6 +3338,7 @@ width:max-content;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   margin: 0 auto;
   z-index:99;
+  position: relative;
 }
 
 /* Layout-specific styles */
@@ -4817,7 +4818,7 @@ width:max-content;
   opacity:1;
 	pointer-events: none;
 
-    height: 130%;
+    height: 100%;
     width: 100%;
 }
 
@@ -5092,4 +5093,12 @@ width:max-content;
     width: 50px !important;
     height: 50px !important;
     border-radius:10px;
+}
+
+.layout-from-type-register .th-modal-preview{
+    padding-top:140px;
+}
+
+.layout-from-type-register .th-modal-preview:before{
+    height:130%;
 }

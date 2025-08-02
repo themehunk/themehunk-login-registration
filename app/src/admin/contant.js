@@ -433,7 +433,7 @@ export  const design = {
 
 export  const display_triggers = {
       trigger_css_class: "thlogin-trigger",
-      auto_open_on_load: { enabled: true, delay_seconds: 2 },
+      auto_open_on_load: { enabled: true, delay_seconds: 2, max_views: 2 },
       auto_open_on_scroll: { enabled: false, scroll_percentage: 50 },
       auto_open_on_exit_intent: { enabled: false },
       auto_open_on_time_on_page: { enabled: false, time_seconds: 10 },
@@ -457,7 +457,7 @@ export  const display_triggers = {
         },
         referrer_detection: { enabled: false, referrer_urls: [] },
       },
-      pop_up_frequency: { enabled: false, type: "session", days: 7 },
+      pop_up_frequency: { enabled: true, type: "session", days: 7 },
       menu_integration: {
         enabled: false, 
         item_text_login: __("Login", "th-login"), 

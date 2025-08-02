@@ -39,20 +39,21 @@ class THLogin_Forgot_Password_Form {
 
 
 		if ( $logo_url ) {
-            echo '<div class="thlogin-form-logo">';
-                echo '<div class="thlogin-form-logo-wrapper">';
-                    echo '<img 
-                        src="' . $logo_url . '" 
-                        alt="' . esc_attr__('Logo', 'th-login') . '" 
-                        class="thlogin-form-logo" 
-                        style="height:' . $logo_size . ';max-height:' . $logo_size . ';object-fit:cover;" 
-                    />';
-                echo '</div>';
-               echo '<h3>' . esc_html__('Reset Password', 'th-login') . '</h3>';
-            echo '</div>';
-        }else{
-          	echo '<h3>' . esc_html__('Reset Password', 'th-login') . '</h3>';
-        }
+			echo '<div class="thlogin-form-logo">';
+				echo '<div class="thlogin-form-logo-wrapper">';
+					echo '<img 
+						src="' . esc_url( $logo_url ) . '" 
+						alt="' . esc_attr__( 'Logo', 'th-login' ) . '" 
+						class="thlogin-form-logo" 
+						style="height:' . esc_attr( $logo_size ) . ';max-height:' . esc_attr( $logo_size ) . ';object-fit:cover;" 
+					/>';
+				echo '</div>';
+				echo '<h3>' . esc_html__( 'Reset Password', 'th-login' ) . '</h3>';
+			echo '</div>';
+		} else {
+			echo '<h3>' . esc_html__( 'Reset Password', 'th-login' ) . '</h3>';
+		}
+
 
 		foreach ($this->fields as $field) {
 			if (!empty($field['hidden'])) continue;

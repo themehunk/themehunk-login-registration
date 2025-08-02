@@ -130,11 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
       container.style.display = 'none';
     }, 5000);
   };
-  var canShowModal = function canShowModal() {
+  var canAutoOpenModal = function canAutoOpenModal() {
     var _displayTriggers$pop_;
-    if (thLoginFrontendData.hasShortcode) {
-      return false;
-    }
+    if (thLoginFrontendData.hasShortcode) return false;
     if (isUserLoggedIn && displayTriggers.auto_open_conditions.for_logged_out_only) return false;
     var specificRoles = displayTriggers.auto_open_conditions.for_specific_roles || [];
     if (specificRoles.length && !currentUserRoles.some(function (role) {
@@ -158,6 +156,20 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     return true;
+  };
+  var canManualOpenModal = function canManualOpenModal() {
+    if (thLoginFrontendData.hasShortcode) return false;
+    if (isUserLoggedIn && displayTriggers.auto_open_conditions.for_logged_out_only) return false;
+    var specificRoles = displayTriggers.auto_open_conditions.for_specific_roles || [];
+    if (specificRoles.length && !currentUserRoles.some(function (role) {
+      return specificRoles.includes(role);
+    })) return false;
+    var deviceVisibility = displayTriggers.auto_open_conditions.device_visibility;
+    var w = window.innerWidth;
+    var isMobile = w <= 768;
+    var isTablet = w > 768 && w <= 1024;
+    var isDesktop = w > 1024;
+    return !(isMobile && !deviceVisibility.mobile || isTablet && !deviceVisibility.tablet || isDesktop && !deviceVisibility.desktop);
   };
   var recordPopupShown = function recordPopupShown() {
     var _displayTriggers$pop_2;
@@ -221,7 +233,9 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       var trigger = e.target.closest(triggerSelector);
       var formType = trigger.dataset.thPopupAction || 'login';
-      if (canShowModal()) openModal(formType);
+      // if (canShowModal()) openModal(formType);
+
+      if (canManualOpenModal()) openModal(formType);
     }
     // Switch forms inside modal via links/buttons with data attribute
     else if (modal && modal.contains(e.target)) {
@@ -386,11 +400,74 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     }());
   });
+  var shouldTriggerByConditions = function shouldTriggerByConditions() {
+    var _conditions$on_specif, _conditions$on_specif2, _conditions$on_specif3;
+    var conditions = displayTriggers.auto_open_conditions;
+    var currentPageId = thLoginFrontendData.currentPageId;
+    var currentPageSlug = thLoginFrontendData.currentPageSlug;
+
+    // 1. Check specific pages (working correctly)
+    if ((_conditions$on_specif = conditions.on_specific_pages) !== null && _conditions$on_specif !== void 0 && _conditions$on_specif.enabled) {
+      var pageIds = conditions.on_specific_pages.page_ids || [];
+      var pageSlugs = conditions.on_specific_pages.page_slugs || [];
+      if (pageIds.includes(Number(currentPageId))) {
+        return true;
+      }
+      if (pageSlugs.includes(currentPageSlug)) {
+        return true;
+      }
+    }
+
+    // 2. Check categories - FIXED
+    if ((_conditions$on_specif2 = conditions.on_specific_categories) !== null && _conditions$on_specif2 !== void 0 && _conditions$on_specif2.enabled) {
+      var catIds = conditions.on_specific_categories.category_ids || [];
+      var catSlugs = conditions.on_specific_categories.category_slugs || [];
+
+      // Check category IDs
+      var currentCategoryIds = thLoginFrontendData.currentCategoryIds || [];
+      if (currentCategoryIds.some(function (id) {
+        return catIds.includes(Number(id));
+      })) {
+        return true;
+      }
+
+      // Check category slugs
+      var currentCategorySlugs = thLoginFrontendData.currentCategorySlugs || [];
+      if (currentCategorySlugs.some(function (slug) {
+        return catSlugs.includes(slug);
+      })) {
+        return true;
+      }
+    }
+
+    // 3. Check tags - FIXED
+    if ((_conditions$on_specif3 = conditions.on_specific_tags) !== null && _conditions$on_specif3 !== void 0 && _conditions$on_specif3.enabled) {
+      var tagIds = conditions.on_specific_tags.tag_ids || [];
+      var tagSlugs = conditions.on_specific_tags.tag_slugs || [];
+
+      // Check tag IDs
+      var currentTagIds = thLoginFrontendData.currentTagIds || [];
+      if (currentTagIds.some(function (id) {
+        return tagIds.includes(Number(id));
+      })) {
+        return true;
+      }
+
+      // Check tag slugs
+      var currentTagSlugs = thLoginFrontendData.currentTagSlugs || [];
+      if (currentTagSlugs.some(function (slug) {
+        return tagSlugs.includes(slug);
+      })) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   // --- Auto-Open Logic ---
   var checkAndAutoOpenModal = function checkAndAutoOpenModal() {
     var _displayTriggers$auto, _displayTriggers$auto2, _displayTriggers$auto3, _displayTriggers$auto4, _displayTriggers$auto5;
-    if (!canShowModal()) return;
+    if (!canAutoOpenModal()) return;
     var urlParams = new URLSearchParams(window.location.search);
     var wcAction = urlParams.get('thlogin_action');
     var customParamName = displayTriggers.auto_open_conditions.url_parameter_trigger.param_name;
@@ -400,6 +477,12 @@ document.addEventListener('DOMContentLoaded', function () {
       openModal(wcAction);
       return;
     } else if (customParamTriggered) {
+      openModal('login');
+      return;
+    }
+
+    // if any page/category/tag conditions match
+    if (shouldTriggerByConditions()) {
       openModal('login');
       return;
     }

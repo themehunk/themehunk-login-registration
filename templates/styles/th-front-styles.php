@@ -25,7 +25,7 @@ class THLogin_Style_Renderer {
 			$image = $background['image'];
 			return "background-image: url({$image['url']}); background-size: {$image['size']}; background-repeat: {$image['repeat']}; background-position: {$image['position']}; opacity: {$background['opacity']};";
 		} else {
-			return "background-color: {$background['color']}; opacity: {$background['opacity']};";
+			return "background-color: {$background['color']};";
 		}
 	}
 
@@ -126,7 +126,7 @@ class THLogin_Style_Renderer {
 
             .thlogin-form-field--checkbox input[type="checkbox"],
             .thlogin-form-field--terms input[type="checkbox"] {
-                accent-color: <?php echo esc_attr( $d['rememberme']['checkboxbackground'] ); ?>;
+           
                 width: 16px;
                 height: 16px;
                 cursor: pointer;

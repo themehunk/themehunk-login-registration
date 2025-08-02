@@ -40,23 +40,21 @@ class THLogin_Register_Form {
 		echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="register">';
 			echo '<div class="thlogin-messages" aria-live="polite"></div>';
 
-
 		if ( $logo_url ) {
-            echo '<div class="thlogin-form-logo">';
-                echo '<div class="thlogin-form-logo-wrapper">';
-                    echo '<img 
-                        src="' . $logo_url . '" 
-                        alt="' . esc_attr__('Logo', 'th-login') . '" 
-                        class="thlogin-form-logo" 
-                        style="height:' . $logo_size . ';max-height:' . $logo_size . ';object-fit:cover;" 
-                    />';
-                echo '</div>';
-                echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
-            echo '</div>';
-        }else{
-          	echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
-        }
-
+			echo '<div class="thlogin-form-logo">';
+				echo '<div class="thlogin-form-logo-wrapper">';
+					echo '<img 
+						src="' . esc_url( $logo_url ) . '" 
+						alt="' . esc_attr__( 'Logo', 'th-login' ) . '" 
+						class="thlogin-form-logo" 
+						style="height:' . esc_attr( $logo_size ) . ';max-height:' . esc_attr( $logo_size ) . ';object-fit:cover;" 
+					/>';
+				echo '</div>';
+				echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
+			echo '</div>';
+		} else {
+			echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
+		}
 
 		foreach ( $this->fields as $field ) {
 			if ( ! ( $field['show'] ?? true ) || ( $field['hidden'] ?? false ) ) {

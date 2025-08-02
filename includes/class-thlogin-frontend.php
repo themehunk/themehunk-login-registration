@@ -136,6 +136,12 @@ class THLogin_Frontend {
 				'logoutUrl'        => wp_logout_url( home_url() ),
 				'icons'            => $icons_for_js,
 				'hasShortcode'     => $this->has_shortcode ?? false,
+				'currentPageId'        => get_queried_object_id(),
+				'currentPageSlug'      => $post->post_name ?? '',
+				'currentCategorySlugs' => wp_get_post_terms( get_the_ID(), 'category', ['fields' => 'slugs'] ),
+				'currentCategoryIds'   => wp_get_post_terms( get_the_ID(), 'category', ['fields' => 'ids'] ), // ✅ ADD THIS
+				'currentTagSlugs'      => wp_get_post_terms( get_the_ID(), 'post_tag', ['fields' => 'slugs'] ),
+				'currentTagIds'        => wp_get_post_terms( get_the_ID(), 'post_tag', ['fields' => 'ids'] ),  // ✅ ADD THIS
 			)
 		);
 	}

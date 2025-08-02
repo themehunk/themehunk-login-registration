@@ -124,7 +124,6 @@ class THLogin_Admin {
 		$wp_custom_slug = sanitize_title( $integration_wp['url'] ?? 'login' );
 		$wp_login_url   = $wp_enabled ? home_url( '/' . $wp_custom_slug ) : '';
 
-
 		wp_localize_script(
 			'thlogin-admin-script',
 			'thLoginData',
@@ -143,7 +142,9 @@ class THLogin_Admin {
 			'smtp_enabled'  => $smtp_active,
 			'myaccount_url' => $woo_active ? wc_get_page_permalink('myaccount') : '',
 			'thlogin_url'   => $thlogin_page ? $thlogin_url : '',
-			'wp_login_url'   => $wp_login_url, 
+			'wp_login_url'  => $wp_login_url, 
+			'base_url'      => home_url('/'),
+			'admin_url'     => admin_url()
 		));
 
 	}

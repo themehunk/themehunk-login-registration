@@ -48,6 +48,13 @@ class THLogin_Integrations {
 				$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
 
 				if ( strpos( $request_uri, 'wp-login.php' ) !== false ) {
+					$action = $_GET['action'] ?? '';
+					
+					//  Allow logout and lostpassword actions to pass through
+					if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
+						return;
+					}
+
 					global $wp_query;
 					$wp_query->set_404();
 					status_header( 404 );
@@ -55,6 +62,7 @@ class THLogin_Integrations {
 					include get_404_template();
 					exit;
 				}
+
 			}
 		} );
 

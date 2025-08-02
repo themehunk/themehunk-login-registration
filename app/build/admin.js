@@ -12032,7 +12032,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var IntegrationSettings = function IntegrationSettings(_ref) {
-  var _thlogin_admin_data, _settings$integration2, _settings$integration3, _settings$integration4, _settings$integration6;
+  var _thlogin_admin_data, _settings$integration2, _settings$integration3, _settings$integration4, _settings$integration5, _settings$integration7;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange,
     isLoading = _ref.isLoading;
@@ -12044,6 +12044,10 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     baseWordpressUrl = _useState2[0],
     setBaseWordpressUrl = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isExpanded = _useState4[0],
+    setIsExpanded = _useState4[1];
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     var _settings$integration;
     // Jab tak loading ho rahi hai, kuch bhi mat karo
@@ -12096,8 +12100,25 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     checked: ((_settings$integration2 = settings.integration) === null || _settings$integration2 === void 0 || (_settings$integration2 = _settings$integration2.wordpress) === null || _settings$integration2 === void 0 ? void 0 : _settings$integration2.enabled) || false,
     onChange: function onChange(isChecked) {
       handleSettingChange("integration", ["wordpress", "enabled"], isChecked);
+      setIsExpanded(true);
     }
   }))), ((_settings$integration3 = settings.integration) === null || _settings$integration3 === void 0 || (_settings$integration3 = _settings$integration3.wordpress) === null || _settings$integration3 === void 0 ? void 0 : _settings$integration3.enabled) && /*#__PURE__*/React.createElement("div", {
+    className: "integration-settings-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "settings-header-toggle",
+    onClick: function onClick() {
+      return setIsExpanded(!isExpanded);
+    },
+    style: {
+      cursor: "pointer",
+      fontWeight: "bold",
+      padding: "12px 16px",
+      background: "#f8f8f8",
+      borderRadius: "8px",
+      marginBottom: "10px",
+      boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'th-login'), /*#__PURE__*/React.createElement("span", null, isExpanded ? "▲" : "▼")), isExpanded && ((_settings$integration4 = settings.integration) === null || _settings$integration4 === void 0 || (_settings$integration4 = _settings$integration4.wordpress) === null || _settings$integration4 === void 0 ? void 0 : _settings$integration4.enabled) && /*#__PURE__*/React.createElement("div", {
     className: "premium-openeer-toggle"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wordpress-option-slide"
@@ -12107,7 +12128,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     className: "custom-login-url-row"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("e.g. login, kuber, signin", "thlogin"),
-    value: ((_settings$integration4 = settings.integration) === null || _settings$integration4 === void 0 || (_settings$integration4 = _settings$integration4.wordpress) === null || _settings$integration4 === void 0 ? void 0 : _settings$integration4.url) || "",
+    value: ((_settings$integration5 = settings.integration) === null || _settings$integration5 === void 0 || (_settings$integration5 = _settings$integration5.wordpress) === null || _settings$integration5 === void 0 ? void 0 : _settings$integration5.url) || "",
     onChange: function onChange(value) {
       return handleSettingChange("integration", ["wordpress", "url"], value);
     },
@@ -12138,13 +12159,13 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "th-login"),
     description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "th-login")
   }].map(function (_ref2) {
-    var _settings$integration5;
+    var _settings$integration6;
     var type = _ref2.type,
       label = _ref2.label,
       description = _ref2.description;
     return /*#__PURE__*/React.createElement("div", {
       key: type,
-      className: "form-type-card ".concat(((_settings$integration5 = settings.integration.wordpress) === null || _settings$integration5 === void 0 ? void 0 : _settings$integration5.form_type) === type ? "active" : ""),
+      className: "form-type-card ".concat(((_settings$integration6 = settings.integration.wordpress) === null || _settings$integration6 === void 0 ? void 0 : _settings$integration6.form_type) === type ? "active" : ""),
       onClick: function onClick() {
         return handleSettingChange("integration", ["wordpress", "form_type"], type);
       }
@@ -12179,7 +12200,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     }, label), /*#__PURE__*/React.createElement("p", {
       className: "form-type-description"
     }, description));
-  })))))), /*#__PURE__*/React.createElement("div", {
+  }))))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group integration-woocommerce"
   }, /*#__PURE__*/React.createElement("div", {
     className: "settings-card woocommerce-card"
@@ -12205,7 +12226,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     className: "woocommerce-toggle"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$integration6 = settings.integration) === null || _settings$integration6 === void 0 || (_settings$integration6 = _settings$integration6.woocommerce) === null || _settings$integration6 === void 0 ? void 0 : _settings$integration6.enabled) || false,
+    checked: ((_settings$integration7 = settings.integration) === null || _settings$integration7 === void 0 || (_settings$integration7 = _settings$integration7.woocommerce) === null || _settings$integration7 === void 0 ? void 0 : _settings$integration7.enabled) || false,
     disabled: !isWooEnabled,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "enabled"], isChecked);

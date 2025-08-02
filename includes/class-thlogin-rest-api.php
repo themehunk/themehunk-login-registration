@@ -813,8 +813,8 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $user_id->get_error_message() ] ], 400 );
 		}
 
-		// Email verification
-		if ( $security_settings['email_verification']['enabled'] ?? false ) {
+		//Email Verification
+		if($security_settings['email_verification']['from_type'] === 'wordpress'  && ($security_settings['email_verification']['enabled'] ?? false)){
 			$this->thlogin_send_verification_email( $user_id, $email );
 
 			return new WP_REST_Response( [
@@ -824,7 +824,11 @@ class THLogin_REST_API {
 					'redirect_url'  => home_url( '/?email_verification=sent' ),
 				],
 			], 200 );
+		}else if($security_settings['email_verification']['from_type'] === 'smtp' && $integration_settings['smtp']['enabled'] && ($security_settings['email_verification']['enabled'] ?? false)){
+
+
 		}
+
 
 		// Manual approval
 		if ( $general_settings['manual_user_approval']['enabled'] ?? false ) {

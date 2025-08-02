@@ -4883,4 +4883,10 @@ input[type=range]::-webkit-slider-thumb {
   margin: 0;
 }
 
+.smtp-image-icon img {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 10px;
+}
+
 /*# sourceMappingURL=admin.css.map*/

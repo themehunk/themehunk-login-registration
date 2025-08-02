@@ -10768,12 +10768,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 var EmailSettings = function EmailSettings(_ref) {
-  var _settings$security$em, _settings$security$em2, _settings$security$em3, _settings$security$em4, _settings$security$em5, _settings$security$em6;
+  var _settings$security$em2, _settings$security$em3, _settings$security$em4, _settings$security$em5, _settings$security$em6, _settings$security$em7, _settings$security$em8, _settings$security$em9, _settings$integration, _settings$security$em0, _settings$security$em1, _settings$security$em10, _settings$security$em11;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange;
+  var tabs = [{
+    key: "wordpress",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WordPress", "th-login")
+  }, {
+    key: "smtp",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("SMTP", "th-login")
+  }];
+  var renderTabs = function renderTabs() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "custom-tabs"
+    }, tabs.map(function (tab) {
+      var _settings$security$em;
+      return /*#__PURE__*/React.createElement("button", {
+        key: tab.key,
+        className: "custom-tab-button ".concat(((_settings$security$em = settings.security.email_verification) === null || _settings$security$em === void 0 ? void 0 : _settings$security$em.from_type) === tab.key ? "active" : ""),
+        onClick: function onClick() {
+          return handleSettingChange("security", ["email_verification", "from_type"], tab.key);
+        }
+      }, tab.label);
+    }));
+  };
   return /*#__PURE__*/React.createElement("section", {
     className: "settings-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -10796,13 +10820,13 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$security$em = settings.security.email_verification) === null || _settings$security$em === void 0 ? void 0 : _settings$security$em.enabled) || false,
+    checked: ((_settings$security$em2 = settings.security.email_verification) === null || _settings$security$em2 === void 0 ? void 0 : _settings$security$em2.enabled) || false,
     onChange: function onChange(isChecked) {
       return handleSettingChange("security", ["email_verification", "enabled"], isChecked);
     }
-  }))), ((_settings$security$em2 = settings.security.email_verification) === null || _settings$security$em2 === void 0 ? void 0 : _settings$security$em2.enabled) && /*#__PURE__*/React.createElement("div", {
+  }))), ((_settings$security$em3 = settings.security.email_verification) === null || _settings$security$em3 === void 0 ? void 0 : _settings$security$em3.enabled) && /*#__PURE__*/React.createElement("div", {
     className: "menu-item-group"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, " ", ((_settings$security$em4 = settings.security.email_verification) === null || _settings$security$em4 === void 0 ? void 0 : _settings$security$em4.from_type) === 'wordpress' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
@@ -10811,7 +10835,7 @@ var EmailSettings = function EmailSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    value: ((_settings$security$em3 = settings.security.email_verification) === null || _settings$security$em3 === void 0 ? void 0 : _settings$security$em3.from_name) || "",
+    value: ((_settings$security$em5 = settings.security.email_verification) === null || _settings$security$em5 === void 0 ? void 0 : _settings$security$em5.from_name) || "",
     onChange: function onChange(value) {
       return handleSettingChange("security", ["email_verification", "from_name"], value);
     }
@@ -10825,7 +10849,7 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     type: "email",
-    value: ((_settings$security$em4 = settings.security.email_verification) === null || _settings$security$em4 === void 0 ? void 0 : _settings$security$em4.from_email) || "",
+    value: ((_settings$security$em6 = settings.security.email_verification) === null || _settings$security$em6 === void 0 ? void 0 : _settings$security$em6.from_email) || "",
     onChange: function onChange(value) {
       return handleSettingChange("security", ["email_verification", "from_email"], value);
     }
@@ -10838,7 +10862,7 @@ var EmailSettings = function EmailSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    value: ((_settings$security$em5 = settings.security.email_verification) === null || _settings$security$em5 === void 0 ? void 0 : _settings$security$em5.email_subject) || "",
+    value: ((_settings$security$em7 = settings.security.email_verification) === null || _settings$security$em7 === void 0 ? void 0 : _settings$security$em7.email_subject) || "",
     onChange: function onChange(value) {
       return handleSettingChange("security", ["email_verification", "email_subject"], value);
     }
@@ -10851,10 +10875,75 @@ var EmailSettings = function EmailSettings(_ref) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
-    value: ((_settings$security$em6 = settings.security.email_verification) === null || _settings$security$em6 === void 0 ? void 0 : _settings$security$em6.email_content) || "",
+    value: ((_settings$security$em8 = settings.security.email_verification) === null || _settings$security$em8 === void 0 ? void 0 : _settings$security$em8.email_content) || "",
     onChange: function onChange(value) {
       return handleSettingChange("security", ["email_verification", "email_content"], value);
     }
+  })))), ((_settings$security$em9 = settings.security.email_verification) === null || _settings$security$em9 === void 0 ? void 0 : _settings$security$em9.from_type) === 'smtp' && /*#__PURE__*/React.createElement(React.Fragment, null, (_settings$integration = settings.integration) !== null && _settings$integration !== void 0 && (_settings$integration = _settings$integration.smtp) !== null && _settings$integration !== void 0 && _settings$integration.enabled ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: ((_settings$security$em0 = settings.security.email_verification) === null || _settings$security$em0 === void 0 ? void 0 : _settings$security$em0.from_name) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "from_name"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    type: "email",
+    value: ((_settings$security$em1 = settings.security.email_verification) === null || _settings$security$em1 === void 0 ? void 0 : _settings$security$em1.from_email) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "from_email"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    value: ((_settings$security$em10 = settings.security.email_verification) === null || _settings$security$em10 === void 0 ? void 0 : _settings$security$em10.email_subject) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "email_subject"], value);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "setting-label"
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "th-login")), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "th-login"))), /*#__PURE__*/React.createElement("div", {
+    className: "setting-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+    value: ((_settings$security$em11 = settings.security.email_verification) === null || _settings$security$em11 === void 0 ? void 0 : _settings$security$em11.email_content) || "",
+    onChange: function onChange(value) {
+      return handleSettingChange("security", ["email_verification", "email_content"], value);
+    }
+  })))) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      backgroundColor: "#f0f6ff",
+      border: "1px solid #b6d4fe",
+      borderRadius: "6px",
+      padding: "12px 16px",
+      marginTop: "12px",
+      fontSize: "14px",
+      color: "#084298"
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createInterpolateElement)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('<strong>Notice:</strong> To enable email sending features, please go to the <strong>Integration</strong> tab and activate a supported <strong>SMTP plugin</strong>.', 'th-login'), {
+    strong: /*#__PURE__*/React.createElement("strong", null)
   }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmailSettings);
@@ -11948,6 +12037,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     handleSettingChange = _ref.handleSettingChange,
     isLoading = _ref.isLoading;
   var isWooEnabled = thlogin_admin_data.woo_enabled;
+  var isSmtpEnabled = thlogin_admin_data.smtp_enabled;
   var finalurl = window.location.origin;
   if (!finalurl.endsWith('/wordpress')) {
     finalurl += '/wordpress';
@@ -12964,10 +13054,6 @@ var TABS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Design", "th-login"),
   icon: "art"
 }, {
-  id: "integration",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration", "th-login"),
-  icon: "admin-plugins"
-}, {
   id: "security",
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security", "th-login"),
   icon: "shield"
@@ -12975,6 +13061,10 @@ var TABS = [{
   id: "email",
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "th-login"),
   icon: "email"
+}, {
+  id: "integration",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration", "th-login"),
+  icon: "admin-plugins"
 }, {
   id: "tools",
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "th-login"),
@@ -13535,6 +13625,9 @@ var integration = {
     enabled: false,
     url: "login",
     form_type: "double"
+  },
+  smtp: {
+    enabled: false
   }
 };
 var security = {
@@ -13554,6 +13647,7 @@ var security = {
   honeypot_enabled: true,
   email_verification: {
     enabled: false,
+    from_type: "wordpress",
     from_name: '',
     from_email: '',
     email_subject: 'Verify your email',

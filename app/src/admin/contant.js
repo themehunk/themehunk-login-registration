@@ -23,11 +23,6 @@ export const TABS = [
     icon: "art"
   },
   {
-    id: "integration",
-    label: __("Integration", "th-login"),
-    icon: "admin-plugins"
-  },
-  {
     id: "security",
     label: __("Security", "th-login"),
     icon: "shield"
@@ -36,6 +31,11 @@ export const TABS = [
     id: "email",
     label: __("Email Settings", "th-login"),
     icon: "email"
+  },
+  {
+    id: "integration",
+    label: __("Integration", "th-login"),
+    icon: "admin-plugins"
   },
   {
     id: "tools",
@@ -478,6 +478,9 @@ export const integration = {
     enabled: false,
     url:"login",
     form_type: "double",
+  },
+  smtp:{
+    enabled: false,
   }
 };
 
@@ -498,6 +501,7 @@ export  const security = {
   honeypot_enabled: true,
   email_verification: {
     enabled: false,
+    from_type:"wordpress",
     from_name: '',
     from_email: '',
     email_subject: 'Verify your email',

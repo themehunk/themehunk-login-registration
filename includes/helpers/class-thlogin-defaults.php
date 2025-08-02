@@ -539,8 +539,9 @@ class THLogin_Defaults {
 			),
 			'honeypot_enabled'       => true,
 			'email_verification'     => array(
-				'enabled'   => false,
+				'enabled'        => false,
 				'from_name'      => '',
+				'from_type'  	 =>'wordpress',
 				'from_email'     => '',
 				'email_subject'  => 'Verify your email',
 				'email_content'  => 'Click the link to verify: {verification_link}',
@@ -563,6 +564,10 @@ class THLogin_Defaults {
 				'enabled'           => false,
 				'url'               => 'login',
 				'form_type'         => 'double',
+			),
+
+			'smtp'    => array(
+				'enabled'    => false,
 			),
 		);
 	}

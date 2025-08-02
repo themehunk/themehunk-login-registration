@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
 
 	const isWooEnabled = thlogin_admin_data.woo_enabled;
+  const isSmtpEnabled = thlogin_admin_data.smtp_enabled;
 
   let finalurl = window.location.origin;
 
@@ -159,6 +160,7 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                     </div>
                 </div>
             )}
+
           </div>
         </div>
            
@@ -202,6 +204,47 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
 
           </div>
         </div>
+
+        {/* <div className="settings-group integration-woocommerce">
+          <div className="settings-card woocommerce-card">
+            <div className="woocommerce-card-header">
+              <div className="woocommerce-icon smtp-image-icon">
+                <img src="https://ps.w.org/post-smtp/assets/icon-128x128.gif?rev=3209655"></img>
+              </div>
+              <div className="woocommerce-info">
+                <h3>{__("SMTP Integration", "thlogin")}</h3>
+                <p>
+                  {__(
+                    "Enable SMTP to improve email deliverability and send login-related emails reliably.",
+                    "th-login"
+                  )}
+                </p>
+              </div>
+              <div className="woocommerce-toggle">
+                <ToggleControl
+                  __nextHasNoMarginBottom={true}
+                  checked={settings.integration?.smtp?.enabled || false}
+                  disabled={!isSmtpEnabled}
+                  onChange={(isChecked) =>
+                    handleSettingChange("integration", ["smtp", "enabled"], isChecked)
+                  }
+                />
+              </div>
+            </div>
+
+            {!isSmtpEnabled && (
+                <div style={{ marginTop: "15px" }}>
+                  <Notice status="warning" isDismissible={false}>
+                    {__(
+                      "To enable SMTP integration, please install and activate the SMTP plugin.",
+                      "thlogin"
+                    )}
+                  </Notice>
+                </div>
+              )}
+
+          </div>
+        </div> */}
 
       </div>
     </section>

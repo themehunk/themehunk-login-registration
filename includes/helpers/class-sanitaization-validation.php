@@ -675,10 +675,11 @@ class TH_Sanitization_validation {
 
 		return $errors->has_errors() ? $errors : true;
 	}
-
+	
 	public function sanitize_integration_settings( $settings ) {
 		$woocommerce = $settings['woocommerce'] ?? array();
 		$wordpress   = $settings['wordpress'] ?? array();
+		$smtp        = $settings['smtp'] ?? array();
 
 		return array(
 			'woocommerce' => array(
@@ -689,6 +690,9 @@ class TH_Sanitization_validation {
 				'url'       => sanitize_title( $wordpress['url'] ?? 'login' ),
 				'form_type' => sanitize_text_field( $wordpress['form_type'] ?? 'double' ),
 			),
+			'smtp' => array(
+				'enabled' => ! empty( $smtp['enabled'] ),
+			),
 		);
 	}
 
@@ -697,10 +701,9 @@ class TH_Sanitization_validation {
 			return new WP_Error( 'invalid_data', __( 'Integration settings must be an array.', 'th-login' ) );
 		}
 
-		// ✅ Validate WooCommerce settings
+		// ✅ WooCommerce
 		if ( isset( $settings['woocommerce'] ) && is_array( $settings['woocommerce'] ) ) {
 			$allowed_woo_keys = [ 'enabled' ];
-
 			foreach ( $settings['woocommerce'] as $key => $val ) {
 				if ( ! in_array( $key, $allowed_woo_keys, true ) ) {
 					return new WP_Error(
@@ -713,10 +716,9 @@ class TH_Sanitization_validation {
 			return new WP_Error( 'missing_woocommerce', __( 'WooCommerce integration settings missing or invalid.', 'th-login' ) );
 		}
 
-		// ✅ Validate WordPress settings
+		// ✅ WordPress
 		if ( isset( $settings['wordpress'] ) && is_array( $settings['wordpress'] ) ) {
 			$allowed_wp_keys = [ 'enabled', 'url', 'form_type' ];
-
 			foreach ( $settings['wordpress'] as $key => $val ) {
 				if ( ! in_array( $key, $allowed_wp_keys, true ) ) {
 					return new WP_Error(
@@ -725,16 +727,29 @@ class TH_Sanitization_validation {
 					);
 				}
 			}
-
 			if ( isset( $settings['wordpress']['url'] ) && ! is_string( $settings['wordpress']['url'] ) ) {
 				return new WP_Error( 'invalid_url', __( 'Login URL must be a string.', 'th-login' ) );
 			}
-
 			if ( isset( $settings['wordpress']['form_type'] ) && ! is_string( $settings['wordpress']['form_type'] ) ) {
 				return new WP_Error( 'invalid_form_type', __( 'Form type must be a string.', 'th-login' ) );
 			}
 		} else {
 			return new WP_Error( 'missing_wordpress', __( 'WordPress integration settings missing or invalid.', 'th-login' ) );
+		}
+
+		// ✅ SMTP
+		if ( isset( $settings['smtp'] ) && is_array( $settings['smtp'] ) ) {
+			$allowed_smtp_keys = [ 'enabled' ];
+			foreach ( $settings['smtp'] as $key => $val ) {
+				if ( ! in_array( $key, $allowed_smtp_keys, true ) ) {
+					return new WP_Error(
+						'invalid_key',
+						sprintf( __( 'Unexpected key "%s" in SMTP settings.', 'th-login' ), esc_html( $key ) )
+					);
+				}
+			}
+		} else {
+			return new WP_Error( 'missing_smtp', __( 'SMTP integration settings missing or invalid.', 'th-login' ) );
 		}
 
 		return true;
@@ -765,6 +780,7 @@ class TH_Sanitization_validation {
 		$sanitized['email_verification']['from_email']    = sanitize_email( $settings['email_verification']['from_email'] ?? '' );
 		$sanitized['email_verification']['email_subject'] = sanitize_text_field( $settings['email_verification']['email_subject'] ?? 'Verify your email' );
 		$sanitized['email_verification']['email_content'] = wp_kses_post( $settings['email_verification']['email_content'] ?? 'Click the link to verify: {verification_link}' );
+		$sanitized['email_verification']['from_type'] = sanitize_text_field( $settings['email_verification']['from_type'] ?? 'wordpress' );
 
 		// Session Timeout.
 		$sanitized['session_timeout']['enabled'] = rest_sanitize_boolean( $settings['session_timeout']['enabled'] ?? true );

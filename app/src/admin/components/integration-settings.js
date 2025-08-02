@@ -6,7 +6,13 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
 
 	const isWooEnabled = thlogin_admin_data.woo_enabled;
 
-  const fullwordpressurl = thlogin_admin_data.wp_login_url;
+  let finalurl = window.location.origin;
+
+  if (!finalurl.endsWith('/wordpress')) {
+    finalurl += '/wordpress';
+  }
+
+  const fullwordpressurl = thlogin_admin_data?.wp_login_url || finalurl;
 
   const [baseWordpressUrl, setBaseWordpressUrl] = useState(fullwordpressurl);
 
@@ -84,7 +90,6 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                     </label>
 
                     <div className="custom-login-url-row">
-                     
                       <TextControl
                         placeholder={__("e.g. login, kuber, signin", "thlogin")}
                         value={settings.integration?.wordpress?.url || ""}
@@ -104,6 +109,54 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                     </span>
                   </div>
                   </div>
+
+                    <div className="settings-group thlogin-modalchoose-form inetgration-form-type">
+                            <h4 className="group-title">{__("Form Type", "th-login")}</h4>
+
+                            <div className="form-type-options">
+                                {[
+                                {
+                                    type: "single",
+                                    label: __("Single Form", "th-login"),
+                                    description: __("Only login form will be shown", "th-login"),
+                                },
+                                {
+                                    type: "double",
+                                    label: __("Double Form", "th-login"),
+                                    description: __("Users can toggle between Login and Register forms", "th-login"),
+                                },
+                                ].map(({ type, label, description }) => (
+                                <div
+                                    key={type}
+                                    className={`form-type-card ${settings.integration.wordpress?.form_type === type ? "active" : ""}`}
+                                    onClick={() => handleSettingChange("integration", ["wordpress", "form_type"], type)}
+                                >
+                                    <div className="form-type-mockup">
+                                      {type === "single" ? (
+                                          <div className="mockup-box">
+                                          <div className="mockup-header">Login</div>
+                                          <div className="mockup-line short"></div>
+                                          <div className="mockup-line"></div>
+                                          <div className="mockup-button"></div>
+                                          </div>
+                                      ) : (
+                                          <div className="mockup-box">
+                                          <div className="mockup-tab-row">
+                                              <div className="tab active">Login</div>
+                                              <div className="tab">Register</div>
+                                          </div>
+                                          <div className="mockup-line short"></div>
+                                          <div className="mockup-line"></div>
+                                          <div className="mockup-button"></div>
+                                          </div>
+                                      )}
+                                    </div>
+                                    <h5 className="form-type-label">{label}</h5>
+                                    <p className="form-type-description">{description}</p>
+                                </div>
+                                ))}
+                            </div>
+                    </div>
                 </div>
             )}
           </div>

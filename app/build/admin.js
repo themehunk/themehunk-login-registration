@@ -11943,12 +11943,16 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var IntegrationSettings = function IntegrationSettings(_ref) {
-  var _settings$integration2, _settings$integration3, _settings$integration4, _settings$integration5;
+  var _thlogin_admin_data, _settings$integration2, _settings$integration3, _settings$integration4, _settings$integration6;
   var settings = _ref.settings,
     handleSettingChange = _ref.handleSettingChange,
     isLoading = _ref.isLoading;
   var isWooEnabled = thlogin_admin_data.woo_enabled;
-  var fullwordpressurl = thlogin_admin_data.wp_login_url;
+  var finalurl = window.location.origin;
+  if (!finalurl.endsWith('/wordpress')) {
+    finalurl += '/wordpress';
+  }
+  var fullwordpressurl = ((_thlogin_admin_data = thlogin_admin_data) === null || _thlogin_admin_data === void 0 ? void 0 : _thlogin_admin_data.wp_login_url) || finalurl;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(fullwordpressurl),
     _useState2 = _slicedToArray(_useState, 2),
     baseWordpressUrl = _useState2[0],
@@ -12032,7 +12036,63 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
       color: "#666",
       userSelect: "all"
     }
-  }, baseWordpressUrl + '/' + settings.integration.wordpress.url)))))), /*#__PURE__*/React.createElement("div", {
+  }, baseWordpressUrl + '/' + settings.integration.wordpress.url))), /*#__PURE__*/React.createElement("div", {
+    className: "settings-group thlogin-modalchoose-form inetgration-form-type"
+  }, /*#__PURE__*/React.createElement("h4", {
+    className: "group-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Type", "th-login")), /*#__PURE__*/React.createElement("div", {
+    className: "form-type-options"
+  }, [{
+    type: "single",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Form", "th-login"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only login form will be shown", "th-login")
+  }, {
+    type: "double",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "th-login"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "th-login")
+  }].map(function (_ref2) {
+    var _settings$integration5;
+    var type = _ref2.type,
+      label = _ref2.label,
+      description = _ref2.description;
+    return /*#__PURE__*/React.createElement("div", {
+      key: type,
+      className: "form-type-card ".concat(((_settings$integration5 = settings.integration.wordpress) === null || _settings$integration5 === void 0 ? void 0 : _settings$integration5.form_type) === type ? "active" : ""),
+      onClick: function onClick() {
+        return handleSettingChange("integration", ["wordpress", "form_type"], type);
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-type-mockup"
+    }, type === "single" ? /*#__PURE__*/React.createElement("div", {
+      className: "mockup-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "mockup-header"
+    }, "Login"), /*#__PURE__*/React.createElement("div", {
+      className: "mockup-line short"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "mockup-line"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "mockup-button"
+    })) : /*#__PURE__*/React.createElement("div", {
+      className: "mockup-box"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "mockup-tab-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "tab active"
+    }, "Login"), /*#__PURE__*/React.createElement("div", {
+      className: "tab"
+    }, "Register")), /*#__PURE__*/React.createElement("div", {
+      className: "mockup-line short"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "mockup-line"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "mockup-button"
+    }))), /*#__PURE__*/React.createElement("h5", {
+      className: "form-type-label"
+    }, label), /*#__PURE__*/React.createElement("p", {
+      className: "form-type-description"
+    }, description));
+  })))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group integration-woocommerce"
   }, /*#__PURE__*/React.createElement("div", {
     className: "settings-card woocommerce-card"
@@ -12058,7 +12118,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     className: "woocommerce-toggle"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    checked: ((_settings$integration5 = settings.integration) === null || _settings$integration5 === void 0 || (_settings$integration5 = _settings$integration5.woocommerce) === null || _settings$integration5 === void 0 ? void 0 : _settings$integration5.enabled) || false,
+    checked: ((_settings$integration6 = settings.integration) === null || _settings$integration6 === void 0 || (_settings$integration6 = _settings$integration6.woocommerce) === null || _settings$integration6 === void 0 ? void 0 : _settings$integration6.enabled) || false,
     disabled: !isWooEnabled,
     onChange: function onChange(isChecked) {
       return handleSettingChange("integration", ["woocommerce", "enabled"], isChecked);
@@ -13473,7 +13533,8 @@ var integration = {
   },
   wordpress: {
     enabled: false,
-    url: ""
+    url: "login",
+    form_type: "double"
   }
 };
 var security = {

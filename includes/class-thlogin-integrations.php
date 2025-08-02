@@ -155,6 +155,21 @@ class THLogin_Integrations {
 					height:auto !important;
 				}
 
+				.integration_single {
+					.thlogin-form-toggle {
+						display: none;
+					}
+
+					.thlogin-link-separator {
+						display: none;
+					}
+
+					.thlogin-link[data-th-popup-action="register"] {
+						display: none;
+					}
+					}
+
+
 			</style>';
 
 			// Your custom inline JS
@@ -195,6 +210,7 @@ class THLogin_Integrations {
 		
 				echo '</head><body>';
 			echo wp_footer();
+
 		echo '</body></html>';
 
 		exit;

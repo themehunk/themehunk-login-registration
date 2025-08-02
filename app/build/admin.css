@@ -4873,4 +4873,14 @@ input[type=range]::-webkit-slider-thumb {
   gap: 10px;
 }
 
+.premium-openeer-toggle {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+.premium-openeer-toggle .inetgration-form-type {
+  display: block;
+  margin: 0;
+}
+
 /*# sourceMappingURL=admin.css.map*/

@@ -476,7 +476,8 @@ export const integration = {
   },
   wordpress:{
     enabled: false,
-    url:"",
+    url:"login",
+    form_type: "double",
   }
 };
 

@@ -561,7 +561,8 @@ class THLogin_Defaults {
 			),
 			'wordpress' => array(
 				'enabled'           => false,
-				'url'               => '',
+				'url'               => 'login',
+				'form_type'         => 'double',
 			),
 		);
 	}

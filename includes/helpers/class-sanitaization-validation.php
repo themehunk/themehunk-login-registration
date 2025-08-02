@@ -685,8 +685,9 @@ class TH_Sanitization_validation {
 				'enabled' => ! empty( $woocommerce['enabled'] ),
 			),
 			'wordpress' => array(
-				'enabled'          => ! empty( $wordpress['enabled'] ),
-				'url'     => sanitize_title( $wordpress['url'] ?? 'login' ),
+				'enabled'   => ! empty( $wordpress['enabled'] ),
+				'url'       => sanitize_title( $wordpress['url'] ?? 'login' ),
+				'form_type' => sanitize_text_field( $wordpress['form_type'] ?? 'double' ),
 			),
 		);
 	}
@@ -704,7 +705,6 @@ class TH_Sanitization_validation {
 				if ( ! in_array( $key, $allowed_woo_keys, true ) ) {
 					return new WP_Error(
 						'invalid_key',
-						/* translators: %s: The invalid key in WooCommerce settings */
 						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'th-login' ), esc_html( $key ) )
 					);
 				}
@@ -715,21 +715,23 @@ class TH_Sanitization_validation {
 
 		// ✅ Validate WordPress settings
 		if ( isset( $settings['wordpress'] ) && is_array( $settings['wordpress'] ) ) {
-			$allowed_wp_keys = [ 'enabled', 'url' ]; // ⛔ removed replace_wp_login (not used anywhere)
+			$allowed_wp_keys = [ 'enabled', 'url', 'form_type' ];
 
 			foreach ( $settings['wordpress'] as $key => $val ) {
 				if ( ! in_array( $key, $allowed_wp_keys, true ) ) {
 					return new WP_Error(
 						'invalid_key',
-						/* translators: %s: The invalid key in WordPress settings */
 						sprintf( __( 'Unexpected key "%s" in WordPress settings.', 'th-login' ), esc_html( $key ) )
 					);
 				}
 			}
 
-			// ✅ Ensure login slug is a string (optional but strict)
 			if ( isset( $settings['wordpress']['url'] ) && ! is_string( $settings['wordpress']['url'] ) ) {
 				return new WP_Error( 'invalid_url', __( 'Login URL must be a string.', 'th-login' ) );
+			}
+
+			if ( isset( $settings['wordpress']['form_type'] ) && ! is_string( $settings['wordpress']['form_type'] ) ) {
+				return new WP_Error( 'invalid_form_type', __( 'Form type must be a string.', 'th-login' ) );
 			}
 		} else {
 			return new WP_Error( 'missing_wordpress', __( 'WordPress integration settings missing or invalid.', 'th-login' ) );
@@ -737,7 +739,7 @@ class TH_Sanitization_validation {
 
 		return true;
 	}
-
+	
 	public function sanitize_security_settings( $settings ) {
 		$sanitized = array();
 

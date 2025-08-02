@@ -105,6 +105,7 @@ class THLogin_Style_Renderer {
                 font-size: <?php echo esc_attr( $d['heading']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['heading']['typography']['fontWeight'] ); ?>;
                 text-align: center;
+                margin:0;
             }
 
             .thlogin-form-field input[type="text"],

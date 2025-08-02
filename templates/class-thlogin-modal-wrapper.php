@@ -21,6 +21,10 @@ class THLogin_Modal_Wrapper {
 		$all_settings = get_option( 'thlogin_settings', [] );
 		$d  = $all_settings['design'] ?? [];
 
+		$integration = $all_settings['integration']?? [];
+		$integration_form_type = $integration['wordpress']['form_type'] ?? [];
+		$integration_class = $integration_form_type === 'single' ? 'integration_single' : 'integration_double';
+
 		$modal_bg_style = $this->get_background_style();
 		$filter = isset( $d['form']['form_background']['filter'] ) ? intval( $d['form']['form_background']['filter'] ) : 0;
 
@@ -31,7 +35,7 @@ class THLogin_Modal_Wrapper {
 		?>
 		
 		<div id="thlogin-popup-modal"
-			class="thlogin-popup-modal"
+			class="thlogin-popup-modal <?php echo esc_attr($integration_class); ?>"
 			role="dialog"
 			aria-modal="true"
 			aria-hidden="true"

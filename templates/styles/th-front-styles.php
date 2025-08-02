@@ -70,6 +70,7 @@ class THLogin_Style_Renderer {
 		ob_start();
 		?>
 
+        
             .thlogin-popup-form-container {
                 <?php echo esc_attr( $this->get_background_style( $d['form']['form_background'] ) ); ?>
                 <?php echo esc_attr( $this->get_border_style( $d['form']['form_border'] ) ); ?>

@@ -17,6 +17,32 @@ const tabinside = [
 	{ key: "header", label: __("Button", "th-login") },
 ];
 
+const getBackgroundStyle = (background) => {
+	const type = background?.type || "color";
+	if (type === "gradient") {
+	return {
+		backgroundImage: background.gradient,
+		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center center",
+		opacity: background.opacity,
+	};
+	} else if (type === "image" && background.image?.url) {
+	return {
+		backgroundImage: `url(${background.image.url})`,
+		backgroundSize: background.image.size || "cover",
+		backgroundRepeat: background.image.repeat || "no-repeat",
+		backgroundPosition: background.image.position || "center center",
+		opacity: background.opacity,
+	};
+	} else {
+	return {
+		backgroundColor: background.color || "#ffffff",
+		opacity: background.opacity,
+	};
+	}
+};
+
 //intertivity
 const InteractiveInput = ({ base, hover, active, ...props }) => {
   const [hovered, setHovered] = useState(false);
@@ -132,18 +158,27 @@ const LoginFormHeader = ({ settings }) => {
   const buttonStyle = header?.button || {};
   const cancelStyle = header?.cancel_button || {};
 
-  const applyButtonStyle = (style) => ({
-    color: style.color,
-    backgroundColor: style.background,
-    padding: `${style.padding?.top || 0}px ${style.padding?.right || 0}px ${style.padding?.bottom || 0}px ${style.padding?.left || 0}px`,
-    fontSize: style.typography?.size || '14px',
-    fontWeight: style.typography?.fontWeight || 'normal',
-    borderStyle: style.border?.style || 'solid',
-    borderColor: style.border?.color || '#000',
-    borderWidth: `${style.border?.width?.top || 0}px ${style.border?.width?.right || 0}px ${style.border?.width?.bottom || 0}px ${style.border?.width?.left || 0}px`,
-    borderRadius: `${style.border?.radius?.topLeft || 0}px ${style.border?.radius?.topRight || 0}px ${style.border?.radius?.bottomRight || 0}px ${style.border?.radius?.bottomLeft || 0}px`,
-    cursor: 'pointer'
-  });
+  const [hovered, setHovered] = useState(null); // 'login' | 'register' | 'cancel' | null
+
+
+  const applyButtonStyle = (style, isHovered = false) => {
+    const bg = isHovered && style?.hoverbackground
+      ? style.hoverbackground
+      : style.background;
+
+    return {
+      color: style.color,
+      ...getBackgroundStyle(bg),
+      padding: `${style.padding?.top || 0}px ${style.padding?.right || 0}px ${style.padding?.bottom || 0}px ${style.padding?.left || 0}px`,
+      fontSize: style.typography?.size || '14px',
+      fontWeight: style.typography?.fontWeight || 'normal',
+      borderStyle: style.border?.style || 'solid',
+      borderColor: style.border?.color || '#000',
+      borderWidth: `${style.border?.width?.top || 0}px ${style.border?.width?.right || 0}px ${style.border?.width?.bottom || 0}px ${style.border?.width?.left || 0}px`,
+      borderRadius: `${style.border?.radius?.topLeft || 0}px ${style.border?.radius?.topRight || 0}px ${style.border?.radius?.bottomRight || 0}px ${style.border?.radius?.bottomLeft || 0}px`,
+      cursor: 'pointer'
+    };
+  };
 
   return (
     <div className="thloginpreview-form-header-part">
@@ -152,7 +187,9 @@ const LoginFormHeader = ({ settings }) => {
           <button 
             className="thloginpreview-popup-close-button" 
             aria-label={__('Close', 'th-login')}
-            style={applyButtonStyle(cancelStyle)}
+            onMouseEnter={() => setHovered('cancel')}
+            onMouseLeave={() => setHovered(null)}
+            style={applyButtonStyle(cancelStyle, hovered === 'cancel')}
           >
             <Dashicon icon="no-alt" />
           </button>
@@ -163,24 +200,27 @@ const LoginFormHeader = ({ settings }) => {
         <div className="thlogin-prevuiew-form-toggle">
           <button 
             type="button" 
-            className="thlogin-prevuiew-toggle-button thlogin-prevuiew-toggle-button--login" 
+            className="thlogin-prevuiew-toggle-button thlogin-prevuiew-toggle-button--login"
             data-th-popup-action="login"
-            style={applyButtonStyle(buttonStyle)}
+            onMouseEnter={() => setHovered('login')}
+            onMouseLeave={() => setHovered(null)}
+            style={applyButtonStyle(buttonStyle, hovered === 'login')}
           >
-            {__('Login', 'th-login')}
+            {__(settings.design.header?.loginText, 'th-login')}
           </button>
 
           <button 
             type="button" 
-            className="thlogin-preview-toggle-button thlogin-preview-toggle-button--register" 
+            className="thlogin-preview-toggle-button thlogin-preview-toggle-button--register"
             data-th-popup-action="register"
-            style={applyButtonStyle(buttonStyle)}
+            onMouseEnter={() => setHovered('register')}
+            onMouseLeave={() => setHovered(null)}
+            style={applyButtonStyle(buttonStyle, hovered === 'register')}
           >
-            {__('Register', 'th-login')}
+            {__(settings.design.header?.registerText, 'th-login')}
           </button>
         </div>
       )}
-
     </div>
   );
 };
@@ -194,32 +234,6 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 	const inputBase = settings.design.Input;
 	const buttonBase = settings.design.button;
-
-	const getBackgroundStyle = (background) => {
-		const type = background?.type || "color";
-		if (type === "gradient") {
-		return {
-			backgroundImage: background.gradient,
-			backgroundSize: "cover",
-			backgroundRepeat: "no-repeat",
-			backgroundPosition: "center center",
-			opacity: background.opacity,
-		};
-		} else if (type === "image" && background.image?.url) {
-		return {
-			backgroundImage: `url(${background.image.url})`,
-			backgroundSize: background.image.size || "cover",
-			backgroundRepeat: background.image.repeat || "no-repeat",
-			backgroundPosition: background.image.position || "center center",
-			opacity: background.opacity,
-		};
-		} else {
-		return {
-			backgroundColor: background.color || "#ffffff",
-			opacity: background.opacity,
-		};
-		}
-	};
 
 	const getBorderStyle = (border = {}) => {
 		const width = border.width || {};
@@ -256,7 +270,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		width: '100%',
 		height: '100%',
 		'--th-input-color': inputBase.color,
-		'--th-backgroundColor': `0 0 0 1000px ${inputBase.background} inset`,
+		'--th-backgroundColor': `0 0 0 1000px ${inputBase.background.color} inset`,
 		backdropFilter: `blur(${settings.design.modal?.modal_background?.filter}px)`,
 	};
 
@@ -289,7 +303,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				width: '100%',
 				borderRadius: '4px',
 				color: settings.design.Input?.color,
-				backgroundColor: settings.design.Input?.background,
+				...getBackgroundStyle(settings.design.Input?.background),
 				fontSize: settings.design.Input?.typography.size,
 				fontWeight: settings.design.Input?.typography.fontWeight,
 				...(settings.design.icon.icon_position ==='inside-input' ? { paddingLeft: '30px' } : {}),
@@ -299,7 +313,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				borderColor: settings.design.Input?.activecolor,
 			},
 			active: {
-				backgroundColor: settings.design.Input?.background,
+				...getBackgroundStyle(settings.design.Input?.background),
 				borderColor: settings.design.Input?.activecolor,
 			},
 		};
@@ -307,7 +321,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 		const buttonProps = {
 			base: {
 				color: buttonBase.color,
-				backgroundColor: buttonBase.background,
+				...getBackgroundStyle(buttonBase.background),
 				fontSize: buttonBase.typography.size,
 				fontWeight: buttonBase.typography.fontWeight,
 				padding: `${buttonBase.padding.top}px ${buttonBase.padding.right}px`,
@@ -316,7 +330,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				cursor: 'pointer',
 				width: '100%',
 			},
-			hover: { backgroundColor: buttonBase.hoverBackground },
+			hover: { ...getBackgroundStyle( buttonBase.hoverbackground)},
 		};
 
 		const checkboxProps = {
@@ -474,8 +488,6 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 			return (
 				<>
-
-			
 					<LoginFormHeader settings={settings} />
 
 					{settings.design.logo?.url ? (
@@ -685,8 +697,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 	);
 
 	return (
-		<div className="settings-card">
-			
+		<div className="settings-card">	
 			<div className="settings-label-with-deisgn"> 
 				<h2 className="section-title">
 					<i className="dashicons dashicons-art"></i>
@@ -804,45 +815,45 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 						{insidetab === "label" && (
 							<>
 								<AccordionSection title={__("Heading", "th-login")} defaultOpen={false}>
-								<div className="th-heading-settings">
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Text Color", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.heading.color}
-										onChange={(e) =>
-										handleSettingChange("design", ["heading", "color"], e.target.value)
-										}
-									/>
-									</div>
-
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Font Size", "th-login")}</label>
-									<input
-										type="number"
-										className="th-number-input"
-										value={parseInt(settings.design.heading.typography.size)}
-										onChange={(e) =>
-										handleSettingChange("design", ["heading", "typography", "size"], `${e.target.value}px`)
-										}
-										min={1}
-									/>
-									</div>
-
-									<div className="th-setting-row">
-									<div className="th-select-wrapper modern-sleect-heaidng">
-										<CustomSelectControl
-										label={__("Font Weight", "th-login")}
-										value={settings.design.heading.typography.fontWeight}
-										onChange={(value) =>
-											handleSettingChange("design", ["heading", "typography", "fontWeight"], value)
-										}
-										options={fontWeightOptions}
+									<div className="th-heading-settings">
+										<div className="th-setting-row">
+										<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+										<input
+											type="color"
+											className="th-color-input"
+											value={settings.design.heading.color}
+											onChange={(e) =>
+											handleSettingChange("design", ["heading", "color"], e.target.value)
+											}
 										/>
+										</div>
+
+										<div className="th-setting-row">
+										<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+										<input
+											type="number"
+											className="th-number-input"
+											value={parseInt(settings.design.heading.typography.size)}
+											onChange={(e) =>
+											handleSettingChange("design", ["heading", "typography", "size"], `${e.target.value}px`)
+											}
+											min={1}
+										/>
+										</div>
+
+										<div className="th-setting-row">
+										<div className="th-select-wrapper modern-sleect-heaidng">
+											<CustomSelectControl
+											label={__("Font Weight", "th-login")}
+											value={settings.design.heading.typography.fontWeight}
+											onChange={(value) =>
+												handleSettingChange("design", ["heading", "typography", "fontWeight"], value)
+											}
+											options={fontWeightOptions}
+											/>
+										</div>
+										</div>
 									</div>
-									</div>
-								</div>
 								</AccordionSection>
 
 								<AccordionSection title={__("Logo", "th-login")} defaultOpen={false}>
@@ -940,18 +951,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 											/>
 										</div>
 
-										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Background Color", "th-login")}</label>
-											<input
-												type="color"
-												className="th-color-input"
-												value={settings.design.Input.background}
-												onChange={(e) =>
-												handleSettingChange("design", ["Input", "background"], e.target.value)
-												}
-											/>
-										</div>
-
+							
 										<div className="th-setting-row">
 											<label className="th-setting-label">{__("Font Size", "th-login")}</label>
 											<input
@@ -977,7 +977,17 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												/>
 											</div>
 										</div>
+
+										<BackgroundSettingsPanel
+											title={__("Background", "th-login")}
+											background={settings.design.Input.background}
+											path={["Input", "background"]}
+											handleSettingChange={handleSettingChange}
+											blur={false}
+											onlycolor={true}
+										/>
 									</div>
+
 								</AccordionSection>
 
 								<AccordionSection title={__("Terms and Condition", "th-login")} defaultOpen={false}>
@@ -1196,30 +1206,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												/>
 												</div>
 
-												<div className="th-setting-row">
-												<label className="th-setting-label">{__("Background", "th-login")}</label>
-												<input
-													type="color"
-													className="th-color-input"
-													value={settings.design.header.button.background}
-													onChange={(e) =>
-													handleSettingChange("design", ["header", "button", "background"], e.target.value)
-													}
-												/>
-												</div>
-
-												<div className="th-setting-row">
-												<label className="th-setting-label">{__("Hover Background", "th-login")}</label>
-												<input
-													type="color"
-													className="th-color-input"
-													value={settings.design.header.button.hoverBackground}
-													onChange={(e) =>
-													handleSettingChange("design", ["header", "button", "hoverBackground"], e.target.value)
-													}
-												/>
-												</div>
-
+								
 												<div className="th-setting-row">
 												<label className="th-setting-label">{__("Font Size", "th-login")}</label>
 												<input
@@ -1233,15 +1220,31 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												</div>
 
 												<div className="th-setting-row modern-sleect-heaidng">
-												<CustomSelectControl
-													label={__("Font Weight", "th-login")}
-													value={settings.design.header.button.typography.fontWeight}
-													onChange={(value) =>
-													handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value)
-													}
-													options={fontWeightOptions}
-												/>
+													<CustomSelectControl
+														label={__("Font Weight", "th-login")}
+														value={settings.design.header.button.typography.fontWeight}
+														onChange={(value) =>
+														handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value)
+														}
+														options={fontWeightOptions}
+													/>
 												</div>
+
+												<BackgroundSettingsPanel
+													title={__("Background", "th-login")}
+													background={settings.design.header.button.background}
+													path={["header", "button", "background"]}
+													handleSettingChange={handleSettingChange}
+													blur={false}
+												/>
+
+												<BackgroundSettingsPanel
+													title={__("Hover Background", "th-login")}
+													background={settings.design.header.button.hoverbackground}
+													path={["header", "button", "hoverbackground"]}
+													handleSettingChange={handleSettingChange}
+													blur={false}
+												/>
 											</div>
 
 											<PaddingSettingsPanel
@@ -1277,29 +1280,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									/>
 									</div>
 
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Background Color", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.button.background}
-										onChange={(e) =>
-										handleSettingChange("design", ["button", "background"], e.target.value)
-										}
-									/>
-									</div>
-
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Hover Background", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.button.hoverBackground}
-										onChange={(e) =>
-										handleSettingChange("design", ["button", "hoverBackground"], e.target.value)
-										}
-									/>
-									</div>
+									
 
 									<div className="th-setting-row">
 									<label className="th-setting-label">{__("Font Size", "th-login")}</label>
@@ -1327,6 +1308,24 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									</div>
 									</div>
 								</div>
+
+								<BackgroundSettingsPanel
+										title={__("Background", "th-login")}
+										background={settings.design.button.background}
+										path={["button", "background"]}
+										handleSettingChange={handleSettingChange}
+										blur={false}
+									/>
+
+
+									<BackgroundSettingsPanel
+										title={__("Hover Background", "th-login")}
+										background={settings.design.button.hoverbackground}
+										path={["button", "hoverbackground"]}
+										handleSettingChange={handleSettingChange}
+										blur={false}
+									/>
+
 								
 								<div className="thlogin-border-managemnt-border">
 									<PaddingSettingsPanel
@@ -1360,40 +1359,18 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									/>
 									</div>
 
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Background", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.header.cancel_button.background}
-										onChange={(e) =>
-										handleSettingChange("design", ["header", "cancel_button", "background"], e.target.value)
-										}
-									/>
-									</div>
+									
 
 									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Hover Background", "th-login")}</label>
-									<input
-										type="color"
-										className="th-color-input"
-										value={settings.design.header.cancel_button.hoverBackground}
-										onChange={(e) =>
-										handleSettingChange("design", ["header", "cancel_button", "hoverBackground"], e.target.value)
-										}
-									/>
-									</div>
-
-									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Font Size", "th-login")}</label>
-									<input
-										type="number"
-										className="th-number-input"
-										value={parseInt(settings.design.header.cancel_button.typography.size)}
-										onChange={(e) =>
-										handleSettingChange("design", ["header", "cancel_button", "typography", "size"], `${e.target.value}px`)
-										}
-									/>
+										<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+										<input
+											type="number"
+											className="th-number-input"
+											value={parseInt(settings.design.header.cancel_button.typography.size)}
+											onChange={(e) =>
+											handleSettingChange("design", ["header", "cancel_button", "typography", "size"], `${e.target.value}px`)
+											}
+										/>
 									</div>
 
 									<div className="th-setting-row modern-sleect-heaidng">
@@ -1406,7 +1383,25 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										options={fontWeightOptions}
 									/>
 									</div>
+
+									
 								</div>
+
+								<BackgroundSettingsPanel
+										title={__("Background", "th-login")}
+										background={settings.design.header.cancel_button.background}
+										path={["header", "cancel_button", "background"]}
+										handleSettingChange={handleSettingChange}
+										blur={false}
+									/>
+
+									<BackgroundSettingsPanel
+										title={__("Hover Background", "th-login")}
+										background={settings.design.header.cancel_button.hoverbackground}
+										path={["header", "cancel_button", "hoverbackground"]}
+										handleSettingChange={handleSettingChange}
+										blur={false}
+									/>
 
 								<PaddingSettingsPanel
 									title={__("Padding", "th-login")}

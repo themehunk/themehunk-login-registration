@@ -7862,7 +7862,6 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
-  var _background$opacity;
   var title = _ref.title,
     _ref$background = _ref.background,
     background = _ref$background === void 0 ? {} : _ref$background,
@@ -7870,7 +7869,9 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
     path = _ref$path === void 0 ? [] : _ref$path,
     handleSettingChange = _ref.handleSettingChange,
     _ref$blur = _ref.blur,
-    blur = _ref$blur === void 0 ? false : _ref$blur;
+    blur = _ref$blur === void 0 ? false : _ref$blur,
+    _ref$onlycolor = _ref.onlycolor,
+    onlycolor = _ref$onlycolor === void 0 ? false : _ref$onlycolor;
   var type = background.type || "color";
   var color = background.color || "#ffffff";
   var gradient = background.gradient || "";
@@ -7879,12 +7880,11 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
   var position = image.position || "center center";
   var size = image.size || "cover";
   var repeat = image.repeat || "no-repeat";
-  var opacity = (_background$opacity = background.opacity) !== null && _background$opacity !== void 0 ? _background$opacity : 1;
   var filter = background === null || background === void 0 ? void 0 : background.filter;
   return /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: title,
     defaultOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
+  }, !onlycolor ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
     __nextHasNoMarginBottom: true,
     __next40pxDefaultSize: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Type", "th-login"),
@@ -7904,12 +7904,40 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image", "th-login")
   })), type === "color" && /*#__PURE__*/React.createElement("div", {
     className: "background-color-picker"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
-    color: color,
-    onChangeComplete: function onChangeComplete(value) {
-      handleSettingChange("design", [].concat(_toConsumableArray(path), ["color"]), value.hex);
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+    value: color,
+    onChange: function onChange(value) {
+      handleSettingChange("design", [].concat(_toConsumableArray(path), ["color"]), value);
     },
-    disableAlpha: false
+    colors: [{
+      color: '#f00',
+      name: 'Red'
+    }, {
+      color: '#fff',
+      name: 'White'
+    }, {
+      color: '#00f',
+      name: 'Blue'
+    }, {
+      color: '#000',
+      name: 'Black'
+    }, {
+      color: '#ff9800',
+      name: 'Orange'
+    }, {
+      color: '#4caf50',
+      name: 'Green'
+    }, {
+      color: '#9c27b0',
+      name: 'Purple'
+    }, {
+      color: '#03a9f4',
+      name: 'Sky Blue'
+    }, {
+      color: 'transparent',
+      name: 'Transparent'
+    }],
+    enableAlpha: true
   })), type === "gradient" && /*#__PURE__*/React.createElement("div", {
     className: "background-gradient-picker"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.GradientPicker, {
@@ -8062,7 +8090,43 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "repeat"]), val);
     }
-  })))), blur && /*#__PURE__*/React.createElement("div", {
+  }))))) : /*#__PURE__*/React.createElement("div", {
+    className: "background-color-picker"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+    value: color,
+    onChange: function onChange(value) {
+      handleSettingChange("design", [].concat(_toConsumableArray(path), ["color"]), value);
+    },
+    colors: [{
+      color: '#f00',
+      name: 'Red'
+    }, {
+      color: '#fff',
+      name: 'White'
+    }, {
+      color: '#00f',
+      name: 'Blue'
+    }, {
+      color: '#000',
+      name: 'Black'
+    }, {
+      color: '#ff9800',
+      name: 'Orange'
+    }, {
+      color: '#4caf50',
+      name: 'Green'
+    }, {
+      color: '#9c27b0',
+      name: 'Purple'
+    }, {
+      color: '#03a9f4',
+      name: 'Sky Blue'
+    }, {
+      color: 'transparent',
+      name: 'Transparent'
+    }],
+    enableAlpha: true
+  })), blur && /*#__PURE__*/React.createElement("div", {
     className: "background-opacity-slider",
     style: {
       marginTop: "16px"
@@ -8647,6 +8711,32 @@ var tabinside = [{
   key: "header",
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "th-login")
 }];
+var getBackgroundStyle = function getBackgroundStyle(background) {
+  var _background$image;
+  var type = (background === null || background === void 0 ? void 0 : background.type) || "color";
+  if (type === "gradient") {
+    return {
+      backgroundImage: background.gradient,
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center center",
+      opacity: background.opacity
+    };
+  } else if (type === "image" && (_background$image = background.image) !== null && _background$image !== void 0 && _background$image.url) {
+    return {
+      backgroundImage: "url(".concat(background.image.url, ")"),
+      backgroundSize: background.image.size || "cover",
+      backgroundRepeat: background.image.repeat || "no-repeat",
+      backgroundPosition: background.image.position || "center center",
+      opacity: background.opacity
+    };
+  } else {
+    return {
+      backgroundColor: background.color || "#ffffff",
+      opacity: background.opacity
+    };
+  }
+};
 
 //intertivity
 var InteractiveInput = function InteractiveInput(_ref) {
@@ -8773,6 +8863,7 @@ var InteractiveCheckbox = function InteractiveCheckbox(_ref3) {
 
 //login-loader
 var LoginFormHeader = function LoginFormHeader(_ref4) {
+  var _settings$design$head, _settings$design$head2;
   var settings = _ref4.settings;
   var _settings$design = settings.design,
     design = _settings$design === void 0 ? {} : _settings$design,
@@ -8786,11 +8877,18 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
     close_button = _general$close_button === void 0 ? true : _general$close_button;
   var buttonStyle = (header === null || header === void 0 ? void 0 : header.button) || {};
   var cancelStyle = (header === null || header === void 0 ? void 0 : header.cancel_button) || {};
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    hovered = _useState8[0],
+    setHovered = _useState8[1]; // 'login' | 'register' | 'cancel' | null
+
   var applyButtonStyle = function applyButtonStyle(style) {
     var _style$padding, _style$padding2, _style$padding3, _style$padding4, _style$typography, _style$typography2, _style$border, _style$border2, _style$border3, _style$border4, _style$border5, _style$border6, _style$border7, _style$border8, _style$border9, _style$border0;
-    return {
-      color: style.color,
-      backgroundColor: style.background,
+    var isHovered = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var bg = isHovered && style !== null && style !== void 0 && style.hoverbackground ? style.hoverbackground : style.background;
+    return _objectSpread(_objectSpread({
+      color: style.color
+    }, getBackgroundStyle(bg)), {}, {
       padding: "".concat(((_style$padding = style.padding) === null || _style$padding === void 0 ? void 0 : _style$padding.top) || 0, "px ").concat(((_style$padding2 = style.padding) === null || _style$padding2 === void 0 ? void 0 : _style$padding2.right) || 0, "px ").concat(((_style$padding3 = style.padding) === null || _style$padding3 === void 0 ? void 0 : _style$padding3.bottom) || 0, "px ").concat(((_style$padding4 = style.padding) === null || _style$padding4 === void 0 ? void 0 : _style$padding4.left) || 0, "px"),
       fontSize: ((_style$typography = style.typography) === null || _style$typography === void 0 ? void 0 : _style$typography.size) || '14px',
       fontWeight: ((_style$typography2 = style.typography) === null || _style$typography2 === void 0 ? void 0 : _style$typography2.fontWeight) || 'normal',
@@ -8799,7 +8897,7 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
       borderWidth: "".concat(((_style$border3 = style.border) === null || _style$border3 === void 0 || (_style$border3 = _style$border3.width) === null || _style$border3 === void 0 ? void 0 : _style$border3.top) || 0, "px ").concat(((_style$border4 = style.border) === null || _style$border4 === void 0 || (_style$border4 = _style$border4.width) === null || _style$border4 === void 0 ? void 0 : _style$border4.right) || 0, "px ").concat(((_style$border5 = style.border) === null || _style$border5 === void 0 || (_style$border5 = _style$border5.width) === null || _style$border5 === void 0 ? void 0 : _style$border5.bottom) || 0, "px ").concat(((_style$border6 = style.border) === null || _style$border6 === void 0 || (_style$border6 = _style$border6.width) === null || _style$border6 === void 0 ? void 0 : _style$border6.left) || 0, "px"),
       borderRadius: "".concat(((_style$border7 = style.border) === null || _style$border7 === void 0 || (_style$border7 = _style$border7.radius) === null || _style$border7 === void 0 ? void 0 : _style$border7.topLeft) || 0, "px ").concat(((_style$border8 = style.border) === null || _style$border8 === void 0 || (_style$border8 = _style$border8.radius) === null || _style$border8 === void 0 ? void 0 : _style$border8.topRight) || 0, "px ").concat(((_style$border9 = style.border) === null || _style$border9 === void 0 || (_style$border9 = _style$border9.radius) === null || _style$border9 === void 0 ? void 0 : _style$border9.bottomRight) || 0, "px ").concat(((_style$border0 = style.border) === null || _style$border0 === void 0 || (_style$border0 = _style$border0.radius) === null || _style$border0 === void 0 ? void 0 : _style$border0.bottomLeft) || 0, "px"),
       cursor: 'pointer'
-    };
+    });
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "thloginpreview-form-header-part"
@@ -8808,7 +8906,13 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
   }, close_button && /*#__PURE__*/React.createElement("button", {
     className: "thloginpreview-popup-close-button",
     "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'th-login'),
-    style: applyButtonStyle(cancelStyle)
+    onMouseEnter: function onMouseEnter() {
+      return setHovered('cancel');
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setHovered(null);
+    },
+    style: applyButtonStyle(cancelStyle, hovered === 'cancel')
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Dashicon, {
     icon: "no-alt"
   }))), settings.design.header.showButtons && form_type === 'double' && /*#__PURE__*/React.createElement("div", {
@@ -8817,66 +8921,52 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
     type: "button",
     className: "thlogin-prevuiew-toggle-button thlogin-prevuiew-toggle-button--login",
     "data-th-popup-action": "login",
-    style: applyButtonStyle(buttonStyle)
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Login', 'th-login')), /*#__PURE__*/React.createElement("button", {
+    onMouseEnter: function onMouseEnter() {
+      return setHovered('login');
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setHovered(null);
+    },
+    style: applyButtonStyle(buttonStyle, hovered === 'login')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)((_settings$design$head = settings.design.header) === null || _settings$design$head === void 0 ? void 0 : _settings$design$head.loginText, 'th-login')), /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: "thlogin-preview-toggle-button thlogin-preview-toggle-button--register",
     "data-th-popup-action": "register",
-    style: applyButtonStyle(buttonStyle)
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Register', 'th-login'))));
+    onMouseEnter: function onMouseEnter() {
+      return setHovered('register');
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setHovered(null);
+    },
+    style: applyButtonStyle(buttonStyle, hovered === 'register')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)((_settings$design$head2 = settings.design.header) === null || _settings$design$head2 === void 0 ? void 0 : _settings$design$head2.registerText, 'th-login'))));
 };
 var DesignEditor = function DesignEditor(_ref5) {
   var _settings$design$moda, _settings$design$moda2, _settings$design$form, _settings$design$form2, _settings$design$form3;
   var settings = _ref5.settings,
     handleSettingChange = _ref5.handleSettingChange;
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("login"),
-    _useState8 = _slicedToArray(_useState7, 2),
-    activeForm = _useState8[0],
-    setActiveForm = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('form'),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("login"),
     _useState0 = _slicedToArray(_useState9, 2),
-    insidetab = _useState0[0],
-    setinsidetab = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('preview'),
+    activeForm = _useState0[0],
+    setActiveForm = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('form'),
     _useState10 = _slicedToArray(_useState1, 2),
-    deisgnpreview = _useState10[0],
-    setdeisgnpreview = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    insidetab = _useState10[0],
+    setinsidetab = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('preview'),
     _useState12 = _slicedToArray(_useState11, 2),
-    floatingFocused = _useState12[0],
-    setFloatingFocused = _useState12[1];
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    deisgnpreview = _useState12[0],
+    setdeisgnpreview = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
     _useState14 = _slicedToArray(_useState13, 2),
-    floatingFocusedplace = _useState14[0],
-    setFloatingFocusedplace = _useState14[1];
+    floatingFocused = _useState14[0],
+    setFloatingFocused = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    floatingFocusedplace = _useState16[0],
+    setFloatingFocusedplace = _useState16[1];
   var inputBase = settings.design.Input;
   var buttonBase = settings.design.button;
-  var getBackgroundStyle = function getBackgroundStyle(background) {
-    var _background$image;
-    var type = (background === null || background === void 0 ? void 0 : background.type) || "color";
-    if (type === "gradient") {
-      return {
-        backgroundImage: background.gradient,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        opacity: background.opacity
-      };
-    } else if (type === "image" && (_background$image = background.image) !== null && _background$image !== void 0 && _background$image.url) {
-      return {
-        backgroundImage: "url(".concat(background.image.url, ")"),
-        backgroundSize: background.image.size || "cover",
-        backgroundRepeat: background.image.repeat || "no-repeat",
-        backgroundPosition: background.image.position || "center center",
-        opacity: background.opacity
-      };
-    } else {
-      return {
-        backgroundColor: background.color || "#ffffff",
-        opacity: background.opacity
-      };
-    }
-  };
   var getBorderStyle = function getBorderStyle() {
     var _width$top, _width$right, _width$bottom, _width$left, _radius$topLeft, _radius$topRight, _radius$bottomRight, _radius$bottomLeft;
     var border = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -8912,7 +9002,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     width: '100%',
     height: '100%',
     '--th-input-color': inputBase.color,
-    '--th-backgroundColor': "0 0 0 1000px ".concat(inputBase.background, " inset"),
+    '--th-backgroundColor': "0 0 0 1000px ".concat(inputBase.background.color, " inset"),
     backdropFilter: "blur(".concat((_settings$design$moda2 = settings.design.modal) === null || _settings$design$moda2 === void 0 || (_settings$design$moda2 = _settings$design$moda2.modal_background) === null || _settings$design$moda2 === void 0 ? void 0 : _settings$design$moda2.filter, "px)")
   });
   var formStyle = _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, getBackgroundStyle((_settings$design$form = settings.design.form) === null || _settings$design$form === void 0 ? void 0 : _settings$design$form.form_background)), getBorderStyle((_settings$design$form2 = settings.design.form) === null || _settings$design$form2 === void 0 ? void 0 : _settings$design$form2.form_border)), getPaddingStyle((_settings$design$form3 = settings.design.form) === null || _settings$design$form3 === void 0 ? void 0 : _settings$design$form3.form_padding)), {}, {
@@ -8934,13 +9024,13 @@ var DesignEditor = function DesignEditor(_ref5) {
       margin: 0
     };
     var inputProps = {
-      base: _objectSpread(_objectSpread({
+      base: _objectSpread(_objectSpread(_objectSpread({
         padding: '10px',
         border: '1px solid #ccc',
         width: '100%',
         borderRadius: '4px',
-        color: (_settings$design$Inpu = settings.design.Input) === null || _settings$design$Inpu === void 0 ? void 0 : _settings$design$Inpu.color,
-        backgroundColor: (_settings$design$Inpu2 = settings.design.Input) === null || _settings$design$Inpu2 === void 0 ? void 0 : _settings$design$Inpu2.background,
+        color: (_settings$design$Inpu = settings.design.Input) === null || _settings$design$Inpu === void 0 ? void 0 : _settings$design$Inpu.color
+      }, getBackgroundStyle((_settings$design$Inpu2 = settings.design.Input) === null || _settings$design$Inpu2 === void 0 ? void 0 : _settings$design$Inpu2.background)), {}, {
         fontSize: (_settings$design$Inpu3 = settings.design.Input) === null || _settings$design$Inpu3 === void 0 ? void 0 : _settings$design$Inpu3.typography.size,
         fontWeight: (_settings$design$Inpu4 = settings.design.Input) === null || _settings$design$Inpu4 === void 0 ? void 0 : _settings$design$Inpu4.typography.fontWeight
       }, settings.design.icon.icon_position === 'inside-input' ? {
@@ -8951,15 +9041,14 @@ var DesignEditor = function DesignEditor(_ref5) {
       hover: {
         borderColor: (_settings$design$Inpu6 = settings.design.Input) === null || _settings$design$Inpu6 === void 0 ? void 0 : _settings$design$Inpu6.activecolor
       },
-      active: {
-        backgroundColor: (_settings$design$Inpu7 = settings.design.Input) === null || _settings$design$Inpu7 === void 0 ? void 0 : _settings$design$Inpu7.background,
+      active: _objectSpread(_objectSpread({}, getBackgroundStyle((_settings$design$Inpu7 = settings.design.Input) === null || _settings$design$Inpu7 === void 0 ? void 0 : _settings$design$Inpu7.background)), {}, {
         borderColor: (_settings$design$Inpu8 = settings.design.Input) === null || _settings$design$Inpu8 === void 0 ? void 0 : _settings$design$Inpu8.activecolor
-      }
+      })
     };
     var buttonProps = {
-      base: {
-        color: buttonBase.color,
-        backgroundColor: buttonBase.background,
+      base: _objectSpread(_objectSpread({
+        color: buttonBase.color
+      }, getBackgroundStyle(buttonBase.background)), {}, {
         fontSize: buttonBase.typography.size,
         fontWeight: buttonBase.typography.fontWeight,
         padding: "".concat(buttonBase.padding.top, "px ").concat(buttonBase.padding.right, "px"),
@@ -8967,10 +9056,8 @@ var DesignEditor = function DesignEditor(_ref5) {
         borderRadius: "".concat((_buttonBase$border$ra = (_buttonBase$border$ra2 = buttonBase.border.radius) === null || _buttonBase$border$ra2 === void 0 ? void 0 : _buttonBase$border$ra2.topLeft) !== null && _buttonBase$border$ra !== void 0 ? _buttonBase$border$ra : 4, "px"),
         cursor: 'pointer',
         width: '100%'
-      },
-      hover: {
-        backgroundColor: buttonBase.hoverBackground
-      }
+      }),
+      hover: _objectSpread({}, getBackgroundStyle(buttonBase.hoverbackground))
     };
     var checkboxProps = {
       base: {
@@ -9504,17 +9591,6 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.Input.background,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["Input", "background"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
@@ -9534,7 +9610,14 @@ var DesignEditor = function DesignEditor(_ref5) {
       return handleSettingChange("design", ["Input", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
-  }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
+    background: settings.design.Input.background,
+    path: ["Input", "background"],
+    handleSettingChange: handleSettingChange,
+    blur: false,
+    onlycolor: true
+  }))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terms and Condition", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
@@ -9718,28 +9801,6 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.header.button.background,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["header", "button", "background"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.header.button.hoverBackground,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["header", "button", "hoverBackground"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
@@ -9756,7 +9817,19 @@ var DesignEditor = function DesignEditor(_ref5) {
       return handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
-  }))), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
+  })), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
+    background: settings.design.header.button.background,
+    path: ["header", "button", "background"],
+    handleSettingChange: handleSettingChange,
+    blur: false
+  }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login"),
+    background: settings.design.header.button.hoverbackground,
+    path: ["header", "button", "hoverbackground"],
+    handleSettingChange: handleSettingChange,
+    blur: false
+  })), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
     padding: settings.design.header.button.padding,
     path: ["header", "button", "padding"],
@@ -9786,28 +9859,6 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background Color", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.button.background,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["button", "background"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.button.hoverBackground,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["button", "hoverBackground"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
@@ -9827,7 +9878,19 @@ var DesignEditor = function DesignEditor(_ref5) {
       return handleSettingChange("design", ["button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
-  })))), /*#__PURE__*/React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
+    background: settings.design.button.background,
+    path: ["button", "background"],
+    handleSettingChange: handleSettingChange,
+    blur: false
+  }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login"),
+    background: settings.design.button.hoverbackground,
+    path: ["button", "hoverbackground"],
+    handleSettingChange: handleSettingChange,
+    blur: false
+  }), /*#__PURE__*/React.createElement("div", {
     className: "thlogin-border-managemnt-border"
   }, /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
@@ -9859,28 +9922,6 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.header.cancel_button.background,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["header", "cancel_button", "background"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login")), /*#__PURE__*/React.createElement("input", {
-    type: "color",
-    className: "th-color-input",
-    value: settings.design.header.cancel_button.hoverBackground,
-    onChange: function onChange(e) {
-      return handleSettingChange("design", ["header", "cancel_button", "hoverBackground"], e.target.value);
-    }
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "th-setting-row"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "th-setting-label"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
@@ -9897,7 +9938,19 @@ var DesignEditor = function DesignEditor(_ref5) {
       return handleSettingChange("design", ["header", "cancel_button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
-  }))), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
+  }))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
+    background: settings.design.header.cancel_button.background,
+    path: ["header", "cancel_button", "background"],
+    handleSettingChange: handleSettingChange,
+    blur: false
+  }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login"),
+    background: settings.design.header.cancel_button.hoverbackground,
+    path: ["header", "cancel_button", "hoverbackground"],
+    handleSettingChange: handleSettingChange,
+    blur: false
+  }), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
     padding: settings.design.header.cancel_button.padding,
     path: ["header", "cancel_button", "padding"],
@@ -12827,6 +12880,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
 //app
@@ -13032,7 +13089,6 @@ var design = {
       // 'color' | 'gradient' | 'image'
       color: "#5954549c",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-      opacity: 1,
       filter: 10,
       image: {
         url: "",
@@ -13052,7 +13108,6 @@ var design = {
       // 'color' | 'gradient' | 'image'
       color: "#ffffff",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-      opacity: 1,
       image: {
         url: "",
         // Image URL
@@ -13102,46 +13157,98 @@ var design = {
       size: "16px",
       fontWeight: 500
     },
-    background: "#ffffff",
+    background: {
+      type: "color",
+      // 'color' | 'gradient' | 'image'
+      color: "#ffffff",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",
+        // Image URL
+        position: "center center",
+        // e.g. 'top left', 'center center'
+        size: "cover",
+        // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
     typography: {
       size: "14px",
       fontWeight: 300
     }
   },
-  button: {
+  button: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
     color: "#ffffff",
-    background: "#0B59f4",
-    hoverBackground: "#1c21ba",
-    padding: {
-      top: 12,
-      left: 12,
-      right: 12,
-      bottom: 12
-    },
-    typography: {
-      size: "14px",
-      fontWeight: 500
-    },
-    border: {
-      width: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0
-      },
-      style: "solid",
-      color: "#000000",
-      radius: {
-        topLeft: 5,
-        topRight: 5,
-        bottomRight: 5,
-        bottomLeft: 5
-      }
+    background: "#0B59f4"
+  }, "background", {
+    type: "color",
+    // 'color' | 'gradient' | 'image'
+    color: "#0B59f4",
+    gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+    image: {
+      url: "",
+      // Image URL
+      position: "center center",
+      // e.g. 'top left', 'center center'
+      size: "cover",
+      // 'cover' | 'contain' | 'auto'
+      repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
     }
-  },
+  }), "hoverbackground", {
+    type: "color",
+    // 'color' | 'gradient' | 'image'
+    color: "#1c21ba",
+    gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+    image: {
+      url: "",
+      // Image URL
+      position: "center center",
+      // e.g. 'top left', 'center center'
+      size: "cover",
+      // 'cover' | 'contain' | 'auto'
+      repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+    }
+  }), "hoverBackground", "#1c21ba"), "padding", {
+    top: 12,
+    left: 12,
+    right: 12,
+    bottom: 12
+  }), "typography", {
+    size: "14px",
+    fontWeight: 500
+  }), "border", {
+    width: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
+    },
+    style: "solid",
+    color: "#000000",
+    radius: {
+      topLeft: 5,
+      topRight: 5,
+      bottomRight: 5,
+      bottomLeft: 5
+    }
+  }),
   rememberme: {
     color: "#8392A5",
-    checkboxbackground: "#ffffff",
+    background: {
+      type: "color",
+      // 'color' | 'gradient' | 'image'
+      color: "#ffffff",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",
+        // Image URL
+        position: "center center",
+        // e.g. 'top left', 'center center'
+        size: "cover",
+        // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
     typography: {
       size: "14px",
       fontWeight: 300
@@ -13166,8 +13273,36 @@ var design = {
     registerText: "Register",
     button: {
       color: "#ffffff",
-      background: "#0B59f4",
-      hoverBackground: "#1c21ba",
+      background: {
+        type: "color",
+        // 'color' | 'gradient' | 'image'
+        color: "#0B59f4",
+        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+        image: {
+          url: "",
+          // Image URL
+          position: "center center",
+          // e.g. 'top left', 'center center'
+          size: "cover",
+          // 'cover' | 'contain' | 'auto'
+          repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+        }
+      },
+      hoverbackground: {
+        type: "color",
+        // 'color' | 'gradient' | 'image'
+        color: "#1c21ba",
+        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+        image: {
+          url: "",
+          // Image URL
+          position: "center center",
+          // e.g. 'top left', 'center center'
+          size: "cover",
+          // 'cover' | 'contain' | 'auto'
+          repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+        }
+      },
       padding: {
         top: 8,
         left: 12,
@@ -13197,8 +13332,36 @@ var design = {
     },
     cancel_button: {
       color: "#f31212",
-      background: "#E6e6e6",
-      hoverBackground: "#9a9a9e",
+      background: {
+        type: "color",
+        // 'color' | 'gradient' | 'image'
+        color: "#E6e6e6",
+        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+        image: {
+          url: "",
+          // Image URL
+          position: "center center",
+          // e.g. 'top left', 'center center'
+          size: "cover",
+          // 'cover' | 'contain' | 'auto'
+          repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+        }
+      },
+      hoverbackground: {
+        type: "color",
+        // 'color' | 'gradient' | 'image'
+        color: "#9a9a9e",
+        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+        image: {
+          url: "",
+          // Image URL
+          position: "center center",
+          // e.g. 'top left', 'center center'
+          size: "cover",
+          // 'cover' | 'contain' | 'auto'
+          repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+        }
+      },
       padding: {
         top: 3,
         left: 3,

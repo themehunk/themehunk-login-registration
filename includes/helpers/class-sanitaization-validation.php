@@ -59,19 +59,9 @@ class TH_Sanitization_validation {
 		$sanitized['modal']['modal_input_layout'] = sanitize_text_field( $settings['modal']['modal_input_layout'] ?? 'stack' );
 
 		foreach ( [ 'modal', 'form' ] as $section ) {
-			$bg = $settings[ $section ][ "{$section}_background" ] ?? array();
-			$sanitized[ $section ][ "{$section}_background" ] = array(
-				'type'     => sanitize_text_field( $bg['type'] ?? 'color' ),
-				'color'    => $this->sanitize_color_input( $bg['color'] ?? ( $section === 'modal' ? '#5954549c' : '#ffffff' ) ),
-				'gradient' => sanitize_text_field( $bg['gradient'] ?? 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)' ),
-				'opacity'  => floatval( $bg['opacity'] ?? 1 ),
-				'filter'   => floatval( $bg['filter'] ?? 10 ),
-				'image'    => array(
-					'url'      => esc_url_raw( $bg['image']['url'] ?? '' ),
-					'position' => sanitize_text_field( $bg['image']['position'] ?? 'center center' ),
-					'size'     => sanitize_text_field( $bg['image']['size'] ?? 'cover' ),
-					'repeat'   => sanitize_text_field( $bg['image']['repeat'] ?? 'no-repeat' ),
-				),
+			$sanitized[ $section ][ "{$section}_background" ] = $this->sanitize_background_style(
+				$settings[ $section ][ "{$section}_background" ] ?? array(),
+				$section === 'modal' ? '#5954549c' : '#ffffff'
 			);
 		}
 
@@ -105,7 +95,7 @@ class TH_Sanitization_validation {
 
 		$heading = $settings['heading'] ?? array();
 		$sanitized['heading'] = array(
-			'color'      => $this->sanitize_color_input( $heading['color'] ?? '#000000' ),
+			'color' => $this->sanitize_color_input( $heading['color'] ?? '#000000' ),
 			'typography' => array(
 				'size'       => sanitize_text_field( $heading['typography']['size'] ?? '25px' ),
 				'fontWeight' => intval( $heading['typography']['fontWeight'] ?? 500 ),
@@ -116,8 +106,8 @@ class TH_Sanitization_validation {
 		$sanitized['Input'] = array(
 			'color'        => $this->sanitize_color_input( $input['color'] ?? '#8392A5' ),
 			'labelcolor'   => $this->sanitize_color_input( $input['labelcolor'] ?? '#262626' ),
-			'activecolor'   => $this->sanitize_color_input( $input['activecolor'] ?? '#262626' ),
-			'background'   => $this->sanitize_color_input( $input['background'] ?? '#ffffff' ),
+			'activecolor'  => $this->sanitize_color_input( $input['activecolor'] ?? '#262626' ),
+			'background'   => $this->sanitize_background_style( $input['background'] ?? array(), '#ffffff' ),
 			'typography'   => array(
 				'size'       => sanitize_text_field( $input['typography']['size'] ?? '14px' ),
 				'fontWeight' => intval( $input['typography']['fontWeight'] ?? 300 ),
@@ -128,17 +118,10 @@ class TH_Sanitization_validation {
 			),
 		);
 
-		$sanitized['button'] = $this->sanitize_button_style( $settings['button'] ?? array(), array(
-			'color'      => '#ffffff',
-			'background' => '#0B59f4',
-			'hover'      => '#1c21ba',
-			'padding'    => array( 'top' => 12, 'right' => 12, 'bottom' => 12, 'left' => 12 ),
-			'radius'     => array( 'topLeft' => 5, 'topRight' => 5, 'bottomRight' => 5, 'bottomLeft' => 5 ),
-		) );
-
+		$sanitized['button'] = $this->sanitize_button_style( $settings['button'] ?? array() );
 		$sanitized['rememberme'] = array(
 			'color'              => $this->sanitize_color_input( $settings['rememberme']['color'] ?? '#8392A5' ),
-			'checkboxbackground' => $this->sanitize_color_input( $settings['rememberme']['checkboxbackground'] ?? '#ffffff' ),
+			'background'         => $this->sanitize_background_style( $settings['rememberme']['background'] ?? array(), '#ffffff' ),
 			'typography'         => array(
 				'size'       => sanitize_text_field( $settings['rememberme']['typography']['size'] ?? '14px' ),
 				'fontWeight' => intval( $settings['rememberme']['typography']['fontWeight'] ?? 300 ),
@@ -155,29 +138,18 @@ class TH_Sanitization_validation {
 		);
 
 		$sanitized['icon'] = array(
-			'color' => $this->sanitize_color_input( $settings['icon']['color'] ?? '#8392A5' ),
-			'size'  => sanitize_text_field( $settings['icon']['size'] ?? '17px' ),
+			'color'         => $this->sanitize_color_input( $settings['icon']['color'] ?? '#8392A5' ),
+			'size'          => sanitize_text_field( $settings['icon']['size'] ?? '17px' ),
 			'icon_position' => sanitize_text_field( $settings['icon']['icon_position'] ?? 'inside-input' ),
 		);
 
+		$header = $settings['header'] ?? array();
 		$sanitized['header'] = array(
-			'showButtons'   => isset( $settings['header']['showButtons'] ) ? (bool) $settings['header']['showButtons'] : false,
-			'loginText'     => sanitize_text_field( $settings['header']['loginText'] ?? 'Login' ),
-			'registerText'  => sanitize_text_field( $settings['header']['registerText'] ?? 'Register' ),
-			'button'        => $this->sanitize_button_style( $settings['header']['button'] ?? array(), array(
-				'color' => '#ffffff',
-				'background' => '#0B59f4',
-				'hover' => '#1c21ba',
-				'padding' => array( 'top' => 8, 'right' => 12, 'bottom' => 8, 'left' => 12 ),
-				'radius' => array( 'topLeft' => 5, 'topRight' => 5, 'bottomRight' => 5, 'bottomLeft' => 5 ),
-			) ),
-			'cancel_button' => $this->sanitize_button_style( $settings['header']['cancel_button'] ?? array(), array(
-				'color' => '#f31212',
-				'background' => '#E6e6e6',
-				'hover' => '#9a9a9e',
-				'padding' => array( 'top' => 3, 'right' => 3, 'bottom' => 3, 'left' => 3 ),
-				'radius' => array( 'topLeft' => 20, 'topRight' => 20, 'bottomRight' => 20, 'bottomLeft' => 20 ),
-			) ),
+			'showButtons'   => isset( $header['showButtons'] ) ? (bool) $header['showButtons'] : false,
+			'loginText'     => sanitize_text_field( $header['loginText'] ?? 'Login' ),
+			'registerText'  => sanitize_text_field( $header['registerText'] ?? 'Register' ),
+			'button'        => $this->sanitize_button_style( $header['button'] ?? array() ),
+			'cancel_button' => $this->sanitize_button_style( $header['cancel_button'] ?? array(), '#f31212', '#E6e6e6', '#9a9a9e' ),
 		);
 
 		$sanitized['submitButton'] = array(
@@ -196,22 +168,36 @@ class TH_Sanitization_validation {
 		return $sanitized;
 	}
 
-	private function sanitize_button_style( $btn ) {
+	private function sanitize_background_style( $bg, $default_color = '#ffffff' ) {
 		return array(
-			'color'           => $this->sanitize_color_input( $btn['color'] ?? '#000000' ),
-			'background'      => $this->sanitize_color_input( $btn['background'] ?? '#ffffff' ),
-			'hoverBackground' => $this->sanitize_color_input( $btn['hoverBackground'] ?? '#C7C2C2' ),
-			'padding'         => array(
-				'top'    => intval( $btn['padding']['top'] ?? 0 ),
-				'right'  => intval( $btn['padding']['right'] ?? 0 ),
-				'bottom' => intval( $btn['padding']['bottom'] ?? 0 ),
-				'left'   => intval( $btn['padding']['left'] ?? 0 ),
+			'type'     => sanitize_text_field( $bg['type'] ?? 'color' ),
+			'color'    => $this->sanitize_color_input( $bg['color'] ?? $default_color ),
+			'gradient' => sanitize_text_field( $bg['gradient'] ?? 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)' ),
+			'image'    => array(
+				'url'      => esc_url_raw( $bg['image']['url'] ?? '' ),
+				'position' => sanitize_text_field( $bg['image']['position'] ?? 'center center' ),
+				'size'     => sanitize_text_field( $bg['image']['size'] ?? 'cover' ),
+				'repeat'   => sanitize_text_field( $bg['image']['repeat'] ?? 'no-repeat' ),
 			),
-			'typography' => array(
+		);
+	}
+
+	private function sanitize_button_style( $btn, $default_color = '#ffffff', $default_bg = '#0B59f4', $default_hover = '#1c21ba' ) {
+		return array(
+			'color'            => $this->sanitize_color_input( $btn['color'] ?? $default_color ),
+			'background'       => $this->sanitize_background_style( $btn['background'] ?? array(), $default_bg ),
+			'hoverbackground'  => $this->sanitize_background_style( $btn['hoverbackground'] ?? array(), $default_hover ),
+			'padding'          => array(
+				'top'    => intval( $btn['padding']['top'] ?? 12 ),
+				'right'  => intval( $btn['padding']['right'] ?? 12 ),
+				'bottom' => intval( $btn['padding']['bottom'] ?? 12 ),
+				'left'   => intval( $btn['padding']['left'] ?? 12 ),
+			),
+			'typography'       => array(
 				'size'       => sanitize_text_field( $btn['typography']['size'] ?? '14px' ),
-				'fontWeight' => intval( $btn['typography']['fontWeight'] ?? 400 ),
+				'fontWeight' => intval( $btn['typography']['fontWeight'] ?? 500 ),
 			),
-			'border' => array(
+			'border'           => array(
 				'width' => array(
 					'top'    => intval( $btn['border']['width']['top'] ?? 0 ),
 					'right'  => intval( $btn['border']['width']['right'] ?? 0 ),
@@ -221,10 +207,10 @@ class TH_Sanitization_validation {
 				'style'  => sanitize_text_field( $btn['border']['style'] ?? 'solid' ),
 				'color'  => $this->sanitize_color_input( $btn['border']['color'] ?? '#000000' ),
 				'radius' => array(
-					'topLeft'     => intval( $btn['border']['radius']['topLeft'] ?? 0 ),
-					'topRight'    => intval( $btn['border']['radius']['topRight'] ?? 0 ),
-					'bottomRight' => intval( $btn['border']['radius']['bottomRight'] ?? 0 ),
-					'bottomLeft'  => intval( $btn['border']['radius']['bottomLeft'] ?? 0 ),
+					'topLeft'     => intval( $btn['border']['radius']['topLeft'] ?? 5 ),
+					'topRight'    => intval( $btn['border']['radius']['topRight'] ?? 5 ),
+					'bottomRight' => intval( $btn['border']['radius']['bottomRight'] ?? 5 ),
+					'bottomLeft'  => intval( $btn['border']['radius']['bottomLeft'] ?? 5 ),
 				),
 			),
 		);
@@ -251,29 +237,49 @@ class TH_Sanitization_validation {
 
 	public function validate_design_settings( $settings ) {
 		$errors = new WP_Error();
-
 		$valid_types = array( 'color', 'gradient', 'image' );
 		$valid_color_regex = '/^(#([A-Fa-f0-9]{3,8})|rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(,\s*(\d+(\.\d+)?|1|0))?\s*\)|[a-zA-Z]+)$/';
 
-		foreach ( [ 'modal', 'form' ] as $section ) {
-			$type = $settings[ $section ][ "{$section}_background" ]['type'] ?? 'color';
+		// Validate unified background structure
+		$background_fields = [
+			'modal_background'         => $settings['modal']['modal_background'] ?? [],
+			'form_background'          => $settings['form']['form_background'] ?? [],
+			'Input_background'         => $settings['Input']['background'] ?? [],
+			'button_background'        => $settings['button']['background'] ?? [],
+			'button_hoverbackground'   => $settings['button']['hoverbackground'] ?? [],
+			'rememberme_background'    => $settings['rememberme']['background'] ?? [],
+			'header_button_background' => $settings['header']['button']['background'] ?? [],
+			'header_button_hover'      => $settings['header']['button']['hoverbackground'] ?? [],
+			'header_cancel_background' => $settings['header']['cancel_button']['background'] ?? [],
+			'header_cancel_hover'      => $settings['header']['cancel_button']['hoverbackground'] ?? [],
+		];
+
+		foreach ( $background_fields as $key => $bg ) {
+			$type = $bg['type'] ?? 'color';
 			if ( ! in_array( $type, $valid_types, true ) ) {
-				$errors->add( "invalid_{$section}_background_type", sprintf( esc_html__( 'Invalid %s background type.', 'th-login' ), $section ) );
+				$errors->add( "invalid_{$key}_type", sprintf( esc_html__( 'Invalid background type in %s.', 'th-login' ), $key ) );
+			}
+
+			if ( isset( $bg['color'] ) && ! preg_match( $valid_color_regex, trim( $bg['color'] ) ) ) {
+				$errors->add( "invalid_{$key}_color", sprintf( esc_html__( 'Invalid background color in %s.', 'th-login' ), $key ) );
+			}
+
+			if ( isset( $bg['image']['url'] ) && $bg['image']['url'] && ! filter_var( $bg['image']['url'], FILTER_VALIDATE_URL ) ) {
+				$errors->add( "invalid_{$key}_image_url", sprintf( esc_html__( 'Invalid background image URL in %s.', 'th-login' ), $key ) );
 			}
 		}
 
+		// Validate input layout
 		$valid_input_layouts = [ 'stack', 'inline', 'floating', 'placehold' ];
-		$modal_input_layout = $settings['modal']['modal_input_layout'] ?? '';
-		if ( $modal_input_layout && ! in_array( $modal_input_layout, $valid_input_layouts, true ) ) {
+		$layout = $settings['modal']['modal_input_layout'] ?? '';
+		if ( $layout && ! in_array( $layout, $valid_input_layouts, true ) ) {
 			$errors->add(
 				'invalid_modal_input_layout',
-				sprintf(
-					esc_html__( 'Invalid modal input layout. Allowed values are: %s.', 'th-login' ),
-					implode( ', ', $valid_input_layouts )
-				)
+				sprintf( esc_html__( 'Invalid modal input layout. Allowed values: %s.', 'th-login' ), implode( ', ', $valid_input_layouts ) )
 			);
 		}
 
+		// Validate border radius
 		$radius_fields = array(
 			'form_border'          => $settings['form']['form_border']['radius'] ?? array(),
 			'button_border'        => $settings['button']['border']['radius'] ?? array(),
@@ -286,37 +292,36 @@ class TH_Sanitization_validation {
 				if ( isset( $radius[ $corner ] ) && intval( $radius[ $corner ] ) < 0 ) {
 					$errors->add(
 						"inappropriate_{$key}_{$corner}",
-						sprintf( esc_html__( '%s radius value must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+						sprintf( esc_html__( '%s radius value must be positive.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
 			}
 		}
 
+		// Validate padding
 		$padding_fields = array(
 			'form_padding'           => $settings['form']['form_padding'] ?? array(),
 			'button_padding'         => $settings['button']['padding'] ?? array(),
 			'header_button_padding'  => $settings['header']['button']['padding'] ?? array(),
 			'header_cancel_padding'  => $settings['header']['cancel_button']['padding'] ?? array(),
 		);
-
 		foreach ( $padding_fields as $key => $padding ) {
 			foreach ( [ 'top', 'right', 'bottom', 'left' ] as $side ) {
 				if ( isset( $padding[ $side ] ) && intval( $padding[ $side ] ) < 0 ) {
 					$errors->add(
 						"invalid_{$key}_{$side}",
-						sprintf( esc_html__( '%s padding must be a positive number.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+						sprintf( esc_html__( '%s padding must be positive.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
 			}
 		}
 
+		// Form gap
 		if ( isset( $settings['form']['form_gap'] ) && intval( $settings['form']['form_gap'] ) < 0 ) {
-			$errors->add(
-				'invalid_form_gap',
-				esc_html__( 'Form gap must be a positive number.', 'th-login' )
-			);
+			$errors->add( 'invalid_form_gap', esc_html__( 'Form gap must be a positive number.', 'th-login' ) );
 		}
 
+		// Validate all font sizes
 		$typography_fields = array(
 			'heading'               => $settings['heading']['typography']['size'] ?? '',
 			'Input'                 => $settings['Input']['typography']['size'] ?? '',
@@ -328,42 +333,34 @@ class TH_Sanitization_validation {
 			'header_button'         => $settings['header']['button']['typography']['size'] ?? '',
 			'header_cancel_button'  => $settings['header']['cancel_button']['typography']['size'] ?? '',
 		);
-
 		foreach ( $typography_fields as $key => $font_size ) {
 			if ( $font_size && ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%)$/', $font_size ) ) {
 				$errors->add(
 					'invalid_' . strtolower( $key ) . '_font_size',
-					sprintf( esc_html__( '%s font size must be a valid CSS size (e.g., 14px, 1.2em).', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+					sprintf( esc_html__( '%s font size must be a valid CSS size.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
 		}
 
+		// Validate all simple colors
 		$color_fields = array(
-			'heading_color'              => $settings['heading']['color'] ?? '',
-			'input_color'                => $settings['Input']['color'] ?? '',
-			'input_labelcolor'           => $settings['Input']['labelcolor'] ?? '',
-			'input_activecolor'          => $settings['Input']['activecolor'] ?? '',
-			'input_background'           => $settings['Input']['background'] ?? '',
-			'button_color'               => $settings['button']['color'] ?? '',
-			'button_background'          => $settings['button']['background'] ?? '',
-			'button_hover_bg'            => $settings['button']['hoverBackground'] ?? '',
-			'button_border_color'        => $settings['button']['border']['color'] ?? '',
-			'form_border_color'          => $settings['form']['form_border']['color'] ?? '',
-			'rememberme_color'           => $settings['rememberme']['color'] ?? '',
-			'rememberme_checkbox_bg'     => $settings['rememberme']['checkboxbackground'] ?? '',
-			'icon_color'                 => $settings['icon']['color'] ?? '',
-			'header_button_color'        => $settings['header']['button']['color'] ?? '',
-			'header_button_background'   => $settings['header']['button']['background'] ?? '',
-			'header_button_hover_bg'     => $settings['header']['button']['hoverBackground'] ?? '',
-			'header_button_border_color' => $settings['header']['button']['border']['color'] ?? '',
-			'header_cancel_color'        => $settings['header']['cancel_button']['color'] ?? '',
-			'header_cancel_background'   => $settings['header']['cancel_button']['background'] ?? '',
-			'header_cancel_hover_bg'     => $settings['header']['cancel_button']['hoverBackground'] ?? '',
-			'header_cancel_border_color' => $settings['header']['cancel_button']['border']['color'] ?? '',
-			'term_color'                 => $settings['term']['color'] ?? '',
-			'term_link'                  => $settings['term']['link'] ?? '',
+			'heading_color'         => $settings['heading']['color'] ?? '',
+			'input_color'           => $settings['Input']['color'] ?? '',
+			'input_labelcolor'      => $settings['Input']['labelcolor'] ?? '',
+			'input_activecolor'     => $settings['Input']['activecolor'] ?? '',
+			'button_color'          => $settings['button']['color'] ?? '',
+			'button_border_color'   => $settings['button']['border']['color'] ?? '',
+			'form_border_color'     => $settings['form']['form_border']['color'] ?? '',
+			'rememberme_color'      => $settings['rememberme']['color'] ?? '',
+			'icon_color'            => $settings['icon']['color'] ?? '',
+			'header_button_color'   => $settings['header']['button']['color'] ?? '',
+			'header_button_border'  => $settings['header']['button']['border']['color'] ?? '',
+			'header_cancel_color'   => $settings['header']['cancel_button']['color'] ?? '',
+			'header_cancel_border'  => $settings['header']['cancel_button']['border']['color'] ?? '',
+			'term_color'            => $settings['term']['color'] ?? '',
+			'term_link'             => $settings['term']['link'] ?? '',
+			'logo_color'            => $settings['logo']['color'] ?? '',
 		);
-
 		foreach ( $color_fields as $key => $color ) {
 			if ( $color && ! preg_match( $valid_color_regex, trim( $color ) ) ) {
 				$errors->add(
@@ -373,8 +370,8 @@ class TH_Sanitization_validation {
 			}
 		}
 
+		// Validate submit button labels
 		$submit_button = $settings['submitButton'] ?? array();
-
 		foreach ( [ 'login', 'register', 'forgot_password' ] as $key ) {
 			if ( empty( $submit_button[ $key ] ) || ! is_string( $submit_button[ $key ] ) ) {
 				$errors->add(
@@ -384,13 +381,10 @@ class TH_Sanitization_validation {
 			}
 		}
 
+		// Header fields
 		if ( isset( $settings['header']['showButtons'] ) && ! is_bool( $settings['header']['showButtons'] ) ) {
-			$errors->add(
-				'invalid_header_show_buttons',
-				esc_html__( 'Header showButtons must be a boolean value.', 'th-login' )
-			);
+			$errors->add( 'invalid_header_showButtons', esc_html__( 'Header showButtons must be boolean.', 'th-login' ) );
 		}
-
 		foreach ( [ 'loginText', 'registerText' ] as $key ) {
 			if ( empty( $settings['header'][ $key ] ) || ! is_string( $settings['header'][ $key ] ) ) {
 				$errors->add(
@@ -400,24 +394,15 @@ class TH_Sanitization_validation {
 			}
 		}
 
-		// ✅ Logo validation
+		// Logo validation
 		if ( isset( $settings['logo']['url'] ) && ! empty( $settings['logo']['url'] ) ) {
 			if ( ! filter_var( $settings['logo']['url'], FILTER_VALIDATE_URL ) ) {
-				$errors->add(
-					'invalid_logo_url',
-					esc_html__( 'Logo URL must be a valid URL.', 'th-login' )
-				);
+				$errors->add( 'invalid_logo_url', esc_html__( 'Logo URL must be valid.', 'th-login' ) );
 			}
 		}
-
-		foreach ( [ 'width', 'height' ] as $dim ) {
-			if ( isset( $settings['logo'][ $dim ] ) && $settings['logo'][ $dim ] !== '' ) {
-				if ( ! preg_match( '/^\d+(px|em|rem|%)?$/', $settings['logo'][ $dim ] ) ) {
-					$errors->add(
-						'invalid_logo_' . $dim,
-						sprintf( esc_html__( 'Logo %s must be a valid CSS size (e.g., 100px, 5em).', 'th-login' ), $dim )
-					);
-				}
+		if ( isset( $settings['logo']['size'] ) && $settings['logo']['size'] !== '' ) {
+			if ( ! preg_match( '/^\d+(px|em|rem|%)?$/', $settings['logo']['size'] ) ) {
+				$errors->add( 'invalid_logo_size', esc_html__( 'Logo size must be valid CSS size (e.g., 30px, 2em).', 'th-login' ) );
 			}
 		}
 

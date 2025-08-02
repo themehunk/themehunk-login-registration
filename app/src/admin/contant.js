@@ -216,7 +216,6 @@ export  const design = {
       type: "color",     // 'color' | 'gradient' | 'image'
       color: "#5954549c",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-      opacity:1,
       filter:10,
       image: {
         url: "",         // Image URL
@@ -232,7 +231,6 @@ export  const design = {
       type: "color",     // 'color' | 'gradient' | 'image'
       color: "#ffffff",
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
-      opacity:1,
       image: {
         url: "",         // Image URL
         position: "center center",  // e.g. 'top left', 'center center'
@@ -273,12 +271,44 @@ export  const design = {
     labelcolor:"#262626",
     activecolor: "#262626",
     labeltypography:{size: "16px", fontWeight: 500},
-    background:"#ffffff",
+    background: {
+      type: "color",     // 'color' | 'gradient' | 'image'
+      color: "#ffffff",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",         // Image URL
+        position: "center center",  // e.g. 'top left', 'center center'
+        size: "cover",   // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
     typography:{size: "14px", fontWeight: 300}
   },
   button:{
     color:"#ffffff",
     background:"#0B59f4",
+    background: {
+      type: "color",     // 'color' | 'gradient' | 'image'
+      color: "#0B59f4",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",         // Image URL
+        position: "center center",  // e.g. 'top left', 'center center'
+        size: "cover",   // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
+    hoverbackground: {
+      type: "color",     // 'color' | 'gradient' | 'image'
+      color: "#1c21ba",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",         // Image URL
+        position: "center center",  // e.g. 'top left', 'center center'
+        size: "cover",   // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
     hoverBackground:"#1c21ba",
     padding:{ top:12, left:12, right:12, bottom:12},
     typography:{size: "14px",fontWeight: 500},
@@ -291,7 +321,17 @@ export  const design = {
   },
   rememberme:{
     color:"#8392A5",
-    checkboxbackground:"#ffffff",
+    background: {
+      type: "color",     // 'color' | 'gradient' | 'image'
+      color: "#ffffff",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",         // Image URL
+        position: "center center",  // e.g. 'top left', 'center center'
+        size: "cover",   // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
     typography:{size: "14px",fontWeight: 300},
   },
   term: {
@@ -310,8 +350,29 @@ export  const design = {
     registerText: "Register",
     button:{
       color:"#ffffff",
-      background:"#0B59f4",
-      hoverBackground:"#1c21ba",
+
+    background: {
+      type: "color",     // 'color' | 'gradient' | 'image'
+      color: "#0B59f4",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",         // Image URL
+        position: "center center",  // e.g. 'top left', 'center center'
+        size: "cover",   // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
+    hoverbackground: {
+      type: "color",     // 'color' | 'gradient' | 'image'
+      color: "#1c21ba",
+      gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+      image: {
+        url: "",         // Image URL
+        position: "center center",  // e.g. 'top left', 'center center'
+        size: "cover",   // 'cover' | 'contain' | 'auto'
+        repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+      }
+    },
       padding:{ top:8, left:12, right:12, bottom:8},
       typography:{size: "14px",fontWeight: 500},
       border: {
@@ -323,8 +384,31 @@ export  const design = {
     },
     cancel_button:{
       color:"#f31212",
-      background:"#E6e6e6",
-      hoverBackground:"#9a9a9e",
+
+      background: {
+        type: "color",     // 'color' | 'gradient' | 'image'
+        color: "#E6e6e6",
+        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+        image: {
+          url: "",         // Image URL
+          position: "center center",  // e.g. 'top left', 'center center'
+          size: "cover",   // 'cover' | 'contain' | 'auto'
+          repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+        }
+      },
+
+      hoverbackground: {
+        type: "color",     // 'color' | 'gradient' | 'image'
+        color: "#9a9a9e",
+        gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
+        image: {
+          url: "",         // Image URL
+          position: "center center",  // e.g. 'top left', 'center center'
+          size: "cover",   // 'cover' | 'contain' | 'auto'
+          repeat: "no-repeat" // optional: 'repeat' | 'no-repeat' | 'repeat-x' | 'repeat-y'
+        }
+      },
+
       padding:{ top:3, left:3, right:3, bottom:3},
       typography:{size: "14px",fontWeight: 500},
       border: {

@@ -48,6 +48,21 @@ class THLogin_Integrations {
 				$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
 
 				if ( strpos( $request_uri, 'wp-login.php' ) !== false ) {
+
+					// ✅ Safely retrieve and sanitize 'action' GET param
+					$action = '';
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only usage, safe here.
+					if ( isset( $_GET['action'] ) ) {
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only usage, safe here.
+						$action = sanitize_text_field( wp_unslash( $_GET['action'] ) );
+					}
+
+					// ✅ Allow logout and recovery actions through
+					if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
+						return;
+					}
+
+					// ✅ Block wp-login.php access
 					global $wp_query;
 					$wp_query->set_404();
 					status_header( 404 );
@@ -57,7 +72,6 @@ class THLogin_Integrations {
 				}
 			}
 		} );
-
 
 		// 2. Add rewrite rule for /your-slug
 		add_action( 'init', function () use ( $custom_login_slug ) {

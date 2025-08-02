@@ -114,7 +114,7 @@ class THLogin_Style_Renderer {
             .thlogin-form-field input[type="tel"],
             .thlogin-form-field input[type="url"],
             .thlogin-form-field input[type="number"] {
-                width: 100%;
+                width: 100% !important;
                 padding: 13px;
                 color: <?php echo esc_attr( $d['Input']['color'] ); ?>;
                 <?php echo esc_attr( $this->get_background_style( $d['Input']['background'] ) ); ?>

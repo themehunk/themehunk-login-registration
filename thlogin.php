@@ -56,7 +56,6 @@ final class THLogin {
 		require_once THLOGIN_PATH . 'includes/class-thlogin-shortcodes.php';
 		require_once THLOGIN_PATH . 'includes/class-thlogin-security.php';
 		require_once THLOGIN_PATH . 'includes/class-thlogin-rest-api.php';
-		require_once THLOGIN_PATH . 'includes/class-thlogin-forms.php';
 		require_once THLOGIN_PATH . 'includes/class-thlogin-integrations.php';
 		require_once THLOGIN_PATH . 'includes/helpers.php';
 		require_once THLOGIN_PATH . 'includes/helpers/class-thlogin-defaults.php';
@@ -72,7 +71,6 @@ final class THLogin {
 		new THLogin_Shortcodes();
 		new THLogin_Security();
 		new THLogin_REST_API();
-		new THLogin_Forms();
 		new THLogin_Integrations();
 		new THLogin_Menu_Integration();
 

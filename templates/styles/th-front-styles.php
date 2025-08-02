@@ -105,6 +105,7 @@ class THLogin_Style_Renderer {
                 font-size: <?php echo esc_attr( $d['heading']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['heading']['typography']['fontWeight'] ); ?>;
                 text-align: center;
+                margin:0;
             }
 
             .thlogin-form-field input[type="text"],
@@ -116,7 +117,7 @@ class THLogin_Style_Renderer {
                 width: 100%;
                 padding: 13px;
                 color: <?php echo esc_attr( $d['Input']['color'] ); ?>;
-                background-color: <?php echo esc_attr( $d['Input']['background'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['Input']['background'] ) ); ?>
                 font-size: <?php echo esc_attr( $d['Input']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['Input']['typography']['fontWeight'] ); ?>;
                 border: 1px solid #ccc;
@@ -140,7 +141,7 @@ class THLogin_Style_Renderer {
 
             .thlogin-button {
                 color: <?php echo esc_attr( $d['button']['color'] ); ?>;
-                background-color: <?php echo esc_attr( $d['button']['background'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['button']['background'] ) ); ?>
                 font-size: <?php echo esc_attr( $d['button']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['button']['typography']['fontWeight'] ); ?>;
                 padding: <?php echo esc_attr( $d['button']['padding']['top'] ); ?>px <?php echo esc_attr( $d['button']['padding']['right'] ); ?>px;
@@ -165,7 +166,7 @@ class THLogin_Style_Renderer {
 
             .thlogin-button {
                 color: <?php echo esc_attr( $d['button']['color'] ); ?>;
-                background-color: <?php echo esc_attr( $d['button']['background'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['button']['background']  ) ); ?>
                 font-size: <?php echo esc_attr( $d['button']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['button']['typography']['fontWeight'] ); ?>;
                 padding: <?php echo esc_attr( $d['button']['padding']['top'] ); ?>px <?php echo esc_attr( $d['button']['padding']['right'] ); ?>px;
@@ -176,7 +177,7 @@ class THLogin_Style_Renderer {
             }
 
             .thlogin-button:hover {
-                background-color: <?php echo esc_attr( $d['button']['hoverBackground'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['button']['hoverbackground'] ) ); ?>
             }
 
             .thlogin-link {
@@ -230,7 +231,7 @@ class THLogin_Style_Renderer {
 
             .thlogin-header-button {
                 color: <?php echo esc_attr( $d['header']['button']['color'] ); ?>;
-                background-color: <?php echo esc_attr( $d['header']['button']['background'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['header']['button']['background'] ) ); ?>
                 font-size: <?php echo esc_attr( $d['header']['button']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['header']['button']['typography']['fontWeight'] ); ?>;
                 <?php echo esc_attr( $this->get_padding_style( $d['header']['button']['padding'] ) ); ?>
@@ -240,12 +241,12 @@ class THLogin_Style_Renderer {
             }
 
             .thlogin-header-button:hover {
-                background-color: <?php echo esc_attr( $d['header']['button']['hoverBackground'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['header']['button']['hoverbackground'] ) ); ?>
             }
 
             .thlogin-header-cancel-button {
                 color: <?php echo esc_attr( $d['header']['cancel_button']['color'] ); ?>;
-                background-color: <?php echo esc_attr( $d['header']['cancel_button']['background'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['header']['cancel_button']['background'] ) ); ?>
                 font-size: <?php echo esc_attr( $d['header']['cancel_button']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['header']['cancel_button']['typography']['fontWeight'] ); ?>;
                 <?php echo esc_attr( $this->get_padding_style( $d['header']['cancel_button']['padding'] ) ); ?>
@@ -259,7 +260,7 @@ class THLogin_Style_Renderer {
             }
 
             .thlogin-header-cancel-button:hover {
-                background-color: <?php echo esc_attr( $d['header']['cancel_button']['hoverBackground'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['header']['cancel_button']['hoverbackground'] ) ); ?>
             }
 
             .thlogin-header-cancel-button .dashicons {
@@ -276,7 +277,7 @@ class THLogin_Style_Renderer {
                 width: 100%;
                 padding: 10px;
                 color: <?php echo esc_attr( $d['Input']['color'] ); ?>;
-                background-color: <?php echo esc_attr( $d['Input']['background'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['Input']['background'] ) ); ?>
                 font-size: <?php echo esc_attr( $d['Input']['typography']['size'] ); ?>;
                 font-weight: <?php echo esc_attr( $d['Input']['typography']['fontWeight'] ); ?>;
                 border: 1px solid #ccc;
@@ -304,7 +305,7 @@ class THLogin_Style_Renderer {
                 left: 8px;
                 font-size: 12px;
                 color: #007cba;
-                background-color: <?php echo esc_attr( $d['Input']['background'] ); ?>;
+                <?php echo esc_attr( $this->get_background_style( $d['Input']['background']) ); ?>
             }
 
         <?php

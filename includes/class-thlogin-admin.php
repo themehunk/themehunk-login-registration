@@ -112,6 +112,12 @@ class THLogin_Admin {
 		$thlogin_page = get_page_by_path('th-login');
 		$thlogin_url  = $thlogin_page ? get_permalink($thlogin_page) : '';
 
+		$smtp_active =
+			class_exists( 'WPMailSMTP\Options' )     // WP Mail SMTP
+			|| class_exists( 'Postman' )             // Post SMTP
+			|| class_exists( 'EasyWPSMTP\Main' )     // Easy WP SMTP (v2.x+)
+			|| class_exists( 'EasyWPSMTP' )          // Easy WP SMTP (older fallback)
+			|| class_exists( 'MailBank' );           // Mail Bank
 
 		$integration_wp = $all_settings['integration']['wordpress'] ?? array();
 		$wp_enabled     = ! empty( $integration_wp['enabled'] );
@@ -134,6 +140,7 @@ class THLogin_Admin {
 
 		wp_localize_script('thlogin-admin-script', 'thlogin_admin_data', array(
 			'woo_enabled'   => $woo_active,
+			'smtp_enabled'  => $smtp_active,
 			'myaccount_url' => $woo_active ? wc_get_page_permalink('myaccount') : '',
 			'thlogin_url'   => $thlogin_page ? $thlogin_url : '',
 			'wp_login_url'   => $wp_login_url, 

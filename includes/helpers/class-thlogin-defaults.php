@@ -46,7 +46,6 @@ class THLogin_Defaults {
 					'type'     => 'color',
 					'color'    => '#5954549c',
 					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
-					'opacity'  => 1,
 					'filter'   => 10,
 					'image'    => array(
 						'url'      => '',
@@ -55,7 +54,7 @@ class THLogin_Defaults {
 						'repeat'   => 'no-repeat',
 					),
 				),
-				'modal_input_layout'=>  'stack',
+				'modal_input_layout' => 'stack',
 			),
 
 			'form' => array(
@@ -63,7 +62,6 @@ class THLogin_Defaults {
 					'type'     => 'color',
 					'color'    => '#ffffff',
 					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
-					'opacity'  => 1,
 					'image'    => array(
 						'url'      => '',
 						'position' => 'center center',
@@ -97,7 +95,7 @@ class THLogin_Defaults {
 			),
 
 			'heading' => array(
-				'color'     => '#000000',
+				'color' => '#000000',
 				'typography' => array(
 					'size'       => '25px',
 					'fontWeight' => 500,
@@ -105,14 +103,24 @@ class THLogin_Defaults {
 			),
 
 			'Input' => array(
-				'color'      => '#8392A5',
-				'labelcolor' => '#262626',
-				'activecolor'=> '#262626',
+				'color'       => '#8392A5',
+				'labelcolor'  => '#262626',
+				'activecolor' => '#262626',
 				'labeltypography' => array(
 					'size'       => '16px',
 					'fontWeight' => 500,
 				),
-				'background' => '#ffffff',
+				'background' => array(
+					'type'     => 'color',
+					'color'    => '#ffffff',
+					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+					'image'    => array(
+						'url'      => '',
+						'position' => 'center center',
+						'size'     => 'cover',
+						'repeat'   => 'no-repeat',
+					),
+				),
 				'typography' => array(
 					'size'       => '14px',
 					'fontWeight' => 300,
@@ -120,10 +128,30 @@ class THLogin_Defaults {
 			),
 
 			'button' => array(
-				'color'           => '#ffffff',
-				'background'      => '#0B59f4',
-				'hoverBackground' => '#1c21ba',
-				'padding'         => array(
+				'color' => '#ffffff',
+				'background' => array(
+					'type'     => 'color',
+					'color'    => '#0B59f4',
+					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+					'image'    => array(
+						'url'      => '',
+						'position' => 'center center',
+						'size'     => 'cover',
+						'repeat'   => 'no-repeat',
+					),
+				),
+				'hoverbackground' => array(
+					'type'     => 'color',
+					'color'    => '#1c21ba',
+					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+					'image'    => array(
+						'url'      => '',
+						'position' => 'center center',
+						'size'     => 'cover',
+						'repeat'   => 'no-repeat',
+					),
+				),
+				'padding' => array(
 					'top'    => 12,
 					'right'  => 12,
 					'bottom' => 12,
@@ -152,18 +180,28 @@ class THLogin_Defaults {
 			),
 
 			'rememberme' => array(
-				'color'              => '#8392A5',
-				'checkboxbackground' => '#ffffff',
-				'typography'         => array(
+				'color' => '#8392A5',
+				'background' => array(
+					'type'     => 'color',
+					'color'    => '#ffffff',
+					'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+					'image'    => array(
+						'url'      => '',
+						'position' => 'center center',
+						'size'     => 'cover',
+						'repeat'   => 'no-repeat',
+					),
+				),
+				'typography' => array(
 					'size'       => '14px',
 					'fontWeight' => 300,
 				),
 			),
 
 			'term' => array(
-				'color'              => '#8392A5',
-				'link'               => '#007cba ',
-				'typography'         => array(
+				'color' => '#8392A5',
+				'link'  => '#007cba',
+				'typography' => array(
 					'size'       => '14px',
 					'fontWeight' => 300,
 				),
@@ -176,14 +214,34 @@ class THLogin_Defaults {
 			),
 
 			'header' => array(
-				'showButtons'   => false,
-				'loginText'     => 'Login',
-				'registerText'  => 'Register',
+				'showButtons'  => false, 
+				'loginText'    => 'Login',
+				'registerText' => 'Register',
 				'button' => array(
-					'color'           => '#ffffff',
-					'background'      => '#0B59f4',
-					'hoverBackground' => '#1c21ba',
-					'padding'         => array(
+					'color' => '#ffffff',
+					'background' => array(
+						'type'     => 'color',
+						'color'    => '#0B59f4',
+						'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+						'image'    => array(
+							'url'      => '',
+							'position' => 'center center',
+							'size'     => 'cover',
+							'repeat'   => 'no-repeat',
+						),
+					),
+					'hoverbackground' => array(
+						'type'     => 'color',
+						'color'    => '#1c21ba',
+						'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+						'image'    => array(
+							'url'      => '',
+							'position' => 'center center',
+							'size'     => 'cover',
+							'repeat'   => 'no-repeat',
+						),
+					),
+					'padding' => array(
 						'top'    => 8,
 						'right'  => 12,
 						'bottom' => 8,
@@ -211,10 +269,30 @@ class THLogin_Defaults {
 					),
 				),
 				'cancel_button' => array(
-					'color'           => '#f31212',
-					'background'      => '#E6e6e6',
-					'hoverBackground' => '#9a9a9e',
-					'padding'         => array(
+					'color' => '#f31212',
+					'background' => array(
+						'type'     => 'color',
+						'color'    => '#E6e6e6',
+						'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+						'image'    => array(
+							'url'      => '',
+							'position' => 'center center',
+							'size'     => 'cover',
+							'repeat'   => 'no-repeat',
+						),
+					),
+					'hoverbackground' => array(
+						'type'     => 'color',
+						'color'    => '#9a9a9e',
+						'gradient' => 'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
+						'image'    => array(
+							'url'      => '',
+							'position' => 'center center',
+							'size'     => 'cover',
+							'repeat'   => 'no-repeat',
+						),
+					),
+					'padding' => array(
 						'top'    => 3,
 						'right'  => 3,
 						'bottom' => 3,
@@ -245,14 +323,14 @@ class THLogin_Defaults {
 
 			'submitButton' => array(
 				'login'           => 'Login',
-				'register'        => 'Register',
+				'register'       => 'Register',
 				'forgot_password' => 'Reset',
 			),
 
 			'logo' => array(
 				'size'  => '30px',
 				'color' => 'black',
-				'url'   =>  '',
+				'url'   => '',
 			),
 		);
 	}
@@ -461,8 +539,9 @@ class THLogin_Defaults {
 			),
 			'honeypot_enabled'       => true,
 			'email_verification'     => array(
-				'enabled'   => false,
+				'enabled'        => false,
 				'from_name'      => '',
+				'from_type'  	 =>'wordpress',
 				'from_email'     => '',
 				'email_subject'  => 'Verify your email',
 				'email_content'  => 'Click the link to verify: {verification_link}',
@@ -483,7 +562,12 @@ class THLogin_Defaults {
 			),
 			'wordpress' => array(
 				'enabled'           => false,
-				'url'               => '',
+				'url'               => 'login',
+				'form_type'         => 'double',
+			),
+
+			'smtp'    => array(
+				'enabled'    => false,
 			),
 		);
 	}

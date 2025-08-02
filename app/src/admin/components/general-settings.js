@@ -92,28 +92,6 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                             </div>
                         </div>
 
-                       {/* Replace Default WordPress Forms Toggle
-                        <div className="setting-row">
-                            <div className="setting-label">
-                                <h3>{__("Replace WordPress Login/Registration", "th-login")}</h3>
-                                <p className="description">
-                                    {__(
-                                        "Enable this to override default WordPress login, register, and lost password pages with TH Login popup/modal.",
-                                        "th-login"
-                                    )}
-                                </p>
-                            </div>
-                            <div className="setting-control">
-                                <ToggleControl
-                                    __nextHasNoMarginBottom={true}
-                                    checked={settings.general.replace_wordpress || false}
-                                    onChange={(isChecked) =>
-                                        handleSettingChange("general", ["replace_wordpress"], isChecked)
-                                    }
-                                />
-                            </div>
-                        </div> */}
-
 
                         {/* Allow User Registration Toggle */}
                         <div className="setting-row">

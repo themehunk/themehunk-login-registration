@@ -5,8 +5,15 @@ import { useEffect, useState } from "react";
 const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
 
 	const isWooEnabled = thlogin_admin_data.woo_enabled;
+  const isSmtpEnabled = thlogin_admin_data.smtp_enabled;
 
-  const fullwordpressurl = thlogin_admin_data.wp_login_url;
+  let finalurl = window.location.origin;
+
+  if (!finalurl.endsWith('/wordpress')) {
+    finalurl += '/wordpress';
+  }
+
+  const fullwordpressurl = thlogin_admin_data?.wp_login_url || finalurl;
 
   const [baseWordpressUrl, setBaseWordpressUrl] = useState(fullwordpressurl);
 
@@ -84,7 +91,6 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                     </label>
 
                     <div className="custom-login-url-row">
-                     
                       <TextControl
                         placeholder={__("e.g. login, kuber, signin", "thlogin")}
                         value={settings.integration?.wordpress?.url || ""}
@@ -104,8 +110,57 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                     </span>
                   </div>
                   </div>
+
+                    <div className="settings-group thlogin-modalchoose-form inetgration-form-type">
+                            <h4 className="group-title">{__("Form Type", "th-login")}</h4>
+
+                            <div className="form-type-options">
+                                {[
+                                {
+                                    type: "single",
+                                    label: __("Single Form", "th-login"),
+                                    description: __("Only login form will be shown", "th-login"),
+                                },
+                                {
+                                    type: "double",
+                                    label: __("Double Form", "th-login"),
+                                    description: __("Users can toggle between Login and Register forms", "th-login"),
+                                },
+                                ].map(({ type, label, description }) => (
+                                <div
+                                    key={type}
+                                    className={`form-type-card ${settings.integration.wordpress?.form_type === type ? "active" : ""}`}
+                                    onClick={() => handleSettingChange("integration", ["wordpress", "form_type"], type)}
+                                >
+                                    <div className="form-type-mockup">
+                                      {type === "single" ? (
+                                          <div className="mockup-box">
+                                          <div className="mockup-header">Login</div>
+                                          <div className="mockup-line short"></div>
+                                          <div className="mockup-line"></div>
+                                          <div className="mockup-button"></div>
+                                          </div>
+                                      ) : (
+                                          <div className="mockup-box">
+                                          <div className="mockup-tab-row">
+                                              <div className="tab active">Login</div>
+                                              <div className="tab">Register</div>
+                                          </div>
+                                          <div className="mockup-line short"></div>
+                                          <div className="mockup-line"></div>
+                                          <div className="mockup-button"></div>
+                                          </div>
+                                      )}
+                                    </div>
+                                    <h5 className="form-type-label">{label}</h5>
+                                    <p className="form-type-description">{description}</p>
+                                </div>
+                                ))}
+                            </div>
+                    </div>
                 </div>
             )}
+
           </div>
         </div>
            
@@ -149,6 +204,47 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
 
           </div>
         </div>
+
+        {/* <div className="settings-group integration-woocommerce">
+          <div className="settings-card woocommerce-card">
+            <div className="woocommerce-card-header">
+              <div className="woocommerce-icon smtp-image-icon">
+                <img src="https://ps.w.org/post-smtp/assets/icon-128x128.gif?rev=3209655"></img>
+              </div>
+              <div className="woocommerce-info">
+                <h3>{__("SMTP Integration", "thlogin")}</h3>
+                <p>
+                  {__(
+                    "Enable SMTP to improve email deliverability and send login-related emails reliably.",
+                    "th-login"
+                  )}
+                </p>
+              </div>
+              <div className="woocommerce-toggle">
+                <ToggleControl
+                  __nextHasNoMarginBottom={true}
+                  checked={settings.integration?.smtp?.enabled || false}
+                  disabled={!isSmtpEnabled}
+                  onChange={(isChecked) =>
+                    handleSettingChange("integration", ["smtp", "enabled"], isChecked)
+                  }
+                />
+              </div>
+            </div>
+
+            {!isSmtpEnabled && (
+                <div style={{ marginTop: "15px" }}>
+                  <Notice status="warning" isDismissible={false}>
+                    {__(
+                      "To enable SMTP integration, please install and activate the SMTP plugin.",
+                      "thlogin"
+                    )}
+                  </Notice>
+                </div>
+              )}
+
+          </div>
+        </div> */}
 
       </div>
     </section>

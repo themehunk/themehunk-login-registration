@@ -400,6 +400,69 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     }());
   });
+  var shouldTriggerByConditions = function shouldTriggerByConditions() {
+    var _conditions$on_specif, _conditions$on_specif2, _conditions$on_specif3;
+    var conditions = displayTriggers.auto_open_conditions;
+    var currentPageId = thLoginFrontendData.currentPageId;
+    var currentPageSlug = thLoginFrontendData.currentPageSlug;
+
+    // 1. Check specific pages (working correctly)
+    if ((_conditions$on_specif = conditions.on_specific_pages) !== null && _conditions$on_specif !== void 0 && _conditions$on_specif.enabled) {
+      var pageIds = conditions.on_specific_pages.page_ids || [];
+      var pageSlugs = conditions.on_specific_pages.page_slugs || [];
+      if (pageIds.includes(Number(currentPageId))) {
+        return true;
+      }
+      if (pageSlugs.includes(currentPageSlug)) {
+        return true;
+      }
+    }
+
+    // 2. Check categories - FIXED
+    if ((_conditions$on_specif2 = conditions.on_specific_categories) !== null && _conditions$on_specif2 !== void 0 && _conditions$on_specif2.enabled) {
+      var catIds = conditions.on_specific_categories.category_ids || [];
+      var catSlugs = conditions.on_specific_categories.category_slugs || [];
+
+      // Check category IDs
+      var currentCategoryIds = thLoginFrontendData.currentCategoryIds || [];
+      if (currentCategoryIds.some(function (id) {
+        return catIds.includes(Number(id));
+      })) {
+        return true;
+      }
+
+      // Check category slugs
+      var currentCategorySlugs = thLoginFrontendData.currentCategorySlugs || [];
+      if (currentCategorySlugs.some(function (slug) {
+        return catSlugs.includes(slug);
+      })) {
+        return true;
+      }
+    }
+
+    // 3. Check tags - FIXED
+    if ((_conditions$on_specif3 = conditions.on_specific_tags) !== null && _conditions$on_specif3 !== void 0 && _conditions$on_specif3.enabled) {
+      var tagIds = conditions.on_specific_tags.tag_ids || [];
+      var tagSlugs = conditions.on_specific_tags.tag_slugs || [];
+
+      // Check tag IDs
+      var currentTagIds = thLoginFrontendData.currentTagIds || [];
+      if (currentTagIds.some(function (id) {
+        return tagIds.includes(Number(id));
+      })) {
+        return true;
+      }
+
+      // Check tag slugs
+      var currentTagSlugs = thLoginFrontendData.currentTagSlugs || [];
+      if (currentTagSlugs.some(function (slug) {
+        return tagSlugs.includes(slug);
+      })) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   // --- Auto-Open Logic ---
   var checkAndAutoOpenModal = function checkAndAutoOpenModal() {
@@ -414,6 +477,12 @@ document.addEventListener('DOMContentLoaded', function () {
       openModal(wcAction);
       return;
     } else if (customParamTriggered) {
+      openModal('login');
+      return;
+    }
+
+    // if any page/category/tag conditions match
+    if (shouldTriggerByConditions()) {
       openModal('login');
       return;
     }

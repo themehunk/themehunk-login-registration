@@ -16,7 +16,6 @@ th-login/
 │   ├── class-thlogin-rest-api.php                          # REST API handler class
 │   ├── class-thlogin-security.php                          # Security & validation layer
 │   ├── class-thlogin-integrations.php                      # WooCommerce hooks & redirects
-│   ├── class-thlogin-forms.php                             # Form fields definitions
 │   ├── helpers.php                                         # Global helper functions
 │   └── helpers/
 │       ├── class-thlogin-defaults.php                      # Settings defaults loader

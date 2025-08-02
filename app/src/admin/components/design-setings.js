@@ -1425,7 +1425,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 				</div>
 
 				<div className="preview-panel">
-					<div className={`th-preview-container layout-${settings.general.display_mode}`}>
+					<div className={`th-preview-container layout-${settings.general.display_mode} layout-from-type-${activeForm}`}>
 
 						{deisgnpreview === 'design' ? (
 							<>

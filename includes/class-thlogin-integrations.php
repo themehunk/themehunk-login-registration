@@ -56,11 +56,20 @@ class THLogin_Integrations {
 
 		// 2. Add rewrite rule for /your-slug
 		add_action( 'init', function () use ( $custom_login_slug ) {
+
+		
 			add_rewrite_rule(
 				"^{$custom_login_slug}/?$",
 				'index.php?thlogin_custom_login=1',
 				'top'
 			);
+
+			// Flush rules if our rule isn't there yet
+			$rules = get_option('rewrite_rules');
+			if (!isset($rules["^{$custom_login_slug}/?$"])) {
+				flush_rewrite_rules(false);
+			}
+
 		} );
 
 		// 3. Register query var

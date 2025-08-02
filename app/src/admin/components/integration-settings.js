@@ -7,13 +7,9 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
 	const isWooEnabled = thlogin_admin_data.woo_enabled;
   const isSmtpEnabled = thlogin_admin_data.smtp_enabled;
 
-  let finalurl = window.location.origin;
+  const base_url =  thlogin_admin_data.base_url;
 
-  if (!finalurl.endsWith('/wordpress')) {
-    finalurl += '/wordpress';
-  }
-
-  const fullwordpressurl = thlogin_admin_data?.wp_login_url || finalurl;
+  const fullwordpressurl = thlogin_admin_data?.wp_login_url || base_url;
 
   const [baseWordpressUrl, setBaseWordpressUrl] = useState(fullwordpressurl);
 

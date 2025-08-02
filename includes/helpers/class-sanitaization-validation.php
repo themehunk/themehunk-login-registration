@@ -600,6 +600,7 @@ class TH_Sanitization_validation {
 		// Auto open on load.
 		$sanitized['auto_open_on_load']['enabled'] = rest_sanitize_boolean( $settings['auto_open_on_load']['enabled'] ?? true );
 		$sanitized['auto_open_on_load']['delay_seconds'] = absint( $settings['auto_open_on_load']['delay_seconds'] ?? 2 );
+		$sanitized['auto_open_on_load']['max_views']     = absint( $settings['auto_open_on_load']['max_views'] ?? 2 );
 
 		// Auto open on scroll.
 		$sanitized['auto_open_on_scroll']['enabled'] = rest_sanitize_boolean( $settings['auto_open_on_scroll']['enabled'] ?? false );
@@ -643,7 +644,7 @@ class TH_Sanitization_validation {
 		$sanitized['auto_open_conditions']['referrer_detection']['referrer_urls'] = array_map( 'esc_url_raw', $settings['auto_open_conditions']['referrer_detection']['referrer_urls'] ?? array() );
 
 		// Pop up frequency.
-		$sanitized['pop_up_frequency']['enabled'] = rest_sanitize_boolean( $settings['pop_up_frequency']['enabled'] ?? false );
+		$sanitized['pop_up_frequency']['enabled'] = rest_sanitize_boolean( $settings['pop_up_frequency']['enabled'] ?? true );
 		$sanitized['pop_up_frequency']['type'] = sanitize_text_field( $settings['pop_up_frequency']['type'] ?? 'session' );
 		$sanitized['pop_up_frequency']['days'] = absint( $settings['pop_up_frequency']['days'] ?? 7 );
 
@@ -672,6 +673,17 @@ class TH_Sanitization_validation {
 				esc_html__( 'Delay seconds must be a non-negative number.', 'th-login' )
 			);
 		}
+
+		if (
+			( $settings['auto_open_on_load']['enabled'] ?? false ) &&
+			( $settings['auto_open_on_load']['max_views'] ?? 1 ) < 1
+		) {
+			$errors->add(
+				'invalid_max_views',
+				esc_html__( 'Max displays must be at least 1.', 'th-login' )
+			);
+		}
+
 
 		return $errors->has_errors() ? $errors : true;
 	}

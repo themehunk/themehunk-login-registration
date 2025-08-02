@@ -493,7 +493,7 @@ class THLogin_Defaults {
 		// move your full `$display_triggers_defaults` array here
 		return array(
 			'trigger_css_class'          => 'thlogin-trigger',
-			'auto_open_on_load'          => array( 'enabled' => true, 'delay_seconds' => 2 ),
+			'auto_open_on_load'          => array( 'enabled' => true, 'delay_seconds' => 2 , 'max_views'=>  2 ),
 			'auto_open_on_scroll'        => array( 'enabled' => false, 'scroll_percentage' => 50 ),
 			'auto_open_on_exit_intent'   => array( 'enabled' => false ),
 			'auto_open_on_time_on_page'  => array( 'enabled' => false, 'time_seconds' => 10 ),
@@ -509,7 +509,7 @@ class THLogin_Defaults {
 				'url_parameter_trigger'    => array( 'enabled' => false, 'param_name' => 'thlogin', 'param_value' => 'open' ),
 				'referrer_detection'       => array( 'enabled' => false, 'referrer_urls' => array() ),
 			),
-			'pop_up_frequency'           => array( 'enabled' => false, 'type' => 'session', 'days' => 7 ),
+			'pop_up_frequency'           => array( 'enabled' => true, 'type' => 'session', 'days' => 7 ),
 			'menu_integration' => array(
 				'enabled'            => false,
 				'item_text_login'    => __( 'Login', 'th-login' ),

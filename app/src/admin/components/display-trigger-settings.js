@@ -113,7 +113,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                     </div>
                                     <div className="setting-control text-small-box">
                                     <TextControl
-                                                                    __next40pxDefaultSize = {true}
+                                        __next40pxDefaultSize = {true}
                                         __nextHasNoMarginBottom={true}
                                         type="number"
                                         min="0"
@@ -131,6 +131,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                     />
                                     </div>
                                 </div>
+
                             </div>
                         )}
 
@@ -708,7 +709,6 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                     {__("How to limit pop-up frequency", "th-login")}
                                     </p>
                                 </div>
-
 
                                 <div className="setting-control thlogin-toggle-group" style={{maxWidth: '350px'}}>
                                     <div className="custom-tabs">

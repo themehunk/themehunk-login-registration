@@ -9963,7 +9963,7 @@ var DesignEditor = function DesignEditor(_ref5) {
   }))))), /*#__PURE__*/React.createElement("div", {
     className: "preview-panel"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "th-preview-container layout-".concat(settings.general.display_mode)
+    className: "th-preview-container layout-".concat(settings.general.display_mode, " layout-from-type-").concat(activeForm)
   }, deisgnpreview === 'design' ? /*#__PURE__*/React.createElement(React.Fragment, null, renderDesignOptions()) : /*#__PURE__*/React.createElement(React.Fragment, null, renderFormPreview())))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DesignEditor);
@@ -12038,11 +12038,8 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     isLoading = _ref.isLoading;
   var isWooEnabled = thlogin_admin_data.woo_enabled;
   var isSmtpEnabled = thlogin_admin_data.smtp_enabled;
-  var finalurl = window.location.origin;
-  if (!finalurl.endsWith('/wordpress')) {
-    finalurl += '/wordpress';
-  }
-  var fullwordpressurl = ((_thlogin_admin_data = thlogin_admin_data) === null || _thlogin_admin_data === void 0 ? void 0 : _thlogin_admin_data.wp_login_url) || finalurl;
+  var base_url = thlogin_admin_data.base_url;
+  var fullwordpressurl = ((_thlogin_admin_data = thlogin_admin_data) === null || _thlogin_admin_data === void 0 ? void 0 : _thlogin_admin_data.wp_login_url) || base_url;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(fullwordpressurl),
     _useState2 = _slicedToArray(_useState, 2),
     baseWordpressUrl = _useState2[0],
@@ -13555,7 +13552,8 @@ var display_triggers = {
   trigger_css_class: "thlogin-trigger",
   auto_open_on_load: {
     enabled: true,
-    delay_seconds: 2
+    delay_seconds: 2,
+    max_views: 2
   },
   auto_open_on_scroll: {
     enabled: false,
@@ -13604,7 +13602,7 @@ var display_triggers = {
     }
   },
   pop_up_frequency: {
-    enabled: false,
+    enabled: true,
     type: "session",
     days: 7
   },

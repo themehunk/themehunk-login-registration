@@ -35,23 +35,22 @@ class THLogin_Login_Form {
         echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="login">';
         echo '<div class="thlogin-messages" aria-live="polite"></div>';
        
-
-
         if ( $logo_url ) {
             echo '<div class="thlogin-form-logo">';
                 echo '<div class="thlogin-form-logo-wrapper">';
                     echo '<img 
-                        src="' . $logo_url . '" 
-                        alt="' . esc_attr__('Logo', 'th-login') . '" 
+                        src="' . esc_url( $logo_url ) . '" 
+                        alt="' . esc_attr__( 'Logo', 'th-login' ) . '" 
                         class="thlogin-form-logo" 
-                        style="height:' . $logo_size . ';max-height:' . $logo_size . ';object-fit:cover;" 
+                        style="height:' . esc_attr( $logo_size ) . ';max-height:' . esc_attr( $logo_size ) . ';object-fit:cover;" 
                     />';
                 echo '</div>';
-               echo '<h3>' . esc_html__('Login', 'th-login') . '</h3>';
+                echo '<h3>' . esc_html__( 'Login', 'th-login' ) . '</h3>';
             echo '</div>';
-        }else{
-          	echo '<h3>' . esc_html__('Login', 'th-login') . '</h3>';
+        } else {
+            echo '<h3>' . esc_html__( 'Login', 'th-login' ) . '</h3>';
         }
+
 
         if (
             isset( $_GET['thlogin_email_verified'], $_GET['_wpnonce'] ) &&

@@ -64,7 +64,6 @@ final class THLogin {
 	}
 
 	public function init_plugin() {
-		load_plugin_textdomain( 'th-login', false, dirname( THLOGIN_BASENAME ) . '/languages' );
 
 		new THLogin_Admin();
 		new THLogin_Frontend();

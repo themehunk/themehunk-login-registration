@@ -44,15 +44,20 @@ class THLogin_Integrations {
 	public function register_wordpress_login_override( $custom_login_slug ) {
 		// 1. Disable wp-login.php
 		add_action( 'init', function () {
-			if ( strpos( $_SERVER['REQUEST_URI'], 'wp-login.php' ) !== false ) {
-				global $wp_query;
-				$wp_query->set_404();
-				status_header( 404 );
-				nocache_headers();
-				include get_404_template();
-				exit;
+			if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+				$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+
+				if ( strpos( $request_uri, 'wp-login.php' ) !== false ) {
+					global $wp_query;
+					$wp_query->set_404();
+					status_header( 404 );
+					nocache_headers();
+					include get_404_template();
+					exit;
+				}
 			}
 		} );
+
 
 		// 2. Add rewrite rule for /your-slug
 		add_action( 'init', function () use ( $custom_login_slug ) {
@@ -96,7 +101,7 @@ class THLogin_Integrations {
 		status_header( 200 );
 
 		echo '<!DOCTYPE html><html><head>';
-		echo wp_head();
+		wp_head();
 			echo '<style>
 				.thlogin-popup-modal { 
 					display:flex !important; 
@@ -218,7 +223,7 @@ class THLogin_Integrations {
 
 		
 				echo '</head><body>';
-			echo wp_footer();
+			 wp_footer();
 
 		echo '</body></html>';
 

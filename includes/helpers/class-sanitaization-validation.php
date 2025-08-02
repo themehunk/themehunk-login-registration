@@ -257,14 +257,17 @@ class TH_Sanitization_validation {
 		foreach ( $background_fields as $key => $bg ) {
 			$type = $bg['type'] ?? 'color';
 			if ( ! in_array( $type, $valid_types, true ) ) {
+				// translators: %s refers to the design key (e.g., modal_background, input_background).
 				$errors->add( "invalid_{$key}_type", sprintf( esc_html__( 'Invalid background type in %s.', 'th-login' ), $key ) );
 			}
 
 			if ( isset( $bg['color'] ) && ! preg_match( $valid_color_regex, trim( $bg['color'] ) ) ) {
+				// translators: %s refers to the design key (e.g., modal_background, input_background).
 				$errors->add( "invalid_{$key}_color", sprintf( esc_html__( 'Invalid background color in %s.', 'th-login' ), $key ) );
 			}
 
 			if ( isset( $bg['image']['url'] ) && $bg['image']['url'] && ! filter_var( $bg['image']['url'], FILTER_VALIDATE_URL ) ) {
+				// translators: %s refers to the design key (e.g., modal_background, input_background).
 				$errors->add( "invalid_{$key}_image_url", sprintf( esc_html__( 'Invalid background image URL in %s.', 'th-login' ), $key ) );
 			}
 		}
@@ -275,6 +278,7 @@ class TH_Sanitization_validation {
 		if ( $layout && ! in_array( $layout, $valid_input_layouts, true ) ) {
 			$errors->add(
 				'invalid_modal_input_layout',
+				// translators: %s refers to the design key (e.g., modal_background, input_background).
 				sprintf( esc_html__( 'Invalid modal input layout. Allowed values: %s.', 'th-login' ), implode( ', ', $valid_input_layouts ) )
 			);
 		}
@@ -292,6 +296,7 @@ class TH_Sanitization_validation {
 				if ( isset( $radius[ $corner ] ) && intval( $radius[ $corner ] ) < 0 ) {
 					$errors->add(
 						"inappropriate_{$key}_{$corner}",
+						// translators: %s refers to the design key (e.g., modal_background, input_background).
 						sprintf( esc_html__( '%s radius value must be positive.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
@@ -310,6 +315,7 @@ class TH_Sanitization_validation {
 				if ( isset( $padding[ $side ] ) && intval( $padding[ $side ] ) < 0 ) {
 					$errors->add(
 						"invalid_{$key}_{$side}",
+						// translators: %s refers to the design key (e.g., modal_background, input_background).
 						sprintf( esc_html__( '%s padding must be positive.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
@@ -337,6 +343,7 @@ class TH_Sanitization_validation {
 			if ( $font_size && ! preg_match( '/^\d+(\.\d+)?(px|em|rem|%)$/', $font_size ) ) {
 				$errors->add(
 					'invalid_' . strtolower( $key ) . '_font_size',
+					// translators: %s refers to the design key (e.g., modal_background, input_background).
 					sprintf( esc_html__( '%s font size must be a valid CSS size.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
@@ -365,6 +372,7 @@ class TH_Sanitization_validation {
 			if ( $color && ! preg_match( $valid_color_regex, trim( $color ) ) ) {
 				$errors->add(
 					'invalid_' . $key,
+					// translators: %s refers to the design key (e.g., modal_background, input_background).
 					sprintf( esc_html__( '%s must be a valid CSS color.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
@@ -376,6 +384,7 @@ class TH_Sanitization_validation {
 			if ( empty( $submit_button[ $key ] ) || ! is_string( $submit_button[ $key ] ) ) {
 				$errors->add(
 					'invalid_submit_button_' . $key,
+					// translators: %s refers to the design key (e.g., modal_background, input_background).
 					sprintf( esc_html__( 'Submit button text for "%s" must be a non-empty string.', 'th-login' ), $key )
 				);
 			}
@@ -389,6 +398,7 @@ class TH_Sanitization_validation {
 			if ( empty( $settings['header'][ $key ] ) || ! is_string( $settings['header'][ $key ] ) ) {
 				$errors->add(
 					'invalid_header_' . $key,
+					// translators: %s refers to the design key (e.g., modal_background, input_background).
 					sprintf( esc_html__( 'Header text for "%s" must be a non-empty string.', 'th-login' ), $key )
 				);
 			}
@@ -720,6 +730,7 @@ class TH_Sanitization_validation {
 				if ( ! in_array( $key, $allowed_woo_keys, true ) ) {
 					return new WP_Error(
 						'invalid_key',
+						// translators: %s refers to the design key (e.g., modal_background, input_background).
 						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'th-login' ), esc_html( $key ) )
 					);
 				}
@@ -735,6 +746,7 @@ class TH_Sanitization_validation {
 				if ( ! in_array( $key, $allowed_wp_keys, true ) ) {
 					return new WP_Error(
 						'invalid_key',
+						// translators: %s refers to the design key (e.g., modal_background, input_background).
 						sprintf( __( 'Unexpected key "%s" in WordPress settings.', 'th-login' ), esc_html( $key ) )
 					);
 				}
@@ -756,6 +768,7 @@ class TH_Sanitization_validation {
 				if ( ! in_array( $key, $allowed_smtp_keys, true ) ) {
 					return new WP_Error(
 						'invalid_key',
+						// translators: %s refers to the design key (e.g., modal_background, input_background).
 						sprintf( __( 'Unexpected key "%s" in SMTP settings.', 'th-login' ), esc_html( $key ) )
 					);
 				}

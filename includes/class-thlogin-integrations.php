@@ -42,6 +42,28 @@ class THLogin_Integrations {
 	}
 
 	public function register_wordpress_login_override( $custom_login_slug ) {
+
+		add_action( 'init', function () use ( $custom_login_slug ) {
+			if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+				$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+
+				if ( strpos( $request_uri, 'wp-login.php' ) !== false ) {
+
+					// Allow password reset or logout to process
+					$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+
+					if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
+						return;
+					}
+
+					//  Redirect everything else to custom login page
+					wp_redirect( home_url( "/{$custom_login_slug}/" ) );
+					exit;
+				}
+			}
+		} );
+
+
 		// 1. Disable wp-login.php
 		add_action( 'init', function () {
 			if ( isset( $_SERVER['REQUEST_URI'] ) ) {

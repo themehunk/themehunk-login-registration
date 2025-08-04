@@ -519,3 +519,10 @@ body.thlogin-modal-open {
     justify-content: center;
     gap:10px;
 }
+
+
+#wp-auth-check-wrap #wp-auth-check{
+    overflow: hidden;
+    max-height: 500px;
+    width: 500px;
+}

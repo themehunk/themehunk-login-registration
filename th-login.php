@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       TH Login
- * Plugin URI:        https://themehunk.com/thlogin
+ * Plugin URI:        https://themehunk.com/th-login
  * Description:       A powerful and highly customizable frontend login, registration, and password reset pop-up plugin for WordPress.
  * Version:           1.0.0
  * Requires at least: 5.8

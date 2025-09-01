@@ -77,6 +77,7 @@ Yes. You can enable manual user approval from the settings.
 * reCAPTCHA, honeypot, and brute force protection.
 * Role-based redirection, menu link login/logout support.
 * Auto-display popups and manual user approval options.
+* Languages Folder Added.
 
 == Upgrade Notice ==
 

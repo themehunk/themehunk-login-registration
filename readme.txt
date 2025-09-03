@@ -4,7 +4,7 @@ Tags: login, registration, popup, WooCommerce, frontend login
 Requires at least: 5.8  
 Tested up to: 6.8  
 Requires PHP: 7.4  
-Stable tag: 1.0.0  
+Stable tag: 1.0.1  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -70,6 +70,9 @@ Yes. You can enable manual user approval from the settings.
 
 == Changelog ==
 
+= 1.0.1 =
+* class-thlogin-rest-api.php permission_callback issues resolved.
+
 = 1.0.0 =
 * Initial release with complete frontend login, registration, and password reset flow.
 * Fully customizable popup and inline form layouts.
@@ -81,6 +84,6 @@ Yes. You can enable manual user approval from the settings.
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Welcome to TH Login – your all-in-one frontend login and user registration plugin for WordPress and WooCommerce.
+= 1.0.1 =
+* class-thlogin-rest-api.php permission_callback issues resolved.
 

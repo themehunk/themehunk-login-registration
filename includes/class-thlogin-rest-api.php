@@ -73,7 +73,7 @@ class THLogin_REST_API {
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'handle_frontend_login' ),
-				'permission_callback' => '__return_true', // Public endpoint for logged out users.
+				'permission_callback' => array( $this, 'check_registration_allowed' ), // Public endpoint for logged out users.
 				'args'                => array(),
 			)
 		);
@@ -97,7 +97,7 @@ class THLogin_REST_API {
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'handle_frontend_forgot_password' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'check_registration_allowed' ),
 				'args'                => array(), // Let handler manage required logic_key-based validation
 			)
 		);
@@ -160,7 +160,7 @@ class THLogin_REST_API {
 
 				return rest_ensure_response($output);
 			},
-			'permission_callback' => '__return_true',
+			'permission_callback' => array( $this, 'check_admin_permissions' ),
 		]);
 
 		//Route for pending users

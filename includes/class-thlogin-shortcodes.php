@@ -82,7 +82,7 @@ class THLogin_Shortcodes {
 			);
 
 			// Using defer for the main frontend script as it needs DOM and other dependencies
-			wp_enqueue_script(
+			wp_register_script(
 				'thlogin-frontend-script',
 				THLOGIN_URL . 'app/build/public.js',
 				$asset_config['dependencies'],
@@ -92,6 +92,8 @@ class THLogin_Shortcodes {
 					'strategy' => 'defer',
 				)
 			);
+
+			wp_enqueue_script('thlogin-frontend-script');
 
 			wp_enqueue_style(
 				'thlogin-frontend-style',
@@ -192,76 +194,76 @@ class THLogin_Shortcodes {
 	}
 
 	public function render_popup_link_shortcode( $atts, $content = null ) {
-		$this->enqueue_shortcode_assets();
+    $this->enqueue_shortcode_assets();
 
-		$atts = shortcode_atts(
-			array(
-				'type'      => 'login',
-				'text'      => '',
-				'class'     => '',
-				'auto_open' => 'false',
-			),
-			$atts,
-			'thlogin_popup_link'
-		);
+    $atts = shortcode_atts(
+        array(
+            'type'      => 'login',
+            'text'      => '',
+            'class'     => '',
+            'auto_open' => 'false',
+        ),
+        $atts,
+        'thlogin_popup_link'
+    );
 
-		$type        = sanitize_text_field( $atts['type'] );
-		$text        = ! empty( $content ) ? $content : sanitize_text_field( $atts['text'] );
-		$extra_class = sanitize_html_class( $atts['class'] );
-		$auto_open   = filter_var( $atts['auto_open'], FILTER_VALIDATE_BOOLEAN );
+    $type        = sanitize_text_field( $atts['type'] );
+    $text        = ! empty( $content ) ? $content : sanitize_text_field( $atts['text'] );
+    $extra_class = sanitize_html_class( $atts['class'] );
+    $auto_open   = filter_var( $atts['auto_open'], FILTER_VALIDATE_BOOLEAN );
 
-		$settings = get_option( 'thlogin_settings', [] );
-		$display_triggers_settings = $settings['display_triggers'] ?? [];
+    $settings = get_option( 'thlogin_settings', [] );
+    $display_triggers_settings = $settings['display_triggers'] ?? [];
 
-		$trigger_css_class         = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
+    $trigger_css_class = $display_triggers_settings['trigger_css_class'] ?? 'thlogin-trigger';
 
-		$classes = array( $trigger_css_class, 'thlogin-shortcode-link' );
-		if ( ! empty( $extra_class ) ) {
-			$classes[] = $extra_class;
-		}
+    $classes = array( $trigger_css_class, 'thlogin-shortcode-link' );
+    if ( ! empty( $extra_class ) ) {
+        $classes[] = $extra_class;
+    }
 
-		$html = '';
+    $html = '';
 
-		if ( ! $auto_open ) {
-			// Normal trigger link
-			$html .= sprintf(
-				'<a href="#" class="%s" data-th-popup-action="%s">%s</a>',
-				esc_attr( implode( ' ', $classes ) ),
-				esc_attr( $type ),
-				esc_html( $text )
-			);
-		} else {
-			// Auto open: show modal + form instantly
-			ob_start();
-			?>
-			<style>
-			#thlogin-popup-modal {
-				display: flex !important;
-				opacity: 1 !important;
-				visibility: visible !important;
-			}
-			#thlogin-popup-modal .thlogin-form {
-				display: none;
-			}
-			#thlogin-popup-modal .thlogin-form[data-form-type="<?php echo esc_attr( $type ); ?>"] {
-				display: block;
-			}
-			</style>
-			<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				setTimeout(function () {
-					document.dispatchEvent(new CustomEvent("thlogin:open", {
-						detail: { type: "<?php echo esc_js( $type ); ?>" }
-					}));
-				}, 100);
-			});
-			</script>
-			<?php
-			$html .= ob_get_clean();
-		}
+    if ( ! $auto_open ) {
+        // Normal trigger link
+        $html .= sprintf(
+            '<a href="#" class="%s" data-th-popup-action="%s">%s</a>',
+            esc_attr( implode( ' ', $classes ) ),
+            esc_attr( $type ),
+            esc_html( $text )
+        );
+    } else {
+        // Auto open mode: inject CSS + JS properly
+        $custom_css = '
+            #thlogin-popup-modal {
+                display: flex !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            #thlogin-popup-modal .thlogin-form {
+                display: none;
+            }
+            #thlogin-popup-modal .thlogin-form[data-form-type="' . esc_attr( $type ) . '"] {
+                display: block;
+            }
+        ';
+        wp_add_inline_style( 'thlogin-frontend-style', $custom_css );
 
-		return $html;
-	}
+        $custom_js = '
+            document.addEventListener("DOMContentLoaded", function () {
+                setTimeout(function () {
+                    document.dispatchEvent(new CustomEvent("thlogin:open", {
+                        detail: { type: "' . esc_js( $type ) . '" }
+                    }));
+                }, 100);
+            });
+        ';
+        wp_add_inline_script( 'thlogin-frontend-script', $custom_js, 'after' );
+    }
+
+    return $html;
+}
+
 
 	public function render_auto_popup_shortcode( $atts ) {
 		$this->enqueue_shortcode_assets();
@@ -273,69 +275,58 @@ class THLogin_Shortcodes {
 
 		$output = ob_get_clean();
 
-		// Styles to force popup visible and highlight active toggle
-		$output .= '<style>
-			#thlogin-popup-modal.thlogin-popup-modal--active {
-				display: flex !important;
-				opacity: 1 !important;
-				visibility: visible !important;
-			}
-			.thlogin-toggle-button.is-active {
-				background: #0b59f4;
-				color: #fff;
-				font-weight: 600;
-			}
-		</style>';
+		 // --- Instead of appending <style> and <script>, enqueue properly ---
+    $custom_css = '
+        #thlogin-popup-modal.thlogin-popup-modal--active {
+            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        .thlogin-toggle-button.is-active {
+            background: #0b59f4;
+            color: #fff;
+            font-weight: 600;
+        }
+    ';
+    wp_add_inline_style( 'thlogin-frontend-style', $custom_css );
 
-		// JS: handle toggle + close functionality
-		$output .= '<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			var modal = document.getElementById("thlogin-popup-modal");
-			if (modal) {
-				modal.style.display = "flex";
-				modal.classList.add("thlogin-popup-modal--active");
-				modal.setAttribute("aria-hidden", "false");
-			}
-
-			function switchForm(target) {
-				document.querySelectorAll(".thlogin-form").forEach(function (f) {
-					f.style.display = "none";
-				});
-				var form = document.querySelector(".thlogin-form--" + target);
-				if (form) {
-					form.style.display = "block";
-				}
-				document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
-					btn.classList.remove("is-active");
-				});
-				var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
-				if (activeBtn) {
-					activeBtn.classList.add("is-active");
-				}
-			}
-
-			// Initial form = login
-			switchForm("login");
-
-			// Form toggle buttons (login/register/forgot)
-			document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
-				btn.addEventListener("click", function (e) {
-					e.preventDefault();
-					var target = this.getAttribute("data-th-popup-action");
-					switchForm(target);
-				});
-			});
-
-			// Close button functionality
-			document.querySelectorAll(".thlogin-popup-close-button").forEach(function (btn) {
-				btn.addEventListener("click", function () {
-					modal.classList.remove("thlogin-popup-modal--active");
-					modal.style.display = "none";
-					modal.setAttribute("aria-hidden", "true");
-				});
-			});
-		});
-		</script>';
+    $custom_js = '
+        document.addEventListener("DOMContentLoaded", function () {
+            var modal = document.getElementById("thlogin-popup-modal");
+            if (modal) {
+                modal.style.display = "flex";
+                modal.classList.add("thlogin-popup-modal--active");
+                modal.setAttribute("aria-hidden", "false");
+            }
+            function switchForm(target) {
+                document.querySelectorAll(".thlogin-form").forEach(function (f) {
+                    f.style.display = "none";
+                });
+                var form = document.querySelector(".thlogin-form--" + target);
+                if (form) form.style.display = "block";
+                document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
+                    btn.classList.remove("is-active");
+                });
+                var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
+                if (activeBtn) activeBtn.classList.add("is-active");
+            }
+            switchForm("login");
+            document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
+                btn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    switchForm(this.getAttribute("data-th-popup-action"));
+                });
+            });
+            document.querySelectorAll(".thlogin-popup-close-button").forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    modal.classList.remove("thlogin-popup-modal--active");
+                    modal.style.display = "none";
+                    modal.setAttribute("aria-hidden", "true");
+                });
+            });
+        });
+    ';
+    wp_add_inline_script( 'thlogin-frontend-script', $custom_js, 'after' );
 
 		return '<div class="thlogin-auto-popup-shortcode-wrapper">' . $output . '</div>';
 	}
@@ -359,56 +350,61 @@ class THLogin_Shortcodes {
 		$output = preg_replace('/<button class="thlogin-popup-close-button[^>]*>.*?<\/button>/', '', $output);
 
 		// 3. Add custom styles and JS logic
-		$output .= '<style>
-			#thlogin-inline-wrapper {
-				display: block !important;
-				position: static !important;
-				background: none !important;
-				box-shadow: none !important;
-				opacity: 1 !important;
-				visibility: visible !important;
-				z-index: auto !important;
-			}
-			.thlogin-toggle-button.is-active {
-				background: #0b59f4;
-				color: #fff;
-				font-weight: 600;
-			}
+		  // --- Add inline CSS properly ---
+    $custom_css = '
+        #thlogin-inline-wrapper {
+            display: block !important;
+            position: static !important;
+            background: none !important;
+            box-shadow: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: auto !important;
+        }
+        .thlogin-toggle-button.is-active {
+            background: #0b59f4;
+            color: #fff;
+            font-weight: 600;
+        }
+        .thlogin-header-cancel-button {
+            display: none;
+        }
+    ';
+    wp_add_inline_style( 'thlogin-frontend-style', $custom_css );
 
-			.thlogin-header-cancel-button{
-				display:none;
-			}
-		</style>';
+    // --- Add inline JS properly ---
+    $custom_js = '
+        document.addEventListener("DOMContentLoaded", function () {
+            function switchForm(target) {
+                document.querySelectorAll(".thlogin-form").forEach(function (f) {
+                    f.style.display = "none";
+                });
+                var form = document.querySelector(".thlogin-form--" + target);
+                if (form) {
+                    form.style.display = "block";
+                }
+                document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
+                    btn.classList.remove("is-active");
+                });
+                var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
+                if (activeBtn) {
+                    activeBtn.classList.add("is-active");
+                }
+            }
 
-		$output .= '<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			function switchForm(target) {
-				document.querySelectorAll(".thlogin-form").forEach(function (f) {
-					f.style.display = "none";
-				});
-				var form = document.querySelector(".thlogin-form--" + target);
-				if (form) {
-					form.style.display = "block";
-				}
-				document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
-					btn.classList.remove("is-active");
-				});
-				var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
-				if (activeBtn) {
-					activeBtn.classList.add("is-active");
-				}
-			}
+            // Default form = login
+            switchForm("login");
 
-			switchForm("login"); // Default form
-
-			document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
-				btn.addEventListener("click", function (e) {
-					e.preventDefault();
-					switchForm(this.getAttribute("data-th-popup-action"));
-				});
-			});
-		});
-		</script>';
+            // Form toggle buttons (login/register/forgot)
+            document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
+                btn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    switchForm(this.getAttribute("data-th-popup-action"));
+                });
+            });
+        });
+    ';
+    wp_add_inline_script( 'thlogin-frontend-script', $custom_js, 'after' );
 
 		return '<div class="thlogin-inline-combined-form-wrapper">' . $output . '</div>';
 	}	

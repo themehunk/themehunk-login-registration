@@ -79,7 +79,7 @@ class THLogin_Admin {
 		wp_enqueue_style( 'wp-edit-blocks' );
 
 		// Enqueue the admin.js file with defer
-		wp_enqueue_script(
+		wp_register_script(
 			'thlogin-admin-script',
 			THLOGIN_URL . 'app/build/admin.js',
 			$asset_config['dependencies'],
@@ -89,6 +89,8 @@ class THLogin_Admin {
 				'strategy' => 'defer' // Using defer for better control
 			)
 		);
+
+		wp_enqueue_script('thlogin-admin-script');
 
 		// Enqueue the admin.css file
 		wp_enqueue_style(

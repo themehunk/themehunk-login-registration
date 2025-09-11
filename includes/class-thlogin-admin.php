@@ -12,21 +12,25 @@ class THLogin_Admin {
 		add_action( 'admin_head', function () {
 			$image_url = esc_url( plugins_url( '../assets/images/th-login-new.svg', __FILE__ ) );
 
-			echo '<style>
-				#adminmenu .toplevel_page_thlogin-settings .wp-menu-image:before {
-					content: "";
-					display: inline-block;
-					width: 20px;
-					height: 20px;
-					background-size: contain;
-					background-repeat: no-repeat;
-					background-position: center;
-					background-image: url("' . esc_url( $image_url ) . '");
-				}
-				#adminmenu .toplevel_page_thlogin-settings .wp-menu-image img {
-					display: none;
-				}
-			</style>';
+			$custom_css = '
+			#adminmenu .toplevel_page_thlogin-settings .wp-menu-image:before {
+				content: "";
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				background-image: url("' . esc_url( $image_url ) . '");
+			}
+			#adminmenu .toplevel_page_thlogin-settings .wp-menu-image img {
+				display: none;
+			}
+		';
+
+		// Inject inline CSS safely
+		wp_add_inline_style( 'thlogin-admin-style', $custom_css );
+
 		} );
 
 	}
@@ -54,7 +58,7 @@ class THLogin_Admin {
 				<div class="thlogin-loader-circle"></div>
 				<div class="thlogin-loader-circle"></div>
 				<div class="thlogin-loader-circle"></div>
-					<p class="thlogin-loading-text"><?php echo esc_html__( 'Loading settings...', 'th-login' ); ?></p>
+					<p class="thlogin-loading-text"><?php echo esc_html_e( 'Loading settings...', 'th-login' ); ?></p>
 			</div>
 		</div>
 		<?php

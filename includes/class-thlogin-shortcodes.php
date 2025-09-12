@@ -249,16 +249,23 @@ class THLogin_Shortcodes {
         ';
         wp_add_inline_style( 'thlogin-frontend-style', $custom_css );
 
-        $custom_js = '
-            document.addEventListener("DOMContentLoaded", function () {
+        // $custom_js = '
+        //     document.addEventListener("DOMContentLoaded", function () {
+        //         setTimeout(function () {
+        //             document.dispatchEvent(new CustomEvent("thlogin:open", {
+        //                 detail: { type: "' . esc_js( $type ) . '" }
+        //             }));
+        //         }, 100);
+        //     });
+        //     ';
+        wp_add_inline_script( 'thlogin-frontend-script', 'document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(function () {
                     document.dispatchEvent(new CustomEvent("thlogin:open", {
                         detail: { type: "' . esc_js( $type ) . '" }
                     }));
                 }, 100);
-            });
-        ';
-        wp_add_inline_script( 'thlogin-frontend-script', $custom_js, 'after' );
+            });', 'after' );
+
     }
 
     return $html;
@@ -276,8 +283,19 @@ class THLogin_Shortcodes {
 		$output = ob_get_clean();
 
 		 // --- Instead of appending <style> and <script>, enqueue properly ---
-    $custom_css = '
-        #thlogin-popup-modal.thlogin-popup-modal--active {
+    // $custom_css = '
+    //     #thlogin-popup-modal.thlogin-popup-modal--active {
+    //         display: flex !important;
+    //         opacity: 1 !important;
+    //         visibility: visible !important;
+    //     }
+    //     .thlogin-toggle-button.is-active {
+    //         background: #0b59f4;
+    //         color: #fff;
+    //         font-weight: 600;
+    //     }
+    // ';
+    wp_add_inline_style( 'thlogin-frontend-style', '#thlogin-popup-modal.thlogin-popup-modal--active {
             display: flex !important;
             opacity: 1 !important;
             visibility: visible !important;
@@ -286,12 +304,45 @@ class THLogin_Shortcodes {
             background: #0b59f4;
             color: #fff;
             font-weight: 600;
-        }
-    ';
-    wp_add_inline_style( 'thlogin-frontend-style', $custom_css );
+        }' );
 
-    $custom_js = '
-        document.addEventListener("DOMContentLoaded", function () {
+    // $custom_js = '
+    //     document.addEventListener("DOMContentLoaded", function () {
+    //         var modal = document.getElementById("thlogin-popup-modal");
+    //         if (modal) {
+    //             modal.style.display = "flex";
+    //             modal.classList.add("thlogin-popup-modal--active");
+    //             modal.setAttribute("aria-hidden", "false");
+    //         }
+    //         function switchForm(target) {
+    //             document.querySelectorAll(".thlogin-form").forEach(function (f) {
+    //                 f.style.display = "none";
+    //             });
+    //             var form = document.querySelector(".thlogin-form--" + target);
+    //             if (form) form.style.display = "block";
+    //             document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
+    //                 btn.classList.remove("is-active");
+    //             });
+    //             var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
+    //             if (activeBtn) activeBtn.classList.add("is-active");
+    //         }
+    //         switchForm("login");
+    //         document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
+    //             btn.addEventListener("click", function (e) {
+    //                 e.preventDefault();
+    //                 switchForm(this.getAttribute("data-th-popup-action"));
+    //             });
+    //         });
+    //         document.querySelectorAll(".thlogin-popup-close-button").forEach(function (btn) {
+    //             btn.addEventListener("click", function () {
+    //                 modal.classList.remove("thlogin-popup-modal--active");
+    //                 modal.style.display = "none";
+    //                 modal.setAttribute("aria-hidden", "true");
+    //             });
+    //         });
+    //     });
+    // ';
+    wp_add_inline_script( 'thlogin-frontend-script', 'document.addEventListener("DOMContentLoaded", function () {
             var modal = document.getElementById("thlogin-popup-modal");
             if (modal) {
                 modal.style.display = "flex";
@@ -324,9 +375,7 @@ class THLogin_Shortcodes {
                     modal.setAttribute("aria-hidden", "true");
                 });
             });
-        });
-    ';
-    wp_add_inline_script( 'thlogin-frontend-script', $custom_js, 'after' );
+        });', 'after' );
 
 		return '<div class="thlogin-auto-popup-shortcode-wrapper">' . $output . '</div>';
 	}
@@ -351,8 +400,26 @@ class THLogin_Shortcodes {
 
 		// 3. Add custom styles and JS logic
 		  // --- Add inline CSS properly ---
-    $custom_css = '
-        #thlogin-inline-wrapper {
+    // $custom_css = '
+    //     #thlogin-inline-wrapper {
+    //         display: block !important;
+    //         position: static !important;
+    //         background: none !important;
+    //         box-shadow: none !important;
+    //         opacity: 1 !important;
+    //         visibility: visible !important;
+    //         z-index: auto !important;
+    //     }
+    //     .thlogin-toggle-button.is-active {
+    //         background: #0b59f4;
+    //         color: #fff;
+    //         font-weight: 600;
+    //     }
+    //     .thlogin-header-cancel-button {
+    //         display: none;
+    //     }
+    // ';
+    wp_add_inline_style( 'thlogin-frontend-style', '    #thlogin-inline-wrapper {
             display: block !important;
             position: static !important;
             background: none !important;
@@ -368,13 +435,41 @@ class THLogin_Shortcodes {
         }
         .thlogin-header-cancel-button {
             display: none;
-        }
-    ';
-    wp_add_inline_style( 'thlogin-frontend-style', $custom_css );
+        }' );
 
     // --- Add inline JS properly ---
-    $custom_js = '
-        document.addEventListener("DOMContentLoaded", function () {
+    // $custom_js = '
+    //     document.addEventListener("DOMContentLoaded", function () {
+    //         function switchForm(target) {
+    //             document.querySelectorAll(".thlogin-form").forEach(function (f) {
+    //                 f.style.display = "none";
+    //             });
+    //             var form = document.querySelector(".thlogin-form--" + target);
+    //             if (form) {
+    //                 form.style.display = "block";
+    //             }
+    //             document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
+    //                 btn.classList.remove("is-active");
+    //             });
+    //             var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
+    //             if (activeBtn) {
+    //                 activeBtn.classList.add("is-active");
+    //             }
+    //         }
+
+    //         // Default form = login
+    //         switchForm("login");
+
+    //         // Form toggle buttons (login/register/forgot)
+    //         document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
+    //             btn.addEventListener("click", function (e) {
+    //                 e.preventDefault();
+    //                 switchForm(this.getAttribute("data-th-popup-action"));
+    //             });
+    //         });
+    //     });
+    // ';
+    wp_add_inline_script( 'thlogin-frontend-script', 'document.addEventListener("DOMContentLoaded", function () {
             function switchForm(target) {
                 document.querySelectorAll(".thlogin-form").forEach(function (f) {
                     f.style.display = "none";
@@ -402,9 +497,7 @@ class THLogin_Shortcodes {
                     switchForm(this.getAttribute("data-th-popup-action"));
                 });
             });
-        });
-    ';
-    wp_add_inline_script( 'thlogin-frontend-script', $custom_js, 'after' );
+        });', 'after' );
 
 		return '<div class="thlogin-inline-combined-form-wrapper">' . $output . '</div>';
 	}	

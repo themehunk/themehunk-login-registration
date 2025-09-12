@@ -65,7 +65,10 @@ class THLogin_Frontend {
 			THLOGIN_URL . 'assets/js/session-timeout.js',
 			array( 'jquery' ),
 			THLOGIN_VERSION,
-			true
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
 		);
 
 		wp_enqueue_script('thlogin-session-timeout');

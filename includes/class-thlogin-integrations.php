@@ -136,94 +136,46 @@ class THLogin_Integrations {
 	public function render_custom_login_page() {
 	status_header( 200 );
 
-	// ✅ Define safe CSS
-	$custom_css = '
-		.thlogin-popup-modal { 
-			display:flex !important; 
-			visibility:visible !important;
-			opacity:1 !important; 
-		}
-		#thlogin-inline-wrapper {
-			display: block !important;
-			position: static !important;
-			background: none !important;
-			box-shadow: none !important;
-			opacity: 1 !important;
-			visibility: visible !important;
-			z-index: auto !important;
-		}
-		.thlogin-toggle-button.is-active {
-			background: #0b59f4;
-			color: #fff;
-			font-weight: 600;
-		}
-		.thlogin-header-cancel-button{ display:none; }
-		.thlogin-page .thlogin-popup-form-container{ height:auto !important; }
-		#thlogin-popup-modal.thlogin-page{ display:flex !important; }
-	';
-
-	//  Whitelist CSS properties (basic safety, avoids XSS)
-	$allowed_css = array(
-		'display'   => true,
-		'visibility'=> true,
-		'opacity'   => true,
-		'position'  => true,
-		'background'=> true,
-		'box-shadow'=> true,
-		'z-index'   => true,
-		'color'     => true,
-		'font-weight'=> true,
-		'height'    => true,
+	//Register and enqueue CSS
+	wp_register_style(
+		'thlogin-custom-login',
+		THLOGIN_URL . 'assets/css/thlogin-custom-login.css',
+		array(),
+		THLOGIN_VERSION
 	);
+	wp_enqueue_style('thlogin-custom-login');
 
-	$sanitized_css = wp_strip_all_tags( $custom_css ); // strips harmful tags
-	$sanitized_css = wp_kses( $sanitized_css, array() ); // no HTML tags allowed
+	//Register and enqueue JS
+	wp_register_script(
+		'thlogin-custom-login',
+		THLOGIN_URL . 'assets/js/thlogin-custom-login.js',
+		array(), // add dependencies if needed e.g., array('jquery')
+		THLOGIN_VERSION,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
+	wp_enqueue_script('thlogin-custom-login');
 
-	// Define safe JS
-	$custom_js = '
-		document.addEventListener("DOMContentLoaded", function () {
-			function switchForm(target) {
-				document.querySelectorAll(".thlogin-form").forEach(f => f.style.display = "none");
-				const form = document.querySelector(".thlogin-form--" + target);
-				if (form) form.style.display = "block";
-				document.querySelectorAll(".thlogin-toggle-button").forEach(btn => btn.classList.remove("is-active"));
-				const activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
-				if (activeBtn) activeBtn.classList.add("is-active");
-			}
-			switchForm("login");
-			document.querySelectorAll("[data-th-popup-action]").forEach(btn => {
-				btn.addEventListener("click", function (e) {
-					e.preventDefault();
-					switchForm(this.getAttribute("data-th-popup-action"));
-				});
-			});
-		});
-	';
-
-	//  Sanitize JS
-	$sanitized_js = wp_strip_all_tags( $custom_js );
-
+	// Output template
 	?>
 	<!DOCTYPE html>
 	<html <?php language_attributes(); ?>>
 	<head>
 		<?php wp_head(); ?>
-
-		<style id="thlogin-inline-css">
-			<?php echo esc_html( $sanitized_css ); ?>
-		</style>
-
-		<script id="thlogin-inline-js">
-			<?php echo esc_js( $sanitized_js ); ?>
-		</script>
 	</head>
-	<body <?php body_class(); ?>>
+	<body <?php body_class( 'thlogin-page' ); ?>>
+		<div id="thlogin-inline-wrapper">
+			<?php echo do_shortcode( '[thlogin_combined_form]' ); ?>
+		</div>
 		<?php wp_footer(); ?>
 	</body>
 	</html>
 	<?php
 	exit;
 }
+
 
 
 	public function create_my_custom_page() {

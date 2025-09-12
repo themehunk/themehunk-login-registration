@@ -43,7 +43,7 @@ class THLogin_Login_Form {
                     <div class="thlogin-form-logo-wrapper">
                         <img 
                             src="<?php echo esc_url( $logo_url ); ?>" 
-                            alt="<?php echo esc_attr__( 'Logo', 'th-login' ); ?>" 
+                            alt="<?php echo esc_attr_e( 'Logo', 'th-login' ); ?>" 
                             class="thlogin-form-logo" 
                             style="height:<?php echo esc_attr( $logo_size ); ?>;max-height:<?php echo esc_attr( $logo_size ); ?>;object-fit:cover;" 
                         />
@@ -160,7 +160,7 @@ class THLogin_Login_Form {
                 name="<?php echo esc_attr( $name ); ?>"
                 id="<?php echo esc_attr( $id ); ?>"
                 value="1"
-                <?php echo $required ? 'required' : ''; ?>
+                <?php if ( $required ) : ?>required<?php endif; ?>
             />
             <label for="<?php echo esc_attr( $id ); ?>">
                 <?php echo esc_html( $label ); ?>
@@ -169,9 +169,9 @@ class THLogin_Login_Form {
                 <?php endif; ?>
             </label>
         <?php elseif ( in_array( $this->layout, [ 'floating', 'placehold' ], true ) ) : ?>
-            <div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php echo $show_icon_in_input ? 'icon-activated-input-wrapper' : ''; ?>">
+            <div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php if ( $show_icon_in_input ) : ?>icon-activated-input-wrapper<?php endif; ?>">
                 <input
-                    class="floating-input <?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+                    class="floating-input <?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
                     <?php if ( $show_icon_in_input ) : ?>
                         style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
                     <?php endif; ?>
@@ -179,8 +179,11 @@ class THLogin_Login_Form {
                     name="<?php echo esc_attr( $name ); ?>"
                     id="<?php echo esc_attr( $id ); ?>"
                     placeholder=" "
-                    <?php echo $required ? 'required' : ''; ?>
-                    <?php echo $autocomplete ? 'autocomplete="' . esc_attr( $autocomplete ) . '"' : ''; ?>
+                    <?php if ( $required ) : ?>required<?php endif; ?>
+                    <?php if ( $autocomplete ) : ?>
+                        autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
+                    <?php endif; ?>
+
                 />
                 <label for="<?php echo esc_attr( $id ); ?>" class="floating-label">
                     <?php echo esc_html( $label ); ?>
@@ -205,7 +208,7 @@ class THLogin_Login_Form {
             </label>
 
             <input
-                class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+                class="<?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
                 <?php if ( $show_icon_in_input ) : ?>
                     style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
                 <?php endif; ?>
@@ -213,70 +216,65 @@ class THLogin_Login_Form {
                 name="<?php echo esc_attr( $name ); ?>"
                 id="<?php echo esc_attr( $id ); ?>"
                 placeholder="<?php echo esc_attr( $placeholder ); ?>"
-                <?php echo $required ? 'required' : ''; ?>
-                <?php echo $autocomplete ? 'autocomplete="' . esc_attr( $autocomplete ) . '"' : ''; ?>
+               <?php if ( $required ) : ?>required<?php endif; ?>
+               <?php if ( $autocomplete ) : ?>
+                        autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
+                    <?php endif; ?>
             />
         <?php endif; ?>
     </div>
     <?php
 }
 
+    protected function render_recaptcha( $security ) {
+    $recaptcha = $security['recaptcha'] ?? [];
+    $show_on   = $recaptcha['show_on'] ?? 'all';
 
-    protected function render_recaptcha($security) {
-        $recaptcha = $security['recaptcha'] ?? [];
-        $show_on = $recaptcha['show_on'] ?? 'all';
-
-        if (!empty($recaptcha['enabled']) && ($show_on === 'all' || $show_on === 'login')) {
-            if ($recaptcha['type'] === 'v2_checkbox') {
-                echo '<div class="thlogin-form-field">';
-                echo '<div class="g-recaptcha" data-sitekey="' . esc_attr($recaptcha['site_key']) . '"></div>';
-                echo '</div>';
-            } elseif ($recaptcha['type'] === 'v3') {
-                echo '<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">';
-               
-
-                    // Register the script only if reCAPTCHA v3 is enabled
-                wp_register_script(
-                    'thlogin-recaptcha',
-                    'https://www.google.com/recaptcha/api.js?render=' . esc_attr( $recaptcha['site_key'] ),
-                    [],
-                    null,
-                    true
-                );
-
-                wp_enqueue_script( 'thlogin-recaptcha' );
-
-                // Add the inline execution code
-                // $inline_js = "
-                //     document.addEventListener('DOMContentLoaded', function () {
-                //         if (typeof grecaptcha !== 'undefined') {
-                //             grecaptcha.ready(function () {
-                //                 grecaptcha.execute('" . esc_js( $recaptcha['site_key'] ) . "', { action: 'login' })
-                //                     .then(function (token) {
-                //                         document.getElementById('g-recaptcha-response').value = token;
-                //                     });
-                //             });
-                //         }
-                //     });
-                // ";
-                wp_add_inline_script( "thlogin-recaptcha", "document.addEventListener('DOMContentLoaded', function () {
-                        if (typeof grecaptcha !== 'undefined') {
-                            grecaptcha.ready(function () {
-                                grecaptcha.execute('" . esc_js( $recaptcha['site_key'] ) . "', { action: 'login' })
-                                    .then(function (token) {
-                                        document.getElementById('g-recaptcha-response').value = token;
-                                    });
-                            });
-                        }
-                    });" );
-
-
-
-
-
-            }
-        }
+    if ( empty( $recaptcha['enabled'] ) || ( $show_on !== 'all' && $show_on !== 'login' ) ) {
+        return;
     }
+
+    $type    = $recaptcha['type'] ?? '';
+    $sitekey = ! empty( $recaptcha['site_key'] ) ? $recaptcha['site_key']  : '';
+
+    if ( 'v2_checkbox' === $type && $sitekey ) :
+        ?>
+        <div class="thlogin-form-field">
+            <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($sitekey); ?>"></div>
+        </div>
+        <?php
+    elseif ( 'v3' === $type && $sitekey ) :
+        ?>
+        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+        <?php
+        // Register Google reCAPTCHA v3 script.
+        wp_register_script(
+            'thlogin-recaptcha',
+            'https://www.google.com/recaptcha/api.js?render=' . $sitekey,
+            [],
+            null,
+            true
+        );
+
+        wp_enqueue_script( 'thlogin-recaptcha' );
+
+        // Add inline script to execute reCAPTCHA.
+        wp_add_inline_script(
+            'thlogin-recaptcha',
+            "document.addEventListener('DOMContentLoaded', function () {
+                if (typeof grecaptcha !== 'undefined') {
+                    grecaptcha.ready(function () {
+                        grecaptcha.execute('" . esc_js( $sitekey ) . "', { action: 'login' })
+                            .then(function (token) {
+                                document.getElementById('g-recaptcha-response').value = token;
+                            });
+                    });
+                }
+            });"
+        );
+    endif;
+}
+
 }
 
 // Usage:

@@ -234,8 +234,20 @@ class THLogin_Shortcodes {
         );
     } else {
         // Auto open mode: inject CSS + JS properly
-        $custom_css = '
-            #thlogin-popup-modal {
+        // $custom_css = '
+        //     #thlogin-popup-modal {
+        //         display: flex !important;
+        //         opacity: 1 !important;
+        //         visibility: visible !important;
+        //     }
+        //     #thlogin-popup-modal .thlogin-form {
+        //         display: none;
+        //     }
+        //     #thlogin-popup-modal .thlogin-form[data-form-type="' . esc_attr( $type ) . '"] {
+        //         display: block;
+        //     }
+        // ';
+        wp_add_inline_style( 'thlogin-frontend-style', ' #thlogin-popup-modal {
                 display: flex !important;
                 opacity: 1 !important;
                 visibility: visible !important;
@@ -245,9 +257,7 @@ class THLogin_Shortcodes {
             }
             #thlogin-popup-modal .thlogin-form[data-form-type="' . esc_attr( $type ) . '"] {
                 display: block;
-            }
-        ';
-        wp_add_inline_style( 'thlogin-frontend-style', $custom_css );
+            }' );
 
         // $custom_js = '
         //     document.addEventListener("DOMContentLoaded", function () {
@@ -283,18 +293,7 @@ class THLogin_Shortcodes {
 		$output = ob_get_clean();
 
 		 // --- Instead of appending <style> and <script>, enqueue properly ---
-    // $custom_css = '
-    //     #thlogin-popup-modal.thlogin-popup-modal--active {
-    //         display: flex !important;
-    //         opacity: 1 !important;
-    //         visibility: visible !important;
-    //     }
-    //     .thlogin-toggle-button.is-active {
-    //         background: #0b59f4;
-    //         color: #fff;
-    //         font-weight: 600;
-    //     }
-    // ';
+   
     wp_add_inline_style( 'thlogin-frontend-style', '#thlogin-popup-modal.thlogin-popup-modal--active {
             display: flex !important;
             opacity: 1 !important;

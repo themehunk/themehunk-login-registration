@@ -202,52 +202,89 @@ class THLogin_Register_Form {
 
 
 	protected function render_terms_checkbox( $field ) {
-		$id     = sanitize_key( $field['id'] ?? '' );
-		$name   = sanitize_key( $field['name'] ?? $id );
-		$label  = sanitize_text_field( $field['label'] ?? '' );
-		$required = ! empty( $field['required'] );
-		$link   = ! empty( $field['link'] ) ? esc_url( $field['link'] ) : '#';
+	$id       = sanitize_key( $field['id'] ?? '' );
+	$name     = sanitize_key( $field['name'] ?? $id );
+	$label    = sanitize_text_field( $field['label'] ?? '' );
+	$required = ! empty( $field['required'] );
+	$link     = ! empty( $field['link'] ) ? esc_url( $field['link'] ) : '#';
 
-		$parsed_text = preg_replace_callback(
-			'/\[(.*?)\]/',
-			function ( $matches ) use ( $link ) {
-				return '<a href="' . esc_url( $link ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $matches[1] ) . '</a>';
-			},
-			$label
-		);
+	$parsed_text = preg_replace_callback(
+		'/\[(.*?)\]/',
+		function ( $matches ) use ( $link ) {
+			return sprintf(
+				'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+				esc_url( $link ),
+				esc_html( $matches[1] )
+			);
+		},
+		$label
+	);
+	?>
 
-		echo '<p class="thlogin-form-field thlogin-form-field--terms">';
-			echo '<input type="checkbox" name="' . esc_attr( $name ) . '" id="th-register-' . esc_attr( $id ) . '" value="1" ' . ( $required ? 'required' : '' ) . '>';
-			echo '<label for="th-register-' . esc_attr( $id ) . '">' . wp_kses_post( $parsed_text ) . '</label>';
-		echo '</p>';
-	}
+	<p class="thlogin-form-field thlogin-form-field--terms">
+		<input
+			type="checkbox"
+			name="<?php echo esc_attr( $name ); ?>"
+			id="th-register-<?php echo esc_attr( $id ); ?>"
+			value="1"
+			<?php if ( $required ) : ?> required<?php endif; ?>
+		/>
+		<label for="th-register-<?php echo esc_attr( $id ); ?>">
+			<?php echo wp_kses_post( $parsed_text ); ?>
+		</label>
+	</p>
+
+	<?php
+}
 
 	protected function render_recaptcha( $security ) {
-		$recaptcha = $security['recaptcha'] ?? [];
-		$show_on   = $recaptcha['show_on'] ?? 'all';
+    $recaptcha = $security['recaptcha'] ?? [];
+    $show_on   = $recaptcha['show_on'] ?? 'all';
 
-		if ( ! empty( $recaptcha['enabled'] ) && ( $show_on === 'all' || $show_on === 'register' ) ) {
-			if ( $recaptcha['type'] === 'v2_checkbox' ) {
-				echo '<div class="thlogin-form-field">';
-				echo '<div class="g-recaptcha" data-sitekey="' . esc_attr( $recaptcha['site_key'] ) . '"></div>';
-				echo '</div>';
-			} elseif ( $recaptcha['type'] === 'v3' ) {
-				echo '<input type="hidden" id="g-recaptcha-response-register" name="g-recaptcha-response">';
-				echo '<script>
-					document.addEventListener("DOMContentLoaded", function () {
-						if (typeof grecaptcha !== "undefined") {
-							grecaptcha.ready(function () {
-								grecaptcha.execute("' . esc_attr( $recaptcha['site_key'] ) . '", { action: "register" })
-									.then(function (token) {
-										document.getElementById("g-recaptcha-response-register").value = token;
-									});
-							});
-						}
-					});
-				</script>';
-			}
-		}
-	}
+    if ( empty( $recaptcha['enabled'] ) || ( $show_on !== 'all' && $show_on !== 'login' ) ) {
+        return;
+    }
+
+    $type    = $recaptcha['type'] ?? '';
+    $sitekey = ! empty( $recaptcha['site_key'] ) ? $recaptcha['site_key']  : '';
+
+    if ( 'v2_checkbox' === $type && $sitekey ) :
+        ?>
+        <div class="thlogin-form-field">
+            <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($sitekey); ?>"></div>
+        </div>
+        <?php
+    elseif ( 'v3' === $type && $sitekey ) :
+        ?>
+        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+        <?php
+        // Register Google reCAPTCHA v3 script.
+        wp_register_script(
+            'thlogin-recaptcha',
+            'https://www.google.com/recaptcha/api.js?render=' . $sitekey,
+            [],
+            null,
+            true
+        );
+
+        wp_enqueue_script( 'thlogin-recaptcha' );
+
+        // Add inline script to execute reCAPTCHA.
+        wp_add_inline_script(
+            'thlogin-recaptcha',
+            "document.addEventListener('DOMContentLoaded', function () {
+                if (typeof grecaptcha !== 'undefined') {
+                    grecaptcha.ready(function () {
+                        grecaptcha.execute('" . esc_js( $sitekey ) . "', { action: 'login' })
+                            .then(function (token) {
+                                document.getElementById('g-recaptcha-response').value = token;
+                            });
+                    });
+                }
+            });"
+        );
+    endif;
+}
 
 }
 

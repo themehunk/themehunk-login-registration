@@ -252,7 +252,7 @@ class THLogin_Login_Form {
             'thlogin-recaptcha',
             'https://www.google.com/recaptcha/api.js?render=' . $sitekey,
             [],
-            null,
+            THLOGIN_VERSION,
             true
         );
 

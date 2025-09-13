@@ -115,7 +115,8 @@ class THLogin_Security {
 			    <pre>
 			        <?php 
 			        esc_html_e('--- TH Login Brute Force Debug ---','th-login');
-			        print_r( $failed_attempts ); ?>
+			        // error_log(print_r($failed_attempts, true)); // Logs to the debug.log file
+			         ?>
 			    </pre>
 			</div>
 			<?php

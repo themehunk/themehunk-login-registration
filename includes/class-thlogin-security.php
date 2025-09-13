@@ -107,11 +107,18 @@ class THLogin_Security {
 			current_user_can( 'manage_options' ) &&
 			wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_debug_nonce' )
 		) {
-			echo '<pre style="background:#111;color:#0f0;padding:10px;">';
-			echo "--- TH Login Brute Force Debug ---\n";
-				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
-				print_r( get_transient( self::FAILED_ATTEMPTS_OPTION ) );
-			echo '</pre>';
+			$failed_attempts = get_transient( self::FAILED_ATTEMPTS_OPTION );
+
+			// Output the HTML with the debug information
+			?>
+			<div style="background:#111;color:#0f0;padding:10px;">
+			    <pre>
+			        <?php 
+			        esc_html_e('--- TH Login Brute Force Debug ---','th-login');
+			        print_r( $failed_attempts ); ?>
+			    </pre>
+			</div>
+			<?php
 			exit;
 		}
 	}

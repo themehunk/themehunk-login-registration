@@ -165,7 +165,7 @@ protected function render_field( $args ) {
 					name="<?php echo esc_attr( $name ); ?>"
 					id="<?php echo esc_attr( $id ); ?>"
 					placeholder=" "
-					<?php echo $required ? 'required' : ''; ?>
+					<?php if ( $required ) : ?> required<?php endif; ?>
 					autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
 				/>
 				<label for="<?php echo esc_attr( $id ); ?>" class="floating-label">
@@ -202,7 +202,7 @@ protected function render_field( $args ) {
 				name="<?php echo esc_attr( $name ); ?>"
 				id="<?php echo esc_attr( $id ); ?>"
 				placeholder="<?php echo esc_attr( $placeholder ); ?>"
-				<?php echo $required ? 'required' : ''; ?>
+				<?php if ( $required ) : ?> required<?php endif; ?>
 				autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
 			/>
 		</p>

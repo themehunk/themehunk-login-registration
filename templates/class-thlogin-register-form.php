@@ -27,7 +27,7 @@ class THLogin_Register_Form {
 	$design      = $this->settings['design'] ?? [];
 	$submit_text = ! empty( $design['submitButton']['register'] )
 		? sanitize_text_field( $design['submitButton']['register'] )
-		: esc_html__( 'Register', 'th-login' );
+		: esc_html_e( 'Register', 'th-login' );
 
 	// Logo setup.
 	$logo      = $design['logo'] ?? [];
@@ -147,9 +147,9 @@ class THLogin_Register_Form {
 	// Floating / placehold layout.
 	if ( in_array( $this->layout, [ 'floating', 'placehold' ], true ) ) : ?>
 		<div class="<?php echo esc_attr( $field_class ); ?>">
-			<div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php echo $show_icon_in_input ? 'icon-activated-input-wrapper' : ''; ?>">
+			<div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php if ( $show_icon_in_input ) : ?>icon-activated-input-wrapper<?php endif; ?>">
 				<input
-					class="floating-input <?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+					class="floating-input <?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
 					<?php if ( $show_icon_in_input ) : ?>
 						style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
 					<?php endif; ?>
@@ -184,7 +184,7 @@ class THLogin_Register_Form {
 				</span>
 			</label>
 			<input
-				class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+				class="<?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
 				<?php if ( $show_icon_in_input ) : ?>
 					style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
 				<?php endif; ?>

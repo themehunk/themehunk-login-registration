@@ -68,6 +68,41 @@ Yes. You can enable manual user approval from the settings.
 6. Design customization interface
 7. WooCommerce integration in My Account area
 
+== External services ==
+
+This plugin integrates with the following third-party services:
+
+### Google reCAPTCHA
+
+- **What the service is and what it is used for**:  
+  Google reCAPTCHA is used to protect the WordPress login form from automated bot attacks. It helps to ensure that only human users can attempt to log in.
+
+- **What data is sent and when**:  
+  The plugin sends a reCAPTCHA verification token to Google's API whenever a login attempt is made (if reCAPTCHA is enabled). This token is used to validate that the login attempt is from a human user.
+
+- **Links to the service's terms of service and privacy policy**:  
+  - Terms of Service: [https://www.google.com/recaptcha/intro/v3.html](https://www.google.com/recaptcha/intro/v3.html)
+  - Privacy Policy: [https://policies.google.com/privacy](https://policies.google.com/privacy)
+
+### How reCAPTCHA works in this plugin:
+
+- **On Login Form**: When a user attempts to log in, if the reCAPTCHA is enabled, the plugin will send a request to Google's reCAPTCHA API to verify if the submitted token is valid.
+- **On Failed Login Attempts**: In case of repeated failed login attempts, the plugin may block the IP or username temporarily, as part of the brute-force protection. The reCAPTCHA check ensures that only valid users (humans) can proceed to the login page.
+- **What data is sent**: The plugin sends the user's IP address and the reCAPTCHA verification token (if applicable) to Google for validation.
+
+
+== Frequently Asked Questions ==
+
+= How do I enable reCAPTCHA on my login page? =
+
+1. Navigate to the plugin settings under "Settings" > "THLogin Security".
+2. Enable reCAPTCHA and enter your Google reCAPTCHA site key and secret key.
+3. Save changes and reCAPTCHA will be active on your login page.
+
+= Can I disable reCAPTCHA? =
+
+Yes, you can disable reCAPTCHA by unchecking the reCAPTCHA option in the plugin settings.
+
 == Changelog ==
 
 = 1.0.1 =

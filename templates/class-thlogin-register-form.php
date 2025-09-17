@@ -17,196 +17,274 @@ class THLogin_Register_Form {
 	}
 
 	public function render() {
-		if ( ! get_option( 'users_can_register' ) ) {
-			return;
-		}
+	// Bail if registration is disabled in WordPress settings.
+	if ( ! get_option( 'users_can_register' ) ) {
+		return;
+	}
 
-		$security = $this->settings['security'] ?? [];
-		$design   = $this->settings['design'] ?? [];
-		$submit_text = $design['submitButton']['register'] ?? esc_html__('Register', 'th-login');
+	// Settings.
+	$security    = $this->settings['security'] ?? [];
+	$design      = $this->settings['design'] ?? [];
+	$submit_text = ! empty( $design['submitButton']['register'] )
+		? sanitize_text_field( $design['submitButton']['register'] )
+		: esc_html_e( 'Register', 'th-login' );
 
-        $logo = $design['logo'] ?? [];
-        $logo_url = !empty($logo['url']) ? esc_url($logo['url']) : '';
-        $logo_size = !empty($logo['size']) ? esc_attr($logo['size']) : '30px';
+	// Logo setup.
+	$logo      = $design['logo'] ?? [];
+	$logo_url  = ! empty( $logo['url'] ) ? esc_url( $logo['url'] ) : '';
+	$logo_size = ! empty( $logo['size'] ) ? esc_attr( $logo['size'] ) : '30px';
+	?>
 
-		echo '<div class="thlogin-form thlogin-form--register" data-form-type="register" style="display: none;">';
-		echo wp_kses_post(thlogin_render_form_header());
+	<div class="thlogin-form thlogin-form--register" data-form-type="register" style="display: none;">
 
+		<?php echo wp_kses_post( thlogin_render_form_header() ); ?>
+
+		<?php
 		/**
 		 * Hook: thlogin_before_register_form
 		 */
 		do_action( 'thlogin_before_register_form' );
+		?>
 
-		echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="register">';
-			echo '<div class="thlogin-messages" aria-live="polite"></div>';
+		<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="register">
+			<div class="thlogin-messages" aria-live="polite"></div>
 
-		if ( $logo_url ) {
-			echo '<div class="thlogin-form-logo">';
-				echo '<div class="thlogin-form-logo-wrapper">';
-					echo '<img 
-						src="' . esc_url( $logo_url ) . '" 
-						alt="' . esc_attr__( 'Logo', 'th-login' ) . '" 
-						class="thlogin-form-logo" 
-						style="height:' . esc_attr( $logo_size ) . ';max-height:' . esc_attr( $logo_size ) . ';object-fit:cover;" 
-					/>';
-				echo '</div>';
-				echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
-			echo '</div>';
-		} else {
-			echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
-		}
+			<?php if ( $logo_url ) : ?>
+				<div class="thlogin-form-logo">
+					<div class="thlogin-form-logo-wrapper">
+						<img 
+							src="<?php echo esc_url( $logo_url ); ?>" 
+							alt="<?php esc_attr_e( 'Logo', 'th-login' ); ?>" 
+							class="thlogin-form-logo" 
+							style="height:<?php echo esc_attr( $logo_size ); ?>;max-height:<?php echo esc_attr( $logo_size ); ?>;object-fit:cover;" 
+						/>
+					</div>
+					<h3><?php esc_html_e( 'Register', 'th-login' ); ?></h3>
+				</div>
+			<?php else : ?>
+				<h3><?php esc_html_e( 'Register', 'th-login' ); ?></h3>
+			<?php endif; ?>
 
-		foreach ( $this->fields as $field ) {
-			if ( ! ( $field['show'] ?? true ) || ( $field['hidden'] ?? false ) ) {
-				continue;
+			<?php
+			foreach ( $this->fields as $field ) {
+				if ( ! ( $field['show'] ?? true ) || ( $field['hidden'] ?? false ) ) {
+					continue;
+				}
+
+				$this->render_field( $field, $design );
 			}
+			?>
 
-			$this->render_field( $field, $design );
-		}
+			<?php if ( ! empty( $security['honeypot_enabled'] ) ) : ?>
+				<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">
+					<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'th-login' ); ?></label>
+					<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">
+				</p>
+			<?php endif; ?>
 
-		if ( ! empty( $security['honeypot_enabled'] ) ) {
-			echo '<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">';
-				echo '<label for="thlogin_hp">' . esc_html__( 'Leave this field empty', 'th-login' ) . '</label>';
-				echo '<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">';
-			echo '</p>';
-		}
+			<?php $this->render_recaptcha( $security ); ?>
 
-		$this->render_recaptcha( $security );
+			<p class="thlogin-form-submit">
+				<button type="submit" class="thlogin-button thlogin-button--primary">
+					<?php echo esc_html( $submit_text ); ?>
+				</button>
+			</p>
 
-		echo '<p class="thlogin-form-submit">';
-            echo '<button type="submit" class="thlogin-button thlogin-button--primary">' . esc_html($submit_text) . '</button>';
-		echo '</p>';
+			<p class="thlogin-form-links">
+				<a href="#" class="thlogin-link" data-th-popup-action="login">
+					<?php esc_html_e( 'Already have an account? Log In', 'th-login' ); ?>
+				</a>
+			</p>
+		</form>
 
-		echo '<p class="thlogin-form-links">';
-			echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__( 'Already have an account? Log In', 'th-login' ) . '</a>';
-		echo '</p>';
-
-		echo '</form>';
-
+		<?php
 		/**
 		 * Hook: thlogin_after_register_form
 		 */
 		do_action( 'thlogin_after_register_form' );
+		?>
 
-		echo '</div>';
+	</div>
+	<?php
+}
 
-	}
 
 	protected function render_field( $field, $design ) {
-		$id          = sanitize_key( $field['id'] ?? '' );
-		$label       = sanitize_text_field( $field['label'] ?? '' );
-		$name        = sanitize_key( $field['name'] ?? $id );
-		$type        = sanitize_text_field( $field['type'] ?? 'text' );
-		$placeholder = sanitize_text_field( $field['placeholder'] ?? '' );
-		$required    = ! empty( $field['required'] );
-		$icon        = sanitize_text_field( $field['icon'] ?? '' );
+	$id          = sanitize_key( $field['id'] ?? '' );
+	$label       = sanitize_text_field( $field['label'] ?? '' );
+	$name        = sanitize_key( $field['name'] ?? $id );
+	$type        = sanitize_text_field( $field['type'] ?? 'text' );
+	$placeholder = sanitize_text_field( $field['placeholder'] ?? '' );
+	$required    = ! empty( $field['required'] );
+	$icon        = sanitize_text_field( $field['icon'] ?? '' );
 
-		$icon_position       = $design['icon']['icon_position'] ?? 'with-label';
-		$show_icon_in_label  = $icon && $icon_position === 'with-label';
-		$show_icon_in_input  = $icon && $icon_position === 'inside-input';
+	$icon_position      = $design['icon']['icon_position'] ?? 'with-label';
+	$show_icon_in_label = $icon && $icon_position === 'with-label';
+	$show_icon_in_input = $icon && $icon_position === 'inside-input';
 
-		$autocomplete = '';
-		if ( $type === 'password' ) {
-			$autocomplete = 'new-password';
-		} elseif ( $type === 'email' ) {
-			$autocomplete = 'email';
-		}
-
-		$field_class = 'thlogin-form-field';
-		if ( $this->layout === 'stack' ) {
-			$field_class .= ' thlogin-layout-stack';
-		} elseif ( $this->layout === 'inline' ) {
-			$field_class .= ' thlogin-layout-inline';
-		} elseif ( $this->layout === 'floating' ) {
-			$field_class .= ' thlogin-layout-floating';
-		}else if ($this->layout === 'placehold') {
-			$field_class .= ' thlogin-layout-floating';
-		}
-
-		if ( $type === 'checkbox' && strpos( strtolower( $name ), 'terms' ) !== false ) {
-			$this->render_terms_checkbox( $field );
-			return;
-		}
-
-		// Floating layout
-		if ( in_array($this->layout, ['floating', 'placehold'], true)) {
-			echo '<div class="' . esc_attr( $field_class ) . '">';
-			echo '<div class="floating-wrapper layout-' . esc_attr($this->layout) . ' ' . ($show_icon_in_input ? 'icon-activated-input-wrapper' : '') . '">';
-			echo '<input class="floating-input ' . ( $show_icon_in_input ? 'icon-activated-input' : '' ) . '"'
-				. ( $show_icon_in_input ? ' style="background-image: ' . esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ) . ';"' : '' )
-				. ' type="' . esc_attr( $type ) . '" name="' . esc_attr( $name ) . '" id="th-register-' . esc_attr( $id ) . '" placeholder=" "'
-				. ( $required ? ' required' : '' )
-				. ( $autocomplete ? ' autocomplete="' . esc_attr( $autocomplete ) . '"' : '' )
-				. ' />';
-			echo '<label for="th-register-' . esc_attr( $id ) . '" class="floating-label">' . esc_html( $label );
-			if ( $required ) echo '<span class="th-required">*</span>';
-			echo '</label></div></div>';
-		} else {
-			echo '<p class="' . esc_attr( $field_class ) . '">';
-			echo '<label for="th-register-' . esc_attr( $id ) . '" class="thlogin-label-with-icon">';
-			if ( $show_icon_in_label ) {
-				echo '<span class="thlogin-label-icon">' . wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ) . '</span>';
-			}
-			echo '<span class="thlogin-label-text">' . esc_html( $label );
-			if ( $required ) echo '<span class="th-required">*</span>';
-			echo '</span></label>';
-			echo '<input class="' . ( $show_icon_in_input ? 'icon-activated-input' : '' ) . '"'
-				. ( $show_icon_in_input ? ' style="background-image: ' . esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ) . ';"' : '' )
-				. ' type="' . esc_attr( $type ) . '" name="' . esc_attr( $name ) . '" id="th-register-' . esc_attr( $id ) . '" placeholder="' . esc_attr( $placeholder ) . '"'
-				. ( $required ? ' required' : '' )
-				. ( $autocomplete ? ' autocomplete="' . esc_attr( $autocomplete ) . '"' : '' )
-				. ' />';
-			echo '</p>';
-		}
+	$autocomplete = '';
+	if ( $type === 'password' ) {
+		$autocomplete = 'new-password';
+	} elseif ( $type === 'email' ) {
+		$autocomplete = 'email';
 	}
+
+	$field_class = 'thlogin-form-field';
+	if ( $this->layout === 'stack' ) {
+		$field_class .= ' thlogin-layout-stack';
+	} elseif ( $this->layout === 'inline' ) {
+		$field_class .= ' thlogin-layout-inline';
+	} elseif ( $this->layout === 'floating' || $this->layout === 'placehold' ) {
+		$field_class .= ' thlogin-layout-floating';
+	}
+
+	// Special case: terms checkbox.
+	if ( $type === 'checkbox' && strpos( strtolower( $name ), 'terms' ) !== false ) {
+		$this->render_terms_checkbox( $field );
+		return;
+	}
+
+	// Floating / placehold layout.
+	if ( in_array( $this->layout, [ 'floating', 'placehold' ], true ) ) : ?>
+		<div class="<?php echo esc_attr( $field_class ); ?>">
+			<div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php if ( $show_icon_in_input ) : ?>icon-activated-input-wrapper<?php endif; ?>">
+				<input
+					class="floating-input <?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
+					<?php if ( $show_icon_in_input ) : ?>
+						style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
+					<?php endif; ?>
+					type="<?php echo esc_attr( $type ); ?>"
+					name="<?php echo esc_attr( $name ); ?>"
+					id="th-register-<?php echo esc_attr( $id ); ?>"
+					placeholder=" "
+					<?php if ( $required ) : ?> required<?php endif; ?>
+					<?php if ( $autocomplete ) : ?> autocomplete="<?php echo esc_attr( $autocomplete ); ?>"<?php endif; ?>
+				/>
+				<label for="th-register-<?php echo esc_attr( $id ); ?>" class="floating-label">
+					<?php echo esc_html( $label ); ?>
+					<?php if ( $required ) : ?>
+						<span class="th-required">*</span>
+					<?php endif; ?>
+				</label>
+			</div>
+		</div>
+	<?php else : ?>
+		<p class="<?php echo esc_attr( $field_class ); ?>">
+			<label for="th-register-<?php echo esc_attr( $id ); ?>" class="thlogin-label-with-icon">
+				<?php if ( $show_icon_in_label ) : ?>
+					<span class="thlogin-label-icon">
+						<?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
+					</span>
+				<?php endif; ?>
+				<span class="thlogin-label-text">
+					<?php echo esc_html( $label ); ?>
+					<?php if ( $required ) : ?>
+						<span class="th-required">*</span>
+					<?php endif; ?>
+				</span>
+			</label>
+			<input
+				class="<?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
+				<?php if ( $show_icon_in_input ) : ?>
+					style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
+				<?php endif; ?>
+				type="<?php echo esc_attr( $type ); ?>"
+				name="<?php echo esc_attr( $name ); ?>"
+				id="th-register-<?php echo esc_attr( $id ); ?>"
+				placeholder="<?php echo esc_attr( $placeholder ); ?>"
+				<?php if ( $required ) : ?> required<?php endif; ?>
+				<?php if ( $autocomplete ) : ?> autocomplete="<?php echo esc_attr( $autocomplete ); ?>"<?php endif; ?>
+			/>
+		</p>
+	<?php
+	endif;
+}
+
 
 	protected function render_terms_checkbox( $field ) {
-		$id     = sanitize_key( $field['id'] ?? '' );
-		$name   = sanitize_key( $field['name'] ?? $id );
-		$label  = sanitize_text_field( $field['label'] ?? '' );
-		$required = ! empty( $field['required'] );
-		$link   = ! empty( $field['link'] ) ? esc_url( $field['link'] ) : '#';
+	$id       = sanitize_key( $field['id'] ?? '' );
+	$name     = sanitize_key( $field['name'] ?? $id );
+	$label    = sanitize_text_field( $field['label'] ?? '' );
+	$required = ! empty( $field['required'] );
+	$link     = ! empty( $field['link'] ) ? esc_url( $field['link'] ) : '#';
 
-		$parsed_text = preg_replace_callback(
-			'/\[(.*?)\]/',
-			function ( $matches ) use ( $link ) {
-				return '<a href="' . esc_url( $link ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $matches[1] ) . '</a>';
-			},
-			$label
-		);
+	$parsed_text = preg_replace_callback(
+		'/\[(.*?)\]/',
+		function ( $matches ) use ( $link ) {
+			return sprintf(
+				'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+				esc_url( $link ),
+				esc_html( $matches[1] )
+			);
+		},
+		$label
+	);
+	?>
 
-		echo '<p class="thlogin-form-field thlogin-form-field--terms">';
-			echo '<input type="checkbox" name="' . esc_attr( $name ) . '" id="th-register-' . esc_attr( $id ) . '" value="1" ' . ( $required ? 'required' : '' ) . '>';
-			echo '<label for="th-register-' . esc_attr( $id ) . '">' . wp_kses_post( $parsed_text ) . '</label>';
-		echo '</p>';
-	}
+	<p class="thlogin-form-field thlogin-form-field--terms">
+		<input
+			type="checkbox"
+			name="<?php echo esc_attr( $name ); ?>"
+			id="th-register-<?php echo esc_attr( $id ); ?>"
+			value="1"
+			<?php if ( $required ) : ?> required<?php endif; ?>
+		/>
+		<label for="th-register-<?php echo esc_attr( $id ); ?>">
+			<?php echo wp_kses_post( $parsed_text ); ?>
+		</label>
+	</p>
+
+	<?php
+}
 
 	protected function render_recaptcha( $security ) {
-		$recaptcha = $security['recaptcha'] ?? [];
-		$show_on   = $recaptcha['show_on'] ?? 'all';
+    $recaptcha = $security['recaptcha'] ?? [];
+    $show_on   = $recaptcha['show_on'] ?? 'all';
 
-		if ( ! empty( $recaptcha['enabled'] ) && ( $show_on === 'all' || $show_on === 'register' ) ) {
-			if ( $recaptcha['type'] === 'v2_checkbox' ) {
-				echo '<div class="thlogin-form-field">';
-				echo '<div class="g-recaptcha" data-sitekey="' . esc_attr( $recaptcha['site_key'] ) . '"></div>';
-				echo '</div>';
-			} elseif ( $recaptcha['type'] === 'v3' ) {
-				echo '<input type="hidden" id="g-recaptcha-response-register" name="g-recaptcha-response">';
-				echo '<script>
-					document.addEventListener("DOMContentLoaded", function () {
-						if (typeof grecaptcha !== "undefined") {
-							grecaptcha.ready(function () {
-								grecaptcha.execute("' . esc_attr( $recaptcha['site_key'] ) . '", { action: "register" })
-									.then(function (token) {
-										document.getElementById("g-recaptcha-response-register").value = token;
-									});
-							});
-						}
-					});
-				</script>';
-			}
-		}
-	}
+    if ( empty( $recaptcha['enabled'] ) || ( $show_on !== 'all' && $show_on !== 'login' ) ) {
+        return;
+    }
+
+    $type    = $recaptcha['type'] ?? '';
+    $sitekey = ! empty( $recaptcha['site_key'] ) ? $recaptcha['site_key']  : '';
+
+    if ( 'v2_checkbox' === $type && $sitekey ) :
+        ?>
+        <div class="thlogin-form-field">
+            <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($sitekey); ?>"></div>
+        </div>
+        <?php
+    elseif ( 'v3' === $type && $sitekey ) :
+        ?>
+        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+        <?php
+        // Register Google reCAPTCHA v3 script.
+        wp_register_script(
+            'thlogin-recaptcha',
+            'https://www.google.com/recaptcha/api.js?render=' . $sitekey,
+            [],
+            THLOGIN_VERSION,
+            true
+        );
+
+        wp_enqueue_script( 'thlogin-recaptcha' );
+
+        // Add inline script to execute reCAPTCHA.
+        wp_add_inline_script(
+            'thlogin-recaptcha',
+            "document.addEventListener('DOMContentLoaded', function () {
+                if (typeof grecaptcha !== 'undefined') {
+                    grecaptcha.ready(function () {
+                        grecaptcha.execute('" . esc_js( $sitekey ) . "', { action: 'login' })
+                            .then(function (token) {
+                                document.getElementById('g-recaptcha-response').value = token;
+                            });
+                    });
+                }
+            });"
+        );
+    endif;
+}
 
 }
 

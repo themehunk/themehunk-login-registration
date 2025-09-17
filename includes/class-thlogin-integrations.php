@@ -50,15 +50,44 @@ class THLogin_Integrations {
 				if ( strpos( $request_uri, 'wp-login.php' ) !== false ) {
 
 					// Allow password reset or logout to process
-					$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+					// $action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 
-					if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
-						return;
-					}
+					// if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
+					// 	return;
+					// }
 
-					//  Redirect everything else to custom login page
-					wp_redirect( home_url( "/{$custom_login_slug}/" ) );
-					exit;
+					// //  Redirect everything else to custom login page
+					// wp_redirect( home_url( "/{$custom_login_slug}/" ) );
+					// exit;
+
+
+	//////////////MODIFIED CODE IF NOT WORK uncomment above code/////////////////////////
+					// Allow password reset or logout to process
+				$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+
+				// List of allowed actions
+				$allowed_actions = array( 'logout', 'lostpassword', 'rp', 'resetpass' );
+
+				// Check if the action is **not** one of the allowed actions
+				if ( ! in_array( $action, $allowed_actions, true ) ) {
+				    // Redirect everything else to custom login page
+				    wp_redirect( home_url( "/{$custom_login_slug}/" ) );
+				    exit;
+				}
+
+				// Nonce verification for sensitive actions
+				if ( $action === 'resetpass' && isset( $_GET['key'] ) && isset( $_GET['login'] ) ) {
+				    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'reset-password' ) ) {
+				        wp_die( esc_html__( 'Security check failed', 'th-login' ) );
+				    }
+				}
+
+				// If action is allowed, continue processing
+				return;
+				//////////////////////MODIFIED CODE/////////////////////////
+
+
+
 				}
 			}
 		} );
@@ -134,137 +163,49 @@ class THLogin_Integrations {
 	}
 
 	public function render_custom_login_page() {
-		status_header( 200 );
+	status_header( 200 );
 
-		echo '<!DOCTYPE html><html><head>';
-		wp_head();
-			echo '<style>
-				.thlogin-popup-modal { 
-					display:flex !important; 
-					visibility:visible !important;
-					opacity:1 !important; 
-				}
-				#thlogin-inline-wrapper {
-					display: block !important;
-					position: static !important;
-					background: none !important;
-					box-shadow: none !important;
-					opacity: 1 !important;
-					visibility: visible !important;
-					z-index: auto !important;
-				}
-				.thlogin-toggle-button.is-active {
-					background: #0b59f4;
-					color: #fff;
-					font-weight: 600;
-				}
+	//Register and enqueue CSS
+	wp_register_style(
+		'thlogin-custom-login',
+		THLOGIN_URL . 'assets/css/thlogin-custom-login.css',
+		array(),
+		THLOGIN_VERSION
+	);
+	wp_enqueue_style('thlogin-custom-login');
 
-				.thlogin-header-cancel-button{
-					display:none;
-				}
+	//Register and enqueue JS
+	wp_register_script(
+		'thlogin-custom-login',
+		THLOGIN_URL . 'assets/js/thlogin-custom-login.js',
+		array(), // add dependencies if needed e.g., array('jquery')
+		THLOGIN_VERSION,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
+	wp_enqueue_script('thlogin-custom-login');
 
-				.thlogin-popup-modal.thlogin-slide-in-left,.thlogin-popup-modal.thlogin-slide-in-right {
-					animation: none !important;
-					transform: none !important;
-					opacity: 1 !important;
-					justify-content:center !important;
-				}
-
-				.thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container, .thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container{
-					animation: none !important;
-				}
-
-				.thlogin-slide-in-left.thlogin-popup-modal--closing .thlogin-popup-form-container, .thlogin-slide-in-right.thlogin-popup-modal--closing .thlogin-popup-form-container{
-					animation: none !important;
-				}
-
-				.thlogin-page .thlogin-popup-form-container{
-					height:auto !important;
-				}
-
-				#thlogin-popup-modal.thlogin-page{
-					display:flex !important;
-				}
-
-				.thlogin-popup-modal.thlogin-popup-modal--opening{
-					animation:none !important;
-					transform: none !important;
-					opacity: 1 !important;
-				}
-
-				.thlogin-popup-modal-effect .thlogin-popup-form-container{
-					animation:none !important;
-					transform: none !important;
-					opacity: 1 !important;
-				}
-
-				.thlogin-popup-modal.thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container,.thlogin-popup-modal.thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container{
-					animation:none !important;
-					transform: none !important;
-					opacity: 1 !important;
-					height:auto !important;
-				}
-
-				.integration_single {
-					.thlogin-form-toggle {
-						display: none;
-					}
-
-					.thlogin-link-separator {
-						display: none;
-					}
-
-					.thlogin-link[data-th-popup-action="register"] {
-						display: none;
-					}
-					}
+	// Output template
+	?>
+	<!DOCTYPE html>
+	<html <?php language_attributes(); ?>>
+	<head>
+		<?php wp_head(); ?>
+	</head>
+	<body <?php body_class( 'thlogin-page' ); ?>>
+		<div id="thlogin-inline-wrapper">
+			<?php echo do_shortcode( '[thlogin_combined_form]' ); ?>
+		</div>
+		<?php wp_footer(); ?>
+	</body>
+	</html>
+	<?php
+	exit;
+}
 
 
-			</style>';
-
-			// Your custom inline JS
-			echo '<script>
-					document.addEventListener("DOMContentLoaded", function () {
-						function switchForm(target) {
-							document.querySelectorAll(".thlogin-form").forEach(function (f) {
-								f.style.display = "none";
-							});
-							var form = document.querySelector(".thlogin-form--" + target);
-							if (form) {
-								form.style.display = "block";
-							}
-							document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
-								btn.classList.remove("is-active");
-							});
-							var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
-							if (activeBtn) {
-								activeBtn.classList.add("is-active");
-							}
-						}
-
-						switchForm("login"); // Default form
-
-						document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
-							btn.addEventListener("click", function (e) {
-								e.preventDefault();
-								switchForm(this.getAttribute("data-th-popup-action"));
-							});
-						});
-
-						document.querySelectorAll(".thlogin-slide-in-left").forEach(function (el) {
-							el.classList.remove("thlogin-slide-in-left");
-						});
-					});
-				</script>';
-
-		
-				echo '</head><body>';
-			 wp_footer();
-
-		echo '</body></html>';
-
-		exit;
-	}
 
 	public function create_my_custom_page() {
         $page_title = 'My Custom Page';

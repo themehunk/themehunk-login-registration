@@ -4,12 +4,12 @@ This comprehensive developer documentation covers every file, class, function, R
 
 ## 📁 Folder Structure Overview
 
-th-login/
-├── th-login.php                                            # Main plugin bootstrap file
+themehunk-login-registration/
+├── themehunk-login-registration.php                                            # Main plugin bootstrap file
 ├── readme.txt                                              # WordPress.org standard readme
 ├── assets/                                                 # Static frontend/admin assets
 │   └── images/
-│       └── th-login-logo.svg                               # Branding/logo image
+│       └── themehunk-login-registration-logo.svg                               # Branding/logo image
 ├── includes/                                               # Core logic classes
 │   ├── class-thlogin-admin.php                             # Admin settings panel logic
 │   ├── class-thlogin-frontend.php                          # Frontend popup logic

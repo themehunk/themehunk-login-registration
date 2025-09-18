@@ -130,19 +130,19 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                     </div>
 
                       <div className="settings-group thlogin-modalchoose-form inetgration-form-type">
-                              <h4 className="group-title">{__("Form Type", "th-login")}</h4>
+                              <h4 className="group-title">{__("Form Type", "themehunk-login-registration")}</h4>
 
                               <div className="form-type-options">
                                   {[
                                   {
                                       type: "single",
-                                      label: __("Single Form", "th-login"),
-                                      description: __("Only login form will be shown", "th-login"),
+                                      label: __("Single Form", "themehunk-login-registration"),
+                                      description: __("Only login form will be shown", "themehunk-login-registration"),
                                   },
                                   {
                                       type: "double",
-                                      label: __("Double Form", "th-login"),
-                                      description: __("Users can toggle between Login and Register forms", "th-login"),
+                                      label: __("Double Form", "themehunk-login-registration"),
+                                      description: __("Users can toggle between Login and Register forms", "themehunk-login-registration"),
                                   },
                                   ].map(({ type, label, description }) => (
                                   <div
@@ -196,7 +196,7 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                 <p>
                   {__(
                     "Enable login features for WooCommerce like checkout login, account sync, etc.",
-                    "th-login"
+                    "themehunk-login-registration"
                   )}
                 </p>
               </div>
@@ -237,7 +237,7 @@ const IntegrationSettings = ({ settings, handleSettingChange,isLoading }) => {
                 <p>
                   {__(
                     "Enable SMTP to improve email deliverability and send login-related emails reliably.",
-                    "th-login"
+                    "themehunk-login-registration"
                   )}
                 </p>
               </div>

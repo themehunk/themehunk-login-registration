@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 // Register the block
 registerBlockType('thlogin/form-block', {
     // Block title (visible in editor)
-    title: __('TH Login Form/Trigger', 'themehunk-login-registration'),
+    title: __('Themehunk Login Registration Form/Trigger', 'themehunk-login-registration'),
 
     // Block description (visible in editor)
     description: __('Embed a login, registration, or forgot password form, or a link to trigger the popup.', 'themehunk-login-registration'),
@@ -23,7 +23,7 @@ registerBlockType('thlogin/form-block', {
         __('register', 'themehunk-login-registration'),
         __('form', 'themehunk-login-registration'),
         __('popup', 'themehunk-login-registration'),
-        __('th login', 'themehunk-login-registration'),
+        __('Themehunk Login Registration', 'themehunk-login-registration'),
     ],
 
     // Block attributes (defined in PHP as well for server-side rendering)
@@ -98,7 +98,7 @@ registerBlockType('thlogin/form-block', {
                         <div className="thlogin-block-preview thlogin-block-preview--popup">
                             <Dashicon icon="external" />
                             <p>
-                                {__('TH Login Popup Trigger:', 'themehunk-login-registration')}
+                                {__('Themehunk Login Registration Popup Trigger:', 'themehunk-login-registration')}
                                 <strong> {formTypeOptions.find(opt => opt.value === formType)?.label || formType}</strong>
                             </p>
                             {linkText && <p>Link Text: "{linkText}"</p>}
@@ -108,7 +108,7 @@ registerBlockType('thlogin/form-block', {
                         <div className="thlogin-block-preview thlogin-block-preview--inline">
                             <Dashicon icon="forms" />
                             <p>
-                                {__('TH Login Inline Form:', 'themehunk-login-registration')}
+                                {__('Themehunk Login Registration Inline Form:', 'themehunk-login-registration')}
                                 <strong> {formTypeOptions.find(opt => opt.value === formType)?.label || formType}</strong>
                             </p>
                             <p className="thlogin-block-note">{__('This will render the form directly on the page.', 'themehunk-login-registration')}</p>

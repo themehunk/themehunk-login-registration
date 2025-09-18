@@ -1,6 +1,6 @@
-# 📦 TH Login Plugin – Full Technical Documentation (Developer Readme)
+# 📦 Themehunk Login Registration Plugin – Full Technical Documentation (Developer Readme)
 
-This comprehensive developer documentation covers every file, class, function, REST API route, and flow in the **TH Login** WordPress plugin. It serves as both an internal development guide and technical manual for contributors, maintainers, and advanced users.
+This comprehensive developer documentation covers every file, class, function, REST API route, and flow in the **Themehunk Login Registration** WordPress plugin. It serves as both an internal development guide and technical manual for contributors, maintainers, and advanced users.
 
 ## 📁 Folder Structure Overview
 
@@ -154,7 +154,7 @@ REST API Endpoints (Defined in class-thlogin-rest-api.php)
 * **GET** `/wp-json/thlogin/v1/lockout`: Brute force status query.
 
 File: includes/helpers/class-thlogin-defaults.php
-    Purpose: This class defines the default settings for all major panels of the TH Login plugin. It provides a centralized method to reset or initialize all plugin options with structured, validated values. Useful during plugin activation, reset, or migrations.
+    Purpose: This class defines the default settings for all major panels of the Themehunk Login Registration plugin. It provides a centralized method to reset or initialize all plugin options with structured, validated values. Useful during plugin activation, reset, or migrations.
 
     Method: set_all_defaults()
         Registers and saves all default plugin options into a single database option:
@@ -265,8 +265,8 @@ File: class-thlogin-shortcodes.php
         | Shortcode                   | Description                                                               |
         | --------------------------- | ------------------------------------------------------------------------- |
         | `[thlogin_form]`            | Renders the login form.                                                   |
-        | `[th_register_form]`        | Renders the registration form.                                            |
-        | `[th_forgot_password_form]` | Renders the forgot password form.                                         |
+        | `[thlogin_register_form]`        | Renders the registration form.                                            |
+        | `[thlogin_forgot_password_form]` | Renders the forgot password form.                                         |
         | `[thlogin_combined_form]`   | Renders an inline layout of login/register/forgot forms with toggle tabs. |
         | `[thlogin_popup_auto]`      | Automatically opens the login/register modal on page load.                |
 

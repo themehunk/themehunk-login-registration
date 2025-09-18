@@ -208,11 +208,12 @@ class THLogin_Integrations {
 
 
 	public function create_my_custom_page() {
-        $page_title = 'My Custom Page';
-        $page_content = '<p>This is the content of my custom page.</p>';
-        $page_slug = 'my-custom-page';
-        $page_status = 'publish';
-        $page_author = 1; // Replace with the actual user ID
+	    // Sanitize the input values
+	    $page_title = sanitize_text_field( 'My Custom Page' );
+	    $page_content = wp_kses_post( '<p>This is the content of my custom page.</p>' ); 
+	    $page_slug = sanitize_title_with_dashes( 'my-custom-page' );
+	    $page_status = 'publish'; // Assuming this is a valid post status
+	    $page_author = 1; // Replace with the actual user ID, ensure it's valid
     
         $new_page_id = wp_insert_post(array(
             'post_title'    => $page_title,
@@ -234,7 +235,7 @@ class THLogin_Integrations {
 		if ( ! $page ) {
 			// Page doesn't exist, create it
 			wp_insert_post( array(
-				'post_title'   => 'TH Login',
+				'post_title'   => __( 'Themehunk Login Registration', 'themehunk-login-registration' ),
 				'post_name'    => 'th-login',
 				'post_status'  => 'publish',
 				'post_type'    => 'page',

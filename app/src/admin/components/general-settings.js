@@ -77,8 +77,8 @@ const GeneralSettings = ({ settings, handleSettingChange}) => {
                             <h3>{__("Plugin Status", "themehunk-login-registration")}</h3>
                             <p className="description">
                                 {settings.general.plugin_status === "enabled"
-                                ? __("Th Login Plugin is active", "themehunk-login-registration")
-                                : __("Th Login Plugin is inactive", "themehunk-login-registration")}
+                                ? __("Themehunk Login Registration Plugin is active", "themehunk-login-registration")
+                                : __("Themehunk Login Registration Plugin is inactive", "themehunk-login-registration")}
                             </p>
                             </div>
                             <div className="setting-control">

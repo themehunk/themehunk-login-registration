@@ -887,7 +887,7 @@ class THLogin_REST_API {
 
 		$email_settings    = $security_settings['email_verification'] ?? [];
 
-		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? __( 'TH Login', 'themehunk-login-registration' ) );
+		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? __( 'Themehunk Login Registration', 'themehunk-login-registration' ) );
 		$from_email    = sanitize_email( $email_settings['from_email'] ?? get_bloginfo( 'admin_email' ) );
 		$email_subject = sanitize_text_field( $email_settings['email_subject'] ?? __( 'Verify your email', 'themehunk-login-registration' ) );
 		$email_content = wp_kses_post( $email_settings['email_content'] ?? __( 'Click the following link to verify your email: {verification_link}', 'themehunk-login-registration' ) );

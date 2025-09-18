@@ -7,8 +7,8 @@ class THLogin_Shortcodes {
 
 	public function __construct() {
 		add_shortcode( 'thlogin_form', array( $this, 'render_login_form_shortcode' ) );
-		add_shortcode( 'th_register_form', array( $this, 'render_register_form_shortcode' ) );
-		add_shortcode( 'th_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
+		add_shortcode( 'thlogin_register_form', array( $this, 'render_register_form_shortcode' ) );
+		add_shortcode( 'thlogin_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
 		add_shortcode( 'thlogin__combined_form', array( $this, 'render_combined_form_shortcode' ) );
 		add_shortcode( 'thlogin_popup_auto', array( $this, 'render_auto_popup_shortcode' ) );
 
@@ -23,8 +23,8 @@ class THLogin_Shortcodes {
 			is_a( $post, 'WP_Post' ) &&
 			(
 				has_shortcode( $post->post_content, 'thlogin_form' ) ||
-				has_shortcode( $post->post_content, 'th_register_form' ) ||
-				has_shortcode( $post->post_content, 'th_forgot_password_form' ) ||
+				has_shortcode( $post->post_content, 'thlogin_register_form' ) ||
+				has_shortcode( $post->post_content, 'thlogin_forgot_password_form' ) ||
 				has_shortcode( $post->post_content, 'thlogin__combined_form' ) ||
 				has_shortcode( $post->post_content, 'thlogin_popup_auto' )
 			)
@@ -40,8 +40,8 @@ class THLogin_Shortcodes {
         $has_shortcode = false;
         $shortcodes = [
             'thlogin_form',
-            'th_register_form',
-            'th_forgot_password_form',
+            'thlogin_register_form',
+            'thlogin_forgot_password_form',
             'thlogin__combined_form',
             'thlogin_popup_auto'
         ];

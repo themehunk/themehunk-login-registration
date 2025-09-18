@@ -575,12 +575,12 @@ export const shortcodes = [
     },
     {
       label: __("Register Form", "themehunk-login-registration"),
-      shortcode: "[th_register_form]",
+      shortcode: "[thlogin_register_form]",
       description: __("Displays only the register form", "themehunk-login-registration"),
     },
     {
       label: __("Forgot Password Form", "themehunk-login-registration"),
-      shortcode: "[th_forgot_password_form]",
+      shortcode: "[thlogin_forgot_password_form]",
       description: __("Displays only the forgot password form", "themehunk-login-registration"),
     },
     {

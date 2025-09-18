@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 showMessage(form, 'An unexpected error occurred. Please check your network.', 'error');
-                console.error('TH Login: Frontend REST API Error:', error);
+                console.error('Themehunk Login Registration: Frontend REST API Error:', error);
 
                  if (
                     typeof grecaptcha !== 'undefined' &&

@@ -10,7 +10,7 @@ class THLogin_Admin {
 		add_action( 'admin_menu', array( $this, 'register_admin_menu_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 		add_action( 'admin_head', function () {
-			$image_url = esc_url( plugins_url( '../assets/images/th-login-new.svg', __FILE__ ) );
+			$image_url = esc_url( plugins_url( '../assets/images/thlogin-new.svg', __FILE__ ) );
 
 		// Inject inline CSS safely
 		wp_add_inline_style( 'thlogin-admin-style', '
@@ -35,8 +35,8 @@ class THLogin_Admin {
 
 	public function register_admin_menu_page() {
 		add_menu_page(
-			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Page title
-			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Menu title
+			esc_html__( 'Themehunk Login Registration', 'themehunk-login-registration' ), // Page title
+			esc_html__( 'Themehunk Login Registration', 'themehunk-login-registration' ), // Menu title
 			'manage_options',                     // Capability
 			'thlogin-settings',                   // Slug
 			array( $this, 'render_admin_page' ),  // Callback

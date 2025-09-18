@@ -54,7 +54,7 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
       </AccordionSection>
 
 
-      <AccordionSection title={__('Radius', 'th-login')} defaultOpen={false}>
+      <AccordionSection title={__('Radius', 'themehunk-login-registration')} defaultOpen={false}>
         <div className="thlogin-border-controls">
           <BorderRadiusControl
             label={__("Border Radius", "th-login")}

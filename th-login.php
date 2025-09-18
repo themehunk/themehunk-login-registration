@@ -3,14 +3,14 @@
  * Plugin Name:       TH Login
  * Plugin URI:        https://themehunk.com/th-login
  * Description:       A powerful and highly customizable frontend login, registration, and password reset pop-up plugin for WordPress.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            ThemeHunk
  * Author URI:        https://themehunk.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       th-login
+ * Text Domain:       themehunk-login-registration
  * Domain Path:       /languages
  *
  * @package TH_Login
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'THLOGIN_VERSION', '1.0.0' );
+define( 'THLOGIN_VERSION', '1.0.2' );
 define( 'THLOGIN_FILE', __FILE__ );
 define( 'THLOGIN_PATH', plugin_dir_path( THLOGIN_FILE ) );
 define( 'THLOGIN_URL', plugin_dir_url( THLOGIN_FILE ) );
@@ -90,7 +90,7 @@ final class THLogin {
 	}
 
 	public function add_plugin_action_links( $links ) {
-		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'th-login' ) . '</a>';
+		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'themehunk-login-registration' ) . '</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}

@@ -277,7 +277,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
                                
                                 <FormTokenField
-                                    label={__('Select Pages/Posts', 'th-login')}
+                                    label={__('Select Pages/Posts', 'themehunk-login-registration')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_pages?.page_ids?.map(id => {
                                             const matched = [...suggestions.pages, ...suggestions.posts].find(p => p.id === id);
@@ -402,7 +402,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
 
                                 <FormTokenField
-                                    label={__('Select Categories', 'th-login')}
+                                    label={__('Select Categories', 'themehunk-login-registration')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_ids?.map(id => {
                                             const matched = suggestions.categories?.find(cat => cat.id === id);
@@ -496,7 +496,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
 
                                 <FormTokenField
-                                    label={__('Select Tags', 'th-login')}
+                                    label={__('Select Tags', 'themehunk-login-registration')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_ids?.map(id => {
                                             const matched = suggestions.tags?.find(tag => tag.id === id);

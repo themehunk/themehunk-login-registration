@@ -186,7 +186,7 @@ const LoginFormHeader = ({ settings }) => {
         {close_button && (
           <button 
             className="thloginpreview-popup-close-button" 
-            aria-label={__('Close', 'th-login')}
+            aria-label={__('Close', 'themehunk-login-registration')}
             onMouseEnter={() => setHovered('cancel')}
             onMouseLeave={() => setHovered(null)}
             style={applyButtonStyle(cancelStyle, hovered === 'cancel')}
@@ -206,7 +206,7 @@ const LoginFormHeader = ({ settings }) => {
             onMouseLeave={() => setHovered(null)}
             style={applyButtonStyle(buttonStyle, hovered === 'login')}
           >
-            {__(settings.design.header?.loginText, 'th-login')}
+            {__(settings.design.header?.loginText, 'themehunk-login-registration')}
           </button>
 
           <button 
@@ -217,7 +217,7 @@ const LoginFormHeader = ({ settings }) => {
             onMouseLeave={() => setHovered(null)}
             style={applyButtonStyle(buttonStyle, hovered === 'register')}
           >
-            {__(settings.design.header?.registerText, 'th-login')}
+            {__(settings.design.header?.registerText, 'themehunk-login-registration')}
           </button>
         </div>
       )}
@@ -800,7 +800,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								<AccordionSection title={__("Field Gap", "th-login")} defaultOpen={false}>
 									<RangeControl
-										label={__('Gap', 'th-login')}
+										label={__('Gap', 'themehunk-login-registration')}
 										value={parseInt(settings.design.form.form_gap || 0)}
 										onChange={(value) => handleSettingChange("design", ["form", "form_gap"], parseInt(value))}
 										min={0}

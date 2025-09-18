@@ -238,7 +238,7 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                                 createInterpolateElement(
                                     __(
                                     '<strong>Notice:</strong> To enable email sending features, please go to the <strong>Integration</strong> tab and activate a supported <strong>SMTP plugin</strong>.',
-                                    'th-login'
+                                    'themehunk-login-registration'
                                     ),
                                     {
                                     strong: <strong />,

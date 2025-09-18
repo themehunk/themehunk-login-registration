@@ -31,8 +31,8 @@ class THLogin_Menu_Integration {
 		$is_logged_in = is_user_logged_in();
 
 		// Get text and icons from settings
-		$login_text  = esc_html( $menu_settings['item_text_login'] ?? esc_html_e( 'Login', 'th-login' ) );
-		$logout_text = esc_html( $menu_settings['item_text_logout'] ?? esc_html_e( 'Logout', 'th-login' ) );
+		$login_text  = esc_html( $menu_settings['item_text_login'] ?? esc_html_e( 'Login', 'themehunk-login-registration' ) );
+		$logout_text = esc_html( $menu_settings['item_text_logout'] ?? esc_html_e( 'Logout', 'themehunk-login-registration' ) );
 
 		$login_icon  = thlogin_get_icon_svg( $menu_settings['item_icon_login'] ?? '' );
 		$logout_icon = thlogin_get_icon_svg( $menu_settings['item_icon_logout'] ?? '' );

@@ -27,7 +27,7 @@ class THLogin_Register_Form {
 	$design      = $this->settings['design'] ?? [];
 	$submit_text = ! empty( $design['submitButton']['register'] )
 		? sanitize_text_field( $design['submitButton']['register'] )
-		: esc_html_e( 'Register', 'th-login' );
+		: esc_html_e( 'Register', 'themehunk-login-registration' );
 
 	// Logo setup.
 	$logo      = $design['logo'] ?? [];
@@ -54,15 +54,15 @@ class THLogin_Register_Form {
 					<div class="thlogin-form-logo-wrapper">
 						<img 
 							src="<?php echo esc_url( $logo_url ); ?>" 
-							alt="<?php esc_attr_e( 'Logo', 'th-login' ); ?>" 
+							alt="<?php esc_attr_e( 'Logo', 'themehunk-login-registration' ); ?>" 
 							class="thlogin-form-logo" 
 							style="height:<?php echo esc_attr( $logo_size ); ?>;max-height:<?php echo esc_attr( $logo_size ); ?>;object-fit:cover;" 
 						/>
 					</div>
-					<h3><?php esc_html_e( 'Register', 'th-login' ); ?></h3>
+					<h3><?php esc_html_e( 'Register', 'themehunk-login-registration' ); ?></h3>
 				</div>
 			<?php else : ?>
-				<h3><?php esc_html_e( 'Register', 'th-login' ); ?></h3>
+				<h3><?php esc_html_e( 'Register', 'themehunk-login-registration' ); ?></h3>
 			<?php endif; ?>
 
 			<?php
@@ -77,7 +77,7 @@ class THLogin_Register_Form {
 
 			<?php if ( ! empty( $security['honeypot_enabled'] ) ) : ?>
 				<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">
-					<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'th-login' ); ?></label>
+					<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'themehunk-login-registration' ); ?></label>
 					<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">
 				</p>
 			<?php endif; ?>
@@ -92,7 +92,7 @@ class THLogin_Register_Form {
 
 			<p class="thlogin-form-links">
 				<a href="#" class="thlogin-link" data-th-popup-action="login">
-					<?php esc_html_e( 'Already have an account? Log In', 'th-login' ); ?>
+					<?php esc_html_e( 'Already have an account? Log In', 'themehunk-login-registration' ); ?>
 				</a>
 			</p>
 		</form>

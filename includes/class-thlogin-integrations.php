@@ -78,7 +78,7 @@ class THLogin_Integrations {
 				// Nonce verification for sensitive actions
 				if ( $action === 'resetpass' && isset( $_GET['key'] ) && isset( $_GET['login'] ) ) {
 				    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'reset-password' ) ) {
-				        wp_die( esc_html__( 'Security check failed', 'th-login' ) );
+				        wp_die( esc_html__( 'Security check failed', 'themehunk-login-registration' ) );
 				    }
 				}
 

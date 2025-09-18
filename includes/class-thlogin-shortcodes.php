@@ -305,42 +305,6 @@ class THLogin_Shortcodes {
             font-weight: 600;
         }' );
 
-    // $custom_js = '
-    //     document.addEventListener("DOMContentLoaded", function () {
-    //         var modal = document.getElementById("thlogin-popup-modal");
-    //         if (modal) {
-    //             modal.style.display = "flex";
-    //             modal.classList.add("thlogin-popup-modal--active");
-    //             modal.setAttribute("aria-hidden", "false");
-    //         }
-    //         function switchForm(target) {
-    //             document.querySelectorAll(".thlogin-form").forEach(function (f) {
-    //                 f.style.display = "none";
-    //             });
-    //             var form = document.querySelector(".thlogin-form--" + target);
-    //             if (form) form.style.display = "block";
-    //             document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
-    //                 btn.classList.remove("is-active");
-    //             });
-    //             var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
-    //             if (activeBtn) activeBtn.classList.add("is-active");
-    //         }
-    //         switchForm("login");
-    //         document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
-    //             btn.addEventListener("click", function (e) {
-    //                 e.preventDefault();
-    //                 switchForm(this.getAttribute("data-th-popup-action"));
-    //             });
-    //         });
-    //         document.querySelectorAll(".thlogin-popup-close-button").forEach(function (btn) {
-    //             btn.addEventListener("click", function () {
-    //                 modal.classList.remove("thlogin-popup-modal--active");
-    //                 modal.style.display = "none";
-    //                 modal.setAttribute("aria-hidden", "true");
-    //             });
-    //         });
-    //     });
-    // ';
     wp_add_inline_script( 'thlogin-frontend-script', 'document.addEventListener("DOMContentLoaded", function () {
             var modal = document.getElementById("thlogin-popup-modal");
             if (modal) {
@@ -437,37 +401,11 @@ class THLogin_Shortcodes {
         }' );
 
     // --- Add inline JS properly ---
-    // $custom_js = '
-    //     document.addEventListener("DOMContentLoaded", function () {
-    //         function switchForm(target) {
-    //             document.querySelectorAll(".thlogin-form").forEach(function (f) {
-    //                 f.style.display = "none";
-    //             });
-    //             var form = document.querySelector(".thlogin-form--" + target);
-    //             if (form) {
-    //                 form.style.display = "block";
-    //             }
-    //             document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
-    //                 btn.classList.remove("is-active");
-    //             });
-    //             var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
-    //             if (activeBtn) {
-    //                 activeBtn.classList.add("is-active");
-    //             }
-    //         }
+    
+    // Method 1 use this placing code inside this variable
+        // $custom_js = ''; 
 
-    //         // Default form = login
-    //         switchForm("login");
-
-    //         // Form toggle buttons (login/register/forgot)
-    //         document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
-    //             btn.addEventListener("click", function (e) {
-    //                 e.preventDefault();
-    //                 switchForm(this.getAttribute("data-th-popup-action"));
-    //             });
-    //         });
-    //     });
-    // ';
+    // Method 2 directly placing whole code inside the second paremeter of the function 
     wp_add_inline_script( 'thlogin-frontend-script', 'document.addEventListener("DOMContentLoaded", function () {
             function switchForm(target) {
                 document.querySelectorAll(".thlogin-form").forEach(function (f) {

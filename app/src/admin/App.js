@@ -55,14 +55,14 @@ const App = () => {
           setMessage({
             type: "error",
             text:
-              response.message || __("Failed to load settings.", "thlogin"),
+              response.message || __("Failed to load settings.", "themehunk-login-registration"),
           });
         }
       } catch (error) {
         console.error("Error fetching settings:", error);
         setMessage({
           type: "error",
-          text: __("Error loading settings. Please check console.", "thlogin"),
+          text: __("Error loading settings. Please check console.", "themehunk-login-registration"),
         });
       } finally {
         setIsLoading(false);
@@ -148,13 +148,13 @@ const App = () => {
       } else {
         setMessage({
           type: "error",
-          text: response.message || __("Failed to save settings.", "thlogin"),
+          text: response.message || __("Failed to save settings.", "themehunk-login-registration"),
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: __("Error saving settings. Please check console.", "thlogin"),
+        text: __("Error saving settings. Please check console.", "themehunk-login-registration"),
       });
       console.error("Error saving settings:", error);
     } finally {
@@ -175,7 +175,7 @@ const App = () => {
         .then(() =>
           setMessage({
             type: "success",
-            text: __("Settings copied to clipboard!", "thlogin"),
+            text: __("Settings copied to clipboard!", "themehunk-login-registration"),
           })
         )
         .catch(() =>
@@ -183,7 +183,7 @@ const App = () => {
             type: "error",
             text: __(
               "Failed to copy settings to clipboard. Please copy manually.",
-              "thlogin"
+              "themehunk-login-registration"
             ),
           })
         );
@@ -192,7 +192,7 @@ const App = () => {
         type: "info",
         text: __(
           "Please manually copy the settings from the text area below.",
-          "thlogin"
+          "themehunk-login-registration"
         ),
       });
       if (importTextareaRef.current) {
@@ -215,7 +215,7 @@ const App = () => {
         throw new Error(
           __(
             "Invalid settings format. Please provide a valid JSON object.",
-            "thlogin"
+            "themehunk-login-registration"
           )
         );
       }
@@ -237,7 +237,7 @@ const App = () => {
         setMessage({
           type: "error",
           text:
-            response.message || __("Failed to import settings.", "thlogin"),
+            response.message || __("Failed to import settings.", "themehunk-login-registration"),
         });
       }
     } catch (error) {
@@ -247,7 +247,7 @@ const App = () => {
           error.message ||
           __(
             "Error parsing or importing settings. Please ensure valid JSON.",
-            "thlogin"
+            "themehunk-login-registration"
           ),
       });
       console.error("Error importing settings:", error);
@@ -300,7 +300,7 @@ const App = () => {
         <div className="header-content">
           <h2>
             <span className="th-logo">TH</span>
-            {__("Login Settings", "thlogin")}
+            {__("Login Settings", "themehunk-login-registration")}
           </h2>
     
           {message && (
@@ -316,10 +316,10 @@ const App = () => {
         <div className="thlogin-fetch-error-overlay">
           <div className="error-box">
             <span className="dashicons dashicons-warning"></span>
-            <h2>{__("Unable to load settings", "thlogin")}</h2>
-            <p>{__("Sorry, we're currently unable to fetch your settings. Please try again.", "thlogin")}</p>
+            <h2>{__("Unable to load settings", "themehunk-login-registration")}</h2>
+            <p>{__("Sorry, we're currently unable to fetch your settings. Please try again.", "themehunk-login-registration")}</p>
             <Button isSecondary onClick={fetchSettings}>
-              {__("Retry", "thlogin")}
+              {__("Retry", "themehunk-login-registration")}
             </Button>
           </div>
         </div>
@@ -422,12 +422,12 @@ const App = () => {
             {isSaving ? (
               <>
                 <Spinner />
-                <span style={{ marginLeft: '8px' }}>{__("Saving...", "thlogin")}</span>
+                <span style={{ marginLeft: '8px' }}>{__("Saving...", "themehunk-login-registration")}</span>
               </>
             ) : isSaved ? (
-              <>{__("Saved", "thlogin")}</>
+              <>{__("Saved", "themehunk-login-registration")}</>
             ) : (
-              <>{__("Save Changes", "thlogin")}</>
+              <>{__("Save Changes", "themehunk-login-registration")}</>
             )}
           </Button>
           </div>
@@ -439,11 +439,11 @@ const App = () => {
       {isResetConfirmOpen && (
         <div className="confirmation-modal">
           <div className="modal-content">
-            <h3>{__("Reset All Settings?", "thlogin")}</h3>
+            <h3>{__("Reset All Settings?", "themehunk-login-registration")}</h3>
             <p>
               {__(
                 "This will restore all settings to default values. This cannot be undone.",
-                "thlogin"
+                "themehunk-login-registration"
               )}
             </p>
             <div className="modal-actions">
@@ -452,14 +452,14 @@ const App = () => {
                 onClick={() => setIsResetConfirmOpen(false)}
                 className="cancel-button"
               >
-                {__("Cancel", "thlogin")}
+                {__("Cancel", "themehunk-login-registration")}
               </Button>
               <Button
                 isDestructive
                 onClick={handleResetSettings}
                 className="confirm-button"
               >
-                {__("Reset Settings", "thlogin")}
+                {__("Reset Settings", "themehunk-login-registration")}
               </Button>
             </div>
           </div>

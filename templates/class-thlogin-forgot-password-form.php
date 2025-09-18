@@ -20,7 +20,7 @@ class THLogin_Forgot_Password_Form {
 	public function render() {
 	$security    = $this->settings['security'] ?? [];
 	$design      = $this->settings['design'] ?? [];
-	$submit_text = $design['submitButton']['forgot_password'] ?? esc_html__( 'Reset', 'th-login' );
+	$submit_text = $design['submitButton']['forgot_password'] ?? esc_html__( 'Reset', 'themehunk-login-registration' );
 
 	$logo      = $design['logo'] ?? [];
 	$logo_url  = ! empty( $logo['url'] ) ? esc_url( $logo['url'] ) : '';
@@ -45,15 +45,15 @@ class THLogin_Forgot_Password_Form {
 					<div class="thlogin-form-logo-wrapper">
 						<img 
 							src="<?php echo esc_url( $logo_url ); ?>"
-							alt="<?php esc_attr_e( 'Logo', 'th-login' ); ?>"
+							alt="<?php esc_attr_e( 'Logo', 'themehunk-login-registration' ); ?>"
 							class="thlogin-form-logo"
 							style="height:<?php echo esc_attr( $logo_size ); ?>;max-height:<?php echo esc_attr( $logo_size ); ?>;object-fit:cover;"
 						/>
 					</div>
-					<h3><?php esc_html_e( 'Reset Password', 'th-login' ); ?></h3>
+					<h3><?php esc_html_e( 'Reset Password', 'themehunk-login-registration' ); ?></h3>
 				</div>
 			<?php else : ?>
-				<h3><?php esc_html_e( 'Reset Password', 'th-login' ); ?></h3>
+				<h3><?php esc_html_e( 'Reset Password', 'themehunk-login-registration' ); ?></h3>
 			<?php endif; ?>
 
 			<?php foreach ( $this->fields as $field ) : ?>
@@ -110,7 +110,7 @@ class THLogin_Forgot_Password_Form {
 
 			<?php if ( ! empty( $security['honeypot_enabled'] ) ) : ?>
 				<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">
-					<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'th-login' ); ?></label>
+					<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'themehunk-login-registration' ); ?></label>
 					<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off" />
 				</p>
 			<?php endif; ?>
@@ -123,7 +123,7 @@ class THLogin_Forgot_Password_Form {
 
 			<p class="thlogin-form-links">
 				<a href="#" class="thlogin-link" data-th-popup-action="login">
-					<?php esc_html_e( 'Back to Login', 'th-login' ); ?>
+					<?php esc_html_e( 'Back to Login', 'themehunk-login-registration' ); ?>
 				</a>
 			</p>
 		</form>

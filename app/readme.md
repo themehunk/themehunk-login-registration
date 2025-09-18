@@ -392,7 +392,7 @@ File:includes/class-thlogin-security.php
             ];
 
         * Lockout response:
-            new WP_Error( 'thlogin_locked_out', __( 'Too many failed login attempts. Please try again after X minutes.', 'th-login' ) );
+            new WP_Error( 'thlogin_locked_out', __( 'Too many failed login attempts. Please try again after X minutes.', 'themehunk-login-registration' ) );
 
         * Debugging View:
             Visit `/wp-admin/?thlogin_debug=1` (requires `manage_options` capability) to print all active failed attempts.
@@ -554,7 +554,7 @@ File: Sanitization and Validation Documentation
 
         ### Example Validation:
             if ( ! in_array( $settings['general']['default_form_type'], [ 'login', 'register', 'forgot_password' ], true ) ) {
-                $errors->add( 'invalid_form_type', __( 'Invalid default form type selected.', 'th-login' ) );
+                $errors->add( 'invalid_form_type', __( 'Invalid default form type selected.', 'themehunk-login-registration' ) );
             }
 
 
@@ -562,7 +562,7 @@ File: Sanitization and Validation Documentation
         If validation fails, a `WP_Error` is returned:
         return new WP_Error(
             'validation_errors',
-            __( 'There were validation errors.', 'th-login' ),
+            __( 'There were validation errors.', 'themehunk-login-registration' ),
             $errors->get_error_messages()
         );
 

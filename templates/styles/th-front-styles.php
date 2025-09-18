@@ -4,12 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class THLogin_Style_Renderer {
 
 	public function render_inline_styles() {
-		$design = $this->get_design_settings();
+		$design = $this->get_design_settings(); ?>
 
-		echo '<style type="text/css" id="thlogin-front-styles">';
-		    echo wp_kses_post($this->get_form_styles( $design ));
-		echo '</style>';
-	}
+		<style type="text/css" id="thlogin-front-styles">
+		   <?php echo wp_kses_post($this->get_form_styles( $design )); ?>
+		</style>
+        
+	<?php }
 
 	private function get_design_settings() {
 		$all_settings = get_option( 'thlogin_settings', [] );

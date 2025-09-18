@@ -62,7 +62,7 @@ class THLogin_Frontend {
 
 		wp_register_script(
 			'thlogin-session-timeout',
-			THLOGIN_URL . 'assets/js/session-timeout.js',
+			THLOGIN_URL . 'assets/js/thlogin-session-timeout.js',
 			array( 'jquery' ),
 			THLOGIN_VERSION,
 			array(
@@ -182,7 +182,7 @@ class THLogin_Frontend {
                     // Add nonce verification for sensitive actions
                     if ($_GET['action'] === 'resetpass' && isset($_GET['key']) && isset($_GET['login'])) {
                       if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'reset-password')) {
-                            wp_die(esc_html__('Security check failed', 'th-login'));
+                            wp_die(esc_html__('Security check failed', 'themehunk-login-registration'));
                         }
                     }
                     return;
@@ -260,7 +260,7 @@ class THLogin_Frontend {
 				wp_safe_redirect( $redirect_url );
 				exit;
 			} else {
-				wp_die( esc_html__( 'Invalid verification link.', 'th-login' ) );
+				wp_die( esc_html__( 'Invalid verification link.', 'themehunk-login-registration' ) );
 			}
 		}
 	}

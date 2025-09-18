@@ -23,7 +23,7 @@ if ( ! function_exists( 'thlogin_render_form_header' ) ) {
         <div class="thlogin-form-header-part">
             <div class="thlogin-header-top-row">
                 <?php if ( $close_button_settings ) : ?>
-                    <button class="thlogin-popup-close-button thlogin-header-cancel-button" aria-label="<?php esc_attr_e( 'Close', 'th-login' ); ?>">
+                    <button class="thlogin-popup-close-button thlogin-header-cancel-button" aria-label="<?php esc_attr_e( 'Close', 'themehunk-login-registration' ); ?>">
                         <span class="dashicons dashicons-no-alt"></span>
                     </button>
                 <?php endif; ?>

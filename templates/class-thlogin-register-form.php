@@ -147,9 +147,9 @@ class THLogin_Register_Form {
 	// Floating / placehold layout.
 	if ( in_array( $this->layout, [ 'floating', 'placehold' ], true ) ) : ?>
 		<div class="<?php echo esc_attr( $field_class ); ?>">
-			<div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php if ( $show_icon_in_input ) : ?>icon-activated-input-wrapper<?php endif; ?>">
+			<div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php echo esc_attr( $show_icon_in_input ? 'icon-activated-input-wrapper' : '' ); ?>">
 				<input
-					class="floating-input <?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
+					class="floating-input <?php echo esc_attr( $show_icon_in_input ? 'icon-activated-input' : '' ); ?>"
 					<?php if ( $show_icon_in_input ) : ?>
 						style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
 					<?php endif; ?>
@@ -157,8 +157,8 @@ class THLogin_Register_Form {
 					name="<?php echo esc_attr( $name ); ?>"
 					id="th-register-<?php echo esc_attr( $id ); ?>"
 					placeholder=" "
-					<?php if ( $required ) : ?> required<?php endif; ?>
-					<?php if ( $autocomplete ) : ?> autocomplete="<?php echo esc_attr( $autocomplete ); ?>"<?php endif; ?>
+					<?php echo $required ? ' required' : ''; ?>
+					<?php echo $autocomplete ? ' autocomplete="' . esc_attr( $autocomplete ) . '"' : ''; ?>
 				/>
 				<label for="th-register-<?php echo esc_attr( $id ); ?>" class="floating-label">
 					<?php echo esc_html( $label ); ?>
@@ -184,7 +184,7 @@ class THLogin_Register_Form {
 				</span>
 			</label>
 			<input
-				class="<?php if ( $show_icon_in_input ) : ?>icon-activated-input<?php endif; ?>"
+				class="<?php echo esc_attr( $show_icon_in_input ? 'icon-activated-input' : '' ); ?>"
 				<?php if ( $show_icon_in_input ) : ?>
 					style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
 				<?php endif; ?>
@@ -192,8 +192,8 @@ class THLogin_Register_Form {
 				name="<?php echo esc_attr( $name ); ?>"
 				id="th-register-<?php echo esc_attr( $id ); ?>"
 				placeholder="<?php echo esc_attr( $placeholder ); ?>"
-				<?php if ( $required ) : ?> required<?php endif; ?>
-				<?php if ( $autocomplete ) : ?> autocomplete="<?php echo esc_attr( $autocomplete ); ?>"<?php endif; ?>
+				<?php echo $required ? ' required' : ''; ?>
+				<?php echo $autocomplete ? ' autocomplete="' . esc_attr( $autocomplete ) . '"' : ''; ?>
 			/>
 		</p>
 	<?php
@@ -227,7 +227,7 @@ class THLogin_Register_Form {
 			name="<?php echo esc_attr( $name ); ?>"
 			id="th-register-<?php echo esc_attr( $id ); ?>"
 			value="1"
-			<?php if ( $required ) : ?> required<?php endif; ?>
+			<?php echo $required ? ' required' : ''; ?>
 		/>
 		<label for="th-register-<?php echo esc_attr( $id ); ?>">
 			<?php echo wp_kses_post( $parsed_text ); ?>

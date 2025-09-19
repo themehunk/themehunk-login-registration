@@ -5115,3 +5115,13 @@ width:max-content;
     display:flex;
     justify-content:space-between;
 }
+#adminmenu {
+  li.toplevel_page_thlogin-settings {
+    .wp-menu-image {
+      img {
+        width: 29px;
+        height: 29px;
+      }
+    }
+  }
+}

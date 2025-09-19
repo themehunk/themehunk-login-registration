@@ -9,38 +9,22 @@ class THLogin_Admin {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'register_admin_menu_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-		add_action( 'admin_head', function () {
-			$image_url = esc_url( plugins_url( '../assets/images/th-login-new.svg', __FILE__ ) );
+		add_action( 'admin_enqueue_scripts', function() {
+    	wp_add_inline_style( 'wp-admin', '#adminmenu li.toplevel_page_thlogin-settings .wp-menu-image img { width: 29px; height: 29px; }' );
+		});
 
-		// Inject inline CSS safely
-		wp_add_inline_style( 'thlogin-admin-style', '
-			#adminmenu .toplevel_page_thlogin-settings .wp-menu-image:before {
-				content: "";
-				display: inline-block;
-				width: 20px;
-				height: 20px;
-				background-size: contain;
-				background-repeat: no-repeat;
-				background-position: center;
-				background-image: url("' . esc_url( $image_url ) . '");
-			}
-			#adminmenu .toplevel_page_thlogin-settings .wp-menu-image img {
-				display: none;
-			}
-		' );
-
-		} );
 
 	}
 
 	public function register_admin_menu_page() {
+		$image_url = THLOGIN_URL. 'assets/images/thlogin-new.svg' ;
 		add_menu_page(
-			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Page title
-			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Menu title
+			esc_html__( 'Themehunk Login Registration', 'themehunk-login-registration' ), // Page title
+			esc_html__( 'Themehunk Login Registration', 'themehunk-login-registration' ), // Menu title
 			'manage_options',                     // Capability
 			'thlogin-settings',                   // Slug
 			array( $this, 'render_admin_page' ),  // Callback
-			'',
+			$image_url,
 			59
 		);
 	}
@@ -63,6 +47,7 @@ class THLogin_Admin {
 	}
 
 	public function enqueue_admin_scripts( $hook ) {
+
 		if ( 'toplevel_page_thlogin-settings' !== $hook ) {
 			return;
 		}
@@ -101,6 +86,7 @@ class THLogin_Admin {
 			array(),
 			$asset_config['version']
 		);
+		
 
 		$all_settings = get_option( 'thlogin_settings', array() );
 

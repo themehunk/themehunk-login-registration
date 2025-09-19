@@ -114,7 +114,7 @@ class THLogin_Security {
 			<div style="background:#111;color:#0f0;padding:10px;">
 			    <pre>
 			        <?php 
-			        esc_html_e('--- TH Login Brute Force Debug ---','themehunk-login-registration');
+			        esc_html_e('--- Themehunk Login Registration Brute Force Debug ---','themehunk-login-registration');
 			        // error_log(print_r($failed_attempts, true)); // Logs to the debug.log file
 			         ?>
 			    </pre>

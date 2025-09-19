@@ -5,8 +5,8 @@ import { createInterpolateElement } from '@wordpress/element';
 const EmailSettings = ({ settings, handleSettingChange }) => {
 
     const tabs = [
-        { key: "wordpress", label: __("WordPress", "th-login") },
-        { key: "smtp", label: __("SMTP", "th-login") },
+        { key: "wordpress", label: __("WordPress", "themehunk-login-registration") },
+        { key: "smtp", label: __("SMTP", "themehunk-login-registration") },
     ];
 
     const renderTabs = () => (
@@ -30,19 +30,19 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
         <div className="settings-card">
           <h2 className="section-title">
             <i className="dashicons dashicons-email"></i>
-            {__("Email Settings", "th-login")}
+            {__("Email Settings", "themehunk-login-registration")}
           </h2>
 
             <div className="settings-group">
-                <h3 className="group-title">{__("Email Settings", "th-login")}</h3>
+                <h3 className="group-title">{__("Email Settings", "themehunk-login-registration")}</h3>
             </div>
 
             {/* Enable Toggle */}
             <div className="setting-row">
                 <div className="setting-label">
-                <h4>{__("Enable Email Verification", "th-login")}</h4>
+                <h4>{__("Enable Email Verification", "themehunk-login-registration")}</h4>
                 <p className="description">
-                    {__("Require users to verify their email after registration.", "th-login")}
+                    {__("Require users to verify their email after registration.", "themehunk-login-registration")}
                 </p>
                 </div>
                 <div className="setting-control">
@@ -66,9 +66,9 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                             {/* From Name */}
                             <div className="setting-row">
                                 <div className="setting-label">
-                                <h4>{__("From Name", "th-login")}</h4>
+                                <h4>{__("From Name", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                    {__("This name will appear as the sender of the email.", "th-login")}
+                                    {__("This name will appear as the sender of the email.", "themehunk-login-registration")}
                                 </p>
                                 </div>
                                 <div className="setting-control">
@@ -84,9 +84,9 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                             {/* From Email */}
                             <div className="setting-row">
                                 <div className="setting-label">
-                                <h4>{__("From Email", "th-login")}</h4>
+                                <h4>{__("From Email", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                    {__("This email will be used as the sender address.", "th-login")}
+                                    {__("This email will be used as the sender address.", "themehunk-login-registration")}
                                 </p>
                                 </div>
                                 <div className="setting-control">
@@ -103,9 +103,9 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                             {/* Email Subject */}
                             <div className="setting-row">
                                 <div className="setting-label">
-                                <h4>{__("Email Subject", "th-login")}</h4>
+                                <h4>{__("Email Subject", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                    {__("The subject line of the verification email.", "th-login")}
+                                    {__("The subject line of the verification email.", "themehunk-login-registration")}
                                 </p>
                                 </div>
                                 <div className="setting-control">
@@ -121,11 +121,11 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                             {/* Email Body */}
                             <div className="setting-row">
                                 <div className="setting-label">
-                                <h4>{__("Email Content", "th-login")}</h4>
+                                <h4>{__("Email Content", "themehunk-login-registration")}</h4>
                                 <p className="description">
                                     {__(
                                     "You can use {verification_link} placeholder which will be replaced with the actual verification link.",
-                                    "th-login"
+                                    "themehunk-login-registration"
                                     )}
                                 </p>
                                 </div>
@@ -149,9 +149,9 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                                     {/* From Name */}
                                     <div className="setting-row">
                                         <div className="setting-label">
-                                        <h4>{__("From Name", "th-login")}</h4>
+                                        <h4>{__("From Name", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                            {__("This name will appear as the sender of the email.", "th-login")}
+                                            {__("This name will appear as the sender of the email.", "themehunk-login-registration")}
                                         </p>
                                         </div>
                                         <div className="setting-control">
@@ -167,9 +167,9 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                                     {/* From Email */}
                                     <div className="setting-row">
                                         <div className="setting-label">
-                                        <h4>{__("From Email", "th-login")}</h4>
+                                        <h4>{__("From Email", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                            {__("This email will be used as the sender address.", "th-login")}
+                                            {__("This email will be used as the sender address.", "themehunk-login-registration")}
                                         </p>
                                         </div>
                                         <div className="setting-control">
@@ -186,9 +186,9 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                                     {/* Email Subject */}
                                     <div className="setting-row">
                                         <div className="setting-label">
-                                        <h4>{__("Email Subject", "th-login")}</h4>
+                                        <h4>{__("Email Subject", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                            {__("The subject line of the verification email.", "th-login")}
+                                            {__("The subject line of the verification email.", "themehunk-login-registration")}
                                         </p>
                                         </div>
                                         <div className="setting-control">
@@ -204,11 +204,11 @@ const EmailSettings = ({ settings, handleSettingChange }) => {
                                     {/* Email Body */}
                                     <div className="setting-row">
                                         <div className="setting-label">
-                                        <h4>{__("Email Content", "th-login")}</h4>
+                                        <h4>{__("Email Content", "themehunk-login-registration")}</h4>
                                         <p className="description">
                                             {__(
                                             "You can use {verification_link} placeholder which will be replaced with the actual verification link.",
-                                            "th-login"
+                                            "themehunk-login-registration"
                                             )}
                                         </p>
                                         </div>

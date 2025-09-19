@@ -12,9 +12,9 @@ import { envelope } from '@wordpress/icons';
 import { Icon,TextControl } from '@wordpress/components';
 
 const tabinside = [
-	{ key: "form", label: __("Form", "th-login") },
-	{ key: "label", label: __("Label", "th-login") },
-	{ key: "header", label: __("Button", "th-login") },
+	{ key: "form", label: __("Form", "themehunk-login-registration") },
+	{ key: "label", label: __("Label", "themehunk-login-registration") },
+	{ key: "header", label: __("Button", "themehunk-login-registration") },
 ];
 
 const getBackgroundStyle = (background) => {
@@ -481,10 +481,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 		const renderContent = () => {
 			const fields = settings.form_fields?.[activeForm] || [];
-			let headingLabel = __("Login", "th-login");
+			let headingLabel = __("Login", "themehunk-login-registration");
 
-			if (activeForm === "register") headingLabel = __("Register", "th-login");
-			else if (activeForm === "forgot_password") headingLabel = __("Forgot Password", "th-login");
+			if (activeForm === "register") headingLabel = __("Register", "themehunk-login-registration");
+			else if (activeForm === "forgot_password") headingLabel = __("Forgot Password", "themehunk-login-registration");
 
 			return (
 				<>
@@ -701,7 +701,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 			<div className="settings-label-with-deisgn"> 
 				<h2 className="section-title">
 					<i className="dashicons dashicons-art"></i>
-					{__("Design Settings", "th-login")}
+					{__("Design Settings", "themehunk-login-registration")}
 				</h2>
 
 				<div className="custom-tabs">
@@ -740,7 +740,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 					<div className="cutsom-tabs-inside-panel">
 						{insidetab === "form" && (
 							<>
-								<AccordionSection title={__("layout", "th-login")} defaultOpen={false} className='deisgn-layout-adjust'>
+								<AccordionSection title={__("layout", "themehunk-login-registration")} defaultOpen={false} className='deisgn-layout-adjust'>
 									<div className="th-layout-picker">
 										{layoutOptions.map((option) => (
 											<div
@@ -770,7 +770,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								</AccordionSection>
 
 								<BackgroundSettingsPanel
-									title={__("Foreground", "th-login")}
+									title={__("Foreground", "themehunk-login-registration")}
 									background={settings.design.modal.modal_background}
 									path={["modal", "modal_background"]}
 									handleSettingChange={handleSettingChange}
@@ -778,27 +778,27 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								/>
 
 								<BackgroundSettingsPanel
-									title={__("Background", "th-login")}
+									title={__("Background", "themehunk-login-registration")}
 									background={settings.design.form.form_background}
 									path={["form", "form_background"]}
 									handleSettingChange={handleSettingChange}
 								/>
 
 								<BorderSettingsPanel
-									title={__("Border", "th-login")}
+									title={__("Border", "themehunk-login-registration")}
 									border={settings.design.form.form_border}
 									path={["form", "form_border"]}
 									handleSettingChange={handleSettingChange}
 								/>
 
 								<PaddingSettingsPanel
-									title={__("Padding", "th-login")}
+									title={__("Padding", "themehunk-login-registration")}
 									padding={settings.design.form.form_padding}
 									path={["form", "form_padding"]}
 									handleSettingChange={handleSettingChange}
 								/>
 
-								<AccordionSection title={__("Field Gap", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Field Gap", "themehunk-login-registration")} defaultOpen={false}>
 									<RangeControl
 										label={__('Gap', 'themehunk-login-registration')}
 										value={parseInt(settings.design.form.form_gap || 0)}
@@ -814,10 +814,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 						{insidetab === "label" && (
 							<>
-								<AccordionSection title={__("Heading", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Heading", "themehunk-login-registration")} defaultOpen={false}>
 									<div className="th-heading-settings">
 										<div className="th-setting-row">
-										<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+										<label className="th-setting-label">{__("Text Color", "themehunk-login-registration")}</label>
 										<input
 											type="color"
 											className="th-color-input"
@@ -829,7 +829,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 
 										<div className="th-setting-row">
-										<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+										<label className="th-setting-label">{__("Font Size", "themehunk-login-registration")}</label>
 										<input
 											type="number"
 											className="th-number-input"
@@ -844,7 +844,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										<div className="th-setting-row">
 										<div className="th-select-wrapper modern-sleect-heaidng">
 											<CustomSelectControl
-											label={__("Font Weight", "th-login")}
+											label={__("Font Weight", "themehunk-login-registration")}
 											value={settings.design.heading.typography.fontWeight}
 											onChange={(value) =>
 												handleSettingChange("design", ["heading", "typography", "fontWeight"], value)
@@ -856,10 +856,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									</div>
 								</AccordionSection>
 
-								<AccordionSection title={__("Logo", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Logo", "themehunk-login-registration")} defaultOpen={false}>
 								<div className="th-heading-settings">
 									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Image URL", "th-login")}</label>
+									<label className="th-setting-label">{__("Image URL", "themehunk-login-registration")}</label>
 									<TextControl
 										value={settings.design.logo.url}
 										onChange={(value) =>
@@ -869,7 +869,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									</div>
 
 									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Size", "th-login")}</label>
+									<label className="th-setting-label">{__("Size", "themehunk-login-registration")}</label>
 									<input
 										type="number"
 										className="th-number-input"
@@ -883,10 +883,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								</div>
 								</AccordionSection>
 
-								<AccordionSection title={__("Input Label", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Input Label", "themehunk-login-registration")} defaultOpen={false}>
 									<div className="th-heading-settings">
 										<div className="th-setting-row">
-										<label className="th-setting-label">{__("Label Color", "th-login")}</label>
+										<label className="th-setting-label">{__("Label Color", "themehunk-login-registration")}</label>
 											<input
 												type="color"
 												className="th-color-input"
@@ -898,7 +898,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Label Font Size", "th-login")}</label>
+											<label className="th-setting-label">{__("Label Font Size", "themehunk-login-registration")}</label>
 											<input
 												type="number"
 												className="th-number-input"
@@ -913,7 +913,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										<div className="th-setting-row">
 											<div className="th-select-wrapper modern-sleect-heaidng">
 												<CustomSelectControl
-												label={__("Label Font Weight", "th-login")}
+												label={__("Label Font Weight", "themehunk-login-registration")}
 												value={settings.design.Input.labeltypography.fontWeight}
 												onChange={(value) =>
 													handleSettingChange("design", ["Input", "labeltypography", "fontWeight"], value)
@@ -925,10 +925,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									</div>
 								</AccordionSection>
 
-								<AccordionSection title={__("Input Box", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Input Box", "themehunk-login-registration")} defaultOpen={false}>
 									<div className="th-heading-settings">
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+											<label className="th-setting-label">{__("Text Color", "themehunk-login-registration")}</label>
 											<input
 												type="color"
 												className="th-color-input"
@@ -940,7 +940,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Active Color", "th-login")}</label>
+											<label className="th-setting-label">{__("Active Color", "themehunk-login-registration")}</label>
 											<input
 												type="color"
 												className="th-color-input"
@@ -953,7 +953,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 							
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+											<label className="th-setting-label">{__("Font Size", "themehunk-login-registration")}</label>
 											<input
 												type="number"
 												className="th-number-input"
@@ -968,7 +968,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										<div className="th-setting-row">
 											<div className="th-select-wrapper modern-sleect-heaidng">
 												<CustomSelectControl
-												label={__("Font Weight", "th-login")}
+												label={__("Font Weight", "themehunk-login-registration")}
 												value={settings.design.Input.typography.fontWeight}
 												onChange={(value) =>
 													handleSettingChange("design", ["Input", "typography", "fontWeight"], value)
@@ -979,7 +979,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 
 										<BackgroundSettingsPanel
-											title={__("Background", "th-login")}
+											title={__("Background", "themehunk-login-registration")}
 											background={settings.design.Input.background}
 											path={["Input", "background"]}
 											handleSettingChange={handleSettingChange}
@@ -990,10 +990,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								</AccordionSection>
 
-								<AccordionSection title={__("Terms and Condition", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Terms and Condition", "themehunk-login-registration")} defaultOpen={false}>
 									<div className="th-heading-settings">
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+											<label className="th-setting-label">{__("Text Color", "themehunk-login-registration")}</label>
 											<input
 												type="color"
 												className="th-color-input"
@@ -1005,7 +1005,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Link Color", "th-login")}</label>
+											<label className="th-setting-label">{__("Link Color", "themehunk-login-registration")}</label>
 											<input
 												type="color"
 												className="th-color-input"
@@ -1017,7 +1017,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+											<label className="th-setting-label">{__("Font Size", "themehunk-login-registration")}</label>
 											<input
 												type="number"
 												className="th-number-input"
@@ -1032,7 +1032,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 											<div className="th-setting-row">
 											<div className="th-select-wrapper modern-sleect-heaidng">
 												<CustomSelectControl
-												label={__("Font Weight", "th-login")}
+												label={__("Font Weight", "themehunk-login-registration")}
 												value={settings.design.term.typography.fontWeight}
 												onChange={(value) =>
 													handleSettingChange("design", ["term", "typography", "fontWeight"], value)
@@ -1046,10 +1046,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								</AccordionSection>
 
-								<AccordionSection title={__("Remember Me", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Remember Me", "themehunk-login-registration")} defaultOpen={false}>
 									<div className="th-heading-settings">
 										<div className="th-setting-row">
-										<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+										<label className="th-setting-label">{__("Text Color", "themehunk-login-registration")}</label>
 										<input
 											type="color"
 											className="th-color-input"
@@ -1063,7 +1063,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 
 										{/* <div className="th-setting-row">
-											<label className="th-setting-label">{__("Checkbox Color", "th-login")}</label>
+											<label className="th-setting-label">{__("Checkbox Color", "themehunk-login-registration")}</label>
 											<input
 												type="color"
 												className="th-color-input"
@@ -1075,7 +1075,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div> */}
 
 										<div className="th-setting-row">
-										<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+										<label className="th-setting-label">{__("Font Size", "themehunk-login-registration")}</label>
 										<input
 											type="number"
 											className="th-number-input"
@@ -1090,7 +1090,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										<div className="th-setting-row">
 										<div className="th-select-wrapper modern-sleect-heaidng">
 											<CustomSelectControl
-											label={__("Font Weight", "th-login")}
+											label={__("Font Weight", "themehunk-login-registration")}
 											value={settings.design.rememberme.typography.fontWeight}
 											onChange={(value) =>
 												handleSettingChange("design", ["rememberme", "typography", "fontWeight"], value)
@@ -1102,10 +1102,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									</div>
 								</AccordionSection>
 
-								<AccordionSection title={__("Icon", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Icon", "themehunk-login-registration")} defaultOpen={false}>
 									<div className="th-heading-settings">
 										<div className="th-setting-row">
-										<label className="th-setting-label">{__("Color", "th-login")}</label>
+										<label className="th-setting-label">{__("Color", "themehunk-login-registration")}</label>
 											<input
 												type="color"
 												className="th-color-input"
@@ -1117,7 +1117,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										</div>
 										
 										<div className="th-setting-row">
-											<label className="th-setting-label">{__("Size", "th-login")}</label>
+											<label className="th-setting-label">{__("Size", "themehunk-login-registration")}</label>
 											<input
 												type="number"
 												className="th-number-input"
@@ -1131,14 +1131,14 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 										<div className="th-setting-row">
 											<CustomSelectControl
-												label={__("Icon Position", "th-login")}
+												label={__("Icon Position", "themehunk-login-registration")}
 												value={settings.design.icon.icon_position}
 												onChange={(value) =>
 													handleSettingChange("design", ["icon", "icon_position"], value)
 												}
 												options={[
-													{ label: __("With Label", "th-login"), value: "with-label" },
-													{ label: __("Inside Input", "th-login"), value: "inside-input" },
+													{ label: __("With Label", "themehunk-login-registration"), value: "with-label" },
+													{ label: __("Inside Input", "themehunk-login-registration"), value: "inside-input" },
 												]}
 												className="modrn-size-fixer-167"	
 											/>
@@ -1154,10 +1154,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 							<>
 
 								{/* Add Header Button (Submit) Settings */}
-								<AccordionSection title={__("Login/Registration Button", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Login/Registration Button", "themehunk-login-registration")} defaultOpen={false}>
 
 									<div className="th-setting-row">
-										<label className="th-setting-label">{__("Show Buttons", "th-login")}</label>
+										<label className="th-setting-label">{__("Show Buttons", "themehunk-login-registration")}</label>
 										<ToggleControl
 											checked={settings.design.header.showButtons}
 											onChange={(value) =>
@@ -1170,7 +1170,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 										<>
 
 											<div className="th-setting-row th-setting-row-text">
-												<label className="th-setting-label">{__("Login Button Text", "th-login")}</label>
+												<label className="th-setting-label">{__("Login Button Text", "themehunk-login-registration")}</label>
 												<input
 													type="text"
 													className="th-text-input"
@@ -1182,7 +1182,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 											</div>
 
 											<div className="th-setting-row th-setting-row-text">
-												<label className="th-setting-label">{__("Registration Button Text", "th-login")}</label>
+												<label className="th-setting-label">{__("Registration Button Text", "themehunk-login-registration")}</label>
 												<input
 													type="text"
 													className="th-text-input"
@@ -1195,7 +1195,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 											<div className="th-heading-settings">
 												<div className="th-setting-row">
-												<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+												<label className="th-setting-label">{__("Text Color", "themehunk-login-registration")}</label>
 												<input
 													type="color"
 													className="th-color-input"
@@ -1208,7 +1208,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								
 												<div className="th-setting-row">
-												<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+												<label className="th-setting-label">{__("Font Size", "themehunk-login-registration")}</label>
 												<input
 													type="number"
 													className="th-number-input"
@@ -1221,7 +1221,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 												<div className="th-setting-row modern-sleect-heaidng">
 													<CustomSelectControl
-														label={__("Font Weight", "th-login")}
+														label={__("Font Weight", "themehunk-login-registration")}
 														value={settings.design.header.button.typography.fontWeight}
 														onChange={(value) =>
 														handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value)
@@ -1231,7 +1231,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												</div>
 
 												<BackgroundSettingsPanel
-													title={__("Background", "th-login")}
+													title={__("Background", "themehunk-login-registration")}
 													background={settings.design.header.button.background}
 													path={["header", "button", "background"]}
 													handleSettingChange={handleSettingChange}
@@ -1239,7 +1239,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 												/>
 
 												<BackgroundSettingsPanel
-													title={__("Hover Background", "th-login")}
+													title={__("Hover Background", "themehunk-login-registration")}
 													background={settings.design.header.button.hoverbackground}
 													path={["header", "button", "hoverbackground"]}
 													handleSettingChange={handleSettingChange}
@@ -1248,14 +1248,14 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 											</div>
 
 											<PaddingSettingsPanel
-												title={__("Padding", "th-login")}
+												title={__("Padding", "themehunk-login-registration")}
 												padding={settings.design.header.button.padding}
 												path={["header", "button", "padding"]}
 												handleSettingChange={handleSettingChange}
 											/>
 
 											<BorderSettingsPanel
-												title={__("Border", "th-login")}
+												title={__("Border", "themehunk-login-registration")}
 												border={settings.design.header.button.border}
 												path={["header", "button", "border"]}
 												handleSettingChange={handleSettingChange}
@@ -1266,10 +1266,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 								</AccordionSection>
 
-								<AccordionSection title={__("Submit Button", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Submit Button", "themehunk-login-registration")} defaultOpen={false}>
 								<div className="th-heading-settings">
 									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+									<label className="th-setting-label">{__("Text Color", "themehunk-login-registration")}</label>
 									<input
 										type="color"
 										className="th-color-input"
@@ -1283,7 +1283,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									
 
 									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+									<label className="th-setting-label">{__("Font Size", "themehunk-login-registration")}</label>
 									<input
 										type="number"
 										className="th-number-input"
@@ -1298,7 +1298,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									<div className="th-setting-row">
 									<div className="th-select-wrapper modern-sleect-heaidng">
 										<CustomSelectControl
-										label={__("Font Weight", "th-login")}
+										label={__("Font Weight", "themehunk-login-registration")}
 										value={settings.design.button.typography.fontWeight}
 										onChange={(value) =>
 											handleSettingChange("design", ["button", "typography", "fontWeight"], value)
@@ -1310,7 +1310,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								</div>
 
 								<BackgroundSettingsPanel
-										title={__("Background", "th-login")}
+										title={__("Background", "themehunk-login-registration")}
 										background={settings.design.button.background}
 										path={["button", "background"]}
 										handleSettingChange={handleSettingChange}
@@ -1319,7 +1319,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 
 									<BackgroundSettingsPanel
-										title={__("Hover Background", "th-login")}
+										title={__("Hover Background", "themehunk-login-registration")}
 										background={settings.design.button.hoverbackground}
 										path={["button", "hoverbackground"]}
 										handleSettingChange={handleSettingChange}
@@ -1329,14 +1329,14 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								
 								<div className="thlogin-border-managemnt-border">
 									<PaddingSettingsPanel
-									title={__("Padding", "th-login")}
+									title={__("Padding", "themehunk-login-registration")}
 									padding={settings.design.button.padding}  
 									path={["button", "padding"]}
 									handleSettingChange={handleSettingChange}
 									/>
 
 									<BorderSettingsPanel
-									title={__("Border", "th-login")}
+									title={__("Border", "themehunk-login-registration")}
 									border={settings.design.button.border}
 									path={["button", "border"]}
 									handleSettingChange={handleSettingChange}
@@ -1345,10 +1345,10 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								</AccordionSection>
 
 								{/* Add Cancel Button Settings */}
-								<AccordionSection title={__("Cancel Button", "th-login")} defaultOpen={false}>
+								<AccordionSection title={__("Cancel Button", "themehunk-login-registration")} defaultOpen={false}>
 								<div className="th-heading-settings">
 									<div className="th-setting-row">
-									<label className="th-setting-label">{__("Text Color", "th-login")}</label>
+									<label className="th-setting-label">{__("Text Color", "themehunk-login-registration")}</label>
 									<input
 										type="color"
 										className="th-color-input"
@@ -1362,7 +1362,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									
 
 									<div className="th-setting-row">
-										<label className="th-setting-label">{__("Font Size", "th-login")}</label>
+										<label className="th-setting-label">{__("Font Size", "themehunk-login-registration")}</label>
 										<input
 											type="number"
 											className="th-number-input"
@@ -1375,7 +1375,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 
 									<div className="th-setting-row modern-sleect-heaidng">
 									<CustomSelectControl
-										label={__("Font Weight", "th-login")}
+										label={__("Font Weight", "themehunk-login-registration")}
 										value={settings.design.header.cancel_button.typography.fontWeight}
 										onChange={(value) =>
 										handleSettingChange("design", ["header", "cancel_button", "typography", "fontWeight"], value)
@@ -1388,7 +1388,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 								</div>
 
 								<BackgroundSettingsPanel
-										title={__("Background", "th-login")}
+										title={__("Background", "themehunk-login-registration")}
 										background={settings.design.header.cancel_button.background}
 										path={["header", "cancel_button", "background"]}
 										handleSettingChange={handleSettingChange}
@@ -1396,7 +1396,7 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									/>
 
 									<BackgroundSettingsPanel
-										title={__("Hover Background", "th-login")}
+										title={__("Hover Background", "themehunk-login-registration")}
 										background={settings.design.header.cancel_button.hoverbackground}
 										path={["header", "cancel_button", "hoverbackground"]}
 										handleSettingChange={handleSettingChange}
@@ -1404,14 +1404,14 @@ const DesignEditor = ({ settings, handleSettingChange }) => {
 									/>
 
 								<PaddingSettingsPanel
-									title={__("Padding", "th-login")}
+									title={__("Padding", "themehunk-login-registration")}
 									padding={settings.design.header.cancel_button.padding}
 									path={["header", "cancel_button", "padding"]}
 									handleSettingChange={handleSettingChange}
 								/>
 
 								<BorderSettingsPanel
-									title={__("Border", "th-login")}
+									title={__("Border", "themehunk-login-registration")}
 									border={settings.design.header.cancel_button.border}
 									path={["header", "cancel_button", "border"]}
 									handleSettingChange={handleSettingChange}

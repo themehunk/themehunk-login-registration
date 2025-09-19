@@ -1,4 +1,4 @@
-=== TH Login ===
+=== Themehunk Login Registration ===
 Contributors: ThemeHunk  
 Tags: login, registration, popup, WooCommerce, frontend login
 Requires at least: 5.8  
@@ -12,9 +12,9 @@ A powerful, secure, and highly customizable frontend login, registration, and pa
 
 == Description ==
 
-**TH Login** transforms your WordPress site's authentication flow with modern, user-friendly frontend login, registration, and password reset forms—without touching the WordPress admin.
+**Themehunk Login Registration** transforms your WordPress site's authentication flow with modern, user-friendly frontend login, registration, and password reset forms—without touching the WordPress admin.
 
-Designed with flexibility and performance in mind, TH Login lets you display forms in popups or directly on pages, fully customize their appearance, and control user behavior after login or registration. Built for compatibility with WooCommerce and Gutenberg, it’s the ideal solution for membership sites, eCommerce stores, and user-driven communities.
+Designed with flexibility and performance in mind, Themehunk Login Registration lets you display forms in popups or directly on pages, fully customize their appearance, and control user behavior after login or registration. Built for compatibility with WooCommerce and Gutenberg, it’s the ideal solution for membership sites, eCommerce stores, and user-driven communities.
 
 🎯 **Key Features**
 * 🔐 Frontend login, registration & password reset forms
@@ -31,29 +31,29 @@ Designed with flexibility and performance in mind, TH Login lets you display for
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/th-login` or install it directly from the WordPress plugin repository.
+1. Upload the plugin files to `/wp-content/plugins/themehunk-login-registration` or install it directly from the WordPress plugin repository.
 2. Activate the plugin through the "Plugins" menu in WordPress.
-3. Go to **Settings > TH Login** to configure login, registration, design, and behavior.
+3. Go to **Settings > Themehunk Login Registration** to configure login, registration, design, and behavior.
 
 == Frequently Asked Questions ==
 
-= Is TH Login free? =  
-Yes! TH Login is completely free and includes all core features.
+= Is Themehunk Login Registration free? =  
+Yes! Themehunk Login Registration is completely free and includes all core features.
 
 = Can I use this with my existing theme? =  
-Absolutely. TH Login works with all modern WordPress themes and page builders.
+Absolutely. Themehunk Login Registration works with all modern WordPress themes and page builders.
 
 = How do I display the login popup? =  
 You can add the CSS class `thlogin-trigger` to any button or link. You can also enable auto-popup triggers in the settings.
 
 = Does it work with WooCommerce? =  
-Yes, TH Login integrates seamlessly with WooCommerce’s account and checkout flows.
+Yes, Themehunk Login Registration integrates seamlessly with WooCommerce’s account and checkout flows.
 
 = Can I customize form fields and layout? =  
 Yes! You can manage form fields, toggle visibility, and apply your own styles using the built-in design editor.
 
 = Is reCAPTCHA supported? =  
-Yes, TH Login supports Google reCAPTCHA v2 for login, registration, and password reset forms.
+Yes, Themehunk Login Registration supports Google reCAPTCHA v2 for login, registration, and password reset forms.
 
 = Can I approve users manually before login? =  
 Yes. You can enable manual user approval from the settings.
@@ -95,7 +95,7 @@ This plugin integrates with the following third-party services:
 
 = How do I enable reCAPTCHA on my login page? =
 
-1. Navigate to the plugin settings under "Settings" > "THLogin Security".
+1. Navigate to the plugin settings under "Settings" > "Themehunk Login Registration Security".
 2. Enable reCAPTCHA and enter your Google reCAPTCHA site key and secret key.
 3. Save changes and reCAPTCHA will be active on your login page.
 

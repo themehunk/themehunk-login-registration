@@ -1048,7 +1048,7 @@ class THLogin_REST_API {
 			], 403 );
 		}
 
-		require_once THLOGIN_PATH . 'thlogin.php';
+		// require_once THLOGIN_PATH . 'thlogin.php';
 
 		if ( function_exists( 'thlogin_set_default_options' ) ) {
 			delete_option( 'thlogin_settings' );

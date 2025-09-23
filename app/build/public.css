@@ -486,4 +486,8 @@ body.thlogin-modal-open {
   width: 500px;
 }
 
+.thlogin-inline-combined-form-wrapper .thlogin-form {
+  display: block !important;
+}
+
 /*# sourceMappingURL=public.css.map*/

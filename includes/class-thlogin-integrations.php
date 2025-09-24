@@ -50,40 +50,40 @@ class THLogin_Integrations {
 				if ( strpos( $request_uri, 'wp-login.php' ) !== false ) {
 
 					// Allow password reset or logout to process
-					// $action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+					$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 
-					// if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
-					// 	return;
-					// }
+					if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
+						return;
+					}
 
-					// //  Redirect everything else to custom login page
-					// wp_redirect( home_url( "/{$custom_login_slug}/" ) );
-					// exit;
+					//  Redirect everything else to custom login page
+					wp_redirect( home_url( "/{$custom_login_slug}/" ) );
+					exit;
 
 
 	//////////////MODIFIED CODE IF NOT WORK uncomment above code/////////////////////////
 					// Allow password reset or logout to process
-				$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+				// $action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 
-				// List of allowed actions
-				$allowed_actions = array( 'logout', 'lostpassword', 'rp', 'resetpass' );
+				// // List of allowed actions
+				// $allowed_actions = array( 'logout', 'lostpassword', 'rp', 'resetpass' );
 
-				// Check if the action is **not** one of the allowed actions
-				if ( ! in_array( $action, $allowed_actions, true ) ) {
-				    // Redirect everything else to custom login page
-				    wp_redirect( home_url( "/{$custom_login_slug}/" ) );
-				    exit;
-				}
+				// // Check if the action is **not** one of the allowed actions
+				// if ( ! in_array( $action, $allowed_actions, true ) ) {
+				//     // Redirect everything else to custom login page
+				//     wp_redirect( home_url( "/{$custom_login_slug}/" ) );
+				//     exit;
+				// }
 
-				// Nonce verification for sensitive actions
-				if ( $action === 'resetpass' && isset( $_GET['key'] ) && isset( $_GET['login'] ) ) {
-				    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'reset-password' ) ) {
-				        wp_die( esc_html__( 'Security check failed', 'themehunk-login-registration' ) );
-				    }
-				}
+				// // Nonce verification for sensitive actions
+				// if ( $action === 'resetpass' && isset( $_GET['key'] ) && isset( $_GET['login'] ) ) {
+				//     if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'reset-password' ) ) {
+				//         wp_die( esc_html__( 'Security check failed', 'themehunk-login-registration' ) );
+				//     }
+				// }
 
-				// If action is allowed, continue processing
-				return;
+				// // If action is allowed, continue processing
+				// return;
 				//////////////////////MODIFIED CODE/////////////////////////
 
 
@@ -211,9 +211,15 @@ class THLogin_Integrations {
 	    // Sanitize the input values
 	    $page_title = sanitize_text_field( 'My Custom Page' );
 	    $page_content = wp_kses_post( '<p>This is the content of my custom page.</p>' ); 
-	    $page_slug = sanitize_title_with_dashes( 'my-custom-page' );
+	    $page_slug =  'my-custom-page';
 	    $page_status = 'publish'; // Assuming this is a valid post status
 	    $page_author = 1; // Replace with the actual user ID, ensure it's valid
+
+	    // $page_title = 'My Custom Page';
+        // $page_content = '<p>This is the content of my custom page.</p>';
+        // $page_slug = 'my-custom-page';
+        // $page_status = 'publish';
+        // $page_author = 1; // Replace with the actual user ID
     
         $new_page_id = wp_insert_post(array(
             'post_title'    => $page_title,

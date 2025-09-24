@@ -155,9 +155,9 @@ protected function render_field( $args ) {
 	// Floating / Placeholder Layout
 	if ( in_array( $this->layout, [ 'floating', 'placehold' ], true ) ) : ?>
 		<div class="<?php echo esc_attr( $field_class ); ?>">
-			<div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php echo $show_icon_in_input ? 'icon-activated-input-wrapper' : ''; ?>">
+			<div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php echo esc_attr( $show_icon_in_input ? 'icon-activated-input-wrapper' : '' ); ?>">
 				<input
-					class="floating-input <?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+					class="floating-input <?php echo esc_attr( $show_icon_in_input ? 'icon-activated-input' : '' ); ?>"
 					<?php if ( $show_icon_in_input ) : ?>
 						style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
 					<?php endif; ?>
@@ -165,7 +165,7 @@ protected function render_field( $args ) {
 					name="<?php echo esc_attr( $name ); ?>"
 					id="<?php echo esc_attr( $id ); ?>"
 					placeholder=" "
-					<?php if ( $required ) : ?> required<?php endif; ?>
+					<?php echo $required ? ' required' : ''; ?>
 					autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
 				/>
 				<label for="<?php echo esc_attr( $id ); ?>" class="floating-label">
@@ -194,7 +194,7 @@ protected function render_field( $args ) {
 			</label>
 
 			<input
-				class="<?php echo $show_icon_in_input ? 'icon-activated-input' : ''; ?>"
+				class="<?php echo esc_attr( $show_icon_in_input ? 'icon-activated-input' : '' ); ?>"
 				<?php if ( $show_icon_in_input ) : ?>
 					style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
 				<?php endif; ?>
@@ -202,7 +202,7 @@ protected function render_field( $args ) {
 				name="<?php echo esc_attr( $name ); ?>"
 				id="<?php echo esc_attr( $id ); ?>"
 				placeholder="<?php echo esc_attr( $placeholder ); ?>"
-				<?php if ( $required ) : ?> required<?php endif; ?>
+				<?php echo $required ? ' required' : ''; ?>
 				autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
 			/>
 		</p>

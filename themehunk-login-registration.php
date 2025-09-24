@@ -13,7 +13,7 @@
  * Text Domain:       themehunk-login-registration
  * Domain Path:       /languages
  *
- * @package TH_Login
+ * @package themehunk-login-registration
  */
 
 // Exit if accessed directly.

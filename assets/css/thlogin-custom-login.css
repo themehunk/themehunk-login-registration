@@ -20,3 +20,7 @@
 .thlogin-header-cancel-button { display: none; }
 .thlogin-page .thlogin-popup-form-container { height: auto !important; }
 #thlogin-popup-modal.thlogin-page { display: flex !important; }
+
+.thlogin-inline-combined-form-wrapper .thlogin-form{
+    display: block!important;
+}

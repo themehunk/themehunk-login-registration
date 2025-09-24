@@ -368,7 +368,7 @@ class THLogin_REST_API {
 		return new WP_REST_Response(
 			[
 				'success'  => true,
-				'message'  => esc_html__( 'Settings saved successfully!', 'th-login' ),
+				'message'  => esc_html__( 'Settings saved successfully!', 'themehunk-login-registration' ),
 				'settings' => $all_settings,
 			],
 			200
@@ -409,14 +409,14 @@ class THLogin_REST_API {
 		$user_id = $request->get_param( 'user_id' );
 
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
-			return new WP_Error( 'thlogin_no_permission', __( 'You do not have permission to approve this user.', 'th-login' ), [ 'status' => 403 ] );
+			return new WP_Error( 'thlogin_no_permission', __( 'You do not have permission to approve this user.', 'themehunk-login-registration' ), [ 'status' => 403 ] );
 		}
 
 		delete_user_meta( $user_id, 'thlogin_pending_approval' );
 
 		return rest_ensure_response( [
 			'success' => true,
-			'message' => __( 'User approved successfully.', 'th-login' ),
+			'message' => __( 'User approved successfully.', 'themehunk-login-registration' ),
 		] );
 	}
 
@@ -480,7 +480,7 @@ class THLogin_REST_API {
 		if ( get_user_meta( $user->ID, 'thlogin_pending_approval', true ) ) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'data'    => [ 'message' => __( 'Your account is pending admin approval.', 'th-login' ) ],
+				'data'    => [ 'message' => __( 'Your account is pending admin approval.', 'themehunk-login-registration' ) ],
 			], 403 );
 		}
 
@@ -490,7 +490,7 @@ class THLogin_REST_API {
 		) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'data'    => [ 'message' => __( 'Please verify your email before logging in.', 'th-login' ) ],
+				'data'    => [ 'message' => __( 'Please verify your email before logging in.', 'themehunk-login-registration' ) ],
 			], 403 );
 		}
 
@@ -502,7 +502,7 @@ class THLogin_REST_API {
 		return new WP_REST_Response( [
 			'success' => true,
 			'data' => [
-				'message'      => __( 'Login successful!', 'th-login' ),
+				'message'      => __( 'Login successful!', 'themehunk-login-registration' ),
 				'redirect_url' => $this->get_redirect_url( $user, $request ),
 			],
 		], 200 );
@@ -544,7 +544,7 @@ class THLogin_REST_API {
 			$value = sanitize_text_field( $params[ $name ] ?? '' );
 			$existing = get_user_meta( $user_id, $name, true );
 			// translators: %s: Field label like "Email" or "Username"
-			$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'th-login' ), $label );
+			$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'themehunk-login-registration' ), $label );
 
 			if ( ! empty( $field['required'] ) && $value === '' ) {
 				return new WP_REST_Response( [
@@ -557,7 +557,7 @@ class THLogin_REST_API {
 				return new WP_REST_Response( [
 					'success' => false,
 					// translators: %s: Field label like "Email" or "Username"
-					'data' => [ 'message' => sprintf( __( 'Invalid value for %s.', 'th-login' ), $label ) ],
+					'data' => [ 'message' => sprintf( __( 'Invalid value for %s.', 'themehunk-login-registration' ), $label ) ],
 				], 403 );
 			}
 
@@ -583,7 +583,7 @@ class THLogin_REST_API {
 			$error_message .= $password_field['error_message'];
 		}
 
-		return trim( $error_message ?: __( 'Username and password are required.', 'th-login' ) );
+		return trim( $error_message ?: __( 'Username and password are required.', 'themehunk-login-registration' ) );
 	}
 
 	private function extract_login_credentials( $params, $form_fields ) {
@@ -614,7 +614,7 @@ class THLogin_REST_API {
 				if ( stripos( $key, 'thlogin_hp' ) === 0 && ! empty( $value ) ) {
 					return new WP_REST_Response( [
 						'success' => false,
-						'data'    => [ 'message' => __( 'Bot detection triggered. Please refresh and try again.', 'th-login' ) ],
+						'data'    => [ 'message' => __( 'Bot detection triggered. Please refresh and try again.', 'themehunk-login-registration' ) ],
 					], 400 );
 				}
 			}
@@ -688,25 +688,25 @@ class THLogin_REST_API {
 
 			if ( empty( $value ) ) {
 				/* translators: %s: The form type (login/register) to be displayed in the link text */
-				$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'th-login' ), ucfirst( str_replace('_', ' ', $field_id) ) );
+				$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'themehunk-login-registration' ), ucfirst( str_replace('_', ' ', $field_id) ) );
 				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $error ] ], 400 );
 			}
 		}
 
 		if ( ! is_email( $email ) ) {
-			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Invalid email address.', 'th-login' ) ] ], 400 );
+			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'Invalid email address.', 'themehunk-login-registration' ) ] ], 400 );
 		}
 
 		if ( username_exists( $username ) ) {
-			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This username is already taken.', 'th-login' ) ] ], 409 );
+			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This username is already taken.', 'themehunk-login-registration' ) ] ], 409 );
 		}
 		if ( email_exists( $email ) ) {
-			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This email is already registered.', 'th-login' ) ] ], 409 );
+			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => __( 'This email is already registered.', 'themehunk-login-registration' ) ] ], 409 );
 		}
 		if ( $password !== $confirm_password ) {
 			$field = array_filter( $register_fields, fn( $f ) => $f['id'] === 'confirm_password' );
 			$field = reset( $field );
-			$msg   = $field['error_message'] ?? __( 'Passwords do not match.', 'th-login' );
+			$msg   = $field['error_message'] ?? __( 'Passwords do not match.', 'themehunk-login-registration' );
 			return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $msg ] ], 400 );
 		}
 
@@ -728,32 +728,32 @@ class THLogin_REST_API {
 				return new WP_REST_Response( [
 					'success' => false,
 					/* translators: %d: The form type (login/register) to be displayed in the link text */
-					'data'    => [ 'message' => sprintf( __( 'Password must be at least %d characters.', 'th-login' ), $min ) ]
+					'data'    => [ 'message' => sprintf( __( 'Password must be at least %d characters.', 'themehunk-login-registration' ), $min ) ]
 				], 400 );
 			}
 			if ( $max && strlen( $password ) > $max ) {
 				return new WP_REST_Response( [
 					'success' => false,
 					/* translators: %d: The form type (login/register) to be displayed in the link text */
-					'data'    => [ 'message' => sprintf( __( 'Password must not exceed %d characters.', 'th-login' ), $max ) ]
+					'data'    => [ 'message' => sprintf( __( 'Password must not exceed %d characters.', 'themehunk-login-registration' ), $max ) ]
 				], 400 );
 			}
 			if ( ! empty( $check['text'] ) && ! preg_match( '/[A-Za-z]/', $password ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => __( 'Password must contain at least one letter.', 'th-login' ) ]
+					'data'    => [ 'message' => __( 'Password must contain at least one letter.', 'themehunk-login-registration' ) ]
 				], 400 );
 			}
 			if ( ! empty( $check['number'] ) && ! preg_match( '/\d/', $password ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => __( 'Password must contain at least one number.', 'th-login' ) ]
+					'data'    => [ 'message' => __( 'Password must contain at least one number.', 'themehunk-login-registration' ) ]
 				], 400 );
 			}
 			if ( ! empty( $check['special_charcter'] ) && ! preg_match( '/[\W_]/', $password ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data'    => [ 'message' => __( 'Password must contain at least one special character.', 'th-login' ) ]
+					'data'    => [ 'message' => __( 'Password must contain at least one special character.', 'themehunk-login-registration' ) ]
 				], 400 );
 			}
 		}
@@ -765,7 +765,7 @@ class THLogin_REST_API {
 				if ( ! $checked ) {
 					return new WP_REST_Response( [
 						'success' => false,
-						'data'    => [ 'message' => $field['error_message'] ?? __( 'You must agree to the Terms & Conditions.', 'th-login' ) ]
+						'data'    => [ 'message' => $field['error_message'] ?? __( 'You must agree to the Terms & Conditions.', 'themehunk-login-registration' ) ]
 					], 400 );
 				}
 				break;
@@ -799,7 +799,7 @@ class THLogin_REST_API {
 
 			if ( ( $field['required'] ?? false ) && empty( $value ) ) {
 				/* translators: %s: The form type (login/register) to be displayed in the link text */
-				$msg = $field['error_message'] ?? sprintf( __( '%s is required.', 'th-login' ), $field['label'] ?? ucfirst( $field_name ) );
+				$msg = $field['error_message'] ?? sprintf( __( '%s is required.', 'themehunk-login-registration' ), $field['label'] ?? ucfirst( $field_name ) );
 				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $msg ] ], 400 );
 			}
 
@@ -820,7 +820,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [
 				'success' => true,
 				'data'    => [
-					'message'       => __( 'Registration successful! Please verify your email.', 'th-login' ),
+					'message'       => __( 'Registration successful! Please verify your email.', 'themehunk-login-registration' ),
 					'redirect_url'  => home_url( '/?email_verification=sent' ),
 				],
 			], 200 );
@@ -833,7 +833,7 @@ class THLogin_REST_API {
 		// Manual approval
 		if ( $general_settings['manual_user_approval']['enabled'] ?? false ) {
 			update_user_meta( $user_id, 'thlogin_pending_approval', true );
-			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Awaiting admin approval.', 'th-login' ) ] ], 200 );
+			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Awaiting admin approval.', 'themehunk-login-registration' ) ] ], 200 );
 		}
 
 		// Auto-login
@@ -858,11 +858,11 @@ class THLogin_REST_API {
 				}
 			}
 
-			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! You are now logged in.', 'th-login' ), 'redirect_url' => $url ] ], 200 );
+			return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! You are now logged in.', 'themehunk-login-registration' ), 'redirect_url' => $url ] ], 200 );
 		}
 
 		// Default
-		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'th-login' ), 'redirect_url' => home_url( '/?thlogin_action=login' ) ] ], 200 );
+		return new WP_REST_Response( [ 'success' => true, 'data' => [ 'message' => __( 'Registration successful! Please log in.', 'themehunk-login-registration' ), 'redirect_url' => home_url( '/?thlogin_action=login' ) ] ], 200 );
 	}
 
 	function thlogin_send_verification_email( $user_id, $email ) {
@@ -887,10 +887,10 @@ class THLogin_REST_API {
 
 		$email_settings    = $security_settings['email_verification'] ?? [];
 
-		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? __( 'TH Login', 'th-login' ) );
+		$from_name     = sanitize_text_field( $email_settings['from_name'] ?? __( 'TH Login', 'themehunk-login-registration' ) );
 		$from_email    = sanitize_email( $email_settings['from_email'] ?? get_bloginfo( 'admin_email' ) );
-		$email_subject = sanitize_text_field( $email_settings['email_subject'] ?? __( 'Verify your email', 'th-login' ) );
-		$email_content = wp_kses_post( $email_settings['email_content'] ?? __( 'Click the following link to verify your email: {verification_link}', 'th-login' ) );
+		$email_subject = sanitize_text_field( $email_settings['email_subject'] ?? __( 'Verify your email', 'themehunk-login-registration' ) );
+		$email_content = wp_kses_post( $email_settings['email_content'] ?? __( 'Click the following link to verify your email: {verification_link}', 'themehunk-login-registration' ) );
 
 		// Replace placeholder.
 		$email_content = str_replace( '{verification_link}', esc_url( $verification_link ), $email_content );
@@ -949,7 +949,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [
 				'success' => false,
 				'data'    => [
-					'message' => $field_error_message ?: __( 'Please enter your username or email address.', 'th-login' ),
+					'message' => $field_error_message ?: __( 'Please enter your username or email address.', 'themehunk-login-registration' ),
 				],
 			], 400 );
 		}
@@ -965,7 +965,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [
 				'success' => false,
 				'data'    => [
-					'message' => __( 'Invalid username or email address.', 'th-login' ),
+					'message' => __( 'Invalid username or email address.', 'themehunk-login-registration' ),
 				],
 			], 404 );
 		}
@@ -992,7 +992,7 @@ class THLogin_REST_API {
 		$message = sprintf(
 			/* translators: 1: User's login name, 2: Password reset link URL */
 			esc_html__( 'Someone has requested a password reset for the following account: %1$s. If this was a mistake, just ignore this email. To reset your password, visit the following address: %2$s',
-				'th-login'
+				'themehunk-login-registration'
 			),
 			$user->user_login,
 			$reset_link
@@ -1000,7 +1000,7 @@ class THLogin_REST_API {
 
 		$title = sprintf(
 			/* translators: %s: The form type (login/register) to be displayed in the link text */
-			esc_html__( '[%s] Password Reset', 'th-login' ),
+			esc_html__( '[%s] Password Reset', 'themehunk-login-registration' ),
 			wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES )
 		);
 
@@ -1011,7 +1011,7 @@ class THLogin_REST_API {
 			return new WP_REST_Response( [
 				'success' => false,
 				'data'    => [
-					'message' => __( 'The email could not be sent. Possible reason: your host may have disabled the mail function.', 'th-login' ),
+					'message' => __( 'The email could not be sent. Possible reason: your host may have disabled the mail function.', 'themehunk-login-registration' ),
 				],
 			], 500 );
 		}
@@ -1019,7 +1019,7 @@ class THLogin_REST_API {
 		return new WP_REST_Response( [
 			'success' => true,
 			'data'    => [
-				'message' => __( 'A password reset link has been sent to your email address.', 'th-login' ),
+				'message' => __( 'A password reset link has been sent to your email address.', 'themehunk-login-registration' ),
 			],
 		], 200 );
 	}
@@ -1037,14 +1037,14 @@ class THLogin_REST_API {
 		if ( ! wp_verify_nonce( $request->get_header( 'X-WP-Nonce' ), 'wp_rest' ) ) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Invalid nonce', 'th-login' ),
+				'message' => __( 'Invalid nonce', 'themehunk-login-registration' ),
 			], 403 );
 		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'message' => __( 'Insufficient permissions', 'th-login' ),
+				'message' => __( 'Insufficient permissions', 'themehunk-login-registration' ),
 			], 403 );
 		}
 
@@ -1062,7 +1062,7 @@ class THLogin_REST_API {
 			if ( ! is_array( $fresh_settings ) ) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'message' => __( 'Settings data is not in a valid format.', 'th-login' ),
+					'message' => __( 'Settings data is not in a valid format.', 'themehunk-login-registration' ),
 				], 500 );
 			}
 
@@ -1079,14 +1079,14 @@ class THLogin_REST_API {
 
 			return new WP_REST_Response( [
 				'success'  => true,
-				'message'  => esc_html__( 'Settings reset and saved successfully.', 'th-login' ),
+				'message'  => esc_html__( 'Settings reset and saved successfully.', 'themehunk-login-registration' ),
 				'settings' => $fresh_settings,
 			], 200 );
 		}
 
 		return new WP_REST_Response( [
 			'success' => false,
-			'message' => esc_html__( 'Reset function not available.', 'th-login' ),
+			'message' => esc_html__( 'Reset function not available.', 'themehunk-login-registration' ),
 		], 500 );
 	}
 

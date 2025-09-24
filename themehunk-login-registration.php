@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       TH Login
+ * Plugin Name:       Themehunk Login Registration
  * Plugin URI:        https://themehunk.com/th-login
  * Description:       A powerful and highly customizable frontend login, registration, and password reset pop-up plugin for WordPress.
  * Version:           1.0.1
@@ -10,7 +10,7 @@
  * Author URI:        https://themehunk.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       th-login
+ * Text Domain:       themehunk-login-registration
  * Domain Path:       /languages
  *
  * @package TH_Login

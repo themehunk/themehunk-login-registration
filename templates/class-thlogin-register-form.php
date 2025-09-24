@@ -23,7 +23,7 @@ class THLogin_Register_Form {
 
 		$security = $this->settings['security'] ?? [];
 		$design   = $this->settings['design'] ?? [];
-		$submit_text = $design['submitButton']['register'] ?? esc_html__('Register', 'th-login');
+		$submit_text = $design['submitButton']['register'] ?? esc_html__('Register', 'themehunk-login-registration');
 
         $logo = $design['logo'] ?? [];
         $logo_url = !empty($logo['url']) ? esc_url($logo['url']) : '';
@@ -45,15 +45,15 @@ class THLogin_Register_Form {
 				echo '<div class="thlogin-form-logo-wrapper">';
 					echo '<img 
 						src="' . esc_url( $logo_url ) . '" 
-						alt="' . esc_attr__( 'Logo', 'th-login' ) . '" 
+						alt="' . esc_attr__( 'Logo', 'themehunk-login-registration' ) . '" 
 						class="thlogin-form-logo" 
 						style="height:' . esc_attr( $logo_size ) . ';max-height:' . esc_attr( $logo_size ) . ';object-fit:cover;" 
 					/>';
 				echo '</div>';
-				echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
+				echo '<h3>' . esc_html__( 'Register', 'themehunk-login-registration' ) . '</h3>';
 			echo '</div>';
 		} else {
-			echo '<h3>' . esc_html__( 'Register', 'th-login' ) . '</h3>';
+			echo '<h3>' . esc_html__( 'Register', 'themehunk-login-registration' ) . '</h3>';
 		}
 
 		foreach ( $this->fields as $field ) {
@@ -66,7 +66,7 @@ class THLogin_Register_Form {
 
 		if ( ! empty( $security['honeypot_enabled'] ) ) {
 			echo '<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">';
-				echo '<label for="thlogin_hp">' . esc_html__( 'Leave this field empty', 'th-login' ) . '</label>';
+				echo '<label for="thlogin_hp">' . esc_html__( 'Leave this field empty', 'themehunk-login-registration' ) . '</label>';
 				echo '<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">';
 			echo '</p>';
 		}
@@ -78,7 +78,7 @@ class THLogin_Register_Form {
 		echo '</p>';
 
 		echo '<p class="thlogin-form-links">';
-			echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__( 'Already have an account? Log In', 'th-login' ) . '</a>';
+			echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__( 'Already have an account? Log In', 'themehunk-login-registration' ) . '</a>';
 		echo '</p>';
 
 		echo '</form>';

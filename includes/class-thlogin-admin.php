@@ -33,8 +33,8 @@ class THLogin_Admin {
 
 	public function register_admin_menu_page() {
 		add_menu_page(
-			esc_html__( 'TH Login', 'th-login' ), // Page title
-			esc_html__( 'TH Login', 'th-login' ), // Menu title
+			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Page title
+			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Menu title
 			'manage_options',                     // Capability
 			'thlogin-settings',                   // Slug
 			array( $this, 'render_admin_page' ),  // Callback
@@ -54,7 +54,7 @@ class THLogin_Admin {
 				<div class="thlogin-loader-circle"></div>
 				<div class="thlogin-loader-circle"></div>
 				<div class="thlogin-loader-circle"></div>
-					<p class="thlogin-loading-text"><?php echo esc_html__( 'Loading settings...', 'th-login' ); ?></p>
+					<p class="thlogin-loading-text"><?php echo esc_html__( 'Loading settings...', 'themehunk-login-registration' ); ?></p>
 			</div>
 		</div>
 		<?php

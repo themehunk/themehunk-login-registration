@@ -47,7 +47,7 @@ class TH_Sanitization_validation {
 		$errors = new WP_Error();
 
 		if ( ! in_array( $settings['plugin_status'], array( 'enabled', 'disabled' ), true ) ) {
-			$errors->add( 'invalid_plugin_status', esc_html__( 'Invalid plugin status.', 'th-login' ) );
+			$errors->add( 'invalid_plugin_status', esc_html__( 'Invalid plugin status.', 'themehunk-login-registration' ) );
 		}
 
 		return $errors->has_errors() ? $errors : true;
@@ -258,17 +258,17 @@ class TH_Sanitization_validation {
 			$type = $bg['type'] ?? 'color';
 			if ( ! in_array( $type, $valid_types, true ) ) {
 				// translators: %s refers to the design key (e.g., modal_background, input_background).
-				$errors->add( "invalid_{$key}_type", sprintf( esc_html__( 'Invalid background type in %s.', 'th-login' ), $key ) );
+				$errors->add( "invalid_{$key}_type", sprintf( esc_html__( 'Invalid background type in %s.', 'themehunk-login-registration' ), $key ) );
 			}
 
 			if ( isset( $bg['color'] ) && ! preg_match( $valid_color_regex, trim( $bg['color'] ) ) ) {
 				// translators: %s refers to the design key (e.g., modal_background, input_background).
-				$errors->add( "invalid_{$key}_color", sprintf( esc_html__( 'Invalid background color in %s.', 'th-login' ), $key ) );
+				$errors->add( "invalid_{$key}_color", sprintf( esc_html__( 'Invalid background color in %s.', 'themehunk-login-registration' ), $key ) );
 			}
 
 			if ( isset( $bg['image']['url'] ) && $bg['image']['url'] && ! filter_var( $bg['image']['url'], FILTER_VALIDATE_URL ) ) {
 				// translators: %s refers to the design key (e.g., modal_background, input_background).
-				$errors->add( "invalid_{$key}_image_url", sprintf( esc_html__( 'Invalid background image URL in %s.', 'th-login' ), $key ) );
+				$errors->add( "invalid_{$key}_image_url", sprintf( esc_html__( 'Invalid background image URL in %s.', 'themehunk-login-registration' ), $key ) );
 			}
 		}
 
@@ -279,7 +279,7 @@ class TH_Sanitization_validation {
 			$errors->add(
 				'invalid_modal_input_layout',
 				// translators: %s refers to the design key (e.g., modal_background, input_background).
-				sprintf( esc_html__( 'Invalid modal input layout. Allowed values: %s.', 'th-login' ), implode( ', ', $valid_input_layouts ) )
+				sprintf( esc_html__( 'Invalid modal input layout. Allowed values: %s.', 'themehunk-login-registration' ), implode( ', ', $valid_input_layouts ) )
 			);
 		}
 
@@ -297,7 +297,7 @@ class TH_Sanitization_validation {
 					$errors->add(
 						"inappropriate_{$key}_{$corner}",
 						// translators: %s refers to the design key (e.g., modal_background, input_background).
-						sprintf( esc_html__( '%s radius value must be positive.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+						sprintf( esc_html__( '%s radius value must be positive.', 'themehunk-login-registration' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
 			}
@@ -316,7 +316,7 @@ class TH_Sanitization_validation {
 					$errors->add(
 						"invalid_{$key}_{$side}",
 						// translators: %s refers to the design key (e.g., modal_background, input_background).
-						sprintf( esc_html__( '%s padding must be positive.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+						sprintf( esc_html__( '%s padding must be positive.', 'themehunk-login-registration' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 					);
 				}
 			}
@@ -324,7 +324,7 @@ class TH_Sanitization_validation {
 
 		// Form gap
 		if ( isset( $settings['form']['form_gap'] ) && intval( $settings['form']['form_gap'] ) < 0 ) {
-			$errors->add( 'invalid_form_gap', esc_html__( 'Form gap must be a positive number.', 'th-login' ) );
+			$errors->add( 'invalid_form_gap', esc_html__( 'Form gap must be a positive number.', 'themehunk-login-registration' ) );
 		}
 
 		// Validate all font sizes
@@ -344,7 +344,7 @@ class TH_Sanitization_validation {
 				$errors->add(
 					'invalid_' . strtolower( $key ) . '_font_size',
 					// translators: %s refers to the design key (e.g., modal_background, input_background).
-					sprintf( esc_html__( '%s font size must be a valid CSS size.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+					sprintf( esc_html__( '%s font size must be a valid CSS size.', 'themehunk-login-registration' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
 		}
@@ -373,7 +373,7 @@ class TH_Sanitization_validation {
 				$errors->add(
 					'invalid_' . $key,
 					// translators: %s refers to the design key (e.g., modal_background, input_background).
-					sprintf( esc_html__( '%s must be a valid CSS color.', 'th-login' ), ucfirst( str_replace( '_', ' ', $key ) ) )
+					sprintf( esc_html__( '%s must be a valid CSS color.', 'themehunk-login-registration' ), ucfirst( str_replace( '_', ' ', $key ) ) )
 				);
 			}
 		}
@@ -385,21 +385,21 @@ class TH_Sanitization_validation {
 				$errors->add(
 					'invalid_submit_button_' . $key,
 					// translators: %s refers to the design key (e.g., modal_background, input_background).
-					sprintf( esc_html__( 'Submit button text for "%s" must be a non-empty string.', 'th-login' ), $key )
+					sprintf( esc_html__( 'Submit button text for "%s" must be a non-empty string.', 'themehunk-login-registration' ), $key )
 				);
 			}
 		}
 
 		// Header fields
 		if ( isset( $settings['header']['showButtons'] ) && ! is_bool( $settings['header']['showButtons'] ) ) {
-			$errors->add( 'invalid_header_showButtons', esc_html__( 'Header showButtons must be boolean.', 'th-login' ) );
+			$errors->add( 'invalid_header_showButtons', esc_html__( 'Header showButtons must be boolean.', 'themehunk-login-registration' ) );
 		}
 		foreach ( [ 'loginText', 'registerText' ] as $key ) {
 			if ( empty( $settings['header'][ $key ] ) || ! is_string( $settings['header'][ $key ] ) ) {
 				$errors->add(
 					'invalid_header_' . $key,
 					// translators: %s refers to the design key (e.g., modal_background, input_background).
-					sprintf( esc_html__( 'Header text for "%s" must be a non-empty string.', 'th-login' ), $key )
+					sprintf( esc_html__( 'Header text for "%s" must be a non-empty string.', 'themehunk-login-registration' ), $key )
 				);
 			}
 		}
@@ -407,12 +407,12 @@ class TH_Sanitization_validation {
 		// Logo validation
 		if ( isset( $settings['logo']['url'] ) && ! empty( $settings['logo']['url'] ) ) {
 			if ( ! filter_var( $settings['logo']['url'], FILTER_VALIDATE_URL ) ) {
-				$errors->add( 'invalid_logo_url', esc_html__( 'Logo URL must be valid.', 'th-login' ) );
+				$errors->add( 'invalid_logo_url', esc_html__( 'Logo URL must be valid.', 'themehunk-login-registration' ) );
 			}
 		}
 		if ( isset( $settings['logo']['size'] ) && $settings['logo']['size'] !== '' ) {
 			if ( ! preg_match( '/^\d+(px|em|rem|%)?$/', $settings['logo']['size'] ) ) {
-				$errors->add( 'invalid_logo_size', esc_html__( 'Logo size must be valid CSS size (e.g., 30px, 2em).', 'th-login' ) );
+				$errors->add( 'invalid_logo_size', esc_html__( 'Logo size must be valid CSS size (e.g., 30px, 2em).', 'themehunk-login-registration' ) );
 			}
 		}
 
@@ -517,7 +517,7 @@ class TH_Sanitization_validation {
 					$errors->add(
 						'missing_field_id',
 						/* translators: %s: The form type (login/register) to be displayed in the link text */
-						sprintf( esc_html__( 'A field in "%s" is missing an ID.', 'th-login' ), $form_key )
+						sprintf( esc_html__( 'A field in "%s" is missing an ID.', 'themehunk-login-registration' ), $form_key )
 					);
 					continue;
 				}
@@ -525,7 +525,7 @@ class TH_Sanitization_validation {
 				if ( in_array( $field_id, $seen_ids, true ) ) {
 					$error_message = sprintf(
 						/* translators: 1: Field ID, 2: Form name/identifier */
-						esc_html__( 'Duplicate field ID "%1$s" found in %2$s.', 'th-login' ),
+						esc_html__( 'Duplicate field ID "%1$s" found in %2$s.', 'themehunk-login-registration' ),
 						esc_html( $field_id ),
 						esc_html( $form_key )
 					);
@@ -545,7 +545,7 @@ class TH_Sanitization_validation {
 						'missing_required_label',
 						sprintf( 
 							/* translators: 1: Field ID, 2: Form name/identifier */
-							esc_html__( 'Field "%1$s" in %2$s is required but missing a label.', 'th-login' ),
+							esc_html__( 'Field "%1$s" in %2$s is required but missing a label.', 'themehunk-login-registration' ),
 							esc_html( $field_id ),
 							esc_html( $form_key )
 						)
@@ -557,7 +557,7 @@ class TH_Sanitization_validation {
 					if ( isset( $field['minInput'] ) && intval( $field['minInput'] ) < 4 ) {
 						$errors->add(
 							'invalid_min_input',
-							esc_html__( 'Password minimum length must be at least 4 characters.', 'th-login' )
+							esc_html__( 'Password minimum length must be at least 4 characters.', 'themehunk-login-registration' )
 						);
 					}
 
@@ -571,7 +571,7 @@ class TH_Sanitization_validation {
 						) {
 							$errors->add(
 								'invalid_password_check',
-								esc_html__( 'At least one password check must be enabled (letter, number, or special character).', 'th-login' )
+								esc_html__( 'At least one password check must be enabled (letter, number, or special character).', 'themehunk-login-registration' )
 							);
 						}
 					}
@@ -582,7 +582,7 @@ class TH_Sanitization_validation {
 					if ( isset( $field['link'] ) && ! empty( $field['link'] ) && ! filter_var( $field['link'], FILTER_VALIDATE_URL ) ) {
 						$errors->add(
 							'invalid_terms_link',
-							esc_html__( 'The link for Terms & Conditions must be a valid URL.', 'th-login' )
+							esc_html__( 'The link for Terms & Conditions must be a valid URL.', 'themehunk-login-registration' )
 						);
 					}
 				}
@@ -591,7 +591,7 @@ class TH_Sanitization_validation {
 					if ( strlen( wp_strip_all_tags( $field['termsText'] ) ) < 2 ) {
 						$errors->add(
 							'invalid_terms_text',
-							esc_html__( 'The Terms & Conditions label must be at least 5 characters.', 'th-login' )
+							esc_html__( 'The Terms & Conditions label must be at least 5 characters.', 'themehunk-login-registration' )
 						);
 					}
 				}
@@ -680,7 +680,7 @@ class TH_Sanitization_validation {
 		) {
 			$errors->add(
 				'invalid_delay_seconds',
-				esc_html__( 'Delay seconds must be a non-negative number.', 'th-login' )
+				esc_html__( 'Delay seconds must be a non-negative number.', 'themehunk-login-registration' )
 			);
 		}
 
@@ -690,7 +690,7 @@ class TH_Sanitization_validation {
 		) {
 			$errors->add(
 				'invalid_max_views',
-				esc_html__( 'Max displays must be at least 1.', 'th-login' )
+				esc_html__( 'Max displays must be at least 1.', 'themehunk-login-registration' )
 			);
 		}
 
@@ -720,7 +720,7 @@ class TH_Sanitization_validation {
 
 	public function validate_integration_settings( $settings ) {
 		if ( ! is_array( $settings ) ) {
-			return new WP_Error( 'invalid_data', __( 'Integration settings must be an array.', 'th-login' ) );
+			return new WP_Error( 'invalid_data', __( 'Integration settings must be an array.', 'themehunk-login-registration' ) );
 		}
 
 		// ✅ WooCommerce
@@ -731,12 +731,12 @@ class TH_Sanitization_validation {
 					return new WP_Error(
 						'invalid_key',
 						// translators: %s refers to the design key (e.g., modal_background, input_background).
-						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'th-login' ), esc_html( $key ) )
+						sprintf( __( 'Unexpected key "%s" in WooCommerce settings.', 'themehunk-login-registration' ), esc_html( $key ) )
 					);
 				}
 			}
 		} else {
-			return new WP_Error( 'missing_woocommerce', __( 'WooCommerce integration settings missing or invalid.', 'th-login' ) );
+			return new WP_Error( 'missing_woocommerce', __( 'WooCommerce integration settings missing or invalid.', 'themehunk-login-registration' ) );
 		}
 
 		// ✅ WordPress
@@ -747,18 +747,18 @@ class TH_Sanitization_validation {
 					return new WP_Error(
 						'invalid_key',
 						// translators: %s refers to the design key (e.g., modal_background, input_background).
-						sprintf( __( 'Unexpected key "%s" in WordPress settings.', 'th-login' ), esc_html( $key ) )
+						sprintf( __( 'Unexpected key "%s" in WordPress settings.', 'themehunk-login-registration' ), esc_html( $key ) )
 					);
 				}
 			}
 			if ( isset( $settings['wordpress']['url'] ) && ! is_string( $settings['wordpress']['url'] ) ) {
-				return new WP_Error( 'invalid_url', __( 'Login URL must be a string.', 'th-login' ) );
+				return new WP_Error( 'invalid_url', __( 'Login URL must be a string.', 'themehunk-login-registration' ) );
 			}
 			if ( isset( $settings['wordpress']['form_type'] ) && ! is_string( $settings['wordpress']['form_type'] ) ) {
-				return new WP_Error( 'invalid_form_type', __( 'Form type must be a string.', 'th-login' ) );
+				return new WP_Error( 'invalid_form_type', __( 'Form type must be a string.', 'themehunk-login-registration' ) );
 			}
 		} else {
-			return new WP_Error( 'missing_wordpress', __( 'WordPress integration settings missing or invalid.', 'th-login' ) );
+			return new WP_Error( 'missing_wordpress', __( 'WordPress integration settings missing or invalid.', 'themehunk-login-registration' ) );
 		}
 
 		// ✅ SMTP
@@ -769,12 +769,12 @@ class TH_Sanitization_validation {
 					return new WP_Error(
 						'invalid_key',
 						// translators: %s refers to the design key (e.g., modal_background, input_background).
-						sprintf( __( 'Unexpected key "%s" in SMTP settings.', 'th-login' ), esc_html( $key ) )
+						sprintf( __( 'Unexpected key "%s" in SMTP settings.', 'themehunk-login-registration' ), esc_html( $key ) )
 					);
 				}
 			}
 		} else {
-			return new WP_Error( 'missing_smtp', __( 'SMTP integration settings missing or invalid.', 'th-login' ) );
+			return new WP_Error( 'missing_smtp', __( 'SMTP integration settings missing or invalid.', 'themehunk-login-registration' ) );
 		}
 
 		return true;
@@ -822,38 +822,38 @@ class TH_Sanitization_validation {
 		// Validate reCAPTCHA keys if enabled.
 		if ( ( $settings['recaptcha']['enabled'] ?? false ) ) {
 			if ( empty( $settings['recaptcha']['site_key'] ?? '' ) ) {
-				$errors->add( 'missing_recaptcha_site_key', esc_html__( 'reCAPTCHA Site Key is required when reCAPTCHA is enabled.', 'th-login' ) );
+				$errors->add( 'missing_recaptcha_site_key', esc_html__( 'reCAPTCHA Site Key is required when reCAPTCHA is enabled.', 'themehunk-login-registration' ) );
 			}
 			if ( empty( $settings['recaptcha']['secret_key'] ?? '' ) ) {
-				$errors->add( 'missing_recaptcha_secret_key', esc_html__( 'reCAPTCHA Secret Key is required when reCAPTCHA is enabled.', 'th-login' ) );
+				$errors->add( 'missing_recaptcha_secret_key', esc_html__( 'reCAPTCHA Secret Key is required when reCAPTCHA is enabled.', 'themehunk-login-registration' ) );
 			}
 		}
 
 		// Validate email verification if enabled.
 		if ( ( $settings['email_verification']['enabled'] ?? false ) ) {
 			if ( empty( $settings['email_verification']['from_email'] ?? '' ) ) {
-				$errors->add( 'missing_from_email', esc_html__( 'From Email is required for email verification.', 'th-login' ) );
+				$errors->add( 'missing_from_email', esc_html__( 'From Email is required for email verification.', 'themehunk-login-registration' ) );
 			} elseif ( ! is_email( $settings['email_verification']['from_email'] ) ) {
-				$errors->add( 'invalid_from_email', esc_html__( 'From Email must be a valid email address.', 'th-login' ) );
+				$errors->add( 'invalid_from_email', esc_html__( 'From Email must be a valid email address.', 'themehunk-login-registration' ) );
 			}
 
 			if ( empty( $settings['email_verification']['email_subject'] ?? '' ) ) {
-				$errors->add( 'missing_email_subject', esc_html__( 'Email Subject is required for verification email.', 'th-login' ) );
+				$errors->add( 'missing_email_subject', esc_html__( 'Email Subject is required for verification email.', 'themehunk-login-registration' ) );
 			}
 
 			if ( empty( $settings['email_verification']['email_content'] ?? '' ) ) {
-				$errors->add( 'missing_email_content', esc_html__( 'Email Content is required for verification email.', 'th-login' ) );
+				$errors->add( 'missing_email_content', esc_html__( 'Email Content is required for verification email.', 'themehunk-login-registration' ) );
 			}
 		}
 
 		// Validate Session Timeout.
 		if ( ( $settings['session_timeout']['enabled'] ?? false ) ) {
 			if ( empty( $settings['session_timeout']['duration'] ) || ! is_numeric( $settings['session_timeout']['duration'] ) ) {
-				$errors->add( 'invalid_session_timeout_duration', esc_html__( 'Session timeout duration must be a valid number.', 'th-login' ) );
+				$errors->add( 'invalid_session_timeout_duration', esc_html__( 'Session timeout duration must be a valid number.', 'themehunk-login-registration' ) );
 			}
 			if ( ( $settings['session_timeout']['show_warning'] ?? false ) && 
 				( empty( $settings['session_timeout']['warning_duration'] ) || ! is_numeric( $settings['session_timeout']['warning_duration'] ) ) ) {
-				$errors->add( 'invalid_session_warning_duration', esc_html__( 'Warning duration must be a valid number.', 'th-login' ) );
+				$errors->add( 'invalid_session_warning_duration', esc_html__( 'Warning duration must be a valid number.', 'themehunk-login-registration' ) );
 			}
 		}
 

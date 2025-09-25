@@ -16,7 +16,7 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
       <AccordionSection title={title} defaultOpen={false}>
         <div className="thlogin-border-controls">
           <BorderBoxControl
-            label={__("Border Width", "th-login")}
+            label={__("Border Width", "themehunk-login-registration")}
             values={width}
             onChange={(newVal) =>
               handleSettingChange("design", [...path, "width"], newVal)
@@ -27,14 +27,14 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
         </div>
 
         <CustomSelectControl
-          label={__("Style", "th-login")}
+          label={__("Style", "themehunk-login-registration")}
           value={style}
           options={[
-            { label: __("Solid", "th-login"), value: "solid" },
-            { label: __("Dashed", "th-login"), value: "dashed" },
-            { label: __("Dotted", "th-login"), value: "dotted" },
-            { label: __("Double", "th-login"), value: "double" },
-            { label: __("None", "th-login"), value: "none" },
+            { label: __("Solid", "themehunk-login-registration"), value: "solid" },
+            { label: __("Dashed", "themehunk-login-registration"), value: "dashed" },
+            { label: __("Dotted", "themehunk-login-registration"), value: "dotted" },
+            { label: __("Double", "themehunk-login-registration"), value: "double" },
+            { label: __("None", "themehunk-login-registration"), value: "none" },
           ]}
           className="modern-border-select-control"
           onChange={(val) =>
@@ -54,10 +54,10 @@ const BorderSettingsPanel = ({ title, border = {}, path = [], handleSettingChang
       </AccordionSection>
 
 
-      <AccordionSection title={__('Radius', 'th-login')} defaultOpen={false}>
+      <AccordionSection title={__('Radius', 'themehunk-login-registration')} defaultOpen={false}>
         <div className="thlogin-border-controls">
           <BorderRadiusControl
-            label={__("Border Radius", "th-login")}
+            label={__("Border Radius", "themehunk-login-registration")}
             values={radius}
             onChange={(newVal) =>
               handleSettingChange("design", [...path, "radius"], newVal)

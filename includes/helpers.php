@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * General utility functions for TH Login plugin.
+ * General utility functions for Themehunk Login Registration plugin.
 */
 
 if ( ! function_exists( 'thlogin_get_option' ) ) {

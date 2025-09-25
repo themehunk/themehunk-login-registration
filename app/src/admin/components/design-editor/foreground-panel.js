@@ -6,7 +6,7 @@ const ForegroundSettingsPanel = ({ foreground, path, handleSettingChange }) => {
 
 		<div className="thlogin-panel">
 				<RangeControl
-					label={<span className="thlogin-range-label">{__('Blur', 'th-login')}</span>}
+					label={<span className="thlogin-range-label">{__('Blur', 'themehunk-login-registration')}</span>}
 					value={parseInt(foreground.blur)}
 					min={0}
 					max={20}
@@ -14,7 +14,7 @@ const ForegroundSettingsPanel = ({ foreground, path, handleSettingChange }) => {
 				/>
 
 				<RangeControl
-					label={<span className="thlogin-range-label">{__('Brightness', 'th-login')}</span>}
+					label={<span className="thlogin-range-label">{__('Brightness', 'themehunk-login-registration')}</span>}
 					value={parseInt(foreground.brightness)}
 					min={50}
 					max={150}
@@ -22,7 +22,7 @@ const ForegroundSettingsPanel = ({ foreground, path, handleSettingChange }) => {
 				/>
 
 				<RangeControl
-					label={<span className="thlogin-range-label">{__('Contrast', 'th-login')}</span>}
+					label={<span className="thlogin-range-label">{__('Contrast', 'themehunk-login-registration')}</span>}
 					value={parseInt(foreground.contrast)}
 					min={50}
 					max={200}

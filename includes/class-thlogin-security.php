@@ -89,7 +89,7 @@ class THLogin_Security {
 			return new WP_Error(
 				'thlogin_locked_out',
 				// translators: %1$s: Minutes remaining, %2$s: Seconds remaining
-				sprintf(__( 'Too many failed login attempts. Please try again after %1$s minutes (%2$s seconds).', 'th-login' ),
+				sprintf(__( 'Too many failed login attempts. Please try again after %1$s minutes (%2$s seconds).', 'themehunk-login-registration' ),
 					ceil( $remaining / 60 ),
 					$remaining
 				)
@@ -108,7 +108,7 @@ class THLogin_Security {
 			wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'thlogin_debug_nonce' )
 		) {
 			echo '<pre style="background:#111;color:#0f0;padding:10px;">';
-			echo "--- TH Login Brute Force Debug ---\n";
+			echo "--- Themehunk Login Registration Brute Force Debug ---\n";
 				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 				print_r( get_transient( self::FAILED_ATTEMPTS_OPTION ) );
 			echo '</pre>';
@@ -151,7 +151,7 @@ class THLogin_Security {
 				'remaining_time'  => $remaining,
 				'remaining_mins'  => ceil( $remaining / 60 ),
 				// translators: %s: Field label like "Email" or "Username"
-				'message'         => sprintf( __( 'You are blocked for %s more seconds.', 'th-login' ), $remaining )
+				'message'         => sprintf( __( 'You are blocked for %s more seconds.', 'themehunk-login-registration' ), $remaining )
 			];
 		}
 
@@ -168,7 +168,7 @@ class THLogin_Security {
 		if ( empty( $token ) ) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'data' => [ 'message' => __( 'Please complete the reCAPTCHA verification.', 'th-login' ) ],
+				'data' => [ 'message' => __( 'Please complete the reCAPTCHA verification.', 'themehunk-login-registration' ) ],
 			], 400 );
 		}
 
@@ -186,7 +186,7 @@ class THLogin_Security {
 		if ( is_wp_error( $response ) ) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'data' => [ 'message' => __( 'reCAPTCHA verification failed. Please try again.', 'th-login' ) ],
+				'data' => [ 'message' => __( 'reCAPTCHA verification failed. Please try again.', 'themehunk-login-registration' ) ],
 			], 400 );
 		}
 
@@ -203,13 +203,13 @@ class THLogin_Security {
 			) {
 				return new WP_REST_Response( [
 					'success' => false,
-					'data' => [ 'message' => __( 'reCAPTCHA v3 verification failed or suspicious activity detected.', 'th-login' ) ],
+					'data' => [ 'message' => __( 'reCAPTCHA v3 verification failed or suspicious activity detected.', 'themehunk-login-registration' ) ],
 				], 400 );
 			}
 		} elseif ( empty( $body['success'] ) ) {
 			return new WP_REST_Response( [
 				'success' => false,
-				'data' => [ 'message' => __( 'reCAPTCHA verification failed.', 'th-login' ) ],
+				'data' => [ 'message' => __( 'reCAPTCHA verification failed.', 'themehunk-login-registration' ) ],
 			], 400 );
 		}
 

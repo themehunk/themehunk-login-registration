@@ -21,7 +21,7 @@ class THLogin_Login_Form {
         $design = $this->settings['design'] ?? [];
         $security = $this->settings['security'] ?? [];
         $allow_user_registration = $general['allow_user_registration'] ?? true;
-        $submit_text = $design['submitButton']['login'] ?? esc_html__('Log In', 'th-login');
+        $submit_text = $design['submitButton']['login'] ?? esc_html__('Log In', 'themehunk-login-registration');
        
         $logo = $design['logo'] ?? [];
         $logo_url = !empty($logo['url']) ? esc_url($logo['url']) : '';
@@ -40,15 +40,15 @@ class THLogin_Login_Form {
                 echo '<div class="thlogin-form-logo-wrapper">';
                     echo '<img 
                         src="' . esc_url( $logo_url ) . '" 
-                        alt="' . esc_attr__( 'Logo', 'th-login' ) . '" 
+                        alt="' . esc_attr__( 'Logo', 'themehunk-login-registration' ) . '" 
                         class="thlogin-form-logo" 
                         style="height:' . esc_attr( $logo_size ) . ';max-height:' . esc_attr( $logo_size ) . ';object-fit:cover;" 
                     />';
                 echo '</div>';
-                echo '<h3>' . esc_html__( 'Login', 'th-login' ) . '</h3>';
+                echo '<h3>' . esc_html__( 'Login', 'themehunk-login-registration' ) . '</h3>';
             echo '</div>';
         } else {
-            echo '<h3>' . esc_html__( 'Login', 'th-login' ) . '</h3>';
+            echo '<h3>' . esc_html__( 'Login', 'themehunk-login-registration' ) . '</h3>';
         }
 
 
@@ -59,8 +59,8 @@ class THLogin_Login_Form {
             $status = sanitize_text_field( wp_unslash( $_GET['thlogin_email_verified'] ) );
 
             $msg = $status === 'success'
-                ? esc_html__( 'Your email has been verified successfully.', 'th-login' )
-                : esc_html__( 'Invalid or expired verification link.', 'th-login' );
+                ? esc_html__( 'Your email has been verified successfully.', 'themehunk-login-registration' )
+                : esc_html__( 'Invalid or expired verification link.', 'themehunk-login-registration' );
 
             $class = $status === 'success' ? 'success' : 'error';
 
@@ -86,11 +86,11 @@ class THLogin_Login_Form {
         echo '</div>';
 
         echo '<div class="thlogin-form-links">';
-        echo '<a href="#" class="thlogin-link" data-th-popup-action="forgot-password">' . esc_html__('Forgot Password?', 'th-login') . '</a>';
+        echo '<a href="#" class="thlogin-link" data-th-popup-action="forgot-password">' . esc_html__('Forgot Password?', 'themehunk-login-registration') . '</a>';
 
         if ( $allow_user_registration) {
             echo '<span class="thlogin-link-separator">|</span>';
-            echo '<a href="#" class="thlogin-link" data-th-popup-action="register">' . esc_html__('Register', 'th-login') . '</a>';
+            echo '<a href="#" class="thlogin-link" data-th-popup-action="register">' . esc_html__('Register', 'themehunk-login-registration') . '</a>';
         }
         echo '</div>';
 

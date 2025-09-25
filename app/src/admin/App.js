@@ -278,13 +278,13 @@ const App = () => {
       } else {
         setMessage({
           type: "error",
-          text: response.message || __("Failed to reset settings.", "th-login"),
+          text: response.message || __("Failed to reset settings.", "themehunk-login-registration"),
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: __("Error resetting settings. Please check console.", "th-login"),
+        text: __("Error resetting settings. Please check console.", "themehunk-login-registration"),
       });
       console.error("Error resetting settings:", error);
     } finally {

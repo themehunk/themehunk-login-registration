@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       TH Login
- * Plugin URI:        https://themehunk.com/th-login
+ * Plugin Name:       Themehunk Login Registration
+ * Plugin URI:        https://themehunk.com/themehunk-login-registration
  * Description:       A powerful and highly customizable frontend login, registration, and password reset pop-up plugin for WordPress.
  * Version:           1.0.1
  * Requires at least: 5.8
@@ -10,7 +10,7 @@
  * Author URI:        https://themehunk.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       th-login
+ * Text Domain:       themehunk-login-registration
  * Domain Path:       /languages
  *
  * @package TH_Login
@@ -90,7 +90,7 @@ final class THLogin {
 	}
 
 	public function add_plugin_action_links( $links ) {
-		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'th-login' ) . '</a>';
+		$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=thlogin-settings' ) ) . '">' . esc_html__( 'Settings', 'themehunk-login-registration' ) . '</a>';
 		array_unshift( $links, $settings_link );
 		return $links;
 	}

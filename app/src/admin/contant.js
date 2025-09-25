@@ -4,42 +4,42 @@ import { __ } from "@wordpress/i18n";
 export const TABS = [
   {
     id: "general",
-    label: __("General", "th-login"),
+    label: __("General", "themehunk-login-registration"),
     icon: "admin-settings"
   },
    {
     id: "form-fields",
-    label: __("Form Fields", "th-login"),
+    label: __("Form Fields", "themehunk-login-registration"),
     icon: "feedback"
   },
   {
     id: "display-triggers",
-    label: __("Display Triggers", "th-login"),
+    label: __("Display Triggers", "themehunk-login-registration"),
     icon: "visibility"
   },
   {
     id: "design",
-    label: __("Design", "th-login"),
+    label: __("Design", "themehunk-login-registration"),
     icon: "art"
   },
   {
     id: "security",
-    label: __("Security", "th-login"),
+    label: __("Security", "themehunk-login-registration"),
     icon: "shield"
   },
   {
     id: "email",
-    label: __("Email Settings", "th-login"),
+    label: __("Email Settings", "themehunk-login-registration"),
     icon: "email"
   },
   {
     id: "integration",
-    label: __("Integration", "th-login"),
+    label: __("Integration", "themehunk-login-registration"),
     icon: "admin-plugins"
   },
   {
     id: "tools",
-    label: __("Tools", "th-login"),
+    label: __("Tools", "themehunk-login-registration"),
     icon: "admin-tools"
   }
 ];
@@ -460,11 +460,11 @@ export  const display_triggers = {
       pop_up_frequency: { enabled: true, type: "session", days: 7 },
       menu_integration: {
         enabled: false, 
-        item_text_login: __("Login", "th-login"), 
+        item_text_login: __("Login", "themehunk-login-registration"), 
         item_icon_login: "", 
 
         logout: true, 
-        item_text_logout: __("Logout", "th-login"), 
+        item_text_logout: __("Logout", "themehunk-login-registration"), 
         item_icon_logout: "", 
       }
 
@@ -517,79 +517,79 @@ export  const security = {
 
 //deisgn-settings
 export const tabs = [
-  { key: "login", label: __("Login", "th-login") },
-  { key: "register", label: __("Register", "th-login") },
-  { key: "forgot_password", label: __("Forgot", "th-login") },
+  { key: "login", label: __("Login", "themehunk-login-registration") },
+  { key: "register", label: __("Register", "themehunk-login-registration") },
+  { key: "forgot_password", label: __("Forgot", "themehunk-login-registration") },
 ];
 
 export const tabdeisgn = [
-  { key: "design", label: __("Design", "th-login") },
-  { key: "preview", label: __("Preview", "th-login") },
+  { key: "design", label: __("Design", "themehunk-login-registration") },
+  { key: "preview", label: __("Preview", "themehunk-login-registration") },
 ]
 
 export const tabicon = [
-  { key: "with-label", label: __("With Label", "th-login") },
-  { key: "inside-input", label: __("Inside Input", "th-login") },
+  { key: "with-label", label: __("With Label", "themehunk-login-registration") },
+  { key: "inside-input", label: __("Inside Input", "themehunk-login-registration") },
 ]
 
 export const layoutOptions = [
   {
     key: "page",
     icon: "admin-page", // more appropriate than "align-center"
-    label: __("Page/ShortCode", "th-login"),
+    label: __("Page/ShortCode", "themehunk-login-registration"),
     demoClass: "page",
   },
   {	
     key: "popup",
     icon: "align-center",
-    label: __("Popup", "th-login"),
+    label: __("Popup", "themehunk-login-registration"),
     demoClass: "popup",
   },
   {
     key: "slide_in_left",
     icon: "align-pull-left",
-    label: __("Slide-in-left", "th-login"),
+    label: __("Slide-in-left", "themehunk-login-registration"),
     demoClass: "slide-left",
   },
   {
     key: "slide_in_right",
     icon: "align-pull-right",
-    label: __("Slide-in-right", "th-login"),
+    label: __("Slide-in-right", "themehunk-login-registration"),
     demoClass: "slide-right",
   },
 ];
 
 export const fontWeightOptions = [
-  { label: __("Normal", "th-login"), value: 300 },
-  { label: __("Medium", "th-login"), value: 500 },
-  { label: __("Semi-Bold", "th-login"), value: 700 },
-  { label: __("Bold", "th-login"), value: 900 },
+  { label: __("Normal", "themehunk-login-registration"), value: 300 },
+  { label: __("Medium", "themehunk-login-registration"), value: 500 },
+  { label: __("Semi-Bold", "themehunk-login-registration"), value: 700 },
+  { label: __("Bold", "themehunk-login-registration"), value: 900 },
 ];
 
 //general-settings
 export const shortcodes = [
     {
-      label: __("Login Form", "th-login"),
+      label: __("Login Form", "themehunk-login-registration"),
       shortcode: "[thlogin_form]",
-      description: __("Displays only the login form", "th-login"),
+      description: __("Displays only the login form", "themehunk-login-registration"),
     },
     {
-      label: __("Register Form", "th-login"),
-      shortcode: "[th_register_form]",
-      description: __("Displays only the register form", "th-login"),
+      label: __("Register Form", "themehunk-login-registration"),
+      shortcode: "[thlogin_register_form]",
+      description: __("Displays only the register form", "themehunk-login-registration"),
     },
     {
-      label: __("Forgot Password Form", "th-login"),
-      shortcode: "[th_forgot_password_form]",
-      description: __("Displays only the forgot password form", "th-login"),
+      label: __("Forgot Password Form", "themehunk-login-registration"),
+      shortcode: "[thlogin_forgot_password_form]",
+      description: __("Displays only the forgot password form", "themehunk-login-registration"),
     },
     {
-      label: __("Combined Modal", "th-login"),
+      label: __("Combined Modal", "themehunk-login-registration"),
       shortcode: "[thlogin__combined_form]",
-      description: __("Shows the full login/register/forgot modal and auto-triggers it", "th-login"),
+      description: __("Shows the full login/register/forgot modal and auto-triggers it", "themehunk-login-registration"),
     },
         {
-            label: __("Popup Link", "th-login"),
+            label: __("Popup Link", "themehunk-login-registration"),
             shortcode : "[thlogin_popup_auto]",
             description:__("Use this link to generate popup link.")
         }

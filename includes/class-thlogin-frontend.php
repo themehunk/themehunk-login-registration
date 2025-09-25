@@ -47,7 +47,7 @@ class THLogin_Frontend {
 			);
 		}
 
-		wp_enqueue_script(
+		wp_register_script(
 			'thlogin-frontend-script',
 			THLOGIN_URL . 'app/build/public.js',
 			$asset_config['dependencies'],
@@ -58,13 +58,17 @@ class THLogin_Frontend {
 			)
 		);
 
-		wp_enqueue_script(
+		wp_enqueue_script('thlogin-frontend-script');
+
+		wp_register_script(
 			'thlogin-session-timeout',
 			THLOGIN_URL . 'assets/js/session-timeout.js',
 			array( 'jquery' ),
 			THLOGIN_VERSION,
 			true
 		);
+
+		wp_enqueue_script('thlogin-session-timeout');
 
 		wp_localize_script( 'thlogin-session-timeout', 'thloginSessionSettings', array(
 			'enabled'           => $settings['security']['session_timeout']['enabled'] ?? false,
@@ -100,8 +104,8 @@ class THLogin_Frontend {
 
 			$shortcodes_to_check = array(
 				'thlogin_form',
-				'th_register_form',
-				'th_forgot_password_form',
+				'thlogin_register_form',
+				'thlogin_forgot_password_form',
 				'thlogin__combined_form',
 				'thlogin_popup_auto'
 			);
@@ -175,7 +179,7 @@ class THLogin_Frontend {
                     // Add nonce verification for sensitive actions
                     if ($_GET['action'] === 'resetpass' && isset($_GET['key']) && isset($_GET['login'])) {
                       if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'reset-password')) {
-                            wp_die(esc_html__('Security check failed', 'th-login'));
+                            wp_die(esc_html__('Security check failed', 'themehunk-login-registration'));
                         }
                     }
                     return;
@@ -253,7 +257,7 @@ class THLogin_Frontend {
 				wp_safe_redirect( $redirect_url );
 				exit;
 			} else {
-				wp_die( esc_html__( 'Invalid verification link.', 'th-login' ) );
+				wp_die( esc_html__( 'Invalid verification link.', 'themehunk-login-registration' ) );
 			}
 		}
 	}

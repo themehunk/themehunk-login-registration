@@ -266,23 +266,6 @@ class THLogin_Integrations {
 		exit;
 	}
 
-	public function create_my_custom_page() {
-        $page_title = 'My Custom Page';
-        $page_content = '<p>This is the content of my custom page.</p>';
-        $page_slug = 'my-custom-page';
-        $page_status = 'publish';
-        $page_author = 1; // Replace with the actual user ID
-    
-        $new_page_id = wp_insert_post(array(
-            'post_title'    => $page_title,
-            'post_content'  => $page_content,
-            'post_name'     => $page_slug,
-            'post_status'   => $page_status,
-            'post_author'   => $page_author,
-            'post_type'     => 'page'
-        ));
-    }
-
 	public function ensure_thlogin_page_exists() {
 		if ( ! is_admin() || ! current_user_can( 'manage_options' ) ) {
 			return; // Only admins can auto-create/update page

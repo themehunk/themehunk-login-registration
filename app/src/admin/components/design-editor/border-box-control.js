@@ -67,7 +67,7 @@ export const BorderBoxControl = ({
             icon={syncAll ? 'admin-links' : 'editor-unlink'}
             onClick={toggleSync}
             aria-pressed={syncAll}
-            label={__('Toggle sync', 'th-login')}
+            label={__('Toggle sync', 'themehunk-login-registration')}
             showTooltip
           />
         </div>
@@ -82,7 +82,7 @@ export const BorderBoxControl = ({
             <TextControl
               __next40pxDefaultSize={true}
               __nextHasNoMarginBottom={true}
-              label={__(side.charAt(0).toUpperCase() + side.slice(1), 'th-login')}
+              label={__(side.charAt(0).toUpperCase() + side.slice(1), 'themehunk-login-registration')}
               type="number"
               min={min}
               max={max}

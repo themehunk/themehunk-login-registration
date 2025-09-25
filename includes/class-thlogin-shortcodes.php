@@ -82,7 +82,7 @@ class THLogin_Shortcodes {
 			);
 
 			// Using defer for the main frontend script as it needs DOM and other dependencies
-			wp_enqueue_script(
+			wp_register_script(
 				'thlogin-frontend-script',
 				THLOGIN_URL . 'app/build/public.js',
 				$asset_config['dependencies'],
@@ -92,6 +92,8 @@ class THLogin_Shortcodes {
 					'strategy' => 'defer',
 				)
 			);
+
+			wp_enqueue_script('thlogin-frontend-script');
 
 			wp_enqueue_style(
 				'thlogin-frontend-style',

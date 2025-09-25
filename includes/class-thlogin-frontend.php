@@ -47,7 +47,7 @@ class THLogin_Frontend {
 			);
 		}
 
-		wp_enqueue_script(
+		wp_register_script(
 			'thlogin-frontend-script',
 			THLOGIN_URL . 'app/build/public.js',
 			$asset_config['dependencies'],
@@ -58,13 +58,17 @@ class THLogin_Frontend {
 			)
 		);
 
-		wp_enqueue_script(
+		wp_enqueue_script('thlogin-frontend-script');
+
+		wp_register_script(
 			'thlogin-session-timeout',
 			THLOGIN_URL . 'assets/js/session-timeout.js',
 			array( 'jquery' ),
 			THLOGIN_VERSION,
 			true
 		);
+
+		wp_enqueue_script('thlogin-session-timeout');
 
 		wp_localize_script( 'thlogin-session-timeout', 'thloginSessionSettings', array(
 			'enabled'           => $settings['security']['session_timeout']['enabled'] ?? false,

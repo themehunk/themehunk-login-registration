@@ -33,8 +33,8 @@ class THLogin_Admin {
 
 	public function register_admin_menu_page() {
 		add_menu_page(
-			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Page title
-			esc_html__( 'TH Login', 'themehunk-login-registration' ), // Menu title
+			esc_html__( 'Themehunk Login Registration', 'themehunk-login-registration' ), // Page title
+			esc_html__( 'Themehunk Login Registration', 'themehunk-login-registration' ), // Menu title
 			'manage_options',                     // Capability
 			'thlogin-settings',                   // Slug
 			array( $this, 'render_admin_page' ),  // Callback
@@ -54,7 +54,7 @@ class THLogin_Admin {
 				<div class="thlogin-loader-circle"></div>
 				<div class="thlogin-loader-circle"></div>
 				<div class="thlogin-loader-circle"></div>
-					<p class="thlogin-loading-text"><?php echo esc_html__( 'Loading settings...', 'themehunk-login-registration' ); ?></p>
+					<p class="thlogin-loading-text"><?php echo esc_html_e( 'Loading settings...', 'themehunk-login-registration' ); ?></p>
 			</div>
 		</div>
 		<?php
@@ -79,7 +79,7 @@ class THLogin_Admin {
 		wp_enqueue_style( 'wp-edit-blocks' );
 
 		// Enqueue the admin.js file with defer
-		wp_enqueue_script(
+		wp_register_script(
 			'thlogin-admin-script',
 			THLOGIN_URL . 'app/build/admin.js',
 			$asset_config['dependencies'],
@@ -89,6 +89,8 @@ class THLogin_Admin {
 				'strategy' => 'defer' // Using defer for better control
 			)
 		);
+
+		wp_enqueue_script('thlogin-admin-script');
 
 		// Enqueue the admin.css file
 		wp_enqueue_style(

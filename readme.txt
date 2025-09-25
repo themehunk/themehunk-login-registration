@@ -104,6 +104,11 @@ This plugin integrates with the following third-party services:
 Yes, you can disable reCAPTCHA by unchecking the reCAPTCHA option in the plugin settings.
 
 == Changelog ==
+= 25-09-2025 =
+Plugin Name Changed.
+Plugin text-domain changed.
+escaping in where it is required.
+
 
 = 1.0.2 =
 * Update: Text domain changed.

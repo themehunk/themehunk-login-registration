@@ -56,10 +56,10 @@ export const BorderRadiusControl = ({
   };
 
   const corners = [
-    { key: 'topLeft', label: __('Top Left', 'th-login') },
-    { key: 'topRight', label: __('Top Right', 'th-login') },
-    { key: 'bottomRight', label: __('Bottom Right', 'th-login') },
-    { key: 'bottomLeft', label: __('Bottom Left', 'th-login') },
+    { key: 'topLeft', label: __('Top Left', 'themehunk-login-registration') },
+    { key: 'topRight', label: __('Top Right', 'themehunk-login-registration') },
+    { key: 'bottomRight', label: __('Bottom Right', 'themehunk-login-registration') },
+    { key: 'bottomLeft', label: __('Bottom Left', 'themehunk-login-registration') },
   ];
 
   return (
@@ -73,7 +73,7 @@ export const BorderRadiusControl = ({
             icon={syncAll ? 'admin-links' : 'editor-unlink'}
             onClick={toggleSync}
             aria-pressed={syncAll}
-            label={__('Toggle sync', 'th-login')}
+            label={__('Toggle sync', 'themehunk-login-registration')}
             showTooltip
           />
         </div>

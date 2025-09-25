@@ -35,11 +35,11 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
     }, []);
 
     const tabs = [
-        { key: "auto_open", label: __("Auto-Open", "th-login") },
-        { key: "page_conditions", label: __("Page Conditions", "th-login") },
-        { key: "device", label: __("Device Visibility", "th-login") },
-        { key: "frequency", label: __("Frequency", "th-login") },
-        { key: "menu", label: __("Menu Integration", "th-login") },
+        { key: "auto_open", label: __("Auto-Open", "themehunk-login-registration") },
+        { key: "page_conditions", label: __("Page Conditions", "themehunk-login-registration") },
+        { key: "device", label: __("Device Visibility", "themehunk-login-registration") },
+        { key: "frequency", label: __("Frequency", "themehunk-login-registration") },
+        { key: "menu", label: __("Menu Integration", "themehunk-login-registration") },
     ];
 
     const renderTabs = () => (
@@ -64,7 +64,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                 <h2 className="section-title">
                     <i className="dashicons dashicons-visibility"></i>
-                    {__("Display Triggers", "th-login")}
+                    {__("Display Triggers", "themehunk-login-registration")}
                 </h2>
 
                 {renderTabs()}
@@ -72,14 +72,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "auto_open" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Auto-Open Conditions", "th-login")}
+                        {__("Auto-Open Conditions", "themehunk-login-registration")}
                         </h3>
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("On Page Load", "th-login")}</h4>
+                                <h4>{__("On Page Load", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                {__("Automatically open when page loads", "th-login")}
+                                {__("Automatically open when page loads", "themehunk-login-registration")}
                                 </p>
                             </div>
 
@@ -106,9 +106,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group login-group">
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                    <h4>{__("Delay (seconds)", "th-login")}</h4>
+                                    <h4>{__("Delay (seconds)", "themehunk-login-registration")}</h4>
                                     <p className="description">
-                                        {__("Delay before showing the modal", "th-login")}
+                                        {__("Delay before showing the modal", "themehunk-login-registration")}
                                     </p>
                                     </div>
                                     <div className="setting-control text-small-box">
@@ -137,9 +137,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Auto-Open on Scroll", "th-login")}</h4>
+                                <h4>{__("Auto-Open on Scroll", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal when the user scrolls down a certain percentage of the page.", "th-login")}
+                                {__("Automatically open the modal when the user scrolls down a certain percentage of the page.", "themehunk-login-registration")}
                                 </p>
                             </div>
 
@@ -157,9 +157,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group login-group">
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                    <h4>{__("Scroll Percentage (%)", "th-login")}</h4>
+                                    <h4>{__("Scroll Percentage (%)", "themehunk-login-registration")}</h4>
                                     <p className="description">
-                                        {__("Percentage of the page scrolled before the modal opens.", "th-login")}
+                                        {__("Percentage of the page scrolled before the modal opens.", "themehunk-login-registration")}
                                     </p>
                                     </div>
                                     <div className="setting-control text-small-box">
@@ -179,9 +179,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Auto-Open on Exit Intent", "th-login")}</h4>
+                                <h4>{__("Auto-Open on Exit Intent", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "th-login")}
+                                {__("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "themehunk-login-registration")}
                                 </p>
                             </div>
 
@@ -196,9 +196,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Auto-Open on Time on Page", "th-login")}</h4>
+                                <h4>{__("Auto-Open on Time on Page", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                {__("Automatically open the modal after the user spends a specified amount of time on the page.", "th-login")}
+                                {__("Automatically open the modal after the user spends a specified amount of time on the page.", "themehunk-login-registration")}
                                 </p>
                             </div>
 
@@ -216,9 +216,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group login-group">
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                    <h4>{__("Time on Page (seconds)", "th-login")}</h4>
+                                    <h4>{__("Time on Page (seconds)", "themehunk-login-registration")}</h4>
                                     <p className="description">
-                                        {__("Time in seconds before the modal opens.", "th-login")}
+                                        {__("Time in seconds before the modal opens.", "themehunk-login-registration")}
                                     </p>
                                     </div>
                                     <div className="setting-control text-small-box">
@@ -241,14 +241,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "page_conditions" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Page & Content Conditions", "th-login")}
+                        {__("Page & Content Conditions", "themehunk-login-registration")}
                         </h3>
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Specific Pages/Posts", "th-login")}</h4>
+                            <h4>{__("Specific Pages/Posts", "themehunk-login-registration")}</h4>
                             <p className="description">
-                            {__("Show on specific pages or posts", "th-login")}
+                            {__("Show on specific pages or posts", "themehunk-login-registration")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -277,7 +277,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
                                
                                 <FormTokenField
-                                    label={__('Select Pages/Posts', 'th-login')}
+                                    label={__('Select Pages/Posts', 'themehunk-login-registration')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_pages?.page_ids?.map(id => {
                                             const matched = [...suggestions.pages, ...suggestions.posts].find(p => p.id === id);
@@ -314,9 +314,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                    
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Page/Post IDs", "th-login")}</h4>
+                                        <h4>{__("Page/Post IDs", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                        {__("Comma-separated list of IDs", "th-login")}
+                                        {__("Comma-separated list of IDs", "themehunk-login-registration")}
                                         </p>
                                     </div>
                                     <div className="setting-control">
@@ -349,9 +349,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Page/Post Slugs", "th-login")}</h4>
+                                        <h4>{__("Page/Post Slugs", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                        {__("Comma-separated list of slugs", "th-login")}
+                                        {__("Comma-separated list of slugs", "themehunk-login-registration")}
                                         </p>
                                     </div>
                                     <div className="setting-control">
@@ -383,9 +383,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Show on Specific Categories", "th-login")}</h4>
+                                <h4>{__("Show on Specific Categories", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                {__("Control modal display on posts within specific categories.", "th-login")}
+                                {__("Control modal display on posts within specific categories.", "themehunk-login-registration")}
                                 </p>
                             </div>
 
@@ -402,7 +402,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
 
                                 <FormTokenField
-                                    label={__('Select Categories', 'th-login')}
+                                    label={__('Select Categories', 'themehunk-login-registration')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_categories?.category_ids?.map(id => {
                                             const matched = suggestions.categories?.find(cat => cat.id === id);
@@ -440,9 +440,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Category IDs (comma-separated)", "th-login")}</h4>
+                                        <h4>{__("Category IDs (comma-separated)", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                        {__("Enter category IDs (e.g., 5, 12).", "th-login")}
+                                        {__("Enter category IDs (e.g., 5, 12).", "themehunk-login-registration")}
                                         </p>
                                     </div>
 
@@ -458,9 +458,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                    <h4>{__("Category Slugs (comma-separated)", "th-login")}</h4>
+                                    <h4>{__("Category Slugs (comma-separated)", "themehunk-login-registration")}</h4>
                                     <p className="description">
-                                    {__("Enter category slugs (e.g., news, blog).", "th-login")}
+                                    {__("Enter category slugs (e.g., news, blog).", "themehunk-login-registration")}
                                     </p>
                                 </div>
                                 <div className="setting-control">
@@ -477,9 +477,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Show on Specific Tags", "th-login")}</h4>
+                                <h4>{__("Show on Specific Tags", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                {__("Control modal display on posts with specific tags.", "th-login")}
+                                {__("Control modal display on posts with specific tags.", "themehunk-login-registration")}
                                 </p>
                             </div>
 
@@ -496,7 +496,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             <div className="menu-item-group">
 
                                 <FormTokenField
-                                    label={__('Select Tags', 'th-login')}
+                                    label={__('Select Tags', 'themehunk-login-registration')}
                                     value={
                                         settings.display_triggers.auto_open_conditions?.on_specific_tags?.tag_ids?.map(id => {
                                             const matched = suggestions.tags?.find(tag => tag.id === id);
@@ -533,9 +533,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Tag IDs (comma-separated)", "th-login")}</h4>
+                                        <h4>{__("Tag IDs (comma-separated)", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                        {__("Enter tag IDs (e.g., 7, 15).", "th-login")}
+                                        {__("Enter tag IDs (e.g., 7, 15).", "themehunk-login-registration")}
                                         </p>
                                     </div>
 
@@ -551,9 +551,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                 <div className="setting-row under-small-portion">
                                     <div className="setting-label">
-                                        <h4>{__("Tag Slugs (comma-separated)", "th-login")}</h4>
+                                        <h4>{__("Tag Slugs (comma-separated)", "themehunk-login-registration")}</h4>
                                         <p className="description">
-                                        {__("Enter tag slugs (e.g., featured, popular).", "th-login")}
+                                        {__("Enter tag slugs (e.g., featured, popular).", "themehunk-login-registration")}
                                         </p>
                                     </div>
 
@@ -576,14 +576,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "device" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Device Visibility", "th-login")}
+                        {__("Device Visibility", "themehunk-login-registration")}
                         </h3>
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Desktop", "th-login")}</h4>
+                            <h4>{__("Desktop", "themehunk-login-registration")}</h4>
                             <p className="description">
-                            {__("Show on desktop devices", "th-login")}
+                            {__("Show on desktop devices", "themehunk-login-registration")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -610,9 +610,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Tablet", "th-login")}</h4>
+                            <h4>{__("Tablet", "themehunk-login-registration")}</h4>
                             <p className="description">
-                            {__("Show on tablet devices", "th-login")}
+                            {__("Show on tablet devices", "themehunk-login-registration")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -639,9 +639,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Mobile", "th-login")}</h4>
+                            <h4>{__("Mobile", "themehunk-login-registration")}</h4>
                             <p className="description">
-                            {__("Show on mobile devices", "th-login")}
+                            {__("Show on mobile devices", "themehunk-login-registration")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -671,14 +671,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                 {activeTab === "frequency" && (
                     <div className="settings-group">
                         <h3 className="group-title">
-                        {__("Pop-up Frequency", "th-login")}
+                        {__("Pop-up Frequency", "themehunk-login-registration")}
                         </h3>
 
                         <div className="setting-row">
                         <div className="setting-label">
-                            <h4>{__("Enable Frequency Control", "th-login")}</h4>
+                            <h4>{__("Enable Frequency Control", "themehunk-login-registration")}</h4>
                             <p className="description">
-                            {__("Control how often pop-up appears", "th-login")}
+                            {__("Control how often pop-up appears", "themehunk-login-registration")}
                             </p>
                         </div>
                         <div className="setting-control">
@@ -704,17 +704,17 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                           <div className="menu-item-group login-group">
                             <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                    <h4>{__("Frequency Type", "th-login")}</h4>
+                                    <h4>{__("Frequency Type", "themehunk-login-registration")}</h4>
                                     <p className="description">
-                                    {__("How to limit pop-up frequency", "th-login")}
+                                    {__("How to limit pop-up frequency", "themehunk-login-registration")}
                                     </p>
                                 </div>
 
                                 <div className="setting-control thlogin-toggle-group" style={{maxWidth: '350px'}}>
                                     <div className="custom-tabs">
                                         {[
-                                        { key: "session", label: __("Once per session", "th-login") },
-                                        { key: "days", label: __("Once every X days", "th-login") },
+                                        { key: "session", label: __("Once per session", "themehunk-login-registration") },
+                                        { key: "days", label: __("Once every X days", "themehunk-login-registration") },
                                         ].map((tab) => (
                                         <button
                                             key={tab.key}
@@ -737,9 +737,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                             "days" && (
                             <div className="setting-row under-small-portion">
                                 <div className="setting-label">
-                                <h4>{__("Days to Hide", "th-login")}</h4>
+                                <h4>{__("Days to Hide", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                    {__("Days before showing again", "th-login")}
+                                    {__("Days before showing again", "themehunk-login-registration")}
                                 </p>
                                 </div>
                                 <div className="setting-control text-small-box">
@@ -772,14 +772,14 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                     <div className="settings-group">
 
                         <h3 className="group-title">
-                        {__("Menu Integration", "th-login")}
+                        {__("Menu Integration", "themehunk-login-registration")}
                         </h3>
 
                         <div className="setting-row">
                             <div className="setting-label">
-                                <h4>{__("Enable Menu Items", "th-login")}</h4>
+                                <h4>{__("Enable Menu Items", "themehunk-login-registration")}</h4>
                                 <p className="description">
-                                {__("Add login/register links to menus", "th-login")}
+                                {__("Add login/register links to menus", "themehunk-login-registration")}
                                 </p>
                             </div>
                             <div className="setting-control">
@@ -805,9 +805,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                 <div className="menu-item-group login-group">
                                     <div className="setting-row under-small-portion">
                                         <div className="setting-label">
-                                            <h4>{__("Item Text", "th-login")}</h4>
+                                            <h4>{__("Item Text", "themehunk-login-registration")}</h4>
                                             <p className="description">
-                                            {__("Text for menu item", "th-login")}
+                                            {__("Text for menu item", "themehunk-login-registration")}
                                             </p>
                                         </div>
 
@@ -817,7 +817,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                                 __nextHasNoMarginBottom={true}
                                                 value={
                                                     settings.display_triggers.menu_integration
-                                                    ?.item_text_login || __("Login", "th-login")
+                                                    ?.item_text_login || __("Login", "themehunk-login-registration")
                                                 }
                                                 onChange={(newValue) =>
                                                     handleSettingChange(
@@ -832,16 +832,16 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                     <div className="setting-row under-small-portion">
                                         <div className="setting-label">
-                                            <h4>{__("Login Item Icon", "th-login")}</h4>
+                                            <h4>{__("Login Item Icon", "themehunk-login-registration")}</h4>
                                             <p className="description">
-                                            {__("Dashicon for login menu item", "th-login")}
+                                            {__("Dashicon for login menu item", "themehunk-login-registration")}
                                             </p>
                                         </div>
                                         <div className="setting-control">
 
                                             <div className="thl-icon-picker">
                                             <label className="components-base-control__label">
-                                                {__("Choose Icon", "th-login")}
+                                                {__("Choose Icon", "themehunk-login-registration")}
                                             </label>
 
                                             <div
@@ -894,9 +894,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                         <div className="setting-row">
                                             <div className="setting-label">
-                                                <h4>{__("Enable Log Out Button", "th-login")}</h4>
+                                                <h4>{__("Enable Log Out Button", "themehunk-login-registration")}</h4>
                                                 <p className="description">
-                                                    {__("Add log out button to menus", "th-login")}
+                                                    {__("Add log out button to menus", "themehunk-login-registration")}
                                                 </p>
                                             </div>
                                             <div className="setting-control">
@@ -922,9 +922,9 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                                 
                                                 <div className="setting-row under-small-portion th-login-logout-integration">
                                                     <div className="setting-label">
-                                                        <h4>{__("Item Text", "th-login")}</h4>
+                                                        <h4>{__("Item Text", "themehunk-login-registration")}</h4>
                                                         <p className="description">
-                                                        {__("Text for menu item", "th-login")}
+                                                        {__("Text for menu item", "themehunk-login-registration")}
                                                         </p>
                                                     </div>
 
@@ -934,7 +934,7 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
                                                             __nextHasNoMarginBottom={true}
                                                             value={
                                                                 settings.display_triggers.menu_integration
-                                                                ?.item_text_logout || __("Login", "th-login")
+                                                                ?.item_text_logout || __("Login", "themehunk-login-registration")
                                                             }
                                                             onChange={(newValue) =>
                                                                 handleSettingChange(
@@ -949,16 +949,16 @@ const DisplayTriggersSettings = ({ settings, handleSettingChange }) => {
 
                                                 <div className="setting-row under-small-portion th-login-logout-integration">
                                                     <div className="setting-label">
-                                                        <h4>{__("Logout Item Icon", "th-login")}</h4>
+                                                        <h4>{__("Logout Item Icon", "themehunk-login-registration")}</h4>
                                                         <p className="description">
-                                                        {__("Dashicon for logout menu item", "th-login")}
+                                                        {__("Dashicon for logout menu item", "themehunk-login-registration")}
                                                         </p>
                                                     </div>
                                                     <div className="setting-control">
 
                                                         <div className="thl-icon-picker">
                                                         <label className="components-base-control__label">
-                                                            {__("Choose Icon", "th-login")}
+                                                            {__("Choose Icon", "themehunk-login-registration")}
                                                         </label>
 
                                                         <div

@@ -1,15 +1,15 @@
-# 📦 Themehunk Login Registration Plugin – Full Technical Documentation (Developer Readme)
+# 📦 TH Login Plugin – Full Technical Documentation (Developer Readme)
 
-This comprehensive developer documentation covers every file, class, function, REST API route, and flow in the **Themehunk Login Registration** WordPress plugin. It serves as both an internal development guide and technical manual for contributors, maintainers, and advanced users.
+This comprehensive developer documentation covers every file, class, function, REST API route, and flow in the **TH Login** WordPress plugin. It serves as both an internal development guide and technical manual for contributors, maintainers, and advanced users.
 
 ## 📁 Folder Structure Overview
 
-themehunk-login-registration/
-├── themehunk-login-registration.php                                            # Main plugin bootstrap file
+th-login/
+├── th-login.php                                            # Main plugin bootstrap file
 ├── readme.txt                                              # WordPress.org standard readme
 ├── assets/                                                 # Static frontend/admin assets
 │   └── images/
-│       └── themehunk-login-registration-logo.svg                               # Branding/logo image
+│       └── th-login-logo.svg                               # Branding/logo image
 ├── includes/                                               # Core logic classes
 │   ├── class-thlogin-admin.php                             # Admin settings panel logic
 │   ├── class-thlogin-frontend.php                          # Frontend popup logic
@@ -154,7 +154,7 @@ REST API Endpoints (Defined in class-thlogin-rest-api.php)
 * **GET** `/wp-json/thlogin/v1/lockout`: Brute force status query.
 
 File: includes/helpers/class-thlogin-defaults.php
-    Purpose: This class defines the default settings for all major panels of the Themehunk Login Registration plugin. It provides a centralized method to reset or initialize all plugin options with structured, validated values. Useful during plugin activation, reset, or migrations.
+    Purpose: This class defines the default settings for all major panels of the TH Login plugin. It provides a centralized method to reset or initialize all plugin options with structured, validated values. Useful during plugin activation, reset, or migrations.
 
     Method: set_all_defaults()
         Registers and saves all default plugin options into a single database option:
@@ -265,8 +265,8 @@ File: class-thlogin-shortcodes.php
         | Shortcode                   | Description                                                               |
         | --------------------------- | ------------------------------------------------------------------------- |
         | `[thlogin_form]`            | Renders the login form.                                                   |
-        | `[thlogin_register_form]`        | Renders the registration form.                                            |
-        | `[thlogin_forgot_password_form]` | Renders the forgot password form.                                         |
+        | `[th_register_form]`        | Renders the registration form.                                            |
+        | `[th_forgot_password_form]` | Renders the forgot password form.                                         |
         | `[thlogin_combined_form]`   | Renders an inline layout of login/register/forgot forms with toggle tabs. |
         | `[thlogin_popup_auto]`      | Automatically opens the login/register modal on page load.                |
 
@@ -392,7 +392,7 @@ File:includes/class-thlogin-security.php
             ];
 
         * Lockout response:
-            new WP_Error( 'thlogin_locked_out', __( 'Too many failed login attempts. Please try again after X minutes.', 'themehunk-login-registration' ) );
+            new WP_Error( 'thlogin_locked_out', __( 'Too many failed login attempts. Please try again after X minutes.', 'th-login' ) );
 
         * Debugging View:
             Visit `/wp-admin/?thlogin_debug=1` (requires `manage_options` capability) to print all active failed attempts.
@@ -554,7 +554,7 @@ File: Sanitization and Validation Documentation
 
         ### Example Validation:
             if ( ! in_array( $settings['general']['default_form_type'], [ 'login', 'register', 'forgot_password' ], true ) ) {
-                $errors->add( 'invalid_form_type', __( 'Invalid default form type selected.', 'themehunk-login-registration' ) );
+                $errors->add( 'invalid_form_type', __( 'Invalid default form type selected.', 'th-login' ) );
             }
 
 
@@ -562,7 +562,7 @@ File: Sanitization and Validation Documentation
         If validation fails, a `WP_Error` is returned:
         return new WP_Error(
             'validation_errors',
-            __( 'There were validation errors.', 'themehunk-login-registration' ),
+            __( 'There were validation errors.', 'th-login' ),
             $errors->get_error_messages()
         );
 

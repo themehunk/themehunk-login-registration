@@ -7246,7 +7246,7 @@ var App = function App() {
             } else {
               setMessage({
                 type: "error",
-                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "themehunk-login-registration")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to load settings.", "thlogin")
               });
             }
             _context.n = 4;
@@ -7257,7 +7257,7 @@ var App = function App() {
             console.error("Error fetching settings:", _t);
             setMessage({
               type: "error",
-              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "themehunk-login-registration")
+              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error loading settings. Please check console.", "thlogin")
             });
           case 4:
             _context.p = 4;
@@ -7344,7 +7344,7 @@ var App = function App() {
             } else {
               setMessage({
                 type: "error",
-                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to save settings.", "themehunk-login-registration")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to save settings.", "thlogin")
               });
             }
             _context2.n = 4;
@@ -7354,7 +7354,7 @@ var App = function App() {
             _t2 = _context2.v;
             setMessage({
               type: "error",
-              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error saving settings. Please check console.", "themehunk-login-registration")
+              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error saving settings. Please check console.", "thlogin")
             });
             console.error("Error saving settings:", _t2);
           case 4:
@@ -7383,18 +7383,18 @@ var App = function App() {
       navigator.clipboard.writeText(settingsToExport).then(function () {
         return setMessage({
           type: "success",
-          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings copied to clipboard!", "themehunk-login-registration")
+          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings copied to clipboard!", "thlogin")
         });
       })["catch"](function () {
         return setMessage({
           type: "error",
-          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to copy settings to clipboard. Please copy manually.", "themehunk-login-registration")
+          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to copy settings to clipboard. Please copy manually.", "thlogin")
         });
       });
     } else {
       setMessage({
         type: "info",
-        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Please manually copy the settings from the text area below.", "themehunk-login-registration")
+        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Please manually copy the settings from the text area below.", "thlogin")
       });
       if (importTextareaRef.current) {
         importTextareaRef.current.select();
@@ -7415,7 +7415,7 @@ var App = function App() {
               _context3.n = 2;
               break;
             }
-            throw new Error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Invalid settings format. Please provide a valid JSON object.", "themehunk-login-registration"));
+            throw new Error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Invalid settings format. Please provide a valid JSON object.", "thlogin"));
           case 2:
             _context3.n = 3;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
@@ -7437,7 +7437,7 @@ var App = function App() {
             } else {
               setMessage({
                 type: "error",
-                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to import settings.", "themehunk-login-registration")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to import settings.", "thlogin")
               });
             }
             _context3.n = 5;
@@ -7447,7 +7447,7 @@ var App = function App() {
             _t3 = _context3.v;
             setMessage({
               type: "error",
-              text: _t3.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error parsing or importing settings. Please ensure valid JSON.", "themehunk-login-registration")
+              text: _t3.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error parsing or importing settings. Please ensure valid JSON.", "thlogin")
             });
             console.error("Error importing settings:", _t3);
           case 5:
@@ -7493,7 +7493,7 @@ var App = function App() {
             } else {
               setMessage({
                 type: "error",
-                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to reset settings.", "themehunk-login-registration")
+                text: response.message || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Failed to reset settings.", "th-login")
               });
             }
             _context4.n = 4;
@@ -7503,7 +7503,7 @@ var App = function App() {
             _t4 = _context4.v;
             setMessage({
               type: "error",
-              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error resetting settings. Please check console.", "themehunk-login-registration")
+              text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Error resetting settings. Please check console.", "th-login")
             });
             console.error("Error resetting settings:", _t4);
           case 4:
@@ -7530,7 +7530,7 @@ var App = function App() {
     className: "header-content"
   }, /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement("span", {
     className: "th-logo"
-  }, "TH"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Settings", "themehunk-login-registration")), message && /*#__PURE__*/React.createElement("div", {
+  }, "TH"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Settings", "thlogin")), message && /*#__PURE__*/React.createElement("div", {
     className: "notice-banner ".concat(message.type)
   }, /*#__PURE__*/React.createElement("p", null, message.text)))), !isLoading && hasFetched && !(settings !== null && settings !== void 0 && settings.general) ? /*#__PURE__*/React.createElement("div", {
     className: "thlogin-fetch-error-overlay"
@@ -7538,10 +7538,10 @@ var App = function App() {
     className: "error-box"
   }, /*#__PURE__*/React.createElement("span", {
     className: "dashicons dashicons-warning"
-  }), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unable to load settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorry, we're currently unable to fetch your settings. Please try again.", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+  }), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Unable to load settings", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Sorry, we're currently unable to fetch your settings. Please try again.", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     isSecondary: true,
     onClick: fetchSettings
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Retry", "themehunk-login-registration")))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Retry", "thlogin")))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "admin-container"
   }, /*#__PURE__*/React.createElement("nav", {
     className: "admin-sidebar"
@@ -7602,11 +7602,11 @@ var App = function App() {
     style: {
       marginLeft: '8px'
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saving...", "themehunk-login-registration"))) : isSaved ? /*#__PURE__*/React.createElement(React.Fragment, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saved", "themehunk-login-registration")) : /*#__PURE__*/React.createElement(React.Fragment, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Save Changes", "themehunk-login-registration"))))), isResetConfirmOpen && /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saving...", "thlogin"))) : isSaved ? /*#__PURE__*/React.createElement(React.Fragment, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Saved", "thlogin")) : /*#__PURE__*/React.createElement(React.Fragment, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Save Changes", "thlogin"))))), isResetConfirmOpen && /*#__PURE__*/React.createElement("div", {
     className: "confirmation-modal"
   }, /*#__PURE__*/React.createElement("div", {
     className: "modal-content"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset All Settings?", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("This will restore all settings to default values. This cannot be undone.", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset All Settings?", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("This will restore all settings to default values. This cannot be undone.", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "modal-actions"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     isSecondary: true,
@@ -7614,11 +7614,11 @@ var App = function App() {
       return setIsResetConfirmOpen(false);
     },
     className: "cancel-button"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel", "thlogin")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     isDestructive: true,
     onClick: handleResetSettings,
     className: "confirm-button"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset Settings", "themehunk-login-registration"))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Reset Settings", "thlogin"))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
@@ -7887,7 +7887,7 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
   }, !onlycolor ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
     __nextHasNoMarginBottom: true,
     __next40pxDefaultSize: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Type", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Type", "th-login"),
     value: type,
     isBlock: true,
     onChange: function onChange(newType) {
@@ -7895,13 +7895,13 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
     value: "color",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "th-login")
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
     value: "gradient",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "th-login")
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
     value: "image",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image", "th-login")
   })), type === "color" && /*#__PURE__*/React.createElement("div", {
     className: "background-color-picker"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
@@ -7946,51 +7946,51 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["gradient"]), value);
     },
     gradients: [{
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "th-login"),
       gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
       slug: "default"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ocean Blue", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Ocean Blue", "th-login"),
       gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
       slug: "ocean-blue"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sunset", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sunset", "th-login"),
       gradient: "linear-gradient(135deg,#ff7e5f 0%,#feb47b 100%)",
       slug: "sunset"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cool Sky", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cool Sky", "th-login"),
       gradient: "linear-gradient(135deg,#2980b9 0%,#6dd5fa 100%)",
       slug: "cool-sky"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Peach", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Peach", "th-login"),
       gradient: "linear-gradient(135deg,#ed4264 0%,#ffedbc 100%)",
       slug: "peach"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Purple Dream", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Purple Dream", "th-login"),
       gradient: "linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%)",
       slug: "purple-dream"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mango", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mango", "th-login"),
       gradient: "linear-gradient(135deg,#ffe259 0%,#ffa751 100%)",
       slug: "mango"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frost", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frost", "th-login"),
       gradient: "linear-gradient(135deg,#000428 0%,#004e92 100%)",
       slug: "frost"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cherry Blossom", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cherry Blossom", "th-login"),
       gradient: "linear-gradient(135deg,#ff9a9e 0%,#fad0c4 99%,#fad0c4 100%)",
       slug: "cherry-blossom"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lush Green", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lush Green", "th-login"),
       gradient: "linear-gradient(135deg,#56ab2f 0%,#a8e063 100%)",
       slug: "lush-green"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Deep Space", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Deep Space", "th-login"),
       gradient: "linear-gradient(135deg,#000000 0%,#434343 100%)",
       slug: "deep-space"
     }, {
-      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rose Gold", "themehunk-login-registration"),
+      name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Rose Gold", "th-login"),
       gradient: "linear-gradient(135deg,#b76e79 0%,#ffe6e6 100%)",
       slug: "rose-gold"
     }]
@@ -7999,7 +7999,7 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image URL", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image URL", "th-login"),
     value: imageURL,
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "url"]), val);
@@ -8022,69 +8022,69 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "thlogin-media-image"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Position", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Position", "th-login"),
     value: position,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Left", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Left", "th-login"),
       value: "top left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Center", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Center", "th-login"),
       value: "top center"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Right", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Top Right", "th-login"),
       value: "top right"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Left", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Left", "th-login"),
       value: "center left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Center", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Center", "th-login"),
       value: "center center"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Right", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Center Right", "th-login"),
       value: "center right"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Left", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Left", "th-login"),
       value: "bottom left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Center", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Center", "th-login"),
       value: "bottom center"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Right", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bottom Right", "th-login"),
       value: "bottom right"
     }],
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "position"]), val);
     }
   }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Size", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Size", "th-login"),
     value: size,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cover", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cover", "th-login"),
       value: "cover"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contain", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contain", "th-login"),
       value: "contain"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto", "th-login"),
       value: "auto"
     }],
     onChange: function onChange(val) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["image", "size"]), val);
     }
   }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "th-login"),
     value: repeat,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No Repeat", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No Repeat", "th-login"),
       value: "no-repeat"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat", "th-login"),
       value: "repeat"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat X", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat X", "th-login"),
       value: "repeat-x"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat Y", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Repeat Y", "th-login"),
       value: "repeat-y"
     }],
     onChange: function onChange(val) {
@@ -8132,7 +8132,7 @@ var BackgroundSettingsPanel = function BackgroundSettingsPanel(_ref) {
       marginTop: "16px"
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Backdrop Filter", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Backdrop Filter", "th-login"),
     value: filter,
     onChange: function onChange(val) {
       handleSettingChange("design", [].concat(_toConsumableArray(path), ["filter"]), val);
@@ -8244,7 +8244,7 @@ var BorderBoxControl = function BorderBoxControl(_ref) {
     icon: syncAll ? 'admin-links' : 'editor-unlink',
     onClick: toggleSync,
     "aria-pressed": syncAll,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'themehunk-login-registration'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'th-login'),
     showTooltip: true
   })), /*#__PURE__*/React.createElement("div", {
     className: "components-border-box-control__input-wrapper"
@@ -8255,7 +8255,7 @@ var BorderBoxControl = function BorderBoxControl(_ref) {
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
       __next40pxDefaultSize: true,
       __nextHasNoMarginBottom: true,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)(side.charAt(0).toUpperCase() + side.slice(1), 'themehunk-login-registration'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)(side.charAt(0).toUpperCase() + side.slice(1), 'th-login'),
       type: "number",
       min: min,
       max: max,
@@ -8354,16 +8354,16 @@ var BorderRadiusControl = function BorderRadiusControl(_ref) {
   };
   var corners = [{
     key: 'topLeft',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top Left', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top Left', 'th-login')
   }, {
     key: 'topRight',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top Right', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top Right', 'th-login')
   }, {
     key: 'bottomRight',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom Right', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom Right', 'th-login')
   }, {
     key: 'bottomLeft',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom Left', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom Left', 'th-login')
   }];
   return /*#__PURE__*/React.createElement(React.Fragment, null, label && /*#__PURE__*/React.createElement("div", {
     className: "components-border-box-control__header"
@@ -8375,7 +8375,7 @@ var BorderRadiusControl = function BorderRadiusControl(_ref) {
     icon: syncAll ? 'admin-links' : 'editor-unlink',
     onClick: toggleSync,
     "aria-pressed": syncAll,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'themehunk-login-registration'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'th-login'),
     showTooltip: true
   })), /*#__PURE__*/React.createElement("div", {
     className: "components-border-box-control__input-wrapper"
@@ -8450,7 +8450,7 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "thlogin-border-controls"
   }, /*#__PURE__*/React.createElement(_border_box_control__WEBPACK_IMPORTED_MODULE_3__.BorderBoxControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Width", "th-login"),
     values: width,
     onChange: function onChange(newVal) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["width"]), newVal);
@@ -8458,22 +8458,22 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
     min: 0,
     max: 1000
   })), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_5__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Style", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Style", "th-login"),
     value: style,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "th-login"),
       value: "solid"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashed", "th-login"),
       value: "dashed"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dotted", "th-login"),
       value: "dotted"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double", "th-login"),
       value: "double"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "th-login"),
       value: "none"
     }],
     className: "modern-border-select-control",
@@ -8489,12 +8489,12 @@ var BorderSettingsPanel = function BorderSettingsPanel(_ref) {
     },
     disableAlpha: false
   }))), /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Radius', 'themehunk-login-registration'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Radius', 'th-login'),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "thlogin-border-controls"
   }, /*#__PURE__*/React.createElement(_border_radius_control__WEBPACK_IMPORTED_MODULE_4__.BorderRadiusControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Border Radius", "th-login"),
     values: radius,
     onChange: function onChange(newVal) {
       return handleSettingChange("design", [].concat(_toConsumableArray(path), ["radius"]), newVal);
@@ -8597,16 +8597,16 @@ var PaddingSettingsPanel = function PaddingSettingsPanel(_ref) {
   };
   var sides = [{
     key: 'top',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Top', 'th-login')
   }, {
     key: 'right',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right', 'th-login')
   }, {
     key: 'bottom',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'th-login')
   }, {
     key: 'left',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'themehunk-login-registration')
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left', 'th-login')
   }];
   return /*#__PURE__*/React.createElement(_accordion_section__WEBPACK_IMPORTED_MODULE_3__["default"], {
     title: title,
@@ -8615,13 +8615,13 @@ var PaddingSettingsPanel = function PaddingSettingsPanel(_ref) {
     className: "components-border-box-control__header"
   }, /*#__PURE__*/React.createElement("span", {
     className: "components-border-box-control__label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Padding Settings', 'themehunk-login-registration')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Padding Settings', 'th-login')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.Button, {
     className: "components-border-box-control__sync-button",
     isSmall: true,
     icon: syncAll ? 'admin-links' : 'editor-unlink',
     onClick: toggleSync,
     "aria-pressed": syncAll,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'themehunk-login-registration'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Toggle sync', 'th-login'),
     showTooltip: true
   })), /*#__PURE__*/React.createElement("div", {
     className: "components-border-box-control__input-wrapper"
@@ -8703,13 +8703,13 @@ function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t =
 
 var tabinside = [{
   key: "form",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Form", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Form", "th-login")
 }, {
   key: "label",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label", "th-login")
 }, {
   key: "header",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Button", "th-login")
 }];
 var getBackgroundStyle = function getBackgroundStyle(background) {
   var _background$image;
@@ -8905,7 +8905,7 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
     className: "thloginpreview-cancel"
   }, close_button && /*#__PURE__*/React.createElement("button", {
     className: "thloginpreview-popup-close-button",
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'themehunk-login-registration'),
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'th-login'),
     onMouseEnter: function onMouseEnter() {
       return setHovered('cancel');
     },
@@ -8928,7 +8928,7 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
       return setHovered(null);
     },
     style: applyButtonStyle(buttonStyle, hovered === 'login')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)((_settings$design$head = settings.design.header) === null || _settings$design$head === void 0 ? void 0 : _settings$design$head.loginText, 'themehunk-login-registration')), /*#__PURE__*/React.createElement("button", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)((_settings$design$head = settings.design.header) === null || _settings$design$head === void 0 ? void 0 : _settings$design$head.loginText, 'th-login')), /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: "thlogin-preview-toggle-button thlogin-preview-toggle-button--register",
     "data-th-popup-action": "register",
@@ -8939,7 +8939,7 @@ var LoginFormHeader = function LoginFormHeader(_ref4) {
       return setHovered(null);
     },
     style: applyButtonStyle(buttonStyle, hovered === 'register')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)((_settings$design$head2 = settings.design.header) === null || _settings$design$head2 === void 0 ? void 0 : _settings$design$head2.registerText, 'themehunk-login-registration'))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)((_settings$design$head2 = settings.design.header) === null || _settings$design$head2 === void 0 ? void 0 : _settings$design$head2.registerText, 'th-login'))));
 };
 var DesignEditor = function DesignEditor(_ref5) {
   var _settings$design$moda, _settings$design$moda2, _settings$design$form, _settings$design$form2, _settings$design$form3;
@@ -9186,8 +9186,8 @@ var DesignEditor = function DesignEditor(_ref5) {
     var renderContent = function renderContent() {
       var _settings$form_fields, _settings$design$logo;
       var fields = ((_settings$form_fields = settings.form_fields) === null || _settings$form_fields === void 0 ? void 0 : _settings$form_fields[activeForm]) || [];
-      var headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "themehunk-login-registration");
-      if (activeForm === "register") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "themehunk-login-registration");else if (activeForm === "forgot_password") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot Password", "themehunk-login-registration");
+      var headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login", "th-login");
+      if (activeForm === "register") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Register", "th-login");else if (activeForm === "forgot_password") headingLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Forgot Password", "th-login");
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(LoginFormHeader, {
         settings: settings
       }), (_settings$design$logo = settings.design.logo) !== null && _settings$design$logo !== void 0 && _settings$design$logo.url ? /*#__PURE__*/React.createElement("div", {
@@ -9365,7 +9365,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-art"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Design Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Design Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "custom-tabs"
   }, _contant__WEBPACK_IMPORTED_MODULE_8__.tabdeisgn.map(function (tab) {
     return /*#__PURE__*/React.createElement("button", {
@@ -9394,7 +9394,7 @@ var DesignEditor = function DesignEditor(_ref5) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "cutsom-tabs-inside-panel"
   }, insidetab === "form" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("layout", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("layout", "th-login"),
     defaultOpen: false,
     className: "deisgn-layout-adjust"
   }, /*#__PURE__*/React.createElement("div", {
@@ -9423,31 +9423,31 @@ var DesignEditor = function DesignEditor(_ref5) {
       size: 16
     }), /*#__PURE__*/React.createElement("span", null, option.label), getLoginPreviewUrl(option)));
   }))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Foreground", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Foreground", "th-login"),
     background: settings.design.modal.modal_background,
     path: ["modal", "modal_background"],
     handleSettingChange: handleSettingChange,
     blur: true
   }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
     background: settings.design.form.form_background,
     path: ["form", "form_background"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
     border: settings.design.form.form_border,
     path: ["form", "form_border"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
     padding: settings.design.form.form_padding,
     path: ["form", "form_padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Field Gap", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Field Gap", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gap', 'themehunk-login-registration'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gap', 'th-login'),
     value: parseInt(settings.design.form.form_gap || 0),
     onChange: function onChange(value) {
       return handleSettingChange("design", ["form", "form_gap"], parseInt(value));
@@ -9457,7 +9457,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     step: 1,
     withInputField: true
   }))), insidetab === "label" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heading", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Heading", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9465,7 +9465,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.heading.color,
@@ -9476,7 +9476,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.heading.typography.size),
@@ -9489,14 +9489,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
     value: settings.design.heading.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["heading", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Logo", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Logo", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9504,7 +9504,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image URL", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.TextControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Image URL", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.TextControl, {
     value: settings.design.logo.url,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["logo", "url"], value);
@@ -9513,7 +9513,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.logo.size),
@@ -9522,7 +9522,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     },
     min: 1
   })))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Label", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Label", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9530,7 +9530,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.Input.labelcolor,
@@ -9541,7 +9541,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.Input.labeltypography.size),
@@ -9554,14 +9554,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Label Font Weight", "th-login"),
     value: settings.design.Input.labeltypography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["Input", "labeltypography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Box", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Input Box", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9569,7 +9569,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.Input.color,
@@ -9580,7 +9580,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Active Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Active Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.Input.activecolor,
@@ -9591,7 +9591,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.Input.typography.size),
@@ -9604,21 +9604,21 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
     value: settings.design.Input.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["Input", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
     background: settings.design.Input.background,
     path: ["Input", "background"],
     handleSettingChange: handleSettingChange,
     blur: false,
     onlycolor: true
   }))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terms and Condition", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Terms and Condition", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9626,7 +9626,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.term.color,
@@ -9637,7 +9637,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Link Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Link Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.term.link,
@@ -9648,7 +9648,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.term.typography.size),
@@ -9661,14 +9661,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
     value: settings.design.term.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["term", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remember Me", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Remember Me", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9676,7 +9676,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.rememberme.color,
@@ -9687,7 +9687,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.rememberme.typography.size),
@@ -9700,14 +9700,14 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
     value: settings.design.rememberme.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["rememberme", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Icon", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Icon", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9715,7 +9715,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.icon.color,
@@ -9726,7 +9726,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.icon.size),
@@ -9737,27 +9737,27 @@ var DesignEditor = function DesignEditor(_ref5) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Icon Position", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Icon Position", "th-login"),
     value: settings.design.icon.icon_position,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["icon", "icon_position"], value);
     },
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("With Label", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("With Label", "th-login"),
       value: "with-label"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inside Input", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Inside Input", "th-login"),
       value: "inside-input"
     }],
     className: "modrn-size-fixer-167"
   }))))), insidetab === 'header' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login/Registration Button", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login/Registration Button", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Buttons", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ToggleControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show Buttons", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ToggleControl, {
     checked: settings.design.header.showButtons,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["header", "showButtons"], value);
@@ -9766,7 +9766,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row th-setting-row-text"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Button Text", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Login Button Text", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "text",
     className: "th-text-input",
     value: settings.design.header.loginText,
@@ -9777,7 +9777,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row th-setting-row-text"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Registration Button Text", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Registration Button Text", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "text",
     className: "th-text-input",
     value: settings.design.header.registerText,
@@ -9790,7 +9790,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.button.color,
@@ -9801,7 +9801,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.header.button.typography.size),
@@ -9811,36 +9811,36 @@ var DesignEditor = function DesignEditor(_ref5) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
     value: settings.design.header.button.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["header", "button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   })), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
     background: settings.design.header.button.background,
     path: ["header", "button", "background"],
     handleSettingChange: handleSettingChange,
     blur: false
   }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login"),
     background: settings.design.header.button.hoverbackground,
     path: ["header", "button", "hoverbackground"],
     handleSettingChange: handleSettingChange,
     blur: false
   })), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
     padding: settings.design.header.button.padding,
     path: ["header", "button", "padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
     border: settings.design.header.button.border,
     path: ["header", "button", "border"],
     handleSettingChange: handleSettingChange
   }))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Submit Button", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Submit Button", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9848,7 +9848,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.button.color,
@@ -9859,7 +9859,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.button.typography.size),
@@ -9872,20 +9872,20 @@ var DesignEditor = function DesignEditor(_ref5) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-select-wrapper modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
     value: settings.design.button.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   })))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
     background: settings.design.button.background,
     path: ["button", "background"],
     handleSettingChange: handleSettingChange,
     blur: false
   }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login"),
     background: settings.design.button.hoverbackground,
     path: ["button", "hoverbackground"],
     handleSettingChange: handleSettingChange,
@@ -9893,17 +9893,17 @@ var DesignEditor = function DesignEditor(_ref5) {
   }), /*#__PURE__*/React.createElement("div", {
     className: "thlogin-border-managemnt-border"
   }, /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
     padding: settings.design.button.padding,
     path: ["button", "padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
     border: settings.design.button.border,
     path: ["button", "border"],
     handleSettingChange: handleSettingChange
   }))), /*#__PURE__*/React.createElement(_design_editor_accordion_section__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel Button", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancel Button", "th-login"),
     defaultOpen: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "th-heading-settings"
@@ -9911,7 +9911,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Text Color", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "color",
     className: "th-color-input",
     value: settings.design.header.cancel_button.color,
@@ -9922,7 +9922,7 @@ var DesignEditor = function DesignEditor(_ref5) {
     className: "th-setting-row"
   }, /*#__PURE__*/React.createElement("label", {
     className: "th-setting-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Size", "th-login")), /*#__PURE__*/React.createElement("input", {
     type: "number",
     className: "th-number-input",
     value: parseInt(settings.design.header.cancel_button.typography.size),
@@ -9932,31 +9932,31 @@ var DesignEditor = function DesignEditor(_ref5) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "th-setting-row modern-sleect-heaidng"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_6__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Font Weight", "th-login"),
     value: settings.design.header.cancel_button.typography.fontWeight,
     onChange: function onChange(value) {
       return handleSettingChange("design", ["header", "cancel_button", "typography", "fontWeight"], value);
     },
     options: _contant__WEBPACK_IMPORTED_MODULE_8__.fontWeightOptions
   }))), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Background", "th-login"),
     background: settings.design.header.cancel_button.background,
     path: ["header", "cancel_button", "background"],
     handleSettingChange: handleSettingChange,
     blur: false
   }), /*#__PURE__*/React.createElement(_design_editor_background_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Hover Background", "th-login"),
     background: settings.design.header.cancel_button.hoverbackground,
     path: ["header", "cancel_button", "hoverbackground"],
     handleSettingChange: handleSettingChange,
     blur: false
   }), /*#__PURE__*/React.createElement(_design_editor_padding_settings_panel__WEBPACK_IMPORTED_MODULE_5__.PaddingSettingsPanel, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Padding", "th-login"),
     padding: settings.design.header.cancel_button.padding,
     path: ["header", "cancel_button", "padding"],
     handleSettingChange: handleSettingChange
   }), /*#__PURE__*/React.createElement(_design_editor_border_settings_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "themehunk-login-registration"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Border", "th-login"),
     border: settings.design.header.cancel_button.border,
     path: ["header", "cancel_button", "border"],
     handleSettingChange: handleSettingChange
@@ -10073,19 +10073,19 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }, []);
   var tabs = [{
     key: "auto_open",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open", "th-login")
   }, {
     key: "page_conditions",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page Conditions", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page Conditions", "th-login")
   }, {
     key: "device",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Device Visibility", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Device Visibility", "th-login")
   }, {
     key: "frequency",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frequency", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frequency", "th-login")
   }, {
     key: "menu",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Menu Integration", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Menu Integration", "th-login")
   }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
@@ -10108,17 +10108,17 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-visibility"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Display Triggers", "themehunk-login-registration")), renderTabs(), activeTab === "auto_open" && /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Display Triggers", "th-login")), renderTabs(), activeTab === "auto_open" && /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open Conditions", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open Conditions", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("On Page Load", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("On Page Load", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open when page loads", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open when page loads", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10132,9 +10132,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delay (seconds)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delay (seconds)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delay before showing the modal", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delay before showing the modal", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10149,9 +10149,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open on Scroll", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open on Scroll", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal when the user scrolls down a certain percentage of the page.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal when the user scrolls down a certain percentage of the page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control  "
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10165,9 +10165,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scroll Percentage (%)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Scroll Percentage (%)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Percentage of the page scrolled before the modal opens.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Percentage of the page scrolled before the modal opens.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10183,9 +10183,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open on Exit Intent", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open on Exit Intent", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal when the user's mouse leaves the browser viewport (e.g., trying to close the tab).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10197,9 +10197,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open on Time on Page", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Open on Time on Page", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal after the user spends a specified amount of time on the page.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically open the modal after the user spends a specified amount of time on the page.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10213,9 +10213,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time on Page (seconds)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time on Page (seconds)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time in seconds before the modal opens.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time in seconds before the modal opens.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10230,13 +10230,13 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page & Content Conditions", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page & Content Conditions", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Specific Pages/Posts", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Specific Pages/Posts", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on specific pages or posts", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on specific pages or posts", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10247,7 +10247,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }))), ((_settings$display_tri10 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri10 === void 0 || (_settings$display_tri10 = _settings$display_tri10.on_specific_pages) === null || _settings$display_tri10 === void 0 ? void 0 : _settings$display_tri10.enabled) && /*#__PURE__*/React.createElement("div", {
     className: "menu-item-group"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FormTokenField, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Pages/Posts', 'themehunk-login-registration'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Pages/Posts', 'th-login'),
     value: ((_settings$display_tri11 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri11 === void 0 || (_settings$display_tri11 = _settings$display_tri11.on_specific_pages) === null || _settings$display_tri11 === void 0 || (_settings$display_tri11 = _settings$display_tri11.page_ids) === null || _settings$display_tri11 === void 0 ? void 0 : _settings$display_tri11.map(function (id) {
       var matched = [].concat(_toConsumableArray(suggestions.pages), _toConsumableArray(suggestions.posts)).find(function (p) {
         return p.id === id;
@@ -10278,9 +10278,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/Post IDs", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/Post IDs", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comma-separated list of IDs", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comma-separated list of IDs", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10298,9 +10298,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/Post Slugs", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/Post Slugs", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comma-separated list of slugs", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Comma-separated list of slugs", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10316,9 +10316,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on Specific Categories", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on Specific Categories", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control modal display on posts within specific categories.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control modal display on posts within specific categories.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10329,7 +10329,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }))), ((_settings$display_tri15 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri15 === void 0 || (_settings$display_tri15 = _settings$display_tri15.on_specific_categories) === null || _settings$display_tri15 === void 0 ? void 0 : _settings$display_tri15.enabled) && /*#__PURE__*/React.createElement("div", {
     className: "menu-item-group"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FormTokenField, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Categories', 'themehunk-login-registration'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Categories', 'th-login'),
     value: ((_settings$display_tri16 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.on_specific_categories) === null || _settings$display_tri16 === void 0 || (_settings$display_tri16 = _settings$display_tri16.category_ids) === null || _settings$display_tri16 === void 0 ? void 0 : _settings$display_tri16.map(function (id) {
       var _suggestions$categori;
       var matched = (_suggestions$categori = suggestions.categories) === null || _suggestions$categori === void 0 ? void 0 : _suggestions$categori.find(function (cat) {
@@ -10363,9 +10363,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Category IDs (comma-separated)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Category IDs (comma-separated)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter category IDs (e.g., 5, 12).", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter category IDs (e.g., 5, 12).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10382,9 +10382,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Category Slugs (comma-separated)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Category Slugs (comma-separated)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter category slugs (e.g., news, blog).", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter category slugs (e.g., news, blog).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10399,9 +10399,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on Specific Tags", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on Specific Tags", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control modal display on posts with specific tags.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control modal display on posts with specific tags.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10412,7 +10412,7 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
   }))), ((_settings$display_tri20 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri20 === void 0 || (_settings$display_tri20 = _settings$display_tri20.on_specific_tags) === null || _settings$display_tri20 === void 0 ? void 0 : _settings$display_tri20.enabled) && /*#__PURE__*/React.createElement("div", {
     className: "menu-item-group"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FormTokenField, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Tags', 'themehunk-login-registration'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Tags', 'th-login'),
     value: ((_settings$display_tri21 = settings.display_triggers.auto_open_conditions) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.on_specific_tags) === null || _settings$display_tri21 === void 0 || (_settings$display_tri21 = _settings$display_tri21.tag_ids) === null || _settings$display_tri21 === void 0 ? void 0 : _settings$display_tri21.map(function (id) {
       var _suggestions$tags;
       var matched = (_suggestions$tags = suggestions.tags) === null || _suggestions$tags === void 0 ? void 0 : _suggestions$tags.find(function (tag) {
@@ -10446,9 +10446,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tag IDs (comma-separated)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tag IDs (comma-separated)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter tag IDs (e.g., 7, 15).", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter tag IDs (e.g., 7, 15).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10465,9 +10465,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tag Slugs (comma-separated)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tag Slugs (comma-separated)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter tag slugs (e.g., featured, popular).", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enter tag slugs (e.g., featured, popular).", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10482,13 +10482,13 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Device Visibility", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Device Visibility", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Desktop", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Desktop", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on desktop devices", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on desktop devices", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10500,9 +10500,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tablet", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tablet", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on tablet devices", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on tablet devices", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10514,9 +10514,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on mobile devices", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show on mobile devices", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10528,13 +10528,13 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pop-up Frequency", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pop-up Frequency", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Frequency Control", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Frequency Control", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control how often pop-up appears", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Control how often pop-up appears", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10548,9 +10548,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frequency Type", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frequency Type", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How to limit pop-up frequency", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How to limit pop-up frequency", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control thlogin-toggle-group",
     style: {
       maxWidth: '350px'
@@ -10559,10 +10559,10 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "custom-tabs"
   }, [{
     key: "session",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once per session", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once per session", "th-login")
   }, {
     key: "days",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Once every X days", "th-login")
   }].map(function (tab) {
     var _settings$display_tri29;
     return /*#__PURE__*/React.createElement("button", {
@@ -10576,9 +10576,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Days to Hide", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Days to Hide", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Days before showing again", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Days before showing again", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control text-small-box"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -10593,13 +10593,13 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Menu Integration", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Menu Integration", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Menu Items", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Menu Items", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add login/register links to menus", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add login/register links to menus", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10613,14 +10613,14 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Item Text", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Item Text", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text for menu item", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text for menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri34 = settings.display_triggers.menu_integration) === null || _settings$display_tri34 === void 0 ? void 0 : _settings$display_tri34.item_text_login) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "themehunk-login-registration"),
+    value: ((_settings$display_tri34 = settings.display_triggers.menu_integration) === null || _settings$display_tri34 === void 0 ? void 0 : _settings$display_tri34.item_text_login) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_login"], newValue);
     }
@@ -10628,15 +10628,15 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Item Icon", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Item Icon", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashicon for login menu item", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashicon for login menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement("div", {
     className: "thl-icon-picker"
   }, /*#__PURE__*/React.createElement("label", {
     className: "components-base-control__label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "icon-picker-trigger",
     onClick: function onClick() {
       return setIconPickerOpen(function (open) {
@@ -10676,9 +10676,9 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Log Out Button", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Log Out Button", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add log out button to menus", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add log out button to menus", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10692,14 +10692,14 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion th-login-logout-integration"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Item Text", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Item Text", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text for menu item", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text for menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    value: ((_settings$display_tri40 = settings.display_triggers.menu_integration) === null || _settings$display_tri40 === void 0 ? void 0 : _settings$display_tri40.item_text_logout) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "themehunk-login-registration"),
+    value: ((_settings$display_tri40 = settings.display_triggers.menu_integration) === null || _settings$display_tri40 === void 0 ? void 0 : _settings$display_tri40.item_text_logout) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
     onChange: function onChange(newValue) {
       return handleSettingChange("display_triggers", ["menu_integration", "item_text_logout"], newValue);
     }
@@ -10707,15 +10707,15 @@ var DisplayTriggersSettings = function DisplayTriggersSettings(_ref) {
     className: "setting-row under-small-portion th-login-logout-integration"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout Item Icon", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout Item Icon", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashicon for logout menu item", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashicon for logout menu item", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement("div", {
     className: "thl-icon-picker"
   }, /*#__PURE__*/React.createElement("label", {
     className: "components-base-control__label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "icon-picker-trigger",
     onClick: function onClick() {
       return setIconPickerOpenlog(function (open) {
@@ -10779,10 +10779,10 @@ var EmailSettings = function EmailSettings(_ref) {
     handleSettingChange = _ref.handleSettingChange;
   var tabs = [{
     key: "wordpress",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WordPress", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WordPress", "th-login")
   }, {
     key: "smtp",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("SMTP", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("SMTP", "th-login")
   }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
@@ -10806,17 +10806,17 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-email"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Email Verification", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Email Verification", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require users to verify their email after registration.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require users to verify their email after registration.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -10830,9 +10830,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     value: ((_settings$security$em5 = settings.security.email_verification) === null || _settings$security$em5 === void 0 ? void 0 : _settings$security$em5.from_name) || "",
@@ -10843,9 +10843,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     type: "email",
@@ -10857,9 +10857,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     value: ((_settings$security$em7 = settings.security.email_verification) === null || _settings$security$em7 === void 0 ? void 0 : _settings$security$em7.email_subject) || "",
@@ -10870,9 +10870,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     value: ((_settings$security$em8 = settings.security.email_verification) === null || _settings$security$em8 === void 0 ? void 0 : _settings$security$em8.email_content) || "",
@@ -10883,9 +10883,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Name", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This name will appear as the sender of the email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     value: ((_settings$security$em0 = settings.security.email_verification) === null || _settings$security$em0 === void 0 ? void 0 : _settings$security$em0.from_name) || "",
@@ -10896,9 +10896,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("From Email", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("This email will be used as the sender address.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     type: "email",
@@ -10910,9 +10910,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Subject", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The subject line of the verification email.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     value: ((_settings$security$em10 = settings.security.email_verification) === null || _settings$security$em10 === void 0 ? void 0 : _settings$security$em10.email_subject) || "",
@@ -10923,9 +10923,9 @@ var EmailSettings = function EmailSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Content", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You can use {verification_link} placeholder which will be replaced with the actual verification link.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
     value: ((_settings$security$em11 = settings.security.email_verification) === null || _settings$security$em11 === void 0 ? void 0 : _settings$security$em11.email_content) || "",
@@ -10942,7 +10942,7 @@ var EmailSettings = function EmailSettings(_ref) {
       fontSize: "14px",
       color: "#084298"
     }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createInterpolateElement)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('<strong>Notice:</strong> To enable email sending features, please go to the <strong>Integration</strong> tab and activate a supported <strong>SMTP plugin</strong>.', 'themehunk-login-registration'), {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.createInterpolateElement)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('<strong>Notice:</strong> To enable email sending features, please go to the <strong>Integration</strong> tab and activate a supported <strong>SMTP plugin</strong>.', 'th-login'), {
     strong: /*#__PURE__*/React.createElement("strong", null)
   }))))));
 };
@@ -11003,14 +11003,14 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 
 var TAB_KEYS = {
-  login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "themehunk-login-registration"),
-  register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "themehunk-login-registration"),
-  forgot_password: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password", "themehunk-login-registration")
+  login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
+  register: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login"),
+  forgot_password: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password", "th-login")
 };
 var DEFAULT_FIELD = function DEFAULT_FIELD() {
   return {
     id: "ff_" + Math.random().toString(36).substring(2, 9),
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("New Field", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("New Field", "th-login"),
     placeholder: "",
     icon: "admin-users",
     required: false,
@@ -11144,7 +11144,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     var newField = DEFAULT_FIELD();
     updateFields([].concat(_toConsumableArray(fields), [newField]));
     setSelectedField(newField);
-    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field added successfully!", "themehunk-login-registration"));
+    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field added successfully!", "th-login"));
   };
   var handleDeleteField = function handleDeleteField(fieldId) {
     var filtered = fields.filter(function (f) {
@@ -11152,7 +11152,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     });
     updateFields(filtered);
     if ((selectedField === null || selectedField === void 0 ? void 0 : selectedField.id) === fieldId) setSelectedField(null);
-    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field deleted", "themehunk-login-registration"));
+    setToastMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field deleted", "th-login"));
   };
   var handleFieldChange = function handleFieldChange(key, value) {
     if (!selectedField) return;
@@ -11208,7 +11208,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-feedback"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form feild Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form feild Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "thl-form-fields-settings"
   }, /*#__PURE__*/React.createElement("div", {
     className: "thl-left-panel"
@@ -11228,9 +11228,9 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "fields-group"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "fields-group-title"
-  }, TAB_KEYS[activeTab], " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fields", "themehunk-login-registration")), fields.length === 0 ? /*#__PURE__*/React.createElement("p", {
+  }, TAB_KEYS[activeTab], " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Fields", "th-login")), fields.length === 0 ? /*#__PURE__*/React.createElement("p", {
     className: "no-fields"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No fields yet.", "themehunk-login-registration")) : fields.map(function (field) {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No fields yet.", "th-login")) : fields.map(function (field) {
     return /*#__PURE__*/React.createElement("div", {
       key: field.id,
       className: classnames__WEBPACK_IMPORTED_MODULE_7___default()("sortable-field-wrapper", {
@@ -11259,12 +11259,12 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "dashicons dashicons-minus"
   })), /*#__PURE__*/React.createElement("span", {
     className: "field-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Submit Button", "themehunk-login-registration")))))))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Submit Button", "th-login")))))))), /*#__PURE__*/React.createElement("div", {
     className: "add-field-button-wrapper"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isSecondary: true,
     onClick: handleAddField
-  }, "+ ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Field", "themehunk-login-registration")))), /*#__PURE__*/React.createElement("div", {
+  }, "+ ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Field", "th-login")))), /*#__PURE__*/React.createElement("div", {
     className: "thl-right-panel"
   }, selectedField ? /*#__PURE__*/React.createElement("div", {
     className: "field-editor"
@@ -11273,7 +11273,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }, selectedField.label || selectedField.id), selectedField.type != "checkbox" && selectedField.id != "terms_and_conditions" ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Label", "th-login"),
     value: decodeEntities(selectedField.label),
     onChange: function onChange(val) {
       return handleFieldChange("label", val);
@@ -11281,16 +11281,16 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }) : /*#__PURE__*/React.createElement("div", {
     className: "terms-conditions-editor"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms Text", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms Text", "th-login"),
     value: decodeEntities(selectedField.label) || "I agree to the [Terms] & [Conditions]",
     onChange: function onChange(val) {
       return handleFieldChange("label", val);
     },
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wrap linkable text in [square brackets]", "themehunk-login-registration")
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Wrap linkable text in [square brackets]", "th-login")
   })), selectedField.id !== "terms_and_conditions" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Placeholder", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Placeholder", "th-login"),
     value: selectedField.placeholder || "",
     onChange: function onChange(val) {
       return handleFieldChange("placeholder", val);
@@ -11298,7 +11298,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   })), selectedField.type === "checkbox" && selectedField.id === "terms_and_conditions" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Terms & Conditions Link", "th-login"),
     placeholder: "https://example.com/terms",
     value: selectedField.link || "",
     onChange: function onChange(val) {
@@ -11307,7 +11307,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Error Message", "th-login"),
     value: decodeEntities(selectedField.error_message) || "",
     onChange: function onChange(val) {
       return handleFieldChange("error_message", val);
@@ -11326,7 +11326,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       fontSize: '13px',
       color: '#757575'
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Live Preview:", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Live Preview:", "th-login")), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: '14px'
     }
@@ -11354,11 +11354,11 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
       color: '#d63638',
       fontStyle: 'italic'
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Don't forget to set URLs for each bracketed term above", "themehunk-login-registration"))), selectedField.id !== "terms_and_conditions" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Don't forget to set URLs for each bracketed term above", "th-login"))), selectedField.id !== "terms_and_conditions" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "thl-icon-picker"
   }, /*#__PURE__*/React.createElement("label", {
     className: "components-base-control__label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Choose Icon", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "icon-picker-trigger",
     onClick: function onClick() {
       return setIconPickerOpen(function (open) {
@@ -11392,7 +11392,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   })))), !selectedField.predefined && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "th-login"),
     value: selectedField.name || "",
     onChange: function onChange(val) {
       return handleFieldChange("name", val);
@@ -11400,13 +11400,13 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ID", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ID", "th-login"),
     value: selectedField.id || "",
     onChange: function onChange(val) {
       return handleFieldChange("id", val);
     }
   }), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_9__.CustomSelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field Type", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Field Type", "th-login"),
     value: selectedField.type || "text",
     options: [{
       label: "Text",
@@ -11425,14 +11425,14 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     className: "thlogin-toggle-one-line"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Required", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Required", "th-login"),
     checked: selectedField.required,
     onChange: function onChange(val) {
       return handleFieldChange("required", val);
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Field", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Field", "th-login"),
     checked: selectedField.show !== false,
     onChange: function onChange(val) {
       return handleFieldChange("show", val);
@@ -11440,7 +11440,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }))), activeTab === "register" && selectedField.type === "password" && selectedField.predefined && selectedField.id !== "confirm_password" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Minimum Length", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Minimum Length", "th-login"),
     type: "number",
     value: selectedField.minInput || "",
     onChange: function onChange(val) {
@@ -11449,7 +11449,7 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maximum Length", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Maximum Length", "th-login"),
     type: "number",
     value: selectedField.maxInput || "",
     onChange: function onChange(val) {
@@ -11460,31 +11460,31 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
     __next40pxDefaultSize: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Letters (A-Z)", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Letters (A-Z)", "th-login"),
     checked: ((_selectedField$check = selectedField.check) === null || _selectedField$check === void 0 ? void 0 : _selectedField$check.text) || false,
     onChange: function onChange() {
       return handleCheckToggle("text");
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Numbers (0-9)", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Numbers (0-9)", "th-login"),
     checked: ((_selectedField$check2 = selectedField.check) === null || _selectedField$check2 === void 0 ? void 0 : _selectedField$check2.number) || false,
     onChange: function onChange() {
       return handleCheckToggle("number");
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Special Characters", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require Special Characters", "th-login"),
     checked: ((_selectedField$check3 = selectedField.check) === null || _selectedField$check3 === void 0 ? void 0 : _selectedField$check3.special_character) || false,
     onChange: function onChange() {
       return handleCheckToggle("special_character");
     }
   })))) : isSubmitFieldSelected ? /*#__PURE__*/React.createElement("div", {
     className: "submit-field-view"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Submit Button Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Submit Button Settings", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
     __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Text", "themehunk-login-registration"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Text", "th-login"),
     value: ((_settings$design = settings.design) === null || _settings$design === void 0 || (_settings$design = _settings$design.submitButton) === null || _settings$design === void 0 ? void 0 : _settings$design[activeTab]) || "",
     onChange: function onChange(val) {
       var updated = _objectSpread(_objectSpread({}, settings.design.submitButton), {}, _defineProperty({}, activeTab, val));
@@ -11497,9 +11497,9 @@ var FormFieldsSettings = function FormFieldsSettings(_ref3) {
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isPrimary: true
-  }, ((_settings$design2 = settings.design) === null || _settings$design2 === void 0 || (_settings$design2 = _settings$design2.submitButton) === null || _settings$design2 === void 0 ? void 0 : _settings$design2[activeTab]) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Submit", "themehunk-login-registration")))) : /*#__PURE__*/React.createElement("div", {
+  }, ((_settings$design2 = settings.design) === null || _settings$design2 === void 0 || (_settings$design2 = _settings$design2.submitButton) === null || _settings$design2 === void 0 ? void 0 : _settings$design2[activeTab]) || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Submit", "th-login")))) : /*#__PURE__*/React.createElement("div", {
     className: "placeholder"
-  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Click a field to edit its settings", "themehunk-login-registration")))), toastMessage && /*#__PURE__*/React.createElement(ToastNotice, {
+  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Click a field to edit its settings", "th-login")))), toastMessage && /*#__PURE__*/React.createElement(ToastNotice, {
     message: toastMessage,
     onClose: function onClose() {
       return setToastMessage("");
@@ -11585,13 +11585,13 @@ var GeneralSettings = function GeneralSettings(_ref) {
     setActiveTab = _useState6[1];
   var tabs = [{
     key: "general",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "th-login")
   }, {
     key: "redirect",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "th-login")
   }, {
     key: "shortcodes",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ShortCodes", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ShortCodes", "th-login")
   }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
@@ -11614,17 +11614,17 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-admin-settings"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General Settings", "themehunk-login-registration")), renderTabs(), activeTab === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General Settings", "th-login")), renderTabs(), activeTab === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Plugin Status", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Plugin Status", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, settings.general.plugin_status === "enabled" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Themehunk Login Registration Plugin is active", "themehunk-login-registration") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Themehunk Login Registration Plugin is inactive", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, settings.general.plugin_status === "enabled" ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is active", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Th Login Plugin is inactive", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -11636,9 +11636,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allow User Registration", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allow User Registration", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If enabled, users can register an account using the register form.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If enabled, users can register an account using the register form.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -11650,16 +11650,16 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "settings-group thlogin-modalchoose-form"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form Type", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form Type", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "form-type-options"
   }, [{
     type: "single",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Form", "themehunk-login-registration"),
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only login form will be shown", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Form", "th-login"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only login form will be shown", "th-login")
   }, {
     type: "double",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "themehunk-login-registration"),
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "th-login"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "th-login")
   }].map(function (_ref2) {
     var type = _ref2.type,
       label = _ref2.label,
@@ -11705,19 +11705,19 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "settings-group thlogin-modalchoose-form"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Display Mode", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Display Mode", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: displayMode,
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/ShortCode", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/ShortCode", "th-login"),
       value: "page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "th-login"),
       value: "popup"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "th-login"),
       value: "slide_in_left"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "th-login"),
       value: "slide_in_right"
     }],
     onChange: function onChange(value) {
@@ -11727,7 +11727,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "settings-group thlogin-modalchoose-form"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register user with role", "themehunk-login-registration"))), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register user with role", "th-login"))), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: settings.general.default_register_role || "subscriber",
     options: availableRoles,
     onChange: function onChange(value) {
@@ -11737,9 +11737,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual User Approval", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual User Approval", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -11751,9 +11751,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Close Button", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Close Button", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If true without user login the panel can close.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("If true without user login the panel can close.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -11765,23 +11765,23 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Redirect", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "redirection-grid"
   }, /*#__PURE__*/React.createElement("div", {
     className: "redirection-card"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: ((_settings$general$red = settings.general.redirects) === null || _settings$general$red === void 0 || (_settings$general$red = _settings$general$red.after_login) === null || _settings$general$red === void 0 ? void 0 : _settings$general$red.type) || "current_page",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "th-login"),
       value: "current_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "th-login"),
       value: "dashboard"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
       value: "home_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
       value: "custom_url"
     }],
     onChange: function onChange(newValue) {
@@ -11797,13 +11797,13 @@ var GeneralSettings = function GeneralSettings(_ref) {
     placeholder: "https://example.com/welcome"
   })), /*#__PURE__*/React.createElement("div", {
     className: "redirection-card"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: ((_settings$general$red3 = settings.general.redirects) === null || _settings$general$red3 === void 0 || (_settings$general$red3 = _settings$general$red3.after_logout) === null || _settings$general$red3 === void 0 ? void 0 : _settings$general$red3.type) || "home_page",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
       value: "home_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
       value: "custom_url"
     }],
     onChange: function onChange(newValue) {
@@ -11821,9 +11821,9 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "setting-row settings-manage-toggle-resitartion"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Login After Registration", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto-Login After Registration", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log users in after registration", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log users in after registration", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -11836,19 +11836,19 @@ var GeneralSettings = function GeneralSettings(_ref) {
     style: {
       marginTop: "12px"
     }
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Registration", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Registration", "th-login")), /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: ((_settings$general$red5 = settings.general.redirects) === null || _settings$general$red5 === void 0 || (_settings$general$red5 = _settings$general$red5.after_register) === null || _settings$general$red5 === void 0 ? void 0 : _settings$general$red5.type) || "dashboard",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Dashboard", "th-login"),
       value: "dashboard"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Current Page", "th-login"),
       value: "current_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Home Page", "th-login"),
       value: "home_page"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom URL", "th-login"),
       value: "custom_url"
     }],
     onChange: function onChange(newValue) {
@@ -11866,7 +11866,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
     className: "settings-group thlogin-shortcodes-list"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shortcodes", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shortcodes", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "shortcode-grid"
   }, _contant__WEBPACK_IMPORTED_MODULE_5__.shortcodes.map(function (_ref3, i) {
     var label = _ref3.label,
@@ -11891,7 +11891,7 @@ var GeneralSettings = function GeneralSettings(_ref) {
       onClick: function onClick() {
         return handleCopy(shortcode, i);
       },
-      title: copiedIndex === i ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "themehunk-login-registration") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "themehunk-login-registration")
+      title: copiedIndex === i ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "th-login")
     }, copiedIndex === i ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Icon, {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"]
     }) : /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Icon, {
@@ -12071,7 +12071,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-admin-plugins"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration Settings", "thlogin")), /*#__PURE__*/React.createElement("div", {
     className: "settings-group integration-woocommerce integration-wordpress"
   }, /*#__PURE__*/React.createElement("div", {
     className: "settings-card woocommerce-card"
@@ -12093,7 +12093,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     d: "M 16 3 C 8.828 3 3 8.828 3 16 C 3 23.172 8.828 29 16 29 C 23.172 29 29 23.172 29 16 C 29 8.828 23.172 3 16 3 z M 16 5.1679688 C 18.82516 5.1679688 21.382078 6.2468336 23.306641 8.0058594 C 23.265326 8.0050228 23.223641 7.9941406 23.171875 7.9941406 C 22.109875 7.9941406 21.417969 8.924875 21.417969 9.921875 C 21.417969 10.820875 21.870828 11.56975 22.423828 12.46875 C 22.834828 13.18375 23.3125 14.115266 23.3125 15.447266 C 23.3125 16.379266 22.965281 17.451031 22.488281 18.957031 L 21.417969 22.564453 L 17.351562 10.037109 C 18.001562 10.004109 18.585938 9.9394531 18.585938 9.9394531 C 19.170937 9.8744531 19.106484 9.0080156 18.521484 9.0410156 C 18.521484 9.0410156 16.766906 9.1816406 15.628906 9.1816406 C 14.567906 9.1816406 12.779297 9.0410156 12.779297 9.0410156 C 12.194297 9.0080156 12.129844 9.9074531 12.714844 9.9394531 C 12.714844 9.9394531 13.266563 10.004109 13.851562 10.037109 L 15.675781 15.544922 L 13.3125 22.652344 L 9.2148438 10.039062 C 9.8758438 10.006063 10.460938 9.9414062 10.460938 9.9414062 C 11.045937 9.8764062 10.970484 9.0099688 10.396484 9.0429688 C 10.396484 9.0429688 8.7146992 9.1764104 7.5761719 9.1816406 C 9.5589323 6.7317465 12.588121 5.1679688 16 5.1679688 z M 25.511719 10.800781 C 26.353267 12.342723 26.832031 14.112696 26.832031 16 C 26.832031 20.289463 24.358708 23.969277 20.759766 25.726562 C 20.993254 25.611348 21.225341 25.495998 21.449219 25.359375 L 24.753906 15.794922 C 25.370906 14.256922 25.576172 13.021016 25.576172 11.916016 C 25.576172 11.515016 25.555672 11.156547 25.513672 10.810547 C 25.51214 10.807602 25.513044 10.803788 25.511719 10.800781 z M 6.203125 11.384766 L 11.265625 25.740234 C 7.6526246 23.988039 5.1679688 20.299746 5.1679688 16 C 5.1679688 14.344834 5.5451007 12.785069 6.203125 11.384766 z M 16.183594 16.943359 L 19.521484 26.074219 C 19.54289 26.12676 19.564216 26.170993 19.595703 26.212891 C 18.469939 26.60708 17.263759 26.832031 16 26.832031 C 14.933113 26.832031 13.905924 26.673405 12.933594 26.388672 L 16.183594 16.943359 z M 11.396484 25.802734 C 11.677917 25.93153 11.962244 26.048201 12.25 26.158203 C 11.959161 26.051366 11.674854 25.933131 11.396484 25.802734 z M 20.416016 25.892578 C 20.187559 25.99425 19.953374 26.083895 19.716797 26.169922 C 19.954263 26.087148 20.187264 25.993584 20.416016 25.892578 z M 12.560547 26.271484 C 12.676284 26.309724 12.791365 26.347933 12.910156 26.382812 C 12.79235 26.348028 12.676619 26.310112 12.560547 26.271484 z"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "woocommerce-info"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WordPress Integration", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable login features for WordPress like replacing wp-login.php with custom modal.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WordPress Integration", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable login features for WordPress like replacing wp-login.php with custom modal.", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "woocommerce-toggle"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12118,16 +12118,16 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
       marginBottom: "10px",
       boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'themehunk-login-registration'), /*#__PURE__*/React.createElement("span", null, isExpanded ? "▲" : "▼")), isExpanded && ((_settings$integration4 = settings.integration) === null || _settings$integration4 === void 0 || (_settings$integration4 = _settings$integration4.wordpress) === null || _settings$integration4 === void 0 ? void 0 : _settings$integration4.enabled) && /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'th-login'), /*#__PURE__*/React.createElement("span", null, isExpanded ? "▲" : "▼")), isExpanded && ((_settings$integration4 = settings.integration) === null || _settings$integration4 === void 0 || (_settings$integration4 = _settings$integration4.wordpress) === null || _settings$integration4 === void 0 ? void 0 : _settings$integration4.enabled) && /*#__PURE__*/React.createElement("div", {
     className: "premium-openeer-toggle"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wordpress-option-slide"
   }, /*#__PURE__*/React.createElement("label", {
     className: "slug-label"
-  }, /*#__PURE__*/React.createElement("strong", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Login Slug", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("strong", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Login Slug", "thlogin"))), /*#__PURE__*/React.createElement("div", {
     className: "custom-login-url-row"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("e.g. login, kuber, signin", "themehunk-login-registration"),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("e.g. login, kuber, signin", "thlogin"),
     value: ((_settings$integration5 = settings.integration) === null || _settings$integration5 === void 0 || (_settings$integration5 = _settings$integration5.wordpress) === null || _settings$integration5 === void 0 ? void 0 : _settings$integration5.url) || "",
     onChange: function onChange(value) {
       return handleSettingChange("integration", ["wordpress", "url"], value);
@@ -12139,7 +12139,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     style: {
       color: "#888"
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Final URL:", "themehunk-login-registration"), " "), /*#__PURE__*/React.createElement("span", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Final URL:", "thlogin"), " "), /*#__PURE__*/React.createElement("span", {
     style: {
       color: "#666",
       userSelect: "all"
@@ -12148,16 +12148,16 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     className: "settings-group thlogin-modalchoose-form inetgration-form-type"
   }, /*#__PURE__*/React.createElement("h4", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Type", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Type", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "form-type-options"
   }, [{
     type: "single",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Form", "themehunk-login-registration"),
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only login form will be shown", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Single Form", "th-login"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Only login form will be shown", "th-login")
   }, {
     type: "double",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "themehunk-login-registration"),
-    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Double Form", "th-login"),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Users can toggle between Login and Register forms", "th-login")
   }].map(function (_ref2) {
     var _settings$integration6;
     var type = _ref2.type,
@@ -12222,7 +12222,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
     d: "M61.3 89.1l22.3 13.1-4.7-13.1-12.8-3.6z"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "woocommerce-info"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WooCommerce Integration", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable login features for WooCommerce like checkout login, account sync, etc.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("WooCommerce Integration", "thlogin")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable login features for WooCommerce like checkout login, account sync, etc.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "woocommerce-toggle"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12238,7 +12238,7 @@ var IntegrationSettings = function IntegrationSettings(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Notice, {
     status: "warning",
     isDismissible: false
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("To enable WooCommerce integration, please install and activate the WooCommerce plugin.", "themehunk-login-registration")))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("To enable WooCommerce integration, please install and activate the WooCommerce plugin.", "thlogin")))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IntegrationSettings);
 
@@ -12302,19 +12302,19 @@ var SecuritySettings = function SecuritySettings(_ref) {
     setApprovingId = _useState8[1];
   var tabs = [{
     key: "bruteforce",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force", "th-login")
   }, {
     key: "recaptcha",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ReCaptcha", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("ReCaptcha", "th-login")
   }, {
     key: "honeypot",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("HoneyPot", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("HoneyPot", "th-login")
   }, {
     key: "manualApproval",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual Approval", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual Approval", "th-login")
   }, {
     key: "autologout",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto logout", "themehunk-login-registration")
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto logout", "th-login")
   }];
   var renderTabs = function renderTabs() {
     return /*#__PURE__*/React.createElement("div", {
@@ -12414,17 +12414,17 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-shield"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "themehunk-login-registration")), renderTabs(), activeTab === 'bruteforce' && /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security Settings", "th-login")), renderTabs(), activeTab === 'bruteforce' && /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force Protection", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Brute Force Protection", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Protection", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Protection", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prevent brute force login attacks", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Prevent brute force login attacks", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12438,9 +12438,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row text-small-box "
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Max Login Attempts", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Max Login Attempts", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allowed failed attempts before lockout", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Allowed failed attempts before lockout", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -12455,9 +12455,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row text-small-box "
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lockout Duration (minutes)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lockout Duration (minutes)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time before another attempt is allowed", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time before another attempt is allowed", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -12472,9 +12472,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto IP Blacklisting", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Auto IP Blacklisting", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically blacklist repeat offenders", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically blacklist repeat offenders", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12486,13 +12486,13 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable reCAPTCHA", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable reCAPTCHA", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Google reCAPTCHA to forms", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Google reCAPTCHA to forms", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12506,21 +12506,21 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Show", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Show", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show reCaptcha to from", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show reCaptcha to from", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     label: '',
     value: ((_settings$security$re3 = settings.security.recaptcha) === null || _settings$security$re3 === void 0 ? void 0 : _settings$security$re3.show_on) || "all",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("All Forms", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("All Forms", "th-login"),
       value: "all"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Only", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Only", "th-login"),
       value: "login"
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register Only", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register Only", "th-login"),
       value: "register"
     }],
     onChange: function onChange(val) {
@@ -12531,17 +12531,17 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Type", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("reCAPTCHA Type", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Version of reCAPTCHA to use", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Version of reCAPTCHA to use", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_custom_select_control__WEBPACK_IMPORTED_MODULE_2__.CustomSelectControl, {
     value: ((_settings$security$re4 = settings.security.recaptcha) === null || _settings$security$re4 === void 0 ? void 0 : _settings$security$re4.type) || "v2_checkbox",
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("v2 Checkbox", "themehunk-login-registration"),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("v2 Checkbox", "th-login"),
       value: "v2_checkbox"
     }
-    // { label: __("v3", "themehunk-login-registration"), value: "v3" },
+    // { label: __("v3", "th-login"), value: "v3" },
     ],
     onChange: function onChange(value) {
       return handleSettingChange("security", ["recaptcha", "type"], value);
@@ -12551,11 +12551,11 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Site Key", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Site Key", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA site key", "themehunk-login-registration"), ' ', /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ExternalLink, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA site key", "th-login"), ' ', /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ExternalLink, {
     href: "https://www.google.com/recaptcha/admin"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Google reCAPTCHA Admin", "themehunk-login-registration")))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Google reCAPTCHA Admin", "th-login")))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -12568,9 +12568,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secret Key", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secret Key", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA secret key", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Your reCAPTCHA secret key", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     __next40pxDefaultSize: true,
@@ -12583,13 +12583,13 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Honeypot Protection", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Honeypot Protection", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Honeypot", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Honeypot", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add hidden field to catch bots", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add hidden field to catch bots", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12601,9 +12601,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual User Approval", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manual User Approval", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Require admin approval for new registrations", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12615,7 +12615,7 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "menu-item-group"
   }, /*#__PURE__*/React.createElement("div", {
     className: "pending-users-list"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pending Users", "themehunk-login-registration")), loadingUsers ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : pendingUsers.length === 0 ? /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No pending users found.", "themehunk-login-registration")) : /*#__PURE__*/React.createElement("ul", null, pendingUsers.map(function (user) {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Pending Users", "th-login")), loadingUsers ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : pendingUsers.length === 0 ? /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No pending users found.", "th-login")) : /*#__PURE__*/React.createElement("ul", null, pendingUsers.map(function (user) {
     return /*#__PURE__*/React.createElement("li", {
       key: user.id,
       className: "pending-user-item"
@@ -12625,18 +12625,18 @@ var SecuritySettings = function SecuritySettings(_ref) {
         return approveUser(user.id);
       },
       disabled: approvingId === user.id
-    }, approvingId === user.id ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approving...", "themehunk-login-registration") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approve", "themehunk-login-registration")));
+    }, approvingId === user.id ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approving...", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Approve", "th-login")));
   }))))), activeTab === 'autologout' && /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Session Timeout / Auto Logout", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Session Timeout / Auto Logout", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Auto Logout", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Enable Auto Logout", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log out inactive users after specified duration.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatically log out inactive users after specified duration.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12650,9 +12650,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row text-small-box"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inactivity Duration (minutes)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inactivity Duration (minutes)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("User will be logged out after this period of inactivity.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("User will be logged out after this period of inactivity.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     type: "number",
@@ -12667,9 +12667,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Warning Before Logout", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Show Warning Before Logout", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays a countdown warning before automatic logout.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays a countdown warning before automatic logout.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     __nextHasNoMarginBottom: true,
@@ -12681,9 +12681,9 @@ var SecuritySettings = function SecuritySettings(_ref) {
     className: "setting-row text-small-box"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Warning Countdown Duration (seconds)", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Warning Countdown Duration (seconds)", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time shown in warning popup before session expires.", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Time shown in warning popup before session expires.", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     type: "number",
@@ -12838,12 +12838,12 @@ var ToolsSettings = function ToolsSettings(_ref) {
           var json = JSON.parse(e.target.result);
           setImportSettingsText(JSON.stringify(json, null, 2));
         } catch (err) {
-          alert((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Invalid JSON file", "themehunk-login-registration"));
+          alert((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Invalid JSON file", "th-login"));
         }
       };
       reader.readAsText(file);
     } else {
-      alert((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Please upload a valid JSON file", "themehunk-login-registration"));
+      alert((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Please upload a valid JSON file", "th-login"));
     }
   };
   var handlePasteFromClipboard = /*#__PURE__*/function () {
@@ -12881,30 +12881,30 @@ var ToolsSettings = function ToolsSettings(_ref) {
     className: "section-title"
   }, /*#__PURE__*/React.createElement("i", {
     className: "dashicons dashicons-admin-tools"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Current Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Current Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Backup your current configuration", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Backup your current configuration", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isSecondary: true,
     onClick: handleExportSettings
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "download"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "themehunk-login-registration")))), exportedSettings && /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Export Settings", "th-login")))), exportedSettings && /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exported Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Exported Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy or download this JSON to save your settings", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy or download this JSON to save your settings", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control",
     style: {
       maxWidth: '230px'
@@ -12929,7 +12929,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
     style: {
       marginRight: 3
     }
-  }), copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "themehunk-login-registration") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }), copied ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copied!", "th-login") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Copy", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "copy-button",
     onClick: handleDownloadJSON
   }, /*#__PURE__*/React.createElement("span", {
@@ -12937,17 +12937,17 @@ var ToolsSettings = function ToolsSettings(_ref) {
     style: {
       marginRight: 3
     }
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Download", "themehunk-login-registration")))))), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Download", "th-login")))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste or upload previously exported settings JSON", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste or upload previously exported settings JSON", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control",
     style: {
       maxWidth: '230px'
@@ -12972,7 +12972,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
     disabled: !clipboardContent.trim()
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "clipboard"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste", "themehunk-login-registration")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Paste", "th-login")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "copy-button",
     onClick: function onClick() {
       var _fileInputRef$current;
@@ -12980,7 +12980,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "upload"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Upload JSON File", "themehunk-login-registration")), /*#__PURE__*/React.createElement("input", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Upload JSON File", "th-login")), /*#__PURE__*/React.createElement("input", {
     ref: fileInputRef,
     type: "file",
     accept: ".json",
@@ -12998,17 +12998,17 @@ var ToolsSettings = function ToolsSettings(_ref) {
     disabled: isSaving || !importSettingsText.trim()
   }, isSaving ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "upload"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "themehunk-login-registration")))))), /*#__PURE__*/React.createElement("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Import Settings", "th-login")))))), /*#__PURE__*/React.createElement("div", {
     className: "settings-group"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "group-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "th-login")), /*#__PURE__*/React.createElement("div", {
     className: "setting-row"
   }, /*#__PURE__*/React.createElement("div", {
     className: "setting-label"
-  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset All Settings", "themehunk-login-registration")), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset All Settings", "th-login")), /*#__PURE__*/React.createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Restore all settings to default values", "themehunk-login-registration"))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Restore all settings to default values", "th-login"))), /*#__PURE__*/React.createElement("div", {
     className: "setting-control"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isDestructive: true,
@@ -13017,7 +13017,7 @@ var ToolsSettings = function ToolsSettings(_ref) {
     }
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
     icon: "undo"
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "themehunk-login-registration")))))));
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Reset Settings", "th-login")))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ToolsSettings);
 
@@ -13057,35 +13057,35 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 //app
 var TABS = [{
   id: "general",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("General", "th-login"),
   icon: "admin-settings"
 }, {
   id: "form-fields",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Fields", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Form Fields", "th-login"),
   icon: "feedback"
 }, {
   id: "display-triggers",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Display Triggers", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Display Triggers", "th-login"),
   icon: "visibility"
 }, {
   id: "design",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Design", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Design", "th-login"),
   icon: "art"
 }, {
   id: "security",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Security", "th-login"),
   icon: "shield"
 }, {
   id: "email",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Email Settings", "th-login"),
   icon: "email"
 }, {
   id: "integration",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Integration", "th-login"),
   icon: "admin-plugins"
 }, {
   id: "tools",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tools", "th-login"),
   icon: "admin-tools"
 }];
 var general = {
@@ -13629,10 +13629,10 @@ var display_triggers = {
   },
   menu_integration: {
     enabled: false,
-    item_text_login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "themehunk-login-registration"),
+    item_text_login: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login"),
     item_icon_login: "",
     logout: true,
-    item_text_logout: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout", "themehunk-login-registration"),
+    item_text_logout: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Logout", "th-login"),
     item_icon_logout: ""
   }
 };
@@ -13683,83 +13683,83 @@ var security = {
 //deisgn-settings
 var tabs = [{
   key: "login",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login", "th-login")
 }, {
   key: "register",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "th-login")
 }, {
   key: "forgot_password",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot", "th-login")
 }];
 var tabdeisgn = [{
   key: "design",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Design", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Design", "th-login")
 }, {
   key: "preview",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preview", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preview", "th-login")
 }];
 var tabicon = [{
   key: "with-label",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("With Label", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("With Label", "th-login")
 }, {
   key: "inside-input",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inside Input", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inside Input", "th-login")
 }];
 var layoutOptions = [{
   key: "page",
   icon: "admin-page",
   // more appropriate than "align-center"
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/ShortCode", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Page/ShortCode", "th-login"),
   demoClass: "page"
 }, {
   key: "popup",
   icon: "align-center",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup", "th-login"),
   demoClass: "popup"
 }, {
   key: "slide_in_left",
   icon: "align-pull-left",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-left", "th-login"),
   demoClass: "slide-left"
 }, {
   key: "slide_in_right",
   icon: "align-pull-right",
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide-in-right", "th-login"),
   demoClass: "slide-right"
 }];
 var fontWeightOptions = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "th-login"),
   value: 300
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Medium", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Medium", "th-login"),
   value: 500
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Semi-Bold", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Semi-Bold", "th-login"),
   value: 700
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bold", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bold", "th-login"),
   value: 900
 }];
 
 //general-settings
 var shortcodes = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Login Form", "th-login"),
   shortcode: "[thlogin_form]",
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the login form", "themehunk-login-registration")
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the login form", "th-login")
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register Form", "themehunk-login-registration"),
-  shortcode: "[thlogin_register_form]",
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the register form", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register Form", "th-login"),
+  shortcode: "[th_register_form]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the register form", "th-login")
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password Form", "themehunk-login-registration"),
-  shortcode: "[thlogin_forgot_password_form]",
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the forgot password form", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Forgot Password Form", "th-login"),
+  shortcode: "[th_forgot_password_form]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Displays only the forgot password form", "th-login")
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Combined Modal", "themehunk-login-registration"),
-  shortcode: "[thlogin_combined_form]",
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shows the full login/register/forgot modal and auto-triggers it", "themehunk-login-registration")
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Combined Modal", "th-login"),
+  shortcode: "[thlogin__combined_form]",
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Shows the full login/register/forgot modal and auto-triggers it", "th-login")
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup Link", "themehunk-login-registration"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Popup Link", "th-login"),
   shortcode: "[thlogin_popup_auto]",
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Use this link to generate popup link.")
 }];
@@ -13935,7 +13935,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (rootElement) {
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.render)((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_App__WEBPACK_IMPORTED_MODULE_1__["default"]), rootElement);
   } else {
-    console.error('Themehunk Login Registration Admin: Root element #thlogin-admin-root not found.');
+    console.error('TH Login Admin: Root element #thlogin-admin-root not found.');
   }
 });
 })();

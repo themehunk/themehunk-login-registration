@@ -72,12 +72,12 @@ const ToolsSettings = ({
           const json = JSON.parse(e.target.result);
           setImportSettingsText(JSON.stringify(json, null, 2));
         } catch (err) {
-          alert(__("Invalid JSON file", "themehunk-login-registration"));
+          alert(__("Invalid JSON file", "th-login"));
         }
       };
       reader.readAsText(file);
     } else {
-      alert(__("Please upload a valid JSON file", "themehunk-login-registration"));
+      alert(__("Please upload a valid JSON file", "th-login"));
     }
   };
 
@@ -95,24 +95,24 @@ const ToolsSettings = ({
       <div className="settings-card">
         <h2 className="section-title">
           <i className="dashicons dashicons-admin-tools"></i>
-          {__("Tools", "themehunk-login-registration")}
+          {__("Tools", "th-login")}
         </h2>
 
         {/* Export Section */}
         <div className="settings-group">
-          <h3 className="group-title">{__("Export Settings", "themehunk-login-registration")}</h3>
+          <h3 className="group-title">{__("Export Settings", "th-login")}</h3>
 
           <div className="setting-row">
             <div className="setting-label">
-              <h4>{__("Export Current Settings", "themehunk-login-registration")}</h4>
+              <h4>{__("Export Current Settings", "th-login")}</h4>
               <p className="description">
-                {__("Backup your current configuration", "themehunk-login-registration")}
+                {__("Backup your current configuration", "th-login")}
               </p>
             </div>
             <div className="setting-control">
               <Button isSecondary onClick={handleExportSettings}>
                 <Dashicon icon="download" />
-                {__("Export Settings", "themehunk-login-registration")}
+                {__("Export Settings", "th-login")}
               </Button>
             </div>
           </div>
@@ -120,9 +120,9 @@ const ToolsSettings = ({
           {exportedSettings && (
             <div className="setting-row">
               <div className="setting-label">
-                <h4>{__("Exported Settings", "themehunk-login-registration")}</h4>
+                <h4>{__("Exported Settings", "th-login")}</h4>
                 <p className="description">
-                  {__("Copy or download this JSON to save your settings", "themehunk-login-registration")}
+                  {__("Copy or download this JSON to save your settings", "th-login")}
                 </p>
               </div>
               <div className="setting-control" style={{maxWidth: '230px'}}>
@@ -139,14 +139,14 @@ const ToolsSettings = ({
                     onClick={handleCopyToClipboard}
                   >
                      <span className="dashicons dashicons-admin-page" style={{ marginRight: 3 }}></span>
-                    {copied ? __("Copied!", "themehunk-login-registration") : __("Copy", "themehunk-login-registration")}
+                    {copied ? __("Copied!", "th-login") : __("Copy", "th-login")}
                   </Button>
                   <Button
                     className="copy-button"
                     onClick={handleDownloadJSON}
                   > 
                      <span className="dashicons dashicons-download" style={{ marginRight: 3 }}></span>
-                    {__("Download", "themehunk-login-registration")}
+                    {__("Download", "th-login")}
                   </Button>
                 </div>
               </div>
@@ -156,13 +156,13 @@ const ToolsSettings = ({
 
         {/* Import Section */}
         <div className="settings-group">
-          <h3 className="group-title">{__("Import Settings", "themehunk-login-registration")}</h3>
+          <h3 className="group-title">{__("Import Settings", "th-login")}</h3>
 
           <div className="setting-row">
             <div className="setting-label">
-              <h4>{__("Import Settings", "themehunk-login-registration")}</h4>
+              <h4>{__("Import Settings", "th-login")}</h4>
               <p className="description">
-                {__("Paste or upload previously exported settings JSON", "themehunk-login-registration")}
+                {__("Paste or upload previously exported settings JSON", "th-login")}
               </p>
             </div>
             <div className="setting-control" style={{maxWidth: '230px'}}>
@@ -180,7 +180,7 @@ const ToolsSettings = ({
                   disabled={!clipboardContent.trim()}
                 >
                   <Dashicon icon="clipboard" />
-                  {__("Paste", "themehunk-login-registration")}
+                  {__("Paste", "th-login")}
                 </Button>
 
                 <Button
@@ -188,7 +188,7 @@ const ToolsSettings = ({
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Dashicon icon="upload" />
-                  {__("Upload JSON File", "themehunk-login-registration")}
+                  {__("Upload JSON File", "th-login")}
                 </Button>
                 <input
                   ref={fileInputRef}
@@ -213,7 +213,7 @@ const ToolsSettings = ({
                 ) : (
                   <>
                     <Dashicon icon="upload" />
-                    {__("Import Settings", "themehunk-login-registration")}
+                    {__("Import Settings", "th-login")}
                   </>
                 )}
               </Button>
@@ -223,19 +223,19 @@ const ToolsSettings = ({
 
         {/* Reset Section */}
         <div className="settings-group">
-          <h3 className="group-title">{__("Reset Settings", "themehunk-login-registration")}</h3>
+          <h3 className="group-title">{__("Reset Settings", "th-login")}</h3>
 
           <div className="setting-row">
             <div className="setting-label">
-              <h4>{__("Reset All Settings", "themehunk-login-registration")}</h4>
+              <h4>{__("Reset All Settings", "th-login")}</h4>
               <p className="description">
-                {__("Restore all settings to default values", "themehunk-login-registration")}
+                {__("Restore all settings to default values", "th-login")}
               </p>
             </div>
             <div className="setting-control">
               <Button isDestructive onClick={() => setIsResetConfirmOpen(true)}>
                 <Dashicon icon="undo" />
-                {__("Reset Settings", "themehunk-login-registration")}
+                {__("Reset Settings", "th-login")}
               </Button>
             </div>
           </div>

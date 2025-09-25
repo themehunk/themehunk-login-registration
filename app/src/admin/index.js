@@ -8,6 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (rootElement) {
         render(createElement(App), rootElement);
     } else {
-        console.error('Themehunk Login Registration Admin: Root element #thlogin-admin-root not found.');
+        console.error('TH Login Admin: Root element #thlogin-admin-root not found.');
     }
 });

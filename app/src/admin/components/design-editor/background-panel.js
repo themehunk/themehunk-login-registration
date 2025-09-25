@@ -26,16 +26,16 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 					<ToggleGroupControl
 						__nextHasNoMarginBottom={true}
 						__next40pxDefaultSize = {true}
-						label={__("Background Type", "themehunk-login-registration")}
+						label={__("Background Type", "th-login")}
 						value={type}
 						isBlock
 						onChange={(newType) => {
 							handleSettingChange("design", [...path, "type"], newType);
 						}}
 					>
-						<ToggleGroupControlOption value="color" label={__("Color", "themehunk-login-registration")} />
-						<ToggleGroupControlOption value="gradient" label={__("Gradient", "themehunk-login-registration")} />
-						<ToggleGroupControlOption value="image" label={__("Image", "themehunk-login-registration")} />
+						<ToggleGroupControlOption value="color" label={__("Color", "th-login")} />
+						<ToggleGroupControlOption value="gradient" label={__("Gradient", "th-login")} />
+						<ToggleGroupControlOption value="image" label={__("Image", "th-login")} />
 					</ToggleGroupControl>
 			
 					{type === "color" && (
@@ -70,62 +70,62 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 								onChange={(value) => handleSettingChange("design", [...path, "gradient"], value)}
 								gradients={[
 									{
-										name: __("Default", "themehunk-login-registration"),
+										name: __("Default", "th-login"),
 										gradient: "linear-gradient(135deg,#f6d365 0%,#fda085 100%)",
 										slug: "default",
 									},
 									{
-										name: __("Ocean Blue", "themehunk-login-registration"),
+										name: __("Ocean Blue", "th-login"),
 										gradient: "linear-gradient(135deg,#2BC0E4 0%,#EAECC6 100%)",
 										slug: "ocean-blue",
 									},
 									{
-										name: __("Sunset", "themehunk-login-registration"),
+										name: __("Sunset", "th-login"),
 										gradient: "linear-gradient(135deg,#ff7e5f 0%,#feb47b 100%)",
 										slug: "sunset",
 									},
 									{
-										name: __("Cool Sky", "themehunk-login-registration"),
+										name: __("Cool Sky", "th-login"),
 										gradient: "linear-gradient(135deg,#2980b9 0%,#6dd5fa 100%)",
 										slug: "cool-sky",
 									},
 									{
-										name: __("Peach", "themehunk-login-registration"),
+										name: __("Peach", "th-login"),
 										gradient: "linear-gradient(135deg,#ed4264 0%,#ffedbc 100%)",
 										slug: "peach",
 									},
 									{
-										name: __("Purple Dream", "themehunk-login-registration"),
+										name: __("Purple Dream", "th-login"),
 										gradient: "linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%)",
 										slug: "purple-dream",
 									},
 									{
-										name: __("Mango", "themehunk-login-registration"),
+										name: __("Mango", "th-login"),
 										gradient: "linear-gradient(135deg,#ffe259 0%,#ffa751 100%)",
 										slug: "mango",
 									},
 									{
-										name: __("Frost", "themehunk-login-registration"),
+										name: __("Frost", "th-login"),
 										gradient: "linear-gradient(135deg,#000428 0%,#004e92 100%)",
 										slug: "frost",
 									},
 									{
-										name: __("Cherry Blossom", "themehunk-login-registration"),
+										name: __("Cherry Blossom", "th-login"),
 										gradient: "linear-gradient(135deg,#ff9a9e 0%,#fad0c4 99%,#fad0c4 100%)",
 										slug: "cherry-blossom",
 									},
 									{
-										name: __("Lush Green", "themehunk-login-registration"),
+										name: __("Lush Green", "th-login"),
 										gradient: "linear-gradient(135deg,#56ab2f 0%,#a8e063 100%)",
 										slug: "lush-green",
 									},
 									{
-										name: __("Deep Space", "themehunk-login-registration"),
+										name: __("Deep Space", "th-login"),
 										gradient: "linear-gradient(135deg,#000000 0%,#434343 100%)",
 										slug: "deep-space",
 									},
 									{
-										name: __("Rose Gold", "themehunk-login-registration"),
+										name: __("Rose Gold", "th-login"),
 										gradient: "linear-gradient(135deg,#b76e79 0%,#ffe6e6 100%)",
 										slug: "rose-gold",
 									},
@@ -140,7 +140,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 								<TextControl
 									__next40pxDefaultSize
 									__nextHasNoMarginBottom={true}
-									label={__("Image URL", "themehunk-login-registration")}
+									label={__("Image URL", "th-login")}
 									value={imageURL}
 									onChange={(val) =>
 										handleSettingChange("design", [...path, "image", "url"], val)
@@ -167,18 +167,18 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 
 									<div className="thlogin-media-image">
 										<CustomSelectControl
-											label={__("Position", "themehunk-login-registration")}
+											label={__("Position", "th-login")}
 											value={position}
 											options={[
-												{ label: __("Top Left", "themehunk-login-registration"), value: "top left" },
-												{ label: __("Top Center", "themehunk-login-registration"), value: "top center" },
-												{ label: __("Top Right", "themehunk-login-registration"), value: "top right" },
-												{ label: __("Center Left", "themehunk-login-registration"), value: "center left" },
-												{ label: __("Center Center", "themehunk-login-registration"), value: "center center" },
-												{ label: __("Center Right", "themehunk-login-registration"), value: "center right" },
-												{ label: __("Bottom Left", "themehunk-login-registration"), value: "bottom left" },
-												{ label: __("Bottom Center", "themehunk-login-registration"), value: "bottom center" },
-												{ label: __("Bottom Right", "themehunk-login-registration"), value: "bottom right" },
+												{ label: __("Top Left", "th-login"), value: "top left" },
+												{ label: __("Top Center", "th-login"), value: "top center" },
+												{ label: __("Top Right", "th-login"), value: "top right" },
+												{ label: __("Center Left", "th-login"), value: "center left" },
+												{ label: __("Center Center", "th-login"), value: "center center" },
+												{ label: __("Center Right", "th-login"), value: "center right" },
+												{ label: __("Bottom Left", "th-login"), value: "bottom left" },
+												{ label: __("Bottom Center", "th-login"), value: "bottom center" },
+												{ label: __("Bottom Right", "th-login"), value: "bottom right" },
 											]}
 											onChange={(val) =>
 												handleSettingChange("design", [...path, "image", "position"], val)
@@ -186,12 +186,12 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 										/>
 
 										<CustomSelectControl
-											label={__("Size", "themehunk-login-registration")}
+											label={__("Size", "th-login")}
 											value={size}
 											options={[
-												{ label: __("Cover", "themehunk-login-registration"), value: "cover" },
-												{ label: __("Contain", "themehunk-login-registration"), value: "contain" },
-												{ label: __("Auto", "themehunk-login-registration"), value: "auto" },
+												{ label: __("Cover", "th-login"), value: "cover" },
+												{ label: __("Contain", "th-login"), value: "contain" },
+												{ label: __("Auto", "th-login"), value: "auto" },
 											]}
 											onChange={(val) =>
 												handleSettingChange("design", [...path, "image", "size"], val)
@@ -199,13 +199,13 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 										/>
 
 										<CustomSelectControl
-											label={__("Repeat", "themehunk-login-registration")}
+											label={__("Repeat", "th-login")}
 											value={repeat}
 											options={[
-												{ label: __("No Repeat", "themehunk-login-registration"), value: "no-repeat" },
-												{ label: __("Repeat", "themehunk-login-registration"), value: "repeat" },
-												{ label: __("Repeat X", "themehunk-login-registration"), value: "repeat-x" },
-												{ label: __("Repeat Y", "themehunk-login-registration"), value: "repeat-y" },
+												{ label: __("No Repeat", "th-login"), value: "no-repeat" },
+												{ label: __("Repeat", "th-login"), value: "repeat" },
+												{ label: __("Repeat X", "th-login"), value: "repeat-x" },
+												{ label: __("Repeat Y", "th-login"), value: "repeat-y" },
 											]}
 											onChange={(val) =>
 												handleSettingChange("design", [...path, "image", "repeat"], val)
@@ -245,7 +245,7 @@ const BackgroundSettingsPanel = ({ title, background = {}, path = [], handleSett
 
 				<div className="background-opacity-slider" style={{ marginTop: "16px" }}>
 					<RangeControl
-						label={__("Backdrop Filter", "themehunk-login-registration")}
+						label={__("Backdrop Filter", "th-login")}
 						value={filter}
 						onChange={(val) => {
 							handleSettingChange("design", [...path, "filter"], val);

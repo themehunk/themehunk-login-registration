@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
               _context.p = 9;
               _t2 = _context.v;
               showMessage(form, 'An unexpected error occurred. Please check your network.', 'error');
-              console.error('Themehunk Login Registration: Frontend REST API Error:', _t2);
+              console.error('TH Login: Frontend REST API Error:', _t2);
               if (typeof grecaptcha !== 'undefined' && (_thLoginFrontendData$6 = thLoginFrontendData.settings.security) !== null && _thLoginFrontendData$6 !== void 0 && (_thLoginFrontendData$6 = _thLoginFrontendData$6.recaptcha) !== null && _thLoginFrontendData$6 !== void 0 && _thLoginFrontendData$6.enabled && thLoginFrontendData.settings.security.recaptcha.type === 'v2_checkbox') {
                 grecaptcha.reset();
               }
@@ -549,8 +549,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!(menuSettings !== null && menuSettings !== void 0 && menuSettings.enabled)) return;
   var isUserLoggedIn = thLoginFrontendData.isUserLoggedIn;
   var logoutEnabled = menuSettings.logout !== false;
-  var loginText = menuSettings.item_text_login || __('Login', 'themehunk-login-registration');
-  var logoutText = menuSettings.item_text_logout || __('Logout', 'themehunk-login-registration');
+  var loginText = menuSettings.item_text_login || __('Login', 'th-login');
+  var logoutText = menuSettings.item_text_logout || __('Logout', 'th-login');
   var icons = thLoginFrontendData.icons || {};
 
   // SVG icons as HTML

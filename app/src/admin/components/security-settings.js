@@ -13,11 +13,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
   const [approvingId, setApprovingId] = useState(null);
 
   const tabs = [
-    { key: "bruteforce", label: __("Brute Force", "themehunk-login-registration") },
-    { key: "recaptcha", label: __("ReCaptcha", "themehunk-login-registration") },
-    { key: "honeypot", label: __("HoneyPot", "themehunk-login-registration") },
-    { key: "manualApproval", label: __("Manual Approval", "themehunk-login-registration") },
-    { key: "autologout", label: __("Auto logout", "themehunk-login-registration") },
+    { key: "bruteforce", label: __("Brute Force", "th-login") },
+    { key: "recaptcha", label: __("ReCaptcha", "th-login") },
+    { key: "honeypot", label: __("HoneyPot", "th-login") },
+    { key: "manualApproval", label: __("Manual Approval", "th-login") },
+    { key: "autologout", label: __("Auto logout", "th-login") },
   ];
   
   const renderTabs = () => (
@@ -73,7 +73,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
         <div className="settings-card">
           <h2 className="section-title">
             <i className="dashicons dashicons-shield"></i>
-            {__("Security Settings", "themehunk-login-registration")}
+            {__("Security Settings", "th-login")}
           </h2>
 
             {renderTabs()}
@@ -81,14 +81,14 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
             {activeTab === 'bruteforce' && (
               <div className="settings-group">
                 <h3 className="group-title">
-                  {__("Brute Force Protection", "themehunk-login-registration")}
+                  {__("Brute Force Protection", "th-login")}
                 </h3>
 
                 <div className="setting-row">
                   <div className="setting-label">
-                    <h4>{__("Enable Protection", "themehunk-login-registration")}</h4>
+                    <h4>{__("Enable Protection", "th-login")}</h4>
                     <p className="description">
-                      {__("Prevent brute force login attacks", "themehunk-login-registration")}
+                      {__("Prevent brute force login attacks", "th-login")}
                     </p>
                   </div>
                   <div className="setting-control">
@@ -113,11 +113,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                   <div className="menu-item-group ">
                     <div className="setting-row text-small-box ">
                       <div className="setting-label">
-                        <h4>{__("Max Login Attempts", "themehunk-login-registration")}</h4>
+                        <h4>{__("Max Login Attempts", "th-login")}</h4>
                         <p className="description">
                           {__(
                             "Allowed failed attempts before lockout",
-                            "themehunk-login-registration"
+                            "th-login"
                           )}
                         </p>
                       </div>
@@ -145,12 +145,12 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                     <div className="setting-row text-small-box ">
                       <div className="setting-label">
                         <h4>
-                          {__("Lockout Duration (minutes)", "themehunk-login-registration")}
+                          {__("Lockout Duration (minutes)", "th-login")}
                         </h4>
                         <p className="description">
                           {__(
                             "Time before another attempt is allowed",
-                            "themehunk-login-registration"
+                            "th-login"
                           )}
                         </p>
                       </div>
@@ -180,11 +180,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                     <div className="setting-row">
                       <div className="setting-label">
-                        <h4>{__("Auto IP Blacklisting", "themehunk-login-registration")}</h4>
+                        <h4>{__("Auto IP Blacklisting", "th-login")}</h4>
                         <p className="description">
                           {__(
                             "Automatically blacklist repeat offenders",
-                            "themehunk-login-registration"
+                            "th-login"
                           )}
                         </p>
                       </div>
@@ -216,14 +216,14 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
             {activeTab === 'recaptcha' && (
               <div className="settings-group">
                 <h3 className="group-title">
-                  {__("reCAPTCHA Settings", "themehunk-login-registration")}
+                  {__("reCAPTCHA Settings", "th-login")}
                 </h3>
 
                 <div className="setting-row">
                   <div className="setting-label">
-                    <h4>{__("Enable reCAPTCHA", "themehunk-login-registration")}</h4>
+                    <h4>{__("Enable reCAPTCHA", "th-login")}</h4>
                     <p className="description">
-                      {__("Add Google reCAPTCHA to forms", "themehunk-login-registration")}
+                      {__("Add Google reCAPTCHA to forms", "th-login")}
                     </p>
                   </div>
                   <div className="setting-control">
@@ -246,9 +246,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                       <div className="setting-row">
                         <div className="setting-label">
-                          <h4>{__("reCAPTCHA Show", "themehunk-login-registration")}</h4>
+                          <h4>{__("reCAPTCHA Show", "th-login")}</h4>
                           <p className="description">
-                            {__("Show reCaptcha to from", "themehunk-login-registration")}
+                            {__("Show reCaptcha to from", "th-login")}
                           </p>
                         </div>
                         <div className="setting-control">
@@ -257,9 +257,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                             label={''}
                             value={settings.security.recaptcha?.show_on || "all"}
                             options={[
-                              { label: __("All Forms", "themehunk-login-registration"), value: "all" },
-                              { label: __("Login Only", "themehunk-login-registration"), value: "login" },
-                              { label: __("Register Only", "themehunk-login-registration"), value: "register" },
+                              { label: __("All Forms", "th-login"), value: "all" },
+                              { label: __("Login Only", "th-login"), value: "login" },
+                              { label: __("Register Only", "th-login"), value: "register" },
                             ]}
                             onChange={(val) =>
                               handleSettingChange("security", ["recaptcha", "show_on"], val)
@@ -271,9 +271,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                       <div className="setting-row">
                         <div className="setting-label">
-                          <h4>{__("reCAPTCHA Type", "themehunk-login-registration")}</h4>
+                          <h4>{__("reCAPTCHA Type", "th-login")}</h4>
                           <p className="description">
-                            {__("Version of reCAPTCHA to use", "themehunk-login-registration")}
+                            {__("Version of reCAPTCHA to use", "th-login")}
                           </p>
                         </div>
                         <div className="setting-control">
@@ -281,8 +281,8 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                            <CustomSelectControl
                               value={settings.security.recaptcha?.type || "v2_checkbox"}
                               options={[
-                                { label: __("v2 Checkbox", "themehunk-login-registration"), value: "v2_checkbox" },
-                                // { label: __("v3", "themehunk-login-registration"), value: "v3" },
+                                { label: __("v2 Checkbox", "th-login"), value: "v2_checkbox" },
+                                // { label: __("v3", "th-login"), value: "v3" },
                               ]}
                               onChange={(value) =>
                                 handleSettingChange("security", ["recaptcha", "type"], value)
@@ -294,11 +294,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                       <div className="setting-row">
                         <div className="setting-label">
-                          <h4>{__("Site Key", "themehunk-login-registration")}</h4>
+                          <h4>{__("Site Key", "th-login")}</h4>
                           <p className="description">
-                            {__("Your reCAPTCHA site key", "themehunk-login-registration")}{' '}
+                            {__("Your reCAPTCHA site key", "th-login")}{' '}
                             <ExternalLink href="https://www.google.com/recaptcha/admin">
-                              {__("Google reCAPTCHA Admin", "themehunk-login-registration")}
+                              {__("Google reCAPTCHA Admin", "th-login")}
                             </ExternalLink>
                           </p>
                         </div>
@@ -320,9 +320,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                       <div className="setting-row">
                         <div className="setting-label">
-                          <h4>{__("Secret Key", "themehunk-login-registration")}</h4>
+                          <h4>{__("Secret Key", "th-login")}</h4>
                           <p className="description">
-                            {__("Your reCAPTCHA secret key", "themehunk-login-registration")}
+                            {__("Your reCAPTCHA secret key", "th-login")}
                           </p>
                         </div>
                         <div className="setting-control">
@@ -351,14 +351,14 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
             {activeTab === 'honeypot' && (
               <div className="settings-group">
                 <h3 className="group-title">
-                  {__("Honeypot Protection", "themehunk-login-registration")}
+                  {__("Honeypot Protection", "th-login")}
                 </h3>
 
                 <div className="setting-row">
                   <div className="setting-label">
-                    <h4>{__("Enable Honeypot", "themehunk-login-registration")}</h4>
+                    <h4>{__("Enable Honeypot", "th-login")}</h4>
                     <p className="description">
-                      {__("Add hidden field to catch bots", "themehunk-login-registration")}
+                      {__("Add hidden field to catch bots", "th-login")}
                     </p>
                   </div>
                   <div className="setting-control">
@@ -382,9 +382,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
               <>
                 <div className="setting-row">
                     <div className="setting-label">
-                    <h3>{__("Manual User Approval", "themehunk-login-registration")}</h3>
+                    <h3>{__("Manual User Approval", "th-login")}</h3>
                     <p className="description">
-                    {__("Require admin approval for new registrations", "themehunk-login-registration")}
+                    {__("Require admin approval for new registrations", "th-login")}
                     </p>
                     </div>
                     <div className="setting-control">
@@ -400,11 +400,11 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                 {settings.general.manual_user_approval?.enabled && (
                   <div className="menu-item-group"> 
                     <div className="pending-users-list">
-                      <h4>{__("Pending Users", "themehunk-login-registration")}</h4>
+                      <h4>{__("Pending Users", "th-login")}</h4>
                       {loadingUsers ? (
                         <Spinner />
                       ) : pendingUsers.length === 0 ? (
-                        <p>{__("No pending users found.", "themehunk-login-registration")}</p>
+                        <p>{__("No pending users found.", "th-login")}</p>
                       ) : (
                         <ul>
                           {pendingUsers.map((user) => (
@@ -415,7 +415,7 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                                 onClick={() => approveUser(user.id)}
                                 disabled={approvingId === user.id}
                               >
-                                {approvingId === user.id ? __("Approving...", "themehunk-login-registration") : __("Approve", "themehunk-login-registration")}
+                                {approvingId === user.id ? __("Approving...", "th-login") : __("Approve", "th-login")}
                               </Button>
                             </li>
                           ))}
@@ -430,13 +430,13 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
             {activeTab === 'autologout' && (
               <div className="settings-group">
-                <h3 className="group-title">{__("Session Timeout / Auto Logout", "themehunk-login-registration")}</h3>
+                <h3 className="group-title">{__("Session Timeout / Auto Logout", "th-login")}</h3>
 
                 <div className="setting-row">
                   <div className="setting-label">
-                    <h4>{__("Enable Auto Logout", "themehunk-login-registration")}</h4>
+                    <h4>{__("Enable Auto Logout", "th-login")}</h4>
                     <p className="description">
-                      {__("Automatically log out inactive users after specified duration.", "themehunk-login-registration")}
+                      {__("Automatically log out inactive users after specified duration.", "th-login")}
                     </p>
                   </div>
                   <div className="setting-control">
@@ -454,9 +454,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                   <div className="menu-item-group">
                     <div className="setting-row text-small-box">
                       <div className="setting-label">
-                        <h4>{__("Inactivity Duration (minutes)", "themehunk-login-registration")}</h4>
+                        <h4>{__("Inactivity Duration (minutes)", "th-login")}</h4>
                         <p className="description">
-                          {__("User will be logged out after this period of inactivity.", "themehunk-login-registration")}
+                          {__("User will be logged out after this period of inactivity.", "th-login")}
                         </p>
                       </div>
                       <div className="setting-control">
@@ -479,9 +479,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
 
                     <div className="setting-row">
                       <div className="setting-label">
-                        <h4>{__("Show Warning Before Logout", "themehunk-login-registration")}</h4>
+                        <h4>{__("Show Warning Before Logout", "th-login")}</h4>
                         <p className="description">
-                          {__("Displays a countdown warning before automatic logout.", "themehunk-login-registration")}
+                          {__("Displays a countdown warning before automatic logout.", "th-login")}
                         </p>
                       </div>
                       <div className="setting-control">
@@ -498,9 +498,9 @@ const SecuritySettings = ({ settings, handleSettingChange }) => {
                     {settings.security.session_timeout?.show_warning && (
                       <div className="setting-row text-small-box">
                         <div className="setting-label">
-                          <h4>{__("Warning Countdown Duration (seconds)", "themehunk-login-registration")}</h4>
+                          <h4>{__("Warning Countdown Duration (seconds)", "th-login")}</h4>
                           <p className="description">
-                            {__("Time shown in warning popup before session expires.", "themehunk-login-registration")}
+                            {__("Time shown in warning popup before session expires.", "th-login")}
                           </p>
                         </div>
                         <div className="setting-control">

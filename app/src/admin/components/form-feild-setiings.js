@@ -23,14 +23,14 @@
   import { CustomSelectControl } from "./custom-select-control";
 
   const TAB_KEYS = {
-    login: __("Login", "themehunk-login-registration"),
-    register: __("Register", "themehunk-login-registration"),
-    forgot_password: __("Forgot Password", "themehunk-login-registration"),
+    login: __("Login", "th-login"),
+    register: __("Register", "th-login"),
+    forgot_password: __("Forgot Password", "th-login"),
   };
 
   const DEFAULT_FIELD = () => ({
     id: "ff_" + Math.random().toString(36).substring(2, 9),
-    label: __("New Field", "themehunk-login-registration"),
+    label: __("New Field", "th-login"),
     placeholder: "",
     icon: "admin-users",
     required: false,
@@ -145,14 +145,14 @@
       const newField = DEFAULT_FIELD();
       updateFields([...fields, newField]);
       setSelectedField(newField);
-      setToastMessage(__("Field added successfully!", "themehunk-login-registration"));
+      setToastMessage(__("Field added successfully!", "th-login"));
     };
 
     const handleDeleteField = (fieldId) => {
       const filtered = fields.filter((f) => f.id !== fieldId);
       updateFields(filtered);
       if (selectedField?.id === fieldId) setSelectedField(null);
-      setToastMessage(__("Field deleted", "themehunk-login-registration"));
+      setToastMessage(__("Field deleted", "th-login"));
     };
 
     const handleFieldChange = (key, value) => {
@@ -215,7 +215,7 @@
         <div className="settings-card">
             <h2 className="section-title">
                 <i className="dashicons dashicons-feedback"></i>
-                {__("Form feild Settings", "themehunk-login-registration")}
+                {__("Form feild Settings", "th-login")}
             </h2>
 
           <div className="thl-form-fields-settings">
@@ -237,10 +237,10 @@
                   >
                     <div className="fields-group">
                       <h4 className="fields-group-title">
-                        {TAB_KEYS[activeTab]} {__("Fields", "themehunk-login-registration")}
+                        {TAB_KEYS[activeTab]} {__("Fields", "th-login")}
                       </h4>
                       {fields.length === 0 ? (
-                        <p className="no-fields">{__("No fields yet.", "themehunk-login-registration")}</p>
+                        <p className="no-fields">{__("No fields yet.", "th-login")}</p>
                       ) : (
                         fields.map((field) => (
                           <div
@@ -274,7 +274,7 @@
                             <span className="field-drag-handle disabled">
                               <span className="dashicons dashicons-minus"></span>
                             </span>
-                            <span className="field-label">{__("Submit Button", "themehunk-login-registration")}</span>
+                            <span className="field-label">{__("Submit Button", "th-login")}</span>
                           </div>
                         </div>
             
@@ -285,7 +285,7 @@
 
               <div className="add-field-button-wrapper">
                 <Button isSecondary onClick={handleAddField}>
-                  + {__("Add Field", "themehunk-login-registration")}
+                  + {__("Add Field", "th-login")}
                 </Button>
               </div>
             </div>
@@ -301,17 +301,17 @@
                     <TextControl
                         __next40pxDefaultSize = {true}
                         __nextHasNoMarginBottom={true}
-                        label={__("Label", "themehunk-login-registration")}
+                        label={__("Label", "th-login")}
                         value={decodeEntities(selectedField.label)}
                         onChange={(val) => handleFieldChange("label", val)}
                     />
                   ):(
                     <div className="terms-conditions-editor">
                       <TextControl
-                        label={__("Terms Text", "themehunk-login-registration")}
+                        label={__("Terms Text", "th-login")}
                         value={decodeEntities(selectedField.label) || "I agree to the [Terms] & [Conditions]"}
                         onChange={(val) => handleFieldChange("label", val)}
-                        help={__("Wrap linkable text in [square brackets]", "themehunk-login-registration")}
+                        help={__("Wrap linkable text in [square brackets]", "th-login")}
                       />
                     </div>
                   )}
@@ -321,7 +321,7 @@
                       <TextControl
                         __next40pxDefaultSize = {true}
                         __nextHasNoMarginBottom={true}
-                        label={__("Placeholder", "themehunk-login-registration")}
+                        label={__("Placeholder", "th-login")}
                         value={selectedField.placeholder || ""}
                         onChange={(val) => handleFieldChange("placeholder", val)}
                       />
@@ -332,7 +332,7 @@
                     <TextControl
                       __next40pxDefaultSize = {true}
                      __nextHasNoMarginBottom={true}
-                      label={__("Terms & Conditions Link", "themehunk-login-registration")}
+                      label={__("Terms & Conditions Link", "th-login")}
                       placeholder="https://example.com/terms"
                       value={selectedField.link || ""}
                       onChange={(val) => handleFieldChange("link", val)}
@@ -342,7 +342,7 @@
                   <TextControl
                     __next40pxDefaultSize = {true}
                      __nextHasNoMarginBottom={true}
-                    label={__("Error Message", "themehunk-login-registration")}
+                    label={__("Error Message", "th-login")}
                     value={decodeEntities(selectedField.error_message) || ""}
                     onChange={(val) => handleFieldChange("error_message", val)}
                   />
@@ -359,7 +359,7 @@
                         fontSize: '13px',
                         color: '#757575'
                       }}>
-                        {__("Live Preview:", "themehunk-login-registration")}
+                        {__("Live Preview:", "th-login")}
                       </p>
                       
                       <div style={{ fontSize: '14px' }}>
@@ -386,7 +386,7 @@
                           color: '#d63638',
                           fontStyle: 'italic'
                         }}>
-                          {__("Don't forget to set URLs for each bracketed term above", "themehunk-login-registration")}
+                          {__("Don't forget to set URLs for each bracketed term above", "th-login")}
                         </p>
                       )}
                     </div>
@@ -396,7 +396,7 @@
                     <>
                       <div className="thl-icon-picker">
                         <label className="components-base-control__label">
-                          {__("Choose Icon", "themehunk-login-registration")}
+                          {__("Choose Icon", "th-login")}
                         </label>
 
                         <div
@@ -440,19 +440,19 @@
                       <TextControl
                         __next40pxDefaultSize = {true}
                         __nextHasNoMarginBottom={true}
-                        label={__("Name", "themehunk-login-registration")}
+                        label={__("Name", "th-login")}
                         value={selectedField.name || ""}
                         onChange={(val) => handleFieldChange("name", val)}
                       />
                       <TextControl
                           __next40pxDefaultSize = {true}
                           __nextHasNoMarginBottom={true}
-                        label={__("ID", "themehunk-login-registration")}
+                        label={__("ID", "th-login")}
                         value={selectedField.id || ""}
                         onChange={(val) => handleFieldChange("id", val)}
                       />
                       <CustomSelectControl
-                        label={__("Field Type", "themehunk-login-registration")}
+                        label={__("Field Type", "th-login")}
                         value={selectedField.type || "text"}
                         options={[
                           { label: "Text", value: "text" },
@@ -464,13 +464,13 @@
                       <div className="thlogin-toggle-one-line">
                         <ToggleControl
                         __nextHasNoMarginBottom={true}
-                          label={__("Required", "themehunk-login-registration")}
+                          label={__("Required", "th-login")}
                           checked={selectedField.required}
                           onChange={(val) => handleFieldChange("required", val)}
                         />
                         <ToggleControl
                         __nextHasNoMarginBottom={true}
-                          label={__("Show Field", "themehunk-login-registration")}
+                          label={__("Show Field", "th-login")}
                           checked={selectedField.show !== false}
                           onChange={(val) => handleFieldChange("show", val)}
                         />
@@ -486,7 +486,7 @@
                         <TextControl
                           __next40pxDefaultSize = {true}
                           __nextHasNoMarginBottom={true}
-                          label={__("Minimum Length", "themehunk-login-registration")}
+                          label={__("Minimum Length", "th-login")}
                           type="number"
                           value={selectedField.minInput || ""}
                           onChange={(val) => handleFieldChange("minInput", parseInt(val))}
@@ -494,7 +494,7 @@
                         <TextControl
                            __next40pxDefaultSize = {true}
                             __nextHasNoMarginBottom={true}
-                          label={__("Maximum Length", "themehunk-login-registration")}
+                          label={__("Maximum Length", "th-login")}
                           type="number"
                           value={selectedField.maxInput || ""}
                           onChange={(val) => handleFieldChange("maxInput", parseInt(val))}
@@ -503,19 +503,19 @@
                           <ToggleControl
                           __nextHasNoMarginBottom={true}
                           __next40pxDefaultSize = {true}
-                            label={__("Require Letters (A-Z)", "themehunk-login-registration")}
+                            label={__("Require Letters (A-Z)", "th-login")}
                             checked={selectedField.check?.text || false}
                             onChange={() => handleCheckToggle("text")}
                           />
                           <ToggleControl
                           __nextHasNoMarginBottom={true}
-                            label={__("Require Numbers (0-9)", "themehunk-login-registration")}
+                            label={__("Require Numbers (0-9)", "th-login")}
                             checked={selectedField.check?.number || false}
                             onChange={() => handleCheckToggle("number")}
                           />
                           <ToggleControl
                           __nextHasNoMarginBottom={true}
-                            label={__("Require Special Characters", "themehunk-login-registration")}
+                            label={__("Require Special Characters", "th-login")}
                             checked={selectedField.check?.special_character || false}
                             onChange={() => handleCheckToggle("special_character")}
                           />
@@ -525,11 +525,11 @@
                 </div>
               ) :  isSubmitFieldSelected ? (
                   <div className="submit-field-view">
-                      <h3>{__("Submit Button Settings", "themehunk-login-registration")}</h3>
+                      <h3>{__("Submit Button Settings", "th-login")}</h3>
                       <TextControl
                         __next40pxDefaultSize={true}
                         __nextHasNoMarginBottom={true}
-                        label={__("Button Text", "themehunk-login-registration")}
+                        label={__("Button Text", "th-login")}
                         value={settings.design?.submitButton?.[activeTab] || ""}
                         onChange={(val) => {
                           const updated = {
@@ -542,13 +542,13 @@
 
                       <div className="preview-submit-button" style={{ marginTop: "12px" }}>
                         <Button isPrimary>
-                          {settings.design?.submitButton?.[activeTab] || __("Submit", "themehunk-login-registration")}
+                          {settings.design?.submitButton?.[activeTab] || __("Submit", "th-login")}
                         </Button>
                       </div>
                     </div>
               ) : (
                 <div className="placeholder">
-                  <p>{__("Click a field to edit its settings", "themehunk-login-registration")}</p>
+                  <p>{__("Click a field to edit its settings", "th-login")}</p>
                 </div>
               )}
             </div>

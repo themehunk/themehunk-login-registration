@@ -74,7 +74,7 @@ final class THLogin {
 		new THLogin_Menu_Integration();
 
 		add_filter( 'plugin_action_links_' . THLOGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
-		add_action( 'wp_head', [ $this, 'enqueue_inline_styles' ], 20 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_inline_styles' ], 20 );
 	}
 
 	public function enqueue_inline_styles() {

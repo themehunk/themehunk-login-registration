@@ -88,6 +88,13 @@ class THLogin_Frontend {
 
 		wp_enqueue_style( 'dashicons' );
 
+		wp_enqueue_style(
+			'thlogin-frontend-custom-style',
+			THLOGIN_URL . 'assets/css/thlogin-custom-login.css',
+			array(),
+			$asset_config['version']
+		);
+
 		$all_settings = get_option( 'thlogin_settings', array() );
 		$general_settings          = $all_settings['general'] ?? array();
 		$design_settings           = $all_settings['design'] ?? array();

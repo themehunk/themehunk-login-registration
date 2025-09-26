@@ -13,7 +13,7 @@ class THLogin_Shortcodes {
 		add_shortcode( 'thlogin_popup_auto', array( $this, 'render_auto_popup_shortcode' ) );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'conditionally_enqueue_assets' ] );
-		add_action( 'wp_head', [ $this, 'conditionally_render_inline_styles' ], 20 );
+		// add_action( 'wp_head', [ $this, 'conditionally_render_inline_styles' ], 20 );
 	}
 
 	public function conditionally_enqueue_assets() {

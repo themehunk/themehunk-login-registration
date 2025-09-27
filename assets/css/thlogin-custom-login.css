@@ -1,4 +1,4 @@
-/*.thlogin-popup-modal { 
+/*/*.thlogin-popup-modal { 
     display: flex !important; 
     visibility: visible !important;
     opacity: 1 !important; 
@@ -25,3 +25,101 @@
     display: block!important;
 }
 */
+
+
+/************************************************************
+ *  class-thlogin-integrations.php STYLE Starts
+ * 
+ ***********************************************************/
+.thlogin-custom-admin .thlogin-popup-modal { 
+                    display:flex !important; 
+                    visibility:visible !important;
+                    opacity:1 !important; 
+                }
+                .thlogin-custom-admin #thlogin-inline-wrapper {
+                    display: block !important;
+                    position: static !important;
+                    background: none !important;
+                    box-shadow: none !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    z-index: auto !important;
+                }
+                .thlogin-custom-admin .thlogin-toggle-button.is-active {
+                    background: #0b59f4;
+                    color: #fff;
+                    font-weight: 600;
+                }
+
+               .thlogin-custom-admin .thlogin-header-cancel-button{
+                    display:none;
+                }
+
+               .thlogin-custom-admin .thlogin-popup-modal.thlogin-slide-in-left,
+               .thlogin-custom-admin .thlogin-popup-modal.thlogin-slide-in-right {
+                    animation: none !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    justify-content:center !important;
+                }
+
+               .thlogin-custom-admin .thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container,
+               .thlogin-custom-admin .thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container{
+                    animation: none !important;
+                }
+
+                .thlogin-custom-admin .thlogin-slide-in-left.thlogin-popup-modal--closing .thlogin-popup-form-container, 
+                .thlogin-custom-admin .thlogin-slide-in-right.thlogin-popup-modal--closing .thlogin-popup-form-container{
+                    animation: none !important;
+                }
+
+                .thlogin-custom-admin .thlogin-page .thlogin-popup-form-container{
+                    height:auto !important;
+                }
+
+                .thlogin-custom-admin #thlogin-popup-modal.thlogin-page{
+                    display:flex !important;
+                }
+
+                .thlogin-custom-admin .thlogin-popup-modal.thlogin-popup-modal--opening{
+                    animation:none !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                }
+
+                .thlogin-custom-admin .thlogin-popup-modal-effect .thlogin-popup-form-container{
+                    animation:none !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                }
+
+                .thlogin-custom-admin .thlogin-popup-modal.thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container,
+                .thlogin-custom-admin .thlogin-popup-modal.thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container{
+                    animation:none !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    height:auto !important;
+                }
+
+               .thlogin-custom-admin .integration_single {
+                    .thlogin-form-toggle {
+                        display: none;
+                    }
+
+                    .thlogin-link-separator {
+                        display: none;
+                    }
+
+                    .thlogin-link[data-th-popup-action="register"] {
+                        display: none;
+                    }
+                    }
+
+/************************************************************
+ *  class-thlogin-integrations.php STYLE End
+ * 
+ ************************************************************/
+.thlogin-auto-popup-shortcode-wrapper .thlogin-form--register,
+.thlogin-auto-popup-shortcode-wrapper .thlogin-form--forgot-password{
+    display: none!important;
+}

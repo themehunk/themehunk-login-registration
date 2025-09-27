@@ -95,6 +95,19 @@ class THLogin_Frontend {
 			$asset_config['version']
 		);
 
+		wp_register_script(
+			'thlogin-custom-admin-script',
+			THLOGIN_URL . 'assets/js/thlogin-custom-admin.js',
+			 array(), 
+			$asset_config['version'],
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
+		);
+
+		wp_enqueue_script('thlogin-custom-admin-script');
+
 		$all_settings = get_option( 'thlogin_settings', array() );
 		$general_settings          = $all_settings['general'] ?? array();
 		$design_settings           = $all_settings['design'] ?? array();

@@ -31,8 +31,8 @@ class THLogin_Menu_Integration {
 		$is_logged_in = is_user_logged_in();
 
 		// Get text and icons from settings
-		$login_text  = esc_html( $menu_settings['item_text_login'] ?? __( 'Login', 'themehunk-login-registration' ) );
-		$logout_text = esc_html( $menu_settings['item_text_logout'] ?? __( 'Logout', 'themehunk-login-registration' ) );
+		$login_text  = $menu_settings['item_text_login'] ?? __( 'Login', 'themehunk-login-registration' );
+		$logout_text = $menu_settings['item_text_logout'] ?? __( 'Logout', 'themehunk-login-registration' );
 
 		$login_icon  = thlogin_get_icon_svg( $menu_settings['item_icon_login'] ?? '' );
 		$logout_icon = thlogin_get_icon_svg( $menu_settings['item_icon_logout'] ?? '' );
@@ -50,7 +50,7 @@ class THLogin_Menu_Integration {
 				if ( $logout_icon ) {
 					$html .= wp_kses( $logout_icon, thlogin_get_allowed_svg_tags() );
 				}
-				$html .= $logout_text . '</a></li>';
+				$html .= esc_html($logout_text) . '</a></li>';
 			}
 		} else {
 			if ( ! $hide_login_when_logged_in ) {
@@ -59,7 +59,7 @@ class THLogin_Menu_Integration {
 				if ( $login_icon ) {
 					$html .= wp_kses( $login_icon, thlogin_get_allowed_svg_tags() );
 				}
-				$html .= $login_text . '</a></li>';
+				$html .= esc_html($login_text) . '</a></li>';
 			}
 		}
 

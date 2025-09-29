@@ -25,8 +25,16 @@
     display: block!important;
 }
 */
-
-
+#thlogin-popup-modal.thlogin-popup-modal--active {
+                display: flex !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            .thlogin-toggle-button.is-active {
+                background: #0b59f4;
+                color: #fff;
+                font-weight: 600;
+            }
 /************************************************************
  *  class-thlogin-integrations.php STYLE Starts
  * 

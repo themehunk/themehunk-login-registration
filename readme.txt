@@ -107,6 +107,7 @@ Yes, you can disable reCAPTCHA by unchecking the reCAPTCHA option in the plugin 
 
 = 1.0.2 =
 * Update: all text domain change, readmefile update , registerd_enque add, all file escaping
+* Update: Reviewer issues resolved.
 
 
 = 1.0.1 =

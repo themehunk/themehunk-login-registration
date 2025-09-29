@@ -27,8 +27,8 @@ class THLogin_Modal_Wrapper {
 
 		$modal_bg_style = $this->get_background_style();
 		$filter = isset( $d['form']['form_background']['filter'] ) ? intval( $d['form']['form_background']['filter'] ) : 0;
-
-		$style  = 'display: none;';
+		$style= '';
+		
 		$style .= rtrim( $modal_bg_style, ';' ) . ';'; // ensure it ends with semicolon
 		$style .= "backdrop-filter: blur({$filter}px);";
 		$style .= "-webkit-backdrop-filter: blur({$filter}px);";

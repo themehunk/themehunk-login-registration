@@ -585,7 +585,7 @@ export const shortcodes = [
     },
     {
       label: __("Combined Modal", "themehunk-login-registration"),
-      shortcode: "[thlogin__combined_form]",
+      shortcode: "[thlogin_combined_form]",
       description: __("Shows the full login/register/forgot modal and auto-triggers it", "themehunk-login-registration"),
     },
         {

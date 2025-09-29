@@ -18,142 +18,193 @@ class THLogin_Forgot_Password_Form {
 	}
 
 	public function render() {
-		$security = $this->settings['security'] ?? [];
-		$design = $this->settings['design'] ?? [];
-		$submit_text = $design['submitButton']['forgot_password'] ?? esc_html__('Reset', 'themehunk-login-registration');
+	$security     = $this->settings['security'] ?? [];
+	$design       = $this->settings['design'] ?? [];
+	$submit_text  = $design['submitButton']['forgot_password'] ?? esc_html__( 'Reset', 'themehunk-login-registration' );
 
-        $logo = $design['logo'] ?? [];
-        $logo_url = !empty($logo['url']) ? esc_url($logo['url']) : '';
-        $logo_size = !empty($logo['size']) ? esc_attr($logo['size']) : '30px';
+	$logo      = $design['logo'] ?? [];
+	$logo_url  = ! empty( $logo['url'] ) ? esc_url( $logo['url'] ) : '';
+	$logo_size = ! empty( $logo['size'] ) ? esc_attr( $logo['size'] ) : '30px';
+	?>
 
-		echo '<div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">';
-		echo wp_kses_post( thlogin_render_form_header() );
+	<div class="thlogin-form thlogin-form--forgot-password" data-form-type="forgot-password" style="display: none;">
+		<?php echo wp_kses_post( thlogin_render_form_header() ); ?>
 
+		<?php
 		/**
 		 * Hook: thlogin_before_forgot_password_form
 		 */
-		do_action('thlogin_before_forgot_password_form');
+		do_action( 'thlogin_before_forgot_password_form' );
+		?>
 
-		echo '<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="forgot-password">';
-		echo '<div class="thlogin-messages" aria-live="polite"></div>';
+		<form class="thlogin-ajax-form th-login-from-feilds-combine" data-form-type="forgot-password">
+			<div class="thlogin-messages" aria-live="polite"></div>
 
+			<?php if ( $logo_url ) { ?>
+				<div class="thlogin-form-logo">
+					<div class="thlogin-form-logo-wrapper">
+						<img 
+							src="<?php echo esc_url( $logo_url ); ?>" 
+							alt="<?php esc_attr_e( 'Logo', 'themehunk-login-registration' ); ?>" 
+							class="thlogin-form-logo" 
+							style="height:<?php echo esc_attr( $logo_size ); ?>;max-height:<?php echo esc_attr( $logo_size ); ?>;object-fit:cover;" 
+						/>
+					</div>
+					<h3><?php esc_html_e( 'Reset Password', 'themehunk-login-registration' ); ?></h3>
+				</div>
+			<?php } else { ?>
+				<h3><?php esc_html_e( 'Reset Password', 'themehunk-login-registration' ); ?></h3>
+			<?php } ?>
 
-		if ( $logo_url ) {
-			echo '<div class="thlogin-form-logo">';
-				echo '<div class="thlogin-form-logo-wrapper">';
-					echo '<img 
-						src="' . esc_url( $logo_url ) . '" 
-						alt="' . esc_attr__( 'Logo', 'themehunk-login-registration' ) . '" 
-						class="thlogin-form-logo" 
-						style="height:' . esc_attr( $logo_size ) . ';max-height:' . esc_attr( $logo_size ) . ';object-fit:cover;" 
-					/>';
-				echo '</div>';
-				echo '<h3>' . esc_html__( 'Reset Password', 'themehunk-login-registration' ) . '</h3>';
-			echo '</div>';
-		} else {
-			echo '<h3>' . esc_html__( 'Reset Password', 'themehunk-login-registration' ) . '</h3>';
-		}
+			<?php
+			foreach ( $this->fields as $field ) {
+				if ( ! empty( $field['hidden'] ) ) {
+					continue;
+				}
 
+				$type        = sanitize_text_field( $field['type'] ?? 'text' );
+				$name        = sanitize_text_field( $field['name'] ?? '' );
+				$id          = sanitize_html_class( $field['id'] ?? 'field_' . uniqid() );
+				$label       = sanitize_text_field( $field['label'] ?? '' );
+				$placeholder = sanitize_text_field( $field['placeholder'] ?? '' );
+				$required    = ! empty( $field['required'] );
+				$icon        = sanitize_text_field( $field['icon'] ?? '' );
 
-		foreach ($this->fields as $field) {
-			if (!empty($field['hidden'])) continue;
+				// Only include email or username fields.
+				if ( stripos( $name, 'email' ) === false && stripos( $name, 'user' ) === false ) {
+					continue;
+				}
 
-			$type = sanitize_text_field($field['type'] ?? 'text');
-			$name = sanitize_text_field($field['name'] ?? '');
-			$id = sanitize_html_class($field['id'] ?? 'field_' . uniqid());
-			$label = sanitize_text_field($field['label'] ?? '');
-			$placeholder = sanitize_text_field($field['placeholder'] ?? '');
-			$required = !empty($field['required']);
-			$icon = sanitize_text_field($field['icon'] ?? '');
+				$autocomplete      = stripos( $name, 'email' ) !== false ? 'email' : 'username';
+				$icon_position     = $design['icon']['icon_position'] ?? 'with-label';
+				$show_icon_in_label = $icon && $icon_position === 'with-label';
+				$show_icon_in_input = $icon && $icon_position === 'inside-input';
 
-			// Only include email or username fields
-			if (stripos($name, 'email') === false && stripos($name, 'user') === false) continue;
+				$field_class = 'thlogin-form-field';
+				if ( $this->layout === 'stack' ) {
+					$field_class .= ' thlogin-layout-stack';
+				} elseif ( $this->layout === 'inline' ) {
+					$field_class .= ' thlogin-layout-inline';
+				} elseif ( $this->layout === 'floating' ) {
+					$field_class .= ' thlogin-layout-floating';
+				} elseif ( $this->layout === 'placehold' ) {
+					$field_class .= ' thlogin-layout-floating';
+				}
 
-			$autocomplete = stripos($name, 'email') !== false ? 'email' : 'username';
-
-			$icon_position = $design['icon']['icon_position'] ?? 'with-label';
-			$show_icon_in_label = $icon && $icon_position === 'with-label';
-			$show_icon_in_input = $icon && $icon_position === 'inside-input';
-
-			$field_class = 'thlogin-form-field';
-			if ($this->layout === 'stack') $field_class .= ' thlogin-layout-stack';
-			elseif ($this->layout === 'inline') $field_class .= ' thlogin-layout-inline';
-			elseif ($this->layout === 'floating') $field_class .= ' thlogin-layout-floating';
-			else if ($this->layout === 'placehold') {
-				$field_class .= ' thlogin-layout-floating';
+				$this->render_field(
+					[
+						'type'              => $type,
+						'name'              => $name,
+						'id'                => $id,
+						'label'             => $label,
+						'placeholder'       => $placeholder,
+						'required'          => $required,
+						'icon'              => $icon,
+						'autocomplete'      => $autocomplete,
+						'show_icon_in_label'=> $show_icon_in_label,
+						'show_icon_in_input'=> $show_icon_in_input,
+						'field_class'       => $field_class,
+					]
+				);
 			}
+			?>
 
-			$this->render_field([
-				'type' => $type,
-				'name' => $name,
-				'id' => $id,
-				'label' => $label,
-				'placeholder' => $placeholder,
-				'required' => $required,
-				'icon' => $icon,
-				'autocomplete' => $autocomplete,
-				'show_icon_in_label' => $show_icon_in_label,
-				'show_icon_in_input' => $show_icon_in_input,
-				'field_class' => $field_class,
-			]);
-		}
+			<?php if ( ! empty( $security['honeypot_enabled'] ) ) { ?>
+				<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">
+					<label for="thlogin_hp"><?php esc_html_e( 'Leave this field empty', 'themehunk-login-registration' ); ?></label>
+					<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off" />
+				</p>
+			<?php } ?>
 
-		// Honeypot
-		if (!empty($security['honeypot_enabled'])) {
-			echo '<p class="thlogin-form-field thlogin-form-field--honeypot" style="display: none;">';
-				echo '<label for="thlogin_hp">' . esc_html__('Leave this field empty', 'themehunk-login-registration') . '</label>';
-				echo '<input type="text" name="thlogin_hp" id="thlogin_hp" tabindex="-1" autocomplete="off">';
-			echo '</p>';
-		}
+			<p class="thlogin-form-submit">
+				<button type="submit" class="thlogin-button thlogin-button--primary">
+					<?php echo esc_html( $submit_text ); ?>
+				</button>
+			</p>
 
-		echo '<p class="thlogin-form-submit">';
-            echo '<button type="submit" class="thlogin-button thlogin-button--primary">' . esc_html($submit_text) . '</button>';
-		echo '</p>';
+			<p class="thlogin-form-links">
+				<a href="#" class="thlogin-link" data-th-popup-action="login">
+					<?php esc_html_e( 'Back to Login', 'themehunk-login-registration' ); ?>
+				</a>
+			</p>
+		</form>
 
-		echo '<p class="thlogin-form-links">';
-			echo '<a href="#" class="thlogin-link" data-th-popup-action="login">' . esc_html__('Back to Login', 'themehunk-login-registration') . '</a>';
-		echo '</p>';
-
-		echo '</form>';
-
+		<?php
 		/**
 		 * Hook: thlogin_after_forgot_password_form
 		 */
-		do_action('thlogin_after_forgot_password_form');
-		
-		echo '</div>';
-	}
+		do_action( 'thlogin_after_forgot_password_form' );
+		?>
+	</div>
+	<?php
+}
 
-	protected function render_field($args) {
-		extract($args); // for cleaner access
 
-		if (in_array($this->layout, ['floating', 'placehold'], true)) {
-			echo '<div class="' . esc_attr($field_class) . '">';
-			echo '<div class="floating-wrapper layout-' . esc_attr($this->layout) . ' ' . ($show_icon_in_input ? 'icon-activated-input-wrapper' : '') . '">';
-			echo '<input class="floating-input ' . ($show_icon_in_input ? 'icon-activated-input' : '') . '"'
-				. ($show_icon_in_input ? ' style="background-image: ' . esc_attr(thlogin_get_icon_svg_data_uri($icon)) . ';"' : '')
-				. ' type="' . esc_attr($type) . '" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" placeholder=" "'
-				. ($required ? ' required' : '')
-				. ' autocomplete="' . esc_attr($autocomplete) . '">';
-			echo '<label for="' . esc_attr($id) . '" class="floating-label">' . esc_html($label);
-			if ($required) echo '<span class="th-required">*</span>';
-			echo '</label></div></div>';
-		} else {
-			echo '<p class="' . esc_attr($field_class) . '">';
-			echo '<label for="' . esc_attr($id) . '" class="thlogin-label-with-icon">';
-			if ($show_icon_in_label) {
-				echo '<span class="thlogin-label-icon">' . wp_kses(thlogin_get_icon_svg($icon), thlogin_get_allowed_svg_tags()) . '</span>';
-			}
-			echo '<span class="thlogin-label-text">' . esc_html($label);
-			if ($required) echo '<span class="th-required">*</span>';
-			echo '</span></label>';
+	protected function render_field( $args ) {
+    extract( $args ); // Gives $field_class, $type, $name, $id, $label, $placeholder, etc.
 
-			echo '<input class="' . ($show_icon_in_input ? 'icon-activated-input' : '') . '"'
-				. ($show_icon_in_input ? ' style="background-image: ' . esc_attr(thlogin_get_icon_svg_data_uri($icon)) . ';"' : '')
-				. ' type="' . esc_attr($type) . '" name="' . esc_attr($name) . '" id="' . esc_attr($id) . '" placeholder="' . esc_attr($placeholder) . '"'
-				. ($required ? ' required' : '')
-				. ' autocomplete="' . esc_attr($autocomplete) . '">';
-			echo '</p>';
-		}
-	}
+    if ( in_array( $this->layout, [ 'floating', 'placehold' ], true ) ) { ?>
+        
+        <div class="<?php echo esc_attr( $field_class ); ?>">
+            <div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php esc_attr_e($show_icon_in_input ? 'icon-activated-input-wrapper' : ''); ?>">
+                
+                <input 
+                    class="floating-input <?php esc_attr_e($show_icon_in_input ? 'icon-activated-input' : ''); ?>"
+                    <?php if ( $show_icon_in_input ) { ?>
+                        style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
+                    <?php } ?>
+                    type="<?php echo esc_attr( $type ); ?>"
+                    name="<?php echo esc_attr( $name ); ?>"
+                    id="<?php echo esc_attr( $id ); ?>"
+                    placeholder=" "
+                    <?php if ( $required ) { ?> required <?php } ?>
+                    autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
+                />
+
+                <label for="<?php echo esc_attr( $id ); ?>" class="floating-label">
+                    <?php echo esc_html( $label ); ?>
+                    <?php if ( $required ) { ?>
+                        <span class="th-required">*</span>
+                    <?php } ?>
+                </label>
+            </div>
+        </div>
+
+    <?php } else { ?>
+        
+        <p class="<?php echo esc_attr( $field_class ); ?>">
+            <label for="<?php echo esc_attr( $id ); ?>" class="thlogin-label-with-icon">
+                <?php if ( $show_icon_in_label ) { ?>
+                    <span class="thlogin-label-icon">
+                        <?php echo wp_kses( thlogin_get_icon_svg( $icon ), thlogin_get_allowed_svg_tags() ); ?>
+                    </span>
+                <?php } ?>
+                <span class="thlogin-label-text">
+                    <?php echo esc_html( $label ); ?>
+                    <?php if ( $required ) { ?>
+                        <span class="th-required">*</span>
+                    <?php } ?>
+                </span>
+            </label>
+
+            <input 
+                class="<?php echo esc_attr_e($show_icon_in_input ? 'icon-activated-input' : ''); ?>"
+                <?php if ( $show_icon_in_input ) { ?>
+                    style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
+                <?php } ?>
+                type="<?php echo esc_attr( $type ); ?>"
+                name="<?php echo esc_attr( $name ); ?>"
+                id="<?php echo esc_attr( $id ); ?>"
+                placeholder="<?php echo esc_attr( $placeholder ); ?>"
+                <?php if ( $required ) { ?> required <?php } ?>
+                autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
+            />
+        </p>
+
+    <?php }
+}
+
+
+
+
 }

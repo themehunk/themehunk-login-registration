@@ -126,7 +126,7 @@ class THLogin_Frontend {
 				'thlogin_form',
 				'thlogin_register_form',
 				'thlogin_forgot_password_form',
-				'thlogin__combined_form',
+				'thlogin_combined_form',
 				'thlogin_popup_auto'
 			);
 

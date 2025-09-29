@@ -9,7 +9,7 @@ class THLogin_Shortcodes {
 		add_shortcode( 'thlogin_form', array( $this, 'render_login_form_shortcode' ) );
 		add_shortcode( 'thlogin_register_form', array( $this, 'render_register_form_shortcode' ) );
 		add_shortcode( 'thlogin_forgot_password_form', array( $this, 'render_forgot_password_form_shortcode' ) );
-		add_shortcode( 'thlogin__combined_form', array( $this, 'render_combined_form_shortcode' ) );
+		add_shortcode( 'thlogin_combined_form', array( $this, 'render_combined_form_shortcode' ) );
 		add_shortcode( 'thlogin_popup_auto', array( $this, 'render_auto_popup_shortcode' ) );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'conditionally_enqueue_assets' ] );
@@ -25,7 +25,7 @@ class THLogin_Shortcodes {
 				has_shortcode( $post->post_content, 'thlogin_form' ) ||
 				has_shortcode( $post->post_content, 'thlogin_register_form' ) ||
 				has_shortcode( $post->post_content, 'thlogin_forgot_password_form' ) ||
-				has_shortcode( $post->post_content, 'thlogin__combined_form' ) ||
+				has_shortcode( $post->post_content, 'thlogin_combined_form' ) ||
 				has_shortcode( $post->post_content, 'thlogin_popup_auto' )
 			)
 		) {
@@ -42,7 +42,7 @@ class THLogin_Shortcodes {
             'thlogin_form',
             'thlogin_register_form',
             'thlogin_forgot_password_form',
-            'thlogin__combined_form',
+            'thlogin_combined_form',
             'thlogin_popup_auto'
         ];
         

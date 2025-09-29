@@ -354,7 +354,7 @@ body.thlogin-modal-open {
 }
 
 .thlogin-page .thlogin-popup-form-container {
-  height: 100%;
+  height: max-content;
 }
 
 .thlogin-popup-modal .thlogin-popup-form-container {
@@ -484,6 +484,11 @@ body.thlogin-modal-open {
   overflow: hidden;
   max-height: 500px;
   width: 500px;
+}
+
+.thlogin-inline-combined-form-wrapper .thlogin-form,
+.thlogin-auto-popup-shortcode-wrapper .thlogin-form {
+  display: block !important;
 }
 
 /*# sourceMappingURL=public.css.map*/

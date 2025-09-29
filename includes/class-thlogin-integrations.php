@@ -128,140 +128,60 @@ class THLogin_Integrations {
 					}
 
 					$this->render_custom_login_page();
+
 				}
 			} );
 
 	}
 
+	public function custom_html_before_forms() {
+    // Start output buffering
+    ob_start();
+
+    // Use printf to print the opening div tag
+    printf(
+        '<div class="thlogin-custom-admin">%s',
+        '' // Empty content before the forms, just the opening div
+    );
+
+    // Return the buffered content
+    return ob_get_clean();
+}
+
+public function custom_html_after_forms() {
+    // Start output buffering
+    ob_start();
+
+    // Use printf to print the closing div tag
+    printf(
+        '%s',
+        '</div>' // Just the closing div tag
+    );
+
+    // Return the buffered content
+    return ob_get_clean();
+}
+public function output_custom_html_before_forms() {
+    // Echo the content returned by the function
+   echo $this->custom_html_before_forms();
+}
+
+public function output_custom_html_after_forms() {
+    // Echo the content returned by the function
+  echo  $this->custom_html_after_forms();
+}
+
 	public function render_custom_login_page() {
 		status_header( 200 );
+add_action( 'thlogin_before_modal', array( $this, 'output_custom_html_before_forms' ) );
+ add_action( 'thlogin_after_modal', array( $this, 'output_custom_html_after_forms' ) );
+	$template = THLOGIN_PATH . 'templates/custom-login-page.php';
 
-		echo '<!DOCTYPE html><html><head>';
-		wp_head();
-			echo '<style>
-				.thlogin-popup-modal { 
-					display:flex !important; 
-					visibility:visible !important;
-					opacity:1 !important; 
-				}
-				#thlogin-inline-wrapper {
-					display: block !important;
-					position: static !important;
-					background: none !important;
-					box-shadow: none !important;
-					opacity: 1 !important;
-					visibility: visible !important;
-					z-index: auto !important;
-				}
-				.thlogin-toggle-button.is-active {
-					background: #0b59f4;
-					color: #fff;
-					font-weight: 600;
-				}
-
-				.thlogin-header-cancel-button{
-					display:none;
-				}
-
-				.thlogin-popup-modal.thlogin-slide-in-left,.thlogin-popup-modal.thlogin-slide-in-right {
-					animation: none !important;
-					transform: none !important;
-					opacity: 1 !important;
-					justify-content:center !important;
-				}
-
-				.thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container, .thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container{
-					animation: none !important;
-				}
-
-				.thlogin-slide-in-left.thlogin-popup-modal--closing .thlogin-popup-form-container, .thlogin-slide-in-right.thlogin-popup-modal--closing .thlogin-popup-form-container{
-					animation: none !important;
-				}
-
-				.thlogin-page .thlogin-popup-form-container{
-					height:auto !important;
-				}
-
-				#thlogin-popup-modal.thlogin-page{
-					display:flex !important;
-				}
-
-				.thlogin-popup-modal.thlogin-popup-modal--opening{
-					animation:none !important;
-					transform: none !important;
-					opacity: 1 !important;
-				}
-
-				.thlogin-popup-modal-effect .thlogin-popup-form-container{
-					animation:none !important;
-					transform: none !important;
-					opacity: 1 !important;
-				}
-
-				.thlogin-popup-modal.thlogin-slide-in-left.thlogin-popup-modal--opening .thlogin-popup-form-container,.thlogin-popup-modal.thlogin-slide-in-right.thlogin-popup-modal--opening .thlogin-popup-form-container{
-					animation:none !important;
-					transform: none !important;
-					opacity: 1 !important;
-					height:auto !important;
-				}
-
-				.integration_single {
-					.thlogin-form-toggle {
-						display: none;
-					}
-
-					.thlogin-link-separator {
-						display: none;
-					}
-
-					.thlogin-link[data-th-popup-action="register"] {
-						display: none;
-					}
-					}
-
-
-			</style>';
-
-			// Your custom inline JS
-			echo '<script>
-					document.addEventListener("DOMContentLoaded", function () {
-						function switchForm(target) {
-							document.querySelectorAll(".thlogin-form").forEach(function (f) {
-								f.style.display = "none";
-							});
-							var form = document.querySelector(".thlogin-form--" + target);
-							if (form) {
-								form.style.display = "block";
-							}
-							document.querySelectorAll(".thlogin-toggle-button").forEach(function (btn) {
-								btn.classList.remove("is-active");
-							});
-							var activeBtn = document.querySelector(".thlogin-toggle-button--" + target);
-							if (activeBtn) {
-								activeBtn.classList.add("is-active");
-							}
-						}
-
-						switchForm("login"); // Default form
-
-						document.querySelectorAll("[data-th-popup-action]").forEach(function (btn) {
-							btn.addEventListener("click", function (e) {
-								e.preventDefault();
-								switchForm(this.getAttribute("data-th-popup-action"));
-							});
-						});
-
-						document.querySelectorAll(".thlogin-slide-in-left").forEach(function (el) {
-							el.classList.remove("thlogin-slide-in-left");
-						});
-					});
-				</script>';
-
-		
-				echo '</head><body>';
-			 wp_footer();
-
-		echo '</body></html>';
+    if ( file_exists( $template ) ) {
+        include $template;
+    } else {
+        wp_die( esc_html__( 'Custom login template not found.', 'themehunk-login-registration' ) );
+    }
 
 		exit;
 	}

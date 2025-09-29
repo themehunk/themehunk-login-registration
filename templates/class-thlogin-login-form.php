@@ -176,18 +176,11 @@ class THLogin_Login_Form {
                 echo '</div>';
             } elseif ($recaptcha['type'] === 'v3') {
                 echo '<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">';
-                echo '<script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        if (typeof grecaptcha !== "undefined") {
-                            grecaptcha.ready(function () {
-                                grecaptcha.execute("' . esc_attr($recaptcha['site_key']) . '", { action: "login" })
-                                    .then(function (token) {
-                                        document.getElementById("g-recaptcha-response").value = token;
-                                    });
-                            });
-                        }
-                    });
-                </script>';
+                wp_localize_script('thlogin-custom-admin-script', 'recaptcha_object', 
+                array(
+                    'site_key' => esc_attr($recaptcha['site_key'])
+                )
+            );
             }
         }
     }

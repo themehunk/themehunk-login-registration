@@ -50,6 +50,7 @@ class THLogin_Integrations {
 				if ( strpos( $request_uri, 'wp-login.php' ) !== false ) {
 
 					// Allow password reset or logout to process
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only usage, safe here.
 					$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
 
 					if ( in_array( $action, array( 'logout', 'lostpassword', 'rp', 'resetpass' ), true ) ) {
@@ -163,12 +164,12 @@ public function custom_html_after_forms() {
 }
 public function output_custom_html_before_forms() {
     // Echo the content returned by the function
-   echo $this->custom_html_before_forms();
+   echo wp_kses_post($this->custom_html_before_forms());
 }
 
 public function output_custom_html_after_forms() {
     // Echo the content returned by the function
-  echo  $this->custom_html_after_forms();
+  echo  wp_kses_post($this->custom_html_after_forms());
 }
 
 	public function render_custom_login_page() {

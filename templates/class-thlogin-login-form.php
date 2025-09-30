@@ -158,9 +158,9 @@ class THLogin_Login_Form {
     <?php } else { ?>
 
         <?php if ( in_array( $this->layout, ['floating', 'placehold'], true ) ) { ?>
-            <div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php esc_attr_e($show_icon_in_input ? 'icon-activated-input-wrapper' : ''); ?>">
+            <div class="floating-wrapper layout-<?php echo esc_attr( $this->layout ); ?> <?php echo esc_attr($show_icon_in_input ? 'icon-activated-input-wrapper' : ''); ?>">
                 <input 
-                    class="floating-input <?php esc_attr_e($show_icon_in_input ? 'icon-activated-input' : ''); ?>"
+                    class="floating-input <?php echo esc_attr($show_icon_in_input ? 'icon-activated-input' : ''); ?>"
                     <?php if ( $show_icon_in_input ) { ?>
                         style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
                     <?php } ?>
@@ -192,7 +192,7 @@ class THLogin_Login_Form {
             </label>
 
             <input 
-                class="<?php esc_attr_e($show_icon_in_input ? 'icon-activated-input' : ''); ?>"
+                class="<?php echo esc_attr($show_icon_in_input ? 'icon-activated-input' : ''); ?>"
                 <?php if ( $show_icon_in_input ) { ?>
                     style="background-image: <?php echo esc_attr( thlogin_get_icon_svg_data_uri( $icon ) ); ?>;"
                 <?php } ?>

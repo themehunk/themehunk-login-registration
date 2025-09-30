@@ -487,7 +487,8 @@ body.thlogin-modal-open {
 }
 
 .thlogin-inline-combined-form-wrapper .thlogin-form,
-.thlogin-auto-popup-shortcode-wrapper .thlogin-form {
+.thlogin-auto-popup-shortcode-wrapper .thlogin-form,
+.thlogin-shortcode-form-wrapper .thlogin-form--active {
   display: block !important;
 }
 

@@ -25,6 +25,11 @@
     display: block!important;
 }
 */
+
+
+.thlogin-form-field input[type="text"], .thlogin-form-field input[type="email"], .thlogin-form-field input[type="password"], .thlogin-form-field input[type="tel"], .thlogin-form-field input[type="url"], .thlogin-form-field input[type="number"]{
+        background-repeat: no-repeat;
+}
 #thlogin-popup-modal.thlogin-popup-modal--active {
                 display: flex !important;
                 opacity: 1 !important;

@@ -1,6 +1,6 @@
 === Themehunk Login Registration ===
 Contributors: ThemeHunk  
-Tags: login, user registration, registration form, WooCommerce, frontend login
+Tags: login,registration, registration form, WooCommerce, frontend login
 Requires at least: 5.8  
 Tested up to: 6.8  
 Requires PHP: 7.4  
@@ -28,6 +28,14 @@ Designed with flexibility and performance in mind, Themehunk Login Registration 
 * 📱 Mobile-responsive design
 * 🔗 Navigation menu integration with login/logout links
 * ⚡ Auto popup triggers: on delay, scroll, or exit intent
+
+
+### Login Registration 
+ThemeHunk Login Registration [View More](https://themehunk.com/login-registration/).
+
+### Support 
+We're here to help. Feel free to open a new thread on the [Support](https://themehunk.com/contact-us/).
+
 
 == Installation ==
 
@@ -57,16 +65,6 @@ Yes, Themehunk Login Registration supports Google reCAPTCHA v2 for login, regist
 
 = Can I approve users manually before login? =  
 Yes. You can enable manual user approval from the settings.
-
-== Screenshots ==
-
-1. Login form with customizable design
-2. Registration form with custom fields
-3. Password reset flow
-4. Popup login modal
-5. Admin settings panel
-6. Design customization interface
-7. WooCommerce integration in My Account area
 
 == External services ==
 
@@ -103,9 +101,24 @@ This plugin integrates with the following third-party services:
 
 Yes, you can disable reCAPTCHA by unchecking the reCAPTCHA option in the plugin settings.
 
+
+== Screenshots ==
+
+1. Login and Registration Form
+2. Customizable design
+3. Registration form with custom fields
+4. Display trigger
+5. Security Settings
+6. Email Settings
+7. Wordpress & WooCommerce integration
+8. Import and export form design
+
+
 == Changelog ==
 
-= 1.0.2 =
+ = 1.0.2 - 08-Oct-2025
+
+* NEW: Login Registration Form release
 * Update: all text domain change, readmefile update , registerd_enque add, all file escaping
 * Update: Reviewer issues resolved.
 * Update: Plugin Check issue resolved.
@@ -125,6 +138,10 @@ Yes, you can disable reCAPTCHA by unchecking the reCAPTCHA option in the plugin 
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-* class-thlogin-rest-api.php permission_callback issues resolved.
+= 1.0.2 =
+* Login Registration Form release
+* Update: all text domain change, readmefile update , registerd_enque add, all file escaping
+* Update: Reviewer issues resolved.
+* Update: Plugin Check issue resolved.
+
 

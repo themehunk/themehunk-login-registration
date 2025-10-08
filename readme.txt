@@ -1,6 +1,6 @@
 === Themehunk Login Registration ===
 Contributors: ThemeHunk  
-Tags: login, registration, popup, WooCommerce, frontend login
+Tags: login, user registration, registration form, WooCommerce, frontend login
 Requires at least: 5.8  
 Tested up to: 6.8  
 Requires PHP: 7.4  
@@ -12,12 +12,12 @@ A powerful, secure, and highly customizable frontend login, registration, and pa
 
 == Description ==
 
-**Themehunk Login Registration** transforms your WordPress site's authentication flow with modern, user-friendly frontend login, registration, and password reset forms—without touching the WordPress admin.
+**Themehunk Login Registration** transforms your WordPress site's authentication flow with modern, user-friendly frontend login, registration, and password reset forms—without touching the WordPress admin, You can also create custom login page for your WordPress dashboard.
 
 Designed with flexibility and performance in mind, Themehunk Login Registration lets you display forms in popups or directly on pages, fully customize their appearance, and control user behavior after login or registration. Built for compatibility with WooCommerce and Gutenberg, it’s the ideal solution for membership sites, eCommerce stores, and user-driven communities.
 
 🎯 **Key Features**
-* 🔐 Frontend login, registration & password reset forms
+* 🔐 Custom Frontend login, registration & password reset forms
 * 🎨 Fully customizable design: colors, backgrounds, typography, borders, spacing
 * 💬 Popup or inline display modes
 * 🛒 Seamless WooCommerce integration

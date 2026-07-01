@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:       Themehunk Login Registration
+ * Plugin Name:       Login Registration
  * Plugin URI:        https://themehunk.com/login-registration/
  * Description:       A powerful and highly customizable frontend login, registration, and password reset pop-up plugin for WordPress.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            ThemeHunk
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'THLOGIN_VERSION', '1.0.2' );
+define( 'THLOGIN_VERSION', '1.0.3' );
 define( 'THLOGIN_FILE', __FILE__ );
 define( 'THLOGIN_PATH', plugin_dir_path( THLOGIN_FILE ) );
 define( 'THLOGIN_URL', plugin_dir_url( THLOGIN_FILE ) );

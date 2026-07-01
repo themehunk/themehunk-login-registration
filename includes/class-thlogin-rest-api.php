@@ -661,20 +661,23 @@ class THLogin_REST_API {
 		foreach ( $register_fields as $field ) {
 			$field_id   = $field['id'] ?? '';
 			$field_name = $field['name'] ?? $field_id;
-			$value      = sanitize_text_field( $request->get_param( $field_name ) );
+			$raw_value  = $request->get_param( $field_name );
 
 			switch ( $field_id ) {
 				case 'username':
-					$username = sanitize_user( $value );
+					$username = sanitize_user( sanitize_text_field( $raw_value ) );
 					break;
 				case 'email':
-					$email = sanitize_email( $value );
+					$email = sanitize_email( sanitize_text_field( $raw_value ) );
 					break;
 				case 'password':
-					$password = $value;
+					// Passwords must not be run through sanitize_text_field() (it trims
+					// whitespace and strips tag-like characters), or the stored/hashed
+					// password would silently differ from what the user typed.
+					$password = (string) $raw_value;
 					break;
 				case 'confirm_password':
-					$confirm_password = $value;
+					$confirm_password = (string) $raw_value;
 					break;
 			}
 		}
@@ -684,9 +687,12 @@ class THLogin_REST_API {
 			$field = array_filter( $register_fields, fn( $f ) => $f['id'] === $field_id );
 			$field = reset( $field );
 			$name  = $field['name'] ?? $field_id;
-			$value = sanitize_text_field( $request->get_param( $name ) );
+			$raw   = $request->get_param( $name );
+			$value = in_array( $field_id, [ 'password', 'confirm_password' ], true )
+				? (string) $raw
+				: sanitize_text_field( $raw );
 
-			if ( empty( $value ) ) {
+			if ( '' === trim( (string) $value ) ) {
 				/* translators: %s: The form type (login/register) to be displayed in the link text */
 				$error = $field['error_message'] ?? sprintf( __( '%s is required.', 'themehunk-login-registration' ), ucfirst( str_replace('_', ' ', $field_id) ) );
 				return new WP_REST_Response( [ 'success' => false, 'data' => [ 'message' => $error ] ], 400 );
@@ -779,13 +785,16 @@ class THLogin_REST_API {
 			'user_email' => $email,
 		];
 
-		$role = sanitize_text_field( $request->get_param( 'role' ) );
+		// Security: the role must NEVER be taken from the request. Allowing a
+		// client-supplied "role" parameter would let an unauthenticated visitor
+		// register as an Administrator (privilege escalation). Only the
+		// admin-configured default role is honored here.
 		if ( ! function_exists( 'get_editable_roles' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/user.php';
 		}
-		$default_role    = $general_settings['default_register_role'] ?? 'subscriber';
-		$editable_roles  = array_keys( get_editable_roles() );
-		$user_data['role'] = ( $role && in_array( $role, $editable_roles, true ) ) ? $role : $default_role;
+		$default_role       = sanitize_text_field( $general_settings['default_register_role'] ?? 'subscriber' );
+		$editable_roles     = array_keys( get_editable_roles() );
+		$user_data['role']  = in_array( $default_role, $editable_roles, true ) ? $default_role : 'subscriber';
 
 		// Custom fields
 		foreach ( $register_fields as $field ) {
@@ -866,7 +875,11 @@ class THLogin_REST_API {
 	}
 
 	function thlogin_send_verification_email( $user_id, $email ) {
-		$key = md5( microtime() . $user_id );
+		// Security: use a cryptographically strong random token instead of
+		// md5( microtime() . $user_id ), which is predictable/brute-forceable
+		// (an attacker who knows their own user ID and roughly when they
+		// registered could compute this key and bypass email verification).
+		$key = wp_generate_password( 32, false );
 
 		update_user_meta( $user_id, 'thlogin_email_verification_key', $key );
 		update_user_meta( $user_id, 'thlogin_email_verified', false );

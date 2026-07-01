@@ -226,7 +226,7 @@ class THLogin_Security {
 
 			$saved_key = get_user_meta( $user_id, 'thlogin_email_verification_key', true );
 
-			if ( $saved_key && $saved_key === $key ) {
+			if ( $saved_key && hash_equals( (string) $saved_key, $key ) ) {
 				update_user_meta( $user_id, 'thlogin_email_verified', true );
 				delete_user_meta( $user_id, 'thlogin_email_verification_key' );
 

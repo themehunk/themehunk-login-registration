@@ -246,7 +246,7 @@ class THLogin_Frontend {
 			$user_id          = absint( $_GET['user_id'] );
 			$stored_key       = get_user_meta( $user_id, 'thlogin_email_verification_key', true );
 
-			if ( $stored_key === $verification_key ) {
+			if ( $stored_key && hash_equals( (string) $stored_key, $verification_key ) ) {
 				update_user_meta( $user_id, 'thlogin_email_verified', true );
 				delete_user_meta( $user_id, 'thlogin_email_verification_key' );
 

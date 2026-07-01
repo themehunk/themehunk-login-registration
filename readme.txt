@@ -1,10 +1,10 @@
-=== Themehunk Login Registration ===
+=== TH Login Registration ===
 Contributors: ThemeHunk  
 Tags: login,registration, registration form, WooCommerce, frontend login
 Requires at least: 5.8  
-Tested up to: 6.8  
+Tested up to: 7.0 
 Requires PHP: 7.4  
-Stable tag: 1.0.2  
+Stable tag: 1.0.3
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -115,6 +115,13 @@ Yes, you can disable reCAPTCHA by unchecking the reCAPTCHA option in the plugin 
 
 
 == Changelog ==
+
+= 1.0.3 - 01-Jul-2026
+
+* Security Fix: Prevented privilege escalation via the frontend registration REST endpoint (client-supplied role was previously honored).
+* Security Fix: Email verification token now uses a cryptographically secure random string instead of a predictable value.
+* Security Fix: Verification token comparisons now use a timing-safe check.
+* Fix: Registration/login password fields are no longer altered by text sanitization before being hashed.
 
  = 1.0.2 - 08-Oct-2025
 
